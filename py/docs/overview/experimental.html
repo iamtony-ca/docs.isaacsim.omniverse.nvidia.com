@@ -1,0 +1,986 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Core Experimental API &#8212; Isaac Sim API</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=8f2a1f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css%3Fv=767de534.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/api.css%3Fv=6f210184.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
+
+
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
+  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
+</script>
+<script type="text/javascript">
+  function OptanonWrapper() {
+    var event = new Event('bannerLoaded');
+    window.dispatchEvent(event);
+  }
+</script>
+<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
+</script>
+
+
+    <script rel="preload" src="../../_static/modal-table.js"></script>
+    <script src="../../_static/documentation_options.js%3Fv=cb01d673"></script>
+    <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/external-links.js"></script>
+    <script src="../../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../../_static/copybutton.js%3Fv=65e89d2a"></script>
+    <script src="../../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/overview/experimental';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../../_static/version-patch.js%3Fv=3e13fdd2"></script>
+
+<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
+
+    <link rel="icon" href="../../_static/favicon.ico"/>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Coding Style Guidelines" href="guidelines.html" />
+    <link rel="prev" title="Isaac Sim: Extensions API" href="../../index.html" />
+
+<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-896K85H299');
+    </script>
+    
+
+
+  </head>
+
+  <body data-default-mode="">
+
+<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="experimental.html#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim API - Home"/>
+    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim API - Home"/>
+  
+  
+    <p class="title logo__title">Isaac Sim API</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">discord</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">github</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">youtube</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">instagram</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">www</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">linkedin</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">twitch</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim API - Home"/>
+    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim API - Home"/>
+  
+  
+    <p class="title logo__title">Isaac Sim API</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">discord</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">github</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">youtube</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">instagram</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">www</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">linkedin</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">twitch</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">General</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="experimental.html#">Core Experimental API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guidelines.html">Coding Style Guidelines</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../api/api_api.html">C++ API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/classes.html">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/macros.html">Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/enumerations.html">Enumerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/functions.html">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/namespaces.html">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/structs.html">Structs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/typedefs.html">Typedefs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/variables.html">Variables</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Standalone Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api/source/standalone_examples_list.html">Standalone Examples Reference List</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Generic Model Output</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../source/generic_model_output/generic_model_output.html">GenericModelOutput</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Core Experimental API</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+<div class="header-article-item">
+  <div class="d-flex justify-content-end w-100">
+    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+  </div>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="core-experimental-api">
+<h1>Core Experimental API<a class="headerlink" href="experimental.html#core-experimental-api" title="Link to this heading">#</a></h1>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>At this time, the Core Experimental API is considered, as its name suggests, experimental and it is under development.
+Going forward, it will become the base API used in all Isaac Sim source code.
+The current Core API will be deprecated and removed in future releases.</p>
+<p>Therefore, <strong>we strongly encourage early adoption and use of the Core Experimental API.</strong></p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The API featured in the <code class="docutils literal notranslate"><span class="pre">isaacsim.core.experimental.*</span></code> extensions is experimental and subject to change without deprecation cycles.
+Although we will try to maintain backward compatibility in the event of a change, it may not always be possible.</p>
+</div>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="experimental.html#overview" title="Link to this heading">#</a></h2>
+<p>The Core Experimental API (exposed by the <code class="docutils literal notranslate"><span class="pre">isaacsim.core.experimental.*</span></code> extensions)
+is a rewritten implementation of the current Isaac Sim’s Core API.
+It is designed to be more robust, flexible, and powerful, yet still maintain the core utilities and wrapper concepts.</p>
+<section id="main-features-compared-to-the-current-core-api">
+<h3>Main features (compared to the current Core API)<a class="headerlink" href="experimental.html#main-features-compared-to-the-current-core-api" title="Link to this heading">#</a></h3>
+<ul>
+<li><p><strong>Warp-based implementation</strong> for numeric data containers (such as arrays and tensors).</p>
+<p>While the current Core API operates with (user-selectable) numeric data containers
+– NumPy arrays (CPU) or Torch tensors (CPU/GPU) –,
+the Core Experimental API operates with <a class="reference external" href="https://nvidia.github.io/warp/">Warp</a> arrays (CPU/GPU).</p>
+<p>Functions, properties and methods that operate on numeric data containers:</p>
+<ul class="simple">
+<li><p>always return data as Warp array, and</p></li>
+<li><p>have native support for input data presented as Python basic types (e.g.: int, float), lists, or NumPy arrays.</p></li>
+</ul>
+<p><br> E.g.: for a <code class="docutils literal notranslate"><span class="pre">RigidPrim</span></code> instance wrapping 2 rigid bodies,
+calling the <a class="reference internal" href="../../source/extensions/isaacsim.core.experimental.prims/docs/api.html#isaacsim.core.experimental.prims.RigidPrim.set_masses" title="isaacsim.core.experimental.prims.RigidPrim.set_masses"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_masses()</span></code></a>
+and <a class="reference internal" href="../../source/extensions/isaacsim.core.experimental.prims/docs/api.html#isaacsim.core.experimental.prims.RigidPrim.get_masses" title="isaacsim.core.experimental.prims.RigidPrim.get_masses"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_masses()</span></code></a> methods
+that expect and return a Warp array respectively:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rb</span><span class="o">.</span><span class="n">set_masses</span><span class="p">(</span><span class="n">wp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]))</span>  <span class="c1"># expected data (Warp array)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rb</span><span class="o">.</span><span class="n">set_masses</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]))</span>  <span class="c1"># &lt;-- this is fine (NumPy array)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rb</span><span class="o">.</span><span class="n">set_masses</span><span class="p">([</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">])</span>            <span class="c1"># &lt;-- this is fine (Python list)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rb</span><span class="o">.</span><span class="n">set_masses</span><span class="p">(</span><span class="mf">5.0</span><span class="p">)</span>                   <span class="c1"># &lt;-- this is fine (Python basic type)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">rb</span><span class="o">.</span><span class="n">get_masses</span><span class="p">()</span>             <span class="c1"># &#39;output&#39; is a Warp array</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>View wrappers</strong>.</p>
+<p><em>View</em> refers to the capability of a wrapper to wrap and operate on multiple USD prims.</p>
+<p>In contrast to the current Core API (where only some of the <code class="docutils literal notranslate"><span class="pre">isaacsim.core.prims</span></code> extension’s wrapper
+classes allow wrapping multiple USD prims: <em>Articulation</em>, <em>RigidPrim</em>, <em>XFormPrim</em>, etc.),
+all Core Experimental API wrappers support wrapping one or more USD prims in the stage
+(not only for <em>Articulation</em>, <em>RigidPrim</em>, <em>XformPrim</em>, etc., but for shapes, meshes, lights, visual/physics materials).</p>
+<p>There are no single-prim wrappers (a particular case of multi-prim wrappers) in the Core Experimental API.</p>
+</li>
+<li><p><strong>Automatic device/dtype conversion and broadcasting</strong> for input data.</p>
+<p>E.g.: for a <code class="docutils literal notranslate"><span class="pre">RigidPrim</span></code> instance wrapping 2 rigid bodies,
+calling the <a class="reference internal" href="../../source/extensions/isaacsim.core.experimental.prims/docs/api.html#isaacsim.core.experimental.prims.RigidPrim.set_masses" title="isaacsim.core.experimental.prims.RigidPrim.set_masses"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_masses()</span></code></a> method
+that expects a Warp array with shape <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">1)</span></code> and dtype <code class="docutils literal notranslate"><span class="pre">wp.float32</span></code>:</p>
+<ul>
+<li><p>Device</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rb</span><span class="o">.</span><span class="n">set_masses</span><span class="p">(</span><span class="n">wp</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">5.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">]],</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda:0&quot;</span><span class="p">))</span>  <span class="c1"># expected device</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rb</span><span class="o">.</span><span class="n">set_masses</span><span class="p">(</span><span class="n">wp</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">5.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">]],</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda:1&quot;</span><span class="p">))</span>  <span class="c1"># &lt;-- this is fine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rb</span><span class="o">.</span><span class="n">set_masses</span><span class="p">(</span><span class="n">wp</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">5.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">]],</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span><span class="p">))</span>     <span class="c1"># &lt;-- this is fine</span>
+</pre></div>
+</div>
+</li>
+<li><p>Dtype</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rb</span><span class="o">.</span><span class="n">set_masses</span><span class="p">(</span><span class="n">wp</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">5.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">wp</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>  <span class="c1"># expected dtype</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rb</span><span class="o">.</span><span class="n">set_masses</span><span class="p">(</span><span class="n">wp</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">wp</span><span class="o">.</span><span class="n">uint8</span><span class="p">))</span>        <span class="c1"># &lt;-- this is fine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rb</span><span class="o">.</span><span class="n">set_masses</span><span class="p">(</span><span class="n">wp</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">]]))</span>  <span class="c1"># &lt;-- this is fine (int64, implicit)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rb</span><span class="o">.</span><span class="n">set_masses</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>                     <span class="c1"># &lt;-- this is fine (int, implicit)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Broadcasting (following <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">NumPy’s broadcasting rules</a>)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rb</span><span class="o">.</span><span class="n">set_masses</span><span class="p">(</span><span class="n">wp</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">5.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">]]))</span>  <span class="c1"># expected shape</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rb</span><span class="o">.</span><span class="n">set_masses</span><span class="p">(</span><span class="n">wp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]))</span>      <span class="c1"># &lt;-- this is fine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rb</span><span class="o">.</span><span class="n">set_masses</span><span class="p">(</span><span class="n">wp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.0</span><span class="p">]))</span>  <span class="c1"># &lt;-- this is fine (same value for all prims)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rb</span><span class="o">.</span><span class="n">set_masses</span><span class="p">(</span><span class="mf">5.0</span><span class="p">)</span>              <span class="c1"># &lt;-- this is fine (same value for all prims)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p><strong>Backend selection</strong> with fallback mechanism.</p>
+<p>See <a class="reference internal" href="experimental.html#backend-specification"><span class="std std-ref">Backends</span></a>.</p>
+</li>
+</ul>
+</section>
+<section id="motivation-behind-its-design-and-implementation">
+<h3>Motivation behind its design and implementation<a class="headerlink" href="experimental.html#motivation-behind-its-design-and-implementation" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Reduce Isaac Sim’s third-party dependencies and package size.</p>
+<p>As the Core Experimental API becomes the main Core API in future releases, PyTorch will no longer be a dependency.
+This will reduce the size of the Isaac Sim distributions (~ 4 GB).</p>
+</li>
+<li><p>Simplify the Core API implementation and boost its maintainability.</p></li>
+<li><p>Streamline the integration of other Deep/Machine Learning frameworks (e.g., PyTorch, JAX, TensorFlow) and libraries.</p>
+<p>Although the Core Experimental API is implemented using Warp, it can
+<a class="reference external" href="https://nvidia.github.io/warp/modules/interoperability.html">interoperate</a>
+with other frameworks through standard interface protocols for exchanging data in a zero-copy manner.</p>
+<p>See the Isaac Sim’s standalone example (<code class="docutils literal notranslate"><span class="pre">standalone_examples/api/isaacsim.core.experimental</span></code>)
+for a demonstration of how the Core Experimental API integrates with PyTorch, JAX, NumPy, and Warp itself.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Although interoperability is possible with the current Core API, it can become challenging.</p>
+<p>As a case, there is a dependency conflict between PyTorch 2.7.0 (an explicit requirement/dependency of Isaac Sim)
+and JAX versions 0.6 and higher. Additionally, having both frameworks active leads to excessive resource
+consumption and GPU memory allocation.</p>
+</div>
+</li>
+</ul>
+</section>
+</section>
+<section id="backends">
+<span id="backend-specification"></span><h2>Backends<a class="headerlink" href="experimental.html#backends" title="Link to this heading">#</a></h2>
+<p>The Experimental Core API is implemented using one or more of the backends listed in the following table.
+The docstring of the API’s functions, properties and methods indicates which backends are supported (in order of call).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Backend</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Performance</p></th>
+<th class="head"><p>Availability</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="guilabel">usd</span></p></td>
+<td><p>System for authoring, composing, and reading hierarchically organized scene description (see <a class="reference external" href="https://www.nvidia.com/en-us/omniverse/usd">OpenUSD</a>).
+OpenUSD is foundational to NVIDIA Omniverse.</p></td>
+<td><p>Standard</p></td>
+<td><p>At any time</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="guilabel">usdrt</span></p></td>
+<td><p>Omniverse API that mirrors the USD API but reads and writes data to and from Fabric instead of USD (see <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/usdrt/latest/docs/fabric_hierarchy.html">Fabric Scene Delegate (FSD) and IFabricHierarchy</a>).</p></td>
+<td><p>Fast</p></td>
+<td><p>At any time</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="guilabel">fabric</span></p></td>
+<td><p>Omniverse library that enables high-performance creation, modification, and access of scene data (see <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/usdrt/latest/docs/usd_fabric_usdrt.html">USD, Fabric, and USDRT</a>).</p></td>
+<td><p>Fast</p></td>
+<td><p>At any time</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="guilabel">tensor</span></p></td>
+<td><p>Interface for interacting with physics simulations in a data-oriented way (see <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/extensions/runtime/source/omni.physics.tensors/docs/index.html">Omni Physics Tensors</a>).</p></td>
+<td><p>Fastest</p></td>
+<td><p>During simulation</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <span class="guilabel">usdrt</span> and <span class="guilabel">fabric</span> backends require Fabric Scene Delegate (FSD) to be enabled.
+FSD can be enabled in <em>apps/.kit</em> experience files by setting <code class="docutils literal notranslate"><span class="pre">app.useFabricSceneDelegate</span> <span class="pre">=</span> <span class="pre">true</span></code>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <span class="guilabel">tensor</span> backend requires the simulation to be running (in play). Calling a property or method
+implemented only using this backend will raise an <code class="xref py py-exc docutils literal notranslate"><span class="pre">AssertionError</span></code> if the simulation is not running.
+If the implementation supports several backends, and the simulation is not running, the call will fallback
+to the next listed backend (typically <span class="guilabel">usd</span>).</p>
+</div>
+<section id="backend-selection">
+<h3>Backend selection<a class="headerlink" href="experimental.html#backend-selection" title="Link to this heading">#</a></h3>
+<p>The selection of a backend (when an implementation supports more than one) will be made according to its
+<em>availability</em> and according to the listed order. The <em>availability</em> refers to the state of the simulation
+in which a backend can be used after instantiating a class.</p>
+<p>A specific backend can be explicitly requested using the <a class="reference internal" href="../../source/extensions/isaacsim.core.experimental.utils/docs/api.html#isaacsim.core.experimental.utils.impl.backend.use_backend" title="isaacsim.core.experimental.utils.impl.backend.use_backend"><code class="xref py py-func docutils literal notranslate"><span class="pre">use_backend()</span></code></a> context manager.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If a backend is explicitly requested (using the <a class="reference internal" href="../../source/extensions/isaacsim.core.experimental.utils/docs/api.html#isaacsim.core.experimental.utils.impl.backend.use_backend" title="isaacsim.core.experimental.utils.impl.backend.use_backend"><code class="xref py py-func docutils literal notranslate"><span class="pre">use_backend()</span></code></a> context manager)
+but is unavailable at the time of the request, resulting in a fallback to another backend, a warning is logged.</p>
+</div>
+</section>
+<section id="authoring-querying-visibility-relationship">
+<h3>Authoring/querying visibility relationship<a class="headerlink" href="experimental.html#authoring-querying-visibility-relationship" title="Link to this heading">#</a></h3>
+<style type="text/css">
+    .backends-table {
+        min-width: 75%;
+    }
+    .backends-table td {
+        border-color: gray;
+        border-style: solid;
+        border-width: 1px;
+    }
+    .backends-table p {
+        margin: 0;
+        padding: 0;
+    }
+    .backends-table .corner-cell {
+        border-top: none;
+        border-left: none;
+    }
+    .center {
+        text-align: center;
+        vertical-align: middle;
+    }
+</style>
+<table class="backends-table">
+<caption>
+    <p>Data authoring (set) and querying (get) visibility relationship between</p>
+    <p>the different backends for implementations that support multiple ones.</p>
+</caption>
+<tbody>
+  <tr>
+    <td colspan="2" rowspan="2" class="corner-cell"></td>
+    <td colspan="5" class="center"><strong>Querying backend</strong></td>
+  </tr>
+  <tr>
+    <td class="center"><span class="guilabel">usd</span></td>
+    <td class="center"><span class="guilabel">usdrt</span>/<span class="guilabel">fabric</span></td>
+    <td class="center"><span class="guilabel">tensor</span></td>
+  </tr>
+  <tr>
+    <td rowspan="3" class="center"><p><strong>&nbsp;Authoring&nbsp;</strong></p><p><strong>&nbsp;backend&nbsp;</strong></p></td>
+    <td><span class="guilabel">usd</span></td>
+    <td class="center">all</td>
+    <td class="center">all</td>
+    <td class="center">all</td>
+  </tr>
+  <tr>
+    <td><span class="guilabel">usdrt</span>/<span class="guilabel">fabric</span></td>
+    <td class="center"></td>
+    <td class="center">all</td>
+    <td class="center">all<sup>&nbsp;(1)</sup></td>
+  </tr>
+  <tr>
+    <td><span class="guilabel">tensor</span></td>
+    <td class="center"></td>
+    <td class="center">partial<sup>&nbsp;(2)</sup></td>
+    <td class="center">all</td>
+  </tr>
+</tbody></table><p><br> Notes:</p>
+<p><sup>(1)</sup> For the <span class="guilabel">tensor</span> backend, changes authored using the <span class="guilabel">usdrt</span> / <span class="guilabel">fabric</span>
+backends will be processed when the next physics update is executed (delayed).
+Therefore, querying the value immediately using this backend will not return the authored value.</p>
+<p><sup>(2)</sup> For the <span class="guilabel">usdrt</span> / <span class="guilabel">fabric</span> backends, only transform (position, orientation and scale)
+and velocity changes authored using the <span class="guilabel">tensor</span> backend will be visible in such backends
+after the simulation is stepped (and if the <code class="docutils literal notranslate"><span class="pre">omni.physx.fabric</span></code> extension is enabled).</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Isaac Sim: Extensions API</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="guidelines.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Coding Style Guidelines</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="experimental.html#overview">Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="experimental.html#main-features-compared-to-the-current-core-api">Main features (compared to the current Core API)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="experimental.html#motivation-behind-its-design-and-implementation">Motivation behind its design and implementation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="experimental.html#backends">Backends</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="experimental.html#backend-selection">Backend selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="experimental.html#authoring-querying-visibility-relationship">Authoring/querying visibility relationship</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
+
+
+<script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2023-2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item"><p class="last-updated">
+  Last updated on Jun 05, 2026.
+  <br/>
+</p></div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

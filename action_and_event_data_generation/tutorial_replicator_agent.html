@@ -1,0 +1,1857 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Actor Simulation and Synthetic Data Generation &#8212; Isaac Sim Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
+
+
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
+  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
+</script>
+<script type="text/javascript">
+  function OptanonWrapper() {
+    var event = new Event('bannerLoaded');
+    window.dispatchEvent(event);
+  }
+</script>
+<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
+</script>
+
+
+    <script rel="preload" src="../_static/modal-table.js"></script>
+    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../_static/external-links.js"></script>
+    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+    <script src="../_static/image_lightbox.js"></script>
+    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'action_and_event_data_generation/tutorial_replicator_agent';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            true;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+
+<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
+
+    <link rel="icon" href="../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configuration File Guide" href="ext_replicator-agent/ext_isaacsim_replicator_agent_configuration.html" />
+    <link rel="prev" title="Action and Event Data Generation" href="index.html" />
+
+<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-896K85H299');
+    </script>
+    
+
+
+  </head>
+
+  <body data-default-mode="">
+
+<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="tutorial_replicator_agent.html#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
+  
+  
+    <p class="title logo__title">Isaac Sim Documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">discord</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">github</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">youtube</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">instagram</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">www</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">linkedin</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">twitch</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
+    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
+  
+  
+    <p class="title logo__title">Isaac Sim Documentation</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">discord</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">github</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">youtube</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">instagram</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">www</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">linkedin</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">twitch</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/known_issues.html">Known Issues</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../migration_guides/index.html">Migration Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_6_0/index.html">Isaac Sim 6.0</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_6_0/sensors_camera_to_experimental_rtx.html">Camera Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_6_0/sensors_rtx_to_experimental_rtx.html">RTX Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_6_0/sensors_physics_to_experimental_physics.html">Physics Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_6_0/sensors_physx_lidar_to_physics_raycast.html">PhysX Lidar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_6_0/sensors_physx_generic_to_physics_raycast.html">PhysX Generic Sensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_6_0/sensors_physx_lightbeam_to_physics_raycast.html">PhysX Lightbeam</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_6_0/ros2_omnigraph_migration.html">ROS 2 OmniGraph Nodes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_6_0/ext_isaacsim_replicator_agent_migration_guide.html">Replicator Agent (IRA)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_6_0/mobility_gen_recordings_migration.html">MobilityGen Recordings</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../installation/index.html">Installation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation/quick-install.html">Quick Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/requirements.html">Isaac Sim Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/download.html">Download Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/install_workstation.html">Workstation Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/install_container.html">Container Installation</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../installation/install_cloud.html">Cloud Deployment</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../installation/install_advanced_cloud_setup_launchable.html">Isaac Launchable Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation/install_advanced_cloud_setup_brev.html">NVIDIA Brev Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation/install_advanced_cloud_setup_aws.html">AWS Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation/install_advanced_cloud_setup_azure.html">Azure Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation/install_advanced_cloud_setup_gcp.html">Google Cloud Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation/install_advanced_cloud_setup_tencent.html">Tencent Cloud Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation/install_advanced_cloud_setup_alibaba.html">Alibaba Cloud Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation/install_advanced_cloud_setup_volcano.html">Volcano Engine Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation/install_advanced_cloud_setup_baidu.html">Baidu Cloud Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation/install_advanced_remote_setup.html">Remote Workstation Deployment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overview/help.html">Help &amp; FAQ</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/isaac_sim_forums.html">Isaac Sim Developer Resources</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../common/feedback.html">Omniverse Feedback and Forums</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../common/general-feedback-form.html">General Feedback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../common/feedback-form.html">Documentation Fix Request</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/faq_index.html">FAQ</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../overview/troubleshooting.html">Troubleshooting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../isaac_lab_tutorials/troubleshooting.html">Isaac Lab Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/troubleshooting.html">ROS 2 Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../replicator_tutorials/troubleshooting.html">Replicator Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../digital_twin/troubleshooting.html">Digital Twin Troubleshooting</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../assets/usd_assets_overview.html">Isaac Sim Assets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../assets/usd_assets_robots.html">Robot Assets</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../assets/usd_assets_sensors.html">Sensor Assets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../assets/usd_assets_camera_depth_sensors.html">Camera and Depth Sensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../assets/usd_assets_nonvisual_sensors.html">Non-Visual Sensors</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../assets/usd_assets_props.html">Prop Assets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assets/usd_assets_environments.html">Environment Assets</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../assets/usd_assets_featured.html">Featured Assets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../assets/nova_carter_landing_page.html">Nova Carter</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../assets/usd_assets_third_party.html">Third-Party USD Assets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assets/usd_assets_nurec.html">Neural Volume Rendering</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quick Start</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../installation/quick-install.html">Quick Install</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../introduction/quickstart_index.html">Quick Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/quickstart_isaacsim.html">Isaac Sim Basic Usage Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/quickstart_isaacsim_robot.html">Basic Robot Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/tutorial_list.html">Tutorial Reference Table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../introduction/examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/menu_examples.html">Interactive Examples Reference Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/standalone_examples_list.html">Standalone Examples Reference List</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction/reference_architecture.html">Reference Architecture and Task Groupings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction/workflows.html">Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gui/reference_user_interface.html">User Interface Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gui/reference_keyboard_shortcuts.html">Keyboard Shortcuts Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_setup/asset_structure.html">Asset Structure</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Base Applications</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../isaac_lab_tutorials/index.html">Isaac Lab</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../isaac_lab_tutorials/tutorial_policy_deployment.html">Deploying Policies in Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_rl_controller.html">Running a Reinforcement Learning Policy through ROS 2 and Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../isaac_lab_tutorials/tutorial_cloner.html">Getting Started with Cloner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../isaac_lab_tutorials/tutorial_instanceable_assets.html">Instanceable Assets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../isaac_lab_tutorials/troubleshooting.html">Isaac Lab Troubleshooting</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
+
+
+
+
+
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_clock.html">ROS 2 Clock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_rtf.html">ROS 2 Publish Real Time Factor (RTF)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_camera.html">ROS 2 Cameras</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_rtx_lidar.html">RTX Lidar Sensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_tf.html">ROS2 Transform Trees and Odometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_publish_rate.html">ROS2 Setting Publish Rates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_camera_noise.html">Add Noise to Camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_camera_publishing.html">Publishing Camera’s Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_compressed_image.html">ROS 2 Compressed Images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_rtx_radar.html">RTX Radar Sensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_qos.html">ROS 2 Quality of Service (QoS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_manipulation.html">ROS2 Joint Control: Extension Python Scripting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_name_override.html">NameOverride Attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_ackermann_controller.html">ROS 2 Ackermann Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_auto_namespace.html">Automatic ROS 2 Namespace Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_rl_controller.html">Running a Reinforcement Learning Policy through ROS 2 and Isaac Sim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_python.html">ROS 2 Bridge in Standalone Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_navigation.html">ROS 2 Navigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_multi_navigation.html">Multiple Robot ROS2 Navigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_navigation_heightmap.html">ROS 2 Navigation with Heightmap Importer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_moveit.html">MoveIt 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_generic_publisher_subscriber.html">ROS 2 Generic Publisher and Subscriber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_generic_server_client.html">ROS 2 Generic Server and Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_prim_service.html">ROS 2 Service for Manipulating Prims Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_custom_message_python.html">ROS 2 Python Custom Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_custom_omnigraph_node_python.html">ROS 2 Python Custom OmniGraph Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_omnigraph_cpp_node.html">ROS 2 Custom C++ OmniGraph Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_launch.html">ROS 2 Launch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_simulation_control.html">ROS2 Simulation Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_putting_it_all_together.html">ROS 2 Putting It All Together</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/ros2_faq.html">ROS 2 Frequently Asked Questions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/troubleshooting.html">ROS 2 Troubleshooting</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../nvidia_isaac_ros/isaac_ros_tutorials.html">NVIDIA Isaac ROS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ros2_tutorials/ros2_reference_architecture.html">ROS 2 Reference Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_navigation.html">ROS 2 Navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_manipulation.html">ROS2 Joint Control: Extension Python Scripting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_moveit.html">MoveIt 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_rl_controller.html">Running a Reinforcement Learning Policy through ROS 2 and Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_simulation_control.html">ROS2 Simulation Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../importer_exporter/ext_isaacsim_asset_importer_urdf.html">URDF Importer Extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../importer_exporter/ext_omni_exporter_urdf.html">USD to URDF Exporter Extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ros2_tutorials/ros2_faq.html">ROS 2 Frequently Asked Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ros2_tutorials/troubleshooting.html">ROS 2 Troubleshooting</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../synthetic_data_generation/index.html">Synthetic Data Generation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../replicator_tutorials/index.html">Perception Data Generation (Replicator)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../replicator_tutorials/tutorial_replicator_overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../replicator_tutorials/tutorial_replicator_recorder.html">Synthetic Data Recorder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../replicator_tutorials/tutorial_replicator_getting_started.html">Getting Started Scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../replicator_tutorials/tutorial_replicator_sdg_workflows.html">SDG Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../replicator_tutorials/tutorial_replicator_scene_based_sdg.html">Scene Based Synthetic Dataset Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../replicator_tutorials/tutorial_replicator_object_based_sdg.html">Object Based Synthetic Dataset Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../replicator_tutorials/tutorial_replicator_infinigen_sdg.html">Environment Based Synthetic Dataset Generation with Infinigen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../replicator_tutorials/tutorial_replicator_amr_navigation.html">Randomization in Simulation – AMR Navigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../replicator_tutorials/tutorial_replicator_ur10_palletizing.html">Randomization in Simulation – UR10 Palletizing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../replicator_tutorials/tutorial_replicator_cosmos.html">Cosmos Synthetic Data Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../replicator_tutorials/tutorial_replicator_augmentation.html">Data Augmentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../replicator_tutorials/tutorial_replicator_custom_og_randomizer.html">Custom Replicator Randomization Nodes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../replicator_tutorials/tutorial_replicator_modular_scripting.html">Modular Behavior Scripting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../replicator_tutorials/tutorial_replicator_isaac_randomizers.html">Randomization Snippets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../replicator_tutorials/tutorial_replicator_isaac_snippets.html">Useful Snippets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../replicator_tutorials/troubleshooting.html">Replicator Troubleshooting</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">Action and Event Data Generation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active has-children"><a class="current reference internal" href="tutorial_replicator_agent.html#">Actor Simulation and Synthetic Data Generation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="ext_replicator-agent/ext_isaacsim_replicator_agent_configuration.html">Configuration File Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_replicator-agent/ext_isaacsim_replicator_agent_sample_configs.html">Sample Configs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_replicator-agent/ext_isaacsim_replicator_agent_configuration_editor.html">Configuration Editor API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_replicator-agent/ext_isaacsim_replicator_agent_custom_writer_example.html">Example: RTSP Streaming with CustomWriter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_replicator-agent/ext_isaacsim_anim_robot.html">Animated Robot Controller</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="tutorial_behavior_tree_gen.html">Behavior Tree Generation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="ext_behavior_tree_gen/context_files_and_schemas.html">Context Files and Metadata Schemas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_behavior_tree_gen/required_inputs.html">Required inputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_behavior_tree_gen/example_walkthrough.html">Example Walkthrough</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_behavior_tree_gen/three_api_functions.html">Using the API Functions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="tutorial_replicator_object.html">Object Simulation and Synthetic Data Generation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="ext_replicator-object/ext_chat_iro.html">Chat IRO: Natural Language Interface for Isaac Sim Replicator Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_replicator-object/setting.html">Setting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_replicator-object/mutable.html">Mutable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_replicator-object/camera.html">Camera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_replicator-object/geometry.html">Geometry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_replicator-object/force.html">Force</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_replicator-object/light.html">Light</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_replicator-object/mutable_attribute.html">Mutable Attribute</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_replicator-object/transformation.html">Transformation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_replicator-object/harmonizer.html">Harmonizer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_replicator-object/empty_space_detection.html">Empty Space Detection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_replicator-object/macro.html">Macro</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_replicator-object/distribution_visualizer.html">Distribution Visualizer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_replicator-object/randomization_dependency.html">Randomization Dependency: Incremental Examples</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial_replicator_caption.html">VLM Scene Captioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial_replicator_incident.html">Physical Space Event Generation</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="tutorial_sensors_rtx_placement.html">RTX Sensors Placement and Calibration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="ext_sensors_rtx_placement/camera_placement.html">Camera Placement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ext_sensors_rtx_placement/camera_calibration.html">Camera Calibration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="example_event_reactive_actors.html">Reacting to Events with Actor Triggers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial_omni_metropolis_pipeline.html">Omni Metropolis Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial_telemetry.html">Telemetry and Performance Tracking</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../synthetic_data_generation/tutorial_replicator_grasping_sdg.html">Grasping Synthetic Data Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../synthetic_data_generation/tutorial_replicator_mobility_gen.html">Data Generation with MobilityGen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../synthetic_data_generation/tutorial_replicator_teleop_sdg.html">Teleoperation Synthetic Data Generation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../digital_twin/index.html">Digital Twin</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../digital_twin/warehouse_logistics/ext_omni_warehouse_creator.html">Warehouse Creator Extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../digital_twin/warehouse_logistics/ext_isaacsim_asset_gen_conveyor.html">Conveyor Belt Utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../digital_twin/warehouse_logistics/tutorial_static_assets.html">Static Warehouse Assets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../digital_twin/warehouse_logistics/logistics_tutorial_cuopt.html">NVIDIA cuOpt</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../cortex_tutorials/tutorial_cortex_1_overview.html">Isaac Cortex: Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cortex_tutorials/tutorial_cortex_2_decider_networks.html">Decider networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cortex_tutorials/tutorial_cortex_3_example_peck_games.html">Behavior Examples: Peck Games</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cortex_tutorials/tutorial_cortex_4_franka_block_stacking.html">Walkthrough: Franka Block Stacking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cortex_tutorials/tutorial_cortex_5_ur10_bin_stacking.html">Walkthrough: UR10 Bin Stacking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cortex_tutorials/tutorial_cortex_7_cortex_extension.html">Building Cortex Based Extensions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../digital_twin/ext_isaacsim_asset_generator_occupancy_map.html">Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../digital_twin/rtsp_camera_streaming.html">Live Camera Streaming over RTSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../digital_twin/troubleshooting.html">Digital Twin Troubleshooting</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../app_template/index.html">Application Template</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Development Components</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../development_tools/index.html">Development Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../development_tools/vscode.html">Visual Studio Code (VS Code)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development_tools/python_server.html">Python Server (Remote Code Execution)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development_tools/jupyter_notebook.html">Jupyter Notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development_tools/omniverse_script_editor.html">Omniverse Script Editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development_tools/isaac_sim_mcp.html">Isaac Sim MCP Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../development_tools/carb_settings.html">Modify Carb Settings</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python_scripting/index.html">Python Scripting and Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python_scripting/python_scripting_concepts.html">Python Scripting Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_scripting/core_api_overview.html">Core API Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_scripting/manual_standalone_python.html">Python Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_scripting/environment_setup.html">Scene Setup Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_scripting/util_snippets.html">Util Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python_scripting/robots_simulation.html">Robot Simulation Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference_python_api.html">API Documentation</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../core_api_tutorials/index.html">Core API Tutorial Series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core_api_tutorials/tutorial_core_hello_world.html">Hello World</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core_api_tutorials/tutorial_core_hello_robot.html">Hello Robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core_api_tutorials/tutorial_core_adding_manipulator.html">Adding a Manipulator Robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core_api_tutorials/tutorial_core_adding_multiple_robots.html">Adding Multiple Robots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core_api_tutorials/tutorial_core_multiple_tasks.html">Multiple Robot Scenarios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core_api_tutorials/tutorial_core_adding_props.html">Adding Props</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../gui/index.html">GUI Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gui/reference_user_interface.html">User Interface Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gui/reference_keyboard_shortcuts.html">Keyboard Shortcuts Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gui/menu_create.html">Create Menu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_omnigraph/interface.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">OmniGraph Interface</span></a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_omnigraph/getting-started/core_concepts.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">OmniGraph Core Concepts</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../omnigraph/omnigraph_shortcuts.html">Commonly Used OmniGraph Shortcuts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../omnigraph/omnigraph_custom_python_nodes.html">Custom Python Nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../omnigraph/omnigraph_custom_cpp_nodes.html">Custom C++ Nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../omnigraph/omnigraph_custom_ipc_nodes.html">Building Custom IPC OmniGraph Nodes</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_omnigraph.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">Additional Resources</span></a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_omnigraph/tutorials/gentle_intro.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">Basic OmniGraph Tutorial</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../omnigraph/omnigraph_tutorial.html">Isaac Sim OmniGraph Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../omnigraph/omnigraph_scripting.html">OmniGraph via Python Scripting Tutorial</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Robot and Sensor Simulation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../importer_exporter/importers_exporters.html">Importers and Exporters</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../importer_exporter/ext_isaacsim_asset_importer_urdf.html">URDF Importer Extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../importer_exporter/ext_omni_exporter_urdf.html">USD to URDF Exporter Extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../importer_exporter/ext_isaacsim_asset_importer_mjcf.html">MJCF Importer Extension</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_onshape.html" title="(in Omniverse Extensions)"><span>Onshape importer</span></a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_cad-converter.html" title="(in Omniverse Extensions)"><span>CAD Converter</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../importer_exporter/ext_omni_isaac_shapenet.html">ShapeNet Importer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../importer_exporter/formats.html">Formats</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../importer_exporter/importer_exporter_tutorials.html">Importer and Exporter Tutorials Series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../importer_exporter/import_urdf.html">Tutorial: Import URDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../importer_exporter/export_urdf.html">Tutorial: Export URDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../importer_exporter/import_mjcf.html">Tutorial: Import MJCF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../importer_exporter/shapenet_importer.html">Tutorial: ShapeNet Importer</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../robot_setup/index.html">Robot Setup</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
+
+
+
+
+<li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_collision_detector.html">Robot Self-Collision Detector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../robot_setup/assemble_robots.html">Robot Assembler</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/inspector_tools.html">Inspector Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../robot_setup/joint_inspector.html">Joint Inspector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../physics/joint_inspector.html">Physics Inspector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../physics/ext_isaacsim_inspect_physics.html">Simulation Data Visualizer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_structure.html">Asset Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer.html">Asset Transformer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_api.html">Asset Transformer API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_rules.html">Asset Transformer Rules Reference</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup_tutorials/index.html">Robot Setup Tutorials Series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../robot_setup_tutorials/tutorial_intro_environment_setup.html">Tutorial 1: Stage Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../robot_setup_tutorials/tutorial_intro_assemble_robot.html">Tutorial 2: Assemble a Simple Robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../robot_setup_tutorials/tutorial_gui_simple_robot.html">Tutorial 3: Articulate a Basic Robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../robot_setup_tutorials/tutorial_gui_camera_sensors.html">Tutorial 4: Add Camera and Sensors to a Robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../robot_setup_tutorials/rig_mobile_robot.html">Tutorial 5: Rig a Mobile Robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../robot_setup_tutorials/tutorial_import_assemble_manipulator.html">Tutorial 6: Setup a Manipulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../robot_setup_tutorials/tutorial_configure_manipulator.html">Tutorial 7: Configure a Manipulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../robot_setup_tutorials/tutorial_generate_robot_config.html">Tutorial 8: Generate Robot Configuration File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../robot_setup_tutorials/tutorial_pickplace_example.html">Tutorial 9: Pick and Place Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../robot_setup_tutorials/rig_closed_loop_structures.html">Tutorial 10: Rig Closed-Loop Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../robot_setup_tutorials/joint_tuning.html">Tutorial 11: Tuning Joint Drive Gains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../robot_setup_tutorials/optimizing_asset.html">Tutorial 12: Asset Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../robot_setup_tutorials/tutorial_rig_legged_robot.html">Tutorial 13: Rigging a Legged Robot for a Locomotion Policy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../openusd_tuning_tutorials/index.html">OpenUSD and Tuning Best Practices Tutorial Series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../openusd_tuning_tutorials/tutorial_01_setup.html">Tutorial 1: Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../openusd_tuning_tutorials/tutorial_02_asset_structure.html">Tutorial 2: Asset Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../openusd_tuning_tutorials/tutorial_03_inspect_asset.html">Tutorial 3: Inspect Asset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../openusd_tuning_tutorials/tutorial_04_collider_pairs.html">Tutorial 4: Collider Pairs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../openusd_tuning_tutorials/tutorial_05_joint_drive_tuning.html">Tutorial 5: Joint Drive Tuning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../openusd_tuning_tutorials/tutorial_06_joint_gains_tuning.html">Tutorial 6: Joint Gains Tuning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../openusd_tuning_tutorials/tutorial_07_practice.html">Tutorial 7: Using the Dexterous Hand in Practice</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../robot_simulation/articulation_controller.html">Articulation Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_simulation/mobile_robot_controllers.html">Mobile Robot Controllers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../manipulators/motion_generation_overview.html">Motion Generation (Deprecated)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../manipulators/concepts/index.html">Motion Generation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../manipulators/concepts/motion_gen_api.html">Motion Generation Extension API Documentation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../manipulators/concepts/kinematics_solver.html">Kinematics Solvers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../manipulators/concepts/trajectory_interface.html">Trajectory Generation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../manipulators/concepts/path_planner.html">Path Planner Algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../manipulators/concepts/lula_rrt.html">Lula RRT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../manipulators/concepts/motion_policy.html">Motion Policy Algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../manipulators/concepts/rmpflow.html">RMPflow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../manipulators/concepts/rmpflow_tuning_guide.html">RMPflow Tuning Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../manipulators/manipulators_robot_description_editor.html">Lula Robot Description and XRDF Editor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manipulators/manipulators_rmpflow.html">Lula RMPflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manipulators/manipulators_lula_rrt.html">Lula RRT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manipulators/manipulators_lula_kinematics.html">Lula Kinematics Solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manipulators/manipulators_lula_trajectory_generator.html">Lula Trajectory Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manipulators/manipulators_configure_rmpflow_denso.html">Configuring RMPflow for a New Manipulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../manipulators/manipulators_curobo.html">cuRobo and cuMotion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_simulation/ext_isaacsim_robot_surface_gripper.html">Surface Gripper Extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_simulation/grasp_editor.html">Grasp Editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_simulation/ext_isaacsim_robot_policy_example.html">Reinforcement Learning Policies Examples in Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_simulation/robot_simulation_tips.html">Robot Simulation Tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../robot_simulation/robot_simulation_core_concepts.html">Useful Links</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../robot_motion_experimental/index.html">Robot Motion (Experimental)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../motion_generation/index.html">Motion Generation (Experimental)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../motion_generation/scene_interaction.html">Scene Interaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../motion_generation/mobile_robot_control_example.html">Controllers and the RobotState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../motion_generation/trajectory_planning.html">Trajectory Planning and Execution</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../cumotion/index.html">cuMotion Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cumotion/tutorial_robot_configuration.html">Robot Configuration Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cumotion/tutorial_world_interface.html">cuMotion World Interface Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cumotion/tutorial_rmpflow.html">RMPflow Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cumotion/tutorial_graph_planner.html">Graph-Based Motion Planner Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cumotion/tutorial_trajectory_generator.html">Trajectory Generator Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cumotion/tutorial_trajectory_optimizer.html">Trajectory Optimizer Tutorial</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pink/index.html">PINK Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pink/tutorial_robot_configuration.html">Robot Configuration Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pink/tutorial_ik_controller.html">IK Controller Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pink/tutorial_multi_task.html">Multi-Task Tutorial</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../sensors/index.html">Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../sensors/isaacsim_sensors_camera.html">Camera Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/isaacsim_sensors_camera_depth.html">Depth Sensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/isaacsim_sensors_camera_structured_light.html">Structured Light Cameras</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../sensors/isaacsim_sensors_rtx.html">RTX Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../sensors/isaacsim_sensors_rtx_lidar.html">RTX Lidar Sensor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../sensors/isaacsim_sensors_rtx_materials.html">RTX Sensor Non-Visual Materials</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../sensors/isaacsim_sensors_rtx_radar.html">RTX Radar Sensor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../sensors/isaacsim_sensors_rtx_materials.html">RTX Sensor Non-Visual Materials</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/isaacsim_sensors_rtx_acoustic.html">RTX Acoustic Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/isaacsim_sensors_rtx_annotators.html">RTX Sensor Annotators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/isaacsim_sensors_rtx_materials.html">RTX Sensor Non-Visual Materials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/isaacsim_sensors_multitick_rendering.html">Multi-Tick Rendering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/isaacsim_sensors_rtx_custom.html">Creating Custom RTX Sensor Profiles</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../sensors/isaacsim_sensors_physics.html">Physics-based sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/isaacsim_sensors_physics_articulation_force.html">Articulation joint sensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/isaacsim_sensors_physics_contact.html">Contact sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/isaacsim_sensors_physics_effort.html">Effort sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/isaacsim_sensors_physics_imu.html">IMU sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/isaacsim_sensors_physics_joint_state.html">Joint state sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/isaacsim_sensors_physics_raycast.html">Physics raycast sensor</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../sensors/isaacsim_sensors_physx.html">PhysX SDK sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/isaacsim_sensors_physx_generic.html">PhysX SDK generic sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/isaacsim_sensors_physx_lidar.html">PhysX SDK lidar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/isaacsim_sensors_physx_lightbeam.html">PhysX SDK lightbeam sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sensors/isaacsim_sensors_physx_proximity.html">Proximity sensor</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../assets/usd_assets_sensors.html">Sensor Assets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../assets/usd_assets_camera_depth_sensors.html">Camera and Depth Sensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../assets/usd_assets_nonvisual_sensors.html">Non-Visual Sensors</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../newton_actuators_tutorials/index.html">Newton Actuators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../newton_actuators_tutorials/newton_actuators_python.html">Set Up Actuators from Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../newton_actuators_tutorials/newton_actuators_usd.html">Author and Parse Actuators from USD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../newton_actuators_tutorials/newton_actuators_omnigraph.html">Drive an Actuated Robot from OmniGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../newton_actuators_tutorials/newton_actuators_tips.html">Tips</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../physics/index.html">Physics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../physics/simulation_fundamentals.html">Physics Simulation Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../physics/new_physics_engine.html">Physics Data Flow and Engine Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../physics/newton_physics.html">Newton Physics Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../physics/physics_resources.html">Omniverse™ Physics and PhysX SDK Limitations</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/extensions/ux/source/omni.physx.ui/docs/dev_guide/sim_management.html" title="(in Omni Physics)"><span class="xref std std-doc">Physics Simulation Management</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../physics/joint_inspector.html">Physics Inspector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../physics/physics_static_collision.html">Physics Static Collision Extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../physics/ext_isaacsim_inspect_physics.html">Simulation Data Visualizer</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/extensions/ux/source/omni.physx.ui/docs/dev_guide/physics_debug_wnd.html" title="(in Omni Physics)"><span class="xref std std-doc">Physics Debug Window</span></a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Utilities</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../utilities/browsers.html">Browsers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../utilities/content_browser.html">Content Browser</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_core/ext_browser-extensions/material-browser.html" title="(in Omniverse Extensions)"><span>Material Browser</span></a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_core/ext_browser-extensions/asset-browser.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">NVIDIA Asset Browser</span></a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_core/ext_browser-extensions/simready-explorer.html" title="(in Omniverse Extensions)"><span>SimReady Explorer</span></a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../utilities/templates_index.html">Templates</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../utilities/cli_extension_templates.html">CLI extension templates</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../utilities/extension_template_generator.html">Extension Template Generator</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../utilities/extension_templates_tutorial.html">Extension Template Generator Explained</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../utilities/vscode_extension_template_generator.html">Advanced Extension Template Generator from VS Code</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../utilities/debugging/index.html">Debugging &amp; Profiling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../utilities/debugging/ext_isaacsim_util_debug_draw.html">Debug Drawing Extension API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utilities/debugging/ext_omni_kit_commands.html">Omniverse Commands Tool Extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utilities/debugging/tutorial_advanced_python_debugging.html">Debugging With Visual Studio Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utilities/debugging/profiling_performance.html">Profiling Performance Using Tracy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../utilities/updating_extensions.html">Adding and Updating Extensions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utilities/tutorial_search_extension.html">SimReady Content Browser Search Extension Tutorial</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reference_python_api.html">API Documentation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reference_material/community_highlights.html">Community Project Highlights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference_material/reference_glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference_material/reference_conventions.html">Isaac Sim Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference_material/rendering_modes.html">Rendering modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference_material/sim_performance_optimization_handbook.html">Isaac Sim Performance Optimization Handbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference_material/benchmarks.html">Isaac Sim Benchmarks</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../omniverse_usd/index.html">Omniverse and USD</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/open_usd.html">OpenUSD Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/intro_to_usd.html">Working with USD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Common</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../common/feedback.html">Omniverse Feedback and Forums</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../common/general-feedback-form.html">General Feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../common/feedback-form.html">Documentation Fix Request</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../common/data-collection.html">Data Collection &amp; Usage</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../common/legal.html">Licenses</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../common/licenses-isaac-sim.html">Isaac Sim License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../common/license-isaac-sim-additional.html">Isaac Sim Additional Software and Materials License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../common/license-isaac-sim-webrtc-streaming-client.html">Isaac Sim WebRTC Streaming Client License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../common/NVIDIA_Omniverse_License_Agreement.html">Omniverse License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../common/licensing-notices-disclaimers.html">Licensing Disclaimer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../common/licenses.html">Other Licenses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../common/redistributable-ov-software.html">Redistributable Omniverse Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../common/license-faq.html">License FAQ</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../synthetic_data_generation/index.html" class="nav-link">Synthetic Data Generation</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Action and Event Data Generation</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Actor Simulation and Synthetic Data Generation</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+<div class="header-article-item">
+  <div class="d-flex justify-content-end w-100">
+    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+  </div>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="actor-simulation-and-synthetic-data-generation">
+<span id="isaac-sim-app-tutorial-replicator-character"></span><h1>Actor Simulation and Synthetic Data Generation<a class="headerlink" href="tutorial_replicator_agent.html#actor-simulation-and-synthetic-data-generation" title="Link to this heading">#</a></h1>
+<p>Detecting and tracking animated actors or agents like human characters and robots in diverse environments offers significant value across industries like retail, manufacturing, and logistics. It helps optimize layouts, improve safety, and enhance efficiency. However, collecting real-world data to train detection models is often costly and unscalable.</p>
+<p>Synthetic data generation offers a flexible, scalable solution. The <code class="docutils literal notranslate"><span class="pre">Omni.Metropolis.Pipeline</span></code> (OMP), <code class="docutils literal notranslate"><span class="pre">Isaacsim.Replicator.Agent</span></code> (IRA), <code class="docutils literal notranslate"><span class="pre">Isaacsim.Anim.Robot.Core</span></code> (IAR) extensions together provide a way to set up human characters and robots in 3D environments and generate synthetic data.
+This framework also provides control over actor behaviors, environments, and sensors, through a configuration file. It aims to provide a GPU-accelerated solution for training computer vision models and testing software-in-the-loop systems.</p>
+<p>This framework simplifies simulation customization with features like:</p>
+<ul class="simple">
+<li><p><strong>Codeless Interaction</strong>: Configurations are expressed in a YAML file. No code is needed to get synthetic data.</p></li>
+<li><p><strong>Simplified Setup</strong>: Included in Isaac Sim, it offers both GUI and scripting interfaces for interactive and headless workflows.</p></li>
+<li><p><strong>High-Fidelity Data</strong>: Leverages Omniverse’s SimReady assets, physics, and rendering to produce realistic imagery and accurate annotations essential for AI training.</p></li>
+<li><p><strong>Seamless Integration</strong>: As part of Kit extensions, it works natively with <code class="docutils literal notranslate"><span class="pre">omni.anim.behavior</span></code>, <code class="docutils literal notranslate"><span class="pre">omni.anim.navigation</span></code>, and <code class="docutils literal notranslate"><span class="pre">omni.replicator.core</span></code>.</p></li>
+</ul>
+<p>Before enabling this extension, read <a class="reference internal" href="../index.html#isaac-sim-app-overview"><span class="std std-ref">What Is Isaac Sim?</span></a> to learn about Isaac Sim and follow <a class="reference internal" href="../installation/index.html"><span class="doc">Installation</span></a> to install Isaac Sim.</p>
+<a class="reference internal image-reference" href="../_images/isim_4.5_full_ext-isaacsim.replicator.agent-5.0.0_viewport_IRA_overview.png"><img alt="characters and robots move around a warehouse 3D environment." class="align-center" src="../_images/isim_4.5_full_ext-isaacsim.replicator.agent-5.0.0_viewport_IRA_overview.png" style="width: 900px;" />
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="enable-extensions">
+<span id="actor-sim-enable-extensions"></span><h2>Enable Extensions<a class="headerlink" href="tutorial_replicator_agent.html#enable-extensions" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>Follow the <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_core/ext_extension-manager.html">Omniverse Extension Manager guide</a> to enable the <code class="docutils literal notranslate"><span class="pre">Omni.Metropolis.Pipeline</span></code>, <code class="docutils literal notranslate"><span class="pre">Isaacsim.Anim.Robot.Core</span></code>, and <code class="docutils literal notranslate"><span class="pre">Isaacsim.Replicator.Agent.Core</span> <span class="pre">&amp;</span> <span class="pre">UI</span></code>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The extensions fetch sample assets from Isaac Sim Assets during start. Refer to <a class="reference internal" href="../assets/usd_assets_overview.html"><span class="doc">Isaac Sim Assets</span></a>, if you encounter issues for loading assets.</p></li>
+<li><p>If loading the UI appears to be hanging, try starting Isaac Sim with the flag <code class="docutils literal notranslate"><span class="pre">--/persistent/isaac/asset_root/timeout=1.0</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>The UI panel is accessible by <strong>Tools &gt; Action and Event Data Generation &gt; Actor SDG</strong> and it opens on the right side of the screen.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>To have the extension auto-loaded on startup, check the <strong>autoload</strong> checkbox in the extension manager.</p></li>
+<li><p>Because of extension dependencies, a restart of the Isaac Sim app might be required.</p></li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you encounter unexpected errors, try launching Isaac Sim with the <code class="docutils literal notranslate"><span class="pre">--reset-user</span></code> flag to clear previous user settings.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./isaac-sim.sh<span class="w"> </span>--reset-user
+</pre></div>
+</div>
+</div>
+</section>
+<section id="getting-started-in-the-ui">
+<span id="actor-sim-getting-started"></span><h2>Getting Started in the UI<a class="headerlink" href="tutorial_replicator_agent.html#getting-started-in-the-ui" title="Link to this heading">#</a></h2>
+<p>For first-time users, start with the UI. Refer to the <a class="reference internal" href="tutorial_replicator_agent.html#actor-sim-running-from-script"><span class="std std-ref">Running from script</span></a> section for running with a Python script in Isaac Sim headless mode.</p>
+<ol class="arabic">
+<li><p>Follow the <a class="reference internal" href="tutorial_replicator_agent.html#actor-sim-enable-extensions"><span class="std std-ref">Enable Extensions</span></a> section and open the UI panel.</p></li>
+<li><p>The minimal config is loaded by default. You can also load a separate config file using the folder browser icon.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>All the sample config files are in <code class="docutils literal notranslate"><span class="pre">[Isaac</span> <span class="pre">Sim</span> <span class="pre">App</span> <span class="pre">Path]/extscache/isaacsim.replicator.agent.core-[current-version]/data/sample_configs/</span></code>. For a description of each file, refer to <a class="reference internal" href="ext_replicator-agent/ext_isaacsim_replicator_agent_sample_configs.html#ira-sample-configs"><span class="std std-ref">Sample Configs</span></a>.</p></li>
+<li><p>The minimal config file does not have actors or cameras. For a more comprehensive example, use <code class="docutils literal notranslate"><span class="pre">full_pipeline.yaml</span></code> in the above folder. This example can take up more loading time.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<a class="reference internal image-reference" href="../_images/isim_6.0_full_tut_external_actor_sim_getting_started_config_panel.png"><img alt="Load a config file." class="align-center" src="../_images/isim_6.0_full_tut_external_actor_sim_getting_started_config_panel.png" style="width: 680px;" />
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ol class="arabic" start="3">
+<li><p>[Optional] Modify the configuration file to your needs.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Use the <strong>New</strong> icon to create a new config file.</p></li>
+<li><p>Use the <strong>Reload</strong> icon to reset changes in UI and load the original config file again.</p></li>
+<li><p>Use the <strong>Save</strong> or <strong>Save As</strong> icon to save the changes in UI to config file.</p></li>
+<li><p>Use the <strong>Verbose save</strong> checkbox to control how much detail is written when saving your configuration file. When off, the written file is kept compact, only writing the values that are modified. When on, all non-empty fields are included, which is useful if you want a complete reference of every available option or need to share a fully explicit config with others.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Click the <strong>Set Up Simulation</strong> button from the top of the UI. It starts loading simulation assets (scene, cameras, actors) according to the configuration.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The scene requires a NavMesh to spawn assets and control them correctly. The scenes in the example config have NavMesh set up in advance. If you are using an external scene, refer to <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_navigation-mesh.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">Navigation Mesh</span></a> for NavMesh set up.</p></li>
+<li><p>You can also go to <strong>Window &gt; Navigation &gt; NavMesh</strong> and turn off <strong>Auto-Bake</strong> in the NavMesh settings. Turning it off can increase the performance.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Clicking <strong>Set Up Simulation</strong> always fully reloads the scene from the current configuration. This includes reopening the base environment USD and re-creating all actors (characters and robots), sensors, and prop layers from scratch. This action discards any manual edits made to the stage after a previous setup. If you want to iterate on the configuration, make your changes in the UI or config file first, then click <strong>Set Up Simulation</strong> to apply them.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Click the <strong>Start Data Generation</strong> button from the top of the UI. The simulation and data generation run for the duration (in seconds) specified in the <strong>Simulation Duration</strong> field in the <strong>Actor SDG Setup</strong> panel.</p></li>
+<li><p>When data generation finishes, the output data is available in the <strong>Output Directory</strong> specified in the <strong>Replicator</strong> panel.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>By default, it is <code class="docutils literal notranslate"><span class="pre">%USERPROFILE%\IRA_output</span></code> on Windows and <code class="docutils literal notranslate"><span class="pre">~/IRA_output</span></code> on Linux.</p></li>
+<li><p>For the folder layout, expected filenames, and a checklist to confirm a successful run, refer to <a class="reference internal" href="tutorial_replicator_agent.html#actor-sim-expected-output"><span class="std std-ref">Expected Output</span></a>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="running-from-script">
+<span id="actor-sim-running-from-script"></span><h2>Running from Script<a class="headerlink" href="tutorial_replicator_agent.html#running-from-script" title="Link to this heading">#</a></h2>
+<p>For large-scale data generation, launching from a script is more efficient. IRA provides an automatic script (<code class="docutils literal notranslate"><span class="pre">actor_sdg.py</span></code>) to run offline data generation.</p>
+<p>To run from script, open a terminal from where Isaac Sim is installed and run the following commands:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>For Linux:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">./python.sh</span> <span class="pre">tools/actor_sdg/actor_sdg.py</span> <span class="pre">-c</span> <span class="pre">[config</span> <span class="pre">file</span> <span class="pre">path]</span></code></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>For Windows:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">.\python.bat</span> <span class="pre">tools\actor_sdg\actor_sdg.py</span> <span class="pre">-c</span> <span class="pre">[config</span> <span class="pre">file</span> <span class="pre">path]</span></code></p>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[config</span> <span class="pre">file</span> <span class="pre">path]</span></code> is the path to the IRA configuration file.</p></li>
+<li><p>You must use the <code class="docutils literal notranslate"><span class="pre">python.sh</span></code> or <code class="docutils literal notranslate"><span class="pre">python.bat</span></code> bundled with Isaac Sim to run the script.</p></li>
+<li><p>An example config file is also provided in the <code class="docutils literal notranslate"><span class="pre">/tools/actor_sdg</span></code> folder. For a sample Linux run, execute: <code class="docutils literal notranslate"><span class="pre">./python.sh</span> <span class="pre">tools/actor_sdg/actor_sdg.py</span> <span class="pre">-c</span> <span class="pre">tools/actor_sdg/sample_config.yaml</span></code></p></li>
+</ul>
+</div>
+</section>
+<section id="expected-output">
+<span id="actor-sim-expected-output"></span><h2>Expected Output<a class="headerlink" href="tutorial_replicator_agent.html#expected-output" title="Link to this heading">#</a></h2>
+<p>After data generation finishes, IRA writes the simulation output to the directory specified by <code class="docutils literal notranslate"><span class="pre">output_dir</span></code> in the <code class="docutils literal notranslate"><span class="pre">replicator</span></code> block of the configuration. If <code class="docutils literal notranslate"><span class="pre">output_dir</span></code> is not set, the default location is:</p>
+<ul class="simple">
+<li><p><strong>Linux:</strong> <code class="docutils literal notranslate"><span class="pre">~/IRA_output</span></code></p></li>
+<li><p><strong>Windows:</strong> <code class="docutils literal notranslate"><span class="pre">%USERPROFILE%\IRA_output</span></code></p></li>
+</ul>
+<p>The exact layout depends on the writer that is active (refer to <a class="reference internal" href="ext_replicator-agent/ext_isaacsim_replicator_agent_configuration.html#ira-configuration-file"><span class="std std-ref">Writer Configuration</span></a> for the full parameter list). With the default <strong>IRABasicWriter</strong> and the bundled <code class="docutils literal notranslate"><span class="pre">full_pipeline.yaml</span></code> sample config, you should expect a structure similar to the following:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;output_dir&gt;/
+├── &lt;render_product_or_camera_subfolder&gt;/
+│   ├── rgb/                          # one file per captured frame
+│   │   ├── rgb_0030.png
+│   │   ├── rgb_0031.png
+│   │   └── ...
+│   ├── camera_params/                # camera intrinsics and pose per frame
+│   │   ├── camera_params_0030.json
+│   │   └── ...
+│   ├── object_detection.json         # consolidated bounding boxes, skeleton data,
+│   │                                 # and per-actor action data.
+│   └── ...                           # one folder per additional annotator that
+│                                     # was enabled (semantic_segmentation,
+│                                     # instance_segmentation, distance_to_camera,
+│                                     # normals, motion_vectors, ...)
+└── ...
+</pre></div>
+</div>
+</section>
+<section id="api-usage">
+<h2>API Usage<a class="headerlink" href="tutorial_replicator_agent.html#api-usage" title="Link to this heading">#</a></h2>
+<p>This extension also exposes a Python API that you can use to set up simulations and generate data from your own script.
+Ensure that <code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.agent.core</span></code> is enabled, and use the API as in the following example.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The snippet below uses the minimal config bundled with the extension (<code class="docutils literal notranslate"><span class="pre">data/sample_configs/minimal.yaml</span></code>).</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationApp</span>
+
+<span class="c1"># Start the application</span>
+<span class="n">simulation_app</span> <span class="o">=</span> <span class="n">SimulationApp</span><span class="p">({</span><span class="s2">&quot;headless&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+
+<span class="c1"># Get the utility to enable extensions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.utils.extensions</span><span class="w"> </span><span class="kn">import</span> <span class="n">enable_extension</span>
+
+<span class="c1"># Enable the IRA extension</span>
+<span class="n">enable_extension</span><span class="p">(</span><span class="s2">&quot;isaacsim.replicator.agent.core&quot;</span><span class="p">)</span>
+<span class="n">simulation_app</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_config_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return path to the minimal IRA config bundled with the extension.&quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">omni.kit.app</span>
+
+    <span class="n">core_ext_path</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get_app</span><span class="p">()</span><span class="o">.</span><span class="n">get_extension_manager</span><span class="p">()</span><span class="o">.</span><span class="n">get_extension_path_by_module</span><span class="p">(</span><span class="s2">&quot;isaacsim.replicator.agent.core&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">default_config_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">core_ext_path</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;sample_configs&quot;</span><span class="p">,</span> <span class="s2">&quot;minimal.yaml&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">default_config_file_path</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;IRA config not found: </span><span class="si">{</span><span class="n">default_config_file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">default_config_file_path</span>
+
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">run_ira_data_generation</span><span class="p">(</span><span class="n">setup_simulation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">run_data_generation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.replicator.agent.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">api</span> <span class="k">as</span> <span class="n">IRA</span>
+
+    <span class="c1"># IRA: load config. Specify the config file path.</span>
+    <span class="n">config_path</span> <span class="o">=</span> <span class="n">_get_config_path</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">IRA</span><span class="o">.</span><span class="n">load_config_file</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to load IRA config: </span><span class="si">{</span><span class="n">config_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># IRA: get config, you can modify the config here</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">IRA</span><span class="o">.</span><span class="n">get_config_file</span><span class="p">()</span>
+    <span class="n">IRA</span><span class="o">.</span><span class="n">set_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="c1"># IRA: setup simulation (only when setup_simulation is True)</span>
+    <span class="k">if</span> <span class="n">setup_simulation</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">IRA</span><span class="o">.</span><span class="n">setup_simulation</span><span class="p">()</span>
+
+        <span class="c1"># Allow a few frames for scene to settle</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">omni.kit.app</span>
+
+        <span class="n">app</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get_app</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+            <span class="k">await</span> <span class="n">app</span><span class="o">.</span><span class="n">next_update_async</span><span class="p">()</span>
+
+        <span class="c1"># IRA: generate data (only when run_data_generation is True)</span>
+        <span class="k">if</span> <span class="n">run_data_generation</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">IRA</span><span class="o">.</span><span class="n">start_data_generation_async</span><span class="p">(</span><span class="n">will_wait_until_complete</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">omni.kit.async_engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_coroutine</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">run_coroutine</span><span class="p">(</span><span class="n">run_ira_data_generation</span><span class="p">(</span><span class="n">setup_simulation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">run_data_generation</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">task</span><span class="o">.</span><span class="n">done</span><span class="p">():</span>
+    <span class="n">simulation_app</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="configuration-file">
+<span id="id1"></span><h2>Configuration File<a class="headerlink" href="tutorial_replicator_agent.html#configuration-file" title="Link to this heading">#</a></h2>
+<p>The configuration file is the central place to define your simulation. It controls everything from the environment and characters to the sensors and data output. The file uses the YAML format.</p>
+<p>The configuration file is organized into these top-level sections:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">environment</span></code>: Defines the simulation environment and assets.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">character</span></code>: Configures human characters.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">robot</span></code>: Configures robots.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sensor</span></code>: Configures RTX sensors.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">replicator</span></code>: Configures data generation and output.</p></li>
+</ul>
+<p>For detailed configuration instructions, parameter lists, and examples, refer to the following document:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ext_replicator-agent/ext_isaacsim_replicator_agent_configuration.html">Configuration File Guide</a></li>
+</ul>
+</div>
+<section id="sample-configs">
+<h3>Sample Configs<a class="headerlink" href="tutorial_replicator_agent.html#sample-configs" title="Link to this heading">#</a></h3>
+<p>The extension bundles a small set of ready-to-run YAML configs under
+<code class="docutils literal notranslate"><span class="pre">[ext-path]/data/sample_configs/</span></code> so you can review each major feature in
+isolation before composing your own. The samples cover both character-behavior
+APIs side by side:</p>
+<ul class="simple">
+<li><p>the stable routine-trigger system at the top level</p></li>
+<li><p>the experimental behavior-tree system under <code class="docutils literal notranslate"><span class="pre">behavior_tree/</span></code></p></li>
+</ul>
+<p>If you are starting out, open <code class="docutils literal notranslate"><span class="pre">minimal.yaml</span></code> (the UI loads it on launch) to
+review the smallest valid config, then switch to <code class="docutils literal notranslate"><span class="pre">full_pipeline.yaml</span></code>
+for an end-to-end demo with sensor placement and writers.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ext_replicator-agent/ext_isaacsim_replicator_agent_sample_configs.html">Sample Configs</a></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="migrating-from-ira-0-x-x">
+<h2>Migrating from IRA 0.x.x<a class="headerlink" href="tutorial_replicator_agent.html#migrating-from-ira-0-x-x" title="Link to this heading">#</a></h2>
+<p>If you are upgrading from IRA 0.x.x (shipped with Isaac Sim 5.1 and earlier),
+be aware that IRA 1.x.x (Isaac Sim 6.0+) is a complete architectural redesign.
+All core capabilities, such as the following, are carried forward:</p>
+<ul class="simple">
+<li><p>environment loading</p></li>
+<li><p>character and robot spawning</p></li>
+<li><p>sensor placement</p></li>
+<li><p>synthetic data generation</p></li>
+</ul>
+<p>However, the configuration schema, behavior system, and Python API have all changed.
+Existing 0.x config files and scripts will not work without modification.</p>
+<p>Key reasons for the redesign:</p>
+<ul class="simple">
+<li><p><strong>Simpler workflow</strong> – The multi-step process of generating, saving, and
+loading external command files is gone. Behaviors are now defined inline in
+the YAML config, reducing setup to two clicks in the UI.</p></li>
+<li><p><strong>Greater flexibility</strong> – Named groups let you define multiple character,
+robot, and sensor populations with independent settings in a single config.
+Multiple data writers can run concurrently with per-writer timing and sensor
+selection.</p></li>
+<li><p><strong>Stronger validation</strong> – Pydantic v2 models validate configs on load and
+surface clear error messages, catching mistakes before the simulation starts.</p></li>
+<li><p><strong>USD-native architecture</strong> – Actor configurations are persisted as USD
+schemas and prims, making them inspectable and editable directly in the
+stage.</p></li>
+</ul>
+<p>For the full migration guide covering every breaking change with before/after
+examples and a step-by-step checklist, refer to <a class="reference internal" href="../migration_guides/isaac_sim_6_0/ext_isaacsim_replicator_agent_migration_guide.html#ira-migration-guide-0x-to-1x"><span class="std std-ref">Replicator Agent (IRA)</span></a>.</p>
+<p>For editing the configuration files through UI or code, refer to the <a class="reference internal" href="ext_replicator-agent/ext_isaacsim_replicator_agent_configuration_editor.html#ira-configuration-editor-api"><span class="std std-ref">Configuration Editor API</span></a>:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ext_replicator-agent/ext_isaacsim_replicator_agent_configuration_editor.html">Configuration Editor API</a></li>
+</ul>
+</div>
+<p>For a practical walkthrough of using the CustomWriter to stream RTSP video from IRA cameras, review the following example:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ext_replicator-agent/ext_isaacsim_replicator_agent_custom_writer_example.html">Example: RTSP Streaming with CustomWriter</a></li>
+</ul>
+</div>
+</section>
+<section id="actor-behaviors">
+<h2>Actor Behaviors<a class="headerlink" href="tutorial_replicator_agent.html#actor-behaviors" title="Link to this heading">#</a></h2>
+<p>Actor behaviors are achieved by OMP, IRA, and IAR together.</p>
+<a class="reference internal image-reference" href="../_images/isim_6.0_full_tut_external_actor_sim_actor_behavior_ext_overview.png"><img alt="Extension relationship." class="align-center" src="../_images/isim_6.0_full_tut_external_actor_sim_actor_behavior_ext_overview.png" style="width: 900px;" />
+</a>
+<p>Actors perform a “routine-trigger” behavior loop at play. This pattern is configurable by the behaviors and triggers assigned to the actor.</p>
+<a class="reference internal image-reference" href="../_images/isim_6.0_full_tut_external_actor_sim_actor_behavior_overview.png"><img alt="actor, behavior, trigger" class="align-center" src="../_images/isim_6.0_full_tut_external_actor_sim_actor_behavior_overview.png" style="width: 900px;" />
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="the-routine-trigger-loop">
+<h3>The Routine Trigger Loop<a class="headerlink" href="tutorial_replicator_agent.html#the-routine-trigger-loop" title="Link to this heading">#</a></h3>
+<p>When no actor triggers are activated, actors perform a routine loop by repeatedly picking behaviors from routines to perform, weighted by their probability, using the <code class="docutils literal notranslate"><span class="pre">actor</span> <span class="pre">global</span> <span class="pre">seed</span></code>.</p>
+<p>When any trigger activates, the actor pauses its routine and performs the behaviors under each active trigger. The system pauses and queues running triggers if a higher-priority trigger fires (lower-priority triggers are skipped).
+A trigger is marked complete when all its behaviors finish. The first trigger in the queue then resumes.
+After all active triggers complete, the actor returns to its routine.</p>
+<a class="reference internal image-reference" href="../_images/isim_6.0_full_tut_external_actor_sim_actor_behavior_flowchart.png"><img alt="routine-trigger flowchart." class="align-center" src="../_images/isim_6.0_full_tut_external_actor_sim_actor_behavior_flowchart.png" style="width: 900px;" />
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="configure-behaviors">
+<h3>Configure Behaviors<a class="headerlink" href="tutorial_replicator_agent.html#configure-behaviors" title="Link to this heading">#</a></h3>
+<p>After the actors are loaded into the scene from the config file, the configurations are embedded in the USD API schemas and USD Prims. Each actor is represented by a MetroAgentAPI schema and its derived type.
+For a human character, it is the <code class="docutils literal notranslate"><span class="pre">IRACharacterAPI</span></code> attached on the SkelRoot prim. For an animated robot, it is the <code class="docutils literal notranslate"><span class="pre">AnimRobotAPI</span></code> attached on the root prim of the robot payload.
+Each behavior and trigger becomes an individual USD Prim that the actor USD API can have reference to, each actor trigger prim can also have reference to a list of behaviors.</p>
+<p>The actor USD API schema defines basic information of the actor:</p>
+<ul class="simple">
+<li><p>name</p></li>
+<li><p>group</p></li>
+<li><p>seed</p></li>
+<li><p>a routine reference slot and a trigger reference slot</p></li>
+</ul>
+<p>At play, the name, group, and seed will be combined and hashed into a single seed as <code class="docutils literal notranslate"><span class="pre">actor</span> <span class="pre">global</span> <span class="pre">seed</span></code>. This seed will be used for all the “randomness” of the actor, including random routine picking for the actor itself and the picking within each behavior such as picking a speed from speed range.
+This also means the same <code class="docutils literal notranslate"><span class="pre">actor</span> <span class="pre">global</span> <span class="pre">seed</span></code> displays the same result if other settings and the environment do not change.</p>
+<p>Each type of actor behavior is represented by a USD Prim type. It defines the configuration of the behavior:</p>
+<ul class="simple">
+<li><p>weight</p></li>
+<li><p>repeat</p></li>
+<li><p>behavior</p></li>
+</ul>
+<p>For human characters, the behavior prim types follow the <code class="docutils literal notranslate"><span class="pre">CharacterXXXBehavior</span></code> naming pattern. For animated robots, they are <code class="docutils literal notranslate"><span class="pre">RobotXXXBehavior</span></code>.</p>
+<p>Each actor trigger is also a USD Prim. It defines the trigger priority and has a reference to a behavior list to be executed sequentially when this trigger activates.
+Human characters and anim robots share the same trigger types that are defined in OMP with the <code class="docutils literal notranslate"><span class="pre">MetroXXXTrigger</span></code> naming pattern.</p>
+<p>In addition, the actors leverage <code class="docutils literal notranslate"><span class="pre">omni.behavior.behavior</span></code> (Human characters) and <code class="docutils literal notranslate"><span class="pre">isaacsim.anim.robot.core</span></code> (Animated robots) as their animation implementation.
+For more information about them, refer to the following documents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ext_replicator-agent/ext_isaacsim_anim_robot.html">Animated Robot Controller</a></li>
+</ul>
+</div>
+</section>
+<section id="behavior-tree-experimental">
+<h3>Behavior Tree (Experimental)<a class="headerlink" href="tutorial_replicator_agent.html#behavior-tree-experimental" title="Link to this heading">#</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Behavior tree character support is <strong>experimental</strong> and might change in future releases.</p>
+</div>
+<p>In addition to the routine-trigger behavior system described above, IRA 1.3.0 introduces support for driving character behavior through <strong>behavior trees</strong>. Behavior trees are authored with the <code class="docutils literal notranslate"><span class="pre">omni.behavior.tree.core</span></code> and <code class="docutils literal notranslate"><span class="pre">omni.anim.behavior.tree</span></code> extensions.</p>
+<p><strong>Behavior Tree Overview</strong></p>
+<p>A behavior tree is a hierarchical model for decision-making. It is composed of different node types that work together:</p>
+<ul class="simple">
+<li><p><strong>Action nodes</strong> are the leaf-level nodes where characters perform concrete actions (for example, <code class="docutils literal notranslate"><span class="pre">MoveTo</span></code>, <code class="docutils literal notranslate"><span class="pre">Wait</span></code>).</p></li>
+<li><p><strong>Composite nodes</strong> control logic and execution flow. For example, a <code class="docutils literal notranslate"><span class="pre">Sequence</span></code> node runs its children in order, while a <code class="docutils literal notranslate"><span class="pre">Selector</span></code> node tries children until one succeeds.</p></li>
+<li><p><strong>Modifiers and Decorators</strong> wrap other nodes to alter their behavior, such as <code class="docutils literal notranslate"><span class="pre">Repeat</span></code> (loop a subtree) or <code class="docutils literal notranslate"><span class="pre">RandomNavMeshPoint</span></code> (supply a random destination).</p></li>
+</ul>
+<p>By combining these node types, you can compose arbitrarily complex behaviors. Behaviors from simple wander loops to multi-step conditional sequences, that are all within a single tree definition, without writing code. Compared to the IRA routine system, which picks behaviors randomly by weight, a behavior tree gives full deterministic control over ordering, branching, and looping.</p>
+<p><strong>Relationship to Routines and Triggers</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Triggers are not currently supported</strong> for behavior-tree character groups. Any reactive or conditional logic must be authored as nodes inside the behavior tree itself.</p>
+</div>
+<p>Behavior tree mode is an alternative to the routine-trigger system. Each character group in the configuration uses <strong>one or the other</strong>: a group either defines <code class="docutils literal notranslate"><span class="pre">routines</span></code> and <code class="docutils literal notranslate"><span class="pre">triggers</span></code> (IRA-style) or references a <code class="docutils literal notranslate"><span class="pre">behavior_tree</span></code>. However, a single configuration file can contain multiple groups, so IRA-style and behavior-tree groups can coexist side by side.</p>
+<p><strong>Workflow</strong></p>
+<ol class="arabic">
+<li><p>Author a behavior tree using <code class="docutils literal notranslate"><span class="pre">omni.behavior.tree.ui</span></code> and save it as a JSON file. The tree references node libraries <code class="docutils literal notranslate"><span class="pre">omni.behavior.tree.core</span></code> and <code class="docutils literal notranslate"><span class="pre">omni.anim.behavior.tree</span></code> for its action, composite, and modifier nodes. Refer to the <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/behavior-tree/latest/user-guide.html">Behavior Tree’s User Guide</a> for how to author a behavior tree.</p></li>
+<li><p>In the IRA configuration YAML, create a character group with a <code class="docutils literal notranslate"><span class="pre">behavior_tree</span></code> field pointing to the JSON file. Optionally provide an <code class="docutils literal notranslate"><span class="pre">overrides</span></code> field to assign node parameters for different character groups without modifying the tree file.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">overrides</span></code> field is not currently configurable through the UI. It can only be edited directly in the YAML configuration file or API.</p>
+</div>
+</li>
+<li><p>Run the simulation as usual. The behavior-tree characters share the same spawning, NavMesh, and data-generation pipeline as IRA characters.</p></li>
+</ol>
+<p>Some sample config files with behavior tree character groups are provided in the <code class="docutils literal notranslate"><span class="pre">[Isaac</span> <span class="pre">Sim</span> <span class="pre">Assets</span> <span class="pre">Path]/Samples/BehaviorTree</span></code> folder as well as bundled in the <code class="docutils literal notranslate"><span class="pre">data/sample_configs/behavior_tree/</span></code> folder in the <code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.agent.core</span></code> extension (refer to <a class="reference internal" href="ext_replicator-agent/ext_isaacsim_replicator_agent_sample_configs.html#ira-sample-configs"><span class="std std-ref">Sample Configs</span></a>). For configuration details, parameter reference, and YAML examples, refer to <a class="reference internal" href="ext_replicator-agent/ext_isaacsim_replicator_agent_configuration.html#ira-bt-character-group"><span class="std std-ref">Behavior Tree Character Group (Experimental)</span></a> in the Configuration File Guide.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Behavior tree characters set up by IRA still have the <code class="docutils literal notranslate"><span class="pre">IRACharacterAPI</span></code> schema applied, but this is only used for data-generation identification (name, group, semantic labels, and related fields). The character’s behavior is entirely controlled by the behavior tree through <code class="docutils literal notranslate"><span class="pre">omni.behavior.tree.core</span></code> (OBT). IRA-level settings such as <code class="docutils literal notranslate"><span class="pre">seed</span></code> have no effect on behavior-tree characters.</p>
+</div>
+</section>
+</section>
+<section id="terminology">
+<h2>Terminology<a class="headerlink" href="tutorial_replicator_agent.html#terminology" title="Link to this heading">#</a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Isaacsim.Replicator.Agent.Core</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The core extension that manages the simulation state. It contains the essential API and modules for setting up the simulation and capturing the synthetic data. Its modules can be called independently.</p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Isaacsim.Replicator.Agent.UI</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The UI extension for IRA. When this extension loads, the core extension is loaded automatically. This extension contains the UI components for easy interaction with the extension.</p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Configuration File</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">A <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> file that contains configuration data that defines the key components of a simulation, including the randomization seed, duration of the simulation, number of the actors, and output format. To use the extension, you must load a configuration file or use the UI to generate a YAML file first.</p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Actor</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Actors are controlled by the respective controllers (<code class="docutils literal notranslate"><span class="pre">omni.behavior.tree</span></code> and <code class="docutils literal notranslate"><span class="pre">isaacsim.anim.robot</span></code>) and perform actions in the simulation. The extension supports human characters and robots (Nova Carter, iw.hub) as actors. The terms “actor” and “agent” are used interchangeably in this documentation.</p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Seed</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Randomization seed. Given the same seed, the extension can generate the same randomized result for camera and agent location and agent behaviors. With the same seed and the same sequence of operations, the same data is guaranteed to be generated.</p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Replicator (Omni.Replicator.Core)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The data capturing extension that this extension is based on. More information about the Replicator extension can be found in <a class="reference internal" href="../replicator_tutorials/index.html"><span class="doc">Replicator Official Documentation</span></a>.</p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Behavior Tree</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">A hierarchical data model for organizing decision-making and actions. A behavior tree is defined as a JSON file and referenced from the IRA configuration. It provides an alternative to the routine-trigger system for controlling character behavior. Refer to the <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/behavior-tree/latest/index.html">Behavior Tree documentation</a> for more information.</p>
+</div>
+</details></section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Action and Event Data Generation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ext_replicator-agent/ext_isaacsim_replicator_agent_configuration.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Configuration File Guide</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_agent.html#enable-extensions">Enable Extensions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_agent.html#getting-started-in-the-ui">Getting Started in the UI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_agent.html#running-from-script">Running from Script</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_agent.html#expected-output">Expected Output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_agent.html#api-usage">API Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_agent.html#configuration-file">Configuration File</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_agent.html#sample-configs">Sample Configs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_agent.html#migrating-from-ira-0-x-x">Migrating from IRA 0.x.x</a><ul class="nav section-nav flex-column">
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_agent.html#actor-behaviors">Actor Behaviors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_agent.html#the-routine-trigger-loop">The Routine Trigger Loop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_agent.html#configure-behaviors">Configure Behaviors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_agent.html#behavior-tree-experimental">Behavior Tree (Experimental)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_agent.html#terminology">Terminology</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
+
+
+<script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2023-2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item"><p class="last-updated">
+  Last updated on Jun 05, 2026.
+  <br/>
+</p></div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

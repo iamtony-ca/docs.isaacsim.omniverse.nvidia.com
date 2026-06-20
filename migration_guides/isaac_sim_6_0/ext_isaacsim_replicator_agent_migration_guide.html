@@ -1,0 +1,2215 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Replicator Agent (IRA) &#8212; Isaac Sim Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=8f2a1f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css%3Fv=767de534.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css%3Fv=76b2166b.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/image_lightbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/isaacsim-design.css%3Fv=54bad574.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
+
+
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
+  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
+</script>
+<script type="text/javascript">
+  function OptanonWrapper() {
+    var event = new Event('bannerLoaded');
+    window.dispatchEvent(event);
+  }
+</script>
+<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
+</script>
+
+
+    <script rel="preload" src="../../_static/modal-table.js"></script>
+    <script src="../../_static/documentation_options.js%3Fv=cb01d673"></script>
+    <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+    <script src="../../_static/external-links.js"></script>
+    <script src="../../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+    <script src="../../_static/copybutton.js%3Fv=65e89d2a"></script>
+    <script src="../../_static/image_lightbox.js"></script>
+    <script src="../../_static/design-tabs.js%3Fv=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'migration_guides/isaac_sim_6_0/ext_isaacsim_replicator_agent_migration_guide';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            true;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="../../_static/version-patch.js%3Fv=3e13fdd2"></script>
+
+<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
+
+    <link rel="icon" href="../../_static/favicon.png"/>
+
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="MobilityGen Recordings" href="mobility_gen_recordings_migration.html" />
+    <link rel="prev" title="ROS 2 OmniGraph Nodes" href="ros2_omnigraph_migration.html" />
+
+<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-896K85H299');
+    </script>
+    
+
+
+  </head>
+
+  <body data-default-mode="">
+
+<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
+
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="ext_isaacsim_replicator_agent_migration_guide.html#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
+    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
+  
+  
+    <p class="title logo__title">Isaac Sim Documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">discord</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">github</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">youtube</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">instagram</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">www</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">linkedin</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">twitch</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
+    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
+  
+  
+    <p class="title logo__title">Isaac Sim Documentation</p>
+  
+</a>
+
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">discord</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">github</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">twitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">youtube</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">instagram</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">www</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">linkedin</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">twitch</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Table of Contents">
+  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">What Is Isaac Sim?</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../overview/release_notes.html">Release Notes</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../overview/known_issues.html">Known Issues</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../index.html">Migration Guides</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="index.html">Isaac Sim 6.0</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="sensors_camera_to_experimental_rtx.html">Camera Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sensors_rtx_to_experimental_rtx.html">RTX Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sensors_physics_to_experimental_physics.html">Physics Sensors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sensors_physx_lidar_to_physics_raycast.html">PhysX Lidar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sensors_physx_generic_to_physics_raycast.html">PhysX Generic Sensor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sensors_physx_lightbeam_to_physics_raycast.html">PhysX Lightbeam</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ros2_omnigraph_migration.html">ROS 2 OmniGraph Nodes</a></li>
+<li class="toctree-l4 current active"><a class="current reference internal" href="ext_isaacsim_replicator_agent_migration_guide.html#">Replicator Agent (IRA)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mobility_gen_recordings_migration.html">MobilityGen Recordings</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../installation/index.html">Installation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/quick-install.html">Quick Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/requirements.html">Isaac Sim Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/download.html">Download Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/install_workstation.html">Workstation Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/install_container.html">Container Installation</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../installation/install_cloud.html">Cloud Deployment</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/install_advanced_cloud_setup_launchable.html">Isaac Launchable Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/install_advanced_cloud_setup_brev.html">NVIDIA Brev Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/install_advanced_cloud_setup_aws.html">AWS Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/install_advanced_cloud_setup_azure.html">Azure Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/install_advanced_cloud_setup_gcp.html">Google Cloud Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/install_advanced_cloud_setup_tencent.html">Tencent Cloud Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/install_advanced_cloud_setup_alibaba.html">Alibaba Cloud Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/install_advanced_cloud_setup_volcano.html">Volcano Engine Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/install_advanced_cloud_setup_baidu.html">Baidu Cloud Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/install_advanced_remote_setup.html">Remote Workstation Deployment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/manual_livestream_clients.html">Livestream Clients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/install_python.html">Python Environment Installation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../installation/install_faq.html">Setup Tips</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../overview/help.html">Help &amp; FAQ</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../overview/isaac_sim_forums.html">Isaac Sim Developer Resources</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../common/feedback.html">Omniverse Feedback and Forums</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../common/general-feedback-form.html">General Feedback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../common/feedback-form.html">Documentation Fix Request</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../overview/faq_index.html">FAQ</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../overview/troubleshooting.html">Troubleshooting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../isaac_lab_tutorials/troubleshooting.html">Isaac Lab Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/troubleshooting.html">ROS 2 Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../replicator_tutorials/troubleshooting.html">Replicator Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../digital_twin/troubleshooting.html">Digital Twin Troubleshooting</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../assets/usd_assets_overview.html">Isaac Sim Assets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../assets/usd_assets_robots.html">Robot Assets</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../assets/usd_assets_sensors.html">Sensor Assets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../assets/usd_assets_camera_depth_sensors.html">Camera and Depth Sensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../assets/usd_assets_nonvisual_sensors.html">Non-Visual Sensors</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assets/usd_assets_props.html">Prop Assets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assets/usd_assets_environments.html">Environment Assets</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../assets/usd_assets_featured.html">Featured Assets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../assets/nova_carter_landing_page.html">Nova Carter</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assets/usd_assets_third_party.html">Third-Party USD Assets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../assets/usd_assets_nurec.html">Neural Volume Rendering</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Quick Start</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../installation/quick-install.html">Quick Install</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../introduction/quickstart_index.html">Quick Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/quickstart_isaacsim.html">Isaac Sim Basic Usage Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/quickstart_isaacsim_robot.html">Basic Robot Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/tutorial_list.html">Tutorial Reference Table</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../introduction/examples.html">Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/menu_examples.html">Interactive Examples Reference Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/standalone_examples_list.html">Standalone Examples Reference List</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/reference_architecture.html">Reference Architecture and Task Groupings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/workflows.html">Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gui/reference_user_interface.html">User Interface Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gui/reference_keyboard_shortcuts.html">Keyboard Shortcuts Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robot_setup/asset_structure.html">Asset Structure</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Base Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../isaac_lab_tutorials/index.html">Isaac Lab</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../isaac_lab_tutorials/tutorial_policy_deployment.html">Deploying Policies in Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_rl_controller.html">Running a Reinforcement Learning Policy through ROS 2 and Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../isaac_lab_tutorials/tutorial_cloner.html">Getting Started with Cloner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../isaac_lab_tutorials/tutorial_instanceable_assets.html">Instanceable Assets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../isaac_lab_tutorials/troubleshooting.html">Isaac Lab Troubleshooting</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
+
+
+
+
+
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_clock.html">ROS 2 Clock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_rtf.html">ROS 2 Publish Real Time Factor (RTF)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_camera.html">ROS 2 Cameras</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_rtx_lidar.html">RTX Lidar Sensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_tf.html">ROS2 Transform Trees and Odometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_publish_rate.html">ROS2 Setting Publish Rates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_camera_noise.html">Add Noise to Camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_camera_publishing.html">Publishing Camera’s Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_compressed_image.html">ROS 2 Compressed Images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_rtx_radar.html">RTX Radar Sensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_qos.html">ROS 2 Quality of Service (QoS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_manipulation.html">ROS2 Joint Control: Extension Python Scripting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_name_override.html">NameOverride Attribute</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_ackermann_controller.html">ROS 2 Ackermann Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_auto_namespace.html">Automatic ROS 2 Namespace Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_rl_controller.html">Running a Reinforcement Learning Policy through ROS 2 and Isaac Sim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_python.html">ROS 2 Bridge in Standalone Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_navigation.html">ROS 2 Navigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_multi_navigation.html">Multiple Robot ROS2 Navigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_navigation_heightmap.html">ROS 2 Navigation with Heightmap Importer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_moveit.html">MoveIt 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_generic_publisher_subscriber.html">ROS 2 Generic Publisher and Subscriber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_generic_server_client.html">ROS 2 Generic Server and Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_prim_service.html">ROS 2 Service for Manipulating Prims Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_custom_message_python.html">ROS 2 Python Custom Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_custom_omnigraph_node_python.html">ROS 2 Python Custom OmniGraph Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_omnigraph_cpp_node.html">ROS 2 Custom C++ OmniGraph Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_launch.html">ROS 2 Launch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_simulation_control.html">ROS2 Simulation Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_putting_it_all_together.html">ROS 2 Putting It All Together</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/ros2_faq.html">ROS 2 Frequently Asked Questions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/troubleshooting.html">ROS 2 Troubleshooting</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nvidia_isaac_ros/isaac_ros_tutorials.html">NVIDIA Isaac ROS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ros2_tutorials/ros2_reference_architecture.html">ROS 2 Reference Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_navigation.html">ROS 2 Navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_manipulation.html">ROS2 Joint Control: Extension Python Scripting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_moveit.html">MoveIt 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_rl_controller.html">Running a Reinforcement Learning Policy through ROS 2 and Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_simulation_control.html">ROS2 Simulation Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../importer_exporter/ext_isaacsim_asset_importer_urdf.html">URDF Importer Extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../importer_exporter/ext_omni_exporter_urdf.html">USD to URDF Exporter Extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ros2_tutorials/ros2_faq.html">ROS 2 Frequently Asked Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ros2_tutorials/troubleshooting.html">ROS 2 Troubleshooting</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../synthetic_data_generation/index.html">Synthetic Data Generation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../replicator_tutorials/index.html">Perception Data Generation (Replicator)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../replicator_tutorials/tutorial_replicator_overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../replicator_tutorials/tutorial_replicator_recorder.html">Synthetic Data Recorder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../replicator_tutorials/tutorial_replicator_getting_started.html">Getting Started Scripts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../replicator_tutorials/tutorial_replicator_sdg_workflows.html">SDG Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../replicator_tutorials/tutorial_replicator_scene_based_sdg.html">Scene Based Synthetic Dataset Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../replicator_tutorials/tutorial_replicator_object_based_sdg.html">Object Based Synthetic Dataset Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../replicator_tutorials/tutorial_replicator_infinigen_sdg.html">Environment Based Synthetic Dataset Generation with Infinigen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../replicator_tutorials/tutorial_replicator_amr_navigation.html">Randomization in Simulation – AMR Navigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../replicator_tutorials/tutorial_replicator_ur10_palletizing.html">Randomization in Simulation – UR10 Palletizing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../replicator_tutorials/tutorial_replicator_cosmos.html">Cosmos Synthetic Data Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../replicator_tutorials/tutorial_replicator_augmentation.html">Data Augmentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../replicator_tutorials/tutorial_replicator_custom_og_randomizer.html">Custom Replicator Randomization Nodes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../replicator_tutorials/tutorial_replicator_modular_scripting.html">Modular Behavior Scripting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../replicator_tutorials/tutorial_replicator_isaac_randomizers.html">Randomization Snippets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../replicator_tutorials/tutorial_replicator_isaac_snippets.html">Useful Snippets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../replicator_tutorials/troubleshooting.html">Replicator Troubleshooting</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../action_and_event_data_generation/index.html">Action and Event Data Generation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../action_and_event_data_generation/tutorial_replicator_agent.html">Actor Simulation and Synthetic Data Generation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-agent/ext_isaacsim_replicator_agent_configuration.html">Configuration File Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-agent/ext_isaacsim_replicator_agent_sample_configs.html">Sample Configs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-agent/ext_isaacsim_replicator_agent_configuration_editor.html">Configuration Editor API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-agent/ext_isaacsim_replicator_agent_custom_writer_example.html">Example: RTSP Streaming with CustomWriter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-agent/ext_isaacsim_anim_robot.html">Animated Robot Controller</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../action_and_event_data_generation/tutorial_behavior_tree_gen.html">Behavior Tree Generation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_behavior_tree_gen/context_files_and_schemas.html">Context Files and Metadata Schemas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_behavior_tree_gen/required_inputs.html">Required inputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_behavior_tree_gen/example_walkthrough.html">Example Walkthrough</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_behavior_tree_gen/three_api_functions.html">Using the API Functions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../action_and_event_data_generation/tutorial_replicator_object.html">Object Simulation and Synthetic Data Generation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-object/ext_chat_iro.html">Chat IRO: Natural Language Interface for Isaac Sim Replicator Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-object/setting.html">Setting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-object/mutable.html">Mutable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-object/camera.html">Camera</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-object/geometry.html">Geometry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-object/force.html">Force</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-object/light.html">Light</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-object/mutable_attribute.html">Mutable Attribute</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-object/transformation.html">Transformation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-object/harmonizer.html">Harmonizer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-object/empty_space_detection.html">Empty Space Detection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-object/macro.html">Macro</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-object/distribution_visualizer.html">Distribution Visualizer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-object/randomization_dependency.html">Randomization Dependency: Incremental Examples</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../action_and_event_data_generation/tutorial_replicator_caption.html">VLM Scene Captioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../action_and_event_data_generation/tutorial_replicator_incident.html">Physical Space Event Generation</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../action_and_event_data_generation/tutorial_sensors_rtx_placement.html">RTX Sensors Placement and Calibration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_sensors_rtx_placement/camera_placement.html">Camera Placement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../action_and_event_data_generation/ext_sensors_rtx_placement/camera_calibration.html">Camera Calibration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../action_and_event_data_generation/example_event_reactive_actors.html">Reacting to Events with Actor Triggers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../action_and_event_data_generation/tutorial_omni_metropolis_pipeline.html">Omni Metropolis Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../action_and_event_data_generation/tutorial_telemetry.html">Telemetry and Performance Tracking</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../synthetic_data_generation/tutorial_replicator_grasping_sdg.html">Grasping Synthetic Data Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../synthetic_data_generation/tutorial_replicator_mobility_gen.html">Data Generation with MobilityGen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../synthetic_data_generation/tutorial_replicator_teleop_sdg.html">Teleoperation Synthetic Data Generation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../digital_twin/index.html">Digital Twin</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../digital_twin/warehouse_logistics/ext_omni_warehouse_creator.html">Warehouse Creator Extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../digital_twin/warehouse_logistics/ext_isaacsim_asset_gen_conveyor.html">Conveyor Belt Utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../digital_twin/warehouse_logistics/tutorial_static_assets.html">Static Warehouse Assets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../digital_twin/warehouse_logistics/logistics_tutorial_cuopt.html">NVIDIA cuOpt</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../cortex_tutorials/tutorial_cortex_1_overview.html">Isaac Cortex: Overview</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../cortex_tutorials/tutorial_cortex_2_decider_networks.html">Decider networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cortex_tutorials/tutorial_cortex_3_example_peck_games.html">Behavior Examples: Peck Games</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cortex_tutorials/tutorial_cortex_4_franka_block_stacking.html">Walkthrough: Franka Block Stacking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cortex_tutorials/tutorial_cortex_5_ur10_bin_stacking.html">Walkthrough: UR10 Bin Stacking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cortex_tutorials/tutorial_cortex_7_cortex_extension.html">Building Cortex Based Extensions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../digital_twin/ext_isaacsim_asset_generator_occupancy_map.html">Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../digital_twin/rtsp_camera_streaming.html">Live Camera Streaming over RTSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../digital_twin/troubleshooting.html">Digital Twin Troubleshooting</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../app_template/index.html">Application Template</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Development Components</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../development_tools/index.html">Development Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../development_tools/vscode.html">Visual Studio Code (VS Code)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../development_tools/python_server.html">Python Server (Remote Code Execution)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../development_tools/jupyter_notebook.html">Jupyter Notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../development_tools/omniverse_script_editor.html">Omniverse Script Editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../development_tools/isaac_sim_mcp.html">Isaac Sim MCP Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../development_tools/carb_settings.html">Modify Carb Settings</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python_scripting/index.html">Python Scripting and Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python_scripting/python_scripting_concepts.html">Python Scripting Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_scripting/core_api_overview.html">Core API Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_scripting/manual_standalone_python.html">Python Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_scripting/environment_setup.html">Scene Setup Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_scripting/util_snippets.html">Util Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_scripting/robots_simulation.html">Robot Simulation Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference_python_api.html">API Documentation</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../core_api_tutorials/index.html">Core API Tutorial Series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../core_api_tutorials/tutorial_core_hello_world.html">Hello World</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core_api_tutorials/tutorial_core_hello_robot.html">Hello Robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core_api_tutorials/tutorial_core_adding_manipulator.html">Adding a Manipulator Robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core_api_tutorials/tutorial_core_adding_multiple_robots.html">Adding Multiple Robots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core_api_tutorials/tutorial_core_multiple_tasks.html">Multiple Robot Scenarios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core_api_tutorials/tutorial_core_adding_props.html">Adding Props</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../gui/index.html">GUI Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../gui/reference_user_interface.html">User Interface Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gui/reference_keyboard_shortcuts.html">Keyboard Shortcuts Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gui/menu_create.html">Create Menu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gui/menu_replicator.html">Replicator Menu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gui/preferences.html">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gui/selection-modes.html">Selection Modes</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_omnigraph/interface.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">OmniGraph Interface</span></a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_omnigraph/getting-started/core_concepts.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">OmniGraph Core Concepts</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../omnigraph/omnigraph_shortcuts.html">Commonly Used OmniGraph Shortcuts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../omnigraph/omnigraph_custom_python_nodes.html">Custom Python Nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../omnigraph/omnigraph_custom_cpp_nodes.html">Custom C++ Nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../omnigraph/omnigraph_custom_ipc_nodes.html">Building Custom IPC OmniGraph Nodes</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_omnigraph.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">Additional Resources</span></a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_omnigraph/tutorials/gentle_intro.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">Basic OmniGraph Tutorial</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../omnigraph/omnigraph_tutorial.html">Isaac Sim OmniGraph Tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../omnigraph/omnigraph_scripting.html">OmniGraph via Python Scripting Tutorial</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Robot and Sensor Simulation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../importer_exporter/importers_exporters.html">Importers and Exporters</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../importer_exporter/ext_isaacsim_asset_importer_urdf.html">URDF Importer Extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../importer_exporter/ext_omni_exporter_urdf.html">USD to URDF Exporter Extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../importer_exporter/ext_isaacsim_asset_importer_mjcf.html">MJCF Importer Extension</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_onshape.html" title="(in Omniverse Extensions)"><span>Onshape importer</span></a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_cad-converter.html" title="(in Omniverse Extensions)"><span>CAD Converter</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../importer_exporter/ext_omni_isaac_shapenet.html">ShapeNet Importer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../importer_exporter/formats.html">Formats</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../importer_exporter/importer_exporter_tutorials.html">Importer and Exporter Tutorials Series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../importer_exporter/import_urdf.html">Tutorial: Import URDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../importer_exporter/export_urdf.html">Tutorial: Export URDF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../importer_exporter/import_mjcf.html">Tutorial: Import MJCF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../importer_exporter/shapenet_importer.html">Tutorial: ShapeNet Importer</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../robot_setup/index.html">Robot Setup</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../robot_setup/robot_poser.html">Robot Poser</a></li>
+
+
+
+
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../robot_setup/ext_isaacsim_robot_setup_collision_detector.html">Robot Self-Collision Detector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../robot_setup/assemble_robots.html">Robot Assembler</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../robot_setup/inspector_tools.html">Inspector Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../robot_setup/joint_inspector.html">Joint Inspector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../physics/joint_inspector.html">Physics Inspector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../physics/ext_isaacsim_inspect_physics.html">Simulation Data Visualizer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../robot_setup/asset_structure.html">Asset Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../robot_setup/asset_transformer.html">Asset Transformer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../robot_setup/asset_transformer_api.html">Asset Transformer API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../robot_setup/asset_transformer_rules.html">Asset Transformer Rules Reference</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../robot_setup_tutorials/index.html">Robot Setup Tutorials Series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../robot_setup_tutorials/tutorial_intro_environment_setup.html">Tutorial 1: Stage Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../robot_setup_tutorials/tutorial_intro_assemble_robot.html">Tutorial 2: Assemble a Simple Robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../robot_setup_tutorials/tutorial_gui_simple_robot.html">Tutorial 3: Articulate a Basic Robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../robot_setup_tutorials/tutorial_gui_camera_sensors.html">Tutorial 4: Add Camera and Sensors to a Robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../robot_setup_tutorials/rig_mobile_robot.html">Tutorial 5: Rig a Mobile Robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../robot_setup_tutorials/tutorial_import_assemble_manipulator.html">Tutorial 6: Setup a Manipulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../robot_setup_tutorials/tutorial_configure_manipulator.html">Tutorial 7: Configure a Manipulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../robot_setup_tutorials/tutorial_generate_robot_config.html">Tutorial 8: Generate Robot Configuration File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../robot_setup_tutorials/tutorial_pickplace_example.html">Tutorial 9: Pick and Place Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../robot_setup_tutorials/rig_closed_loop_structures.html">Tutorial 10: Rig Closed-Loop Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../robot_setup_tutorials/joint_tuning.html">Tutorial 11: Tuning Joint Drive Gains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../robot_setup_tutorials/optimizing_asset.html">Tutorial 12: Asset Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../robot_setup_tutorials/tutorial_rig_legged_robot.html">Tutorial 13: Rigging a Legged Robot for a Locomotion Policy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../openusd_tuning_tutorials/index.html">OpenUSD and Tuning Best Practices Tutorial Series</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../openusd_tuning_tutorials/tutorial_01_setup.html">Tutorial 1: Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../openusd_tuning_tutorials/tutorial_02_asset_structure.html">Tutorial 2: Asset Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../openusd_tuning_tutorials/tutorial_03_inspect_asset.html">Tutorial 3: Inspect Asset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../openusd_tuning_tutorials/tutorial_04_collider_pairs.html">Tutorial 4: Collider Pairs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../openusd_tuning_tutorials/tutorial_05_joint_drive_tuning.html">Tutorial 5: Joint Drive Tuning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../openusd_tuning_tutorials/tutorial_06_joint_gains_tuning.html">Tutorial 6: Joint Gains Tuning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../openusd_tuning_tutorials/tutorial_07_practice.html">Tutorial 7: Using the Dexterous Hand in Practice</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../robot_setup/asset_validation.html">Asset Validation</a></li>
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../robot_simulation/articulation_controller.html">Articulation Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../robot_simulation/mobile_robot_controllers.html">Mobile Robot Controllers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../manipulators/motion_generation_overview.html">Motion Generation (Deprecated)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../manipulators/concepts/index.html">Motion Generation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../manipulators/concepts/motion_gen_api.html">Motion Generation Extension API Documentation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../manipulators/concepts/kinematics_solver.html">Kinematics Solvers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../manipulators/concepts/trajectory_interface.html">Trajectory Generation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../manipulators/concepts/path_planner.html">Path Planner Algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../manipulators/concepts/lula_rrt.html">Lula RRT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../manipulators/concepts/motion_policy.html">Motion Policy Algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../manipulators/concepts/rmpflow.html">RMPflow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../manipulators/concepts/rmpflow_tuning_guide.html">RMPflow Tuning Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../manipulators/manipulators_robot_description_editor.html">Lula Robot Description and XRDF Editor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../manipulators/manipulators_rmpflow.html">Lula RMPflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../manipulators/manipulators_lula_rrt.html">Lula RRT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../manipulators/manipulators_lula_kinematics.html">Lula Kinematics Solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../manipulators/manipulators_lula_trajectory_generator.html">Lula Trajectory Generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../manipulators/manipulators_configure_rmpflow_denso.html">Configuring RMPflow for a New Manipulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../manipulators/manipulators_curobo.html">cuRobo and cuMotion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../robot_simulation/ext_isaacsim_robot_surface_gripper.html">Surface Gripper Extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../robot_simulation/grasp_editor.html">Grasp Editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../robot_simulation/ext_isaacsim_robot_policy_example.html">Reinforcement Learning Policies Examples in Isaac Sim</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../robot_simulation/robot_simulation_tips.html">Robot Simulation Tips</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../robot_simulation/robot_simulation_core_concepts.html">Useful Links</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../robot_motion_experimental/index.html">Robot Motion (Experimental)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../motion_generation/index.html">Motion Generation (Experimental)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../motion_generation/scene_interaction.html">Scene Interaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../motion_generation/mobile_robot_control_example.html">Controllers and the RobotState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../motion_generation/trajectory_planning.html">Trajectory Planning and Execution</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../cumotion/index.html">cuMotion Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../cumotion/tutorial_robot_configuration.html">Robot Configuration Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cumotion/tutorial_world_interface.html">cuMotion World Interface Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cumotion/tutorial_rmpflow.html">RMPflow Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cumotion/tutorial_graph_planner.html">Graph-Based Motion Planner Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cumotion/tutorial_trajectory_generator.html">Trajectory Generator Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cumotion/tutorial_trajectory_optimizer.html">Trajectory Optimizer Tutorial</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../pink/index.html">PINK Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../pink/tutorial_robot_configuration.html">Robot Configuration Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pink/tutorial_ik_controller.html">IK Controller Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pink/tutorial_multi_task.html">Multi-Task Tutorial</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../sensors/index.html">Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../sensors/isaacsim_sensors_camera.html">Camera Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../sensors/isaacsim_sensors_camera_depth.html">Depth Sensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sensors/isaacsim_sensors_camera_structured_light.html">Structured Light Cameras</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../sensors/isaacsim_sensors_rtx.html">RTX Sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../sensors/isaacsim_sensors_rtx_lidar.html">RTX Lidar Sensor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../sensors/isaacsim_sensors_rtx_materials.html">RTX Sensor Non-Visual Materials</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../sensors/isaacsim_sensors_rtx_radar.html">RTX Radar Sensor</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../sensors/isaacsim_sensors_rtx_materials.html">RTX Sensor Non-Visual Materials</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sensors/isaacsim_sensors_rtx_acoustic.html">RTX Acoustic Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sensors/isaacsim_sensors_rtx_annotators.html">RTX Sensor Annotators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sensors/isaacsim_sensors_rtx_materials.html">RTX Sensor Non-Visual Materials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sensors/isaacsim_sensors_multitick_rendering.html">Multi-Tick Rendering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sensors/isaacsim_sensors_rtx_custom.html">Creating Custom RTX Sensor Profiles</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../sensors/isaacsim_sensors_physics.html">Physics-based sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../sensors/isaacsim_sensors_physics_articulation_force.html">Articulation joint sensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sensors/isaacsim_sensors_physics_contact.html">Contact sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sensors/isaacsim_sensors_physics_effort.html">Effort sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sensors/isaacsim_sensors_physics_imu.html">IMU sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sensors/isaacsim_sensors_physics_joint_state.html">Joint state sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sensors/isaacsim_sensors_physics_raycast.html">Physics raycast sensor</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../sensors/isaacsim_sensors_physx.html">PhysX SDK sensors</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../sensors/isaacsim_sensors_physx_generic.html">PhysX SDK generic sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sensors/isaacsim_sensors_physx_lidar.html">PhysX SDK lidar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sensors/isaacsim_sensors_physx_lightbeam.html">PhysX SDK lightbeam sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sensors/isaacsim_sensors_physx_proximity.html">Proximity sensor</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../assets/usd_assets_sensors.html">Sensor Assets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../assets/usd_assets_camera_depth_sensors.html">Camera and Depth Sensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../assets/usd_assets_nonvisual_sensors.html">Non-Visual Sensors</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../newton_actuators_tutorials/index.html">Newton Actuators</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../newton_actuators_tutorials/newton_actuators_python.html">Set Up Actuators from Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../newton_actuators_tutorials/newton_actuators_usd.html">Author and Parse Actuators from USD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../newton_actuators_tutorials/newton_actuators_omnigraph.html">Drive an Actuated Robot from OmniGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../newton_actuators_tutorials/newton_actuators_tips.html">Tips</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../physics/index.html">Physics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/simulation_fundamentals.html">Physics Simulation Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/new_physics_engine.html">Physics Data Flow and Engine Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/newton_physics.html">Newton Physics Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/physics_resources.html">Omniverse™ Physics and PhysX SDK Limitations</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/extensions/ux/source/omni.physx.ui/docs/dev_guide/sim_management.html" title="(in Omni Physics)"><span class="xref std std-doc">Physics Simulation Management</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/joint_inspector.html">Physics Inspector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/physics_static_collision.html">Physics Static Collision Extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../physics/ext_isaacsim_inspect_physics.html">Simulation Data Visualizer</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/extensions/ux/source/omni.physx.ui/docs/dev_guide/physics_debug_wnd.html" title="(in Omni Physics)"><span class="xref std std-doc">Physics Debug Window</span></a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Utilities</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../utilities/browsers.html">Browsers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities/content_browser.html">Content Browser</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_core/ext_browser-extensions/material-browser.html" title="(in Omniverse Extensions)"><span>Material Browser</span></a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_core/ext_browser-extensions/asset-browser.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">NVIDIA Asset Browser</span></a></li>
+<li class="toctree-l2"><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_core/ext_browser-extensions/simready-explorer.html" title="(in Omniverse Extensions)"><span>SimReady Explorer</span></a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../utilities/templates_index.html">Templates</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities/cli_extension_templates.html">CLI extension templates</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../utilities/extension_template_generator.html">Extension Template Generator</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../utilities/extension_templates_tutorial.html">Extension Template Generator Explained</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities/vscode_extension_template_generator.html">Advanced Extension Template Generator from VS Code</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../utilities/debugging/index.html">Debugging &amp; Profiling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities/debugging/ext_isaacsim_util_debug_draw.html">Debug Drawing Extension API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities/debugging/ext_omni_kit_commands.html">Omniverse Commands Tool Extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities/debugging/tutorial_advanced_python_debugging.html">Debugging With Visual Studio Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utilities/debugging/profiling_performance.html">Profiling Performance Using Tracy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utilities/updating_extensions.html">Adding and Updating Extensions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utilities/tutorial_search_extension.html">SimReady Content Browser Search Extension Tutorial</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API Documentation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../reference_python_api.html">API Documentation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../reference_material/community_highlights.html">Community Project Highlights</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference_material/reference_glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference_material/reference_conventions.html">Isaac Sim Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference_material/rendering_modes.html">Rendering modes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference_material/sim_performance_optimization_handbook.html">Isaac Sim Performance Optimization Handbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference_material/benchmarks.html">Isaac Sim Benchmarks</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../omniverse_usd/index.html">Omniverse and USD</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../omniverse_usd/open_usd.html">OpenUSD Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../omniverse_usd/intro_to_usd.html">Working with USD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../omniverse_usd/usd_tools.html">USD Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../omniverse_usd/robot_schema.html">Robot Schema</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../omniverse_usd/omniverse_tools.html">Commands</a></li>
+
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Common</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../common/feedback.html">Omniverse Feedback and Forums</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../common/general-feedback-form.html">General Feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/feedback-form.html">Documentation Fix Request</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../common/data-collection.html">Data Collection &amp; Usage</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../common/legal.html">Licenses</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../common/licenses-isaac-sim.html">Isaac Sim License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/license-isaac-sim-additional.html">Isaac Sim Additional Software and Materials License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/license-isaac-sim-webrtc-streaming-client.html">Isaac Sim WebRTC Streaming Client License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/NVIDIA_Omniverse_License_Agreement.html">Omniverse License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/licensing-notices-disclaimers.html">Licensing Disclaimer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/licenses.html">Other Licenses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/redistributable-ov-software.html">Redistributable Omniverse Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../common/license-faq.html">License FAQ</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../overview/release_notes.html" class="nav-link">Release Notes</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Migration Guides</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Isaac Sim 6.0</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Replicator Agent (IRA)</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+<div class="header-article-item">
+  <div class="d-flex justify-content-end w-100">
+    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+  </div>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="replicator-agent-ira">
+<span id="ira-migration-guide-0x-to-1x"></span><h1>Replicator Agent (IRA)<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#replicator-agent-ira" title="Link to this heading">#</a></h1>
+<p>This guide covers breaking changes and migration steps for users upgrading
+from IRA 0.x.x (shipped with Isaac Sim 5.1 and before) to IRA 1.x.x
+(Isaac Sim 6.0 and after).</p>
+<p>IRA 1.0.0 is a <strong>complete architectural overhaul</strong>. The configuration schema,
+Python API, dependency graph, and internal module layout have all changed.
+Existing 0.x configs and code will <strong>not</strong> work without modification.</p>
+<section id="what-changed-at-a-glance">
+<h2>What Changed at a Glance<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#what-changed-at-a-glance" title="Link to this heading">#</a></h2>
+<p>IRA 1.x retains all core capabilities of 0.x, including:</p>
+<ul class="simple">
+<li><p>environment loading</p></li>
+<li><p>character and robot spawning</p></li>
+<li><p>sensor placement</p></li>
+<li><p>synthetic data generation</p></li>
+</ul>
+<p>While it redesigns how each of those areas is configured and executed. The table below
+summarizes every major feature area, including, the version that supports it and what has
+changed:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 12.0%" />
+<col style="width: 12.0%" />
+<col style="width: 46.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>0.x</p></th>
+<th class="head"><p>1.x</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Environment / Scene Loading</strong></p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scene.asset_path</span></code> renamed to <code class="docutils literal notranslate"><span class="pre">environment.base_stage_asset_path</span></code> (now required). Path can be relative to Isaac Sim assets, a URL, or an absolute path.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Environment Prop Sublayers</strong></p></td>
+<td><p>–</p></td>
+<td><p>New</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">prop_asset_paths</span></code> lets you layer additional USD assets into the base stage.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Human Character Spawning</strong></p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Flat <code class="docutils literal notranslate"><span class="pre">character</span></code> section replaced by <code class="docutils literal notranslate"><span class="pre">character.groups</span></code> with named groups.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Robot Spawning (Nova Carter, iw.hub)</strong></p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">nova_carter_num</span></code> and <code class="docutils literal notranslate"><span class="pre">iw_hub_num</span></code> replaced by named groups with <code class="docutils literal notranslate"><span class="pre">config_file_path</span></code> pointing to IAR configs.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Character Behavior Control</strong></p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>External <code class="docutils literal notranslate"><span class="pre">.txt</span></code> command files replaced by inline <code class="docutils literal notranslate"><span class="pre">routines</span></code> in YAML.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Robot Behavior Control</strong></p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Same change: external command files replaced by inline <code class="docutils literal notranslate"><span class="pre">routines</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Named Actor Groups</strong></p></td>
+<td><p>–</p></td>
+<td><p>New</p></td>
+<td><p>Characters, robots, and sensors are organized into independently configured named groups.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Routine-trigger Behavior Loop</strong></p></td>
+<td><p>–</p></td>
+<td><p>New</p></td>
+<td><p>Actors continuously pick weighted behaviors; triggers interrupt routines with priority-queued sequences. Replaces the old <code class="docutils literal notranslate"><span class="pre">response</span></code>, <code class="docutils literal notranslate"><span class="pre">event</span></code>, and <code class="docutils literal notranslate"><span class="pre">incident</span></code> model.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Behavior Types (wander, patrol, stop/halt)</strong></p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>0.x supported GoTo, Idle, and Patrol-like commands through text files. 1.x formalizes these as typed behaviors (<code class="docutils literal notranslate"><span class="pre">wander</span></code>, <code class="docutils literal notranslate"><span class="pre">patrol</span></code>, <code class="docutils literal notranslate"><span class="pre">stop</span></code>, <code class="docutils literal notranslate"><span class="pre">halt</span></code>) with rich inline parameters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Behavior Tree Groups</strong></p></td>
+<td><p>–</p></td>
+<td><p>New</p></td>
+<td><p>A character or robot group can use <code class="docutils literal notranslate"><span class="pre">behavior_tree</span></code> + <code class="docutils literal notranslate"><span class="pre">overrides</span></code> instead of <code class="docutils literal notranslate"><span class="pre">routines</span></code>/<code class="docutils literal notranslate"><span class="pre">triggers</span></code>, delegating all logic to the referenced JSON tree. Review the Configuration File Guide sections “Behavior Tree Character Group” and “Behavior Tree Robot Group”.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Event and Time Triggers</strong></p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>0.x used <code class="docutils literal notranslate"><span class="pre">response</span></code>, <code class="docutils literal notranslate"><span class="pre">event</span></code>, and <code class="docutils literal notranslate"><span class="pre">incident</span></code> config sections. 1.x replaces them with first-class <code class="docutils literal notranslate"><span class="pre">event_trigger</span></code> and <code class="docutils literal notranslate"><span class="pre">time_trigger</span></code> types with priority queuing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>USD Schema Integration</strong></p></td>
+<td><p>–</p></td>
+<td><p>New</p></td>
+<td><p>Actor config is persisted in USD API schemas (<code class="docutils literal notranslate"><span class="pre">IRACharacterAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">AnimRobotAPI</span></code>). Behaviors and triggers become individual USD prims for inspection and editing.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Per-actor Deterministic Seed</strong></p></td>
+<td><p>–</p></td>
+<td><p>New</p></td>
+<td><p>Each actor’s seed is derived from its name, group, and the global seed, enabling reproducible yet independent randomization.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Sensor and Camera Placement</strong></p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">camera_num</span></code> and <code class="docutils literal notranslate"><span class="pre">camera_list</span></code> replaced by named sensor groups with pluggable placement strategies.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Sensor Placement Strategies</strong></p></td>
+<td><p>–</p></td>
+<td><p>New</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">aim_at_targets</span></code> and <code class="docutils literal notranslate"><span class="pre">maximum_coverage</span></code> algorithms; <code class="docutils literal notranslate"><span class="pre">num:</span> <span class="pre">-1</span></code> auto-calculates camera count for target coverage.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Camera Randomization Parameters</strong></p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Height, angle, focal length, and distance ranges moved from extension settings into the per-group YAML config.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Single Data Writer</strong></p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">IRABasicWriter</span></code> is available in both versions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Multiple Concurrent Writers</strong></p></td>
+<td><p>–</p></td>
+<td><p>New</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">replicator.writers</span></code> dict supports multiple writers running simultaneously.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Per-writer Timing Control</strong></p></td>
+<td><p>–</p></td>
+<td><p>New</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">start_frame</span></code> and <code class="docutils literal notranslate"><span class="pre">end_frame</span></code> or <code class="docutils literal notranslate"><span class="pre">start_time</span></code> and <code class="docutils literal notranslate"><span class="pre">end_time</span></code> per writer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Per-writer Sensor Selection</strong></p></td>
+<td><p>–</p></td>
+<td><p>New</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sensor_prim_list</span></code> selects specific cameras for each writer.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Additional Writers</strong></p></td>
+<td><p>–</p></td>
+<td><p>New</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CosmosIRAWriter</span></code>, <code class="docutils literal notranslate"><span class="pre">SceneGraphWriter</span></code>, <code class="docutils literal notranslate"><span class="pre">CustomWriter</span></code>. (<code class="docutils literal notranslate"><span class="pre">BasicWriter</span></code> is accessible via <code class="docutils literal notranslate"><span class="pre">CustomWriter</span></code> with <code class="docutils literal notranslate"><span class="pre">writer_name:</span> <span class="pre">&quot;BasicWriter&quot;</span></code>.)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Semantic Labels on Actors</strong></p></td>
+<td><p>–</p></td>
+<td><p>New</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">semantic_labels</span></code> field per character/robot group.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Character Colliders</strong></p></td>
+<td><p>–</p></td>
+<td><p>New</p></td>
+<td><p>Optional cylinder or box collision shapes per character group.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Robot Onboard Camera Selection</strong></p></td>
+<td><p>–</p></td>
+<td><p>New</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">camera_prim_paths</span></code> specifies which onboard robot cameras to use for data generation.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Pydantic Config Validation</strong></p></td>
+<td><p>–</p></td>
+<td><p>New</p></td>
+<td><p>Config files are validated with Pydantic v2 models providing clear, actionable error messages.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Simulation Duration in Seconds</strong></p></td>
+<td><p>–</p></td>
+<td><p>New</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simulation_duration</span></code> specified in seconds. 0.x used <code class="docutils literal notranslate"><span class="pre">simulation_length</span></code> in frames (assuming 30 FPS).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>UI Workflow</strong></p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Simplified from 5 steps to 3. The <strong>Generate Random Commands</strong> and <strong>Save Commands</strong> steps are removed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Headless and Script-based Generation</strong></p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sdg_scheduler.py</span></code> replaced by <code class="docutils literal notranslate"><span class="pre">actor_sdg.py</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Animation Backend</strong></p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">omni.anim.people</span></code> replaced by <code class="docutils literal notranslate"><span class="pre">omni.anim.behavior.core</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Command Files (<code class="docutils literal notranslate"><span class="pre">.txt</span></code>) and Transition Maps (<code class="docutils literal notranslate"><span class="pre">.json</span></code>)</p></td>
+<td><p>Yes</p></td>
+<td><p>Removed</p></td>
+<td><p>Replaced entirely by inline <code class="docutils literal notranslate"><span class="pre">routines</span></code> and <code class="docutils literal notranslate"><span class="pre">triggers</span></code> in YAML.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">response</span></code>, <code class="docutils literal notranslate"><span class="pre">event</span></code>, and <code class="docutils literal notranslate"><span class="pre">incident</span></code> config Sections</p></td>
+<td><p>Yes</p></td>
+<td><p>Removed</p></td>
+<td><p>Replaced by <code class="docutils literal notranslate"><span class="pre">triggers</span></code> on individual actor groups.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">filters</span></code> Field on Characters</p></td>
+<td><p>Yes</p></td>
+<td><p>Removed</p></td>
+<td><p>No longer supported.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="workflow-and-ui-changes">
+<h2>Workflow and UI Changes<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#workflow-and-ui-changes" title="Link to this heading">#</a></h2>
+<p>The end-to-end workflow for running IRA has changed significantly.</p>
+<section id="ui-workflow">
+<h3>UI Workflow<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#ui-workflow" title="Link to this heading">#</a></h3>
+<p>The UI workflow has been simplified. The biggest change is the removal of the
+<strong>Generate Random Commands</strong> step.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 5.9%" />
+<col style="width: 47.1%" />
+<col style="width: 47.1%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>0.x Workflow</p></th>
+<th class="head"><p>1.x Workflow</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Load config file</p></td>
+<td><p>Load config file (default minimal config loads automatically)</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Click <strong>Set Up Simulation</strong></p></td>
+<td><p>Click <strong>Set Up Simulation</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Click <strong>Generate Random Commands</strong> for characters</p></td>
+<td><p><em>(removed – behaviors are defined in config)</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Click <strong>Save Commands</strong> (disk icon)</p></td>
+<td><p><em>(removed – no command files)</em></p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Click <strong>Start Data Generation</strong></p></td>
+<td><p>Click <strong>Start Data Generation</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In 0.x, command generation and saving were separate manual steps. In 1.x, all
+actor behavior is pre-defined in the YAML config using <code class="docutils literal notranslate"><span class="pre">routines</span></code> and
+<code class="docutils literal notranslate"><span class="pre">triggers</span></code>, so the setup-to-generation flow is two clicks.</p>
+</section>
+<section id="default-config-file-location">
+<h3>Default Config File Location<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#default-config-file-location" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 14.3%" />
+<col style="width: 85.7%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Location</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.x</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[ext-path]/config/default_config.yaml</span></code> (auto-loaded on startup)</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.x</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[ext-path]/data/sample_configs/</span></code> (refer to <a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-agent/ext_isaacsim_replicator_agent_sample_configs.html#ira-sample-configs"><span class="std std-ref">Sample Configs</span></a> for the bundled samples)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In 1.x, <code class="docutils literal notranslate"><span class="pre">minimal.yaml</span></code> is loaded by default. For a full example with
+characters, cameras, and writers, use <code class="docutils literal notranslate"><span class="pre">full_pipeline.yaml</span></code>.</p>
+</section>
+<section id="headless-or-script-based-data-generation">
+<h3>Headless or Script-Based Data Generation<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#headless-or-script-based-data-generation" title="Link to this heading">#</a></h3>
+<p>The script entry point has changed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># OLD (0.x)</span>
+./python.sh<span class="w"> </span>tools/actor_sdg/sdg_scheduler.py<span class="w"> </span>-c<span class="w"> </span><span class="o">[</span>config<span class="w"> </span>file<span class="w"> </span>path<span class="o">]</span>
+
+<span class="c1"># NEW (1.x)</span>
+./python.sh<span class="w"> </span>tools/actor_sdg/actor_sdg.py<span class="w"> </span>-c<span class="w"> </span><span class="o">[</span>config<span class="w"> </span>file<span class="w"> </span>path<span class="o">]</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">sdg_scheduler.py</span></code> script is replaced by <code class="docutils literal notranslate"><span class="pre">actor_sdg.py</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">--save_usd</span></code> flag from the old script is no longer documented as a script
+argument.</p>
+</section>
+<section id="simulation-duration">
+<h3>Simulation Duration<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#simulation-duration" title="Link to this heading">#</a></h3>
+<p>In 0.x, <code class="docutils literal notranslate"><span class="pre">simulation_length</span></code> was specified in <strong>frames</strong> (assuming 30 FPS).
+Users had to mentally convert: 300 frames = 10 seconds.</p>
+<p>In 1.x, <code class="docutils literal notranslate"><span class="pre">simulation_duration</span></code> is specified in <strong>seconds</strong> directly
+(for example, <code class="docutils literal notranslate"><span class="pre">60.0</span></code>). The simulation still runs at a fixed 30 FPS internally.</p>
+</section>
+</section>
+<section id="configuration-file-changes">
+<h2>Configuration File Changes<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#configuration-file-changes" title="Link to this heading">#</a></h2>
+<p>The YAML configuration schema has been redesigned from scratch.</p>
+<section id="version-field">
+<h3>Version Field<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#version-field" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">version</span></code> field now tracks the extension version and must have a
+<code class="docutils literal notranslate"><span class="pre">1.x.x</span></code> major version.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># 0.x</span>
+<span class="nt">isaacsim.replicator.agent</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.7.0</span>
+
+<span class="c1"># 1.x</span>
+<span class="nt">isaacsim.replicator.agent</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.6.0</span>
+</pre></div>
+</div>
+</section>
+<section id="top-level-structure">
+<h3>Top-Level Structure<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#top-level-structure" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>0.x Field</p></th>
+<th class="head"><p>1.x Replacement</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">global.seed</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">seed</span></code></p></td>
+<td><p>Moved to root level. Now a 32-bit uint (0..4294967295). Auto-generated from system time if omitted.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">global.simulation_length</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">simulation_duration</span></code></p></td>
+<td><p>Renamed. Was in <strong>frames</strong> (at 30 FPS), now in <strong>seconds</strong>. A value of <code class="docutils literal notranslate"><span class="pre">1800</span></code> frames = <code class="docutils literal notranslate"><span class="pre">60.0</span></code> seconds.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">scene.asset_path</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">environment.base_stage_asset_path</span></code></p></td>
+<td><p>Section renamed from <code class="docutils literal notranslate"><span class="pre">scene</span></code> to <code class="docutils literal notranslate"><span class="pre">environment</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sensor</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sensor</span></code></p></td>
+<td><p>Completely restructured (refer below).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">character</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">character</span></code></p></td>
+<td><p>Completely restructured (refer below).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">robot</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">robot</span></code></p></td>
+<td><p>Completely restructured (refer below).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">replicator</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">replicator</span></code></p></td>
+<td><p>Completely restructured (refer below).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">response</span></code></p></td>
+<td><p><em>(removed)</em></p></td>
+<td><p>Response section no longer exists. Use triggers instead.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">event</span></code></p></td>
+<td><p><em>(removed)</em></p></td>
+<td><p>Event section no longer exists. Use triggers instead.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Example of top-level migration:</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># OLD (0.x)</span>
+<span class="nt">isaacsim.replicator.agent</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.7.0</span>
+<span class="w">  </span><span class="nt">global</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456789</span>
+<span class="w">    </span><span class="nt">simulation_length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1800</span>
+
+<span class="c1"># NEW (1.x)</span>
+<span class="nt">isaacsim.replicator.agent</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.6.0</span>
+<span class="w">  </span><span class="nt">seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456789</span><span class="w">           </span><span class="c1"># optional, auto-generated if omitted</span>
+<span class="w">  </span><span class="nt">simulation_duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60.0</span><span class="w">  </span><span class="c1"># 1800 frames / 30 FPS = 60 seconds</span>
+<span class="w">  </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">base_stage_asset_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Isaac/Environments/Simple_Warehouse/full_warehouse.usd&quot;</span><span class="w">  </span><span class="c1"># now required</span>
+</pre></div>
+</div>
+</section>
+<section id="environment-was-scene">
+<h3>Environment (was <code class="docutils literal notranslate"><span class="pre">scene</span></code>)<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#environment-was-scene" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">scene</span></code> section has been renamed to <code class="docutils literal notranslate"><span class="pre">environment</span></code> and expanded.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># OLD (0.x)</span>
+<span class="c1"># scene.asset_path was defined in the config, OR fell back to settings</span>
+
+<span class="c1"># NEW (1.x)</span>
+<span class="nt">environment</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">base_stage_asset_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Isaac/Environments/Simple_Warehouse/full_warehouse.usd&quot;</span>
+<span class="w">  </span><span class="nt">prop_asset_paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">  </span><span class="c1"># optional: additional USD assets loaded as sublayers</span>
+</pre></div>
+</div>
+<p>Key differences:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">base_stage_asset_path</span></code> is <strong>required</strong> (no more fallback to extension settings).</p></li>
+<li><p>Supports relative paths that resolve against the Isaac Sim asset root, full URLs, and absolute filesystem paths.</p></li>
+<li><p>New <code class="docutils literal notranslate"><span class="pre">prop_asset_paths</span></code> field for layering additional assets into the stage.</p></li>
+</ul>
+</section>
+<section id="character-section">
+<h3>Character Section<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#character-section" title="Link to this heading">#</a></h3>
+<p>The character section now uses a <strong>named groups</strong> system with inline behavior
+definitions (routines), replacing the old flat structure with external command
+files.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># OLD (0.x)</span>
+<span class="nt">character</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">asset_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w">                       </span><span class="c1"># single path for all characters</span>
+<span class="w">  </span><span class="nt">command_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default_command.txt</span><span class="w">     </span><span class="c1"># external text file for commands</span>
+<span class="w">  </span><span class="nt">num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span>
+<span class="w">  </span><span class="nt">filters</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">  </span><span class="nt">spawn_area</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">  </span><span class="nt">navigation_area</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+
+<span class="c1"># NEW (1.x)</span>
+<span class="nt">character</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">root_prim_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/World/Characters&quot;</span><span class="w">   </span><span class="c1"># optional, defaults to /World/Characters</span>
+<span class="w">  </span><span class="nt">motion_library_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w">                </span><span class="c1"># optional; 1.4.0+ moved this to character root (was per-group)</span>
+<span class="w">  </span><span class="nt">groups</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">warehouse_workers</span><span class="p">:</span><span class="w">                   </span><span class="c1"># named group</span>
+<span class="w">      </span><span class="nt">num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">      </span><span class="nt">asset_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Isaac/People/Characters/&quot;</span>
+<span class="w">      </span><span class="nt">spawn_areas</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">                    </span><span class="c1"># renamed from spawn_area</span>
+<span class="w">      </span><span class="nt">semantic_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[[</span><span class="s">&quot;class&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;character&quot;</span><span class="p p-Indicator">]]</span>
+<span class="w">      </span><span class="nt">routines</span><span class="p">:</span><span class="w">                          </span><span class="c1"># replaces command_file</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">wander</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">weight</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">            </span><span class="nt">repeat</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">            </span><span class="nt">walk</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">speed_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.8</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.5</span><span class="p p-Indicator">]</span>
+<span class="w">              </span><span class="nt">distance_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">5.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10.0</span><span class="p p-Indicator">]</span>
+<span class="w">              </span><span class="nt">navigation_areas</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">       </span><span class="c1"># renamed from navigation_area</span>
+<span class="w">            </span><span class="nt">idle</span><span class="p">:</span>
+<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">animation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">idle</span>
+<span class="w">                </span><span class="nt">weight</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">                </span><span class="nt">time_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.0</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">triggers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">                       </span><span class="c1"># new: event-driven behavior interrupts</span>
+<span class="w">      </span><span class="nt">colliders</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w">                    </span><span class="c1"># new: optional collision shapes</span>
+</pre></div>
+</div>
+<p>Key differences:</p>
+<ul class="simple">
+<li><p><strong>Named groups</strong>: Characters are now organized into named groups under <code class="docutils literal notranslate"><span class="pre">character.groups</span></code>, each with independent settings.</p></li>
+<li><p><strong>No more command files</strong>: The <code class="docutils literal notranslate"><span class="pre">command_file</span></code> field and external <code class="docutils literal notranslate"><span class="pre">.txt</span></code> command files are gone. Behaviors are defined inline using <code class="docutils literal notranslate"><span class="pre">routines</span></code>.</p></li>
+<li><p><strong>Routines replace commands</strong>: Each routine entry is a behavior type (<code class="docutils literal notranslate"><span class="pre">wander</span></code>, <code class="docutils literal notranslate"><span class="pre">patrol</span></code>, <code class="docutils literal notranslate"><span class="pre">stop</span></code>, <code class="docutils literal notranslate"><span class="pre">custom_behavior</span></code>) with inline parameters.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filters</span></code> field is removed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spawn_area</span></code> renamed to <code class="docutils literal notranslate"><span class="pre">spawn_areas</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">navigation_area</span></code> is now per-behavior under <code class="docutils literal notranslate"><span class="pre">walk.navigation_areas</span></code>.</p></li>
+<li><p>New <code class="docutils literal notranslate"><span class="pre">semantic_labels</span></code>, <code class="docutils literal notranslate"><span class="pre">triggers</span></code>, and <code class="docutils literal notranslate"><span class="pre">colliders</span></code> fields on character groups. <code class="docutils literal notranslate"><span class="pre">motion_library_path</span></code> is also new but lives at the <code class="docutils literal notranslate"><span class="pre">character:</span></code> root (not inside a group) as of IRA 1.4.0; placing it inside a group now fails validation.</p></li>
+</ul>
+</section>
+<section id="robot-section">
+<h3>Robot Section<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#robot-section" title="Link to this heading">#</a></h3>
+<p>Similar to characters, robots now use named groups with inline routines.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># OLD (0.x)</span>
+<span class="nt">robot</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">command_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default_robot_command.txt</span>
+<span class="w">  </span><span class="nt">nova_carter_num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">iw_hub_num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">write_data</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">spawn_area</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">  </span><span class="nt">navigation_area</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+
+<span class="c1"># NEW (1.x)</span>
+<span class="nt">robot</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">root_prim_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/World/Robots&quot;</span>
+<span class="w">  </span><span class="nt">groups</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">carters</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">      </span><span class="nt">config_file_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nova_carter.yaml&quot;</span><span class="w">   </span><span class="c1"># IAR robot config file</span>
+<span class="w">      </span><span class="nt">spawn_areas</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">      </span><span class="nt">agent_radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span><span class="w">                      </span><span class="c1"># optional NavMesh agent radius</span>
+<span class="w">      </span><span class="nt">write_data</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">      </span><span class="nt">camera_prim_paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">                   </span><span class="c1"># optional: specific cameras for data</span>
+<span class="w">      </span><span class="nt">semantic_labels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[[</span><span class="s">&quot;class&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;robot&quot;</span><span class="p p-Indicator">]]</span>
+<span class="w">      </span><span class="nt">routines</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">wander</span><span class="p">:</span>
+<span class="w">            </span><span class="nt">move</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">distance_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">10.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">15.0</span><span class="p p-Indicator">]</span>
+<span class="w">              </span><span class="nt">navigation_areas</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">            </span><span class="nt">idle</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">time_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.0</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">triggers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+</pre></div>
+</div>
+<p>Key differences:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nova_carter_num</span></code> / <code class="docutils literal notranslate"><span class="pre">iw_hub_num</span></code> are gone. Use named groups with <code class="docutils literal notranslate"><span class="pre">num</span></code> and <code class="docutils literal notranslate"><span class="pre">config_file_path</span></code> pointing to the appropriate IAR config.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">command_file</span></code> replaced by inline <code class="docutils literal notranslate"><span class="pre">routines</span></code> (same as characters).</p></li>
+<li><p>New <code class="docutils literal notranslate"><span class="pre">config_file_path</span></code> field references the robot’s Isaac Anim Robot (IAR) configuration.</p></li>
+<li><p>New <code class="docutils literal notranslate"><span class="pre">camera_prim_paths</span></code> for specifying which onboard cameras to use for data generation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spawn_area</span></code> renamed to <code class="docutils literal notranslate"><span class="pre">spawn_areas</span></code>.</p></li>
+</ul>
+</section>
+<section id="sensor-section">
+<h3>Sensor Section<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#sensor-section" title="Link to this heading">#</a></h3>
+<p>The sensor section has been redesigned to support named groups and pluggable
+placement strategies.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># OLD (0.x)</span>
+<span class="nt">sensor</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">camera_num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="w">  </span><span class="c1"># OR</span>
+<span class="w">  </span><span class="nt">camera_list</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;/World/Camera1&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;/World/Camera2&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="c1"># NEW (1.x)</span>
+<span class="nt">sensor</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">root_prim_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/World/Cameras&quot;</span>
+<span class="w">  </span><span class="nt">groups</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">ceiling_cameras</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
+<span class="w">      </span><span class="nt">aim_at_targets</span><span class="p">:</span><span class="w">           </span><span class="c1"># placement strategy</span>
+<span class="w">        </span><span class="nt">height_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">7.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10.0</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">look_down_angle_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">30.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">45.0</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">focal_length_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">10.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">15.0</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">distance_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">5.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10.0</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">coverage_cameras</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-1</span><span class="w">                   </span><span class="c1"># auto-calculate for maximum coverage</span>
+<span class="w">      </span><span class="nt">maximum_coverage</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">target_coverage_ratio</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.8</span>
+<span class="w">        </span><span class="nt">height_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.0</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<p>Key differences:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">camera_num</span></code> / <code class="docutils literal notranslate"><span class="pre">camera_list</span></code> replaced by named groups under <code class="docutils literal notranslate"><span class="pre">sensor.groups</span></code>.</p></li>
+<li><p>Each group specifies a <strong>placement strategy</strong>: <code class="docutils literal notranslate"><span class="pre">aim_at_targets</span></code> or <code class="docutils literal notranslate"><span class="pre">maximum_coverage</span></code>.</p></li>
+<li><p>Camera randomization parameters (height, angle, focal length, distance) that were in extension settings are now in the config YAML per sensor group.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num:</span> <span class="pre">-1</span></code> with <code class="docutils literal notranslate"><span class="pre">maximum_coverage</span></code> triggers automatic camera count calculation.</p></li>
+</ul>
+</section>
+<section id="replicator-section">
+<h3>Replicator Section<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#replicator-section" title="Link to this heading">#</a></h3>
+<p>The replicator section now supports <strong>multiple concurrent writers</strong> with
+per-writer timing control.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># OLD (0.x)</span>
+<span class="nt">replicator</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">writer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IRABasicWriter</span><span class="w">          </span><span class="c1"># single writer, selected by name</span>
+<span class="w">  </span><span class="nt">parameters</span><span class="p">:</span><span class="w">                     </span><span class="c1"># flat parameter dict</span>
+<span class="w">    </span><span class="nt">object_info_bounding_box_2d_tight</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">object_info_bounding_box_2d_loose</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">    </span><span class="nt">semantic_filter_predicate</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;class:character|robot;id:*&quot;</span>
+<span class="w">    </span><span class="nt">rgb</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">camera_params</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="c1"># NEW (1.x)</span>
+<span class="nt">replicator</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">hide_debug_visualization</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">  </span><span class="c1"># new: hides NavMesh/skeleton debug viz</span>
+<span class="w">  </span><span class="nt">writers</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">IRABasicWriter</span><span class="p">:</span><span class="w">               </span><span class="c1"># writer name is the dict key</span>
+<span class="w">      </span><span class="nt">rgb</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">camera_params</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">object_info_bounding_box_2d_tight</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">object_info_bounding_box_2d_loose</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">semantic_filter_predicate</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;class:character|robot;id:*&quot;</span>
+<span class="w">      </span><span class="nt">start_frame</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span><span class="w">             </span><span class="c1"># new: per-writer frame control</span>
+<span class="w">      </span><span class="c1"># OR use time-based:</span>
+<span class="w">      </span><span class="c1"># start_time: 1.0</span>
+<span class="w">      </span><span class="c1"># end_time: 50.0</span>
+<span class="w">      </span><span class="c1"># sensor_prim_list: []      # new: optional per-writer sensor selection</span>
+</pre></div>
+</div>
+<p>Key differences:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">writer</span></code> + <code class="docutils literal notranslate"><span class="pre">parameters</span></code> replaced by <code class="docutils literal notranslate"><span class="pre">writers</span></code> dict. The key is the writer name, and the value contains the parameters directly (no nesting under <code class="docutils literal notranslate"><span class="pre">parameters</span></code>).</p></li>
+<li><p><strong>Multiple writers</strong>: You can define multiple writers in a single config (for example, <code class="docutils literal notranslate"><span class="pre">IRABasicWriter</span></code> + <code class="docutils literal notranslate"><span class="pre">CosmosIRAWriter</span></code>).</p></li>
+<li><p>Per-writer <code class="docutils literal notranslate"><span class="pre">start_frame</span></code> and <code class="docutils literal notranslate"><span class="pre">end_frame</span></code> or <code class="docutils literal notranslate"><span class="pre">start_time</span></code> and <code class="docutils literal notranslate"><span class="pre">end_time</span></code> for timing control.</p></li>
+<li><p>Per-writer <code class="docutils literal notranslate"><span class="pre">sensor_prim_list</span></code> for selecting specific cameras.</p></li>
+<li><p>Default <code class="docutils literal notranslate"><span class="pre">start_frame</span></code> is <code class="docutils literal notranslate"><span class="pre">30</span></code> (skips initial settling frames).</p></li>
+<li><p>New writers: <code class="docutils literal notranslate"><span class="pre">CosmosIRAWriter</span></code>, <code class="docutils literal notranslate"><span class="pre">SceneGraphWriter</span></code>, <code class="docutils literal notranslate"><span class="pre">CustomWriter</span></code>. The stock Replicator <code class="docutils literal notranslate"><span class="pre">BasicWriter</span></code> can be used via <code class="docutils literal notranslate"><span class="pre">CustomWriter</span></code> with <code class="docutils literal notranslate"><span class="pre">writer_name:</span> <span class="pre">&quot;BasicWriter&quot;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IRABasicWriter</span></code> defaults changed: <code class="docutils literal notranslate"><span class="pre">object_info_bounding_box_2d_tight</span></code>, <code class="docutils literal notranslate"><span class="pre">object_info_bounding_box_2d_loose</span></code>, and <code class="docutils literal notranslate"><span class="pre">object_info_bounding_box_3d</span></code> now default to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="behavior-system-architecture-changes">
+<h2>Behavior System Architecture Changes<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#behavior-system-architecture-changes" title="Link to this heading">#</a></h2>
+<p>The actor behavior system has been fundamentally redesigned.</p>
+<section id="old-system-0-x-command-files-omni-anim-people">
+<h3>Old System (0.x): Command Files + <code class="docutils literal notranslate"><span class="pre">omni.anim.people</span></code><a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#old-system-0-x-command-files-omni-anim-people" title="Link to this heading">#</a></h3>
+<p>In 0.x, actor behavior was controlled by <strong>external command files</strong> (<code class="docutils literal notranslate"><span class="pre">.txt</span></code>):</p>
+<ul class="simple">
+<li><p>Characters were driven by <code class="docutils literal notranslate"><span class="pre">omni.anim.people</span></code> which read a text-based command file line-by-line.</p></li>
+<li><p>Robots were driven by <code class="docutils literal notranslate"><span class="pre">isaacsim.anim.robot</span></code> with a similar command file.</p></li>
+<li><p>A <strong>Generate Random Commands</strong> button in the UI created these command files based on randomization settings stored in the extension settings.</p></li>
+<li><p>Command transition maps (<code class="docutils literal notranslate"><span class="pre">.json</span></code>) controlled probabilistic transitions between commands.</p></li>
+</ul>
+</section>
+<section id="new-system-1-x-routine-trigger-loop-omni-anim-behavior">
+<h3>New System (1.x): Routine-Trigger Loop + <code class="docutils literal notranslate"><span class="pre">omni.anim.behavior</span></code><a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#new-system-1-x-routine-trigger-loop-omni-anim-behavior" title="Link to this heading">#</a></h3>
+<p>In 1.x, actor behavior uses a <strong>routine-trigger loop</strong> backed by
+<code class="docutils literal notranslate"><span class="pre">omni.anim.behavior.core</span></code>:</p>
+<ol class="arabic simple">
+<li><p><strong>Routines</strong>: A list of weighted behaviors defined in the YAML config. Actors repeatedly pick a behavior from their routine pool based on probability weights, using the actor’s individual seed.</p></li>
+<li><p><strong>Triggers</strong>: Event-driven or time-driven interrupts. When activated, the actor pauses its routine and executes the trigger’s behavior sequence. Higher-priority triggers can preempt running triggers.</p></li>
+<li><p><strong>USD Schema</strong>: After loading, each actor’s configuration is embedded in <strong>USD API schemas</strong> (<code class="docutils literal notranslate"><span class="pre">IRACharacterAPI</span></code> on SkelRoot for characters, <code class="docutils literal notranslate"><span class="pre">AnimRobotAPI</span></code> on robot root prims). Behaviors and triggers become individual USD prims referenced by the actor.</p></li>
+</ol>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 35.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspect</p></th>
+<th class="head"><p>0.x</p></th>
+<th class="head"><p>1.x</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Behavior source</p></td>
+<td><p>External <code class="docutils literal notranslate"><span class="pre">.txt</span></code> command file</p></td>
+<td><p>Inline YAML <code class="docutils literal notranslate"><span class="pre">routines</span></code> list</p></td>
+</tr>
+<tr class="row-odd"><td><p>Randomization</p></td>
+<td><p>UI button + extension settings</p></td>
+<td><p>Per-behavior <code class="docutils literal notranslate"><span class="pre">weight</span></code>, <code class="docutils literal notranslate"><span class="pre">repeat</span></code>, range params in YAML</p></td>
+</tr>
+<tr class="row-even"><td><p>Transition logic</p></td>
+<td><p>Transition map JSON file</p></td>
+<td><p>Weighted random selection from routine pool</p></td>
+</tr>
+<tr class="row-odd"><td><p>Interrupts</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">response</span></code> + <code class="docutils literal notranslate"><span class="pre">incident</span></code> sections</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">triggers</span></code> (time-based or event-based)</p></td>
+</tr>
+<tr class="row-even"><td><p>Animation backend</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">omni.anim.people</span></code> and <code class="docutils literal notranslate"><span class="pre">omni.anim.graph</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">omni.anim.behavior.core</span></code> (v110+)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Determinism seed</p></td>
+<td><p>Global seed</p></td>
+<td><p>Per-actor seed (name + group + global seed hashed)</p></td>
+</tr>
+<tr class="row-even"><td><p>Stage representation</p></td>
+<td><p>Runtime only</p></td>
+<td><p>Persisted in USD prims and schemas</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="available-behavior-types">
+<h3>Available Behavior Types<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#available-behavior-types" title="Link to this heading">#</a></h3>
+<p><strong>Character behaviors:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">wander</span></code> – random walk and idle cycles with configurable speed, distance, idle animations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">patrol</span></code> – follow a path defined by 3D points or target prims</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stop</span></code> – remain stationary for a configurable time</p></li>
+</ul>
+<p><strong>Robot behaviors:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">wander</span></code> – random movement and idle with configurable distance and wait time</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">patrol</span></code> – follow a path defined by 3D points or target prims</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">halt</span></code> – stop for a configurable duration</p></li>
+</ul>
+<p><strong>Trigger types (shared by characters and robots):</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">event_trigger</span></code> – fires on a named event</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time_trigger</span></code> – fires after a specified time (in seconds)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">collision_trigger</span></code> – fires when a named collider on the actor begins or ends overlapping with another named collider</p></li>
+</ul>
+</section>
+<section id="behavior-tree-groups-alternative-to-routines-triggers">
+<h3>Behavior Tree Groups (alternative to routines/triggers)<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#behavior-tree-groups-alternative-to-routines-triggers" title="Link to this heading">#</a></h3>
+<p>Starting in IRA 1.3.0 (characters) and 1.5.0 (robots), a group may opt out of the routine-trigger system by declaring a <code class="docutils literal notranslate"><span class="pre">behavior_tree</span></code> JSON asset and an optional <code class="docutils literal notranslate"><span class="pre">overrides</span></code> block at the group level. All behavior logic is then authored inside the referenced tree; <code class="docutils literal notranslate"><span class="pre">routines</span></code>, <code class="docutils literal notranslate"><span class="pre">triggers</span></code>, and <code class="docutils literal notranslate"><span class="pre">colliders</span></code> are not applied. Review the Configuration File Guide sections “Behavior Tree Character Group (Experimental)” and “Behavior Tree Robot Group (Experimental)” for the full schema and examples.</p>
+</section>
+</section>
+<section id="step-by-step-migration-checklist">
+<h2>Step-by-Step Migration Checklist<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#step-by-step-migration-checklist" title="Link to this heading">#</a></h2>
+<section id="config-file-migration">
+<h3>Config File Migration<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#config-file-migration" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Change <code class="docutils literal notranslate"><span class="pre">version</span></code> to <code class="docutils literal notranslate"><span class="pre">1.x.x</span></code> (for example, <code class="docutils literal notranslate"><span class="pre">1.5.0</span></code>).</p></li>
+<li><p>Move <code class="docutils literal notranslate"><span class="pre">global.seed</span></code> to root-level <code class="docutils literal notranslate"><span class="pre">seed</span></code>.</p></li>
+<li><p>Convert <code class="docutils literal notranslate"><span class="pre">global.simulation_length</span></code> (frames) to <code class="docutils literal notranslate"><span class="pre">simulation_duration</span></code> (seconds) at root level.</p>
+<ul class="simple">
+<li><p>Formula: <code class="docutils literal notranslate"><span class="pre">simulation_duration</span> <span class="pre">=</span> <span class="pre">simulation_length</span> <span class="pre">/</span> <span class="pre">30.0</span></code></p></li>
+</ul>
+</li>
+<li><p>Rename <code class="docutils literal notranslate"><span class="pre">scene.asset_path</span></code> to <code class="docutils literal notranslate"><span class="pre">environment.base_stage_asset_path</span></code> (this field is now <strong>required</strong>).</p></li>
+<li><p>Restructure <code class="docutils literal notranslate"><span class="pre">character</span></code> into <code class="docutils literal notranslate"><span class="pre">character.groups.&lt;group_name&gt;</span></code> with <code class="docutils literal notranslate"><span class="pre">num</span></code>, <code class="docutils literal notranslate"><span class="pre">asset_path</span></code>, and inline <code class="docutils literal notranslate"><span class="pre">routines</span></code>.</p></li>
+<li><p>Convert external command files (<code class="docutils literal notranslate"><span class="pre">.txt</span></code>) to inline <code class="docutils literal notranslate"><span class="pre">routines</span></code> entries. Map old commands to new behavior types:</p>
+<ul class="simple">
+<li><p>GoTo commands -&gt; <code class="docutils literal notranslate"><span class="pre">wander</span></code> behavior with <code class="docutils literal notranslate"><span class="pre">distance_range</span></code></p></li>
+<li><p>Idle commands -&gt; <code class="docutils literal notranslate"><span class="pre">wander</span></code> behavior with <code class="docutils literal notranslate"><span class="pre">idle</span></code> list</p></li>
+<li><p>Patrol-like sequences -&gt; <code class="docutils literal notranslate"><span class="pre">patrol</span></code> behavior with <code class="docutils literal notranslate"><span class="pre">path_points</span></code> or <code class="docutils literal notranslate"><span class="pre">target_prims</span></code></p></li>
+<li><p>Review the <a class="reference internal" href="../../action_and_event_data_generation/ext_replicator-agent/ext_isaacsim_replicator_agent_configuration.html#ira-configuration-file"><span class="std std-ref">Configuration File Guide</span></a> for full behavior type documentation.</p></li>
+</ul>
+</li>
+<li><p>Restructure <code class="docutils literal notranslate"><span class="pre">robot</span></code> into <code class="docutils literal notranslate"><span class="pre">robot.groups.&lt;group_name&gt;</span></code> with <code class="docutils literal notranslate"><span class="pre">num</span></code>, <code class="docutils literal notranslate"><span class="pre">config_file_path</span></code>, and inline <code class="docutils literal notranslate"><span class="pre">routines</span></code>.</p>
+<ul class="simple">
+<li><p>Replace <code class="docutils literal notranslate"><span class="pre">nova_carter_num:</span> <span class="pre">N</span></code> with a group entry using <code class="docutils literal notranslate"><span class="pre">config_file_path:</span> <span class="pre">&quot;nova_carter.yaml&quot;</span></code>.</p></li>
+<li><p>Replace <code class="docutils literal notranslate"><span class="pre">iw_hub_num:</span> <span class="pre">N</span></code> similarly with the appropriate IAR config.</p></li>
+</ul>
+</li>
+<li><p>Replace <code class="docutils literal notranslate"><span class="pre">sensor.camera_num</span></code> and <code class="docutils literal notranslate"><span class="pre">camera_list</span></code> with <code class="docutils literal notranslate"><span class="pre">sensor.groups.&lt;group_name&gt;</span></code> using a placement strategy (<code class="docutils literal notranslate"><span class="pre">aim_at_targets</span></code> or <code class="docutils literal notranslate"><span class="pre">maximum_coverage</span></code>).</p></li>
+<li><p>Move camera randomization settings (height, angle, focal length, distance ranges) from extension settings into the sensor group config.</p></li>
+<li><p>Replace <code class="docutils literal notranslate"><span class="pre">replicator.writer</span></code> + <code class="docutils literal notranslate"><span class="pre">replicator.parameters</span></code> with <code class="docutils literal notranslate"><span class="pre">replicator.writers.&lt;WriterName&gt;:</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></code>.</p></li>
+<li><p>Remove <code class="docutils literal notranslate"><span class="pre">response</span></code>, <code class="docutils literal notranslate"><span class="pre">event</span></code>, and <code class="docutils literal notranslate"><span class="pre">incident</span></code> sections. Replace with <code class="docutils literal notranslate"><span class="pre">triggers</span></code> on individual character/robot groups.</p></li>
+</ol>
+</section>
+<section id="quick-config-conversion-example">
+<h3>Quick Config Conversion Example<a class="headerlink" href="ext_isaacsim_replicator_agent_migration_guide.html#quick-config-conversion-example" title="Link to this heading">#</a></h3>
+<p><strong>Old (0.x):</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">isaacsim.replicator.agent</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.7.0</span>
+<span class="w">  </span><span class="nt">global</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456789</span>
+<span class="w">    </span><span class="nt">simulation_length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1800</span>
+<span class="w">  </span><span class="nt">sensor</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">camera_num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="w">  </span><span class="nt">character</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">asset_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">    </span><span class="nt">command_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default_command.txt</span>
+<span class="w">    </span><span class="nt">num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span>
+<span class="w">  </span><span class="nt">robot</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">command_file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default_robot_command.txt</span>
+<span class="w">    </span><span class="nt">nova_carter_num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">    </span><span class="nt">iw_hub_num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">    </span><span class="nt">write_data</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">replicator</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">writer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IRABasicWriter</span>
+<span class="w">    </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">semantic_filter_predicate</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;class:character|robot;id:*&quot;</span>
+<span class="w">      </span><span class="nt">rgb</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">camera_params</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+<p><strong>New (1.x):</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">isaacsim.replicator.agent</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.6.0</span>
+<span class="w">  </span><span class="nt">seed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456789</span>
+<span class="w">  </span><span class="nt">simulation_duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60.0</span>
+<span class="w">  </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">base_stage_asset_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Isaac/Environments/Simple_Warehouse/full_warehouse.usd&quot;</span>
+<span class="w">  </span><span class="nt">sensor</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">groups</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">default_cameras</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="w">        </span><span class="nt">aim_at_targets</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">height_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3.0</span><span class="p p-Indicator">]</span>
+<span class="w">          </span><span class="nt">look_down_angle_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">60.0</span><span class="p p-Indicator">]</span>
+<span class="w">          </span><span class="nt">focal_length_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">13.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">23.0</span><span class="p p-Indicator">]</span>
+<span class="w">          </span><span class="nt">distance_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">6.5</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">14.0</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">character</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">groups</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">default_characters</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span>
+<span class="w">        </span><span class="nt">asset_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Isaac/People/Characters/&quot;</span>
+<span class="w">        </span><span class="nt">routines</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">wander</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">walk</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">speed_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">1.0</span><span class="p p-Indicator">]</span>
+<span class="w">                </span><span class="nt">distance_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">5.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">15.0</span><span class="p p-Indicator">]</span>
+<span class="w">              </span><span class="nt">idle</span><span class="p">:</span>
+<span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">animation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">idle</span>
+<span class="w">                  </span><span class="nt">time_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.0</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">robot</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">groups</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">nova_carters</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">        </span><span class="nt">config_file_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;nova_carter.yaml&quot;</span>
+<span class="w">        </span><span class="nt">routines</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">wander</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">move</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">distance_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">10.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">15.0</span><span class="p p-Indicator">]</span>
+<span class="w">              </span><span class="nt">idle</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">time_range</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">5.0</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">replicator</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">writers</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">IRABasicWriter</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">semantic_filter_predicate</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;class:character|robot;id:*&quot;</span>
+<span class="w">        </span><span class="nt">rgb</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">camera_params</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">start_frame</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ros2_omnigraph_migration.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">ROS 2 OmniGraph Nodes</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="mobility_gen_recordings_migration.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">MobilityGen Recordings</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+
+
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#what-changed-at-a-glance">What Changed at a Glance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#workflow-and-ui-changes">Workflow and UI Changes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#ui-workflow">UI Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#default-config-file-location">Default Config File Location</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#headless-or-script-based-data-generation">Headless or Script-Based Data Generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#simulation-duration">Simulation Duration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#configuration-file-changes">Configuration File Changes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#version-field">Version Field</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#top-level-structure">Top-Level Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#environment-was-scene">Environment (was <code class="docutils literal notranslate"><span class="pre">scene</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#character-section">Character Section</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#robot-section">Robot Section</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#sensor-section">Sensor Section</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#replicator-section">Replicator Section</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#behavior-system-architecture-changes">Behavior System Architecture Changes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#old-system-0-x-command-files-omni-anim-people">Old System (0.x): Command Files + <code class="docutils literal notranslate"><span class="pre">omni.anim.people</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#new-system-1-x-routine-trigger-loop-omni-anim-behavior">New System (1.x): Routine-Trigger Loop + <code class="docutils literal notranslate"><span class="pre">omni.anim.behavior</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#available-behavior-types">Available Behavior Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#behavior-tree-groups-alternative-to-routines-triggers">Behavior Tree Groups (alternative to routines/triggers)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#step-by-step-migration-checklist">Step-by-Step Migration Checklist</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#config-file-migration">Config File Migration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="ext_isaacsim_replicator_agent_migration_guide.html#quick-config-conversion-example">Quick Config Conversion Example</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
+
+
+<script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+<a class="footer-brand logo" href="https://www.nvidia.com">
+  <img src="../../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
+  <img src="../../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+</a></div>
+      
+        <div class="footer-item">
+
+<div class="footer-links">
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/">Your Privacy Choices</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/">Terms of Service</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/accessibility/">Accessibility</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/company-policies/">Corporate Policies</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/product-security/">Product Security</a>
+   | 
+  
+  
+  
+  <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
+  
+  
+  
+</div>
+</div>
+      
+        <div class="footer-item">
+
+
+
+
+  <p class="copyright">
+    
+      Copyright © 2023-2026, NVIDIA Corporation.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item"><p class="last-updated">
+  Last updated on Jun 05, 2026.
+  <br/>
+</p></div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

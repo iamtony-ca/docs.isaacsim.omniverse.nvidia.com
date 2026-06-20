@@ -1,0 +1,768 @@
+/* Isaac Sim homepage styles. Theme-class overrides are scoped under
+ * `body:has(.isaacsim-hero)` so they stay inert if the bundle ever leaks. */
+
+body:has(.isaacsim-hero) .bd-header-announcement__content a {
+  color: #003320 !important;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+html[data-theme="dark"] body:has(.isaacsim-hero) .bd-header-announcement__content a {
+  color: #fff !important;
+}
+
+/* Offset anchors below the fixed theme header. */
+body:has(.isaacsim-hero) .bd-article section[id] {
+  scroll-margin-top: 50px;
+}
+
+body:has(.isaacsim-hero) .bd-sidebar-secondary {
+  flex: 0 0 15rem !important;
+  width: 15rem !important;
+  min-width: 0 !important;
+  padding-top: 3.5rem !important;
+  padding-right: 0.25rem !important;
+}
+
+/* Relax the theme's prose-oriented width caps; homepage has wide grids. */
+body:has(.isaacsim-hero) .bd-page-width {
+  max-width: 100rem !important;
+}
+body:has(.isaacsim-hero) .bd-article-container {
+  max-width: none !important;
+}
+
+/* Hide the page TOC below 1280px to free the column for wide grids. */
+@media (max-width: 1279.98px) {
+  body:has(.isaacsim-hero) .bd-sidebar-secondary {
+    display: none !important;
+  }
+}
+
+body:has(.isaacsim-hero) .bd-article hr {
+  border: none; height: 1px;
+  background: linear-gradient(90deg, var(--nv-color-green, #76b900), var(--pst-color-border, #ddd) 30%, transparent 100%);
+  margin: 2.5rem 0; opacity: 0.5;
+}
+body:has(.isaacsim-hero) .bd-article section figure.align-center {
+  border-radius: var(--bs-border-radius-lg, 0.5rem); overflow: hidden;
+}
+
+body:has(.isaacsim-hero) .bd-article .sd-card {
+  border-radius: var(--bs-border-radius-lg, 0.5rem) !important; border: 1px solid var(--pst-color-border, rgba(36, 45, 55, 0.12)) !important;
+  box-shadow: var(--bs-box-shadow-sm, 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)) !important;
+  transition: border-color 250ms ease-out, box-shadow 250ms ease-out, transform 250ms ease-out !important; overflow: hidden;
+}
+body:has(.isaacsim-hero) .bd-article a.sd-card:hover,
+body:has(.isaacsim-hero) .bd-article .sd-card:has(a:hover) {
+  border-color: var(--nv-color-green, #76b900) !important;
+  box-shadow: var(--bs-box-shadow, 0 0.5rem 1rem rgba(0, 0, 0, 0.15)) !important;
+  transform: translateY(-2px);
+}
+body:has(.isaacsim-hero) .bd-article .sd-card .sd-card-body { font-family: var(--pst-font-family-base); }
+body:has(.isaacsim-hero) .bd-article .sd-card .sd-card-title { font-weight: 600; font-size: 0.95rem; }
+body:has(.isaacsim-hero) .bd-article .sd-card-img-top { height: 170px; object-fit: cover; transition: transform 500ms ease-out; }
+body:has(.isaacsim-hero) .bd-article a.sd-card:hover .sd-card-img-top,
+body:has(.isaacsim-hero) .bd-article .sd-card:has(a:hover) .sd-card-img-top { transform: scale(1.06); }
+
+
+/* NVIDIA-hosted privacy notice text is injected at runtime on internal builds. */
+body:has(.isaacsim-hero) #nv-non-gpc-text {
+  display: inline-block !important;
+  position: relative !important;
+  z-index: 1 !important;
+  padding: 0.05rem 0.15rem !important;
+  background: var(--pst-color-background, #fff) !important;
+  color: var(--pst-color-text-base, #1d1d1d) !important;
+}
+
+html[data-theme="dark"] body:has(.isaacsim-hero) #nv-non-gpc-text {
+  background: #111713 !important;
+  color: #fff !important;
+}
+
+body:has(.isaacsim-hero) #nv-non-gpc-text a {
+  color: inherit !important;
+  background: inherit !important;
+}
+
+/* ===== Hero ===== */
+
+.isaacsim-hero {
+  position: relative;
+  margin: 0 -1rem; padding: 5.5rem 3rem 4.5rem;
+  background-color: #050505;
+  background-image:
+    /* Dark wash keeps hero copy above WCAG AA contrast over the screenshot. */
+    radial-gradient(ellipse at 18% 42%, rgba(5, 5, 5, 0.74) 0%, rgba(5, 5, 5, 0.52) 30%, transparent 64%),
+    linear-gradient(145deg, rgba(5, 5, 5, 0.96) 0%, rgba(5, 5, 5, 0.85) 35%, rgba(5, 5, 5, 0.62) 68%, rgba(5, 5, 5, 0.35) 100%),
+    image-set(
+      url("isim_6.0_full_ref_viewport_hero_shot.webp") type("image/webp"),
+      url("isim_6.0_full_ref_viewport_hero_shot.png") type("image/png")
+    );
+  background-position: center right;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-bottom: 4px solid var(--nv-color-green, #76b900);
+  overflow: hidden;
+}
+.isaacsim-hero > * {
+  position: relative;
+  z-index: 1;
+}
+.isaacsim-hero__content {
+  position: relative;
+  z-index: 1;
+  width: min(690px, 100%);
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+.isaacsim-hero__title {
+  display: block;
+  width: min(690px, 100%);
+  aspect-ratio: 690 / 104;
+  margin: 0 0 0.35rem;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20690%20104%22%3E%3Cdefs%3E%3Cfilter%20id=%22s%22%20x=%22-12%25%22%20y=%22-60%25%22%20width=%22124%25%22%20height=%22220%25%22%3E%3CfeDropShadow%20dx=%220%22%20dy=%223%22%20stdDeviation=%223.5%22%20flood-color=%22%23000000%22%20flood-opacity=%220.9%22/%3E%3C/filter%3E%3C/defs%3E%3Ctext%20x=%220%22%20y=%2273%22%20fill=%22%23ffffff%22%20font-family=%22Arial,%20Helvetica,%20sans-serif%22%20font-size=%2268%22%20font-weight=%22700%22%20filter=%22url(%23s)%22%3ENVIDIA%20%3Ctspan%20fill=%22%2376B900%22%3EIsaac%20Sim%3C/tspan%3E%3C/text%3E%3C/svg%3E");
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  padding: 0;
+}
+.isaacsim-hero__sub {
+  margin: 0 0 2.25rem;
+  max-width: 620px;
+  padding: 0;
+  background: transparent;
+  font-family: var(--pst-font-family-base);
+  font-size: 1.125rem;
+  line-height: 1.78;
+  font-weight: 300;
+  color: #e0e0e0;
+}
+.isaacsim-hero__sub span {
+  padding: 0;
+  background: transparent;
+}
+.isaacsim-hero__btns .sd-btn-outline-light {
+  background: rgba(21, 26, 28, 0.62);
+  border-color: rgba(255, 255, 255, 0.48);
+  color: #fff !important;
+}
+.isaacsim-hero__btns .sd-btn-outline-light:hover {
+  border-color: var(--nv-color-green, #76b900);
+  color: var(--nv-color-green, #76b900) !important;
+}
+.isaacsim-hero__badges {
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+  margin: 1.5rem 0 0; padding: 0; align-items: center;
+  list-style: none;
+}
+.isaacsim-hero__badge-item {
+  display: inline-flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.isaacsim-hero__badge {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  background: rgba(21, 26, 28, 0.58);
+  border: 1px solid rgba(255,255,255,0.22);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+  border-radius: var(--bs-border-radius-pill, 50rem);
+  font-family: var(--pst-font-family-base);
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.82) !important;
+  text-decoration: none !important;
+  transition: background 200ms ease-out, background-color 200ms ease-out, border-color 200ms ease-out, color 200ms ease-out, box-shadow 200ms ease-out;
+  white-space: nowrap;
+}
+a.isaacsim-hero__badge:hover {
+  background: rgba(var(--isaacsim-nv-green-rgb),0.28);
+  border-color: var(--nv-color-green, #76b900);
+  color: #fff !important;
+}
+.isaacsim-hero__badge--static { cursor: default; }
+
+/* ===== Platform Overview ===== */
+
+.isaacsim-platform {
+  margin: 1rem 0 1.3rem;
+}
+
+.isaacsim-platform__frame {
+  --isaacsim-frame-padding: 1.2rem;
+}
+
+.isaacsim-platform__topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.1rem;
+}
+
+.isaacsim-platform__topbar > div:first-child {
+  display: inline-flex;
+  padding: 0.18rem;
+  border-radius: var(--bs-border-radius-pill, 50rem);
+  background: linear-gradient(135deg, rgba(var(--isaacsim-nv-green-rgb), 0.42), rgba(var(--bs-info-rgb), 0.2), rgba(var(--bs-primary-rgb), 0.16));
+  box-shadow: var(--bs-box-shadow, 0 0.5rem 1rem rgba(0, 0, 0, 0.15));
+}
+
+.isaacsim-platform__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.42rem 0.86rem;
+  border-radius: var(--bs-border-radius-pill, 50rem);
+  background: var(--pst-color-background, #fff);
+  border: 1px solid rgba(var(--isaacsim-nv-green-2-rgb), 0.18);
+  font-weight: 800;
+  --isaacsim-kicker-size: 0.72rem;
+  --isaacsim-kicker-spacing: 0.1em;
+}
+
+.isaacsim-platform__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.42rem;
+  max-width: 28rem;
+}
+
+.isaacsim-platform__steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-top: 1rem;
+}
+
+
+@media (max-width: 1180px) {
+
+  .isaacsim-platform__steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 960px) {
+  .isaacsim-platform__topbar {
+    flex-direction: column;
+  }
+
+  .isaacsim-platform__meta {
+    justify-content: flex-start;
+    max-width: none;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .isaacsim-platform__frame {
+    --isaacsim-frame-padding: 0.9rem;
+  }
+
+  .isaacsim-platform__steps {
+    grid-template-columns: 1fr;
+  }
+
+  /* Hide desktop loop/lens graphics on phones; __steps list carries mobile. */
+  .isaacsim-platform__canvas {
+    --isaacsim-surface-padding: 0.85rem;
+  }
+  .isaacsim-platform__canvas::before {
+    display: none;
+  }
+  .isaacsim-platform__loop,
+.isaacsim-platform__lens-inline,
+.isaacsim-platform__lens-copy {
+    display: none !important;
+  }
+  .isaacsim-platform__loop-title {
+    margin: 0;
+    padding: 0;
+  }
+  .isaacsim-platform__loop-title span {
+    font-size: 1.1rem;
+  }
+  .isaacsim-platform__loop-title p {
+    font-size: 0.86rem;
+    line-height: 1.45;
+    margin-top: 0.4rem;
+  }
+  .isaacsim-platform__steps {
+    margin-top: 0.85rem;
+    gap: 0.6rem;
+  }
+  .isaacsim-platform__topbar {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .isaacsim-platform__meta {
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+}
+
+.isaacsim-platform__canvas {
+  --isaacsim-surface-padding: 1.05rem;
+  --isaacsim-surface-radius: var(--bs-border-radius-xl, 1rem);
+  --isaacsim-surface-bg: #fff;
+  --isaacsim-surface-border: rgba(36, 45, 55, 0.1);
+  --isaacsim-surface-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.76);
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
+.isaacsim-platform__loop-title,
+.isaacsim-platform__loop {
+  position: relative;
+  z-index: 1;
+}
+
+.isaacsim-platform__loop-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.95rem;
+}
+
+.isaacsim-platform__loop-title span {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.isaacsim-platform__loop-title p {
+  max-width: 38rem;
+  margin: 0.35rem 0 0;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.isaacsim-platform__lens-inline {
+  margin-top: 0.62rem;
+}
+
+.isaacsim-platform__lens-pill {
+  --isaacsim-chip-bg: var(--isaacsim-pill-bg, rgba(255, 255, 255, 0.88));
+  --isaacsim-chip-border: var(--isaacsim-pill-border, rgba(36, 45, 55, 0.12));
+  --isaacsim-chip-color: var(--isaacsim-pill-color, var(--pst-color-text-muted, #5d5d5d));
+  padding: 0.27rem 0.62rem;
+  font-size: 0.68rem;
+}
+
+.isaacsim-platform__lens-copy {
+  position: relative;
+  min-height: 2.65rem;
+  max-width: 44rem;
+  margin-top: 0.52rem;
+}
+
+.isaacsim-platform__lens-copy-item {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  margin: 0 !important;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition:
+    opacity 160ms ease-out,
+    transform 160ms ease-out,
+    visibility 0s linear 160ms;
+}
+
+.isaacsim-platform__loop {
+  position: relative;
+  min-height: 700px;
+  margin-top: 0.8rem;
+}
+
+.isaacsim-platform__loop-node,
+.isaacsim-platform__hub {
+  position: absolute;
+  z-index: 2;
+}
+
+.isaacsim-platform__loop-node {
+  width: min(276px, 30%);
+  min-height: 0;
+}
+
+.isaacsim-platform__loop-node--import {
+  top: 34px;
+  left: 18px;
+}
+
+.isaacsim-platform__loop-node--configure {
+  top: 34px;
+  right: 18px;
+}
+
+.isaacsim-platform__loop-node--simulate {
+  right: 18px;
+  bottom: 34px;
+}
+
+.isaacsim-platform__loop-node--deploy {
+  left: 18px;
+  bottom: 34px;
+}
+
+.isaacsim-platform__loop-node-facets {
+  margin-top: 0.65rem;
+}
+
+.isaacsim-platform__facet {
+  --isaacsim-chip-bg: var(--isaacsim-facet-bg, rgba(246, 248, 250, 0.94));
+  --isaacsim-chip-border: var(--isaacsim-facet-border, rgba(36, 45, 55, 0.12));
+  --isaacsim-chip-color: var(--isaacsim-facet-color, var(--pst-color-text-muted, #5d5d5d));
+}
+
+/* :has() on the canvas lets the radio :checked state drive copy, pill, and facet styling. */
+.isaacsim-platform__canvas:has(#isaacsim-platform-lens-core:checked) .isaacsim-platform__lens-copy-item--core,
+.isaacsim-platform__canvas:has(#isaacsim-platform-lens-sdg:checked) .isaacsim-platform__lens-copy-item--sdg,
+.isaacsim-platform__canvas:has(#isaacsim-platform-lens-sil:checked) .isaacsim-platform__lens-copy-item--sil {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+.isaacsim-platform__canvas:has(#isaacsim-platform-lens-core:checked) .isaacsim-platform__lens-pill--core,
+.isaacsim-platform__canvas:has(#isaacsim-platform-lens-sdg:checked) .isaacsim-platform__lens-pill--sdg,
+.isaacsim-platform__canvas:has(#isaacsim-platform-lens-sil:checked) .isaacsim-platform__lens-pill--sil {
+  background: rgba(var(--isaacsim-nv-green-rgb), 0.1);
+  border-color: rgba(var(--isaacsim-nv-green-rgb), 0.32);
+  color: var(--pst-color-primary, var(--nv-color-green-2, #004831));
+  box-shadow: inset 0 0 0 1px rgba(var(--isaacsim-nv-green-rgb), 0.07);
+}
+
+.isaacsim-platform__canvas:has(#isaacsim-platform-lens-sdg:checked) .isaacsim-platform__loop .isaacsim-platform__facet,
+.isaacsim-platform__canvas:has(#isaacsim-platform-lens-sil:checked) .isaacsim-platform__loop .isaacsim-platform__facet {
+  opacity: 0.42;
+}
+
+.isaacsim-platform__canvas:has(#isaacsim-platform-lens-sdg:checked) .isaacsim-platform__loop .isaacsim-platform__facet--sdg,
+.isaacsim-platform__canvas:has(#isaacsim-platform-lens-sil:checked) .isaacsim-platform__loop .isaacsim-platform__facet--sil {
+  opacity: 1;
+  transform: translateY(-1px);
+  background: rgba(var(--isaacsim-nv-green-rgb), 0.13);
+  border-color: rgba(var(--isaacsim-nv-green-rgb), 0.36);
+  color: var(--nv-color-green, #76b900);
+  box-shadow: 0 0 0 2px rgba(var(--isaacsim-nv-green-rgb), 0.08);
+}
+
+
+
+.isaacsim-platform__rail {
+  position: absolute;
+  z-index: 1;
+  color: var(--nv-color-green, #76b900);
+  opacity: 0.78;
+  pointer-events: none;
+}
+
+.isaacsim-platform__rail::before {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+
+.isaacsim-platform__rail-arrow {
+  --isaacsim-flow-arrow-color: currentColor;
+  color: inherit;
+  --isaacsim-flow-arrow-size: 1rem;
+  --isaacsim-flow-arrow-shaft-length: 0;
+  --isaacsim-flow-arrow-head-width: 0.64rem;
+  --isaacsim-flow-arrow-head-height: 0.56rem;
+  --isaacsim-flow-arrow-stroke: 2px;
+  --isaacsim-flow-arrow-shaft-opacity: 1;
+  --isaacsim-flow-arrow-head-opacity: 1;
+}
+
+.isaacsim-platform__rail--top {
+  top: 136px;
+  left: calc(30% + 46px);
+  right: calc(30% + 46px);
+  height: 0;
+}
+
+.isaacsim-platform__rail--top::before {
+  top: -1px;
+  left: 0;
+  right: 0.62rem;
+  height: 2px;
+  border-radius: var(--bs-border-radius-pill, 50rem);
+}
+
+.isaacsim-platform__rail--top .isaacsim-platform__rail-arrow {
+  top: -0.5rem;
+  right: -0.06rem;
+}
+
+.isaacsim-platform__rail--right {
+  top: 292px;
+  right: calc(15% + 18px);
+  bottom: 330px;
+  width: 0;
+}
+
+.isaacsim-platform__rail--right::before {
+  top: 0;
+  bottom: 0.62rem;
+  left: -1px;
+  width: 2px;
+  border-radius: var(--bs-border-radius-pill, 50rem);
+}
+
+.isaacsim-platform__rail--right .isaacsim-platform__rail-arrow {
+  bottom: -0.06rem;
+  left: -0.5rem;
+}
+
+.isaacsim-platform__rail--bottom {
+  right: calc(30% + 46px);
+  bottom: 136px;
+  left: calc(30% + 46px);
+  height: 0;
+}
+
+.isaacsim-platform__rail--bottom::before {
+  top: -1px;
+  left: 0.62rem;
+  right: 0;
+  height: 2px;
+  border-radius: var(--bs-border-radius-pill, 50rem);
+}
+
+.isaacsim-platform__rail--bottom .isaacsim-platform__rail-arrow {
+  top: -0.5rem;
+  left: -0.06rem;
+}
+
+.isaacsim-platform__rail--left {
+  top: 292px;
+  bottom: 330px;
+  left: calc(15% + 18px);
+  width: 0;
+  opacity: 0.58;
+}
+
+.isaacsim-platform__rail--left::before {
+  top: 0.62rem;
+  bottom: 0;
+  left: -1px;
+  width: 2px;
+  background: repeating-linear-gradient(180deg, currentColor 0 7px, transparent 7px 13px);
+}
+
+.isaacsim-platform__rail--left .isaacsim-platform__rail-arrow {
+  top: -0.06rem;
+  left: -0.5rem;
+}
+
+.isaacsim-platform__hub {
+  top: 50%;
+  left: 50%;
+  width: 176px;
+  min-height: 176px;
+  transform: translate(-50%, -50%);
+  padding: 1.05rem;
+  border-radius: var(--bs-border-radius-pill, 50rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #fff;
+  border: 1px solid rgba(var(--isaacsim-nv-green-rgb), 0.18);
+  box-shadow:
+    0 0 0 14px rgba(var(--isaacsim-nv-green-rgb), 0.035),
+    0 18px 38px rgba(31, 39, 49, 0.07);
+}
+
+.isaacsim-platform__hub-title {
+  font-size: 1.12rem;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--pst-color-primary, var(--nv-color-green-2, #004831));
+}
+
+.isaacsim-platform__hub-copy {
+  margin-top: 0.45rem;
+  font-size: 0.72rem;
+  line-height: 1.46;
+  color: var(--pst-color-text-muted, #606060);
+}
+
+@media (max-width: 1180px) {
+  .isaacsim-platform__loop {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .isaacsim-platform__rail {
+    display: none;
+  }
+
+  .isaacsim-platform__loop-node,
+.isaacsim-platform__hub {
+    position: relative;
+    inset: auto;
+    width: auto;
+    min-height: 0;
+    transform: none;
+  }
+
+  .isaacsim-platform__hub {
+    grid-column: 1 / -1;
+    order: 5;
+    border-radius: var(--bs-border-radius-xl, 1rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .isaacsim-platform__canvas {
+    --isaacsim-surface-padding: 0.85rem;
+  }
+
+  .isaacsim-platform__canvas::before {
+    inset: 0.85rem;
+  }
+
+  .isaacsim-platform__loop {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+/* ===== Open Source + Community ===== */
+
+.isaacsim-open {
+  --isaacsim-frame-padding: 1.4rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(24rem, 0.95fr);
+  gap: 1rem;
+  margin: 1rem 0 1.2rem;
+}
+
+.isaacsim-open__main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.isaacsim-open__eyebrow {
+  --isaacsim-kicker-size: 0.68rem;
+}
+
+.isaacsim-open__title {
+  font-size: 1.35rem;
+}
+
+.isaacsim-open__desc {
+  font-size: 0.92rem;
+}
+
+.isaacsim-open__actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 14.5rem;
+  margin-top: 0.25rem;
+}
+
+.isaacsim-open .isaacsim-fact-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-self: stretch;
+}
+
+.isaacsim-open .isaacsim-fact-card {
+  min-height: 6.2rem;
+}
+
+
+/* ===== Dark mode overrides ===== */
+
+html[data-theme="dark"] body:has(.isaacsim-hero) .bd-article .sd-card {
+  background: var(--pst-color-surface, #1e1e1e) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+html[data-theme="dark"] body:has(.isaacsim-hero) .bd-article a.sd-card:hover,
+html[data-theme="dark"] body:has(.isaacsim-hero) .bd-article .sd-card:has(a:hover) {
+  border-color: var(--nv-color-green, #76b900) !important;
+  box-shadow: var(--bs-box-shadow, 0 0.5rem 1rem rgba(0, 0, 0, 0.15)) !important;
+}
+html[data-theme="dark"] .isaacsim-platform__topbar > div:first-child {
+  background: linear-gradient(135deg, rgba(var(--isaacsim-nv-green-rgb), 0.48), rgba(var(--bs-info-rgb), 0.22), rgba(var(--bs-primary-rgb), 0.18));
+  box-shadow: var(--bs-box-shadow, 0 0.5rem 1rem rgba(0, 0, 0, 0.15));
+}
+
+html[data-theme="dark"] .isaacsim-platform__eyebrow {
+  background: #14181a;
+  border-color: rgba(var(--isaacsim-nv-green-rgb), 0.24);
+  color: var(--nv-color-green, #76b900);
+}
+
+html[data-theme="dark"] .isaacsim-platform__meta a:hover {
+  background: rgba(var(--isaacsim-nv-green-rgb),0.16);
+  border-color: rgba(var(--isaacsim-nv-green-rgb),0.42);
+  color: var(--nv-color-green, #76b900) !important;
+}
+
+html[data-theme="dark"] .isaacsim-platform__canvas {
+  --isaacsim-facet-bg: rgba(255,255,255,0.05);
+  --isaacsim-facet-border: rgba(255,255,255,0.1);
+  --isaacsim-facet-color: rgba(255,255,255,0.74);
+  --isaacsim-pill-bg: rgba(255,255,255,0.05);
+  --isaacsim-pill-border: rgba(255,255,255,0.1);
+  --isaacsim-pill-color: rgba(255,255,255,0.74);
+  --isaacsim-surface-bg:
+    linear-gradient(180deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.025) 100%),
+    rgba(255,255,255,0.02);
+  --isaacsim-surface-border: rgba(255,255,255,0.1);
+}
+html[data-theme="dark"] .isaacsim-platform__canvas {
+  --isaacsim-surface-bg: #14181a;
+}
+html[data-theme="dark"] .isaacsim-platform__hub {
+  background: #111713;
+  border-color: rgba(var(--isaacsim-nv-green-rgb), 0.24);
+  box-shadow:
+    0 0 0 14px rgba(var(--isaacsim-nv-green-rgb), 0.08),
+    0 18px 38px rgba(0,0,0,0.28);
+}
+html[data-theme="dark"] .isaacsim-platform__hub-title {
+  color: var(--nv-color-green, #76b900);
+}
+html[data-theme="dark"] .isaacsim-platform__canvas:has(#isaacsim-platform-lens-core:checked) .isaacsim-platform__lens-pill--core,
+html[data-theme="dark"] .isaacsim-platform__canvas:has(#isaacsim-platform-lens-sdg:checked) .isaacsim-platform__lens-pill--sdg,
+html[data-theme="dark"] .isaacsim-platform__canvas:has(#isaacsim-platform-lens-sil:checked) .isaacsim-platform__lens-pill--sil {
+  color: var(--nv-color-green, #76b900);
+}
+
+/* ===== Mobile / small screens ===== */
+
+/* Collapse the open-source banner to one column below its minmax(24rem) breakpoint. */
+@media (max-width: 768px) {
+  .isaacsim-open {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .isaacsim-open .isaacsim-fact-grid {
+    grid-template-columns: 1fr;
+  }
+}
