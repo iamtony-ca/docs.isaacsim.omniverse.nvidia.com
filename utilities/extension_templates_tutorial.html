@@ -1,551 +1,256 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Extension Template Generator Explained &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Extension Template Generator Explained — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'utilities/extension_templates_tutorial';</script>
-    <script>
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'utilities/extension_templates_tutorial';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Advanced Extension Template Generator from VS Code" href="vscode_extension_template_generator.html" />
-    <link rel="prev" title="Extension Template Generator" href="extension_template_generator.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="vscode_extension_template_generator.html" rel="next" title="Advanced Extension Template Generator from VS Code"/>
+<link href="extension_template_generator.html" rel="prev" title="Extension Template Generator"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="extension_templates_tutorial.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="extension_templates_tutorial.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +270,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -593,20 +297,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -681,17 +373,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -869,7 +551,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -909,13 +590,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -962,10 +637,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1134,18 +805,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1171,226 +832,155 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="templates_index.html" class="nav-link">Templates</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="extension_template_generator.html" class="nav-link">Extension Template Generator</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Extension Template Generator Explained</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="templates_index.html">Templates</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="extension_template_generator.html">Extension Template Generator</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Extension Template Generator Explained</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="extension-template-generator-explained">
+<article class="bd-article">
+<section id="extension-template-generator-explained">
 <span id="isaac-sim-app-tutorial-extension-templates"></span><h1>Extension Template Generator Explained<a class="headerlink" href="extension_templates_tutorial.html#extension-template-generator-explained" title="Link to this heading">#</a></h1>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">Deprecated since version 6.0.0: </span>The UI-based Extension Template Generator (<code class="docutils literal notranslate"><span class="pre">isaacsim.examples.extension</span></code>) is deprecated.
-Use the <a class="reference internal" href="cli_extension_templates.html#isaac-sim-cli-extension-templates"><span class="std std-ref">CLI Extension Templates</span></a> instead.</p>
+<p><span class="versionmodified deprecated">버전 6.0.0부터 더 이상 사용되지 않음: </span>UI 기반 Extension Template Generator(<code class="docutils literal notranslate"><span class="pre">isaacsim.examples.extension</span></code>)는 더 이상 사용되지 않습니다. 대신 <a class="reference internal" href="cli_extension_templates.html#isaac-sim-cli-extension-templates"><span class="std std-ref">CLI Extension Templates</span></a>를 사용하세요.</p>
 </div>
 <section id="general-concepts">
 <h2>General Concepts<a class="headerlink" href="extension_templates_tutorial.html#general-concepts" title="Link to this heading">#</a></h2>
-<p>Each template provided by the <em>Extension Template Generator</em> has a common underlying structure with a thin layer of implementation on top.
-In each template root directory, there is a folder called <code class="docutils literal notranslate"><span class="pre">./scripts</span></code> where all Python code supporting the extension is stored.  Inside
-<code class="docutils literal notranslate"><span class="pre">./scripts</span></code>, there are three common Python files:</p>
+<p><em>Extension Template Generator</em>에서 제공하는 각 템플릿은 그 위에 얇은 구현 레이어가 있는 공통 기본 구조를 가지고 있습니다. 각 템플릿 루트 디렉토리에는 익스텐션을 지원하는 모든 Python 코드가 저장된 <code class="docutils literal notranslate"><span class="pre">./scripts</span></code> 폴더가 있습니다. <code class="docutils literal notranslate"><span class="pre">./scripts</span></code> 안에는 세 가지 공통 Python 파일이 있습니다:</p>
 <ul class="simple">
 <li><dl class="simple">
-<dt>global_variables.py</dt><dd><p>A script that stores the global variables that the user specified when creating their extension in the <em>Extension Template Generator</em>
-such as the Title and Description.</p>
+<dt>global_variables.py</dt><dd><p><em>Extension Template Generator</em>에서 익스텐션을 생성할 때 사용자가 지정한 제목, 설명 등의 전역 변수를 저장하는 스크립트입니다.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>extension.py</dt><dd><p>A class containing the standard boilerplate necessary to have the user extension show up on the Toolbar.  This
-class is meant to fulfill most use-cases without modification.
-In extension.py, useful standard callback functions are created that the user may complete in ui_builder.py.</p>
+<dt>extension.py</dt><dd><p>사용자 익스텐션이 툴바에 표시되는 데 필요한 표준 보일러플레이트를 포함하는 클래스입니다. 이 클래스는 수정 없이 대부분의 사용 사례를 충족하도록 설계되었습니다. extension.py에는 사용자가 ui_builder.py에서 완성할 수 있는 유용한 표준 콜백 함수들이 생성됩니다.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>ui_builder.py</dt><dd><p>This file is the user’s main entrypoint into the template.  Here, the user can see useful callback functions that have been
-set up for them, and they may also create UI elements that are hooked up to user-defined callback functions.  This file is
-the most thoroughly documented, and the user should read through it before making serious modification.</p>
+<dt>ui_builder.py</dt><dd><p>이 파일은 템플릿에 대한 사용자의 주요 진입점입니다. 여기서 사용자는 설정된 유용한 콜백 함수를 확인하고, 사용자 정의 콜백 함수에 연결된 UI 요소를 생성할 수도 있습니다. 이 파일은 가장 상세하게 문서화되어 있으므로 본격적인 수정 전에 반드시 읽어보아야 합니다.</p>
 </dd>
 </dl>
 </li>
 </ul>
-<p>A typical user will only need to modify <code class="docutils literal notranslate"><span class="pre">./scripts/ui_builder.py</span></code> to get their extension working the way they want.  Inside <code class="docutils literal notranslate"><span class="pre">./scripts/ui_builder.py</span></code>, the user
-will find a set of standard callback functions that connect them to the simulator:</p>
+<p>일반적인 사용자는 익스텐션을 원하는 대로 작동하게 만들기 위해 <code class="docutils literal notranslate"><span class="pre">./scripts/ui_builder.py</span></code>만 수정하면 됩니다. <code class="docutils literal notranslate"><span class="pre">./scripts/ui_builder.py</span></code> 안에는 시뮬레이터와 연결하는 표준 콜백 함수 세트가 있습니다:</p>
 <ul class="simple">
-<li><p>on_menu_callback(): Called when extension is opened</p></li>
-<li><p>on_timeline_event(): Called when timeline is stopped, paused, or played</p></li>
-<li><p>on_physics_step(): Called on every physics step.  Physics steps only happen while the timeline is playing.</p></li>
-<li><p>on_stage_event(): Called when stage is opened or closed</p></li>
-<li><p>cleanup(): Called when resources such as physics subscriptions should be cleaned up because the extension is being closed</p></li>
-<li><p>build_ui(): User function that creates the UI they want.</p></li>
+<li><p>on_menu_callback(): 익스텐션이 열릴 때 호출됨</p></li>
+<li><p>on_timeline_event(): 타임라인이 정지, 일시정지 또는 재생될 때 호출됨</p></li>
+<li><p>on_physics_step(): 모든 물리 스텝마다 호출됨. 물리 스텝은 타임라인이 재생 중일 때만 발생함</p></li>
+<li><p>on_stage_event(): 스테이지가 열리거나 닫힐 때 호출됨</p></li>
+<li><p>cleanup(): 익스텐션이 닫히기 때문에 물리 구독과 같은 리소스를 정리해야 할 때 호출됨</p></li>
+<li><p>build_ui(): 사용자가 원하는 UI를 생성하는 함수</p></li>
 </ul>
-<p>In the provided extension templates, most of the implementation is in the <code class="docutils literal notranslate"><span class="pre">build_ui()</span></code> function.  The extension templates utilize a set of wrapper classes around
-<code class="docutils literal notranslate"><span class="pre">omni.ui</span></code> elements that allow the user to easily create and manage a variety of UI elements.  These are referred to in this tutorial as <code class="docutils literal notranslate"><span class="pre">UIElementWrappers</span></code>.  Each wrapper is meant to provide the
-user with the most common-sense way of interacting with a UI element.  For example, the user can create a <code class="docutils literal notranslate"><span class="pre">FloatField</span></code> UI element; any time the user modifies the <code class="docutils literal notranslate"><span class="pre">FloatField</span></code> in the UI,
-a user callback function will be called with the new <code class="docutils literal notranslate"><span class="pre">float</span></code> value passed in.</p>
-<p>Each extension template builds a UI with a set of governing callback functions in <code class="docutils literal notranslate"><span class="pre">build_ui()</span></code>.  These callback functions contain all of the logic to make the UI run smoothly and
-make it easy to connect user code for a custom application.</p>
+<p>제공된 익스텐션 템플릿에서 대부분의 구현은 <code class="docutils literal notranslate"><span class="pre">build_ui()</span></code> 함수에 있습니다. 익스텐션 템플릿은 사용자가 다양한 UI 요소를 쉽게 생성하고 관리할 수 있도록 <code class="docutils literal notranslate"><span class="pre">omni.ui</span></code> 요소를 감싸는 래퍼 클래스 세트를 활용합니다. 이 튜토리얼에서는 이것들을 <code class="docutils literal notranslate"><span class="pre">UIElementWrappers</span></code>라고 합니다. 각 래퍼는 UI 요소와 가장 직관적인 방식으로 상호작용할 수 있도록 설계되었습니다. 예를 들어 사용자가 <code class="docutils literal notranslate"><span class="pre">FloatField</span></code> UI 요소를 생성하면, 사용자가 UI에서 <code class="docutils literal notranslate"><span class="pre">FloatField</span></code>를 수정할 때마다 새 <code class="docutils literal notranslate"><span class="pre">float</span></code> 값이 전달되면서 사용자 콜백 함수가 호출됩니다.</p>
+<p>각 익스텐션 템플릿은 <code class="docutils literal notranslate"><span class="pre">build_ui()</span></code>에 콜백 함수 세트를 포함하는 UI를 빌드합니다. 이 콜백 함수들은 UI가 원활하게 실행되고 커스텀 애플리케이션을 위한 사용자 코드를 쉽게 연결할 수 있도록 하는 모든 로직을 포함합니다.</p>
 </section>
 <section id="loaded-scenario-template">
 <span id="isaac-sim-app-tutorial-extension-templates-loaded-scenario"></span><h2>Loaded Scenario Template<a class="headerlink" href="extension_templates_tutorial.html#loaded-scenario-template" title="Link to this heading">#</a></h2>
-<p>The <em>Loaded Scenario Template</em> starts the user off with a simple UI that contains three buttons: <em>Load</em>, <em>Reset</em>, and <em>Run</em>.  This is meant to provide
-as clear a pathway as possible for the user to start writing code to directly affect the USD stage without having to understand much about the
-internal workings of the underlying simulator.  There user only needs to know the following simple concepts.</p>
+<p><em>Loaded Scenario Template</em>은 <em>Load</em>, <em>Reset</em>, <em>Run</em> 세 개의 버튼이 있는 간단한 UI로 시작합니다. 이것은 사용자가 기본 시뮬레이터의 내부 작동에 대해 많이 이해하지 않고도 USD 스테이지에 직접 영향을 미치는 코드를 작성하기 시작할 수 있는 가장 명확한 경로를 제공하기 위한 것입니다. 사용자는 다음과 같은 간단한 개념만 알면 됩니다.</p>
 <section id="important-concepts">
 <h3>Important Concepts<a class="headerlink" href="extension_templates_tutorial.html#important-concepts" title="Link to this heading">#</a></h3>
-<p>In Omniverse Kit Applications, there is a simulation timeline that can be directly stopped, paused, and played on the left-hand side toolbar.  Physics
-is only running while the timeline is active (not stopped).  As such, the user cannot control a robot <code class="docutils literal notranslate"><span class="pre">Articulation</span></code> while the timeline is stopped,
-and initialization needs to be performed on certain assets such as an <code class="docutils literal notranslate"><span class="pre">Articulation</span></code> when the timeline goes from stopped to playing.  The purpose of the
-<em>Loaded Scenario Template</em> is to make it easier for the user to interact with the simulator without having to handle things like initialization.</p>
-<p>In <code class="docutils literal notranslate"><span class="pre">isaacsim.core.api.world</span></code> there is a singleton class <code class="docutils literal notranslate"><span class="pre">World</span></code> that is designed to set up and properly manage the simulation with simple and clear
-user-interaction.  In this template, the <code class="docutils literal notranslate"><span class="pre">World</span></code> is managed by the <em>Load</em> and <em>Reset</em> buttons, leaving the user with clear guarantees about the
-state of the simulator at the time that their callback functions are called.  The user interaction with the <code class="docutils literal notranslate"><span class="pre">World</span></code> is minimized to the point that
-they their only interaction with the <code class="docutils literal notranslate"><span class="pre">World</span></code> takes the form <code class="docutils literal notranslate"><span class="pre">world.scene.add(user_object)</span></code> where <code class="docutils literal notranslate"><span class="pre">user_object</span></code> is any object from <code class="docutils literal notranslate"><span class="pre">isaacsim.core.api</span></code>.</p>
-<p>To ensure proper functionality, all manipulation of the timeline should be done by the <em>Load</em> and <em>Reset</em> buttons.  I.e. the user is able to cause trouble
-by pressing the <em>Stop</em> and <em>Play</em> buttons on the left-hand toolbar outside of this UI.  For this reason, the template directly handles the cases where
-the user messes with the timeline outside of the template UI by resetting the UI when necessary to maintain assumptions on user callback functions.</p>
+<p>Omniverse Kit 애플리케이션에는 왼쪽 툴바에서 직접 정지, 일시정지, 재생할 수 있는 시뮬레이션 타임라인이 있습니다. 물리는 타임라인이 활성화(정지되지 않은) 상태일 때만 실행됩니다. 따라서 타임라인이 정지되어 있는 동안에는 로봇 <code class="docutils literal notranslate"><span class="pre">Articulation</span></code>을 제어할 수 없으며, 타임라인이 정지에서 재생으로 전환될 때 <code class="docutils literal notranslate"><span class="pre">Articulation</span></code>과 같은 특정 에셋에 대한 초기화가 필요합니다. <em>Loaded Scenario Template</em>의 목적은 사용자가 초기화와 같은 사항을 처리하지 않고도 시뮬레이터와 더 쉽게 상호작용할 수 있도록 하는 것입니다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">isaacsim.core.api.world</span></code>에는 간단하고 명확한 사용자 상호작용으로 시뮬레이션을 설정하고 적절히 관리하도록 설계된 싱글톤 클래스 <code class="docutils literal notranslate"><span class="pre">World</span></code>가 있습니다. 이 템플릿에서 <code class="docutils literal notranslate"><span class="pre">World</span></code>는 <em>Load</em> 및 <em>Reset</em> 버튼으로 관리되어 콜백 함수가 호출되는 시점의 시뮬레이터 상태에 대한 명확한 보장을 제공합니다. <code class="docutils literal notranslate"><span class="pre">World</span></code>와의 사용자 상호작용은 <code class="docutils literal notranslate"><span class="pre">world.scene.add(user_object)</span></code>(여기서 <code class="docutils literal notranslate"><span class="pre">user_object</span></code>는 <code class="docutils literal notranslate"><span class="pre">isaacsim.core.api</span></code>의 객체) 형태만 취하도록 최소화됩니다.</p>
+<p>올바른 기능을 보장하기 위해 타임라인의 모든 조작은 <em>Load</em> 및 <em>Reset</em> 버튼을 통해 이루어져야 합니다. 즉, 사용자가 이 UI 외부에서 왼쪽 툴바의 <em>Stop</em> 및 <em>Play</em> 버튼을 눌러 문제를 일으킬 수 있습니다. 이러한 이유로 템플릿은 사용자가 템플릿 UI 외부에서 타임라인을 조작하는 경우를 직접 처리하여 사용자 콜백 함수의 가정을 유지하기 위해 필요할 때 UI를 재설정합니다.</p>
 </section>
 <section id="implementation-details">
 <h3>Implementation Details<a class="headerlink" href="extension_templates_tutorial.html#implementation-details" title="Link to this heading">#</a></h3>
-<p>The <em>Load</em> button has two callback functions:</p>
+<p><em>Load</em> 버튼에는 두 가지 콜백 함수가 있습니다:</p>
 <ul class="simple">
 <li><dl class="simple">
-<dt>def setup_scene_fn():</dt><dd><p>On pressing the <em>Load</em> button, a new instance of <code class="docutils literal notranslate"><span class="pre">World</span></code> is created and then this function is called.
-The user should now load their assets onto the stage and add them to the <code class="docutils literal notranslate"><span class="pre">World</span></code> with <code class="docutils literal notranslate"><span class="pre">world.scene.add()</span></code>.</p>
+<dt>def setup_scene_fn():</dt><dd><p><em>Load</em> 버튼을 누르면 새 <code class="docutils literal notranslate"><span class="pre">World</span></code> 인스턴스가 생성되고 이 함수가 호출됩니다. 사용자는 이제 스테이지에 에셋을 로드하고 <code class="docutils literal notranslate"><span class="pre">world.scene.add()</span></code>로 <code class="docutils literal notranslate"><span class="pre">World</span></code>에 추가해야 합니다.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>def setup_post_load_fn():</dt><dd><p>The user may assume that their assets have been loaded by their setup_scene_fn callback, that
-their objects are properly initialized, and that the timeline is paused on timestep 0.</p>
+<dt>def setup_post_load_fn():</dt><dd><p>사용자는 setup_scene_fn 콜백으로 에셋이 로드되었고, 객체가 올바르게 초기화되었으며, 타임라인이 타임스텝 0에서 일시정지되어 있다고 가정할 수 있습니다.</p>
 </dd>
 </dl>
 </li>
 </ul>
-<p>The <em>Reset</em> button has two callback functions:</p>
+<p><em>Reset</em> 버튼에는 두 가지 콜백 함수가 있습니다:</p>
 <ul>
 <li><dl class="simple">
-<dt>pre_reset_fn():</dt><dd><p>This function is called before the <code class="docutils literal notranslate"><span class="pre">World</span></code> is reset, so there are no guarantees on the state of the simulator.</p>
+<dt>pre_reset_fn():</dt><dd><p>이 함수는 <code class="docutils literal notranslate"><span class="pre">World</span></code>가 초기화되기 전에 호출되므로 시뮬레이터 상태에 대한 보장이 없습니다.</p>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt>post_reset_fn():</dt><dd><p>The user may assume that their objects are properly initialized, and that the timeline is paused on timestep 0.</p>
-<p>They may also assume that objects that were added to the <code class="docutils literal notranslate"><span class="pre">World</span></code> have been moved to their default positions.
-I.e. a cube prim will move back to the position it was in when it was created in setup_scene_fn().</p>
+<dt>post_reset_fn():</dt><dd><p>사용자는 객체가 올바르게 초기화되었고 타임라인이 타임스텝 0에서 일시정지되어 있다고 가정할 수 있습니다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">World</span></code>에 추가된 객체들이 기본 위치로 이동했다고 가정할 수도 있습니다. 즉, 큐브 프림은 setup_scene_fn()에서 생성될 때의 위치로 돌아갑니다.</p>
 </dd>
 </dl>
 </li>
 </ul>
-<p>The <em>Run</em> button is not connected to the <code class="docutils literal notranslate"><span class="pre">World</span></code>.  It is a <code class="docutils literal notranslate"><span class="pre">StateButton</span></code>, which means that it will switch between two states: <em>Run</em> and <em>Stop</em>.
-A <code class="docutils literal notranslate"><span class="pre">StateButton</span></code> can have three callback functions:</p>
+<p><em>Run</em> 버튼은 <code class="docutils literal notranslate"><span class="pre">World</span></code>에 연결되지 않습니다. 이것은 <code class="docutils literal notranslate"><span class="pre">StateButton</span></code>으로, <em>Run</em>과 <em>Stop</em> 두 상태 사이를 전환합니다. <code class="docutils literal notranslate"><span class="pre">StateButton</span></code>에는 세 가지 콜백 함수가 있을 수 있습니다:</p>
 <ul class="simple">
 <li><dl class="simple">
-<dt>on_a_click():</dt><dd><p>Function called when the <code class="docutils literal notranslate"><span class="pre">StateButton</span></code> is showing its a_text</p>
+<dt>on_a_click():</dt><dd><p><code class="docutils literal notranslate"><span class="pre">StateButton</span></code>이 a_text를 표시할 때 호출되는 함수</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>on_b_click():</dt><dd><p>Function called when the <code class="docutils literal notranslate"><span class="pre">StateButton</span></code> is showing its b_text</p>
+<dt>on_b_click():</dt><dd><p><code class="docutils literal notranslate"><span class="pre">StateButton</span></code>이 b_text를 표시할 때 호출되는 함수</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>physics_callback_fn():</dt><dd><p>If specified, the <code class="docutils literal notranslate"><span class="pre">StateButton</span></code> will call this function on every physics step while the state button is in its B state, and
-it will cancel the physics subscription whenever the state button is in its A state.</p>
+<dt>physics_callback_fn():</dt><dd><p>지정된 경우 <code class="docutils literal notranslate"><span class="pre">StateButton</span></code>이 B 상태일 때 모든 물리 스텝마다 이 함수를 호출하고, A 상태일 때는 물리 구독을 취소합니다.</p>
 </dd>
 </dl>
 </li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>You can see how these functions are called in the <code class="docutils literal notranslate"><span class="pre">UIBuilder</span></code> class (<code class="docutils literal notranslate"><span class="pre">template_source_files/loaded_scenario_workflow/ui_builder.py</span></code> file in the <code class="docutils literal notranslate"><span class="pre">isaacsim.examples.extension</span></code> extension).</p>
+<p>이 함수들이 어떻게 호출되는지는 <code class="docutils literal notranslate"><span class="pre">UIBuilder</span></code> 클래스(<code class="docutils literal notranslate"><span class="pre">isaacsim.examples.extension</span></code> 익스텐션의 <code class="docutils literal notranslate"><span class="pre">template_source_files/loaded_scenario_workflow/ui_builder.py</span></code> 파일)에서 확인할 수 있습니다.</p>
 </div>
-<p>To try it, open the Template Generator (<em>Utilities &gt; Generate Extension Templates</em> menu) and create a new extension under the <em>Loaded Scenario Template</em> section.
-Then, enable the extension (<em>Window &gt; Extensions</em> menu, search for the given extension name) and click on the toolbar entry with the same name.</p>
+<p>사용해 보려면 Template Generator(<em>Utilities &gt; Generate Extension Templates</em> 메뉴)를 열고 <em>Loaded Scenario Template</em> 섹션 아래에 새 익스텐션을 생성합니다. 그런 다음 익스텐션을 활성화하고(<em>Window &gt; Extensions</em> 메뉴, 해당 익스텐션 이름 검색) 같은 이름의 툴바 항목을 클릭합니다.</p>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/isim_4.5_full_ext-isaacsim.examples.extension-2.0.2_gui_loaded_scenario_template.png"><img alt="Loaded Scenario Template" src="../_images/isim_4.5_full_ext-isaacsim.examples.extension-2.0.2_gui_loaded_scenario_template.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/isim_4.5_full_ext-isaacsim.examples.extension-2.0.2_gui_loaded_scenario_template.png"><img alt="Loaded Scenario Template" src="../_images/isim_4.5_full_ext-isaacsim.examples.extension-2.0.2_gui_loaded_scenario_template.png" style="width: 100%;"/>
 </a>
 </figure>
 </section>
 </section>
 <section id="scripting-template">
 <span id="isaac-sim-app-tutorial-extension-templates-scripting"></span><h2>Scripting Template<a class="headerlink" href="extension_templates_tutorial.html#scripting-template" title="Link to this heading">#</a></h2>
-<p>The <em>Scripting Template</em> is a natural extension of the <em>Loaded Scenario Template</em> that demonstrates the
-implementation of a more advanced framework for programming script-like behavior from a UI-based
-extension in NVIDIA Isaac Sim.  This template uses the same mechanics for loading and resetting the robot
-position, but it implements the <em>Run</em> button as a script.</p>
-<p>Using the pattern demonstrated in this template, the user can program script-like behavior by implementing
-long-running functions that check in on every physics step to send a new command or determine that it is
-time to return.  The <em>Scripting Template</em> contains an implementation of the functions <code class="docutils literal notranslate"><span class="pre">goto_position()</span></code>,
-<code class="docutils literal notranslate"><span class="pre">open_gripper_franka()</span></code> and <code class="docutils literal notranslate"><span class="pre">close_gripper_franka()</span></code>.  These functions are used in series in order to
-script the simple pick-and-place task shown below.</p>
+<p><em>Scripting Template</em>은 <em>Loaded Scenario Template</em>의 자연스러운 확장으로, NVIDIA Isaac Sim의 UI 기반 익스텐션에서 스크립트 같은 동작을 프로그래밍하기 위한 고급 프레임워크의 구현을 보여줍니다. 이 템플릿은 로봇 위치 로드 및 재설정에 동일한 메커니즘을 사용하지만 <em>Run</em> 버튼을 스크립트로 구현합니다.</p>
+<p>이 템플릿에서 보여주는 패턴을 사용하면 새 명령을 보내거나 반환할 시간이 되었는지 확인하기 위해 모든 물리 스텝에서 체크하는 장기 실행 함수를 구현하여 스크립트 같은 동작을 프로그래밍할 수 있습니다. <em>Scripting Template</em>에는 <code class="docutils literal notranslate"><span class="pre">goto_position()</span></code>, <code class="docutils literal notranslate"><span class="pre">open_gripper_franka()</span></code>, <code class="docutils literal notranslate"><span class="pre">close_gripper_franka()</span></code> 함수의 구현이 포함되어 있습니다. 이 함수들은 아래에 표시된 간단한 픽앤플레이스 작업을 스크립팅하기 위해 순서대로 사용됩니다.</p>
 <section id="id1">
 <h3>Implementation Details<a class="headerlink" href="extension_templates_tutorial.html#id1" title="Link to this heading">#</a></h3>
-<p>The implementation details of the UI match the <em>Loaded Scenario Template</em>, and so this section focuses
-on the implementation of script-like behavior.  Long-running functions that check in on every frame
-can be written using Python’s yield/generator framework.  A function <code class="docutils literal notranslate"><span class="pre">my_script()</span></code> is implemented in
-the file <code class="docutils literal notranslate"><span class="pre">scenario.py</span></code> that contains the sequence of <code class="docutils literal notranslate"><span class="pre">goto_position()</span></code>, <code class="docutils literal notranslate"><span class="pre">open_gripper_franka()</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">close_gripper_franka()</span></code> function calls.  The <code class="docutils literal notranslate"><span class="pre">my_script()</span></code> function makes use of <code class="docutils literal notranslate"><span class="pre">yield</span></code> and <code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">from</span></code> statements.
-This allows <code class="docutils literal notranslate"><span class="pre">my_script()</span></code> to be wrapped in a generator with <code class="docutils literal notranslate"><span class="pre">self._script_generator</span> <span class="pre">=</span> <span class="pre">self.my_script()</span></code>.
-Then, on every physics step, <code class="docutils literal notranslate"><span class="pre">next(self._script_generator)</span></code> is called to step the generator and
-execute code until the next <code class="docutils literal notranslate"><span class="pre">yield</span></code> statement is encountered (in either <code class="docutils literal notranslate"><span class="pre">my_script()</span></code> or a nested function).</p>
-<p>Take the function <code class="docutils literal notranslate"><span class="pre">open_gripper_franka()</span></code> as an example:</p>
+<p>UI의 구현 세부사항은 <em>Loaded Scenario Template</em>과 일치하므로 이 섹션은 스크립트 같은 동작의 구현에 중점을 둡니다. 모든 프레임에서 체크하는 장기 실행 함수는 Python의 yield/generator 프레임워크를 사용하여 작성할 수 있습니다. <code class="docutils literal notranslate"><span class="pre">scenario.py</span></code> 파일에 <code class="docutils literal notranslate"><span class="pre">goto_position()</span></code>, <code class="docutils literal notranslate"><span class="pre">open_gripper_franka()</span></code>, <code class="docutils literal notranslate"><span class="pre">close_gripper_franka()</span></code> 함수 호출 시퀀스를 포함하는 <code class="docutils literal notranslate"><span class="pre">my_script()</span></code> 함수가 구현되어 있습니다. <code class="docutils literal notranslate"><span class="pre">my_script()</span></code> 함수는 <code class="docutils literal notranslate"><span class="pre">yield</span></code> 및 <code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">from</span></code> 구문을 활용합니다. 이를 통해 <code class="docutils literal notranslate"><span class="pre">my_script()</span></code>를 <code class="docutils literal notranslate"><span class="pre">self._script_generator</span> <span class="pre">=</span> <span class="pre">self.my_script()</span></code>로 제너레이터에 래핑할 수 있습니다. 그런 다음 모든 물리 스텝마다 <code class="docutils literal notranslate"><span class="pre">next(self._script_generator)</span></code>가 호출되어 제너레이터를 진행하고 다음 <code class="docutils literal notranslate"><span class="pre">yield</span></code> 구문을 만날 때까지 코드를 실행합니다(<code class="docutils literal notranslate"><span class="pre">my_script()</span></code> 또는 중첩 함수에서).</p>
+<p><code class="docutils literal notranslate"><span class="pre">open_gripper_franka()</span></code> 함수를 예로 들면:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">open_gripper_franka</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">articulation</span><span class="p">):</span>
     <span class="n">open_gripper_action</span> <span class="o">=</span> <span class="n">ArticulationAction</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">]),</span> <span class="n">joint_indices</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]))</span>
     <span class="n">articulation</span><span class="o">.</span><span class="n">apply_action</span><span class="p">(</span><span class="n">open_gripper_action</span><span class="p">)</span>
@@ -1402,120 +992,76 @@ execute code until the next <code class="docutils literal notranslate"><span cla
     <span class="k">return</span> <span class="kc">True</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">my_script()</span></code> calls <code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">from</span> <span class="pre">open_gripper_franka()</span></code>.  The function <code class="docutils literal notranslate"><span class="pre">open_gripper_franka()</span></code> sends
-a single command to the Franka <code class="docutils literal notranslate"><span class="pre">Articulation</span></code> that the grippers should open, and then on every subsequent
-physics step, it checks if the gripper has made it to the target position.  Once the gripper has reached
-the target position, the function stops calling <code class="docutils literal notranslate"><span class="pre">yield</span></code> and instead calls <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">True</span></code> to signal a success.
-The control flow goes back to <code class="docutils literal notranslate"><span class="pre">my_script()</span></code> and the next function in the sequence gets called.</p>
-<p>To try it, open the Template Generator (<em>Utilities &gt; Generate Extension Templates</em> menu) and create a new extension under the <em>Scripting Template</em> section.
-Then, enable the extension (<em>Window &gt; Extensions</em> menu, search for the given extension name) and click on the toolbar entry with the same name.</p>
+<p><code class="docutils literal notranslate"><span class="pre">my_script()</span></code>는 <code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">from</span> <span class="pre">open_gripper_franka()</span></code>를 호출합니다. <code class="docutils literal notranslate"><span class="pre">open_gripper_franka()</span></code> 함수는 그리퍼가 열려야 한다는 단일 명령을 Franka <code class="docutils literal notranslate"><span class="pre">Articulation</span></code>에 보낸 다음, 이후 모든 물리 스텝에서 그리퍼가 목표 위치에 도달했는지 확인합니다. 그리퍼가 목표 위치에 도달하면 함수는 <code class="docutils literal notranslate"><span class="pre">yield</span></code> 호출을 중지하고 대신 성공을 알리기 위해 <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">True</span></code>를 호출합니다. 제어 흐름이 <code class="docutils literal notranslate"><span class="pre">my_script()</span></code>로 돌아가고 시퀀스의 다음 함수가 호출됩니다.</p>
+<p>사용해 보려면 Template Generator(<em>Utilities &gt; Generate Extension Templates</em> 메뉴)를 열고 <em>Scripting Template</em> 섹션 아래에 새 익스텐션을 생성합니다. 그런 다음 익스텐션을 활성화하고(<em>Window &gt; Extensions</em> 메뉴, 해당 익스텐션 이름 검색) 같은 이름의 툴바 항목을 클릭합니다.</p>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/isim_4.5_full_ext-isaacsim.examples.extension-2.0.2_gui_scripting_template.png"><img alt="Scripting Template" src="../_images/isim_4.5_full_ext-isaacsim.examples.extension-2.0.2_gui_scripting_template.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/isim_4.5_full_ext-isaacsim.examples.extension-2.0.2_gui_scripting_template.png"><img alt="Scripting Template" src="../_images/isim_4.5_full_ext-isaacsim.examples.extension-2.0.2_gui_scripting_template.png" style="width: 100%;"/>
 </a>
 </figure>
 </section>
 </section>
 <section id="configuration-tooling-template">
 <span id="isaac-sim-app-tutorial-extension-templates-configuration-tooling"></span><h2>Configuration Tooling Template<a class="headerlink" href="extension_templates_tutorial.html#configuration-tooling-template" title="Link to this heading">#</a></h2>
-<p>The <em>Configuration Tooling Template</em> provides a simple template that serves as a solid foundation for building tools for asset configuration.
-The provided implementation creates a drop-down menu that finds any <code class="docutils literal notranslate"><span class="pre">Articulation</span></code> on the stage and dynamically creates a UI frame through
-which the user may control each joint in the selected <code class="docutils literal notranslate"><span class="pre">Articulation</span></code>.</p>
-<p>Unlike the <em>Loaded Scenario Template</em> this extension assumes no control over the timeline or the stage.  Instead, it allows the user to select
-whatever is there and start reading and writing its state.  Building asset configuration tools is a more advanced use-case, and as such,
-it requires a better internal model of the Simulation timeline.  For example, because an <code class="docutils literal notranslate"><span class="pre">Articulation</span></code> is only accessible while the timeline
-is playing, the provided template only allows the user to attempt to modify their selected <code class="docutils literal notranslate"><span class="pre">Articulation</span></code> while the timeline is playing.</p>
+<p><em>Configuration Tooling Template</em>은 에셋 구성을 위한 도구를 빌드하기 위한 견고한 기반이 되는 간단한 템플릿을 제공합니다. 제공된 구현은 스테이지에서 <code class="docutils literal notranslate"><span class="pre">Articulation</span></code>을 찾는 드롭다운 메뉴를 생성하고 사용자가 선택한 <code class="docutils literal notranslate"><span class="pre">Articulation</span></code>의 각 관절을 제어할 수 있는 UI 프레임을 동적으로 생성합니다.</p>
+<p><em>Loaded Scenario Template</em>과 달리 이 익스텐션은 타임라인이나 스테이지에 대한 제어를 가정하지 않습니다. 대신 사용자가 현재 있는 것을 선택하고 상태를 읽고 쓸 수 있도록 합니다. 에셋 구성 도구를 빌드하는 것은 더 고급 사용 사례이므로 시뮬레이션 타임라인에 대한 더 나은 내부 모델이 필요합니다. 예를 들어, <code class="docutils literal notranslate"><span class="pre">Articulation</span></code>은 타임라인이 재생 중일 때만 접근 가능하므로 제공된 템플릿은 타임라인이 재생 중일 때만 사용자가 선택한 <code class="docutils literal notranslate"><span class="pre">Articulation</span></code>을 수정하려고 시도할 수 있도록 합니다.</p>
 <section id="id2">
 <h3>Implementation Details<a class="headerlink" href="extension_templates_tutorial.html#id2" title="Link to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">DropDown</span></code> is populated by a function that searches the USD stage for all objects of the specified type.  This is provided as a convenience function
-directly in the <code class="docutils literal notranslate"><span class="pre">DropDown</span></code> UI wrapper, but a version of the function it is using is left at the bottom of the template to allow the user further
-customization.</p>
-<p>Whenever a new item is selected from the <code class="docutils literal notranslate"><span class="pre">DropDown</span></code>, the <em>Robot Control Frame</em> is rebuilt using a builder function.  This is a powerful paradigm for creating robust dynamic UI tools.
-In this template, the frame can either report to the user that no robot could be selected, or it can list every joint in the selected robot if everything went well.</p>
-<p>To try it, open the Template Generator (<em>Utilities &gt; Generate Extension Templates</em> menu) and create a new extension under the <em>Configuration Tooling Template</em> section.
-Then, enable the extension (<em>Window &gt; Extensions</em> menu, search for the given extension name) and click on the toolbar entry with the same name.
-Finally, in a new stage (<em>File &gt; New</em> menu), add the Franka robot (<em>Create &gt; Robots &gt; Franka Emika Panda Arm</em> menu) and play with it.</p>
+<p><code class="docutils literal notranslate"><span class="pre">DropDown</span></code>은 USD 스테이지에서 지정된 타입의 모든 객체를 검색하는 함수로 채워집니다. 이것은 <code class="docutils literal notranslate"><span class="pre">DropDown</span></code> UI 래퍼에서 편의 함수로 직접 제공되지만, 사용하는 함수의 버전은 사용자가 추가 커스터마이징을 할 수 있도록 템플릿 하단에 남겨져 있습니다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">DropDown</span></code>에서 새 항목을 선택할 때마다 빌더 함수를 사용하여 <em>Robot Control Frame</em>이 재빌드됩니다. 이것은 견고한 동적 UI 도구를 생성하기 위한 강력한 패러다임입니다. 이 템플릿에서 프레임은 로봇을 선택할 수 없다고 사용자에게 보고하거나, 모든 것이 잘 되었다면 선택된 로봇의 모든 관절을 나열할 수 있습니다.</p>
+<p>사용해 보려면 Template Generator(<em>Utilities &gt; Generate Extension Templates</em> 메뉴)를 열고 <em>Configuration Tooling Template</em> 섹션 아래에 새 익스텐션을 생성합니다. 그런 다음 익스텐션을 활성화하고(<em>Window &gt; Extensions</em> 메뉴, 해당 익스텐션 이름 검색) 같은 이름의 툴바 항목을 클릭합니다. 마지막으로 새 스테이지(<em>File &gt; New</em> 메뉴)에서 Franka 로봇(<em>Create &gt; Robots &gt; Franka Emika Panda Arm</em> 메뉴)을 추가하고 조작해 봅니다.</p>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/isim_4.5_full_ext-isaacsim.examples.extension-2.0.2_gui_configuration_tooling_template.png"><img alt="Configuration Tooling Template" src="../_images/isim_4.5_full_ext-isaacsim.examples.extension-2.0.2_gui_configuration_tooling_template.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/isim_4.5_full_ext-isaacsim.examples.extension-2.0.2_gui_configuration_tooling_template.png"><img alt="Configuration Tooling Template" src="../_images/isim_4.5_full_ext-isaacsim.examples.extension-2.0.2_gui_configuration_tooling_template.png" style="width: 100%;"/>
 </a>
 </figure>
 </section>
 </section>
 <section id="ui-component-library">
 <span id="isaac-sim-app-tutorial-extension-templates-ui-component-library"></span><h2>UI Component Library<a class="headerlink" href="extension_templates_tutorial.html#ui-component-library" title="Link to this heading">#</a></h2>
-<p>The <em>UI Component Library</em> template demonstrates the usage of each <code class="docutils literal notranslate"><span class="pre">UIElementWrapper</span></code> that has been created.  This should be used as a reference when
-setting up a custom UI tool.  Most importantly, this template shows the specific type of arguments and return values required for each callback function that can be
-attached to each <code class="docutils literal notranslate"><span class="pre">UIElementWrapper</span></code>.  This template omits the <em>Load</em> and <em>Reset</em> buttons, as these are special case buttons that are demonstrated in
-the <em>Loaded Scenario Template</em>.  None of the UI components shown in this template directly impact the simulation; they only call user callback functions.</p>
-<p>The components in the <em>UI Component Library</em> template wrap a subset of the elements in <code class="docutils literal notranslate"><span class="pre">omni.ui</span></code>, and each wrapper is opinionated about how the UI component should be placed and labeled so that
-it will look good next to other wrapped components.  An advanced user may start adding <code class="docutils literal notranslate"><span class="pre">omni.ui</span></code> components next to wrapped components without issue.</p>
-<p>To see the UI elements demonstrated by the template, open the Template Generator (<em>Utilities &gt; Generate Extension Templates</em> menu) and create a new extension under the <em>UI Component Library</em> section.
-Then, enable the extension (<em>Window &gt; Extensions</em> menu, search for the given extension name) and click on the toolbar entry with the same name. The full set of UI elements is demonstrated in the newly opened window.</p>
+<p><em>UI Component Library</em> 템플릿은 생성된 각 <code class="docutils literal notranslate"><span class="pre">UIElementWrapper</span></code>의 사용법을 보여줍니다. 커스텀 UI 도구를 설정할 때 참고로 사용해야 합니다. 가장 중요하게, 이 템플릿은 각 <code class="docutils literal notranslate"><span class="pre">UIElementWrapper</span></code>에 연결할 수 있는 각 콜백 함수에 필요한 특정 인수 타입과 반환값 타입을 보여줍니다. 이 템플릿은 <em>Loaded Scenario Template</em>에서 보여주는 특수 케이스 버튼인 <em>Load</em> 및 <em>Reset</em> 버튼을 생략합니다. 이 템플릿에 표시된 UI 컴포넌트들은 시뮬레이션에 직접적인 영향을 주지 않으며 사용자 콜백 함수만 호출합니다.</p>
+<p><em>UI Component Library</em> 템플릿의 컴포넌트들은 <code class="docutils literal notranslate"><span class="pre">omni.ui</span></code> 요소의 일부를 감싸며, 각 래퍼는 UI 컴포넌트가 다른 래핑된 컴포넌트 옆에서 잘 보이도록 배치 및 레이블 방법에 대한 의견을 가지고 있습니다. 고급 사용자는 문제없이 래핑된 컴포넌트 옆에 <code class="docutils literal notranslate"><span class="pre">omni.ui</span></code> 컴포넌트를 추가할 수 있습니다.</p>
+<p>템플릿에서 보여주는 UI 요소를 확인하려면 Template Generator(<em>Utilities &gt; Generate Extension Templates</em> 메뉴)를 열고 <em>UI Component Library</em> 섹션 아래에 새 익스텐션을 생성합니다. 그런 다음 익스텐션을 활성화하고(<em>Window &gt; Extensions</em> 메뉴, 해당 익스텐션 이름 검색) 같은 이름의 툴바 항목을 클릭합니다. 새로 열린 창에서 전체 UI 요소 세트가 표시됩니다.</p>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/isim_4.5_full_ext-isaacsim.examples.extension-2.0.2_gui_ui_component_library.png"><img alt="UI Component Library" src="../_images/isim_4.5_full_ext-isaacsim.examples.extension-2.0.2_gui_ui_component_library.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/isim_4.5_full_ext-isaacsim.examples.extension-2.0.2_gui_ui_component_library.png"><img alt="UI Component Library" src="../_images/isim_4.5_full_ext-isaacsim.examples.extension-2.0.2_gui_ui_component_library.png" style="width: 100%;"/>
 </a>
 </figure>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="extension_templates_tutorial.html#summary" title="Link to this heading">#</a></h2>
-<p>This tutorial covered the templates provided in the NVIDIA Isaac Sim <em>Extension Template Generator</em>.  Each template has a common underlying structure with a thin layer of implementation to show a different
-use-case.  The user will be able to reference one or more of these templates to get started building a highly customized UI-based extension in NVIDIA Isaac Sim without having to build a detailed knowledge
-of the internal simulator mechanics.</p>
+<p>이 튜토리얼은 NVIDIA Isaac Sim <em>Extension Template Generator</em>에서 제공하는 템플릿을 다루었습니다. 각 템플릿은 서로 다른 사용 사례를 보여주는 얇은 구현 레이어가 있는 공통 기본 구조를 가지고 있습니다. 사용자는 시뮬레이터 내부 메커니즘에 대한 상세한 지식을 쌓지 않고도 NVIDIA Isaac Sim에서 고도로 커스터마이징된 UI 기반 익스텐션을 빌드하기 시작하기 위해 이 템플릿 중 하나 이상을 참고할 수 있습니다.</p>
 <section id="further-learning">
 <h3>Further Learning<a class="headerlink" href="extension_templates_tutorial.html#further-learning" title="Link to this heading">#</a></h3>
-<p>In conjunction with these templates, the user will want to reference the <a class="reference external" href="../py/source/extensions/isaacsim.gui.components/docs/index.html#ui-element-wrappers">API documentation</a> for the <code class="docutils literal notranslate"><span class="pre">UIElementWrapper</span></code> objects.</p>
+<p>이 템플릿들과 함께 사용자는 <code class="docutils literal notranslate"><span class="pre">UIElementWrapper</span></code> 객체의 <a class="reference external" href="../py/source/extensions/isaacsim.gui.components/docs/index.html#ui-element-wrappers">API 문서</a>를 참고하면 좋습니다.</p>
 </section>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="extension_template_generator.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Extension Template Generator</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="vscode_extension_template_generator.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Advanced Extension Template Generator from VS Code</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="extension_template_generator.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Extension Template Generator</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="vscode_extension_template_generator.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Advanced Extension Template Generator from VS Code</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="extension_templates_tutorial.html#general-concepts">General Concepts</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="extension_templates_tutorial.html#loaded-scenario-template">Loaded Scenario Template</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="extension_templates_tutorial.html#important-concepts">Important Concepts</a></li>
@@ -1536,46 +1082,29 @@ of the internal simulator mechanics.</p>
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1606,36 +1135,21 @@ of the internal simulator mechanics.</p>
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

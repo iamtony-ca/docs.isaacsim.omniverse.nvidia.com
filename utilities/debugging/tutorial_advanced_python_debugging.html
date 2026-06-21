@@ -1,551 +1,256 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Debugging With Visual Studio Code &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Debugging With Visual Studio Code — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-
-
-
-    <script rel="preload" src="../../_static/modal-table.js"></script>
-    <script src="../../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../../_static/external-links.js"></script>
-    <script src="../../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../../_static/image_lightbox.js"></script>
-    <script src="../../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'utilities/debugging/tutorial_advanced_python_debugging';</script>
-    <script>
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script rel="preload" src="../../_static/modal-table.js"></script>
+<script src="../../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../../_static/external-links.js"></script>
+<script src="../../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../../_static/image_lightbox.js"></script>
+<script src="../../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'utilities/debugging/tutorial_advanced_python_debugging';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Profiling Performance Using Tracy" href="profiling_performance.html" />
-    <link rel="prev" title="Omniverse Commands Tool Extension" href="ext_omni_kit_commands.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../../_static/searchtools.js"></script>
-    <script src="../../_static/language_data.js"></script>
-    <script src="../../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../../_static/favicon.png" rel="icon"/>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="profiling_performance.html" rel="next" title="Profiling Performance Using Tracy"/>
+<link href="ext_omni_kit_commands.html" rel="prev" title="Omniverse Commands Tool Extension"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../../_static/searchtools.js"></script>
+<script src="../../_static/language_data.js"></script>
+<script src="../../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="tutorial_advanced_python_debugging.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="tutorial_advanced_python_debugging.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +270,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -593,20 +297,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -681,17 +373,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -869,7 +551,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -909,13 +590,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -962,10 +637,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1134,18 +805,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1171,114 +832,88 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Debugging &amp; Profiling</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Debugging With Visual Studio Code</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">Debugging &amp; Profiling</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Debugging With Visual Studio Code</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="debugging-with-visual-studio-code">
+<article class="bd-article">
+<section id="debugging-with-visual-studio-code">
 <span id="isaac-sim-app-tutorial-advanced-debug-vscode"></span><h1>Debugging With Visual Studio Code<a class="headerlink" href="tutorial_advanced_python_debugging.html#debugging-with-visual-studio-code" title="Link to this heading">#</a></h1>
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="tutorial_advanced_python_debugging.html#learning-objectives" title="Link to this heading">#</a></h2>
-<p>In this tutorial, we will go over</p>
+<p>이 튜토리얼에서는 다음을 다룹니다</p>
 <ul class="simple">
-<li><p>Debugging a standalone Python script</p></li>
-<li><p>Debugging <a class="reference internal" href="tutorial_advanced_python_debugging.html#isaac-sim-app-tutorial-advanced-python-debugging-docker"><span class="std std-ref">Python Scripts Running in Docker</span></a>.</p></li>
-<li><p>Attaching to the <code class="docutils literal notranslate"><span class="pre">omni.kit.debug.vscode_debugger</span></code> extension to debug a running instance of Isaac Sim</p></li>
+<li><p>독립 실행형 Python 스크립트 디버깅</p></li>
+<li><p><a class="reference internal" href="tutorial_advanced_python_debugging.html#isaac-sim-app-tutorial-advanced-python-debugging-docker"><span class="std std-ref">Python Scripts Running in Docker</span></a> 디버깅.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">omni.kit.debug.vscode_debugger</span></code> 익스텐션을 연결하여 실행 중인 Isaac Sim 인스턴스 디버깅</p></li>
 </ul>
 </section>
 <section id="standalone-python-scripts">
 <h2>Standalone Python Scripts<a class="headerlink" href="tutorial_advanced_python_debugging.html#standalone-python-scripts" title="Link to this heading">#</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Debugging standalone Python scripts is only supported on Linux currently</p>
+<p>독립 실행형 Python 스크립트 디버깅은 현재 Linux에서만 지원됩니다</p>
 </div>
 <ol class="arabic">
-<li><p>Open a terminal in the Isaac Sim installation root folder, then execute the following command: <code class="code docutils literal notranslate"><span class="pre">code</span> <span class="pre">.</span></code> This launches a new VS Code window and opens the current folder. You can also launch VS Code and open the folder.</p></li>
-<li><p>Let’s try debugging a simple script, open <code class="docutils literal notranslate"><span class="pre">standalone_examples/api/isaacsim.simulation_app/hello_world.py</span></code> and place a breakpoint.</p></li>
-<li><p>Select the “Run” icon from the toolbar on the left, and ensure “Current File” is selected from the configuration dropdown menu.</p></li>
-<li><p>Click “Start Debugging” or press F5 to launch the debugger. Pressing F10 will step line by line. You can mouse over to examine variable values.</p>
-<img alt="../../_images/isim_4.5_full_ref_external_vscode_standalone_debug.png" class="align-center" src="../../_images/isim_4.5_full_ref_external_vscode_standalone_debug.png" />
+<li><p>Isaac Sim 설치 루트 폴더에서 터미널을 열고 다음 명령을 실행합니다: <code class="code docutils literal notranslate"><span class="pre">code</span> <span class="pre">.</span></code> 새 VS Code 창이 실행되고 현재 폴더가 열립니다. VS Code를 실행하고 폴더를 여는 방법도 있습니다.</p></li>
+<li><p>간단한 스크립트를 디버깅해 봅니다. <code class="docutils literal notranslate"><span class="pre">standalone_examples/api/isaacsim.simulation_app/hello_world.py</span></code>를 열고 중단점을 설정합니다.</p></li>
+<li><p>왼쪽 툴바에서 "Run" 아이콘을 선택하고 설정 드롭다운 메뉴에서 "Current File"이 선택되어 있는지 확인합니다.</p></li>
+<li><p>"Start Debugging"을 클릭하거나 F5를 눌러 디버거를 실행합니다. F10을 누르면 줄별로 단계적으로 실행됩니다. 마우스를 올려 변수 값을 확인할 수 있습니다.</p>
+<img alt="../../_images/isim_4.5_full_ref_external_vscode_standalone_debug.png" class="align-center" src="../../_images/isim_4.5_full_ref_external_vscode_standalone_debug.png"/>
 </li>
-<li><p>Stop the current debugging session and let’s try passing a command-line argument to our code in the “args” field of the .vscode/launch.json file. For example, here we change the default nucleus server</p>
+<li><p>현재 디버깅 세션을 중지하고 .vscode/launch.json 파일의 "args" 필드에서 코드에 명령줄 인수를 전달해 봅니다. 예를 들어 여기서는 기본 nucleus 서버를 변경합니다</p>
 <blockquote>
 <div><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Python: Current File&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;request&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;launch&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;program&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${file}&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;console&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integratedTerminal&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;EXP_PATH&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}/apps&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;RESOURCE_NAME&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;IsaacSim&quot;</span>
+<span class="w">        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Python: Current File"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"python"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"launch"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"program"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${file}"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"console"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integratedTerminal"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"EXP_PATH"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}/apps"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"RESOURCE_NAME"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IsaacSim"</span>
 <span class="w">        </span><span class="p">},</span>
-<span class="w">        </span><span class="nt">&quot;python&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}/kit/python/bin/python3&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;envFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}/.vscode/.standalone_examples.env&quot;</span><span class="p">,</span>
-<span class="hll"><span class="w">        </span><span class="nt">&quot;preLaunchTask&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;setup_python_env&quot;</span><span class="p">,</span>
-</span><span class="hll"><span class="w">        </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;--/persistent/isaac/asset_root/default=\&quot;omniverse://my_server\&quot;&quot;</span><span class="p">]</span>
+<span class="w">        </span><span class="nt">"python"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}/kit/python/bin/python3"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"envFile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}/.vscode/.standalone_examples.env"</span><span class="p">,</span>
+<span class="hll"><span class="w">        </span><span class="nt">"preLaunchTask"</span><span class="p">:</span><span class="w"> </span><span class="s2">"setup_python_env"</span><span class="p">,</span>
+</span><span class="hll"><span class="w">        </span><span class="nt">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"--/persistent/isaac/asset_root/default=\"omniverse://my_server\""</span><span class="p">]</span>
 </span><span class="w">    </span><span class="p">}</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Add the following lines to <code class="docutils literal notranslate"><span class="pre">hello_world.py</span></code> and place a breakpoint on the <code class="docutils literal notranslate"><span class="pre">print(server_check)</span></code> line.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">hello_world.py</span></code>에 다음 줄을 추가하고 <code class="docutils literal notranslate"><span class="pre">print(server_check)</span></code> 줄에 중단점을 설정합니다.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The most basic usage for creating a simulation app</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationApp</span>
@@ -1286,7 +921,7 @@
 <span class="n">kit</span> <span class="o">=</span> <span class="n">SimulationApp</span><span class="p">()</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">carb</span>
 
-<span class="n">server_check</span> <span class="o">=</span> <span class="n">carb</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_settings</span><span class="p">()</span><span class="o">.</span><span class="n">get_as_string</span><span class="p">(</span><span class="s2">&quot;/persistent/isaac/asset_root/default&quot;</span><span class="p">)</span>
+<span class="n">server_check</span> <span class="o">=</span> <span class="n">carb</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get_settings</span><span class="p">()</span><span class="o">.</span><span class="n">get_as_string</span><span class="p">(</span><span class="s2">"/persistent/isaac/asset_root/default"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">server_check</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
     <span class="n">kit</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
@@ -1295,85 +930,85 @@
 </div>
 </div></blockquote>
 </li>
-<li><p>After modifying and saving the launch.json, press F5 to launch the debugger.</p></li>
-<li><p>Verify that the variable contains the server set in the <code class="docutils literal notranslate"><span class="pre">args</span></code> in <code class="docutils literal notranslate"><span class="pre">launch.json</span></code></p>
-<img alt="../../_images/isim_4.5_full_ref_external_vscode_standalone_inspect.png" class="align-center" src="../../_images/isim_4.5_full_ref_external_vscode_standalone_inspect.png" />
+<li><p>launch.json을 수정하고 저장한 후 F5를 눌러 디버거를 실행합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">launch.json</span></code>의 <code class="docutils literal notranslate"><span class="pre">args</span></code>에 설정한 서버가 변수에 포함되어 있는지 확인합니다</p>
+<img alt="../../_images/isim_4.5_full_ref_external_vscode_standalone_inspect.png" class="align-center" src="../../_images/isim_4.5_full_ref_external_vscode_standalone_inspect.png"/>
 </li>
 </ol>
 </section>
 <section id="python-scripts-running-in-docker">
 <span id="isaac-sim-app-tutorial-advanced-python-debugging-docker"></span><h2>Python Scripts Running in Docker<a class="headerlink" href="tutorial_advanced_python_debugging.html#python-scripts-running-in-docker" title="Link to this heading">#</a></h2>
-<p>You can debug a Python script running headless in a docker container.</p>
+<p>Docker 컨테이너에서 헤드리스로 실행 중인 Python 스크립트를 디버깅할 수 있습니다.</p>
 <ol class="arabic">
-<li><p><a class="reference internal" href="../../installation/install_container.html#isaac-sim-setup-remote-headless-container"><span class="std std-ref">Deploy the container</span></a> and run it with an interactive Bash session.</p></li>
-<li><p>In the running container, install <code class="code docutils literal notranslate"><span class="pre">debugpy</span></code>:</p>
+<li><p><a class="reference internal" href="../../installation/install_container.html#isaac-sim-setup-remote-headless-container"><span class="std std-ref">Deploy the container</span></a>하고 대화형 Bash 세션으로 실행합니다.</p></li>
+<li><p>실행 중인 컨테이너에서 <code class="code docutils literal notranslate"><span class="pre">debugpy</span></code>를 설치합니다:</p>
 <blockquote>
 <div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>./python.sh<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>debugpy
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Create a new debugging configuration in VS Code with (“Run” menu &gt; “Add Configuration…” &gt; “Python Debugger” &gt; “Remote Attach”, choose: host “localhost” and port “5678”).</p></li>
-<li><p>Make sure the pathMappings are correct with <code class="code docutils literal notranslate"><span class="pre">/isaac-sim</span></code> in the container mapping to the folder where you have Isaac Sim installed locally. These paths should match the configuration in your vscode <code class="code docutils literal notranslate"><span class="pre">launch.json</span></code>:</p>
+<li><p>VS Code에서 새 디버깅 설정을 만듭니다("Run" 메뉴 &gt; "Add Configuration…" &gt; "Python Debugger" &gt; "Remote Attach", 선택: 호스트 "localhost"와 포트 "5678").</p></li>
+<li><p>컨테이너의 <code class="code docutils literal notranslate"><span class="pre">/isaac-sim</span></code>이 로컬에 Isaac Sim이 설치된 폴더로 매핑되도록 pathMappings가 올바른지 확인합니다. 이 경로는 vscode <code class="code docutils literal notranslate"><span class="pre">launch.json</span></code>의 설정과 일치해야 합니다:</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Python Debugger: Docker Attach&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;debugpy&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="s2">&quot;attach&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;connect&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">5678</span><span class="p">},</span>
-    <span class="s2">&quot;pathMappings&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;localRoot&quot;</span><span class="p">:</span> <span class="s2">&quot;$</span><span class="si">{workspaceFolder}</span><span class="s2">/_build/linux-x86_64/release&quot;</span><span class="p">,</span> <span class="s2">&quot;remoteRoot&quot;</span><span class="p">:</span> <span class="s2">&quot;/isaac-sim&quot;</span><span class="p">}],</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Python Debugger: Docker Attach"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"debugpy"</span><span class="p">,</span>
+    <span class="s2">"request"</span><span class="p">:</span> <span class="s2">"attach"</span><span class="p">,</span>
+    <span class="s2">"connect"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"host"</span><span class="p">:</span> <span class="s2">"localhost"</span><span class="p">,</span> <span class="s2">"port"</span><span class="p">:</span> <span class="mi">5678</span><span class="p">},</span>
+    <span class="s2">"pathMappings"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"localRoot"</span><span class="p">:</span> <span class="s2">"$</span><span class="si">{workspaceFolder}</span><span class="s2">/_build/linux-x86_64/release"</span><span class="p">,</span> <span class="s2">"remoteRoot"</span><span class="p">:</span> <span class="s2">"/isaac-sim"</span><span class="p">}],</span>
 <span class="p">},</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>You must still use <code class="code docutils literal notranslate"><span class="pre">./python.sh</span></code> to run Python scripts, but to debug them you have to add <code class="code docutils literal notranslate"><span class="pre">-m</span> <span class="pre">debugpy</span> <span class="pre">--wait-for-client</span> <span class="pre">--listen</span> <span class="pre">0.0.0.0:5678</span></code> after <code class="code docutils literal notranslate"><span class="pre">./python.sh</span></code> and before the Python file.</p></li>
-<li><p>As an example, open <code class="code docutils literal notranslate"><span class="pre">standalone_examples/deprecated/api/isaacsim.core.api/time_stepping.py</span></code> in VS Code and set a breakpoint by clicking on the margin to the left of a line of code.</p></li>
-<li><p>Now start run <code class="code docutils literal notranslate"><span class="pre">time_stepping.py</span></code> in the docker container with the complete debugging command:</p>
+<li><p>Python 스크립트를 실행하려면 여전히 <code class="code docutils literal notranslate"><span class="pre">./python.sh</span></code>를 사용해야 하지만, 디버깅하려면 <code class="code docutils literal notranslate"><span class="pre">./python.sh</span></code> 뒤와 Python 파일 앞에 <code class="code docutils literal notranslate"><span class="pre">-m</span> <span class="pre">debugpy</span> <span class="pre">--wait-for-client</span> <span class="pre">--listen</span> <span class="pre">0.0.0.0:5678</span></code>를 추가해야 합니다.</p></li>
+<li><p>예를 들어 VS Code에서 <code class="code docutils literal notranslate"><span class="pre">standalone_examples/deprecated/api/isaacsim.core.api/time_stepping.py</span></code>를 열고 코드 줄 왼쪽 여백을 클릭하여 중단점을 설정합니다.</p></li>
+<li><p>이제 완전한 디버깅 명령으로 Docker 컨테이너에서 <code class="code docutils literal notranslate"><span class="pre">time_stepping.py</span></code>를 실행합니다:</p>
 <blockquote>
 <div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>./python.sh<span class="w"> </span>-m<span class="w"> </span>debugpy<span class="w"> </span>--wait-for-client<span class="w"> </span>--listen<span class="w"> </span><span class="m">0</span>.0.0.0:5678<span class="w"> </span>standalone_examples/deprecated/api/isaacsim.core.api/time_stepping.py
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Because of the <code class="code docutils literal notranslate"><span class="pre">--wait-for-client</span></code> flag, the script will not start right away.  You must attach the debugger first by selecting it in VS Code’s debug window and pressing the Play button.</p></li>
-<li><p>The script should start in the docker window, and stop at the breakpoint inside VS Code.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">--wait-for-client</span></code> 플래그 때문에 스크립트가 즉시 시작되지 않습니다. 먼저 VS Code의 디버그 창에서 디버거를 선택하고 Play 버튼을 눌러 디버거를 연결해야 합니다.</p></li>
+<li><p>스크립트가 Docker 창에서 시작되어 VS Code 내부의 중단점에서 멈춰야 합니다.</p></li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If the path mappings are incorrect you will not be able to set breakpoints or step through code.</p>
+<p>경로 매핑이 잘못된 경우 중단점을 설정하거나 코드를 단계별로 실행할 수 없습니다.</p>
 </div>
 </section>
 <section id="attaching-the-debugger-to-a-running-app">
 <span id="isaac-sim-app-tutorial-advanced-attach-debugger"></span><h2>Attaching the Debugger to a Running App<a class="headerlink" href="tutorial_advanced_python_debugging.html#attaching-the-debugger-to-a-running-app" title="Link to this heading">#</a></h2>
-<p>To debug a script you are already running, use the VS Code Debugger extension.</p>
+<p>이미 실행 중인 스크립트를 디버깅하려면 VS Code Debugger 익스텐션을 사용합니다.</p>
 <ol class="arabic">
-<li><p>Launch Isaac Sim, and from the top toolbar, select Window &gt; Extensions. Then search for “vscode” and click the Enable button for the <code class="docutils literal notranslate"><span class="pre">omni.kit.debug.vscode</span></code> extension.
-By default, the status will show “VS Code Debugger Unattached” in red text.</p>
-<img alt="../../_images/isim_4.5_full_ref_external_vscode_debug_extension.png" class="align-center" src="../../_images/isim_4.5_full_ref_external_vscode_debug_extension.png" />
+<li><p>Isaac Sim을 실행하고 상단 툴바에서 Window &gt; Extensions를 선택합니다. 그런 다음 "vscode"를 검색하고 <code class="docutils literal notranslate"><span class="pre">omni.kit.debug.vscode</span></code> 익스텐션의 Enable 버튼을 클릭합니다.
+기본적으로 상태는 빨간색 텍스트로 "VS Code Debugger Unattached"로 표시됩니다.</p>
+<img alt="../../_images/isim_4.5_full_ref_external_vscode_debug_extension.png" class="align-center" src="../../_images/isim_4.5_full_ref_external_vscode_debug_extension.png"/>
 </li>
-<li><p>Then launch VS Code, and select the “Run” icon from the toolbar on the left.</p></li>
-<li><p>From the configuration menu, select “Python: Attach (windows-x86_64/linux-x86_64) and click the green arrow to start debugging.</p></li>
-<li><p>Notice that the status in Isaac Sim changes to “VS Code Debugger Attached” in blue text.</p>
-<img alt="../../_images/isim_4.5_full_ref_external_vscode_debug_attach.png" class="align-center" src="../../_images/isim_4.5_full_ref_external_vscode_debug_attach.png" />
+<li><p>그런 다음 VS Code를 실행하고 왼쪽 툴바에서 "Run" 아이콘을 선택합니다.</p></li>
+<li><p>설정 메뉴에서 "Python: Attach (windows-x86_64/linux-x86_64)"를 선택하고 녹색 화살표를 클릭하여 디버깅을 시작합니다.</p></li>
+<li><p>Isaac Sim의 상태가 파란색 텍스트로 "VS Code Debugger Attached"로 변경되는 것을 확인합니다.</p>
+<img alt="../../_images/isim_4.5_full_ref_external_vscode_debug_attach.png" class="align-center" src="../../_images/isim_4.5_full_ref_external_vscode_debug_attach.png"/>
 </li>
-<li><p>You can now return to your Python file in VS Code and add breakpoints to debug, as described above.</p></li>
+<li><p>이제 VS Code의 Python 파일로 돌아가 위에서 설명한 대로 중단점을 추가하여 디버깅할 수 있습니다.</p></li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>To configure the host and port used for debugging, the following command-line arguments can be provided</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="o">--/</span><span class="n">exts</span><span class="o">/</span><span class="n">omni</span><span class="p">.</span><span class="n">kit</span><span class="p">.</span><span class="n">debug</span><span class="p">.</span><span class="n">python</span><span class="o">/</span><span class="n">host</span><span class="o">=</span><span class="s">&quot;127.0.0.1&quot;</span>
+<p>디버깅에 사용되는 호스트와 포트를 구성하려면 다음 명령줄 인수를 제공할 수 있습니다</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="o">--/</span><span class="n">exts</span><span class="o">/</span><span class="n">omni</span><span class="p">.</span><span class="n">kit</span><span class="p">.</span><span class="n">debug</span><span class="p">.</span><span class="n">python</span><span class="o">/</span><span class="n">host</span><span class="o">=</span><span class="s">"127.0.0.1"</span>
 <span class="o">--/</span><span class="n">exts</span><span class="o">/</span><span class="n">omni</span><span class="p">.</span><span class="n">kit</span><span class="p">.</span><span class="n">debug</span><span class="p">.</span><span class="n">python</span><span class="o">/</span><span class="n">port</span><span class="o">=</span><span class="mi">3000</span>
 </pre></div>
 </div>
-<p>These should match the configuration in your vscode <code class="docutils literal notranslate"><span class="pre">launch.json</span></code></p>
+<p>이것은 vscode <code class="docutils literal notranslate"><span class="pre">launch.json</span></code>의 설정과 일치해야 합니다</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Python: Attach (windows-x86_64/linux-x86_64)&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;python&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="s2">&quot;attach&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Python: Attach (windows-x86_64/linux-x86_64)"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"python"</span><span class="p">,</span>
+    <span class="s2">"request"</span><span class="p">:</span> <span class="s2">"attach"</span><span class="p">,</span>
+    <span class="s2">"port"</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"127.0.0.1"</span><span class="p">,</span>
 <span class="p">},</span>
 </pre></div>
 </div>
@@ -1382,65 +1017,43 @@ By default, the status will show “VS Code Debugger Unattached” in red text.<
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="tutorial_advanced_python_debugging.html#summary" title="Link to this heading">#</a></h2>
-<p>In this tutorial, we covered
-#. Debugging a standalone Python script
-#.  Attaching the vscode debugger to a running instance of Isaac Sim</p>
+<p>이 튜토리얼에서 다룬 내용
+#. 독립 실행형 Python 스크립트 디버깅
+#. 실행 중인 Isaac Sim 인스턴스에 vscode 디버거 연결</p>
 <section id="further-learning">
 <h3>Further Learning<a class="headerlink" href="tutorial_advanced_python_debugging.html#further-learning" title="Link to this heading">#</a></h3>
-<p>For more details about how the vscode integration works, refer to <a class="reference internal" href="../../development_tools/vscode.html#isaac-sim-app-vscode"><span class="std std-ref">Visual Studio Code (VS Code)</span></a></p>
+<p>vscode 통합 작동 방식에 대한 자세한 내용은 <a class="reference internal" href="../../development_tools/vscode.html#isaac-sim-app-vscode"><span class="std std-ref">Visual Studio Code (VS Code)</span></a>를 참조하세요</p>
 </section>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="ext_omni_kit_commands.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Omniverse Commands Tool Extension</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="profiling_performance.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Profiling Performance Using Tracy</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="ext_omni_kit_commands.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Omniverse Commands Tool Extension</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="profiling_performance.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Profiling Performance Using Tracy</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_advanced_python_debugging.html#learning-objectives">Learning Objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_advanced_python_debugging.html#standalone-python-scripts">Standalone Python Scripts</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_advanced_python_debugging.html#python-scripts-running-in-docker">Python Scripts Running in Docker</a></li>
@@ -1450,46 +1063,29 @@ By default, the status will show “VS Code Debugger Unattached” in red text.<
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1520,36 +1116,21 @@ By default, the status will show “VS Code Debugger Unattached” in red text.<
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>
