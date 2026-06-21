@@ -1,551 +1,256 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Author and Parse Actuators from USD &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Author and Parse Actuators from USD — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'newton_actuators_tutorials/newton_actuators_usd';</script>
-    <script>
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'newton_actuators_tutorials/newton_actuators_usd';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Drive an Actuated Robot from OmniGraph" href="newton_actuators_omnigraph.html" />
-    <link rel="prev" title="Set Up Actuators from Python" href="newton_actuators_python.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="newton_actuators_omnigraph.html" rel="next" title="Drive an Actuated Robot from OmniGraph"/>
+<link href="newton_actuators_python.html" rel="prev" title="Set Up Actuators from Python"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="newton_actuators_usd.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="newton_actuators_usd.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +270,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -593,20 +297,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -681,17 +373,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -869,7 +551,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -909,13 +590,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -962,10 +637,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1134,18 +805,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1171,120 +832,83 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Newton Actuators</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Author and Parse Actuators from USD</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">Newton Actuators</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Author and Parse Actuators from USD</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="author-and-parse-actuators-from-usd">
+<article class="bd-article">
+<section id="author-and-parse-actuators-from-usd">
 <span id="isaac-sim-newton-actuators-usd"></span><h1>Author and Parse Actuators from USD<a class="headerlink" href="newton_actuators_usd.html#author-and-parse-actuators-from-usd" title="Link to this heading">#</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">isaacsim.core.experimental.actuators</span></code> extension is <strong>experimental</strong>.
-The Newton USD schema names (<code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code>, <code class="docutils literal notranslate"><span class="pre">NewtonPDControlAPI</span></code>,
-…) are part of the shared Newton schema and are also subject to change.</p>
+<p><code class="docutils literal notranslate"><span class="pre">isaacsim.core.experimental.actuators</span></code> 익스텐션은 <strong>실험적</strong>입니다.
+Newton USD 스키마 이름(<code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code>, <code class="docutils literal notranslate"><span class="pre">NewtonPDControlAPI</span></code> 등)은 공유 Newton 스키마의 일부이며 마찬가지로 변경될 수 있습니다.</p>
 </div>
-<p>This tutorial shows how to bake an actuator configuration directly into a
-robot’s USD file, so that the actuator pipeline is reconstructed automatically
-every time the asset is loaded — by either Isaac Sim or
-Isaac Lab.</p>
-<p>Authoring actuators on the asset is the recommended path when:</p>
+<p>이 튜토리얼은 액추에이터 설정을 로봇의 USD 파일에 직접 구워 넣는 방법을 보여줍니다. 이렇게 하면 Isaac Sim이나 Isaac Lab에서 에셋을 로드할 때마다 액추에이터 파이프라인이 자동으로 재구성됩니다.</p>
+<p>에셋에 액추에이터를 작성하는 것이 권장되는 경우:</p>
 <ul class="simple">
-<li><p>You want the same robot file to behave identically across applications (Isaac Sim and Isaac Lab).</p></li>
-<li><p>You are bundling a robot package for distribution: hand-tuned gains,
-effort limits, and motor curves all travel with the file.</p></li>
+<li><p>동일한 로봇 파일이 애플리케이션(Isaac Sim과 Isaac Lab) 간에 동일하게 동작하기를 원할 때.</p></li>
+<li><p>배포용 로봇 패키지를 번들링할 때: 세밀하게 조정된 게인, 노력 제한, 모터 곡선이 모두 파일과 함께 이동합니다.</p></li>
 </ul>
-<p>By the end of this tutorial you’ll know how to:</p>
+<p>이 튜토리얼을 완료하면 다음 방법을 알 수 있습니다:</p>
 <ul class="simple">
-<li><p>Author <code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code> prims with the
-<code class="xref py py-func docutils literal notranslate"><span class="pre">add_actuator()</span></code> helper.</p></li>
-<li><p>Inspect the resulting USDA so you can hand-edit it later.</p></li>
-<li><p>Save the stage and re-open it so the actuators are discovered automatically.</p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">add_actuator()</span></code> 헬퍼로 <code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code> 프림을 작성합니다.</p></li>
+<li><p>결과 USDA를 검사하여 나중에 직접 편집할 수 있습니다.</p></li>
+<li><p>스테이지를 저장하고 다시 열어 액추에이터가 자동으로 검색되도록 합니다.</p></li>
 </ul>
-<p>All code examples come from the complete, runnable file <code class="docutils literal notranslate"><span class="pre">newton_actuators_usd_example.py</span></code>:</p>
+<p>모든 코드 예제는 완전하고 실행 가능한 파일 <code class="docutils literal notranslate"><span class="pre">newton_actuators_usd_example.py</span></code>에서 가져옵니다:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Newton Actuators USD example</span>
 ./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.core.experimental.actuators/newton_actuators_usd_example.py
 </pre></div>
 </div>
 <p><strong>Prerequisites</strong></p>
 <ul class="simple">
-<li><p>Read <a class="reference internal" href="index.html#isaac-sim-newton-actuators-tutorials"><span class="std std-ref">Newton Actuators</span></a> for the actuator pipeline
-overview.</p></li>
-<li><p>Familiarity with USD references and API schemas.</p></li>
+<li><p>액추에이터 파이프라인 개요를 위해 <a class="reference internal" href="index.html#isaac-sim-newton-actuators-tutorials"><span class="std std-ref">Newton Actuators</span></a>를 읽어보세요.</p></li>
+<li><p>USD 참조 및 API 스키마에 대한 기본 이해.</p></li>
 </ul>
 <section id="the-newton-actuator-schema">
 <h2>The Newton actuator schema<a class="headerlink" href="newton_actuators_usd.html#the-newton-actuator-schema" title="Link to this heading">#</a></h2>
-<p>A Newton actuator is a USD prim of type <code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code>, placed under the
-articulation root inside an <code class="docutils literal notranslate"><span class="pre">Actuators</span></code> scope.  It carries:</p>
+<p>Newton 액추에이터는 아티큘레이션 루트 아래 <code class="docutils literal notranslate"><span class="pre">Actuators</span></code> 스코프 내에 배치된 <code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code> 타입의 USD 프림입니다. 여기에는 다음이 포함됩니다:</p>
 <ul class="simple">
-<li><p>A <code class="docutils literal notranslate"><span class="pre">newton:targets</span></code> relationship pointing at the joint it drives</p></li>
-<li><p>One <strong>controller</strong> API schema (e.g. <code class="docutils literal notranslate"><span class="pre">NewtonPDControlAPI</span></code>,
-<code class="docutils literal notranslate"><span class="pre">NewtonPIDControlAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">NewtonNeuralControlAPI</span></code>) and the corresponding
-<code class="docutils literal notranslate"><span class="pre">newton:*</span></code> attributes.</p></li>
-<li><p>Zero or more <strong>clamping</strong> API schemas (<code class="docutils literal notranslate"><span class="pre">NewtonMaxEffortClampingAPI</span></code>,
-<code class="docutils literal notranslate"><span class="pre">NewtonDCMotorClampingAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">NewtonPositionBasedClampingAPI</span></code>).</p></li>
-<li><p>An optional <strong>delay</strong> API schema (<code class="docutils literal notranslate"><span class="pre">NewtonActuatorDelayAPI</span></code>).</p></li>
+<li><p>구동하는 관절을 가리키는 <code class="docutils literal notranslate"><span class="pre">newton:targets</span></code> 관계</p></li>
+<li><p>하나의 <strong>컨트롤러</strong> API 스키마(예: <code class="docutils literal notranslate"><span class="pre">NewtonPDControlAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">NewtonPIDControlAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">NewtonNeuralControlAPI</span></code>)와 해당 <code class="docutils literal notranslate"><span class="pre">newton:*</span></code> 속성.</p></li>
+<li><p>0개 이상의 <strong>클램핑</strong> API 스키마(<code class="docutils literal notranslate"><span class="pre">NewtonMaxEffortClampingAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">NewtonDCMotorClampingAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">NewtonPositionBasedClampingAPI</span></code>).</p></li>
+<li><p>선택적 <strong>지연</strong> API 스키마(<code class="docutils literal notranslate"><span class="pre">NewtonActuatorDelayAPI</span></code>).</p></li>
 </ul>
-<p>A minimal authored prim looks like:</p>
-<div class="highlight-usda notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>NewtonActuator<span class="w"> </span><span class="s">&quot;panda_joint1_actuator&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;NewtonPDControlAPI&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NewtonMaxEffortClampingAPI&quot;</span><span class="p">]</span>
+<p>최소한의 작성된 프림은 다음과 같습니다:</p>
+<div class="highlight-usda notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>NewtonActuator<span class="w"> </span><span class="s">"panda_joint1_actuator"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"NewtonPDControlAPI"</span><span class="p">,</span><span class="w"> </span><span class="s">"NewtonMaxEffortClampingAPI"</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="kt">rel</span><span class="w"> </span><span class="na">newton:targets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">&lt;/</span>World<span class="err">/</span>Franka<span class="err">/</span><span class="p">...</span><span class="err">/</span>panda_joint1<span class="err">&gt;</span>
@@ -1294,19 +918,11 @@ articulation root inside an <code class="docutils literal notranslate"><span cla
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Any application that understands the Newton USD schema can parse the same
-prim and recover the same actuator pipeline.  This is what lets the same
-asset move between Isaac Sim and Isaac Lab.</p>
+<p>Newton USD 스키마를 이해하는 모든 애플리케이션은 동일한 프림을 파싱하고 동일한 액추에이터 파이프라인을 복구할 수 있습니다. 이것이 동일한 에셋이 Isaac Sim과 Isaac Lab 간에 이동할 수 있는 이유입니다.</p>
 </section>
 <section id="authoring-with-add-actuator">
 <h2>Authoring with <code class="docutils literal notranslate"><span class="pre">add_actuator</span></code><a class="headerlink" href="newton_actuators_usd.html#authoring-with-add-actuator" title="Link to this heading">#</a></h2>
-<p>Hand-writing USDA is fine for one-off tweaks, but for setup-time configuration
-the easiest path is the
-<code class="xref py py-func docutils literal notranslate"><span class="pre">add_actuator()</span></code> helper.  It takes
-Python config dataclasses, validates them, defines the <code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code>
-prim under <code class="docutils literal notranslate"><span class="pre">{articulation_root}/Actuators/{name}</span></code>, applies the appropriate
-API schemas, and authors the corresponding <code class="docutils literal notranslate"><span class="pre">newton:*</span></code> attributes — all in
-one call.</p>
+<p>USDA를 직접 작성하는 것은 일회성 수정에는 괜찮지만, 설정 시 구성에는 <code class="xref py py-func docutils literal notranslate"><span class="pre">add_actuator()</span></code> 헬퍼가 가장 쉬운 방법입니다. Python 설정 데이터클래스를 받아 검증하고, <code class="docutils literal notranslate"><span class="pre">{articulation_root}/Actuators/{name}</span></code> 아래에 <code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code> 프림을 정의하며, 적절한 API 스키마를 적용하고, 해당 <code class="docutils literal notranslate"><span class="pre">newton:*</span></code> 속성을 작성합니다 — 모두 한 번의 호출로.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.actuators</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
         <span class="n">MaxEffortClampingConfig</span><span class="p">,</span>
         <span class="n">PDControlConfig</span><span class="p">,</span>
@@ -1315,32 +931,27 @@ one call.</p>
 
     <span class="c1"># Per-joint kp, kd, and effort limits</span>
     <span class="n">JOINT_PARAMS</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;panda_joint1&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">67.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">max_effort</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">),</span>
-        <span class="s2">&quot;panda_joint2&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">66.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">max_effort</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">),</span>
-        <span class="s2">&quot;panda_joint3&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">65.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">max_effort</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">),</span>
-        <span class="s2">&quot;panda_joint4&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">64.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">max_effort</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">),</span>
-        <span class="s2">&quot;panda_joint5&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">63.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">max_effort</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">),</span>
-        <span class="s2">&quot;panda_joint6&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">62.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">max_effort</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">),</span>
-        <span class="s2">&quot;panda_joint7&quot;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">61.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">max_effort</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">),</span>
+        <span class="s2">"panda_joint1"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">67.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">max_effort</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">),</span>
+        <span class="s2">"panda_joint2"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">66.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">max_effort</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">),</span>
+        <span class="s2">"panda_joint3"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">65.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">max_effort</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">),</span>
+        <span class="s2">"panda_joint4"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">64.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">max_effort</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">),</span>
+        <span class="s2">"panda_joint5"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">63.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">max_effort</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">),</span>
+        <span class="s2">"panda_joint6"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">62.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">max_effort</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">),</span>
+        <span class="s2">"panda_joint7"</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">61.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span> <span class="n">max_effort</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">),</span>
     <span class="p">}</span>
 
     <span class="k">for</span> <span class="n">joint_name</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">JOINT_PARAMS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">add_actuator</span><span class="p">(</span>
             <span class="n">franka_path</span><span class="p">,</span>
             <span class="n">target_names</span><span class="o">=</span><span class="n">joint_name</span><span class="p">,</span>
-            <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">joint_name</span><span class="si">}</span><span class="s2">_actuator&quot;</span><span class="p">,</span>
-            <span class="n">controller</span><span class="o">=</span><span class="n">PDControlConfig</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;kp&quot;</span><span class="p">],</span> <span class="n">kd</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;kd&quot;</span><span class="p">]),</span>
-            <span class="n">clamping</span><span class="o">=</span><span class="p">[</span><span class="n">MaxEffortClampingConfig</span><span class="p">(</span><span class="n">max_effort</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;max_effort&quot;</span><span class="p">])],</span>
+            <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">joint_name</span><span class="si">}</span><span class="s2">_actuator"</span><span class="p">,</span>
+            <span class="n">controller</span><span class="o">=</span><span class="n">PDControlConfig</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">"kp"</span><span class="p">],</span> <span class="n">kd</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">"kd"</span><span class="p">]),</span>
+            <span class="n">clamping</span><span class="o">=</span><span class="p">[</span><span class="n">MaxEffortClampingConfig</span><span class="p">(</span><span class="n">max_effort</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s2">"max_effort"</span><span class="p">])],</span>
         <span class="p">)</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">target_names</span></code> argument matches against the <strong>leaf segment</strong> of joint
-USD paths, so passing <code class="docutils literal notranslate"><span class="pre">&quot;panda_joint1&quot;</span></code> resolves to whatever full path that
-joint has under the articulation root.  The helper validates that each name
-matches exactly one joint under the articulation; if a name is ambiguous
-or absent, it raises <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>.</p>
-<p>Each clamping type may appear at most once per actuator.  Multiple clamps can
-be composed together:</p>
+<p><code class="docutils literal notranslate"><span class="pre">target_names</span></code> 인수는 관절 USD 경로의 <strong>리프 세그먼트</strong>와 일치하므로, <code class="docutils literal notranslate"><span class="pre">"panda_joint1"</span></code>을 전달하면 아티큘레이션 루트 아래에서 해당 관절이 가진 전체 경로로 해석됩니다. 헬퍼는 각 이름이 아티큘레이션 아래의 정확히 하나의 관절과 일치하는지 검증합니다; 이름이 모호하거나 없으면 <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>를 발생시킵니다.</p>
+<p>각 클램핑 타입은 액추에이터당 최대 한 번만 나타날 수 있습니다. 여러 클램프를 함께 조합할 수 있습니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">clamping</span><span class="o">=</span><span class="p">[</span>
     <span class="n">MaxEffortClampingConfig</span><span class="p">(</span><span class="n">max_effort</span><span class="o">=</span><span class="mf">87.0</span><span class="p">),</span>
     <span class="n">DCMotorClampingConfig</span><span class="p">(</span><span class="n">saturation_effort</span><span class="o">=</span><span class="mf">120.0</span><span class="p">,</span> <span class="n">velocity_limit</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">max_motor_effort</span><span class="o">=</span><span class="mf">87.0</span><span class="p">),</span>
@@ -1349,18 +960,16 @@ be composed together:</p>
 </div>
 <section id="inspecting-the-authored-prims">
 <h3>Inspecting the authored prims<a class="headerlink" href="newton_actuators_usd.html#inspecting-the-authored-prims" title="Link to this heading">#</a></h3>
-<p>The standalone script flattens the <code class="docutils literal notranslate"><span class="pre">Actuators</span></code> subtree to USDA and prints
-it to the terminal right after authoring, so you can verify exactly what
-was written before exporting.  The output should look like:</p>
+<p>독립 실행형 스크립트는 작성 직후 <code class="docutils literal notranslate"><span class="pre">Actuators</span></code> 서브트리를 USDA로 평탄화하여 터미널에 출력하므로, 내보내기 전에 정확히 무엇이 작성되었는지 확인할 수 있습니다. 출력은 다음과 같아야 합니다:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>=== Authored Newton actuator prims (USDA) ===
 #usda 1.0
 
-over &quot;panda&quot;
+over "panda"
 {
-    def &quot;Actuators&quot;
+    def "Actuators"
     {
-        def NewtonActuator &quot;panda_joint1_actuator&quot; (
-            prepend apiSchemas = [&quot;NewtonPDControlAPI&quot;, &quot;NewtonMaxEffortClampingAPI&quot;]
+        def NewtonActuator "panda_joint1_actuator" (
+            prepend apiSchemas = ["NewtonPDControlAPI", "NewtonMaxEffortClampingAPI"]
         )
         {
             float newton:constEffort = 0
@@ -1370,8 +979,8 @@ over &quot;panda&quot;
             rel newton:targets = &lt;/panda/panda_link0/panda_joint1&gt;
         }
 
-        def NewtonActuator &quot;panda_joint2_actuator&quot; (
-            prepend apiSchemas = [&quot;NewtonPDControlAPI&quot;, &quot;NewtonMaxEffortClampingAPI&quot;]
+        def NewtonActuator "panda_joint2_actuator" (
+            prepend apiSchemas = ["NewtonPDControlAPI", "NewtonMaxEffortClampingAPI"]
         )
         {
             float newton:constEffort = 0
@@ -1381,8 +990,8 @@ over &quot;panda&quot;
             rel newton:targets = &lt;/panda/panda_link1/panda_joint2&gt;
         }
 
-        def NewtonActuator &quot;panda_joint3_actuator&quot; (
-            prepend apiSchemas = [&quot;NewtonPDControlAPI&quot;, &quot;NewtonMaxEffortClampingAPI&quot;]
+        def NewtonActuator "panda_joint3_actuator" (
+            prepend apiSchemas = ["NewtonPDControlAPI", "NewtonMaxEffortClampingAPI"]
         )
         {
             float newton:constEffort = 0
@@ -1392,8 +1001,8 @@ over &quot;panda&quot;
             rel newton:targets = &lt;/panda/panda_link2/panda_joint3&gt;
         }
 
-        def NewtonActuator &quot;panda_joint4_actuator&quot; (
-            prepend apiSchemas = [&quot;NewtonPDControlAPI&quot;, &quot;NewtonMaxEffortClampingAPI&quot;]
+        def NewtonActuator "panda_joint4_actuator" (
+            prepend apiSchemas = ["NewtonPDControlAPI", "NewtonMaxEffortClampingAPI"]
         )
         {
             float newton:constEffort = 0
@@ -1403,8 +1012,8 @@ over &quot;panda&quot;
             rel newton:targets = &lt;/panda/panda_link3/panda_joint4&gt;
         }
 
-        def NewtonActuator &quot;panda_joint5_actuator&quot; (
-            prepend apiSchemas = [&quot;NewtonPDControlAPI&quot;, &quot;NewtonMaxEffortClampingAPI&quot;]
+        def NewtonActuator "panda_joint5_actuator" (
+            prepend apiSchemas = ["NewtonPDControlAPI", "NewtonMaxEffortClampingAPI"]
         )
         {
             float newton:constEffort = 0
@@ -1414,8 +1023,8 @@ over &quot;panda&quot;
             rel newton:targets = &lt;/panda/panda_link4/panda_joint5&gt;
         }
 
-        def NewtonActuator &quot;panda_joint6_actuator&quot; (
-            prepend apiSchemas = [&quot;NewtonPDControlAPI&quot;, &quot;NewtonMaxEffortClampingAPI&quot;]
+        def NewtonActuator "panda_joint6_actuator" (
+            prepend apiSchemas = ["NewtonPDControlAPI", "NewtonMaxEffortClampingAPI"]
         )
         {
             float newton:constEffort = 0
@@ -1425,8 +1034,8 @@ over &quot;panda&quot;
             rel newton:targets = &lt;/panda/panda_link5/panda_joint6&gt;
         }
 
-        def NewtonActuator &quot;panda_joint7_actuator&quot; (
-            prepend apiSchemas = [&quot;NewtonPDControlAPI&quot;, &quot;NewtonMaxEffortClampingAPI&quot;]
+        def NewtonActuator "panda_joint7_actuator" (
+            prepend apiSchemas = ["NewtonPDControlAPI", "NewtonMaxEffortClampingAPI"]
         )
         {
             float newton:constEffort = 0
@@ -1439,53 +1048,37 @@ over &quot;panda&quot;
 }
 </pre></div>
 </div>
-<p>The parent <code class="docutils literal notranslate"><span class="pre">&quot;panda&quot;</span></code> prim shows up as an <code class="docutils literal notranslate"><span class="pre">over</span></code> because the printed
-layer only contains the authored <code class="docutils literal notranslate"><span class="pre">Actuators</span></code> subtree — the rest of the
-Franka asset lives in the original USD file and is composed in at load
-time.  Each <code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code> carries the controller and clamping API
-schemas, the corresponding <code class="docutils literal notranslate"><span class="pre">newton:*</span></code> attributes, and a
-<code class="docutils literal notranslate"><span class="pre">newton:targets</span></code> relationship pointing at the joint it drives.</p>
+<p>부모 <code class="docutils literal notranslate"><span class="pre">"panda"</span></code> 프림은 인쇄된 레이어에 작성된 <code class="docutils literal notranslate"><span class="pre">Actuators</span></code> 서브트리만 포함하기 때문에 <code class="docutils literal notranslate"><span class="pre">over</span></code>로 표시됩니다 — Franka 에셋의 나머지는 원래 USD 파일에 있으며 로드 시 합성됩니다. 각 <code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code>는 컨트롤러 및 클램핑 API 스키마, 해당 <code class="docutils literal notranslate"><span class="pre">newton:*</span></code> 속성, 그리고 구동하는 관절을 가리키는 <code class="docutils literal notranslate"><span class="pre">newton:targets</span></code> 관계를 포함합니다.</p>
 </section>
 </section>
 <section id="saving-the-stage">
 <h2>Saving the stage<a class="headerlink" href="newton_actuators_usd.html#saving-the-stage" title="Link to this heading">#</a></h2>
-<p>Once authored, the actuator prims are part of the stage and persist exactly
-like any other USD content.  Flatten the stage to a single file so it can be
-distributed:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">stage</span> <span class="o">=</span> <span class="n">stage_utils</span><span class="o">.</span><span class="n">get_current_stage</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s2">&quot;usd&quot;</span><span class="p">)</span>
+<p>작성이 완료되면 액추에이터 프림은 스테이지의 일부가 되어 다른 USD 콘텐츠와 동일하게 유지됩니다. 배포할 수 있도록 스테이지를 단일 파일로 평탄화합니다:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">stage</span> <span class="o">=</span> <span class="n">stage_utils</span><span class="o">.</span><span class="n">get_current_stage</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s2">"usd"</span><span class="p">)</span>
     <span class="n">stage</span><span class="o">.</span><span class="n">Export</span><span class="p">(</span><span class="n">out_path</span><span class="o">.</span><span class="n">as_posix</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>Open the exported file in any USD-aware text editor or USD viewer to confirm
-the <code class="docutils literal notranslate"><span class="pre">Actuators</span></code> scope, the <code class="docutils literal notranslate"><span class="pre">newton:*</span></code> attributes, and the <code class="docutils literal notranslate"><span class="pre">newton:targets</span></code>
-relationships are intact.</p>
+<p>USD를 인식하는 텍스트 편집기나 USD 뷰어에서 내보낸 파일을 열어 <code class="docutils literal notranslate"><span class="pre">Actuators</span></code> 스코프, <code class="docutils literal notranslate"><span class="pre">newton:*</span></code> 속성, <code class="docutils literal notranslate"><span class="pre">newton:targets</span></code> 관계가 모두 온전한지 확인합니다.</p>
 </section>
 <section id="discovering-authored-actuators">
 <h2>Discovering authored actuators<a class="headerlink" href="newton_actuators_usd.html#discovering-authored-actuators" title="Link to this heading">#</a></h2>
-<p>When you construct
-<code class="xref py py-class docutils literal notranslate"><span class="pre">ArticulationActuators</span></code> with
-just an articulation root, it walks the USD subtree, finds every
-<code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code> prim, parses its applied API schemas, and rebuilds the
-actuator pipeline:</p>
+<p>아티큘레이션 루트만으로 <code class="xref py py-class docutils literal notranslate"><span class="pre">ArticulationActuators</span></code>를 구성하면, USD 서브트리를 탐색하여 모든 <code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code> 프림을 찾고, 적용된 API 스키마를 파싱하며, 액추에이터 파이프라인을 재구성합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.actuators</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArticulationActuators</span>
 
     <span class="n">actuated</span> <span class="o">=</span> <span class="n">ArticulationActuators</span><span class="p">(</span><span class="n">franka_path</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Discovered </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">actuated</span><span class="o">.</span><span class="n">actuators</span><span class="p">)</span><span class="si">}</span><span class="s2"> actuators&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Actuated DOF indices: </span><span class="si">{</span><span class="n">actuated</span><span class="o">.</span><span class="n">actuated_dof_indices</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Discovered </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">actuated</span><span class="o">.</span><span class="n">actuators</span><span class="p">)</span><span class="si">}</span><span class="s2"> actuators"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Actuated DOF indices: </span><span class="si">{</span><span class="n">actuated</span><span class="o">.</span><span class="n">actuated_dof_indices</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>No further wiring is needed — the pre-physics callback is registered
-automatically and the actuators take over the moment the timeline starts.</p>
+<p>추가 연결이 필요하지 않습니다 — 물리 이전 콜백은 자동으로 등록되며 타임라인이 시작되는 순간 액추에이터가 활성화됩니다.</p>
 </section>
 <section id="round-trip-author-save-re-open-discover">
 <h2>Round-trip: author, save, re-open, discover<a class="headerlink" href="newton_actuators_usd.html#round-trip-author-save-re-open-discover" title="Link to this heading">#</a></h2>
-<p>The most useful pattern is the full round-trip: author once on a base asset,
-flatten to disk, then load the saved file in any application that understands
-the Newton schema:</p>
+<p>가장 유용한 패턴은 전체 왕복입니다: 기본 에셋에 한 번 작성하고, 디스크에 평탄화한 다음, Newton 스키마를 이해하는 모든 애플리케이션에서 저장된 파일을 로드합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">success</span><span class="p">,</span> <span class="n">stage</span> <span class="o">=</span> <span class="n">stage_utils</span><span class="o">.</span><span class="n">open_stage</span><span class="p">(</span><span class="n">out_path</span><span class="o">.</span><span class="n">as_posix</span><span class="p">())</span>
-    <span class="k">assert</span> <span class="n">success</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Failed to open exported stage at </span><span class="si">{</span><span class="n">out_path</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">assert</span> <span class="n">success</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Failed to open exported stage at </span><span class="si">{</span><span class="n">out_path</span><span class="si">}</span><span class="s2">"</span>
 
-    <span class="c1"># The articulation root is the asset&#39;s default prim, preserved by Export.</span>
+    <span class="c1"># The articulation root is the asset's default prim, preserved by Export.</span>
     <span class="n">franka_path</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetDefaultPrim</span><span class="p">()</span><span class="o">.</span><span class="n">GetPath</span><span class="p">()</span><span class="o">.</span><span class="n">pathString</span>
 
     <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.actuators</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArticulationActuators</span>
@@ -1496,7 +1089,7 @@ the Newton schema:</p>
         <span class="c1"># For sim stability, and simulation of the reflected inertia (armature) of the actuator.</span>
         <span class="n">actuated</span><span class="o">.</span><span class="n">articulation</span><span class="o">.</span><span class="n">set_dof_armatures</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">actuated</span><span class="o">.</span><span class="n">actuators</span><span class="p">)</span> <span class="o">==</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;Expected 7 actuators on the Franka arm&quot;</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">actuated</span><span class="o">.</span><span class="n">actuators</span><span class="p">)</span> <span class="o">==</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">"Expected 7 actuators on the Franka arm"</span>
 
             <span class="n">timeline</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">get_timeline_interface</span><span class="p">()</span>
             <span class="n">timeline</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
@@ -1507,18 +1100,15 @@ the Newton schema:</p>
             <span class="n">omni</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">get_timeline_interface</span><span class="p">()</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The same exported file can be loaded in Isaac Lab, where its
-runtime integration layer parses the same <code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code> prims and
-recovers the same effective control law.</p>
+<p>동일한 내보낸 파일은 Isaac Lab에서도 로드할 수 있으며, Isaac Lab의 런타임 통합 레이어가 동일한 <code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code> 프림을 파싱하여 동일한 유효 제어 법칙을 복구합니다.</p>
 </section>
 <section id="hand-editing-authored-actuators">
 <h2>Hand-editing authored actuators<a class="headerlink" href="newton_actuators_usd.html#hand-editing-authored-actuators" title="Link to this heading">#</a></h2>
-<p>After authoring, the Franka actuators on the example asset look like this in
-the saved USDA:</p>
-<div class="highlight-usda notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">&quot;Actuators&quot;</span>
+<p>작성 후 예제 에셋의 Franka 액추에이터는 저장된 USDA에서 다음과 같이 보입니다:</p>
+<div class="highlight-usda notranslate"><div class="highlight"><pre><span></span><span class="k k-Tokens">def</span><span class="w"> </span>Scope<span class="w"> </span><span class="s">"Actuators"</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>NewtonActuator<span class="w"> </span><span class="s">&quot;panda_joint1_actuator&quot;</span><span class="w"> </span><span class="p">(</span>
-<span class="w">        </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;NewtonPDControlAPI&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NewtonMaxEffortClampingAPI&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="k k-Tokens">def</span><span class="w"> </span>NewtonActuator<span class="w"> </span><span class="s">"panda_joint1_actuator"</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="kt">prepend</span><span class="w"> </span><span class="na">apiSchemas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">"NewtonPDControlAPI"</span><span class="p">,</span><span class="w"> </span><span class="s">"NewtonMaxEffortClampingAPI"</span><span class="p">]</span>
 <span class="w">    </span><span class="p">)</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="kt">rel</span><span class="w"> </span><span class="na">newton:targets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nn">&lt;/World/Franka/panda_link0/panda_joint1&gt;</span>
@@ -1531,82 +1121,51 @@ the saved USDA:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Tweaks like adjusting a gain or raising an effort cap can be made by editing
-attributes directly.</p>
+<p>게인 조정이나 노력 상한 변경 같은 수정은 속성을 직접 편집하여 할 수 있습니다.</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="newton_actuators_usd.html#limitations" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>Custom controller subclasses.</strong> Subclasses of <code class="docutils literal notranslate"><span class="pre">newton.actuators.Controller</span></code>
-defined in user code (see <a class="reference internal" href="newton_actuators_python.html#isaac-sim-newton-actuators-python"><span class="std std-ref">Set Up Actuators from Python</span></a>) do not
-have a corresponding USD schema and cannot be authored or discovered this
-way.  Use the Python construction path for those.</p></li>
-<li><p><strong>Homogeneous instances.</strong> When the articulation prim is referenced
-multiple times (a robot fleet), all instances share the same authored
-actuator parameters.</p></li>
-<li><p><strong>No GUI authoring.</strong> There is not yet an Isaac Sim GUI panel for adding <code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code>
-prims; use the Python helper or hand-edit USDA.</p></li>
+<li><p><strong>커스텀 컨트롤러 서브클래스.</strong> 사용자 코드에서 정의된 <code class="docutils literal notranslate"><span class="pre">newton.actuators.Controller</span></code>의 서브클래스(<a class="reference internal" href="newton_actuators_python.html#isaac-sim-newton-actuators-python"><span class="std std-ref">Set Up Actuators from Python</span></a> 참조)는 해당 USD 스키마가 없어 이 방법으로 작성하거나 검색할 수 없습니다. 그런 경우에는 Python 구성 경로를 사용하세요.</p></li>
+<li><p><strong>동질적 인스턴스.</strong> 아티큘레이션 프림이 여러 번 참조(로봇 플릿)되는 경우, 모든 인스턴스는 동일한 작성된 액추에이터 매개변수를 공유합니다.</p></li>
+<li><p><strong>GUI 작성 미지원.</strong> <code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code> 프림 추가를 위한 Isaac Sim GUI 패널이 아직 없습니다; Python 헬퍼를 사용하거나 USDA를 직접 편집하세요.</p></li>
 </ul>
 </section>
 <section id="what-s-next">
 <h2>What’s next<a class="headerlink" href="newton_actuators_usd.html#what-s-next" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="newton_actuators_omnigraph.html#isaac-sim-newton-actuators-omnigraph"><span class="std std-ref">Drive an Actuated Robot from OmniGraph</span></a> — drive a USD-authored
-actuated robot from OmniGraph using the
-<code class="docutils literal notranslate"><span class="pre">Articulation</span> <span class="pre">Actuators</span></code> node.</p></li>
+<li><p><a class="reference internal" href="newton_actuators_omnigraph.html#isaac-sim-newton-actuators-omnigraph"><span class="std std-ref">Drive an Actuated Robot from OmniGraph</span></a> — <code class="docutils literal notranslate"><span class="pre">Articulation</span> <span class="pre">Actuators</span></code> 노드를 사용하여 OmniGraph에서 USD로 작성된 액추에이터 로봇을 구동합니다.</p></li>
 </ul>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="newton_actuators_python.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Set Up Actuators from Python</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="newton_actuators_omnigraph.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Drive an Actuated Robot from OmniGraph</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="newton_actuators_python.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Set Up Actuators from Python</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="newton_actuators_omnigraph.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Drive an Actuated Robot from OmniGraph</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="newton_actuators_usd.html#the-newton-actuator-schema">The Newton actuator schema</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="newton_actuators_usd.html#authoring-with-add-actuator">Authoring with <code class="docutils literal notranslate"><span class="pre">add_actuator</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="newton_actuators_usd.html#inspecting-the-authored-prims">Inspecting the authored prims</a></li>
@@ -1619,46 +1178,29 @@ actuated robot from OmniGraph using the
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="newton_actuators_usd.html#limitations">Limitations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="newton_actuators_usd.html#what-s-next">What’s next</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1689,36 +1231,21 @@ actuated robot from OmniGraph using the
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

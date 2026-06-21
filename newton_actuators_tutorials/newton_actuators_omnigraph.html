@@ -1,551 +1,256 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Drive an Actuated Robot from OmniGraph &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Drive an Actuated Robot from OmniGraph — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'newton_actuators_tutorials/newton_actuators_omnigraph';</script>
-    <script>
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'newton_actuators_tutorials/newton_actuators_omnigraph';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tips" href="newton_actuators_tips.html" />
-    <link rel="prev" title="Author and Parse Actuators from USD" href="newton_actuators_usd.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="newton_actuators_tips.html" rel="next" title="Tips"/>
+<link href="newton_actuators_usd.html" rel="prev" title="Author and Parse Actuators from USD"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="newton_actuators_omnigraph.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="newton_actuators_omnigraph.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +270,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -593,20 +297,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -681,17 +373,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -869,7 +551,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -909,13 +590,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -962,10 +637,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1134,18 +805,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1171,340 +832,215 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Newton Actuators</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Drive an Actuated Robot from OmniGraph</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">Newton Actuators</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Drive an Actuated Robot from OmniGraph</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="drive-an-actuated-robot-from-omnigraph">
+<article class="bd-article">
+<section id="drive-an-actuated-robot-from-omnigraph">
 <span id="isaac-sim-newton-actuators-omnigraph"></span><h1>Drive an Actuated Robot from OmniGraph<a class="headerlink" href="newton_actuators_omnigraph.html#drive-an-actuated-robot-from-omnigraph" title="Link to this heading">#</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">isaacsim.core.experimental.actuators</span></code> extension is <strong>experimental</strong>.
-Node inputs and behavior may change in future releases.</p>
+<p><code class="docutils literal notranslate"><span class="pre">isaacsim.core.experimental.actuators</span></code> 익스텐션은 <strong>실험적</strong>입니다.
+노드 입력과 동작이 향후 릴리스에서 변경될 수 있습니다.</p>
 </div>
-<p>This tutorial walks through driving an actuated robot from OmniGraph
-using the <strong>Articulation Actuators</strong> node provided by
-<code class="docutils literal notranslate"><span class="pre">isaacsim.core.experimental.actuators</span></code>.</p>
-<p>The node is intentionally thin: on each <code class="docutils literal notranslate"><span class="pre">execIn</span></code> pulse it lazily
-constructs an
-<code class="xref py py-class docutils literal notranslate"><span class="pre">ArticulationActuators</span></code> for the
-configured <code class="docutils literal notranslate"><span class="pre">robotPath</span></code> and (optionally) writes a feedforward effort
-target.  All actuator pipeline parameters — controllers, clamping, delays —
-come from <code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code> prims authored on the asset.</p>
+<p>이 튜토리얼은 <code class="docutils literal notranslate"><span class="pre">isaacsim.core.experimental.actuators</span></code>에서 제공하는 <strong>Articulation Actuators</strong> 노드를 사용하여 OmniGraph에서 액추에이터가 연결된 로봇을 구동하는 과정을 안내합니다.</p>
+<p>이 노드는 의도적으로 얇게 설계되어 있습니다: 각 <code class="docutils literal notranslate"><span class="pre">execIn</span></code> 펄스에서 설정된 <code class="docutils literal notranslate"><span class="pre">robotPath</span></code>에 대한 <code class="xref py py-class docutils literal notranslate"><span class="pre">ArticulationActuators</span></code>를 지연 구성하고 선택적으로 피드포워드 노력 목표를 씁니다. 컨트롤러, 클램핑, 지연 등 모든 액추에이터 파이프라인 매개변수는 에셋에 작성된 <code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code> 프림에서 가져옵니다.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p><strong>The Articulation Actuators node only works on robots whose actuators are
-authored in USD.</strong>  It does not expose the Python construction path
-(<code class="docutils literal notranslate"><span class="pre">ArticulationActuators.from_actuators</span></code>).  If your actuator
-configuration is Python-built or relies on a custom
-<code class="docutils literal notranslate"><span class="pre">newton.actuators.Controller</span></code> subclass, drive it from a Python script
-or a custom OmniGraph Python node instead — see
-<a class="reference internal" href="newton_actuators_python.html#isaac-sim-newton-actuators-python"><span class="std std-ref">Set Up Actuators from Python</span></a>.</p>
+<p><strong>Articulation Actuators 노드는 액추에이터가 USD에 작성된 로봇에서만 작동합니다.</strong> Python 구성 경로(<code class="docutils literal notranslate"><span class="pre">ArticulationActuators.from_actuators</span></code>)는 노출되지 않습니다. 액추에이터 설정이 Python으로 구성되거나 커스텀 <code class="docutils literal notranslate"><span class="pre">newton.actuators.Controller</span></code> 서브클래스에 의존하는 경우, 대신 Python 스크립트나 커스텀 OmniGraph Python 노드에서 구동하세요 — <a class="reference internal" href="newton_actuators_python.html#isaac-sim-newton-actuators-python"><span class="std std-ref">Set Up Actuators from Python</span></a>을 참조하세요.</p>
 </div>
-<p>By the end of this tutorial you’ll know how to:</p>
+<p>이 튜토리얼을 완료하면 다음 방법을 알 수 있습니다:</p>
 <ul class="simple">
-<li><p>Build a minimal OmniGraph that drives a USD-authored actuated robot.</p></li>
-<li><p>Send per-DOF feedforward effort commands through the node.</p></li>
+<li><p>USD로 작성된 액추에이터 로봇을 구동하는 최소한의 OmniGraph를 구성합니다.</p></li>
+<li><p>노드를 통해 DOF별 피드포워드 노력 명령을 전송합니다.</p></li>
 </ul>
-<p>To run the example, use the following command:</p>
+<p>예제를 실행하려면 다음 명령을 사용합니다:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Newton Actuators OmniGraph example</span>
 ./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.core.experimental.actuators/newton_actuators_omnigraph_example.py
 </pre></div>
 </div>
 <p><strong>Prerequisites</strong></p>
 <ul class="simple">
-<li><p>A robot asset with <code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code> prims already authored — see
-<a class="reference internal" href="newton_actuators_usd.html#isaac-sim-newton-actuators-usd"><span class="std std-ref">Author and Parse Actuators from USD</span></a>.</p></li>
-<li><p>Familiarity with <a class="reference internal" href="../omnigraph/omnigraph_tutorial.html#isaac-sim-app-tutorial-gui-omnigraph"><span class="std std-ref">OmniGraph</span></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NewtonActuator</span></code> 프림이 이미 작성된 로봇 에셋 — <a class="reference internal" href="newton_actuators_usd.html#isaac-sim-newton-actuators-usd"><span class="std std-ref">Author and Parse Actuators from USD</span></a>를 참조하세요.</p></li>
+<li><p><a class="reference internal" href="../omnigraph/omnigraph_tutorial.html#isaac-sim-app-tutorial-gui-omnigraph"><span class="std std-ref">OmniGraph</span></a>에 대한 기본 이해.</p></li>
 </ul>
 <section id="the-articulation-actuators-node">
 <h2>The Articulation Actuators node<a class="headerlink" href="newton_actuators_omnigraph.html#the-articulation-actuators-node" title="Link to this heading">#</a></h2>
-<p>The node ships under the <strong>Newton Actuators</strong> category in the graph editor’s
-node search.  Its full name is <code class="docutils literal notranslate"><span class="pre">Articulation</span> <span class="pre">Actuators</span></code>.</p>
-<p>Inputs:</p>
+<p>이 노드는 그래프 에디터의 노드 검색에서 <strong>Newton Actuators</strong> 카테고리 아래에 있습니다. 전체 이름은 <code class="docutils literal notranslate"><span class="pre">Articulation</span> <span class="pre">Actuators</span></code>입니다.</p>
+<p>입력:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <colgroup>
-<col style="width: 20.0%" />
-<col style="width: 15.0%" />
-<col style="width: 65.0%" />
+<col style="width: 20.0%"/>
+<col style="width: 15.0%"/>
+<col style="width: 65.0%"/>
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Name</p></th>
-<th class="head"><p>Type</p></th>
-<th class="head"><p>Description</p></th>
+<tr class="row-odd"><th class="head"><p>이름</p></th>
+<th class="head"><p>타입</p></th>
+<th class="head"><p>설명</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">execIn</span></code></p></td>
 <td><p>execution</p></td>
-<td><p>Trigger pulse.  When <code class="docutils literal notranslate"><span class="pre">autoStepPrePhysics</span></code> is true, this is a no-op
-for stepping but still drives feedforward writes.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">autoStepPrePhysics</span></code>가 true이면 스테핑에 대한 no-op이지만 피드포워드 쓰기는 여전히 구동합니다.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">robotPath</span></code></p></td>
 <td><p>string</p></td>
-<td><p>Articulation root prim path.  Changing this after first compute
-destroys and recreates the underlying <code class="docutils literal notranslate"><span class="pre">ArticulationActuators</span></code>.</p></td>
+<td><p>아티큘레이션 루트 프림 경로. 첫 번째 계산 후 이 값을 변경하면 기저 <code class="docutils literal notranslate"><span class="pre">ArticulationActuators</span></code>가 소멸되고 재생성됩니다.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">autoStepPrePhysics</span></code></p></td>
 <td><p>bool</p></td>
-<td><p>When true (default), the underlying wrapper registers a pre-physics
-callback and steps the actuators automatically every tick.  When
-false, the node calls <code class="docutils literal notranslate"><span class="pre">step_actuators</span></code> itself on each <code class="docutils literal notranslate"><span class="pre">execIn</span></code>.</p></td>
+<td><p>true(기본값)이면 기저 래퍼가 물리 이전 콜백을 등록하여 매 틱마다 액추에이터를 자동으로 스텝합니다. false이면 노드가 각 <code class="docutils literal notranslate"><span class="pre">execIn</span></code>에서 직접 <code class="docutils literal notranslate"><span class="pre">step_actuators</span></code>를 호출합니다.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">stepDt</span></code></p></td>
 <td><p>double</p></td>
-<td><p>Physics timestep (seconds) used when <code class="docutils literal notranslate"><span class="pre">autoStepPrePhysics</span></code> is false.
-Default <code class="docutils literal notranslate"><span class="pre">0.016667</span></code> (60 Hz).</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">autoStepPrePhysics</span></code>가 false일 때 사용하는 물리 타임스텝(초). 기본값 <code class="docutils literal notranslate"><span class="pre">0.016667</span></code>(60 Hz).</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">feedforwardCommand</span></code></p></td>
 <td><p>float[]</p></td>
-<td><p>Per-DOF feedforward effort.  Empty array skips the call.</p></td>
+<td><p>DOF별 피드포워드 노력. 빈 배열이면 호출을 건너뜁니다.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">indices</span></code></p></td>
 <td><p>int[]</p></td>
-<td><p>Articulation instance indices the feedforward applies to.  Empty
-array applies to all instances.</p></td>
+<td><p>피드포워드가 적용되는 아티큘레이션 인스턴스 인덱스. 빈 배열이면 모든 인스턴스에 적용됩니다.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dofIndices</span></code></p></td>
 <td><p>int[]</p></td>
-<td><p>DOF indices the feedforward applies to.  Empty array applies to all
-DOFs.</p></td>
+<td><p>피드포워드가 적용되는 DOF 인덱스. 빈 배열이면 모든 DOF에 적용됩니다.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>The node has no output pins; effort is written directly to the articulation.</p>
+<p>노드에는 출력 핀이 없습니다; 노력은 아티큘레이션에 직접 씁니다.</p>
 </section>
 <section id="the-example-graph">
 <h2>The example graph<a class="headerlink" href="newton_actuators_omnigraph.html#the-example-graph" title="Link to this heading">#</a></h2>
-<p>The example graph used by this tutorial looks like this:</p>
+<p>이 튜토리얼에서 사용하는 예제 그래프는 다음과 같습니다:</p>
 <figure class="align-center" id="id1">
-<img alt="Action Graph editor showing the example graph: On Playback Tick, a Constant String for the robot path, one Constant Double per DOF feeding a Construct Array, an Articulation Actuators node, and an Articulation Controller node." src="../_images/isim_6.0_full_tut_gui_newton_actuators_omnigraph_inspect.png" />
+<img alt="Action Graph editor showing the example graph: On Playback Tick, a Constant String for the robot path, one Constant Double per DOF feeding a Construct Array, an Articulation Actuators node, and an Articulation Controller node." src="../_images/isim_6.0_full_tut_gui_newton_actuators_omnigraph_inspect.png"/>
 <figcaption>
-<p><span class="caption-text">The example Action Graph opened in the editor: tick driver, robot-path
-constant, per-DOF pose constants feeding a target-position array, the
-Articulation Actuators node, and the Articulation Controller node.</span><a class="headerlink" href="newton_actuators_omnigraph.html#id1" title="Link to this image">#</a></p>
+<p><span class="caption-text">에디터에서 열린 예제 Action Graph: 틱 드라이버, 로봇 경로 상수, DOF별 포즈 상수가 목표 위치 배열을 공급하고, Articulation Actuators 노드와 Articulation Controller 노드로 구성됩니다.</span><a class="headerlink" href="newton_actuators_omnigraph.html#id1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>It contains:</p>
+<p>포함 내용:</p>
 <ul class="simple">
-<li><p><strong>On Playback Tick</strong> — emits an execution event every frame while the
-simulation is playing.</p></li>
-<li><p><strong>Robot Path</strong> (a <em>Constant String</em> node) — holds the articulation root
-prim path.  Wiring it once and fanning it out keeps a single source of
-truth so the actuator and controller nodes can never drift out of sync.</p></li>
-<li><p><strong>Target Positions</strong> (a <em>Construct Array</em> node, sized to the
-articulation’s DOF count) — aggregates one value per DOF into the
-<code class="docutils literal notranslate"><span class="pre">double[]</span></code> <code class="docutils literal notranslate"><span class="pre">positionCommand</span></code> the controller expects.  For a Franka
-that’s 9 entries: 7 arm joints followed by 2 finger joints.</p></li>
-<li><p><strong>Pose0 … Pose8</strong> (one <em>Constant Double</em> per DOF) — the actual home-pose
-numbers.  Each is wired into the corresponding <code class="docutils literal notranslate"><span class="pre">inputN</span></code> slot of the
-Construct Array.  Splitting the targets across one constant per DOF makes
-it trivial to inspect and tweak any single joint target in the editor.</p></li>
-<li><p><strong>Articulation Actuators</strong> — the experimental Newton actuator node.
-Reads <code class="docutils literal notranslate"><span class="pre">robotPath</span></code> from the constant.</p></li>
-<li><p><strong>Articulation Controller</strong> — the standard Isaac Sim node that writes
-position / velocity / effort commands onto the articulation.  Reads
-<code class="docutils literal notranslate"><span class="pre">robotPath</span></code> from the same constant and <code class="docutils literal notranslate"><span class="pre">positionCommand</span></code> from the
-Construct Array’s output.</p></li>
+<li><p><strong>On Playback Tick</strong> — 시뮬레이션이 재생되는 동안 매 프레임마다 실행 이벤트를 방출합니다.</p></li>
+<li><p><strong>Robot Path</strong>(<em>Constant String</em> 노드) — 아티큘레이션 루트 프림 경로를 보유합니다. 한 번 배선하고 분기하면 단일 정보 소스가 유지되어 액추에이터와 컨트롤러 노드가 동기화를 잃지 않습니다.</p></li>
+<li><p><strong>Target Positions</strong>(아티큘레이션의 DOF 수에 맞게 크기 조정된 <em>Construct Array</em> 노드) — DOF당 하나의 값을 집계하여 컨트롤러가 기대하는 <code class="docutils literal notranslate"><span class="pre">double[]</span></code> <code class="docutils literal notranslate"><span class="pre">positionCommand</span></code>로 만듭니다. Franka의 경우 7개의 팔 관절과 2개의 손가락 관절로 총 9개의 항목입니다.</p></li>
+<li><p><strong>Pose0 … Pose8</strong>(DOF당 하나의 <em>Constant Double</em>) — 실제 홈 포즈 숫자. 각각 Construct Array의 해당 <code class="docutils literal notranslate"><span class="pre">inputN</span></code> 슬롯에 연결됩니다. DOF당 하나의 상수로 목표를 분리하면 에디터에서 단일 관절 목표를 쉽게 검사하고 조정할 수 있습니다.</p></li>
+<li><p><strong>Articulation Actuators</strong> — 실험적 Newton 액추에이터 노드. 상수에서 <code class="docutils literal notranslate"><span class="pre">robotPath</span></code>를 읽습니다.</p></li>
+<li><p><strong>Articulation Controller</strong> — 아티큘레이션에 위치/속도/노력 명령을 쓰는 표준 Isaac Sim 노드. 동일한 상수에서 <code class="docutils literal notranslate"><span class="pre">robotPath</span></code>를, Construct Array 출력에서 <code class="docutils literal notranslate"><span class="pre">positionCommand</span></code>를 읽습니다.</p></li>
 </ul>
-<p>The wiring is:</p>
+<p>배선 방법:</p>
 <ul class="simple">
-<li><p>Both the Articulation Actuators and the Articulation Controller have
-their <code class="docutils literal notranslate"><span class="pre">execIn</span></code> connected to On Playback Tick’s <code class="docutils literal notranslate"><span class="pre">tick</span></code>.</p></li>
-<li><p>The Robot Path constant feeds <code class="docutils literal notranslate"><span class="pre">robotPath</span></code> on both actuator-side nodes.</p></li>
-<li><p>Each Pose constant feeds the corresponding <code class="docutils literal notranslate"><span class="pre">inputN</span></code> slot on the
-Construct Array; the Construct Array’s <code class="docutils literal notranslate"><span class="pre">array</span></code> output feeds
-<code class="docutils literal notranslate"><span class="pre">positionCommand</span></code> on the Articulation Controller.</p></li>
+<li><p>Articulation Actuators와 Articulation Controller 모두 <code class="docutils literal notranslate"><span class="pre">execIn</span></code>이 On Playback Tick의 <code class="docutils literal notranslate"><span class="pre">tick</span></code>에 연결됩니다.</p></li>
+<li><p>Robot Path 상수가 두 액추에이터 측 노드 모두의 <code class="docutils literal notranslate"><span class="pre">robotPath</span></code>에 연결됩니다.</p></li>
+<li><p>각 Pose 상수가 Construct Array의 해당 <code class="docutils literal notranslate"><span class="pre">inputN</span></code> 슬롯에 연결되고, Construct Array의 <code class="docutils literal notranslate"><span class="pre">array</span></code> 출력이 Articulation Controller의 <code class="docutils literal notranslate"><span class="pre">positionCommand</span></code>에 연결됩니다.</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The Articulation Actuators node only needs to fire <strong>once</strong> to bootstrap
-itself: on its first <code class="docutils literal notranslate"><span class="pre">execIn</span></code> pulse it lazily constructs the underlying
-<code class="xref py py-class docutils literal notranslate"><span class="pre">ArticulationActuators</span></code>,
-which then registers its own pre-physics callback and runs the actuators
-on every physics step independent of further graph ticks.  We still feed
-it from On Playback Tick in this example because subsequent ticks are
-what re-apply the <code class="docutils literal notranslate"><span class="pre">feedforwardCommand</span></code> input (when wired).</p>
-<p>The Articulation Controller, by contrast, does need to tick every frame
-so its <code class="docutils literal notranslate"><span class="pre">positionCommand</span></code> is re-asserted onto the articulation.</p>
+<p>Articulation Actuators 노드는 자신을 초기화하기 위해 <strong>한 번만</strong> 실행되면 됩니다: 첫 번째 <code class="docutils literal notranslate"><span class="pre">execIn</span></code> 펄스에서 기저 <code class="xref py py-class docutils literal notranslate"><span class="pre">ArticulationActuators</span></code>를 지연 구성하고, 이후 자체 물리 이전 콜백을 등록하여 추가 그래프 틱과 무관하게 매 물리 스텝에서 액추에이터를 실행합니다. 이 예제에서는 여전히 On Playback Tick에서 피드하는데, 이는 이후 틱이 (배선된 경우) <code class="docutils literal notranslate"><span class="pre">feedforwardCommand</span></code> 입력을 재적용하기 때문입니다.</p>
+<p>반면 Articulation Controller는 <code class="docutils literal notranslate"><span class="pre">positionCommand</span></code>가 아티큘레이션에 다시 어설트되려면 매 프레임마다 틱해야 합니다.</p>
 </div>
 </section>
 <section id="authoring-the-graph">
 <h2>Authoring the graph<a class="headerlink" href="newton_actuators_omnigraph.html#authoring-the-graph" title="Link to this heading">#</a></h2>
-<p>In a typical workflow you author this graph by hand in the Action Graph
-editor — drop in the nodes shown above, fill in the constant string with
-the articulation root path and the per-DOF Constant Doubles with your
-target joint positions, and wire them up as described.  See
-<a class="reference internal" href="../omnigraph/omnigraph_tutorial.html#isaac-sim-app-tutorial-gui-omnigraph"><span class="std std-ref">Isaac Sim OmniGraph Tutorial</span></a> for a walkthrough of the
-editor.</p>
-<p>To reproduce the screenshot above without authoring the graph by hand, a
-runnable companion script is provided at
-<code class="docutils literal notranslate"><span class="pre">standalone_examples/api/isaacsim.core.experimental.actuators/newton_actuators_omnigraph_example.py</span></code>.
-It opens the Franka asset, authors actuator prims onto it, builds the graph
-programmatically, plays the simulation, and keeps the kit window open so
-you can open the Action Graph editor and inspect or modify the graph live:</p>
+<p>일반적인 워크플로우에서 이 그래프는 Action Graph 에디터에서 직접 작성합니다 — 위에 표시된 노드를 추가하고, 상수 문자열에 아티큘레이션 루트 경로를, DOF당 Constant Double에 목표 관절 위치를 채운 다음 설명된 대로 배선합니다. 에디터 사용법은 <a class="reference internal" href="../omnigraph/omnigraph_tutorial.html#isaac-sim-app-tutorial-gui-omnigraph"><span class="std std-ref">Isaac Sim OmniGraph Tutorial</span></a>을 참조하세요.</p>
+<p>그래프를 직접 작성하지 않고 위 스크린샷을 재현하려면, <code class="docutils literal notranslate"><span class="pre">standalone_examples/api/isaacsim.core.experimental.actuators/newton_actuators_omnigraph_example.py</span></code>에 실행 가능한 동반 스크립트가 제공됩니다. Franka 에셋을 열고, 액추에이터 프림을 작성하고, 그래프를 프로그래밍 방식으로 구성하고, 시뮬레이션을 실행하며, Action Graph 에디터를 열어 그래프를 실시간으로 검사하거나 수정할 수 있도록 Kit 창을 열어 둡니다:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.core.experimental.actuators/newton_actuators_omnigraph_example.py
 </pre></div>
 </div>
-<p>Once the script is running you can edit the per-DOF Constant Double values
-directly in the graph editor and watch the robot follow the new targets in
-real time:</p>
+<p>스크립트가 실행되면 그래프 에디터에서 DOF별 Constant Double 값을 직접 편집하고 로봇이 실시간으로 새 목표를 따르는 것을 확인할 수 있습니다:</p>
 <figure class="align-center" id="id2">
-<img alt="Editing per-DOF Constant Double values in the Action Graph editor and seeing the Franka follow the new joint-position targets." src="../_images/isim_6.0_full_tut_gui_newton_actuators_omnigraph_drive.webp" />
+<img alt="Editing per-DOF Constant Double values in the Action Graph editor and seeing the Franka follow the new joint-position targets." src="../_images/isim_6.0_full_tut_gui_newton_actuators_omnigraph_drive.webp"/>
 <figcaption>
-<p><span class="caption-text">Editing the per-DOF target values in the Action Graph editor drives the
-Franka through the Articulation Controller and the authored Newton
-actuators.</span><a class="headerlink" href="newton_actuators_omnigraph.html#id2" title="Link to this image">#</a></p>
+<p><span class="caption-text">Action Graph 에디터에서 DOF별 목표 값을 편집하면 Articulation Controller와 작성된 Newton 액추에이터를 통해 Franka가 구동됩니다.</span><a class="headerlink" href="newton_actuators_omnigraph.html#id2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="adding-a-feedforward-source">
 <h2>Adding a feedforward source<a class="headerlink" href="newton_actuators_omnigraph.html#adding-a-feedforward-source" title="Link to this heading">#</a></h2>
-<p>Feedforward effort is added on top of the controller output by every actuator
-each tick.  It is the right input for gravity-compensation torques, learned
-residual policies, or any open-loop torque component.</p>
-<p>Wire a per-DOF <code class="docutils literal notranslate"><span class="pre">float[]</span></code> array (typically a <strong>Constant Float Array</strong> node,
-or any upstream node that produces a <code class="docutils literal notranslate"><span class="pre">float[]</span></code>) into the
-<strong>feedforwardCommand</strong> input of the Articulation Actuators node.  If the
-array is shorter than the full DOF count, also wire a per-DOF <code class="docutils literal notranslate"><span class="pre">int[]</span></code>
-index array into <strong>dofIndices</strong> so the actuator knows which DOFs the
-feedforward applies to.</p>
+<p>피드포워드 노력은 매 틱마다 모든 액추에이터에 의해 컨트롤러 출력 위에 더해집니다. 중력 보상 토크, 학습된 잔차 정책, 또는 개방 루프 토크 성분에 적합한 입력입니다.</p>
+<p>DOF별 <code class="docutils literal notranslate"><span class="pre">float[]</span></code> 배열(일반적으로 <strong>Constant Float Array</strong> 노드 또는 <code class="docutils literal notranslate"><span class="pre">float[]</span></code>를 생성하는 상위 노드)을 Articulation Actuators 노드의 <strong>feedforwardCommand</strong> 입력에 배선합니다. 배열이 전체 DOF 수보다 짧은 경우, DOF별 <code class="docutils literal notranslate"><span class="pre">int[]</span></code> 인덱스 배열도 <strong>dofIndices</strong>에 배선하여 액추에이터가 피드포워드가 적용되는 DOF를 알 수 있도록 합니다.</p>
 </section>
 <section id="manual-stepping-advanced">
 <h2>Manual stepping (advanced)<a class="headerlink" href="newton_actuators_omnigraph.html#manual-stepping-advanced" title="Link to this heading">#</a></h2>
-<p>Setting <code class="docutils literal notranslate"><span class="pre">autoStepPrePhysics</span></code> to <strong>false</strong> disables the pre-physics
-callback that the underlying <code class="docutils literal notranslate"><span class="pre">ArticulationActuators</span></code> registers, and the
-node steps the actuators itself on each <code class="docutils literal notranslate"><span class="pre">execIn</span></code> pulse using <code class="docutils literal notranslate"><span class="pre">stepDt</span></code>.</p>
-<p>This is useful when you need:</p>
+<p><code class="docutils literal notranslate"><span class="pre">autoStepPrePhysics</span></code>를 <strong>false</strong>로 설정하면 기저 <code class="docutils literal notranslate"><span class="pre">ArticulationActuators</span></code>가 등록하는 물리 이전 콜백이 비활성화되고, 노드가 각 <code class="docutils literal notranslate"><span class="pre">execIn</span></code> 펄스에서 <code class="docutils literal notranslate"><span class="pre">stepDt</span></code>를 사용하여 직접 액추에이터를 스텝합니다.</p>
+<p>이것이 유용한 경우:</p>
 <ul class="simple">
-<li><p>Deterministic ordering between feedforward writes and the actuator step
-inside the same graph evaluation tick, or</p></li>
-<li><p>Stepping at a rate other than the physics rate (e.g. for analysis).</p></li>
+<li><p>동일한 그래프 평가 틱 내에서 피드포워드 쓰기와 액추에이터 스텝 간의 결정론적 순서가 필요하거나,</p></li>
+<li><p>물리 레이트 이외의 레이트로 스테핑할 때(예: 분석 목적).</p></li>
 </ul>
-<p>Be aware that the timeline still drives physics independently — manually stepping the
-actuators faster than physics is usually not useful. In nearly all cases the default
-(auto-stepping) is what you want.</p>
+<p>타임라인은 여전히 물리를 독립적으로 구동한다는 점에 유의하세요 — 물리보다 빠르게 액추에이터를 수동으로 스텝하는 것은 대개 유용하지 않습니다. 거의 모든 경우 기본값(자동 스테핑)이 원하는 것입니다.</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="newton_actuators_omnigraph.html#limitations" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>USD discovery only.</strong> The node has no Python equivalent of
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">from_actuators()</span></code>.
-If your actuator pipeline is built in Python, drive it with a Python
-script (see <a class="reference internal" href="newton_actuators_python.html#isaac-sim-newton-actuators-python"><span class="std std-ref">Set Up Actuators from Python</span></a>) or wrap it in a
-custom OmniGraph Python node.</p></li>
+<li><p><strong>USD 검색만 지원.</strong> 노드에는 <code class="xref py py-meth docutils literal notranslate"><span class="pre">from_actuators()</span></code>에 해당하는 Python 기능이 없습니다. 액추에이터 파이프라인이 Python으로 구성된 경우 Python 스크립트로 구동하거나(<a class="reference internal" href="newton_actuators_python.html#isaac-sim-newton-actuators-python"><span class="std std-ref">Set Up Actuators from Python</span></a> 참조) 커스텀 OmniGraph Python 노드로 래핑하세요.</p></li>
 </ul>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="newton_actuators_usd.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Author and Parse Actuators from USD</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="newton_actuators_tips.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Tips</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="newton_actuators_usd.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Author and Parse Actuators from USD</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="newton_actuators_tips.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Tips</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="newton_actuators_omnigraph.html#the-articulation-actuators-node">The Articulation Actuators node</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="newton_actuators_omnigraph.html#the-example-graph">The example graph</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="newton_actuators_omnigraph.html#authoring-the-graph">Authoring the graph</a></li>
@@ -1512,46 +1048,29 @@ custom OmniGraph Python node.</p></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="newton_actuators_omnigraph.html#manual-stepping-advanced">Manual stepping (advanced)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="newton_actuators_omnigraph.html#limitations">Limitations</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1582,36 +1101,21 @@ custom OmniGraph Python node.</p></li>
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>
