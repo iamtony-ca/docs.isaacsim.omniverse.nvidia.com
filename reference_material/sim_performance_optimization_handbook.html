@@ -1,551 +1,256 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Isaac Sim Performance Optimization Handbook &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Isaac Sim Performance Optimization Handbook — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'reference_material/sim_performance_optimization_handbook';</script>
-    <script>
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'reference_material/sim_performance_optimization_handbook';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Isaac Sim Benchmarks" href="benchmarks.html" />
-    <link rel="prev" title="Rendering modes" href="rendering_modes.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="benchmarks.html" rel="next" title="Isaac Sim Benchmarks"/>
+<link href="rendering_modes.html" rel="prev" title="Rendering modes"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="sim_performance_optimization_handbook.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="sim_performance_optimization_handbook.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +270,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -593,20 +297,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -681,17 +373,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -869,7 +551,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -909,13 +590,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -962,10 +637,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1134,18 +805,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1171,216 +832,191 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Isaac Sim Performance Optimization Handbook</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Isaac Sim Performance Optimization Handbook</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="isaac-sim-performance-optimization-handbook">
+<article class="bd-article">
+<section id="isaac-sim-performance-optimization-handbook">
 <span id="id1"></span><h1>Isaac Sim Performance Optimization Handbook<a class="headerlink" href="sim_performance_optimization_handbook.html#isaac-sim-performance-optimization-handbook" title="Link to this heading">#</a></h1>
 <section id="understanding-isaac-sim-short-performance">
 <h2>Understanding Isaac Sim Performance<a class="headerlink" href="sim_performance_optimization_handbook.html#understanding-isaac-sim-short-performance" title="Link to this heading">#</a></h2>
-<p>The speed of the simulation can be influenced by a variety of factors. The physics step size, complexity of the scene, number of physics objects, and quantity/resolution of cameras and sensors all play a role in simulation performance. The below tips address common performance optimizations for each of these factors.</p>
+<p>시뮬레이션 속도는 다양한 요인에 의해 영향을 받을 수 있습니다. 물리 스텝 크기, 장면의 복잡도, 충돌체의 수와 복잡도, GPU 동역학 사용 여부 등이 요인에 포함됩니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <a class="reference internal" href="benchmarks.html#isaac-sim-benchmarks-measuring-kpis"><span class="std std-ref">Isaac Sim Benchmarks</span></a> page contains common workflows to evaluate performance as well as specific optimization recommendations based on the workflow.</p>
+<p><a class="reference internal" href="benchmarks.html#isaac-sim-benchmarks-measuring-kpis"><span class="std std-ref">KPI 측정</span></a> 페이지에서 주요 성능 지표를 측정하는 방법을 확인하세요.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>To identify performance bottlenecks, profiling the simulation can be helpful. See <a class="reference internal" href="../utilities/debugging/profiling_performance.html#isaac-sim-app-profiling-performance"><span class="std std-ref">Profiling Performance Using Tracy</span></a> for details on using the Tracy profiler to profile the simulation.</p>
+<p>성능 병목 지점을 파악하려면 시뮬레이션 프로파일링이 도움이 됩니다. <a class="reference internal" href="../development_tools/profiling.html#isaac-sim-profiling"><span class="std std-ref">Profiling</span></a>을 참조하세요.</p>
 </div>
 </section>
 <section id="physics-simulation-optimizations">
 <span id="isaac-sim-performance-optimization-handbook-physics-simulation"></span><h2>Physics Simulation Optimizations<a class="headerlink" href="sim_performance_optimization_handbook.html#physics-simulation-optimizations" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p><strong>Physics Step Size</strong>: The physics step size determines the time interval for each physics simulation step.</p></li>
+<li><p><strong>Physics Step Size</strong>: 물리 스텝 크기는 각 물리 계산 단계의 시간 간격을 결정합니다.</p></li>
 </ol>
 <ul class="simple">
-<li><p>A smaller step size will result in a more accurate simulation but will also require more computational resources and thus slow down the simulation.</p></li>
-<li><p>A larger step size will speed up the simulation but may result in less accurate physics.</p></li>
+<li><p>스텝 크기가 작을수록 시뮬레이션이 더 정확해지지만 더 많은 계산 리소스가 필요합니다.</p></li>
+<li><p>스텝 크기가 크면 시뮬레이션이 빨라지지만 물리 정확도가 떨어질 수 있습니다.</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Adjust the physics step size in your script using the <code class="docutils literal notranslate"><span class="pre">SimulationManager.set_physics_dt(dt)</span></code> function, where dt is the desired step size in seconds.</p>
+<p>스크립트에서 <code class="docutils literal notranslate"><span class="pre">set_physics_dt()</span></code>를 사용하여 물리 스텝 크기를 조정하세요.</p>
 </div>
 <ol class="arabic simple" start="2">
-<li><p><strong>PhysX Minimum Frame Rate Clamp</strong> (<code class="docutils literal notranslate"><span class="pre">--/persistent/simulation/minFrameRate</span></code>): caps how many <code class="docutils literal notranslate"><span class="pre">physics_dt</span></code> substeps PhysX will run per app update to catch up after a slow frame. The value represents the target minimum app frame rate; PhysX will not run so many catch-up substeps in one update that the effective frame rate would drop below it. This is a direct performance-vs-accuracy knob:</p></li>
+<li><p><strong>PhysX Minimum Frame Rate Clamp</strong> (<code class="docutils literal notranslate"><span class="pre">/physics/minFrameRate</span></code>): PhysX가 누적된 물리 시간의 최대량을 제한합니다. 렌더링 프레임이 물리 스텝보다 훨씬 느리게 실행될 때 무한한 물리 업데이트를 방지합니다.</p></li>
 </ol>
 <ul class="simple">
-<li><p><strong>Raising the clamp</strong> (for example to <code class="docutils literal notranslate"><span class="pre">60</span></code>) keeps the app frame rate up under load at the cost of physics-time accuracy: when an app update is slow, PhysX truncates the substep budget, so simulated time falls behind wall-clock and the simulation appears to run in slow motion (or, equivalently, some physics work is effectively dropped). Use this when responsiveness / rendering throughput matters more than 1:1 sim-time-to-wall-time playback.</p></li>
-<li><p><strong>Lowering the clamp</strong> (for example to <code class="docutils literal notranslate"><span class="pre">15</span></code>) lets PhysX run more catch-up substeps after a slow frame, keeping simulated time closer to wall-clock at the cost of further reducing the visible frame rate. Use this when sim-time accuracy or determinism matters more than smoothness.</p></li>
+<li><p><strong>클램프 올리기</strong>(예: <code class="docutils literal notranslate"><span class="pre">60</span></code>으로)는 물리 단계가 더 자주 실행될 수 있도록 허용합니다. 렌더링 FPS가 물리 Hz보다 느릴 때 유용합니다.</p></li>
+<li><p><strong>클램프 낮추기</strong>(예: <code class="docutils literal notranslate"><span class="pre">10</span></code>으로)는 각 렌더 프레임당 물리 단계 수를 제한하여 렌더링이 물리보다 느릴 때 시뮬레이션이 뒤처지는 것을 방지합니다.</p></li>
 </ul>
-<p>This setting is <strong>not</strong> the same as the timeline’s <code class="docutils literal notranslate"><span class="pre">targetFrameRate</span></code> (set via <code class="xref py py-meth docutils literal notranslate"><span class="pre">isaacsim.core.rendering_manager.RenderingManager.set_dt()</span></code>) or the loop runner’s <code class="docutils literal notranslate"><span class="pre">/app/runLoops/main/rateLimitFrequency</span></code>. See <a class="reference internal" href="../sensors/isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-clock-relationships"><span class="std std-ref">Architecture: Timeline, Physics, and the Renderer</span></a> for the three-clock architecture.</p>
+<p>이 설정은 타임라인의 <code class="docutils literal notranslate"><span class="pre">dt</span></code>와 <strong>동일하지 않습니다</strong>. 이는 렌더링 프레임 대 물리 업데이트 관계에 대한 안전 장치입니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Adjust the PhysX minimum frame rate clamp by modifying the <code class="docutils literal notranslate"><span class="pre">--/persistent/simulation/minFrameRate=&lt;value&gt;</span></code> setting, where <code class="docutils literal notranslate"><span class="pre">&lt;value&gt;</span></code> is the target minimum app frame rate in FPS.</p>
+<p><code class="docutils literal notranslate"><span class="pre">/physics/minFrameRate</span></code> carb 설정을 수정하여 PhysX 최소 프레임 레이트 클램프를 조정하세요.</p>
 </div>
 <ol class="arabic simple" start="3">
-<li><p><strong>GPU Dynamics</strong>: Enabling GPU dynamics can potentially speed up the simulation by offloading the physics calculations to the GPU.</p></li>
+<li><p><strong>GPU Dynamics</strong>: GPU 동역학을 활성화하면 물리 계산을 CPU에서 GPU로 오프로드하여 시뮬레이션 속도를 높일 수 있습니다.</p></li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This will only be beneficial if your GPU is powerful enough and not already fully utilized by other tasks.
-Enable or disable GPU dynamics in your script using the <code class="docutils literal notranslate"><span class="pre">SimulationManager.set_physics_sim_device(device)</span></code> function, where device is a string value of either <code class="docutils literal notranslate"><span class="pre">cuda</span></code> or <code class="docutils literal notranslate"><span class="pre">cpu</span></code>. In multi-GPU setups, a specific device can be specified by passing the device index as part of the string such as <code class="docutils literal notranslate"><span class="pre">cuda:0</span></code>.</p>
+<p>이는 GPU가 충분히 강력하고 다른 작업으로 이미 완전히 사용되지 않는 경우에만 유익합니다.</p>
 </div>
 <ol class="arabic simple" start="4">
-<li><p><strong>Physics Scene Complexity</strong>: The complexity of the physics objects in the scene will heavily impact the performance of the simulation.</p></li>
+<li><p><strong>Physics Scene Complexity</strong>: 장면의 물리 객체 복잡도는 시뮬레이션 성능에 영향을 줍니다.</p></li>
 </ol>
 <ul>
-<li><p>Simple colliders are typically the most performant. The performance scaling is as follows:</p>
+<li><p>간단한 충돌체가 일반적으로 가장 성능이 좋습니다. 성능 순서는 다음과 같습니다:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Primitive colliders (box, sphere, capsule, plane) are most performant.</p></li>
-<li><p>Convex meshes are the next most performant (Convex Hull or Convex Decomposition approximation)</p></li>
-<li><p>Cylinders are a good choice for smooth, precise rolling behavior but are more expensive than a low-vertex convex mesh approximation.</p></li>
+<li><p>기본 충돌체(박스, 구, 캡슐, 평면)가 가장 성능이 좋습니다.</p></li>
+<li><p>볼록 메시가 다음으로 성능이 좋습니다(Convex Hull 또는 Convex Decomposition 근사)</p></li>
+<li><p>실린더는 부드럽고 정확한 구름 동작에 좋은 선택이지만 저폴리곤 볼록 근사보다 비쌉니다.</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p>Disable or simplify colliders that are not essential for the workflow being simulated. For example, if a robot is not expected to interact with the walls of a room, the wall colliders could be disabled while keeping the floor collider enabled.</p>
+<li><p>시뮬레이션하는 워크플로에 필수적이지 않은 충돌체를 비활성화하거나 단순화하세요. 예를 들어, 조작 태스크에서 로봇 팔꿈치 메시에 충돌 기하학이 필요한지 고려하세요.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Similarly, avoid unnecessary collisions. Where possible, reduce the number of object overlaps to reduce the overhead in the collision phase of the simulation.</p></li>
+<li><p>마찬가지로 불필요한 충돌을 피하세요. 가능하면 객체 겹침 수를 줄여 충돌 감지 및 해결 계산을 최소화하세요.</p></li>
 </ul>
 </div></blockquote>
 </li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This applies to both the scene as a whole and individual physics objects. Complex colliders on highly-articulated robots as well as many complex collision meshes on walls, tables, etc. all add to the computational cost.</p>
+<p>이는 장면 전체와 개별 물리 객체 모두에 적용됩니다. 동적 물체(비정적 객체)의 복잡한 충돌체는 더 큰 영향을 미칩니다.</p>
 </div>
 <ol class="arabic simple" start="5">
-<li><p><strong>Adjusting PhysX Thread Count</strong>: The number of threads used by PhysX can be adjusted to improve performance depending on the workload.</p></li>
+<li><p><strong>Adjusting PhysX Thread Count</strong>: PhysX에서 사용하는 스레드 수는 최적 성능을 위해 조정될 수 있습니다.</p></li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This is specifically applicable for CPU-based physics simulation. Dropping thread count to 0 will run synchronously on the main thread which in some simple scenes can enable speedups. The default thread count is 8. Set the thread count using <code class="docutils literal notranslate"><span class="pre">--/persistent/physics/numThreads=&lt;value&gt;</span></code>.</p>
+<p>이는 특히 CPU 기반 물리 시뮬레이션에 적용됩니다. 스레드 수를 0으로 낮추면 메인 스레드에서 실행됩니다.</p>
 </div>
-<p>Checkout the <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/guides/physics-performance.html">Physics Simulation Performance</a> guide for more optimization tricks!</p>
+<p><a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physx/latest/performance.html">PhysX 성능 문서</a>를 확인하세요.</p>
 </section>
 <section id="robot-asset-optimizations">
 <span id="isaac-sim-performance-optimization-handbook-asset-optimization"></span><h2>Robot Asset Optimizations<a class="headerlink" href="sim_performance_optimization_handbook.html#robot-asset-optimizations" title="Link to this heading">#</a></h2>
-<p>A step-by-step tutorial to optimize a sample asset is provided in <a class="reference internal" href="../robot_setup_tutorials/optimizing_asset.html#isaac-asset-optimization"><span class="std std-ref">Tutorial 12: Asset Optimization</span></a>.</p>
+<p><a class="reference internal" href="../openusd_tuning_tutorials/index.html"><span class="std std-ref">OpenUSD Tuning Tutorials</span></a>에서 샘플 에셋 최적화 단계별 튜토리얼을 제공합니다.</p>
 <ol class="arabic simple">
-<li><p><strong>Merge Mesh Tool</strong>: Using the Merge Mesh tool at <strong>Tools</strong> &gt; <strong>Robotics</strong> &gt; <strong>Asset Editors</strong> &gt; <strong>Mesh Merge Tool</strong> can allow for a more streamlined asset structure and reduction in total mesh count.</p></li>
-<li><p><strong>Scenegraph Instancing</strong>: Instancing enables shareable, referenceable prim subgraphs. Using pointers to shared reference assets can reduce total memory usage for assets with repeated, identical meshes (e.g. wheels).</p>
+<li><p><strong>Merge Mesh Tool</strong>: <strong>Tools</strong> &gt; <strong>Robotics</strong>의 Merge Mesh 도구를 사용하면 물리 계산이나 로보틱스 애플리케이션에 관련 없는 시각적 세부 사항을 단순화할 수 있습니다.</p></li>
+<li><p><strong>Scenegraph Instancing</strong>: 인스턴싱은 공유 가능하고 참조 가능한 prim 서브그래프를 가능하게 합니다. 동일한 객체 또는 유사한 객체가 많은 장면에서 메모리를 절약할 수 있습니다.</p>
 <ul class="simple">
-<li><p>An example of instancing is described in <a class="reference internal" href="../robot_setup_tutorials/optimizing_asset.html#isaac-asset-optimization"><span class="std std-ref">Tutorial 12: Asset Optimization</span></a>. A general guide to instanceable assets can be found at <a class="reference internal" href="../isaac_lab_tutorials/tutorial_instanceable_assets.html#isaac-sim-app-tutorial-instanceable-assets"><span class="std std-ref">Instanceable Assets</span></a>.</p></li>
+<li><p>인스턴싱의 예시는 <a class="reference internal" href="../robot_setup_tutorials/tutorial_robot_from_usd.html"><span class="std std-ref">여기</span></a>에 설명되어 있습니다.</p></li>
 </ul>
 </li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Instancing inherently carries some limitations related to attributes as children cannot have modified attributes from the parent reference object.</p>
+<p>인스턴싱은 본질적으로 속성 관련 제한을 수반합니다. 자식 노드는 수정된 속성을 가질 수 없으며 자신만의 속성을 추가할 수 없습니다.</p>
 </div>
 <ol class="arabic simple" start="3">
-<li><p><strong>Simplify Colliders</strong>: Colliders have high computational costs. The simpler, the collision shape, the more performant the simulation behaves.</p>
+<li><p><strong>Simplify Colliders</strong>: 충돌체는 높은 계산 비용이 발생합니다. 충돌체가 단순할수록 성능이 좋습니다.</p>
 <ul class="simple">
-<li><p>A reduction in contact points brings substantial performance improvements. For wheel colliders, it’s recommended to use a simple cylinder or sphere collider instead of a mesh collider. This greatly simplifies contact with the ground plane, increasing performance and allows the robot to drive smoothly over terrain.</p></li>
-<li><p>For a robot, use the simplest approximations possible that provide the needed level of precision. For example, for a mobile robot, a cube approximation is often sufficient for the body.</p></li>
-<li><p>Reducing the total number of colliders is also beneficial. Consider whether every collider added to the asset needs to be enabled. Selectively disabling/enabling colliders can greatly reduce computational cost.</p></li>
+<li><p>접촉 지점을 줄이면 성능이 크게 향상됩니다. 휠 충돌체의 경우 구 충돌체가 캡슐보다 접촉 지점이 적어 더 빠릅니다.</p></li>
+<li><p>로봇의 경우 필요한 정밀도를 제공하는 가장 단순한 근사를 사용하세요. 예를 들어, 팔 링크에는 기본 캡슐 또는 박스 충돌체를 사용하세요.</p></li>
+<li><p>충돌체의 총 수를 줄이는 것도 유익합니다. 워크플로에 추가된 모든 충돌체가 실제로 필요한지 고려하세요.</p></li>
 </ul>
 </li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Higher precision applications require using mesh colliders rather than simplified shapes. There are different approximations available and the choice of each one is a tradeoff between performance and precision.</p>
+<p>높은 정밀도 애플리케이션에는 단순화된 형태보다 메시 충돌체를 사용해야 합니다. 트레이드오프가 있습니다.</p>
 </div>
 <ol class="arabic simple" start="4">
-<li><p><strong>Disable Self Collisions</strong>: Disabling self collisions from an Articulation Root could reduce computational load and create substantial speedups at runtime if not needed.</p></li>
+<li><p><strong>Disable Self Collisions</strong>: Articulation Root에서 자기 충돌을 비활성화하면 관절형 물체의 시뮬레이션 속도를 높일 수 있습니다.</p></li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This is highly usecase-dependent. With a complex articulated hand, self collisions are necessary to avoid interpenetrations and provide realistic collisions. For a wheeled mobile robot with some internal geometries, it is likely an unnecessary load to compute any collisions other than those with the external environment.</p>
+<p>이는 사용 사례에 크게 의존합니다. 복잡한 관절형 손에서는 자기 충돌이 현실적인 파지를 위해 필요합니다.</p>
 </div>
 </section>
 <section id="scene-and-rendering-optimizations">
 <span id="isaac-sim-performance-optimization-handbook-scene-and-rendering"></span><h2>Scene and Rendering Optimizations<a class="headerlink" href="sim_performance_optimization_handbook.html#scene-and-rendering-optimizations" title="Link to this heading">#</a></h2>
-<p>For an overview of available renderer modes and when to use each one, see <a class="reference internal" href="rendering_modes.html#isaac-sim-rendering-modes"><span class="std std-ref">Rendering modes</span></a>.</p>
+<p>사용 가능한 렌더러 모드와 각각을 사용해야 하는 경우에 대한 개요는 <a class="reference internal" href="rendering_modes.html"><span class="std std-ref">Rendering Modes</span></a>를 참조하세요.</p>
 <ol class="arabic simple">
-<li><p><strong>Simplify the Scene</strong>: Reducing the complexity of the scene, implementing level of detail (LOD), culling invisible objects, and optimizing the physics settings.</p></li>
+<li><p><strong>Simplify the Scene</strong>: 장면의 복잡도를 줄이고, 레벨 오브 디테일(LOD) 기법을 구현하고, 씬 최적화 도구를 활용하면 성능을 향상시킬 수 있습니다.</p></li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Isaac Sim provides several tools for simplifying your scene</p>
+<p>Isaac Sim은 장면 단순화를 위한 여러 도구를 제공합니다.</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_scene-optimizer.html">Scene Optimizer</a>: kit extension that performs scene optimization on the USD level</p></li>
-<li><p><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html#isaac-merge-mesh"><span class="std std-ref">Mesh Merge Tool</span></a>: Isaac Sim utility to merge multiple meshes to a single mesh</p></li>
+<li><p><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_scene-optimizer.html">Scene Optimizer</a></p></li>
+<li><p><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html#isaac-merge-mesh"><span class="std std-ref">Merge Mesh</span></a></p></li>
 </ul>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>During realtime simulation, the gizmos (including floor grids) automatically disappear to optimize performance. They reappear when the simulation is paused or stopped.</p>
+<p>실시간 시뮬레이션 중 기즈모(바닥 그리드 포함)는 성능 최적화를 위해 자동으로 사라집니다.</p>
 </div>
 <ol class="arabic" start="2">
-<li><p><strong>Using RTX Real-Time 2.0</strong>: (see <a class="reference external" href="https://docs.omniverse.nvidia.com/materials-and-rendering/latest/rtx-renderer_rt.html">RTX - Real-Time 2.0 mode</a>)</p>
+<li><p><strong>Using RTX Real-Time 2.0</strong>: (<a class="reference external" href="https://docs.omniverse.nvidia.com/materials-and-rendering/latest/rendering-modes.html#rtx-real-time-2-0">RTX Real-Time 2.0</a> 참조)</p>
 <blockquote>
 <div><ul>
-<li><p>RT2 is the new default rendering mode in Isaac Sim. It offers both accuracy and performance improvements over the previous RTX Real-Time mode.</p></li>
-<li><p>For training-in-the-loop or other workflows that prioritize throughput over full light transport, consider RTX - Minimal for faster performance. In standalone Python, set <code class="docutils literal notranslate"><span class="pre">renderer</span></code> to <code class="docutils literal notranslate"><span class="pre">MinimalRendering</span></code> in the <code class="docutils literal notranslate"><span class="pre">SimulationApp</span></code> launch configuration and use <code class="docutils literal notranslate"><span class="pre">minimal_shading_mode</span></code> to choose the simplified shading behavior. See <a class="reference internal" href="rendering_modes.html#isaac-sim-rendering-modes"><span class="std std-ref">Rendering modes</span></a> for mode selection guidance.</p></li>
-<li><p>The retrace threshold can be decreased to improve performance at the cost of a slightly more biased result. This will still be comparable in accuracy to the legacy RTX Real-Time mode.</p>
+<li><p>RT2는 Isaac Sim의 새로운 기본 렌더링 모드입니다. 기존 RTX Real-Time에 비해 정확도와 성능이 모두 향상되었습니다.</p></li>
+<li><p>루프 내 훈련 또는 처리량을 완전한 광선 전송보다 우선시하는 기타 워크플로의 경우, 경로 추적이나 RT2 대신 레스터화 모드를 고려하세요.</p></li>
+<li><p>레트레이스 임계값을 낮추면 약간 더 편향된 결과를 감수하고 성능을 향상시킬 수 있습니다.</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;--/rtx/pathtracing/cached/retrace=0.1&quot;</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">"--/rtx/pathtracing/cached/retrace=0.1"</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Disabling Fractional Cutout Opacity may also improve performance at the cost of losing accuracy of translucency effects.</p>
+<li><p>Fractional Cutout Opacity를 비활성화하면 반투명 재료의 정확도를 잃는 대신 성능을 향상시킬 수 있습니다.</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;--/rtx/pathtracing/fractionalCutoutOpacity=false&quot;</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">"--/rtx/pathtracing/fractionalCutoutOpacity=false"</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -1391,53 +1027,53 @@ Enable or disable GPU dynamics in your script using the <code class="docutils li
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>On some older hardware, specifically in the Ampere generation, performance of RT2 may fall lower than RTX Real-Time mode. Using the Retrace Threshold setting above shoud improve performance of RT2 above that of the legacy mode with comparable accuracy.</p>
+<p>일부 구형 하드웨어, 특히 Ampere 세대에서는 RT2 성능이 RTX Real-Time보다 낮을 수 있습니다. 이 경우 레스터화 모드를 사용하는 것이 좋습니다.</p>
 </div>
 <ol class="arabic" start="3">
-<li><p><strong>Disable Materials and Lights</strong>: (see <a class="reference external" href="https://docs.omniverse.nvidia.com/materials-and-rendering/latest/rtx-renderer_rt.html">RT2 Mode</a> for specific RT2 and Path Tracing settings)</p>
+<li><p><strong>Disable Materials and Lights</strong>: (<a class="reference external" href="https://docs.omniverse.nvidia.com/materials-and-rendering/latest/rendering-modes.html#performance-modes">Performance Modes</a> 참조)</p>
 <blockquote>
 <div><ul>
-<li><p>Loading time can be drastically slowed down by a large quantity of materials in the scene. Loading materials can be disabled by setting:</p>
+<li><p>장면에 있는 많은 수의 재료로 인해 로드 시간이 크게 느려질 수 있습니다. 렌더링 모드를 낮추면 재료를 비활성화하여 로드 시간을 단축할 수 있습니다.</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;--/app/renderer/skipMaterialLoading=true&quot;</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">"--/app/renderer/skipMaterialLoading=true"</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Disabling lights can simplify the rendering workload and improve performance.</p></li>
-<li><p>Turn off rendering features in the render settings panel (these will also have equivalent carb settings that can be set in python). There is no non-rtx rendering mode in the Isaac Sim GUI application, but you can disable almost everything (reflections, transparency, etc) to increase execution speed. To disable rendering completely unless explicitly needed by a sensor, you can use the headless application workflow.</p></li>
+<li><p>조명을 비활성화하면 렌더링 부하를 단순화하고 성능을 향상시킬 수 있습니다.</p></li>
+<li><p>렌더 설정 패널에서 렌더링 기능을 끄세요(이것들은 동등한 carb 설정도 있습니다).</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p><strong>Adjust DLSS Performance Mode</strong>: DLSS performance mode is toggled by the <code class="docutils literal notranslate"><span class="pre">--/rtx/post/dlss/execMode=&lt;value&gt;</span></code> setting. Values are as follows:</p>
+<li><p><strong>Adjust DLSS Performance Mode</strong>: DLSS 성능 모드는 <code class="docutils literal notranslate"><span class="pre">/persistent/rendering/dlss/execMode</span></code> carb 설정으로 전환됩니다.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Performance (<code class="docutils literal notranslate"><span class="pre">0</span></code>) - the most performant setting, reducing VRAM consumption and rendering time but decreasing render quality. This is the default value in Isaac Sim.</p></li>
-<li><p>Balanced (<code class="docutils literal notranslate"><span class="pre">1</span></code>) - offers both optimized performance and image quality.</p></li>
-<li><p>Quality (<code class="docutils literal notranslate"><span class="pre">2</span></code>) - offers higher image quality than balanced mode, at the cost of increased render time and VRAM consumption.</p></li>
-<li><p>Auto (<code class="docutils literal notranslate"><span class="pre">3</span></code>) - Selects the best DLSS Mode for the current output resolution. When rendering 720p cameras, Auto mode tends to select Quality, so you may see performance impacts by running in Auto mode while rendering cameras at lower resolution.</p></li>
+<li><p>Performance (<code class="docutils literal notranslate"><span class="pre">0</span></code>) - 가장 성능 중심의 모드. 더 많은 에일리어싱이 발생할 수 있습니다.</p></li>
+<li><p>Balanced (<code class="docutils literal notranslate"><span class="pre">1</span></code>) - 성능과 품질의 균형을 제공합니다.</p></li>
+<li><p>Quality (<code class="docutils literal notranslate"><span class="pre">2</span></code>) - 고품질 모드를 제공하지만 성능이 낮습니다.</p></li>
+<li><p>Auto (<code class="docutils literal notranslate"><span class="pre">3</span></code>) - 해상도에 따라 최적 모드를 선택합니다.</p></li>
 </ul>
 </div></blockquote>
 </li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The DLSS mode is currently set to <code class="docutils literal notranslate"><span class="pre">Performance</span></code> by default. <code class="docutils literal notranslate"><span class="pre">Performance</span></code> mode will yield the best performance, but may result in artifacts such as smearing when rendering cameras at lower resolutions (720p or lower).</p>
+<p>현재 DLSS 모드는 기본적으로 <code class="docutils literal notranslate"><span class="pre">Performance</span></code>로 설정되어 있습니다.</p>
 </div>
 <ol class="arabic" start="5">
-<li><p><strong>Disabling viewport updates in headless mode</strong>: Running in headless mode with <code class="docutils literal notranslate"><span class="pre">./python.sh</span></code> still renders the default viewport. This adds the overhead of rendering a view that may not be needed.</p>
+<li><p><strong>Disabling viewport updates in headless mode</strong>: <code class="docutils literal notranslate"><span class="pre">SimulationApp</span></code>이 있는 헤드리스 모드에서 실행할 때 뷰포트 업데이트가 발생할 수 있습니다.</p>
 <blockquote>
 <div><ul>
-<li><p>To improve performance, viewport updates can be disabled by setting the <code class="docutils literal notranslate"><span class="pre">SimulationApp</span></code> configuration parameter <code class="docutils literal notranslate"><span class="pre">disable_viewport_updates=True</span></code>.</p>
+<li><p>성능을 향상시키려면 <code class="docutils literal notranslate"><span class="pre">omni.kit.viewport.utility.get_active_viewport().updates_enabled = False</span></code>를 설정하여 뷰포트 업데이트를 비활성화하세요.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationApp</span>
 
-<span class="n">simulation_app</span> <span class="o">=</span> <span class="n">SimulationApp</span><span class="p">({</span><span class="s2">&quot;headless&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;disable_viewport_updates&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+<span class="n">simulation_app</span> <span class="o">=</span> <span class="n">SimulationApp</span><span class="p">({</span><span class="s2">"headless"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">"disable_viewport_updates"</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>When not using SimulationApp, users can also disable viewport updates with the following code snippet:</p>
+<li><p>SimulationApp을 사용하지 않는 경우 다음 코드 스니펫으로 뷰포트 업데이트를 비활성화할 수 있습니다.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">omni.kit.viewport.utility</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_active_viewport</span>
 
@@ -1453,16 +1089,16 @@ Enable or disable GPU dynamics in your script using the <code class="docutils li
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Setting <code class="docutils literal notranslate"><span class="pre">disable_viewport_updates</span></code> in SimulationApp is only supported if running in headless mode. For streaming usecases, this option should not be used.</p>
+<p><code class="docutils literal notranslate"><span class="pre">disable_viewport_updates</span></code> 플래그를 사용하면 카메라 API 수동 렌더링이 여전히 가능합니다.</p>
 </div>
 <ol class="arabic" start="6">
-<li><p><strong>Disabling texture streaming</strong>: Texture streaming is a feature that helps minimize GPU memory consumption, particularly in large scenes.</p>
+<li><p><strong>Disabling texture streaming</strong>: 텍스처 스트리밍은 GPU 메모리 사용량을 최소화하는 기능으로, 렌더링되는 텍스처만 GPU에 로드됩니다.</p>
 <blockquote>
 <div><ul>
-<li><p>Disabling texture streaming can have positive performance benefits but will result in increased GPU memory consumption. There’s also possible negative UX impacts if memory is running low - leading to crashes or missing some textures.</p></li>
-<li><p>To disable texture streaming, modify the value of the <code class="docutils literal notranslate"><span class="pre">/rtx-transient/resourcemanager/texturestreaming/enabled</span></code> setting.</p>
+<li><p>텍스처 스트리밍을 비활성화하면 성능상 이점이 있을 수 있지만 GPU 메모리 사용량이 증가합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/rtx/resourcemanager/enableTextureStreaming</span></code> carb 설정 값을 수정하여 텍스처 스트리밍을 비활성화하세요.</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;--/rtx-transient/resourcemanager/texturestreaming/enabled=false&quot;</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="s2">"--/rtx-transient/resourcemanager/texturestreaming/enabled=false"</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -1473,32 +1109,32 @@ Enable or disable GPU dynamics in your script using the <code class="docutils li
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This is not recommended for all use cases. It should be used on a case-by-case basis and evaluated for each workflow to determine its suitability. This may lead to unintended rendering behavior.</p>
+<p>모든 사용 사례에 권장되지 않습니다. 사례별로 평가 후 사용해야 합니다.</p>
 </div>
 </section>
 <section id="cpu-thread-count-optimizations">
 <span id="isaac-sim-performance-optimization-handbook-cpu-thread-count"></span><h2>CPU Thread Count Optimizations<a class="headerlink" href="sim_performance_optimization_handbook.html#cpu-thread-count-optimizations" title="Link to this heading">#</a></h2>
-<p>Three settings control the number of CPU threads used by Isaac Sim. When left unset (the default behavior), Isaac Sim will use all available threads on the system. Standalone Python workflows are limited to 32 threads by default and can be modified by changing the <code class="docutils literal notranslate"><span class="pre">limit_cpu_threads</span></code> argument in the <code class="docutils literal notranslate"><span class="pre">SimulationApp</span></code> constructor.</p>
+<p>Isaac Sim이 사용하는 CPU 스레드 수를 제어하는 세 가지 설정이 있습니다. 설정하지 않으면(기본 동작) Isaac Sim이 자동으로 결정합니다.</p>
 <ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--/plugins/carb.tasking.plugin/threadCount</span></code>: Sets Carbonite’s maximum worker thread count.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--/persistent/physics/numThreads</span></code>: Sets how many Carbonite worker threads to use for physics simulation.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--/plugins/omni.tbb.globalcontrol/maxThreadCount</span></code>: Sets Omniverse TBB scheduler’s maximmum worker thread count.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--/plugins/carb.tasking.plugin/threadCount</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--/persistent/physics/numThreads</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--/plugins/omni.tbb.globalcontrol/maxTBBThreads</span></code></p></li>
 </ol>
-<p>Spawning too many worker threads may lead to CPU bottlenecking. Consider limiting the number of CPU threads used by Isaac Sim to fewer than the number of virtual cores on the system. Current testing indicates that 32 threads is optimal for most use cases.</p>
-<p>For example, on Ubuntu:</p>
+<p>너무 많은 워커 스레드를 생성하면 CPU 병목 현상이 발생할 수 있습니다. 시스템에서 사용 가능한 CPU 코어 수로 CPU 스레드 수를 제한하는 것을 고려하세요.</p>
+<p>예를 들어, Ubuntu에서:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./isaac-sim.sh<span class="w"> </span>--/plugins/carb.tasking.plugin/threadCount<span class="o">=</span><span class="m">16</span><span class="w"> </span>--/plugins/omni.tbb.globalcontrol/maxThreadCount<span class="o">=</span><span class="m">16</span>
 </pre></div>
 </div>
 <p>Standalone Python:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationApp</span>
 
-<span class="n">simulation_app</span> <span class="o">=</span> <span class="n">SimulationApp</span><span class="p">({</span><span class="s2">&quot;headless&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;limit_cpu_threads&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">})</span>
+<span class="n">simulation_app</span> <span class="o">=</span> <span class="n">SimulationApp</span><span class="p">({</span><span class="s2">"headless"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">"limit_cpu_threads"</span><span class="p">:</span> <span class="mi">16</span><span class="p">})</span>
 </pre></div>
 </div>
 </section>
 <section id="cpu-governor-settings-on-linux">
 <span id="isaac-sim-performance-optimization-handbook-cpu-governor-settings-on-linux"></span><h2>CPU Governor Settings on Linux<a class="headerlink" href="sim_performance_optimization_handbook.html#cpu-governor-settings-on-linux" title="Link to this heading">#</a></h2>
-<p>CPU governors dictate the operating clock frequency range and scaling of the CPU. This can be a limiting factor for Isaac Sim performance. For maximum performance, the CPU governor should be set to <code class="docutils literal notranslate"><span class="pre">performance</span></code>. To modify the CPU governor, run the following commands:</p>
+<p>CPU 거버너는 CPU의 작동 클록 주파수 범위 및 스케일링을 결정합니다. 이는 성능에 제한이 될 수 있습니다.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>linux-tools-common
 cpupower<span class="w"> </span>frequency-info<span class="w"> </span><span class="c1"># Check available governors</span>
 sudo<span class="w"> </span>cpupower<span class="w"> </span>frequency-set<span class="w"> </span>-g<span class="w"> </span>performance<span class="w"> </span><span class="c1"># Set governor with root permissions</span>
@@ -1506,83 +1142,82 @@ sudo<span class="w"> </span>cpupower<span class="w"> </span>frequency-set<span c
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Not all governors are available on all systems. Governors enabling higher clock speed are typically more performance-centric and can yield substantially better performance for Isaac Sim.</p>
+<p>모든 시스템에서 모든 거버너를 사용할 수 있는 것은 아닙니다. 더 높은 클록 속도를 가능하게 하는 거버너는 일반적으로 특별한 시스템 권한이 필요합니다.</p>
 </div>
 </section>
 <section id="asynchronous-rendering">
 <span id="isaac-sim-performance-optimization-handbook-asynchronous-rendering"></span><h2>Asynchronous Rendering<a class="headerlink" href="sim_performance_optimization_handbook.html#asynchronous-rendering" title="Link to this heading">#</a></h2>
-<p>Asynchronous rendering is a feature that allows the rendering to run in a separate thread from the simulation thread. In Isaac Sim, asynchronous rendering is enabled by default whenever Isaac Sim is in a stoppped or paused state. This greatly improves UI responsiveness and viewport FPS, particularly for complex scenes.</p>
+<p>비동기 렌더링은 렌더링이 시뮬레이션 업데이트와 별도의 스레드에서 실행되도록 하는 기능으로, 더 나은 CPU/GPU 사용을 허용합니다.</p>
 <section id="asynchronous-rendering-toggle-default">
 <h3>Asynchronous Rendering Toggle (Default)<a class="headerlink" href="sim_performance_optimization_handbook.html#asynchronous-rendering-toggle-default" title="Link to this heading">#</a></h3>
-<p>This is set in the isaacsim.core.throttling extension. To disable this feature in the event of unexpected behavior, set the <code class="docutils literal notranslate"><span class="pre">exts.&quot;isaacsim.core.throttling&quot;.enable_async</span></code> setting to <code class="docutils literal notranslate"><span class="pre">false</span></code> when starting the application.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./isaac-sim.sh<span class="w"> </span>--exts.<span class="s2">&quot;isaacsim.core.throttling&quot;</span>.enable_async<span class="o">=</span><span class="nb">false</span>
+<p>이는 isaacsim.core.throttling 익스텐션에서 설정됩니다. 예상치 못한 동작이 발생할 경우 이 기능을 비활성화하세요.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./isaac-sim.sh<span class="w"> </span>--exts.<span class="s2">"isaacsim.core.throttling"</span>.enable_async<span class="o">=</span><span class="nb">false</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This setting is only set true when running with <code class="docutils literal notranslate"><span class="pre">isaacsim.exp.full.kit</span></code>, not when running via a Python-based workflow. It could be enabled manually using the above setting for other workflows if desired.
-In certain use cases, particularly with Replicator-based SDG workflows, it may be necessary to disable asynchronous rendering to ensure proper behavior.</p>
+<p>이 설정은 <code class="docutils literal notranslate"><span class="pre">SimulationApp</span></code>을 사용하여 실행할 때만 true로 설정됩니다.</p>
 </div>
 </section>
 <section id="runtime-asynchronous-rendering-experimental">
 <h3>Runtime Asynchronous Rendering (Experimental)<a class="headerlink" href="sim_performance_optimization_handbook.html#runtime-asynchronous-rendering-experimental" title="Link to this heading">#</a></h3>
-<p>Asynchronous rendering is experimentally supported during runtime. To enable asynchronous rendering for Python-based workflows, add the below arguments to the run command. For full Isaac Sim workflows, additionally disable the toggle in the <em>isaacsim.core.throttling</em> extension so that the application will always run asynchronously.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./isaac-sim.sh<span class="w"> </span>--exts.<span class="s2">&quot;isaacsim.core.throttling&quot;</span>.enable_async<span class="o">=</span><span class="nb">false</span><span class="w"> </span>--/app/asyncRendering<span class="o">=</span><span class="nb">true</span><span class="w"> </span>--/app/omni.usd/asyncHandshake<span class="o">=</span><span class="nb">true</span><span class="w"> </span>--/omni/replicator/asyncRendering<span class="o">=</span><span class="nb">true</span>
+<p>비동기 렌더링은 런타임 중에 실험적으로 지원됩니다. 런타임에 비동기 렌더링을 활성화하려면 다음 설정을 사용하세요.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./isaac-sim.sh<span class="w"> </span>--exts.<span class="s2">"isaacsim.core.throttling"</span>.enable_async<span class="o">=</span><span class="nb">false</span><span class="w"> </span>--/app/asyncRendering<span class="o">=</span><span class="nb">true</span><span class="w"> </span>--/app/omni.usd/asyncHandshake<span class="o">=</span><span class="nb">true</span><span class="w"> </span>--/omni/replicator/asyncRendering<span class="o">=</span><span class="nb">true</span>
 
 ./python.sh<span class="w"> </span>script.py<span class="w"> </span>--/app/asyncRendering<span class="o">=</span><span class="nb">true</span><span class="w"> </span>--/app/omni.usd/asyncHandshake<span class="o">=</span><span class="nb">true</span><span class="w"> </span>--/omni/replicator/asyncRendering<span class="o">=</span><span class="nb">true</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This feature is experimental and may lead to unexpected behavior. Enabling this feature will not necessarily lead to performance improvements. Possible speedups will heavily vary based on the use case and hardware, but are more likely given heavily CPU-bound workflows.</p>
+<p>이 기능은 실험적이며 예상치 못한 동작을 초래할 수 있습니다. 이 기능을 활성화한다고 해서 반드시 FPS가 향상되는 것은 아닙니다.</p>
 </div>
 </section>
 </section>
 <section id="multi-gpu-support">
 <span id="isaac-sim-performance-optimization-handbook-multi-gpu-support"></span><span id="mgpu-support"></span><h2>Multi-GPU Support<a class="headerlink" href="sim_performance_optimization_handbook.html#multi-gpu-support" title="Link to this heading">#</a></h2>
-<p>The following rules of thumb may help improve multi-GPU performance, based on our multi-GPU benchmarks.</p>
+<p>다음 경험 법칙이 멀티 GPU 성능을 향상시키는 데 도움이 될 수 있습니다. 멀티 GPU 벤치마크를 기반으로 합니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Exact Isaac Sim performance metrics when using multiple data-center-grade GPUs can be found <a class="reference internal" href="benchmarks.html#isaac-sim-benchmarks-gpu-dependent"><span class="std std-ref">here</span></a>.</p>
+<p>여러 데이터 센터급 GPU를 사용할 때의 정확한 Isaac Sim 성능 지표는 <a class="reference internal" href="benchmarks.html"><span class="std std-ref">여기</span></a>에서 찾을 수 있습니다.</p>
 </div>
 <ol class="arabic simple">
-<li><p><strong>Add as many GPUs as cameras being rendered - but no more.</strong> When rendering 2 720p cameras with 2 GPUs, we saw a speed up of 72% to 89% compared to single GPU performance, but using 4 GPUs yielded only 61 - 81% improvement.</p></li>
-<li><p><strong>Performance scales better the more cameras you’re rendering.</strong> Our 4 camera with 4x GPUs test scaled well with an overall speed up of about 213% - 233%, but our 8 camera with 4 GPUs test scaled even better with an overall speedup of 271% - 281%.</p></li>
-<li><p><strong>Single high-resolution cameras render faster on multiple GPUs.</strong> An exception to our earlier rules - if you are rendering a single high-resolution (4K or higher) camera, multiple GPUs can help accelerate rendering.</p></li>
-<li><p><strong>Increasing GPU count does not improve scene load time.</strong> GPU count does not influence the amount of time it takes to load a USD, or the maximum USD scene size that can be loaded.</p></li>
-<li><p><strong>GPU Physics simulation only utilizes 1 GPU.</strong> Increasing GPU count will not improve GPU physics simulation performance.</p></li>
+<li><p><strong>렌더링되는 카메라 수만큼 GPU를 추가하되 그 이상은 추가하지 마세요.</strong> 2개의 720p 카메라를 렌더링할 때 GPU를 2개에서 4개로 늘리면 성능이 향상되지 않습니다.</p></li>
+<li><p><strong>카메라가 더 많을수록 성능이 더 잘 스케일됩니다.</strong> 4개의 카메라와 4개의 GPU를 사용하면 카메라당 GPU를 사용하는 것보다 2개의 GPU로 2개의 카메라를 렌더링하는 것보다 더 큰 성능 향상을 보입니다.</p></li>
+<li><p><strong>단일 고해상도 카메라는 여러 GPU에서 더 빠르게 렌더링됩니다.</strong> 경험 법칙의 예외로, 단일 4K 카메라는 여러 GPU에 걸쳐 스케일됩니다.</p></li>
+<li><p><strong>GPU 수를 늘려도 장면 로드 시간이 개선되지 않습니다.</strong> GPU 수는 로드 시간에 영향을 미치지 않습니다.</p></li>
+<li><p><strong>GPU 물리 시뮬레이션은 1개의 GPU만 활용합니다.</strong> GPU 수를 늘려도 GPU 기반 물리 시뮬레이션이 향상되지 않습니다.</p></li>
 </ol>
 <section id="disabling-iommu-on-linux">
 <h3>Disabling IOMMU On Linux<a class="headerlink" href="sim_performance_optimization_handbook.html#disabling-iommu-on-linux" title="Link to this heading">#</a></h3>
-<p>Per the <a class="reference external" href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#iommu-on-linux">CUDA C++ Programming Guide</a>, users on bare-metal Linux should disable the IOMMU to improve multi-GPU performance.</p>
-<p>IOMMU may be disabled from system BIOS (exact instructions vary based on motherboard specification), or from the command line via:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;echo GRUB_CMDLINE_LINUX=&quot;amd_iommu=off&quot; &gt;&gt; /etc/default/grub&#39;</span>
+<p><a class="reference external" href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#interoperability-with-opengl">CUDA 프로그래밍 가이드</a>에 따르면, IOMMU가 활성화된 경우 Linux의 P2P 전송이 지원되지 않습니다.</p>
+<p>IOMMU는 시스템 BIOS에서 비활성화할 수 있습니다(정확한 지침은 마더보드 사양에 따라 다릅니다).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">'echo GRUB_CMDLINE_LINUX="amd_iommu=off" &gt;&gt; /etc/default/grub'</span>
 sudo<span class="w"> </span>update-grub
 sudo<span class="w"> </span>reboot
 </pre></div>
 </div>
-<p>After rebooting, the IOMMU should be disabled.</p>
+<p>재부팅 후 IOMMU가 비활성화되어야 합니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If IOMMU is enabled, you will receive a warning like <code class="docutils literal notranslate"><span class="pre">IOMMU</span> <span class="pre">is</span> <span class="pre">enabled.</span></code> below the <code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code> output in the logs when running Isaac Sim.</p>
+<p>IOMMU가 활성화된 경우 다음과 같은 경고가 표시됩니다: <code class="docutils literal notranslate"><span class="pre">NVRM: GPU at PCI:0000:XX:00: (...</span></code></p>
 </div>
 </section>
 </section>
 <section id="reducing-gpu-memory-utilization">
 <h2>Reducing GPU Memory Utilization<a class="headerlink" href="sim_performance_optimization_handbook.html#reducing-gpu-memory-utilization" title="Link to this heading">#</a></h2>
-<p>These are suggestions to help reduce Isaac Sim GPU memory utilization:</p>
+<p>다음은 Isaac Sim GPU 메모리 사용량을 줄이는 데 도움이 되는 제안입니다:</p>
 <ol class="arabic simple">
-<li><p>Reduce the Texture Streaming Budget. Select the <code class="docutils literal notranslate"><span class="pre">Render</span> <span class="pre">Settings</span></code> tab, then select the <code class="docutils literal notranslate"><span class="pre">Common</span></code> settings. Under <code class="docutils literal notranslate"><span class="pre">Debug</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Streaming</span> <span class="pre">Settings</span></code>, reduce <code class="docutils literal notranslate"><span class="pre">&quot;Texture</span> <span class="pre">Streaming</span> <span class="pre">Budget</span> <span class="pre">(%</span> <span class="pre">of</span> <span class="pre">GPU</span> <span class="pre">memory)&quot;</span></code>. By default this value is set to <strong>0.6</strong>, 60% of GPU memory capacity. To reduce GPU memory consumption, the number can be reduced further. For standalone Python workflows, you can modify the value of the <code class="docutils literal notranslate"><span class="pre">/rtx-transient/resourcemanager/texturestreaming/memoryBudget</span></code> setting.</p></li>
-<li><p>Reduce total rendered pixel count by turning off unnecessary viewports or reducing rendered camera resolution, if possible.</p></li>
+<li><p>텍스처 스트리밍 예산을 줄이세요. <code class="docutils literal notranslate"><span class="pre">Isaac Sim</span></code> 설정에서 <code class="docutils literal notranslate"><span class="pre">Texture Budget (MB)</span></code>를 줄이세요.</p></li>
+<li><p>불필요한 뷰포트를 끄거나 렌더링된 카메라 해상도를 줄여 총 렌더링 픽셀 수를 줄이세요.</p></li>
 </ol>
 </section>
 <section id="experimental-reducing-potential-memory-leaks">
 <h2>Experimental: Reducing Potential Memory Leaks<a class="headerlink" href="sim_performance_optimization_handbook.html#experimental-reducing-potential-memory-leaks" title="Link to this heading">#</a></h2>
-<p>Experimental suggestion to help reduce Isaac Sim RAM consumption in the event of memory leaks in long-running workflows:</p>
+<p>긴 실행 워크플로에서 메모리 누수가 발생하는 경우 Isaac Sim RAM 소비를 줄이기 위한 실험적 제안:</p>
 <ol class="arabic">
 <li><dl>
-<dt>Adjusting the memory allocator to reduce memory leaks in long running workflows, particularly where stages are loaded and unloaded repeatedly.</dt><dd><ul>
-<li><p>To change the allocator configuration, set the following environment variable:</p>
+<dt>특히 단계가 종료될 때 Isaac Sim이 로드된 상태에서 스테이지가 열리고 닫히는 워크플로에서 메모리 누수를 줄이기 위해 메모리 할당자를 조정하세요.</dt><dd><ul>
+<li><p>할당자 구성을 변경하려면 다음 환경 변수를 설정하세요:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">GLIBC_TUNABLES</span><span class="o">=</span>glibc.malloc.arena_max<span class="o">=</span><span class="m">1</span>:glibc.malloc.mmap_max<span class="o">=</span><span class="m">0</span>:glibc.malloc.mmap_threshold<span class="o">=</span><span class="m">2147483647</span>
 </pre></div>
@@ -1599,76 +1234,54 @@ sudo<span class="w"> </span>reboot
 <h2>Useful Tools<a class="headerlink" href="sim_performance_optimization_handbook.html#useful-tools" title="Link to this heading">#</a></h2>
 <section id="windows">
 <h3>Windows<a class="headerlink" href="sim_performance_optimization_handbook.html#windows" title="Link to this heading">#</a></h3>
-<p>Task Manager is a great resource for giving nice clean graphs and can show peak usage on a variety of system information regarding performance.</p>
-<img alt="Task Manager" class="align-center" src="../_images/isim_4.5_full_ref_external_perf_handbook_task_manager.png" />
+<p>Task Manager는 다양한 변수의 최고 사용량을 표시할 수 있는 깔끔한 그래프를 제공하는 유용한 리소스입니다.</p>
+<img alt="Task Manager" class="align-center" src="../_images/isim_4.5_full_ref_external_perf_handbook_task_manager.png"/>
 <ol class="arabic simple">
-<li><p>Click on the Start icon</p></li>
-<li><p>Type “Task Manager”</p></li>
-<li><p>In Task Manager, Select the “Performance” Tab</p></li>
+<li><p>시작 아이콘을 클릭합니다.</p></li>
+<li><p>"Task Manager"를 입력합니다.</p></li>
+<li><p>Task Manager에서 "Performance" 탭을 선택합니다.</p></li>
 </ol>
-<p>On the left side of this pane you will see various graphs like CPU, Memory and GPU.  Select any of these to get a more detailed view of the data.  Generally speaking if any of these are spiking and peaking out, you should look into its cause and begin to troubleshoot.</p>
+<p>이 창의 왼쪽에는 CPU, 메모리, GPU 등의 다양한 그래프가 표시됩니다. 원하는 항목을 선택하면 세부 정보를 확인할 수 있습니다.</p>
 </section>
 <section id="linux">
 <h3>Linux<a class="headerlink" href="sim_performance_optimization_handbook.html#linux" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code> is a great resource for giving useful data on Linux.</p>
-<p>See these documents for further information:</p>
+<p><code class="docutils literal notranslate"><span class="pre">nvidia-smi</span></code>는 Linux에서 GPU 메모리 사용량을 모니터링하기 위한 좋은 리소스입니다.</p>
+<p>추가 정보는 다음 문서를 참조하세요:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://developer.nvidia.com/nvidia-system-management-interface">NVIDIA-SMI</a></p></li>
-<li><p><a class="reference external" href="http://developer.download.nvidia.com/compute/DCGM/docs/nvidia-smi-367.38.pdf">NVIDIA-SMI Documentation (PDF)</a></p></li>
+<li><p><a class="reference external" href="https://developer.nvidia.com/nvidia-system-management-interface">NVIDIA System Management Interface</a></p></li>
+<li><p><a class="reference external" href="http://developer.download.nvidia.com/compute/DCGM/docs/nvidia-smi-367.38.pdf">nvidia-smi 문서</a></p></li>
 </ul>
 </section>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="rendering_modes.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Rendering modes</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="benchmarks.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Isaac Sim Benchmarks</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="rendering_modes.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Rendering modes</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="benchmarks.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Isaac Sim Benchmarks</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="sim_performance_optimization_handbook.html#understanding-isaac-sim-short-performance">Understanding Isaac Sim Performance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="sim_performance_optimization_handbook.html#physics-simulation-optimizations">Physics Simulation Optimizations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="sim_performance_optimization_handbook.html#robot-asset-optimizations">Robot Asset Optimizations</a></li>
@@ -1692,46 +1305,29 @@ sudo<span class="w"> </span>reboot
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1762,36 +1358,21 @@ sudo<span class="w"> </span>reboot
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>
