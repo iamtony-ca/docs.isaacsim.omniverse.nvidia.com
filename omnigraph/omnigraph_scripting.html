@@ -1,551 +1,256 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>OmniGraph via Python Scripting Tutorial &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>OmniGraph via Python Scripting Tutorial — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'omnigraph/omnigraph_scripting';</script>
-    <script>
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'omnigraph/omnigraph_scripting';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Importers and Exporters" href="../importer_exporter/importers_exporters.html" />
-    <link rel="prev" title="Isaac Sim OmniGraph Tutorial" href="omnigraph_tutorial.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="../importer_exporter/importers_exporters.html" rel="next" title="Importers and Exporters"/>
+<link href="omnigraph_tutorial.html" rel="prev" title="Isaac Sim OmniGraph Tutorial"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="omnigraph_scripting.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="omnigraph_scripting.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +270,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -593,20 +297,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -681,17 +373,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -869,7 +551,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">OmniGraph</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -909,13 +590,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -962,10 +637,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1134,18 +805,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1171,246 +832,198 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">OmniGraph</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">OmniGraph via Python Scripting Tutorial</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">OmniGraph</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">OmniGraph via Python Scripting Tutorial</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="omnigraph-via-python-scripting-tutorial">
+<article class="bd-article">
+<section id="omnigraph-via-python-scripting-tutorial">
 <span id="isaac-sim-app-tutorial-advanced-omnigraph-scripting"></span><h1>OmniGraph via Python Scripting Tutorial<a class="headerlink" href="omnigraph_scripting.html#omnigraph-via-python-scripting-tutorial" title="Link to this heading">#</a></h1>
-<p>While OmniGraph is intended to be a visual scripting tool, it does have Python scripting interfaces. This tutorial will give some examples of how to script an action graph using Python.</p>
+<p>OmniGraph는 시각적 스크립팅 도구이지만 Python 스크립팅 인터페이스도 제공합니다. 이 튜토리얼은 Python을 사용하여 Action Graph를 스크립팅하는 몇 가지 예제를 제공합니다.</p>
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="omnigraph_scripting.html#learning-objectives" title="Link to this heading">#</a></h2>
-<p>This tutorial will</p>
+<p>이 튜토리얼에서는</p>
 <ul class="simple">
-<li><p>walk you through examples of scripting an OmniGraph using purely Python APIs</p></li>
-<li><p>introduce the basic concepts and frequently used parameters in OmniGraphs and showcase them using scripted examples</p></li>
+<li><p>순수 Python API를 사용하여 OmniGraph를 스크립팅하는 예제를 안내합니다</p></li>
+<li><p>OmniGraph의 기본 개념과 자주 사용되는 매개변수를 소개하고 스크립팅된 예제로 보여줍니다</p></li>
 </ul>
 </section>
 <section id="getting-started">
 <h2>Getting Started<a class="headerlink" href="omnigraph_scripting.html#getting-started" title="Link to this heading">#</a></h2>
 <p><strong>Prerequisites</strong></p>
 <ul class="simple">
-<li><p>Review the GUI Tutorial series, especially <a class="reference internal" href="omnigraph_tutorial.html#isaac-sim-app-tutorial-gui-omnigraph"><span class="std std-ref">Isaac Sim OmniGraph Tutorial</span></a> and <a class="reference internal" href="../development_tools/omniverse_script_editor.html#isaac-sim-app-omniverse-script-editor"><span class="std std-ref">Omniverse Script Editor</span></a> prior to beginning this tutorial.</p></li>
-<li><p>Review the Core API Tutorial series, especially <a class="reference internal" href="../core_api_tutorials/tutorial_core_hello_world.html#isaac-sim-app-tutorial-core-hello-world"><span class="std std-ref">Hello World</span></a> to become familiar with the extension workflow via Python, as well as the Python Standalone workflow.</p></li>
+<li><p>이 튜토리얼을 시작하기 전에 GUI 튜토리얼 시리즈, 특히 <a class="reference internal" href="omnigraph_tutorial.html#isaac-sim-app-tutorial-gui-omnigraph"><span class="std std-ref">Isaac Sim OmniGraph Tutorial</span></a>과 <a class="reference internal" href="../development_tools/omniverse_script_editor.html#isaac-sim-app-omniverse-script-editor"><span class="std std-ref">Omniverse Script Editor</span></a>를 검토하세요.</p></li>
+<li><p>Core API 튜토리얼 시리즈, 특히 <a class="reference internal" href="../core_api_tutorials/tutorial_core_hello_world.html#isaac-sim-app-tutorial-core-hello-world"><span class="std std-ref">Hello World</span></a>를 검토하여 Python을 통한 익스텐션 워크플로우와 Python 독립 실행형 워크플로우에 익숙해지세요.</p></li>
 </ul>
 </section>
 <section id="code-snippets">
 <h2>Code Snippets<a class="headerlink" href="omnigraph_scripting.html#code-snippets" title="Link to this heading">#</a></h2>
 <section id="creating-a-graph">
 <h3>Creating a Graph<a class="headerlink" href="omnigraph_scripting.html#creating-a-graph" title="Link to this heading">#</a></h3>
-<p>First let’s build a simple action graph that prints “Hello World” to the console on every simulation frame.</p>
+<p>먼저 모든 시뮬레이션 프레임에서 콘솔에 "Hello World"를 출력하는 간단한 Action Graph를 구성해 봅니다.</p>
 <ol class="arabic">
-<li><p>Open ‘Window &gt; Script Editor’ and paste the following code:</p>
+<li><p>'Window &gt; Script Editor'를 열고 다음 코드를 붙여넣습니다:</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni.graph.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">og</span>
 
 <span class="n">keys</span> <span class="o">=</span> <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">Keys</span>
 <span class="n">graph_handle</span><span class="p">,</span> <span class="n">list_of_nodes</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">edit</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;graph_path&quot;</span><span class="p">:</span> <span class="s2">&quot;/action_graph&quot;</span><span class="p">,</span> <span class="s2">&quot;evaluator_name&quot;</span><span class="p">:</span> <span class="s2">&quot;execution&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"graph_path"</span><span class="p">:</span> <span class="s2">"/action_graph"</span><span class="p">,</span> <span class="s2">"evaluator_name"</span><span class="p">:</span> <span class="s2">"execution"</span><span class="p">},</span>
     <span class="p">{</span>
-        <span class="n">keys</span><span class="o">.</span><span class="n">CREATE_NODES</span><span class="p">:</span> <span class="p">[(</span><span class="s2">&quot;tick&quot;</span><span class="p">,</span> <span class="s2">&quot;omni.graph.action.OnTick&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;print&quot;</span><span class="p">,</span> <span class="s2">&quot;omni.graph.ui_nodes.PrintText&quot;</span><span class="p">)],</span>
+        <span class="n">keys</span><span class="o">.</span><span class="n">CREATE_NODES</span><span class="p">:</span> <span class="p">[(</span><span class="s2">"tick"</span><span class="p">,</span> <span class="s2">"omni.graph.action.OnTick"</span><span class="p">),</span> <span class="p">(</span><span class="s2">"print"</span><span class="p">,</span> <span class="s2">"omni.graph.ui_nodes.PrintText"</span><span class="p">)],</span>
         <span class="n">keys</span><span class="o">.</span><span class="n">SET_VALUES</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;print.inputs:text&quot;</span><span class="p">,</span> <span class="s2">&quot;Hello World&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"print.inputs:text"</span><span class="p">,</span> <span class="s2">"Hello World"</span><span class="p">),</span>
             <span class="p">(</span>
-                <span class="s2">&quot;print.inputs:logLevel&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;Warning&quot;</span><span class="p">,</span>
+                <span class="s2">"print.inputs:logLevel"</span><span class="p">,</span>
+                <span class="s2">"Warning"</span><span class="p">,</span>
             <span class="p">),</span>  <span class="c1"># setting the log level to warning so we can see the printout in terminal</span>
         <span class="p">],</span>
-        <span class="n">keys</span><span class="o">.</span><span class="n">CONNECT</span><span class="p">:</span> <span class="p">[(</span><span class="s2">&quot;tick.outputs:tick&quot;</span><span class="p">,</span> <span class="s2">&quot;print.inputs:execIn&quot;</span><span class="p">)],</span>
+        <span class="n">keys</span><span class="o">.</span><span class="n">CONNECT</span><span class="p">:</span> <span class="p">[(</span><span class="s2">"tick.outputs:tick"</span><span class="p">,</span> <span class="s2">"print.inputs:execIn"</span><span class="p">)],</span>
     <span class="p">},</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Press ‘Run’ to execute the script. You should see a new prim <code class="docutils literal notranslate"><span class="pre">/action_graph</span></code> created on the Stage tree.</p></li>
-<li><p>Expand the prim on stage, the nodes “tick” and “print” should be listed under the graph. These nodes can be accessed just like any other prim on the stage.</p></li>
-<li><p>Press “play” to start the simulation. You should see “Hello World” printed to the console on every frame.</p></li>
-<li><p>Open graph editor by going to <cite>Window &gt; Graph Editors &gt; Action Graph</cite>.</p></li>
-<li><p>With the newly created graph highlighted on the Stage tree on the right, open the graph by clicking on the icon for ‘Edit Action Graph’ in the graph editor window. You should see two nodes connected with each other by a line.</p></li>
+<li><p>'Run'을 눌러 스크립트를 실행합니다. Stage 트리에 새 프림 <code class="docutils literal notranslate"><span class="pre">/action_graph</span></code>가 생성되는 것을 확인할 수 있습니다.</p></li>
+<li><p>Stage에서 프림을 확장하면 "tick"과 "print" 노드가 그래프 아래에 나열됩니다. 이 노드들은 Stage의 다른 프림처럼 접근할 수 있습니다.</p></li>
+<li><p>"play"를 눌러 시뮬레이션을 시작합니다. 매 프레임마다 콘솔에 "Hello World"가 출력되는 것을 확인할 수 있습니다.</p></li>
+<li><p><cite>Window &gt; Graph Editors &gt; Action Graph</cite>로 이동하여 그래프 에디터를 엽니다.</p></li>
+<li><p>오른쪽 Stage 트리에서 새로 생성된 그래프를 선택한 상태에서, 그래프 에디터 창의 'Edit Action Graph' 아이콘을 클릭하여 그래프를 엽니다. 선으로 연결된 두 노드가 표시됩니다.</p></li>
 </ol>
 </section>
 <section id="editing-a-graph">
 <h3>Editing a Graph<a class="headerlink" href="omnigraph_scripting.html#editing-a-graph" title="Link to this heading">#</a></h3>
-<p>Once a graph has been created, there are specific APIs to manipulate the graph’s terms.</p>
+<p>그래프가 생성되면 그래프의 항목을 조작하는 특정 API가 있습니다.</p>
 <p><strong>Getting and Setting Attribute Values</strong></p>
-<p>Open another tab in the Script Editor, paste the snippet below, and run.</p>
+<p>Script Editor에서 다른 탭을 열고 아래 스니펫을 붙여넣고 실행합니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni.graph.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">og</span>
 
 <span class="c1"># get existing value from an attribute</span>
-<span class="n">existing_text</span> <span class="o">=</span> <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">attribute</span><span class="p">(</span><span class="s2">&quot;/action_graph/print.inputs:text&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Existing Text: &quot;</span><span class="p">,</span> <span class="n">existing_text</span><span class="p">)</span>
+<span class="n">existing_text</span> <span class="o">=</span> <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">attribute</span><span class="p">(</span><span class="s2">"/action_graph/print.inputs:text"</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Existing Text: "</span><span class="p">,</span> <span class="n">existing_text</span><span class="p">)</span>
 
 <span class="c1"># set new value</span>
-<span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">attribute</span><span class="p">(</span><span class="s2">&quot;/action_graph/print.inputs:text&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;New Texts to print&quot;</span><span class="p">)</span>
+<span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">attribute</span><span class="p">(</span><span class="s2">"/action_graph/print.inputs:text"</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"New Texts to print"</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>This will change the value in the “Print Text” node from “Hello World” to “New Texts to print”. But this affect won’t take place until the first tick through the graph. So when you press ‘Run’ in the script editor, the graph has yet to be ticked, so it should fetch the current value from the node, and print out a single string of “Existing Text: Hello World” in the Script Editor’s console (as well as the terminal if you are using that, or the main Omniverse’s console if you include “Info” to be printed).</p>
-<p>Now press ‘Play’ and start the simulation. It should now print, at the rate of one string per tick, the updated text “New Texts to print”, in the terminal or the main Omniverse console (though not the Script Editor’s console).</p>
+<p>이것은 "Print Text" 노드의 값을 "Hello World"에서 "New Texts to print"로 변경합니다. 그러나 이 변경은 그래프의 첫 번째 틱이 실행될 때까지 적용되지 않습니다. 따라서 스크립트 에디터에서 'Run'을 누르면 그래프가 아직 틱되지 않았으므로 현재 값을 가져와 스크립트 에디터의 콘솔에 "Existing Text: Hello World"라는 단일 문자열을 출력합니다(터미널을 사용하는 경우 터미널에도, "Info"를 포함하면 Omniverse 메인 콘솔에도 출력됩니다).</p>
+<p>이제 'Play'를 눌러 시뮬레이션을 시작합니다. 틱당 하나의 문자열 속도로 업데이트된 텍스트 "New Texts to print"가 터미널 또는 Omniverse 메인 콘솔에 출력됩니다(스크립트 에디터의 콘솔에는 아님).</p>
 <p><strong>Adding Nodes and Connections</strong></p>
-<p>Open a third tab in the Script Editor to add nodes and make more connections to an existing graph.</p>
+<p>스크립트 에디터에서 세 번째 탭을 열어 기존 그래프에 노드를 추가하고 더 많은 연결을 만듭니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni.graph.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">og</span>
 
-<span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="s2">&quot;/action_graph/new_node_name&quot;</span><span class="p">,</span> <span class="s2">&quot;omni.graph.nodes.ConstantString&quot;</span><span class="p">)</span>
-<span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">attribute</span><span class="p">(</span><span class="s2">&quot;/action_graph/new_node_name.inputs:value&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;This is a new node&quot;</span><span class="p">)</span>
-<span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;/action_graph/new_node_name.inputs:value&quot;</span><span class="p">,</span> <span class="s2">&quot;/action_graph/print.inputs:text&quot;</span><span class="p">)</span>
+<span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">create_node</span><span class="p">(</span><span class="s2">"/action_graph/new_node_name"</span><span class="p">,</span> <span class="s2">"omni.graph.nodes.ConstantString"</span><span class="p">)</span>
+<span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">attribute</span><span class="p">(</span><span class="s2">"/action_graph/new_node_name.inputs:value"</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"This is a new node"</span><span class="p">)</span>
+<span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">"/action_graph/new_node_name.inputs:value"</span><span class="p">,</span> <span class="s2">"/action_graph/print.inputs:text"</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>A new node named “new_node_name” will be created and connected to the “Print Text” node. If you have the graph editor (<cite>Window &gt; Graph Editors &gt; Action Graph</cite>) open, you can see that there are now three nodes connected to each other instead of two.</p>
+<p>"new_node_name"이라는 새 노드가 생성되어 "Print Text" 노드에 연결됩니다. 그래프 에디터(<cite>Window &gt; Graph Editors &gt; Action Graph</cite>)를 열어 두면 두 개가 아닌 세 개의 노드가 서로 연결된 것을 볼 수 있습니다.</p>
 </section>
 <section id="graph-execution">
 <h3>Graph Execution<a class="headerlink" href="omnigraph_scripting.html#graph-execution" title="Link to this heading">#</a></h3>
-<p>By default, the graph is evaluated on every frame. You can change this behavior by setting the graph to evaluate only when you call it.</p>
-<p>You can also trigger each graph explicitly by making execute only when you call it. To do this, there is a special parameter called “pipeline_stage” where you can set the graph to execute “On Demand”. Most of the times we want to set this variable during the creation of the graph:</p>
+<p>기본적으로 그래프는 매 프레임마다 평가됩니다. 그래프를 호출할 때만 평가되도록 이 동작을 변경할 수 있습니다.</p>
+<p>각 그래프를 명시적으로 호출할 때만 실행되도록 트리거할 수도 있습니다. 이를 위해 그래프를 "On Demand"로 실행하도록 설정할 수 있는 "pipeline_stage"라는 특수 매개변수가 있습니다. 대부분의 경우 그래프 생성 시 이 변수를 설정합니다:</p>
 <ol class="arabic">
-<li><p>Delete the previous graph by selecting it on the stage tree and pressing ‘Delete’ key.</p></li>
-<li><p>Open a new tab in the Script Editor and paste the following code</p>
+<li><p>Stage 트리에서 이전 그래프를 선택하고 'Delete' 키를 눌러 삭제합니다.</p></li>
+<li><p>스크립트 에디터에서 새 탭을 열고 다음 코드를 붙여넣습니다</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni.graph.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">og</span>
 
 <span class="n">keys</span> <span class="o">=</span> <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">Keys</span>
 <span class="n">demand_graph_handle</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">edit</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="s2">&quot;graph_path&quot;</span><span class="p">:</span> <span class="s2">&quot;/ondemand_graph&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;evaluator_name&quot;</span><span class="p">:</span> <span class="s2">&quot;execution&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;pipeline_stage&quot;</span><span class="p">:</span> <span class="n">og</span><span class="o">.</span><span class="n">GraphPipelineStage</span><span class="o">.</span><span class="n">GRAPH_PIPELINE_STAGE_ONDEMAND</span><span class="p">,</span>
+        <span class="s2">"graph_path"</span><span class="p">:</span> <span class="s2">"/ondemand_graph"</span><span class="p">,</span>
+        <span class="s2">"evaluator_name"</span><span class="p">:</span> <span class="s2">"execution"</span><span class="p">,</span>
+        <span class="s2">"pipeline_stage"</span><span class="p">:</span> <span class="n">og</span><span class="o">.</span><span class="n">GraphPipelineStage</span><span class="o">.</span><span class="n">GRAPH_PIPELINE_STAGE_ONDEMAND</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="n">keys</span><span class="o">.</span><span class="n">CREATE_NODES</span><span class="p">:</span> <span class="p">[(</span><span class="s2">&quot;tick&quot;</span><span class="p">,</span> <span class="s2">&quot;omni.graph.action.OnTick&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;print&quot;</span><span class="p">,</span> <span class="s2">&quot;omni.graph.ui_nodes.PrintText&quot;</span><span class="p">)],</span>
-        <span class="n">keys</span><span class="o">.</span><span class="n">SET_VALUES</span><span class="p">:</span> <span class="p">[(</span><span class="s2">&quot;print.inputs:text&quot;</span><span class="p">,</span> <span class="s2">&quot;On Demand Graph&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;print.inputs:logLevel&quot;</span><span class="p">,</span> <span class="s2">&quot;Warning&quot;</span><span class="p">)],</span>
-        <span class="n">keys</span><span class="o">.</span><span class="n">CONNECT</span><span class="p">:</span> <span class="p">[(</span><span class="s2">&quot;tick.outputs:tick&quot;</span><span class="p">,</span> <span class="s2">&quot;print.inputs:execIn&quot;</span><span class="p">)],</span>
+        <span class="n">keys</span><span class="o">.</span><span class="n">CREATE_NODES</span><span class="p">:</span> <span class="p">[(</span><span class="s2">"tick"</span><span class="p">,</span> <span class="s2">"omni.graph.action.OnTick"</span><span class="p">),</span> <span class="p">(</span><span class="s2">"print"</span><span class="p">,</span> <span class="s2">"omni.graph.ui_nodes.PrintText"</span><span class="p">)],</span>
+        <span class="n">keys</span><span class="o">.</span><span class="n">SET_VALUES</span><span class="p">:</span> <span class="p">[(</span><span class="s2">"print.inputs:text"</span><span class="p">,</span> <span class="s2">"On Demand Graph"</span><span class="p">),</span> <span class="p">(</span><span class="s2">"print.inputs:logLevel"</span><span class="p">,</span> <span class="s2">"Warning"</span><span class="p">)],</span>
+        <span class="n">keys</span><span class="o">.</span><span class="n">CONNECT</span><span class="p">:</span> <span class="p">[(</span><span class="s2">"tick.outputs:tick"</span><span class="p">,</span> <span class="s2">"print.inputs:execIn"</span><span class="p">)],</span>
     <span class="p">},</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Press ‘Run’ in the Script Editor. A new graph <code class="docutils literal notranslate"><span class="pre">/ondemand_graph</span></code> will be created.</p></li>
-<li><p>Start simulation by press “play”, nothing should be printed from this graph because we did not explicitly call to evaluate it.</p></li>
-<li><p>To manually trigger a graph, open another tab, and paste in <code class="docutils literal notranslate"><span class="pre">demand_graph_handle.evaluate()</span></code></p></li>
-<li><p>Make sure simulation is still running. Click ‘Run’ in the Script Editor. You should see “On Demand Graph” printed to the console once.</p></li>
+<li><p>스크립트 에디터에서 'Run'을 누릅니다. 새 그래프 <code class="docutils literal notranslate"><span class="pre">/ondemand_graph</span></code>가 생성됩니다.</p></li>
+<li><p>"play"를 눌러 시뮬레이션을 시작합니다. 명시적으로 평가를 호출하지 않았으므로 이 그래프에서는 아무것도 출력되지 않습니다.</p></li>
+<li><p>그래프를 수동으로 트리거하려면 다른 탭을 열고 <code class="docutils literal notranslate"><span class="pre">demand_graph_handle.evaluate()</span></code>를 붙여넣습니다</p></li>
+<li><p>시뮬레이션이 여전히 실행 중인지 확인합니다. 스크립트 에디터에서 'Run'을 클릭합니다. 콘솔에 "On Demand Graph"가 한 번 출력되는 것을 확인할 수 있습니다.</p></li>
 </ol>
-<p>Alternatively, you can also set it for an existing graph by <code class="docutils literal notranslate"><span class="pre">demand_graph_handle.change_pipeline_stage(og.GraphPipelineStage.GRAPH_PIPELINE_STAGE_ONDEMAND)</span></code></p>
-<p>A more in-depth example of attaching graphs to physics callbacks and/or rendering callbacks can be found in <cite>standalone_examples/api/isaacsim.core.experimental.api/omnigraph_triggers.py</cite></p>
+<p>대안으로, 기존 그래프에 대해 <code class="docutils literal notranslate"><span class="pre">demand_graph_handle.change_pipeline_stage(og.GraphPipelineStage.GRAPH_PIPELINE_STAGE_ONDEMAND)</span></code>를 사용하여 설정할 수도 있습니다</p>
+<p>물리 콜백 및/또는 렌더링 콜백에 그래프를 연결하는 더 심층적인 예제는 <cite>standalone_examples/api/isaacsim.core.experimental.api/omnigraph_triggers.py</cite>에서 찾을 수 있습니다</p>
 </section>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="omnigraph_scripting.html#summary" title="Link to this heading">#</a></h2>
-<p>In this tutorial, we introduced scripting OmniGraph via Python.</p>
+<p>이 튜토리얼에서는 Python을 통해 OmniGraph를 스크립팅하는 방법을 소개했습니다.</p>
 <section id="further-reading">
 <h3>Further Reading<a class="headerlink" href="omnigraph_scripting.html#further-reading" title="Link to this heading">#</a></h3>
-<p>For more Python Scripting API in <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni.graph/latest/omni.graph.core.html">OmniGraph APIs</a></p>
+<p><a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni.graph/latest/omni.graph.core.html">OmniGraph APIs</a>에서 더 많은 Python 스크립팅 API를 확인하세요</p>
 </section>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="omnigraph_tutorial.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Isaac Sim OmniGraph Tutorial</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../importer_exporter/importers_exporters.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Importers and Exporters</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="omnigraph_tutorial.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Isaac Sim OmniGraph Tutorial</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="../importer_exporter/importers_exporters.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Importers and Exporters</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="omnigraph_scripting.html#learning-objectives">Learning Objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="omnigraph_scripting.html#getting-started">Getting Started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="omnigraph_scripting.html#code-snippets">Code Snippets</a><ul class="nav section-nav flex-column">
@@ -1424,46 +1037,29 @@
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1494,36 +1090,21 @@
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

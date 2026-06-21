@@ -1,551 +1,256 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Building Custom IPC OmniGraph Nodes &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Building Custom IPC OmniGraph Nodes — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'omnigraph/omnigraph_custom_ipc_nodes';</script>
-    <script>
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'omnigraph/omnigraph_custom_ipc_nodes';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Isaac Sim OmniGraph Tutorial" href="omnigraph_tutorial.html" />
-    <link rel="prev" title="Custom C++ Nodes" href="omnigraph_custom_cpp_nodes.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="omnigraph_tutorial.html" rel="next" title="Isaac Sim OmniGraph Tutorial"/>
+<link href="omnigraph_custom_cpp_nodes.html" rel="prev" title="Custom C++ Nodes"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="omnigraph_custom_ipc_nodes.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="omnigraph_custom_ipc_nodes.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +270,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -593,20 +297,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -681,17 +373,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -869,7 +551,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">OmniGraph</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -909,13 +590,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -962,10 +637,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1134,18 +805,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1171,109 +832,79 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">OmniGraph</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Building Custom IPC OmniGraph Nodes</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">OmniGraph</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Building Custom IPC OmniGraph Nodes</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="building-custom-ipc-omnigraph-nodes">
+<article class="bd-article">
+<section id="building-custom-ipc-omnigraph-nodes">
 <span id="isaac-sim-omnigraph-custom-ipc-nodes"></span><h1>Building Custom IPC OmniGraph Nodes<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#building-custom-ipc-omnigraph-nodes" title="Link to this heading">#</a></h1>
-<p>This guide explains how to build OmniGraph nodes for inter-process communication (IPC) in Isaac Sim. It covers the node schema, transport lifecycle with <code class="docutils literal notranslate"><span class="pre">BaseResetNode</span></code>, non-blocking I/O inside <code class="docutils literal notranslate"><span class="pre">compute</span></code>, and how to add your transport library as a dependency. The OmniGraph patterns apply regardless of the IPC stack that you use. The working example is <code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc</span></code>, a clock-send and step-receive node pair over BSD sockets in C++ and Python. The tutorial starts by scaffolding a new extension with the CLI template so you have a working build skeleton before writing any IPC code.</p>
+<p>이 가이드는 Isaac Sim에서 프로세스 간 통신(IPC)을 위한 OmniGraph 노드를 구성하는 방법을 설명합니다. 노드 스키마, <code class="docutils literal notranslate"><span class="pre">BaseResetNode</span></code>를 사용한 전송 수명 주기, <code class="docutils literal notranslate"><span class="pre">compute</span></code> 내 비차단 I/O, 그리고 전송 라이브러리를 의존성으로 추가하는 방법을 다룹니다. OmniGraph 패턴은 사용하는 IPC 스택에 관계없이 적용됩니다. 작동 예제는 <code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc</span></code>로, C++ 및 Python에서 BSD 소켓을 통한 클록 전송 및 스텝 수신 노드 쌍입니다. 튜토리얼은 CLI 템플릿으로 새 익스텐션의 스캐폴딩으로 시작하여 IPC 코드를 작성하기 전에 작동하는 빌드 스켈레톤을 갖추게 합니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This workflow requires a <strong>source checkout</strong> of the <a class="reference external" href="https://github.com/isaac-sim/IsaacSim">Isaac Sim</a> repository. It is not supported with the pip packages or the binary release. Clone the GitHub repository before you begin.</p>
+<p>이 워크플로우는 <a class="reference external" href="https://github.com/isaac-sim/IsaacSim">Isaac Sim</a> 저장소의 <strong>소스 체크아웃</strong>이 필요합니다. pip 패키지나 바이너리 릴리스에서는 지원되지 않습니다. 시작 전에 GitHub 저장소를 클론하세요.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>All commands in this tutorial are run from the <strong>Isaac Sim repository root</strong> (the directory that contains <code class="docutils literal notranslate"><span class="pre">build.sh</span></code>/<code class="docutils literal notranslate"><span class="pre">build.bat</span></code> and <code class="docutils literal notranslate"><span class="pre">repo.sh</span></code>/<code class="docutils literal notranslate"><span class="pre">repo.bat</span></code>).</p>
+<p>이 튜토리얼의 모든 명령은 <code class="docutils literal notranslate"><span class="pre">build.sh</span></code>/<code class="docutils literal notranslate"><span class="pre">build.bat</span></code>와 <code class="docutils literal notranslate"><span class="pre">repo.sh</span></code>/<code class="docutils literal notranslate"><span class="pre">repo.bat</span></code>가 있는 디렉토리인 <strong>Isaac Sim 저장소 루트</strong>에서 실행됩니다.</p>
 </div>
 <section id="before-you-start">
 <h2>Before You Start<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#before-you-start" title="Link to this heading">#</a></h2>
 <p><strong>Prerequisites</strong>:</p>
 <ul class="simple">
 <li><p><strong>Custom C++ extensions</strong> — <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/kit-extension-template-cpp/latest/index.html">Kit C++ Extension Template</a>.</p></li>
-<li><p><strong>OmniGraph</strong> — <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_omnigraph/getting-started/core_concepts.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">OmniGraph Core Concepts</span></a> and <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_omnigraph/tutorials/gentle_intro.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">Basic OmniGraph Tutorial</span></a>.</p></li>
-<li><p><strong>Custom nodes</strong> — <a class="reference internal" href="omnigraph_custom_python_nodes.html#isaac-sim-app-omnigraph-custom-python-nodes"><span class="std std-ref">Custom Python Nodes</span></a> and <a class="reference internal" href="omnigraph_custom_cpp_nodes.html#isaac-sim-app-tutorial-advanced-omnigraph-custom-cpp-nodes"><span class="std std-ref">Custom C++ Nodes</span></a>.</p></li>
+<li><p><strong>OmniGraph</strong> — <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_omnigraph/getting-started/core_concepts.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">OmniGraph Core Concepts</span></a> 및 <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_omnigraph/tutorials/gentle_intro.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">Basic OmniGraph Tutorial</span></a>.</p></li>
+<li><p><strong>Custom nodes</strong> — <a class="reference internal" href="omnigraph_custom_python_nodes.html#isaac-sim-app-omnigraph-custom-python-nodes"><span class="std std-ref">Custom Python Nodes</span></a> 및 <a class="reference internal" href="omnigraph_custom_cpp_nodes.html#isaac-sim-app-tutorial-advanced-omnigraph-custom-cpp-nodes"><span class="std std-ref">Custom C++ Nodes</span></a>.</p></li>
 </ul>
-<p>Optional: <a class="reference internal" href="omnigraph_tutorial.html#isaac-sim-app-tutorial-gui-omnigraph"><span class="std std-ref">Isaac Sim OmniGraph Tutorial</span></a>, if you are new to the Action Graph editor.</p>
+<p>선택: <a class="reference internal" href="omnigraph_tutorial.html#isaac-sim-app-tutorial-gui-omnigraph"><span class="std std-ref">Isaac Sim OmniGraph Tutorial</span></a> — Action Graph 에디터를 처음 사용하는 경우.</p>
 <div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_custom_omnigraph_node_python.html#isaac-sim-app-ros2-custom-omnigraph-node-python"><span class="std std-ref">ROS 2 Python Custom OmniGraph Node</span></a> for a complete Python node
-example. ROS 2 context, but the <code class="docutils literal notranslate"><span class="pre">internal_state()</span></code> factory,
-<code class="docutils literal notranslate"><span class="pre">BaseResetNode</span></code>, <code class="docutils literal notranslate"><span class="pre">db.per_instance_state</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">og.ExecutionAttributeState.ENABLED</span></code> patterns are identical for any IPC
-node.</p>
+<p class="admonition-title">참고</p>
+<p>완전한 Python 노드 예제는 <a class="reference internal" href="../ros2_tutorials/tutorial_ros2_custom_omnigraph_node_python.html#isaac-sim-app-ros2-custom-omnigraph-node-python"><span class="std std-ref">ROS 2 Python Custom OmniGraph Node</span></a>를 참조하세요. ROS 2 컨텍스트이지만, <code class="docutils literal notranslate"><span class="pre">internal_state()</span></code> 팩토리, <code class="docutils literal notranslate"><span class="pre">BaseResetNode</span></code>, <code class="docutils literal notranslate"><span class="pre">db.per_instance_state</span></code>, <code class="docutils literal notranslate"><span class="pre">og.ExecutionAttributeState.ENABLED</span></code> 패턴은 모든 IPC 노드에서 동일합니다.</p>
 </div>
 </section>
 <section id="scaffold-your-extension">
 <h2>Scaffold Your Extension<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#scaffold-your-extension" title="Link to this heading">#</a></h2>
-<p>Before writing IPC code, create the extension skeleton with the CLI template:</p>
+<p>IPC 코드를 작성하기 전에 CLI 템플릿으로 익스텐션 스켈레톤을 생성합니다:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="linux" for="sd-tab-item-0">
 Linux</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./repo.sh<span class="w"> </span>template<span class="w"> </span>new
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="windows" for="sd-tab-item-1">
 Windows</label><div class="sd-tab-content docutils">
 <div class="highlight-batch notranslate"><div class="highlight"><pre><span></span>.\repo.bat template new
@@ -1281,14 +912,14 @@ Windows</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </div>
-<p>When prompted, select <strong>Isaac Sim OmniGraph Node Extension</strong>. You will be asked for:</p>
+<p>메시지가 표시되면 <strong>Isaac Sim OmniGraph Node Extension</strong>을 선택합니다. 다음을 입력하라는 메시지가 표시됩니다:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">extension_name</span></code> Dotted identifier, for example <code class="docutils literal notranslate"><span class="pre">isaacsim.my.ipc.nodes</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code> Human-readable name shown in the Extensions window.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code> Short summary.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">category</span></code> Used to group your nodes in the Action Graph node library (for example <code class="docutils literal notranslate"><span class="pre">Simulation</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">extension_name</span></code> 점으로 구분된 식별자, 예: <code class="docutils literal notranslate"><span class="pre">isaacsim.my.ipc.nodes</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code> Extensions 창에 표시되는 사람이 읽을 수 있는 이름.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code> 간단한 요약.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">category</span></code> Action Graph 노드 라이브러리에서 노드를 그룹화하는 데 사용됩니다(예: <code class="docutils literal notranslate"><span class="pre">Simulation</span></code>).</p></li>
 </ul>
-<p>The template creates the full extension skeleton under <code class="docutils literal notranslate"><span class="pre">source/extensions/&lt;extension_name&gt;/</span></code>:</p>
+<p>템플릿은 <code class="docutils literal notranslate"><span class="pre">source/extensions/&lt;extension_name&gt;/</span></code> 아래에 전체 익스텐션 스켈레톤을 생성합니다:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>source/extensions/&lt;extension_name&gt;/
 ├── config/extension.toml          ← metadata, dependencies, test entries
 ├── nodes/
@@ -1308,16 +939,16 @@ Windows</label><div class="sd-tab-content docutils">
 └── premake5.lua                   ← build configuration
 </pre></div>
 </div>
-<p>The build step is required before the extension loads in Isaac Sim — it compiles the C++ plugin and generates the OmniGraph database files that register your nodes. Run it now:</p>
+<p>빌드 단계는 Isaac Sim에서 익스텐션이 로드되기 전에 필요합니다 — C++ 플러그인을 컴파일하고 노드를 등록하는 OmniGraph 데이터베이스 파일을 생성합니다. 지금 실행합니다:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="linux" for="sd-tab-item-2">
 Linux</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./build.sh
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="windows" for="sd-tab-item-3">
 Windows</label><div class="sd-tab-content docutils">
 <div class="highlight-batch notranslate"><div class="highlight"><pre><span></span>.\build.bat
@@ -1325,21 +956,21 @@ Windows</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </div>
-<p>The generated nodes — <strong>Example C++ Node</strong> (<code class="docutils literal notranslate"><span class="pre">OgnExampleCpp</span></code>) and <strong>Example Python Node</strong> (<code class="docutils literal notranslate"><span class="pre">OgnExamplePython</span></code>) — are placeholder stubs that double an input value. The display names in the Action Graph library come from the <code class="docutils literal notranslate"><span class="pre">uiName</span></code> field in each <code class="docutils literal notranslate"><span class="pre">.ogn</span></code> file, not the file name. Rename or replace them with your actual IPC node(s) as you work through the sections below.</p>
+<p>생성된 노드 — <strong>Example C++ Node</strong>(<code class="docutils literal notranslate"><span class="pre">OgnExampleCpp</span></code>)와 <strong>Example Python Node</strong>(<code class="docutils literal notranslate"><span class="pre">OgnExamplePython</span></code>) — 는 입력 값을 두 배로 만드는 플레이스홀더 스텁입니다. Action Graph 라이브러리의 표시 이름은 파일 이름이 아닌 각 <code class="docutils literal notranslate"><span class="pre">.ogn</span></code> 파일의 <code class="docutils literal notranslate"><span class="pre">uiName</span></code> 필드에서 가져옵니다. 아래 섹션을 진행하면서 실제 IPC 노드로 이름을 바꾸거나 교체합니다.</p>
 <div class="admonition-try-it-verify-your-scaffold admonition">
-<p class="admonition-title">Try it: verify your scaffold</p>
-<p>After the build completes above, confirm the scaffold registers its placeholder nodes:</p>
+<p class="admonition-title">시도하기: 스캐폴드 확인</p>
+<p>위 빌드가 완료된 후 스캐폴드가 플레이스홀더 노드를 등록하는지 확인합니다:</p>
 <ol class="arabic">
-<li><p>Launch the repo-built Isaac Sim — not a separately installed Isaac Sim:</p>
+<li><p>별도로 설치된 Isaac Sim이 아닌 리포지토리 빌드된 Isaac Sim을 실행합니다:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
+<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="linux" for="sd-tab-item-4">
 Linux</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./_build/linux-x86_64/release/isaac-sim.sh
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+<input id="sd-tab-item-5" name="sd-tab-set-2" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="windows" for="sd-tab-item-5">
 Windows</label><div class="sd-tab-content docutils">
 <div class="highlight-batch notranslate"><div class="highlight"><pre><span></span>.\_build\windows-x86_64\release\isaac-sim.bat
@@ -1348,119 +979,114 @@ Windows</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </li>
-<li><p>Open <strong>Window → Extensions</strong>, search for your extension name (for example <code class="docutils literal notranslate"><span class="pre">isaacsim.my.ipc.nodes</span></code>), and enable it.</p></li>
-<li><p>Open <strong>Window → Graph Editors → Action Graph</strong> and search for <code class="docutils literal notranslate"><span class="pre">Example</span> <span class="pre">C++</span> <span class="pre">Node</span></code> and <code class="docutils literal notranslate"><span class="pre">Example</span> <span class="pre">Python</span> <span class="pre">Node</span></code> in the node library. These names match the <code class="docutils literal notranslate"><span class="pre">uiName</span></code> fields in the scaffold’s <code class="docutils literal notranslate"><span class="pre">.ogn</span></code> files.</p></li>
+<li><p><strong>Window → Extensions</strong>를 열고 익스텐션 이름(예: <code class="docutils literal notranslate"><span class="pre">isaacsim.my.ipc.nodes</span></code>)을 검색하여 활성화합니다.</p></li>
+<li><p><strong>Window → Graph Editors → Action Graph</strong>를 열고 노드 라이브러리에서 <code class="docutils literal notranslate"><span class="pre">Example</span> <span class="pre">C++</span> <span class="pre">Node</span></code>와 <code class="docutils literal notranslate"><span class="pre">Example</span> <span class="pre">Python</span> <span class="pre">Node</span></code>를 검색합니다. 이 이름은 스캐폴드의 <code class="docutils literal notranslate"><span class="pre">.ogn</span></code> 파일의 <code class="docutils literal notranslate"><span class="pre">uiName</span></code> 필드와 일치합니다.</p></li>
 </ol>
-<p>If both nodes appear, the scaffold is wired correctly. Proceed to <a class="reference internal" href="omnigraph_custom_ipc_nodes.html#design-and-implement-your-nodes">Design and Implement Your Nodes</a> to replace the placeholders.</p>
-<p>If the nodes do not appear, check the following:</p>
+<p>두 노드가 모두 나타나면 스캐폴드가 올바르게 구성된 것입니다. <a class="reference internal" href="omnigraph_custom_ipc_nodes.html#design-and-implement-your-nodes">Design and Implement Your Nodes</a>로 진행하여 플레이스홀더를 교체합니다.</p>
+<p>노드가 나타나지 않으면 다음을 확인합니다:</p>
 <ul class="simple">
-<li><p>The build (<code class="docutils literal notranslate"><span class="pre">./build.sh</span></code> on Linux, <code class="docutils literal notranslate"><span class="pre">.\build.bat</span></code> on Windows) completed without errors. Nodes are not registered until the C++ plugin is compiled and the OmniGraph database files are generated by the build.</p></li>
-<li><p>You launched the repo-built Isaac Sim (<code class="docutils literal notranslate"><span class="pre">./_build/linux-x86_64/release/isaac-sim.sh</span></code> or <code class="docutils literal notranslate"><span class="pre">.\_build\windows-x86_64\release\isaac-sim.bat</span></code>). A separately installed Isaac Sim does not search the repository <code class="docutils literal notranslate"><span class="pre">exts/</span></code> directory and will not find your extension.</p></li>
-<li><p>The extension is enabled (green toggle) in <strong>Window → Extensions</strong>. If it was enabled before the build ran, disable and re-enable it.</p></li>
-<li><p>After any <code class="docutils literal notranslate"><span class="pre">.ogn</span></code> schema or code change, the build must be re-run and Isaac Sim restarted before updated nodes appear.</p></li>
+<li><p>빌드(<code class="docutils literal notranslate"><span class="pre">./build.sh</span></code> on Linux, <code class="docutils literal notranslate"><span class="pre">.\build.bat</span></code> on Windows)가 오류 없이 완료되었는지 확인합니다. 노드는 C++ 플러그인이 컴파일되고 빌드에서 OmniGraph 데이터베이스 파일이 생성될 때까지 등록되지 않습니다.</p></li>
+<li><p>리포지토리 빌드된 Isaac Sim(<code class="docutils literal notranslate"><span class="pre">./_build/linux-x86_64/release/isaac-sim.sh</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">.\_build\windows-x86_64\release\isaac-sim.bat</span></code>)을 실행했는지 확인합니다. 별도로 설치된 Isaac Sim은 저장소 <code class="docutils literal notranslate"><span class="pre">exts/</span></code> 디렉토리를 검색하지 않으므로 익스텐션을 찾지 못합니다.</p></li>
+<li><p><strong>Window → Extensions</strong>에서 익스텐션이 활성화(녹색 토글)되어 있는지 확인합니다. 빌드 전에 활성화되어 있었다면 비활성화 후 다시 활성화합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.ogn</span></code> 스키마 또는 코드 변경 후에는 빌드를 다시 실행하고 Isaac Sim을 재시작해야 업데이트된 노드가 표시됩니다.</p></li>
 </ul>
 </div>
 </section>
 <section id="add-your-transport-library">
 <h2>Add Your Transport Library<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#add-your-transport-library" title="Link to this heading">#</a></h2>
-<p>Before writing node code, wire in the library that provides your IPC and serialization. The generated <code class="docutils literal notranslate"><span class="pre">config/extension.toml</span></code> and <code class="docutils literal notranslate"><span class="pre">premake5.lua</span></code> are already in place. The sections below show where to add entries.</p>
+<p>노드 코드를 작성하기 전에 IPC와 직렬화를 제공하는 라이브러리를 연결합니다. 생성된 <code class="docutils literal notranslate"><span class="pre">config/extension.toml</span></code>과 <code class="docutils literal notranslate"><span class="pre">premake5.lua</span></code>가 이미 준비되어 있습니다. 아래 섹션에서 항목을 추가할 위치를 보여줍니다.</p>
 <section id="python">
 <h3>Python<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#python" title="Link to this heading">#</a></h3>
-<p>Isaac Sim ships a pip archive (<code class="docutils literal notranslate"><span class="pre">omni.isaac.core_archive</span></code> and related extensions) that pre-bundles many common packages, including NumPy and SciPy. If your library is already in that archive you can import it directly with no extra configuration.</p>
-<p>If the package is not yet bundled, declare it in <code class="docutils literal notranslate"><span class="pre">config/extension.toml</span></code>, for example:</p>
+<p>Isaac Sim은 NumPy 및 SciPy를 포함한 많은 일반 패키지를 사전 번들링한 pip 아카이브(<code class="docutils literal notranslate"><span class="pre">omni.isaac.core_archive</span></code> 및 관련 익스텐션)를 제공합니다. 라이브러리가 이미 해당 아카이브에 있으면 추가 설정 없이 직접 임포트할 수 있습니다.</p>
+<p>패키지가 번들링되어 있지 않은 경우 <code class="docutils literal notranslate"><span class="pre">config/extension.toml</span></code>에 선언합니다. 예:</p>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[python.pipapi]</span>
-<span class="n">requirements</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;pyzmq&gt;=25&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;grpcio&quot;</span><span class="p">]</span><span class="w">  </span><span class="c1"># replace with your actual packages</span>
+<span class="n">requirements</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"pyzmq&gt;=25"</span><span class="p">,</span><span class="w"> </span><span class="s2">"grpcio"</span><span class="p">]</span><span class="w">  </span><span class="c1"># replace with your actual packages</span>
 <span class="n">use_online_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 </pre></div>
 </div>
-<p>Isaac Sim resolves these at extension startup. <code class="docutils literal notranslate"><span class="pre">use_online_index</span> <span class="pre">=</span> <span class="pre">true</span></code> must be set. If it is omitted or set to <code class="docutils literal notranslate"><span class="pre">false</span></code>, <code class="docutils literal notranslate"><span class="pre">omni.kit.pipapi</span></code> logs a warning and skips the <code class="docutils literal notranslate"><span class="pre">requirements</span></code> list entirely.</p>
+<p>Isaac Sim은 이것을 익스텐션 시작 시 해석합니다. <code class="docutils literal notranslate"><span class="pre">use_online_index</span> <span class="pre">=</span> <span class="pre">true</span></code>가 설정되어 있어야 합니다. 생략하거나 <code class="docutils literal notranslate"><span class="pre">false</span></code>로 설정하면 <code class="docutils literal notranslate"><span class="pre">omni.kit.pipapi</span></code>가 경고를 기록하고 <code class="docutils literal notranslate"><span class="pre">requirements</span></code> 목록 전체를 건너뜁니다.</p>
 </section>
 <section id="c">
 <h3>C++<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#c" title="Link to this heading">#</a></h3>
-<p>Prebuilt native libraries go through packman. These steps follow the same pattern described in the <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/kit-extension-template-cpp/latest/index.html">Kit Extension C++ template documentation</a>:</p>
+<p>사전 빌드된 네이티브 라이브러리는 packman을 통해 처리됩니다. 이 단계는 <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/kit-extension-template-cpp/latest/index.html">Kit Extension C++ template documentation</a>에 설명된 것과 동일한 패턴을 따릅니다:</p>
 <ol class="arabic">
-<li><p><strong>Declare the dependency.</strong> Add your library to <code class="docutils literal notranslate"><span class="pre">deps/ext-deps.packman.xml</span></code>. It is the designated file for extension-specific dependencies (separate from the Kit SDK deps). The unpacked tree typically lands under <code class="docutils literal notranslate"><span class="pre">_build/target-deps/&lt;libname&gt;/</span></code>:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;project</span><span class="w"> </span><span class="na">toolsVersion=</span><span class="s">&quot;5.0&quot;</span><span class="nt">&gt;</span>
-<span class="w">  </span><span class="nt">&lt;dependency</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mylib&quot;</span><span class="w"> </span><span class="na">linkPath=</span><span class="s">&quot;../_build/target-deps/mylib&quot;</span><span class="nt">&gt;</span>
-<span class="w">    </span><span class="nt">&lt;package</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mylib&quot;</span><span class="w"> </span><span class="na">version=</span><span class="s">&quot;1.2.3&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<li><p><strong>의존성 선언.</strong> <code class="docutils literal notranslate"><span class="pre">deps/ext-deps.packman.xml</span></code>에 라이브러리를 추가합니다. 이것은 익스텐션별 의존성을 위한 지정된 파일입니다(Kit SDK deps와 별도). 압축 해제된 트리는 일반적으로 <code class="docutils literal notranslate"><span class="pre">_build/target-deps/&lt;libname&gt;/</span></code> 아래에 위치합니다:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;project</span><span class="w"> </span><span class="na">toolsVersion=</span><span class="s">"5.0"</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;dependency</span><span class="w"> </span><span class="na">name=</span><span class="s">"mylib"</span><span class="w"> </span><span class="na">linkPath=</span><span class="s">"../_build/target-deps/mylib"</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;package</span><span class="w"> </span><span class="na">name=</span><span class="s">"mylib"</span><span class="w"> </span><span class="na">version=</span><span class="s">"1.2.3"</span><span class="w"> </span><span class="nt">/&gt;</span>
 <span class="w">  </span><span class="nt">&lt;/dependency&gt;</span>
 <span class="nt">&lt;/project&gt;</span>
 </pre></div>
 </div>
 </li>
-<li><p><strong>Update ``premake5.lua``.</strong> Point to the include and library directories and add the link:</p>
-<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nv">includedirs</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;%{target_deps}/mylib/include&quot;</span><span class="w"> </span><span class="p">}</span>
-<span class="nv">libdirs</span><span class="w">     </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;%{target_deps}/mylib/lib/%{platform}&quot;</span><span class="w"> </span><span class="p">}</span>
-<span class="nv">links</span><span class="w">       </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;mylib&quot;</span><span class="w"> </span><span class="p">}</span>
+<li><p><strong>``premake5.lua`` 업데이트.</strong> 포함 및 라이브러리 디렉토리를 가리키고 링크를 추가합니다:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nv">includedirs</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"%{target_deps}/mylib/include"</span><span class="w"> </span><span class="p">}</span>
+<span class="nv">libdirs</span><span class="w">     </span><span class="p">{</span><span class="w"> </span><span class="s2">"%{target_deps}/mylib/lib/%{platform}"</span><span class="w"> </span><span class="p">}</span>
+<span class="nv">links</span><span class="w">       </span><span class="p">{</span><span class="w"> </span><span class="s2">"mylib"</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
 </div>
 </li>
-<li><p><strong>Shared libraries at runtime.</strong> If the library ships as a <code class="docutils literal notranslate"><span class="pre">.so</span></code> / <code class="docutils literal notranslate"><span class="pre">.dll</span></code>, either bundle it beside the extension plugin or list it under <code class="docutils literal notranslate"><span class="pre">[native.library]</span></code> in <code class="docutils literal notranslate"><span class="pre">extension.toml</span></code> so Kit’s loader finds it.</p></li>
+<li><p><strong>런타임 공유 라이브러리.</strong> 라이브러리가 <code class="docutils literal notranslate"><span class="pre">.so</span></code>/<code class="docutils literal notranslate"><span class="pre">.dll</span></code>로 제공되는 경우, 익스텐션 플러그인 옆에 번들하거나 <code class="docutils literal notranslate"><span class="pre">extension.toml</span></code>의 <code class="docutils literal notranslate"><span class="pre">[native.library]</span></code> 아래에 나열하여 Kit의 로더가 찾을 수 있도록 합니다.</p></li>
 </ol>
-<p>The sample extension uses only standard BSD socket APIs and has no additional native library entries beyond the plugin itself.</p>
+<p>샘플 익스텐션은 표준 BSD 소켓 API만 사용하며 플러그인 자체 외에 추가 네이티브 라이브러리 항목이 없습니다.</p>
 </section>
 </section>
 <section id="design-and-implement-your-nodes">
 <h2>Design and Implement Your Nodes<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#design-and-implement-your-nodes" title="Link to this heading">#</a></h2>
 <section id="design-principle">
 <h3>Design Principle<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#design-principle" title="Link to this heading">#</a></h3>
-<p>Keep IPC nodes thin. They should only handle <strong>serialization and transport</strong>. Simulation data reads (joint positions, sensor data, simulation time) belong in upstream built-in nodes wired into the graph before your IPC node. Downstream processing or command writes belong in other nodes after it. This keeps <code class="docutils literal notranslate"><span class="pre">compute</span></code> fast and makes the graph layout self-documenting.</p>
+<p>IPC 노드를 얇게 유지합니다. <strong>직렬화와 전송</strong>만 처리해야 합니다. 시뮬레이션 데이터 읽기(관절 위치, 센서 데이터, 시뮬레이션 시간)는 IPC 노드 앞에 그래프에 연결된 상위 빌트인 노드에 속합니다. 하위 처리 또는 명령 쓰기는 그 후의 다른 노드에 속합니다. 이렇게 하면 <code class="docutils literal notranslate"><span class="pre">compute</span></code>가 빠르고 그래프 레이아웃이 자체 문서화됩니다.</p>
 </section>
 <section id="what-every-ipc-node-requires">
 <h3>What Every IPC Node Requires<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#what-every-ipc-node-requires" title="Link to this heading">#</a></h3>
-<p>Every custom IPC node requires the same six things, regardless of transport:</p>
+<p>모든 커스텀 IPC 노드는 전송에 관계없이 동일한 여섯 가지가 필요합니다:</p>
 <ul>
-<li><p><strong>Node schema</strong> (<code class="docutils literal notranslate"><span class="pre">.ogn</span></code> file) — declare inputs (URI, config), outputs (data, <code class="docutils literal notranslate"><span class="pre">execOut</span></code>), and state. Refer to the sample <code class="docutils literal notranslate"><span class="pre">.ogn</span></code> files under <code class="docutils literal notranslate"><span class="pre">nodes/</span></code> in <code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc</span></code> as a reference.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">BaseResetNode</span></code> subclass — holds per-instance state (sockets, buffers, handles). Implement <code class="docutils literal notranslate"><span class="pre">reset()</span></code> (C++) or <code class="docutils literal notranslate"><span class="pre">custom_reset()</span></code> (Python) to tear down the transport when the timeline stops or inputs change.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">compute(db)</span></code> with a lifecycle split:</p>
+<li><p><strong>노드 스키마</strong>(<code class="docutils literal notranslate"><span class="pre">.ogn</span></code> 파일) — 입력(URI, 설정), 출력(데이터, <code class="docutils literal notranslate"><span class="pre">execOut</span></code>), 상태를 선언합니다. <code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc</span></code>의 <code class="docutils literal notranslate"><span class="pre">nodes/</span></code> 아래 샘플 <code class="docutils literal notranslate"><span class="pre">.ogn</span></code> 파일을 참조로 사용합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BaseResetNode</span></code> 서브클래스 — 인스턴스별 상태(소켓, 버퍼, 핸들)를 보유합니다. 시뮬레이션이 중지되거나 입력이 변경될 때 전송을 해제하도록 <code class="docutils literal notranslate"><span class="pre">reset()</span></code>(C++) 또는 <code class="docutils literal notranslate"><span class="pre">custom_reset()</span></code>(Python)을 구현합니다.</p></li>
+<li><p>수명 주기 분할이 있는 <code class="docutils literal notranslate"><span class="pre">compute(db)</span></code>:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Detect input changes (URI, config) → call reset and teardown</p></li>
-<li><p>Try to open the transport if not ready → return early on failure (retry next evaluation)</p></li>
-<li><p>Do non-blocking I/O (send or try-receive)</p></li>
-<li><p>Write <code class="docutils literal notranslate"><span class="pre">db.outputs</span></code> and fire <code class="docutils literal notranslate"><span class="pre">execOut</span></code></p></li>
+<li><p>입력 변경(URI, 설정) 감지 → reset 및 해제 호출</p></li>
+<li><p>준비되지 않은 경우 전송 열기 시도 → 실패 시 조기 반환(다음 평가에서 재시도)</p></li>
+<li><p>비차단 I/O 수행(전송 또는 수신 시도)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">db.outputs</span></code> 쓰기 및 <code class="docutils literal notranslate"><span class="pre">execOut</span></code> 발동</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p><strong>Non-blocking I/O</strong> — never block indefinitely in <code class="docutils literal notranslate"><span class="pre">compute</span></code>. Use try-receive, timeouts, or offload slow paths to a worker thread (refer to <a class="reference internal" href="omnigraph_custom_ipc_nodes.html#performance-considerations">Performance Considerations</a>).</p></li>
-<li><p><strong>Fire</strong> <code class="docutils literal notranslate"><span class="pre">execOut</span></code> at the end of <code class="docutils literal notranslate"><span class="pre">compute</span></code> to signal downstream nodes that the transport operation is complete and/or new data is ready. You control when to fire it. For example, fire on every evaluation, only on successful send, or only when a full message has been received.</p></li>
-<li><p><strong>Your transport library</strong> — add it as a dependency (refer to <a class="reference internal" href="omnigraph_custom_ipc_nodes.html#add-your-transport-library">Add Your Transport Library</a> above) and replace the TCP helpers with your stack’s API.</p></li>
+<li><p><strong>비차단 I/O</strong> — <code class="docutils literal notranslate"><span class="pre">compute</span></code>에서 무기한 차단하지 않습니다. 수신 시도, 타임아웃, 또는 느린 경로를 워커 스레드로 오프로드합니다(<a class="reference internal" href="omnigraph_custom_ipc_nodes.html#performance-considerations">Performance Considerations</a> 참조).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compute</span></code> 끝에 <code class="docutils literal notranslate"><span class="pre">execOut</span></code>를 <strong>발동</strong>하여 전송 작업이 완료되었거나 새 데이터가 준비되었음을 하위 노드에 신호합니다. 언제 발동할지는 사용자가 제어합니다. 예를 들어 매 평가마다, 성공적인 전송 시에만, 또는 전체 메시지가 수신될 때만 발동합니다.</p></li>
+<li><p><strong>전송 라이브러리</strong> — 의존성으로 추가하고(<a class="reference internal" href="omnigraph_custom_ipc_nodes.html#add-your-transport-library">Add Your Transport Library</a> 참조) TCP 헬퍼를 스택의 API로 교체합니다.</p></li>
 </ul>
 </section>
 <section id="ogn-schema-quick-reference">
 <h3>OGN Schema Quick Reference<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#ogn-schema-quick-reference" title="Link to this heading">#</a></h3>
-<p>Each <code class="docutils literal notranslate"><span class="pre">.ogn</span></code> file is a single JSON object keyed by the node’s registered type
-name. The minimum schema for a Python IPC node looks like this:</p>
+<p>각 <code class="docutils literal notranslate"><span class="pre">.ogn</span></code> 파일은 노드의 등록된 타입 이름을 키로 하는 단일 JSON 객체입니다. Python IPC 노드의 최소 스키마는 다음과 같습니다:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;MyNodeName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Python&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;One-line description shown in the node library.&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;uiName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;My Node Display Name&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">        </span><span class="nt">&quot;categoryDefinitions&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;config/CategoryDefinition.json&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;categories&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;myCategory&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;execIn&quot;</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;execution&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Trigger.&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;uri&quot;</span><span class="p">:</span><span class="w">     </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span><span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tcp://127.0.0.1:5550&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;myValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;double&quot;</span><span class="p">,</span><span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="nt">"MyNodeName"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Python"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"One-line description shown in the node library."</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"uiName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Node Display Name"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">"categoryDefinitions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"config/CategoryDefinition.json"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myCategory"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"execIn"</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"execution"</span><span class="p">,</span><span class="w"> </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trigger."</span><span class="w"> </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">"uri"</span><span class="p">:</span><span class="w">     </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w"> </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tcp://127.0.0.1:5550"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">"myValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"double"</span><span class="p">,</span><span class="w">    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w"> </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="p">}</span>
 <span class="w">        </span><span class="p">},</span>
-<span class="w">        </span><span class="nt">&quot;outputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;execOut&quot;</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;execution&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Output execution port.&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;myTokens&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;token[]&quot;</span><span class="p">,</span><span class="w">   </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Array of token outputs.&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="nt">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"execOut"</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"execution"</span><span class="p">,</span><span class="w"> </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Output execution port."</span><span class="w"> </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">"myTokens"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"token[]"</span><span class="p">,</span><span class="w">   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Array of token outputs."</span><span class="w"> </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Common scalar types: <code class="docutils literal notranslate"><span class="pre">&quot;string&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;double&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;float&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;int&quot;</span></code>,
-<code class="docutils literal notranslate"><span class="pre">&quot;uint&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;bool&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;execution&quot;</span></code>. Array variants append <code class="docutils literal notranslate"><span class="pre">[]</span></code>:
-<code class="docutils literal notranslate"><span class="pre">&quot;double[]&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;float[]&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;token[]&quot;</span></code>, etc. The <code class="docutils literal notranslate"><span class="pre">&quot;default&quot;</span></code> key is
-required for non-execution scalar inputs; use <code class="docutils literal notranslate"><span class="pre">[]</span></code> for array inputs.</p>
-<p><code class="docutils literal notranslate"><span class="pre">categoryDefinitions</span></code> is a path relative to the <code class="docutils literal notranslate"><span class="pre">nodes/</span></code> directory that
-points to a JSON file mapping category keys to human-readable display strings:</p>
+<p>일반 스칼라 타입: <code class="docutils literal notranslate"><span class="pre">"string"</span></code>, <code class="docutils literal notranslate"><span class="pre">"double"</span></code>, <code class="docutils literal notranslate"><span class="pre">"float"</span></code>, <code class="docutils literal notranslate"><span class="pre">"int"</span></code>, <code class="docutils literal notranslate"><span class="pre">"uint"</span></code>, <code class="docutils literal notranslate"><span class="pre">"bool"</span></code>, <code class="docutils literal notranslate"><span class="pre">"execution"</span></code>. 배열 변형은 <code class="docutils literal notranslate"><span class="pre">[]</span></code>를 추가합니다: <code class="docutils literal notranslate"><span class="pre">"double[]"</span></code>, <code class="docutils literal notranslate"><span class="pre">"float[]"</span></code>, <code class="docutils literal notranslate"><span class="pre">"token[]"</span></code> 등. <code class="docutils literal notranslate"><span class="pre">"default"</span></code> 키는 비실행 스칼라 입력에 필요하며, 배열 입력에는 <code class="docutils literal notranslate"><span class="pre">[]</span></code>를 사용합니다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">categoryDefinitions</span></code>는 <code class="docutils literal notranslate"><span class="pre">nodes/</span></code> 디렉토리에 상대적인 경로로, 카테고리 키를 사람이 읽을 수 있는 표시 문자열로 매핑하는 JSON 파일을 가리킵니다:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;categoryDefinitions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;myCategory&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;My node group label in the Action Graph library&quot;</span>
+<span class="w">    </span><span class="nt">"categoryDefinitions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"myCategory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My node group label in the Action Graph library"</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1468,16 +1094,16 @@ points to a JSON file mapping category keys to human-readable display strings:</
 </section>
 <section id="c-node-implementation">
 <h3>C++ Node Implementation<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#c-node-implementation" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">BaseResetNode</span></code> is declared in <code class="docutils literal notranslate"><span class="pre">isaacsim.core.includes</span></code>. This extension is a compile-time only dependency, do <strong>not</strong> add it to <code class="docutils literal notranslate"><span class="pre">[dependencies]</span></code> in <code class="docutils literal notranslate"><span class="pre">extension.toml</span></code>. Instead, add the header path in <code class="docutils literal notranslate"><span class="pre">premake5.lua</span></code>:</p>
-<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nv">includedirs</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;%{root}/source/extensions/isaacsim.core.includes/include&quot;</span><span class="w"> </span><span class="p">}</span>
+<p><code class="docutils literal notranslate"><span class="pre">BaseResetNode</span></code>는 <code class="docutils literal notranslate"><span class="pre">isaacsim.core.includes</span></code>에 선언됩니다. 이 익스텐션은 컴파일 타임 전용 의존성으로, <code class="docutils literal notranslate"><span class="pre">extension.toml</span></code>의 <code class="docutils literal notranslate"><span class="pre">[dependencies]</span></code>에 <strong>추가하지 마세요</strong>. 대신 <code class="docutils literal notranslate"><span class="pre">premake5.lua</span></code>에 헤더 경로를 추가합니다:</p>
+<div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="nv">includedirs</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"%{root}/source/extensions/isaacsim.core.includes/include"</span><span class="w"> </span><span class="p">}</span>
 </pre></div>
 </div>
-<p>Then include the header in your <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> file:</p>
+<p>그런 다음 <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> 파일에 헤더를 포함합니다:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;isaacsim/core/includes/BaseResetNode.h&gt;</span>
 </pre></div>
 </div>
-<p>Derive your per-instance node class from <code class="docutils literal notranslate"><span class="pre">isaacsim::core::includes::BaseResetNode</span></code>. That base subscribes to the timeline stop event and calls your <code class="docutils literal notranslate"><span class="pre">reset()</span></code> so transport handles are not left open after simulation stops.</p>
-<p>Replace the generated <code class="docutils literal notranslate"><span class="pre">OgnExampleCpp</span></code> stub with a class like this (refer to <code class="docutils literal notranslate"><span class="pre">OgnSimpleSendSimulationClockCpp.cpp</span></code> in <code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc</span></code> for TCP implementation):</p>
+<p>인스턴스별 노드 클래스를 <code class="docutils literal notranslate"><span class="pre">isaacsim::core::includes::BaseResetNode</span></code>에서 파생시킵니다. 해당 베이스는 타임라인 정지 이벤트를 구독하고 시뮬레이션이 멈춘 후 전송 핸들이 열린 상태로 남지 않도록 <code class="docutils literal notranslate"><span class="pre">reset()</span></code>을 호출합니다.</p>
+<p>생성된 <code class="docutils literal notranslate"><span class="pre">OgnExampleCpp</span></code> 스텁을 다음과 같은 클래스로 교체합니다(TCP 구현은 <code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc</span></code>의 <code class="docutils literal notranslate"><span class="pre">OgnSimpleSendSimulationClockCpp.cpp</span></code> 참조):</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;isaacsim/core/includes/BaseResetNode.h&gt;</span>
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;OgnMyIpcNodeCppDatabase.h&gt;</span>
@@ -1560,61 +1186,56 @@ points to a JSON file mapping category keys to human-readable display strings:</
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The generated <code class="docutils literal notranslate"><span class="pre">python/impl/extension.py</span></code> calls <code class="docutils literal notranslate"><span class="pre">acquire_example_ipc_interface()</span></code> in
-<code class="docutils literal notranslate"><span class="pre">on_startup()</span></code>. This is what triggers the Carbonite plugin to load and run
-<code class="docutils literal notranslate"><span class="pre">INITIALIZE_OGN_NODES()</span></code>, registering your C++ nodes. If your nodes do not appear in the
-Action Graph library, verify that <code class="docutils literal notranslate"><span class="pre">extension.py</span></code> is calling the acquire function and that
-<code class="docutils literal notranslate"><span class="pre">PluginInterface.cpp</span></code> does <strong>not</strong> contain a <code class="docutils literal notranslate"><span class="pre">CARB_PLUGIN_IMPL_DEPS</span></code> line, because that macro
-can prevent the plugin from loading.</p>
+<p>생성된 <code class="docutils literal notranslate"><span class="pre">python/impl/extension.py</span></code>는 <code class="docutils literal notranslate"><span class="pre">on_startup()</span></code>에서 <code class="docutils literal notranslate"><span class="pre">acquire_example_ipc_interface()</span></code>를 호출합니다. 이것이 Carbonite 플러그인이 로드되어 <code class="docutils literal notranslate"><span class="pre">INITIALIZE_OGN_NODES()</span></code>를 실행하여 C++ 노드를 등록하는 트리거입니다. 노드가 Action Graph 라이브러리에 나타나지 않으면 <code class="docutils literal notranslate"><span class="pre">extension.py</span></code>가 acquire 함수를 호출하는지, <code class="docutils literal notranslate"><span class="pre">PluginInterface.cpp</span></code>에 <code class="docutils literal notranslate"><span class="pre">CARB_PLUGIN_IMPL_DEPS</span></code> 줄이 <strong>없는지</strong> 확인합니다. 해당 매크로는 플러그인 로딩을 방해할 수 있습니다.</p>
 </div>
 </section>
 <section id="python-node-implementation">
 <h3>Python Node Implementation<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#python-node-implementation" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">BaseResetNode</span></code> is provided by the <code class="docutils literal notranslate"><span class="pre">isaacsim.core.nodes</span></code> extension. Add it as a dependency in <code class="docutils literal notranslate"><span class="pre">config/extension.toml</span></code> and import it in your node file:</p>
+<p><code class="docutils literal notranslate"><span class="pre">BaseResetNode</span></code>는 <code class="docutils literal notranslate"><span class="pre">isaacsim.core.nodes</span></code> 익스텐션에서 제공됩니다. <code class="docutils literal notranslate"><span class="pre">config/extension.toml</span></code>에 의존성으로 추가하고 노드 파일에 임포트합니다:</p>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[dependencies]</span>
-<span class="s2">&quot;isaacsim.core.nodes&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<span class="s2">"isaacsim.core.nodes"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
 </pre></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni.graph.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">og</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.nodes</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseResetNode</span>
 </pre></div>
 </div>
-<p>Put per-instance data in a small class that subclasses <code class="docutils literal notranslate"><span class="pre">BaseResetNode</span></code>. Pass <code class="docutils literal notranslate"><span class="pre">initialize=False</span></code> to <code class="docutils literal notranslate"><span class="pre">super().__init__</span></code>, if you lazy-open sockets in <code class="docutils literal notranslate"><span class="pre">compute</span></code>, as the samples do. Without it, <code class="docutils literal notranslate"><span class="pre">BaseResetNode.__init__</span></code> calls <code class="docutils literal notranslate"><span class="pre">custom_reset()</span></code> immediately during construction, before your instance attributes (such as, <code class="docutils literal notranslate"><span class="pre">self.sock</span> <span class="pre">=</span> <span class="pre">None</span></code>) are set, raising <code class="docutils literal notranslate"><span class="pre">AttributeError</span></code>. Implement <code class="docutils literal notranslate"><span class="pre">custom_reset()</span></code> to close sockets and clear buffers. <code class="docutils literal notranslate"><span class="pre">custom_reset()</span></code> runs on timeline stop and mirrors the C++ <code class="docutils literal notranslate"><span class="pre">reset()</span></code>.</p>
-<p>Replace the generated <code class="docutils literal notranslate"><span class="pre">OgnExamplePython</span></code> stub with a class like this (refer to <code class="docutils literal notranslate"><span class="pre">OgnSimpleSendSimulationClockPy.py</span></code> in <code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc</span></code> for a full TCP implementation):</p>
+<p>소규모 클래스에 인스턴스별 데이터를 담아 <code class="docutils literal notranslate"><span class="pre">BaseResetNode</span></code>를 서브클래스화합니다. 샘플처럼 <code class="docutils literal notranslate"><span class="pre">compute</span></code>에서 소켓을 지연 열기하는 경우 <code class="docutils literal notranslate"><span class="pre">super().__init__</span></code>에 <code class="docutils literal notranslate"><span class="pre">initialize=False</span></code>를 전달합니다. 없으면 <code class="docutils literal notranslate"><span class="pre">BaseResetNode.__init__</span></code>이 생성 중 즉시 <code class="docutils literal notranslate"><span class="pre">custom_reset()</span></code>을 호출하는데, 이때 인스턴스 속성(예: <code class="docutils literal notranslate"><span class="pre">self.sock</span> <span class="pre">=</span> <span class="pre">None</span></code>)이 설정되기 전이므로 <code class="docutils literal notranslate"><span class="pre">AttributeError</span></code>가 발생합니다. 소켓을 닫고 버퍼를 지우도록 <code class="docutils literal notranslate"><span class="pre">custom_reset()</span></code>을 구현합니다. <code class="docutils literal notranslate"><span class="pre">custom_reset()</span></code>은 타임라인 정지 시 실행되며 C++의 <code class="docutils literal notranslate"><span class="pre">reset()</span></code>을 반영합니다.</p>
+<p>생성된 <code class="docutils literal notranslate"><span class="pre">OgnExamplePython</span></code> 스텁을 다음과 같은 클래스로 교체합니다(완전한 TCP 구현은 <code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc</span></code>의 <code class="docutils literal notranslate"><span class="pre">OgnSimpleSendSimulationClockPy.py</span></code> 참조):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni.graph.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">og</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.nodes</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseResetNode</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">OgnMyIpcNodePyState</span><span class="p">(</span><span class="n">BaseResetNode</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Per-instance state for the template IPC node.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Per-instance state for the template IPC node."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># Declare all attributes BEFORE calling super().__init__,</span>
         <span class="c1"># because BaseResetNode.__init__ calls custom_reset() immediately.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">handle</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># replace with your transport handle</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">uri</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uri</span> <span class="o">=</span> <span class="s2">""</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">custom_reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset transport state when timeline or inputs change.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Reset transport state when timeline or inputs change."""</span>
         <span class="c1"># Called on timeline stop and when inputs change.</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">handle</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">uri</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uri</span> <span class="o">=</span> <span class="s2">""</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">OgnMyIpcNodePy</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Template OmniGraph node for custom IPC transports.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Template OmniGraph node for custom IPC transports."""</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">internal_state</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">OgnMyIpcNodePyState</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create per-instance state for the node.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Create per-instance state for the node."""</span>
         <span class="k">return</span> <span class="n">OgnMyIpcNodePyState</span><span class="p">()</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate one non-blocking IPC transfer step.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Evaluate one non-blocking IPC transfer step."""</span>
         <span class="n">state</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">per_instance_state</span>
 
         <span class="n">uri</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">uri</span>
@@ -1643,60 +1264,60 @@ can prevent the plugin from loading.</p>
 </pre></div>
 </div>
 <div class="admonition-try-it-implement-and-build-your-node admonition">
-<p class="admonition-title">Try it: implement and build your node</p>
-<p>Adapt your scaffolded extension to a minimal IPC sender:</p>
+<p class="admonition-title">시도하기: 노드 구현 및 빌드</p>
+<p>스캐폴딩된 익스텐션을 최소 IPC 발신기로 적용합니다:</p>
 <ol class="arabic simple">
-<li><p><strong>Update the OGN schema.</strong> In <code class="docutils literal notranslate"><span class="pre">nodes/OgnExampleCpp.ogn</span></code> (or <code class="docutils literal notranslate"><span class="pre">OgnExamplePython.ogn</span></code>), rename the node and add a <code class="docutils literal notranslate"><span class="pre">uri</span></code> string input (default <code class="docutils literal notranslate"><span class="pre">&quot;127.0.0.1:9000&quot;</span></code>) and <code class="docutils literal notranslate"><span class="pre">execIn</span></code>/<code class="docutils literal notranslate"><span class="pre">execOut</span></code> execution ports.</p></li>
-<li><p><strong>Replace the implementation.</strong> Copy the template above into <code class="docutils literal notranslate"><span class="pre">OgnExampleCpp.cpp</span></code> (or <code class="docutils literal notranslate"><span class="pre">OgnExamplePython.py</span></code>), rename classes to match, and fill in a no-op <code class="docutils literal notranslate"><span class="pre">transfer()</span></code> that always returns <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
-<li><p><strong>Rebuild:</strong> <code class="docutils literal notranslate"><span class="pre">./build.sh</span></code> (Linux) or <code class="docutils literal notranslate"><span class="pre">.\build.bat</span></code> (Windows).</p></li>
-<li><p><strong>Restart Isaac Sim</strong> by closing and relaunching <code class="docutils literal notranslate"><span class="pre">./_build/linux-x86_64/release/isaac-sim.sh</span></code> (Linux) or <code class="docutils literal notranslate"><span class="pre">.\_build\windows-x86_64\release\isaac-sim.bat</span></code> (Windows).</p></li>
-<li><p><strong>Verify:</strong> enable your extension in Isaac Sim and confirm the renamed node appears in the Action Graph library under its new <code class="docutils literal notranslate"><span class="pre">uiName</span></code>.</p></li>
+<li><p><strong>OGN 스키마 업데이트.</strong> <code class="docutils literal notranslate"><span class="pre">nodes/OgnExampleCpp.ogn</span></code>(또는 <code class="docutils literal notranslate"><span class="pre">OgnExamplePython.ogn</span></code>)에서 노드 이름을 바꾸고 <code class="docutils literal notranslate"><span class="pre">uri</span></code> 문자열 입력(기본값 <code class="docutils literal notranslate"><span class="pre">"127.0.0.1:9000"</span></code>)과 <code class="docutils literal notranslate"><span class="pre">execIn</span></code>/<code class="docutils literal notranslate"><span class="pre">execOut</span></code> 실행 포트를 추가합니다.</p></li>
+<li><p><strong>구현 교체.</strong> 위 템플릿을 <code class="docutils literal notranslate"><span class="pre">OgnExampleCpp.cpp</span></code>(또는 <code class="docutils literal notranslate"><span class="pre">OgnExamplePython.py</span></code>)에 복사하고 클래스 이름을 일치하도록 바꾸고, 항상 <code class="docutils literal notranslate"><span class="pre">true</span></code>를 반환하는 no-op <code class="docutils literal notranslate"><span class="pre">transfer()</span></code>를 채웁니다.</p></li>
+<li><p><strong>재빌드:</strong> <code class="docutils literal notranslate"><span class="pre">./build.sh</span></code>(Linux) 또는 <code class="docutils literal notranslate"><span class="pre">.\build.bat</span></code>(Windows).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">./_build/linux-x86_64/release/isaac-sim.sh</span></code>(Linux) 또는 <code class="docutils literal notranslate"><span class="pre">.\_build\windows-x86_64\release\isaac-sim.bat</span></code>(Windows)를 닫고 다시 실행하여 <strong>Isaac Sim 재시작</strong>.</p></li>
+<li><p><strong>확인:</strong> Isaac Sim에서 익스텐션을 활성화하고 Action Graph 라이브러리에서 새 <code class="docutils literal notranslate"><span class="pre">uiName</span></code>으로 이름이 바뀐 노드가 나타나는지 확인합니다.</p></li>
 </ol>
-<p>For a complete TCP implementation of the same pattern, study <code class="docutils literal notranslate"><span class="pre">OgnSimpleSendSimulationClockCpp.cpp</span></code> (or the Python equivalent) in <code class="docutils literal notranslate"><span class="pre">source/extensions/isaacsim.examples.ipc/</span></code>.</p>
+<p>동일한 패턴의 완전한 TCP 구현은 <code class="docutils literal notranslate"><span class="pre">source/extensions/isaacsim.examples.ipc/</span></code>의 <code class="docutils literal notranslate"><span class="pre">OgnSimpleSendSimulationClockCpp.cpp</span></code>(또는 Python 버전)를 참고합니다.</p>
 </div>
-<p>For Python-only extensions (no C++ plugin), omit <code class="docutils literal notranslate"><span class="pre">project_ext_plugin</span></code>, <code class="docutils literal notranslate"><span class="pre">project_ext_bindings</span></code>, and all <code class="docutils literal notranslate"><span class="pre">includedirs</span></code> / <code class="docutils literal notranslate"><span class="pre">links</span></code> entries from <code class="docutils literal notranslate"><span class="pre">premake5.lua</span></code>. Keep <code class="docutils literal notranslate"><span class="pre">add_ogn_dependencies</span></code> (processes <code class="docutils literal notranslate"><span class="pre">.ogn</span></code> files and generates <code class="docutils literal notranslate"><span class="pre">*Database.py</span></code> modules) and the <code class="docutils literal notranslate"><span class="pre">repo_build.prebuild_link</span></code> block:</p>
+<p>Python 전용 익스텐션(C++ 플러그인 없음)의 경우 <code class="docutils literal notranslate"><span class="pre">premake5.lua</span></code>에서 <code class="docutils literal notranslate"><span class="pre">project_ext_plugin</span></code>, <code class="docutils literal notranslate"><span class="pre">project_ext_bindings</span></code>, 모든 <code class="docutils literal notranslate"><span class="pre">includedirs</span></code>/<code class="docutils literal notranslate"><span class="pre">links</span></code> 항목을 생략합니다. <code class="docutils literal notranslate"><span class="pre">add_ogn_dependencies</span></code>(<code class="docutils literal notranslate"><span class="pre">.ogn</span></code> 파일을 처리하고 <code class="docutils literal notranslate"><span class="pre">*Database.py</span></code> 모듈을 생성)와 <code class="docutils literal notranslate"><span class="pre">repo_build.prebuild_link</span></code> 블록은 유지합니다:</p>
 <div class="highlight-lua notranslate"><div class="highlight"><pre><span></span><span class="kd">local</span><span class="w"> </span><span class="nv">ext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_current_extension_info</span><span class="p">()</span>
-<span class="kd">local</span><span class="w"> </span><span class="nv">ogn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_ogn_project_information</span><span class="p">(</span><span class="nv">ext</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;myorg/my/ipc/nodes&quot;</span><span class="p">)</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">ogn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">get_ogn_project_information</span><span class="p">(</span><span class="nv">ext</span><span class="p">,</span><span class="w"> </span><span class="s2">"myorg/my/ipc/nodes"</span><span class="p">)</span>
 <span class="nf">project_ext</span><span class="p">(</span><span class="nv">ext</span><span class="p">)</span>
 
-<span class="nf">add_ogn_dependencies</span><span class="p">(</span><span class="nv">ogn</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;python/nodes&quot;</span><span class="w"> </span><span class="p">})</span>
+<span class="nf">add_ogn_dependencies</span><span class="p">(</span><span class="nv">ogn</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"python/nodes"</span><span class="w"> </span><span class="p">})</span>
 
 <span class="nv">repo_build</span><span class="p">.</span><span class="py">prebuild_copy</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;python/__init__.py&quot;</span><span class="p">,</span><span class="w">  </span><span class="nv">ogn</span><span class="p">.</span><span class="py">python_target_path</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;python/extension.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">ogn</span><span class="p">.</span><span class="py">python_target_path</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="s2">"python/__init__.py"</span><span class="p">,</span><span class="w">  </span><span class="nv">ogn</span><span class="p">.</span><span class="py">python_target_path</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="s2">"python/extension.py"</span><span class="p">,</span><span class="w"> </span><span class="nv">ogn</span><span class="p">.</span><span class="py">python_target_path</span><span class="w"> </span><span class="p">},</span>
 <span class="p">}</span>
 
 <span class="nv">repo_build</span><span class="p">.</span><span class="py">prebuild_link</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;python/nodes&quot;</span><span class="p">,</span><span class="w">  </span><span class="nv">ogn</span><span class="p">.</span><span class="py">python_target_path</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="s2">&quot;/nodes&quot;</span><span class="w"> </span><span class="p">},</span>
-<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;python/tests&quot;</span><span class="p">,</span><span class="w">  </span><span class="nv">ogn</span><span class="p">.</span><span class="py">python_target_path</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="s2">&quot;/tests&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="s2">"python/nodes"</span><span class="p">,</span><span class="w">  </span><span class="nv">ogn</span><span class="p">.</span><span class="py">python_target_path</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="s2">"/nodes"</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="s2">"python/tests"</span><span class="p">,</span><span class="w">  </span><span class="nv">ogn</span><span class="p">.</span><span class="py">python_target_path</span><span class="w"> </span><span class="o">..</span><span class="w"> </span><span class="s2">"/tests"</span><span class="w"> </span><span class="p">},</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="sample-extension-reference">
 <h3>Sample Extension Reference<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#sample-extension-reference" title="Link to this heading">#</a></h3>
-<p>Source: <code class="docutils literal notranslate"><span class="pre">source/extensions/isaacsim.examples.ipc/</span></code>.</p>
+<p>소스: <code class="docutils literal notranslate"><span class="pre">source/extensions/isaacsim.examples.ipc/</span></code>.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Registered type name</p></th>
-<th class="head"><p>Implementation</p></th>
-<th class="head"><p>Role</p></th>
+<tr class="row-odd"><th class="head"><p>등록된 타입 이름</p></th>
+<th class="head"><p>구현</p></th>
+<th class="head"><p>역할</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SimpleSendSimulationClockCpp</span></code> / <code class="docutils literal notranslate"><span class="pre">SimpleSendSimulationClockPy</span></code></p></td>
 <td><p>C++ / Python</p></td>
-<td><p>Forwards the simulation clock to an external process on each evaluation. Connects as a TCP client to <code class="docutils literal notranslate"><span class="pre">uri</span></code> (<code class="docutils literal notranslate"><span class="pre">host:port</span></code>). Input: <code class="docutils literal notranslate"><span class="pre">simulationTime</span></code> (<code class="docutils literal notranslate"><span class="pre">double</span></code>, seconds; connect from <code class="docutils literal notranslate"><span class="pre">IsaacReadSimulationTime</span></code>). Encodes the value as nanoseconds in an 8-byte signed int64 (little-endian) and sends it. Fires <code class="docutils literal notranslate"><span class="pre">execOut</span></code> on every evaluation.</p></td>
+<td><p>매 평가마다 시뮬레이션 클록을 외부 프로세스에 전달합니다. <code class="docutils literal notranslate"><span class="pre">uri</span></code>(<code class="docutils literal notranslate"><span class="pre">host:port</span></code>)에 TCP 클라이언트로 연결합니다. 입력: <code class="docutils literal notranslate"><span class="pre">simulationTime</span></code>(<code class="docutils literal notranslate"><span class="pre">double</span></code>, 초; <code class="docutils literal notranslate"><span class="pre">IsaacReadSimulationTime</span></code>에서 연결). 값을 나노초로 변환하여 8바이트 부호 있는 int64(리틀 엔디안)로 전송합니다. 매 평가마다 <code class="docutils literal notranslate"><span class="pre">execOut</span></code>을 발동합니다.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SimpleReceiveExternalStepCpp</span></code> / <code class="docutils literal notranslate"><span class="pre">SimpleReceiveExternalStepPy</span></code></p></td>
 <td><p>C++ / Python</p></td>
-<td><p>Receives a step counter from an external process and exposes it to downstream nodes. Binds as a TCP server on <code class="docutils literal notranslate"><span class="pre">uri</span></code> and accepts one client. Outputs a <code class="docutils literal notranslate"><span class="pre">step</span></code> (uint32). Fires <code class="docutils literal notranslate"><span class="pre">execOut</span></code> only when a complete 4-byte message arrives. Partial reads are buffered across evaluations.</p></td>
+<td><p>외부 프로세스에서 스텝 카운터를 수신하여 하위 노드에 노출합니다. <code class="docutils literal notranslate"><span class="pre">uri</span></code>에서 TCP 서버로 바인딩하고 한 클라이언트를 수락합니다. <code class="docutils literal notranslate"><span class="pre">step</span></code>(uint32)를 출력합니다. 완전한 4바이트 메시지가 도착할 때만 <code class="docutils literal notranslate"><span class="pre">execOut</span></code>을 발동합니다. 부분 읽기는 평가 간에 버퍼링됩니다.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>In graphs, the full path is typically <code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc.&lt;TypeName&gt;</span></code> (refer to the extension’s <code class="docutils literal notranslate"><span class="pre">config/extension.toml</span></code>).</p>
-<p>C++ and Python follow the same sequence in <code class="docutils literal notranslate"><span class="pre">compute</span></code>. They only differ by name and state wiring. For example, <code class="docutils literal notranslate"><span class="pre">reset()</span></code> compared to <code class="docutils literal notranslate"><span class="pre">custom_reset()</span></code>, and C++ <code class="docutils literal notranslate"><span class="pre">state</span></code> from the OGN database compared to Python <code class="docutils literal notranslate"><span class="pre">internal_state()</span></code>.</p>
+<p>그래프에서 전체 경로는 일반적으로 <code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc.&lt;TypeName&gt;</span></code>입니다(익스텐션의 <code class="docutils literal notranslate"><span class="pre">config/extension.toml</span></code> 참조).</p>
+<p>C++와 Python은 <code class="docutils literal notranslate"><span class="pre">compute</span></code>에서 동일한 순서를 따릅니다. 이름과 상태 배선만 다릅니다. 예를 들어 C++의 <code class="docutils literal notranslate"><span class="pre">reset()</span></code> 대 Python의 <code class="docutils literal notranslate"><span class="pre">custom_reset()</span></code>, OGN 데이터베이스의 C++ <code class="docutils literal notranslate"><span class="pre">state</span></code> 대 Python의 <code class="docutils literal notranslate"><span class="pre">internal_state()</span></code>.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>compute(db)
      │
      ├─► uri (or relevant inputs) changed? ──yes──► teardown transport
@@ -1706,7 +1327,7 @@ try open: connect or listen / accept
      │         (retry next eval if not ready)
      ▼
 transport ready? ──no──► return false
-     │    (recv: often &quot;no full message yet&quot;)
+     │    (recv: often "no full message yet")
      yes
      ▼
 framed try-send / try-recv  (see Performance Considerations for time budget)
@@ -1726,23 +1347,23 @@ return true/false  (per node type / sample rules)
 <h3>Enable Your Extension and Find Your Nodes<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#enable-your-extension-and-find-your-nodes" title="Link to this heading">#</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you have not yet replaced the scaffold placeholders, you can follow the steps below using <code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc</span></code> as a stand-in — it ships with Isaac Sim and has fully working nodes ready to enable and find. Repeat the steps with your own extension name once you have implemented and built your nodes.</p>
+<p>스캐폴드 플레이스홀더를 아직 교체하지 않았다면, 아래 단계를 <code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc</span></code>를 대체로 사용하여 따라할 수 있습니다 — Isaac Sim과 함께 제공되며 활성화하여 찾을 수 있는 완전히 작동하는 노드가 있습니다. 노드를 구현하고 빌드한 후 자신의 익스텐션 이름으로 단계를 반복합니다.</p>
 </div>
-<p>The build (<code class="docutils literal notranslate"><span class="pre">./build.sh</span></code> on Linux, <code class="docutils literal notranslate"><span class="pre">.\build.bat</span></code> on Windows) compiles your extension and places the output under <code class="docutils literal notranslate"><span class="pre">_build/&lt;platform&gt;/release/exts/&lt;extension_name&gt;/</span></code> (<code class="docutils literal notranslate"><span class="pre">linux-x86_64</span></code> or <code class="docutils literal notranslate"><span class="pre">windows-x86_64</span></code> depending on host). Isaac Sim launched from the same repo automatically searches that directory, so no additional path configuration is needed.</p>
+<p>빌드(<code class="docutils literal notranslate"><span class="pre">./build.sh</span></code> on Linux, <code class="docutils literal notranslate"><span class="pre">.\build.bat</span></code> on Windows)는 익스텐션을 컴파일하고 출력을 <code class="docutils literal notranslate"><span class="pre">_build/&lt;platform&gt;/release/exts/&lt;extension_name&gt;/</span></code>(<code class="docutils literal notranslate"><span class="pre">linux-x86_64</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">windows-x86_64</span></code>) 아래에 배치합니다. 같은 리포지토리에서 실행된 Isaac Sim은 해당 디렉토리를 자동으로 검색하므로 추가 경로 설정이 필요하지 않습니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Always launch Isaac Sim from the repo build. A separately installed Isaac Sim does not search the repository <code class="docutils literal notranslate"><span class="pre">exts/</span></code> directory and will not find your extension. After each build run, restart Isaac Sim — a loaded C++ plugin cannot be hot-swapped.</p>
+<p>항상 리포지토리 빌드에서 Isaac Sim을 실행합니다. 별도로 설치된 Isaac Sim은 저장소 <code class="docutils literal notranslate"><span class="pre">exts/</span></code> 디렉토리를 검색하지 않으므로 익스텐션을 찾지 못합니다. 각 빌드 실행 후 Isaac Sim을 재시작합니다 — 로드된 C++ 플러그인은 핫 스왑할 수 없습니다.</p>
 </div>
-<p>Launch (or restart) Isaac Sim from the repo build:</p>
+<p>리포지토리 빌드에서 Isaac Sim을 실행(또는 재시작)합니다:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-6" name="sd-tab-set-3" type="radio">
+<input checked="checked" id="sd-tab-item-6" name="sd-tab-set-3" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="linux" for="sd-tab-item-6">
 Linux</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./_build/linux-x86_64/release/isaac-sim.sh
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-7" name="sd-tab-set-3" type="radio">
+<input id="sd-tab-item-7" name="sd-tab-set-3" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="windows" for="sd-tab-item-7">
 Windows</label><div class="sd-tab-content docutils">
 <div class="highlight-batch notranslate"><div class="highlight"><pre><span></span>.\_build\windows-x86_64\release\isaac-sim.bat
@@ -1750,260 +1371,218 @@ Windows</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </div>
-<p>Then enable your extension:</p>
+<p>그런 다음 익스텐션을 활성화합니다:</p>
 <ol class="arabic simple">
-<li><p>Open <strong>Window &gt; Extensions</strong>.</p></li>
-<li><p>Search for your extension name (for example <code class="docutils literal notranslate"><span class="pre">isaacsim.my.ipc.nodes</span></code>) and enable it.</p></li>
+<li><p><strong>Window &gt; Extensions</strong>를 엽니다.</p></li>
+<li><p>익스텐션 이름(예: <code class="docutils literal notranslate"><span class="pre">isaacsim.my.ipc.nodes</span></code>)을 검색하고 활성화합니다.</p></li>
 </ol>
-<p>Your nodes then appear in the Action Graph node library under the category you chose during scaffolding. Search by the <code class="docutils literal notranslate"><span class="pre">uiName</span></code> value defined in your <code class="docutils literal notranslate"><span class="pre">.ogn</span></code> file (for the scaffold defaults: <code class="docutils literal notranslate"><span class="pre">Example</span> <span class="pre">C++</span> <span class="pre">Node</span></code> and <code class="docutils literal notranslate"><span class="pre">Example</span> <span class="pre">Python</span> <span class="pre">Node</span></code>).</p>
+<p>노드가 스캐폴딩 중 선택한 카테고리 아래 Action Graph 노드 라이브러리에 나타납니다. <code class="docutils literal notranslate"><span class="pre">.ogn</span></code> 파일에 정의된 <code class="docutils literal notranslate"><span class="pre">uiName</span></code> 값으로 검색합니다(스캐폴드 기본값: <code class="docutils literal notranslate"><span class="pre">Example</span> <span class="pre">C++</span> <span class="pre">Node</span></code>와 <code class="docutils literal notranslate"><span class="pre">Example</span> <span class="pre">Python</span> <span class="pre">Node</span></code>).</p>
 </section>
 <section id="building-an-example-graph">
 <h3>Building an Example Graph<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#building-an-example-graph" title="Link to this heading">#</a></h3>
-<p>The steps below build the sample graph for <code class="docutils literal notranslate"><span class="pre">tcp_tutorial_playback_bridge.py</span></code> using the reference nodes from <code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc</span></code>. Use it to verify the end-to-end IPC pattern before wiring in your own nodes.</p>
+<p>아래 단계는 <code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc</span></code>의 참조 노드를 사용하여 <code class="docutils literal notranslate"><span class="pre">tcp_tutorial_playback_bridge.py</span></code>용 샘플 그래프를 구성합니다. 자신의 노드를 연결하기 전에 엔드-투-엔드 IPC 패턴을 확인하는 데 사용합니다.</p>
 <ol class="arabic">
-<li><p>Enable the sample extension. <strong>Open Window &gt; Extensions</strong>, search for <code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc</span></code>, and enable IPC OmniGraph Node Examples.</p></li>
-<li><p>Open the Action Graph editor. <strong>Window &gt; Graph Editors &gt; Action Graph</strong>.</p></li>
-<li><p>Place the tutorial nodes. Under Isaac Examples in the node library, add Receive External Step and Send Simulation Clock. Use the search box to add On Playback Tick and Isaac Read Simulation Time from <code class="docutils literal notranslate"><span class="pre">isaacsim.core.nodes</span></code>. Either C++ or Python node pair works with the bridge script.</p></li>
-<li><p>Wire the graph.</p>
-<p>Execution chain:</p>
+<li><p>샘플 익스텐션을 활성화합니다. <strong>Window &gt; Extensions</strong>를 열고 <code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc</span></code>를 검색하여 IPC OmniGraph Node Examples를 활성화합니다.</p></li>
+<li><p>Action Graph 에디터를 엽니다. <strong>Window &gt; Graph Editors &gt; Action Graph</strong>.</p></li>
+<li><p>튜토리얼 노드를 배치합니다. 노드 라이브러리의 Isaac Examples 아래에 Receive External Step과 Send Simulation Clock을 추가합니다. 검색 박스를 사용하여 <code class="docutils literal notranslate"><span class="pre">isaacsim.core.nodes</span></code>에서 On Playback Tick과 Isaac Read Simulation Time을 추가합니다. C++ 또는 Python 노드 쌍 모두 브리지 스크립트와 작동합니다.</p></li>
+<li><p>그래프를 배선합니다.</p>
+<p>실행 체인:</p>
 <ul class="simple">
 <li><p>On Playback Tick <code class="docutils literal notranslate"><span class="pre">execOut</span></code> → Receive External Step <code class="docutils literal notranslate"><span class="pre">execIn</span></code></p></li>
 <li><p>Receive External Step <code class="docutils literal notranslate"><span class="pre">execOut</span></code> → Send Simulation Clock <code class="docutils literal notranslate"><span class="pre">execIn</span></code></p></li>
 </ul>
-<p>Data:</p>
+<p>데이터:</p>
 <ul class="simple">
 <li><p>Isaac Read Simulation Time <code class="docutils literal notranslate"><span class="pre">simulationTime</span></code> → Send Simulation Clock <code class="docutils literal notranslate"><span class="pre">simulationTime</span></code></p></li>
 </ul>
-<p>The default <code class="docutils literal notranslate"><span class="pre">uri</span></code> values are <code class="docutils literal notranslate"><span class="pre">127.0.0.1:9001</span></code> on the receive node and <code class="docutils literal notranslate"><span class="pre">127.0.0.1:9000</span></code> on the send node.</p>
+<p>기본 <code class="docutils literal notranslate"><span class="pre">uri</span></code> 값은 수신 노드에서 <code class="docutils literal notranslate"><span class="pre">127.0.0.1:9001</span></code>, 발신 노드에서 <code class="docutils literal notranslate"><span class="pre">127.0.0.1:9000</span></code>입니다.</p>
 </li>
-<li><p><strong>Start playback.</strong> Click the <strong>Play</strong> button in the toolbar (or press <strong>Space</strong>) to begin the simulation.</p></li>
+<li><p><strong>재생 시작.</strong> 툴바의 <strong>Play</strong> 버튼을 클릭하거나(또는 <strong>Space</strong>를 눌러) 시뮬레이션을 시작합니다.</p></li>
 </ol>
-<p>General Action Graph UI is covered in <a class="reference internal" href="omnigraph_tutorial.html#isaac-sim-app-tutorial-gui-omnigraph"><span class="std std-ref">Isaac Sim OmniGraph Tutorial</span></a> and in the OmniGraph documentation linked in <a class="reference internal" href="omnigraph_custom_ipc_nodes.html#before-you-start">Before You Start</a>.</p>
-<p>After the graph is wired and playback is running, Receive External Step listens on its URI, the bridge script connects and sends the first step token, and Send Simulation Clock reports the current simulation time back to the script after each tick. The script drives the timing loop and Isaac Sim advances one tick per received step.</p>
+<p>일반 Action Graph UI는 <a class="reference internal" href="omnigraph_tutorial.html#isaac-sim-app-tutorial-gui-omnigraph"><span class="std std-ref">Isaac Sim OmniGraph Tutorial</span></a>과 <a class="reference internal" href="omnigraph_custom_ipc_nodes.html#before-you-start">Before You Start</a>에 링크된 OmniGraph 문서에서 다룹니다.</p>
+<p>그래프 배선 및 재생이 실행되면, Receive External Step이 URI에서 수신 대기하고, 브리지 스크립트가 연결하여 첫 번째 스텝 토큰을 전송하며, Send Simulation Clock이 매 틱 후 스크립트에 현재 시뮬레이션 시간을 보고합니다. 스크립트가 타이밍 루프를 구동하고 Isaac Sim은 수신된 스텝당 한 틱씩 진행합니다.</p>
 <div class="admonition-try-it-run-the-bridge-with-your-own-node admonition">
-<p class="admonition-title">Try it: run the bridge with your own node</p>
-<p>Once the reference graph works end-to-end with <code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc</span></code> nodes, substitute your custom node:</p>
+<p class="admonition-title">시도하기: 자신의 노드로 브리지 실행</p>
+<p><code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc</span></code> 노드로 참조 그래프가 엔드-투-엔드로 작동하면 커스텀 노드로 교체합니다:</p>
 <ol class="arabic simple">
-<li><p>In the graph, delete the <code class="docutils literal notranslate"><span class="pre">SimpleSendSimulationClock</span></code> node.</p></li>
-<li><p>Add your renamed node from the exercise above.</p></li>
-<li><p>Wire it the same way: Receive External Step <code class="docutils literal notranslate"><span class="pre">execOut</span></code> → your node <code class="docutils literal notranslate"><span class="pre">execIn</span></code>, and Isaac Read Simulation Time <code class="docutils literal notranslate"><span class="pre">simulationTime</span></code> → your node <code class="docutils literal notranslate"><span class="pre">simulationTime</span></code>.</p></li>
-<li><p>Run the bridge script. Because <code class="docutils literal notranslate"><span class="pre">transfer()</span></code> is still a stub that returns <code class="docutils literal notranslate"><span class="pre">true</span></code> without sending data, the script will connect but receive no clock output — that is expected. This confirms that your extension loads, enables, and participates in the graph.</p></li>
-<li><p>To complete the implementation, add the actual send logic to <code class="docutils literal notranslate"><span class="pre">transfer()</span></code>. Use <code class="docutils literal notranslate"><span class="pre">OgnSimpleSendSimulationClockCpp.cpp</span></code> (or the Python equivalent) in <code class="docutils literal notranslate"><span class="pre">source/extensions/isaacsim.examples.ipc/</span></code> as a reference.</p></li>
+<li><p>그래프에서 <code class="docutils literal notranslate"><span class="pre">SimpleSendSimulationClock</span></code> 노드를 삭제합니다.</p></li>
+<li><p>위 연습에서 이름을 바꾼 노드를 추가합니다.</p></li>
+<li><p>동일한 방식으로 배선합니다: Receive External Step <code class="docutils literal notranslate"><span class="pre">execOut</span></code> → 자신의 노드 <code class="docutils literal notranslate"><span class="pre">execIn</span></code>, Isaac Read Simulation Time <code class="docutils literal notranslate"><span class="pre">simulationTime</span></code> → 자신의 노드 <code class="docutils literal notranslate"><span class="pre">simulationTime</span></code>.</p></li>
+<li><p>브리지 스크립트를 실행합니다. <code class="docutils literal notranslate"><span class="pre">transfer()</span></code>가 여전히 데이터를 전송하지 않고 <code class="docutils literal notranslate"><span class="pre">true</span></code>를 반환하는 스텁이므로, 스크립트는 연결되지만 클록 출력을 받지 못합니다 — 이는 예상된 동작입니다. 이것으로 익스텐션이 로드되고 활성화되며 그래프에 참여함을 확인합니다.</p></li>
+<li><p>구현을 완성하려면 <code class="docutils literal notranslate"><span class="pre">transfer()</span></code>에 실제 전송 로직을 추가합니다. <code class="docutils literal notranslate"><span class="pre">source/extensions/isaacsim.examples.ipc/</span></code>의 <code class="docutils literal notranslate"><span class="pre">OgnSimpleSendSimulationClockCpp.cpp</span></code>(또는 Python 버전)를 참조로 사용합니다.</p></li>
 </ol>
 </div>
 </section>
 <section id="external-python-playback-bridge">
 <h3>External Python Playback Bridge<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#external-python-playback-bridge" title="Link to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">tcp_tutorial_playback_bridge.py</span></code> script demonstrates a complete roundtrip. It listens for the eight-byte clock that the Send node emits, connects to the Receive node’s listen port, primes one step, then for each frame reads the clock and sends back the next step so the next <code class="docutils literal notranslate"><span class="pre">OnPlaybackTick</span></code> can fire.</p>
-<p>The script only uses the Python standard library (<code class="docutils literal notranslate"><span class="pre">socket</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code>, <code class="docutils literal notranslate"><span class="pre">argparse</span></code>) and has no Isaac Sim or third-party dependencies. Run it from the repo root with any system <code class="docutils literal notranslate"><span class="pre">python3</span></code>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">tcp_tutorial_playback_bridge.py</span></code> 스크립트는 완전한 왕복을 보여줍니다. Send 노드가 방출하는 8바이트 클록을 수신하고, Receive 노드의 수신 대기 포트에 연결하고, 하나의 스텝을 준비한 다음 각 프레임에서 클록을 읽고 다음 <code class="docutils literal notranslate"><span class="pre">OnPlaybackTick</span></code>이 발동될 수 있도록 다음 스텝을 전송합니다.</p>
+<p>스크립트는 Python 표준 라이브러리(<code class="docutils literal notranslate"><span class="pre">socket</span></code>, <code class="docutils literal notranslate"><span class="pre">struct</span></code>, <code class="docutils literal notranslate"><span class="pre">argparse</span></code>)만 사용하며 Isaac Sim이나 서드파티 의존성이 없습니다. 시스템 <code class="docutils literal notranslate"><span class="pre">python3</span></code>으로 리포지토리 루트에서 실행합니다:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>source/extensions/isaacsim.examples.ipc/python/scripts/tcp_tutorial_playback_bridge.py
 </pre></div>
 </div>
-<p>Pass <code class="docutils literal notranslate"><span class="pre">--help</span></code> to see <code class="docutils literal notranslate"><span class="pre">--clock-host</span></code>, <code class="docutils literal notranslate"><span class="pre">--clock-port</span></code>, <code class="docutils literal notranslate"><span class="pre">--step-host</span></code>, <code class="docutils literal notranslate"><span class="pre">--step-port</span></code>, and <code class="docutils literal notranslate"><span class="pre">--max-frames</span></code> options.</p>
+<p><code class="docutils literal notranslate"><span class="pre">--help</span></code>를 전달하면 <code class="docutils literal notranslate"><span class="pre">--clock-host</span></code>, <code class="docutils literal notranslate"><span class="pre">--clock-port</span></code>, <code class="docutils literal notranslate"><span class="pre">--step-host</span></code>, <code class="docutils literal notranslate"><span class="pre">--step-port</span></code>, <code class="docutils literal notranslate"><span class="pre">--max-frames</span></code> 옵션을 볼 수 있습니다.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>The script binds a TCP listener on <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>. For real deployments, bind only to loopback unless you intentionally expose a port. Open interfaces can increase attack surface. Treat any IPC bridge like a network service, where authentication, TLS or equivalent, and firewall rules are your responsibility.</p>
+<p>스크립트는 <code class="docutils literal notranslate"><span class="pre">127.0.0.1</span></code>에 TCP 리스너를 바인딩합니다. 실제 배포에서는 의도적으로 포트를 노출하지 않는 한 루프백에만 바인딩합니다. 열린 인터페이스는 공격 표면을 증가시킬 수 있습니다. IPC 브리지는 네트워크 서비스처럼 취급하여 인증, TLS 또는 동등한 수단, 방화벽 규칙은 사용자의 책임입니다.</p>
 </div>
 </section>
 </section>
 <section id="performance-considerations">
 <h2>Performance Considerations<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#performance-considerations" title="Link to this heading">#</a></h2>
-<p><strong>Stay within your frame budget.</strong></p>
+<p><strong>프레임 예산 내에 유지합니다.</strong></p>
 <blockquote>
-<div><p>OmniGraph evaluates <code class="docutils literal notranslate"><span class="pre">compute</span></code> on paths that must stay responsive relative to simulation, UI, and other graphs. The usual failure mode is unpredictably long work and is not “synchronous” I/O by itself. Waiting on a slow peer, large copies, contended locks, or RPC that can stall for many milliseconds may cause performance issues.</p>
+<div><p>OmniGraph는 시뮬레이션, UI 및 다른 그래프에 대해 응답성을 유지해야 하는 경로에서 <code class="docutils literal notranslate"><span class="pre">compute</span></code>를 평가합니다. 일반적인 실패 모드는 예측할 수 없이 긴 작업이며 그 자체로 "동기식" I/O가 아닙니다. 느린 상대방 대기, 대용량 복사, 경합 잠금, 또는 수십 밀리초 동안 중단될 수 있는 RPC는 성능 문제를 유발할 수 있습니다.</p>
 </div></blockquote>
-<p><strong>Small, fast paths are often fine.</strong></p>
+<p><strong>작은 빠른 경로는 종종 괜찮습니다.</strong></p>
 <blockquote>
-<div><p>A tiny, fixed-size, fire-and-forget operation in <code class="docutils literal notranslate"><span class="pre">compute</span></code> (the tutorial’s eight byte clock send once the socket is connected) can stay on the graph thread if it consistently completes within your per-node budget at the target frame rate. The same applies to other stacks when you have measured the path and it does not wait on back-pressure from the remote side.</p>
+<div><p><code class="docutils literal notranslate"><span class="pre">compute</span></code>의 작고 고정 크기의 fire-and-forget 작업(소켓 연결 후 튜토리얼의 8바이트 클록 전송)은 목표 프레임 레이트에서 노드당 예산 내에 일관되게 완료되면 그래프 스레드에 유지할 수 있습니다. 경로를 측정했고 원격 측의 백프레셔를 기다리지 않는 경우 다른 스택에도 동일하게 적용됩니다.</p>
 </div></blockquote>
-<p><strong>When to use workers, queues, or async APIs.</strong></p>
+<p><strong>워커, 큐, 또는 비동기 API를 사용할 때.</strong></p>
 <blockquote>
 <div><ul class="simple">
-<li><p>If a call can block for an unknown duration (request/response, readiness waits, large payloads, or anything that can exceed your per-node budget), run that IPC on a worker thread. Use callbacks that enqueue results, and keep <code class="docutils literal notranslate"><span class="pre">compute</span></code> to non-blocking dequeue and writing <code class="docutils literal notranslate"><span class="pre">db.outputs</span></code>.</p></li>
-<li><p>For inbound data, try-receive (as in the tutorial’s step node) avoids waiting indefinitely when the external process does not send on your schedule.</p></li>
-<li><p><strong>Async or callback-based I/O:</strong> Drive network or IPC on a worker thread, push decoded messages into a thread-safe queue, and let <code class="docutils literal notranslate"><span class="pre">compute</span></code> only dequeue (non-blocking) and write <code class="docutils literal notranslate"><span class="pre">db.outputs</span></code>.</p></li>
-<li><p><strong>Deferred completion:</strong> Post work from <code class="docutils literal notranslate"><span class="pre">compute</span></code> without waiting for the reply. A background thread enqueues results for a later evaluation.</p></li>
+<li><p>호출이 알 수 없는 시간 동안 차단될 수 있는 경우(요청/응답, 준비 대기, 대용량 페이로드, 또는 노드당 예산을 초과할 수 있는 모든 것), 해당 IPC를 워커 스레드에서 실행합니다. 결과를 큐에 넣는 콜백을 사용하고 <code class="docutils literal notranslate"><span class="pre">compute</span></code>는 비차단 디큐와 <code class="docutils literal notranslate"><span class="pre">db.outputs</span></code> 쓰기만 담당합니다.</p></li>
+<li><p>인바운드 데이터의 경우 수신 시도(튜토리얼의 스텝 노드처럼)는 외부 프로세스가 사용자 일정에 따라 전송하지 않을 때 무기한 대기를 피합니다.</p></li>
+<li><p><strong>비동기 또는 콜백 기반 I/O:</strong> 워커 스레드에서 네트워크 또는 IPC를 구동하고, 디코딩된 메시지를 스레드 안전 큐에 넣고, <code class="docutils literal notranslate"><span class="pre">compute</span></code>는 비차단 디큐와 <code class="docutils literal notranslate"><span class="pre">db.outputs</span></code> 쓰기만 담당합니다.</p></li>
+<li><p><strong>지연된 완료:</strong> <code class="docutils literal notranslate"><span class="pre">compute</span></code>에서 응답을 기다리지 않고 작업을 게시합니다. 백그라운드 스레드가 결과를 나중 평가를 위해 큐에 넣습니다.</p></li>
 </ul>
 </div></blockquote>
-<p><strong>Structured messages vs fixed bytes.</strong></p>
+<p><strong>구조화된 메시지 대 고정 바이트.</strong></p>
 <blockquote>
-<div><p>The fixed-size framing in the tutorial is for clarity. A production bridge typically uses your library’s message format (IDL-generated types, JSON, or another schema). You still decide when to send, how to parse inbound data, and how to keep each <code class="docutils literal notranslate"><span class="pre">compute</span></code> within budget.</p>
+<div><p>튜토리얼의 고정 크기 프레이밍은 명확성을 위한 것입니다. 프로덕션 브리지는 일반적으로 라이브러리의 메시지 형식(IDL 생성 타입, JSON, 또는 다른 스키마)을 사용합니다. 언제 전송할지, 인바운드 데이터를 어떻게 파싱할지, 각 <code class="docutils literal notranslate"><span class="pre">compute</span></code>를 예산 내로 유지하는 방법은 여전히 사용자가 결정합니다.</p>
 </div></blockquote>
-<p><strong>Large messages (camera frames, point clouds).</strong></p>
+<p><strong>대용량 메시지(카메라 프레임, 포인트 클라우드).</strong></p>
 <blockquote>
-<div><p>Single-shot calls that move multi-megabyte payloads can stress memory and scheduling. Use streaming APIs, explicit back-pressure (drop or skip frames on a slow consumer), or shared-memory and zero-copy paths outside OmniGraph, with the node passing only handles or small metadata.</p>
+<div><p>멀티 메가바이트 페이로드를 이동하는 단발성 호출은 메모리와 스케줄링에 부담을 줄 수 있습니다. 스트리밍 API, 명시적 백프레셔(느린 소비자에서 프레임 드롭 또는 건너뜀), 또는 노드가 핸들이나 소규모 메타데이터만 전달하는 OmniGraph 외부의 공유 메모리 및 제로 카피 경로를 사용합니다.</p>
 </div></blockquote>
 </section>
 <section id="built-in-nodes-for-data-in-and-out">
 <h2>Built-In Nodes for Data in and Out<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#built-in-nodes-for-data-in-and-out" title="Link to this heading">#</a></h2>
-<p>Besides <code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc</span></code>, several extensions register OmniGraph nodes that read simulation state or drive simulation inside Isaac Sim, without acting as a general-purpose bridge to another process. The table highlights types that often sit next to custom IPC nodes in a bridge graph.</p>
-<p>Before designing your custom node’s inputs and outputs, check the <code class="docutils literal notranslate"><span class="pre">.ogn</span></code> of the built-in nodes you plan to connect to—their output attribute names and types determine what your node needs to consume or produce.</p>
+<p><code class="docutils literal notranslate"><span class="pre">isaacsim.examples.ipc</span></code> 외에도, 여러 익스텐션이 일반 목적 브리지 역할 없이 Isaac Sim 내에서 시뮬레이션 상태를 읽거나 시뮬레이션을 구동하는 OmniGraph 노드를 등록합니다. 표는 브리지 그래프에서 커스텀 IPC 노드 옆에 자주 위치하는 타입을 강조합니다.</p>
+<p>커스텀 노드의 입력과 출력을 설계하기 전에 연결하려는 빌트인 노드의 <code class="docutils literal notranslate"><span class="pre">.ogn</span></code>을 확인하세요 — 출력 속성 이름과 타입이 노드가 소비하거나 생성해야 하는 것을 결정합니다.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id1">
-<caption><span class="caption-text">Common built-in OmniGraph nodes for bridge-style graphs</span><a class="headerlink" href="omnigraph_custom_ipc_nodes.html#id1" title="Link to this table">#</a></caption>
+<caption><span class="caption-text">브리지 스타일 그래프에 자주 사용되는 빌트인 OmniGraph 노드</span><a class="headerlink" href="omnigraph_custom_ipc_nodes.html#id1" title="Link to this table">#</a></caption>
 <colgroup>
-<col style="width: 18.0%" />
-<col style="width: 28.0%" />
-<col style="width: 22.0%" />
-<col style="width: 32.0%" />
+<col style="width: 18.0%"/>
+<col style="width: 28.0%"/>
+<col style="width: 22.0%"/>
+<col style="width: 32.0%"/>
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Goal</p></th>
-<th class="head"><p>Node (registered type)</p></th>
-<th class="head"><p>Extension</p></th>
-<th class="head"><p>Key inputs / outputs (abbrev.)</p></th>
+<tr class="row-odd"><th class="head"><p>목적</p></th>
+<th class="head"><p>노드(등록된 타입)</p></th>
+<th class="head"><p>익스텐션</p></th>
+<th class="head"><p>주요 입력/출력(약식)</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Read joint positions / velocities (and efforts) for publishing</p></td>
+<tr class="row-even"><td><p>게시용 관절 위치/속도(및 노력) 읽기</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">IsaacArticulationState</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">isaacsim.core.nodes</span></code></p></td>
-<td><p>In: <code class="docutils literal notranslate"><span class="pre">robotPath</span></code> or <code class="docutils literal notranslate"><span class="pre">targetPrim</span></code>, optional <code class="docutils literal notranslate"><span class="pre">jointNames</span></code> / <code class="docutils literal notranslate"><span class="pre">jointIndices</span></code>. Out: <code class="docutils literal notranslate"><span class="pre">jointPositions</span></code>, <code class="docutils literal notranslate"><span class="pre">jointVelocities</span></code> (<code class="docutils literal notranslate"><span class="pre">double[]</span></code>), <code class="docutils literal notranslate"><span class="pre">jointNames</span></code> (<code class="docutils literal notranslate"><span class="pre">token[]</span></code>), plus measured effort arrays.</p></td>
+<td><p>입력: <code class="docutils literal notranslate"><span class="pre">robotPath</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">targetPrim</span></code>, 선택적 <code class="docutils literal notranslate"><span class="pre">jointNames</span></code>/<code class="docutils literal notranslate"><span class="pre">jointIndices</span></code>. 출력: <code class="docutils literal notranslate"><span class="pre">jointPositions</span></code>, <code class="docutils literal notranslate"><span class="pre">jointVelocities</span></code>(<code class="docutils literal notranslate"><span class="pre">double[]</span></code>), <code class="docutils literal notranslate"><span class="pre">jointNames</span></code>(<code class="docutils literal notranslate"><span class="pre">token[]</span></code>), 측정된 노력 배열 포함.</p></td>
 </tr>
-<tr class="row-odd"><td><p>Alternative joint state (physics sensor path)</p></td>
+<tr class="row-odd"><td><p>대안 관절 상태(물리 센서 경로)</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.physics.IsaacReadJointState</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.physics.nodes</span></code></p></td>
-<td><p>In: <code class="docutils literal notranslate"><span class="pre">prim</span></code> (articulation root). Out: <code class="docutils literal notranslate"><span class="pre">jointPositions</span></code>, <code class="docutils literal notranslate"><span class="pre">jointVelocities</span></code>, <code class="docutils literal notranslate"><span class="pre">jointEfforts</span></code>, <code class="docutils literal notranslate"><span class="pre">jointNames</span></code>, <code class="docutils literal notranslate"><span class="pre">execOut</span></code>, etc.</p></td>
+<td><p>입력: <code class="docutils literal notranslate"><span class="pre">prim</span></code>(아티큘레이션 루트). 출력: <code class="docutils literal notranslate"><span class="pre">jointPositions</span></code>, <code class="docutils literal notranslate"><span class="pre">jointVelocities</span></code>, <code class="docutils literal notranslate"><span class="pre">jointEfforts</span></code>, <code class="docutils literal notranslate"><span class="pre">jointNames</span></code>, <code class="docutils literal notranslate"><span class="pre">execOut</span></code> 등.</p></td>
 </tr>
-<tr class="row-even"><td><p>Apply joint position / velocity / effort commands</p></td>
+<tr class="row-even"><td><p>관절 위치/속도/노력 명령 적용</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">IsaacArticulationController</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">isaacsim.core.nodes</span></code></p></td>
-<td><p>In: same robot targeting as above; <code class="docutils literal notranslate"><span class="pre">positionCommand</span></code>, <code class="docutils literal notranslate"><span class="pre">velocityCommand</span></code>, <code class="docutils literal notranslate"><span class="pre">effortCommand</span></code> (<code class="docutils literal notranslate"><span class="pre">double[]</span></code>). Angular units are radians at the controller API.</p></td>
+<td><p>입력: 위와 동일한 로봇 타겟팅; <code class="docutils literal notranslate"><span class="pre">positionCommand</span></code>, <code class="docutils literal notranslate"><span class="pre">velocityCommand</span></code>, <code class="docutils literal notranslate"><span class="pre">effortCommand</span></code>(<code class="docutils literal notranslate"><span class="pre">double[]</span></code>). 각도 단위는 컨트롤러 API에서 라디안.</p></td>
 </tr>
-<tr class="row-odd"><td><p>Simulation tick / gating</p></td>
+<tr class="row-odd"><td><p>시뮬레이션 틱/게이팅</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">OnPhysicsStep</span></code>, <code class="docutils literal notranslate"><span class="pre">IsaacSimulationGate</span></code>, <code class="docutils literal notranslate"><span class="pre">IsaacReadSimulationTime</span></code>, …</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">isaacsim.core.nodes</span></code></p></td>
-<td><p>Use to pace state reads and command writes consistently (exact attributes vary by node).</p></td>
+<td><p>상태 읽기와 명령 쓰기를 일관되게 속도 조절하는 데 사용합니다(정확한 속성은 노드마다 다름).</p></td>
 </tr>
-<tr class="row-even"><td><p>Camera / viewport render product path (setup only)</p></td>
+<tr class="row-even"><td><p>카메라/뷰포트 렌더 제품 경로(설정만)</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">IsaacGetViewportRenderProduct</span></code>, <code class="docutils literal notranslate"><span class="pre">IsaacCreateRenderProduct</span></code>, <code class="docutils literal notranslate"><span class="pre">IsaacAttachHydraTexture</span></code>, <code class="docutils literal notranslate"><span class="pre">IsaacSetCameraOnRenderProduct</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">isaacsim.core.nodes</span></code></p></td>
-<td><p>Mostly paths and targets (<code class="docutils literal notranslate"><span class="pre">renderProductPath</span></code>, <code class="docutils literal notranslate"><span class="pre">renderProductPrim</span></code>). Pixels require a separate readback step. Refer to <a class="reference internal" href="omnigraph_custom_ipc_nodes.html#camera-and-render-products">Camera and Render Products</a>.</p></td>
+<td><p>주로 경로와 타겟(<code class="docutils literal notranslate"><span class="pre">renderProductPath</span></code>, <code class="docutils literal notranslate"><span class="pre">renderProductPrim</span></code>). 픽셀은 별도의 읽기 단계가 필요합니다. <a class="reference internal" href="omnigraph_custom_ipc_nodes.html#camera-and-render-products">Camera and Render Products</a> 참조.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Other read extensions you can chain before a custom sender:</p>
+<p>커스텀 발신기 앞에 연결할 수 있는 다른 읽기 익스텐션:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.physics.nodes</span></code> — IMU, contact, effort, etc., backed by <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.physics</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.physx</span></code> — for example Isaac Read Lidar Beams, Isaac Read Lidar Point Cloud, Isaac Read Light Beam Sensor.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.rtx.nodes</span></code> — for example Isaac Extract RTX Sensor Point Cloud.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.physics.nodes</span></code> — <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.physics</span></code>가 지원하는 IMU, 접촉, 노력 등.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.physx</span></code> — 예: Isaac Read Lidar Beams, Isaac Read Lidar Point Cloud, Isaac Read Light Beam Sensor.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.rtx.nodes</span></code> — 예: Isaac Extract RTX Sensor Point Cloud.</p></li>
 </ul>
-<p>For IPC with external applications (topics, services, or other runtimes), use dedicated bridge extensions rather than treating the nodes in the table above as a transport layer. Examples include <code class="docutils literal notranslate"><span class="pre">isaacsim.ros2.nodes</span></code> (ROS 2) or <code class="docutils literal notranslate"><span class="pre">isaacsim.ucx.nodes</span></code> (UCX). Those extensions play the same role as the TCP tutorial nodes, not the sensor-read nodes in the table.</p>
-<p><strong>Reference implementations in this repository.</strong></p>
+<p>외부 애플리케이션(토픽, 서비스, 또는 다른 런타임)과의 IPC에는 위 표의 노드를 전송 계층으로 취급하는 대신 전용 브리지 익스텐션을 사용합니다. 예: <code class="docutils literal notranslate"><span class="pre">isaacsim.ros2.nodes</span></code>(ROS 2) 또는 <code class="docutils literal notranslate"><span class="pre">isaacsim.ucx.nodes</span></code>(UCX). 이러한 익스텐션은 표의 센서 읽기 노드가 아닌 TCP 튜토리얼 노드와 동일한 역할을 합니다.</p>
+<p><strong>이 저장소의 참조 구현.</strong></p>
 <blockquote>
-<div><p>The <code class="docutils literal notranslate"><span class="pre">source/extensions/</span></code> directory contains full IPC bridge implementations
-you can study when you outgrow the TCP tutorial. Two stacks are available:</p>
+<div><p><code class="docutils literal notranslate"><span class="pre">source/extensions/</span></code> 디렉토리에는 TCP 튜토리얼을 넘어섰을 때 참고할 수 있는 완전한 IPC 브리지 구현이 포함되어 있습니다. 두 가지 스택이 있습니다:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><strong>ROS 2</strong>: <code class="docutils literal notranslate"><span class="pre">isaacsim.ros2.nodes</span></code>, <code class="docutils literal notranslate"><span class="pre">isaacsim.ros2.bridge</span></code>, and related
-packages.</p></li>
-<li><p><strong>UCX</strong>: <code class="docutils literal notranslate"><span class="pre">isaacsim.ucx.nodes</span></code>, <code class="docutils literal notranslate"><span class="pre">isaacsim.ucx.core</span></code>,
-<code class="docutils literal notranslate"><span class="pre">isaacsim.ucx.bridge</span></code>.</p></li>
+<li><p><strong>ROS 2</strong>: <code class="docutils literal notranslate"><span class="pre">isaacsim.ros2.nodes</span></code>, <code class="docutils literal notranslate"><span class="pre">isaacsim.ros2.bridge</span></code> 및 관련 패키지.</p></li>
+<li><p><strong>UCX</strong>: <code class="docutils literal notranslate"><span class="pre">isaacsim.ucx.nodes</span></code>, <code class="docutils literal notranslate"><span class="pre">isaacsim.ucx.core</span></code>, <code class="docutils literal notranslate"><span class="pre">isaacsim.ucx.bridge</span></code>.</p></li>
 </ul>
 </div></blockquote>
-<p>Each stack shows how a complete bridge is laid out: <code class="docutils literal notranslate"><span class="pre">extension.toml</span></code>
-dependencies, native plugins, C++ and Python OmniGraph nodes, and transport
-backends.</p>
+<p>각 스택은 완전한 브리지 레이아웃을 보여줍니다: <code class="docutils literal notranslate"><span class="pre">extension.toml</span></code> 의존성, 네이티브 플러그인, C++ 및 Python OmniGraph 노드, 전송 백엔드.</p>
 </div></blockquote>
-<p>Use the OmniGraph node library in the Kit docs to search by name: <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_omnigraph.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">OmniGraph</span></a>.</p>
+<p>Kit 문서의 OmniGraph 노드 라이브러리에서 이름으로 검색합니다: <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_omnigraph.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">OmniGraph</span></a>.</p>
 </section>
 <section id="camera-and-render-products">
 <h2>Camera and Render Products<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#camera-and-render-products" title="Link to this heading">#</a></h2>
-<p>Getting raw RGB pixels into a custom IPC node requires more than a plain <code class="docutils literal notranslate"><span class="pre">uchar[]</span></code> OGN input. Imagery typically flows through a Replicator pipeline or a render product chain before reaching any IPC encoder, not a single wire in the graph editor. The key steps are:</p>
+<p>커스텀 IPC 노드에 원시 RGB 픽셀을 가져오려면 단순한 <code class="docutils literal notranslate"><span class="pre">uchar[]</span></code> OGN 입력 이상이 필요합니다. 이미지는 일반적으로 IPC 인코더에 도달하기 전에 Replicator 파이프라인 또는 렌더 제품 체인을 통해 흐르며 그래프 에디터의 단일 와이어가 아닙니다. 주요 단계는 다음과 같습니다:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>Set up a render product (<code class="docutils literal notranslate"><span class="pre">IsaacCreateRenderProduct</span></code> or <code class="docutils literal notranslate"><span class="pre">IsaacGetViewportRenderProduct</span></code>) and attach a camera.</p></li>
-<li><p>Feed the render product into a readback mechanism either a:</p>
+<li><p>렌더 제품(<code class="docutils literal notranslate"><span class="pre">IsaacCreateRenderProduct</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">IsaacGetViewportRenderProduct</span></code>)을 설정하고 카메라를 연결합니다.</p></li>
+<li><p>렌더 제품을 읽기 메커니즘에 공급합니다:</p>
 <ul class="simple">
-<li><p>Replicator annotator (host-friendly NumPy arrays)</p></li>
-<li><p>Hydra texture chain (GPU handles through <code class="docutils literal notranslate"><span class="pre">IsaacAttachHydraTexture</span></code>)</p></li>
+<li><p>Replicator 어노테이터(호스트 친화적인 NumPy 배열)</p></li>
+<li><p>Hydra 텍스처 체인(<code class="docutils literal notranslate"><span class="pre">IsaacAttachHydraTexture</span></code>를 통한 GPU 핸들)</p></li>
 </ul>
 </li>
-<li><p>Pass the resulting CPU-addressable bytes or arrays into your IPC encoder node.</p></li>
+<li><p>결과 CPU 주소 지정 가능 바이트 또는 배열을 IPC 인코더 노드에 전달합니다.</p></li>
 </ol>
 </div></blockquote>
-<p>The <code class="docutils literal notranslate"><span class="pre">isaacsim.ros2.bridge</span></code> extension’s camera helper node is a concrete reference for how this pipeline is assembled. The ROS 2 camera publisher wires a render product to host readback and then to IPC. Browsing that source is the fastest way to understand the pattern before building your own.</p>
-<p>Refer to <a class="reference internal" href="omnigraph_custom_ipc_nodes.html#performance-considerations">Performance Considerations</a> before passing large buffers through <code class="docutils literal notranslate"><span class="pre">compute</span></code>. Camera frames are a common source of frame-budget overruns.</p>
+<p><code class="docutils literal notranslate"><span class="pre">isaacsim.ros2.bridge</span></code> 익스텐션의 카메라 헬퍼 노드는 이 파이프라인이 어떻게 조립되는지에 대한 구체적인 참조입니다. ROS 2 카메라 퍼블리셔는 렌더 제품을 호스트 읽기에 연결한 다음 IPC에 연결합니다. 해당 소스를 탐색하는 것이 자신의 것을 구성하기 전에 패턴을 이해하는 가장 빠른 방법입니다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">compute</span></code>를 통해 대용량 버퍼를 전달하기 전에 <a class="reference internal" href="omnigraph_custom_ipc_nodes.html#performance-considerations">Performance Considerations</a>를 참조합니다. 카메라 프레임은 프레임 예산 초과의 일반적인 원인입니다.</p>
 </section>
 <section id="testing-your-omnigraph-node-implementation">
 <h2>Testing Your OmniGraph Node Implementation<a class="headerlink" href="omnigraph_custom_ipc_nodes.html#testing-your-omnigraph-node-implementation" title="Link to this heading">#</a></h2>
-<p>Python integration tests for OmniGraph nodes can build Action Graphs at runtime
-using <code class="docutils literal notranslate"><span class="pre">og.Controller.edit</span></code>, wire nodes together programmatically, drive the
-timeline, and assert on output attribute values. Useful areas to cover:</p>
+<p>OmniGraph 노드에 대한 Python 통합 테스트는 런타임에 <code class="docutils literal notranslate"><span class="pre">og.Controller.edit</span></code>를 사용하여 Action Graph를 구성하고, 노드를 프로그래밍 방식으로 연결하고, 타임라인을 구동하며, 출력 속성 값을 검증할 수 있습니다. 커버해야 할 유용한 영역:</p>
 <ul class="simple">
-<li><p><strong>Correct outputs</strong>: Given known inputs, the node produces the expected
-<code class="docutils literal notranslate"><span class="pre">db.outputs</span></code> values.</p></li>
-<li><p><strong>execOut timing</strong>: The node fires <code class="docutils literal notranslate"><span class="pre">execOut</span></code> only under the intended
-conditions. For send nodes, this means every evaluation. For receive nodes,
-this means only on data receipt.</p></li>
-<li><p><strong>Reset behavior</strong>: Changing a URI input or stopping the timeline closes the
-transport, and a subsequent evaluation reopens it cleanly.</p></li>
-<li><p><strong>Edge cases</strong>: Partial messages, peer disconnect, and malformed data from the
-external process.</p></li>
+<li><p><strong>정확한 출력</strong>: 알려진 입력이 주어지면 노드가 예상된 <code class="docutils literal notranslate"><span class="pre">db.outputs</span></code> 값을 생성합니다.</p></li>
+<li><p><strong>execOut 타이밍</strong>: 노드가 의도된 조건에서만 <code class="docutils literal notranslate"><span class="pre">execOut</span></code>을 발동합니다. 발신 노드의 경우 매 평가, 수신 노드의 경우 데이터 수신 시에만.</p></li>
+<li><p><strong>리셋 동작</strong>: URI 입력 변경 또는 타임라인 정지 시 전송이 닫히고, 이후 평가에서 깨끗하게 다시 열립니다.</p></li>
+<li><p><strong>엣지 케이스</strong>: 부분 메시지, 상대방 연결 해제, 외부 프로세스의 잘못된 형식 데이터.</p></li>
 </ul>
-<p>For C++ helpers (parsing, encoding, and endianness), unit tests can run outside
-Isaac Sim through a native test library such as doctest, wired in
-<code class="docutils literal notranslate"><span class="pre">premake5.lua</span></code> and referenced from <code class="docutils literal notranslate"><span class="pre">extension.toml</span></code>.</p>
-<p>Point <code class="docutils literal notranslate"><span class="pre">[[test]]</span></code> entries in your <code class="docutils literal notranslate"><span class="pre">extension.toml</span></code> at your test modules. The
-generated test driver is typically
-<code class="docutils literal notranslate"><span class="pre">_build/&lt;platform&gt;/&lt;config&gt;/tests/tests-&lt;your.extension.id&gt;.sh</span></code>. For a
-scaffolded extension, tests go in <code class="docutils literal notranslate"><span class="pre">python/tests/</span></code> (already created by the
-template).</p>
-<p>For examples of the patterns above (async tests, <code class="docutils literal notranslate"><span class="pre">OnImpulseEvent</span></code>, free-port
-helpers, and timeline control), refer to
-<code class="docutils literal notranslate"><span class="pre">source/extensions/isaacsim.examples.ipc/python/tests/</span></code>.</p>
+<p>C++ 헬퍼(파싱, 인코딩, 엔디안)의 경우 단위 테스트는 doctest와 같은 네이티브 테스트 라이브러리를 통해 Isaac Sim 외부에서 실행할 수 있으며, <code class="docutils literal notranslate"><span class="pre">premake5.lua</span></code>에 연결하고 <code class="docutils literal notranslate"><span class="pre">extension.toml</span></code>에서 참조합니다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">extension.toml</span></code>의 <code class="docutils literal notranslate"><span class="pre">[[test]]</span></code> 항목이 테스트 모듈을 가리키도록 합니다. 생성된 테스트 드라이버는 일반적으로 <code class="docutils literal notranslate"><span class="pre">_build/&lt;platform&gt;/&lt;config&gt;/tests/tests-&lt;your.extension.id&gt;.sh</span></code>입니다. 스캐폴딩된 익스텐션의 경우 테스트는 <code class="docutils literal notranslate"><span class="pre">python/tests/</span></code>에 있습니다(템플릿에서 이미 생성됨).</p>
+<p>위 패턴의 예제(비동기 테스트, <code class="docutils literal notranslate"><span class="pre">OnImpulseEvent</span></code>, 자유 포트 헬퍼, 타임라인 제어)는 <code class="docutils literal notranslate"><span class="pre">source/extensions/isaacsim.examples.ipc/python/tests/</span></code>를 참조합니다.</p>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="omnigraph_custom_cpp_nodes.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Custom C++ Nodes</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="omnigraph_tutorial.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Isaac Sim OmniGraph Tutorial</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="omnigraph_custom_cpp_nodes.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Custom C++ Nodes</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="omnigraph_tutorial.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Isaac Sim OmniGraph Tutorial</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="omnigraph_custom_ipc_nodes.html#before-you-start">Before You Start</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="omnigraph_custom_ipc_nodes.html#scaffold-your-extension">Scaffold Your Extension</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="omnigraph_custom_ipc_nodes.html#add-your-transport-library">Add Your Transport Library</a><ul class="nav section-nav flex-column">
@@ -2031,46 +1610,29 @@ helpers, and timeline control), refer to
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="omnigraph_custom_ipc_nodes.html#camera-and-render-products">Camera and Render Products</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="omnigraph_custom_ipc_nodes.html#testing-your-omnigraph-node-implementation">Testing Your OmniGraph Node Implementation</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -2101,36 +1663,21 @@ helpers, and timeline control), refer to
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>
