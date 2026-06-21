@@ -1,551 +1,256 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Live Camera Streaming over RTSP &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Live Camera Streaming over RTSP — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'digital_twin/rtsp_camera_streaming';</script>
-    <script>
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'digital_twin/rtsp_camera_streaming';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Application Template" href="../app_template/index.html" />
-    <link rel="prev" title="Mapping" href="ext_isaacsim_asset_generator_occupancy_map.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="../app_template/index.html" rel="next" title="Application Template"/>
+<link href="ext_isaacsim_asset_generator_occupancy_map.html" rel="prev" title="Mapping"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="rtsp_camera_streaming.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="rtsp_camera_streaming.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +270,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -593,20 +297,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -681,17 +373,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -869,7 +551,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -909,13 +590,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -962,10 +637,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1134,18 +805,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1171,174 +832,113 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Digital Twin</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Live Camera Streaming over RTSP</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">Digital Twin</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Live Camera Streaming over RTSP</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="live-camera-streaming-over-rtsp">
+<article class="bd-article">
+<section id="live-camera-streaming-over-rtsp">
 <span id="isaac-sim-rtsp-camera-streaming"></span><h1>Live Camera Streaming over RTSP<a class="headerlink" href="rtsp_camera_streaming.html#live-camera-streaming-over-rtsp" title="Link to this heading">#</a></h1>
-<p>NVIDIA Isaac Sim can publish a live video feed of a camera in the scene over the
-Real Time Streaming Protocol (RTSP). Frames captured from a render product are
-encoded with NVIDIA’s hardware video encoder (NVENC) and pushed to an in-process
-RTSP server, which any standard client (VLC, <code class="docutils literal notranslate"><span class="pre">ffplay</span></code>, GStreamer, OpenCV) can
-connect to. This is the recommended path for piping simulated camera output
-into perception stacks, recording rigs, broadcast pipelines, or downstream
-analytics services that already speak RTSP.</p>
-<p>The streaming pipeline ships in the <code class="docutils literal notranslate"><span class="pre">isaacsim.streaming.rtsp</span></code> extension. Enable
-the extension when you need RTSP streaming. It exposes two entry points: an
-OmniGraph node for declarative scene-graph authoring, and a Replicator
-writer for fully programmatic setups.</p>
+<p>NVIDIA Isaac Sim은 씬의 카메라 라이브 비디오 피드를 실시간 스트리밍 프로토콜(RTSP)을 통해 게시할 수 있습니다. 렌더 프로덕트에서 캡처된 프레임은 NVIDIA의 하드웨어 비디오 인코더(NVENC)로 인코딩되어 인프로세스 RTSP 서버로 전송되며, 표준 클라이언트(VLC, <code class="docutils literal notranslate"><span class="pre">ffplay</span></code>, GStreamer, OpenCV)에서 연결할 수 있습니다. 이는 시뮬레이션 카메라 출력을 인식 스택, 녹화 장치, 방송 파이프라인, 또는 RTSP를 지원하는 하위 분석 서비스로 전달하는 데 권장되는 방법입니다.</p>
+<p>스트리밍 파이프라인은 <code class="docutils literal notranslate"><span class="pre">isaacsim.streaming.rtsp</span></code> 익스텐션에 포함되어 있습니다. RTSP 스트리밍이 필요할 때 익스텐션을 활성화하세요. 선언적 씬 그래프 저작을 위한 OmniGraph 노드와 완전 프로그래밍 방식 설정을 위한 Replicator 라이터, 두 가지 진입점을 제공합니다.</p>
 <section id="prerequisites">
 <span id="isaac-sim-rtsp-prerequisites"></span><h2>Prerequisites<a class="headerlink" href="rtsp_camera_streaming.html#prerequisites" title="Link to this heading">#</a></h2>
-<p>Ensure you have the following:</p>
+<p>다음을 준비하세요:</p>
 <ul class="simple">
-<li><p>An NVIDIA GPU with NVENC support (required for H.264 encoding).</p></li>
-<li><p>Enable the <code class="docutils literal notranslate"><span class="pre">isaacsim.streaming.rtsp</span></code> extension in the <strong>Extension Manager</strong>
-window by navigating to <strong>Window</strong> &gt; <strong>Extensions</strong>, or launch NVIDIA Isaac Sim
-with <code class="docutils literal notranslate"><span class="pre">--enable</span> <span class="pre">isaacsim.streaming.rtsp</span></code>.</p></li>
+<li><p>NVENC 지원이 있는 NVIDIA GPU (H.264 인코딩에 필요).</p></li>
+<li><p><strong>Extension Manager</strong> 창에서 <strong>Window</strong> &gt; <strong>Extensions</strong>로 이동하거나, <code class="docutils literal notranslate"><span class="pre">--enable</span> <span class="pre">isaacsim.streaming.rtsp</span></code>로 NVIDIA Isaac Sim을 실행하여 <code class="docutils literal notranslate"><span class="pre">isaacsim.streaming.rtsp</span></code> 익스텐션을 활성화하세요.</p></li>
 </ul>
 </section>
 <section id="streaming-a-camera">
 <span id="isaac-sim-rtsp-streaming-a-camera"></span><h2>Streaming a Camera<a class="headerlink" href="rtsp_camera_streaming.html#streaming-a-camera" title="Link to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">isaacsim.streaming.rtsp.RTSPCameraHelper</span></code> OmniGraph node
-publishes a camera’s render product over RTSP. A complete pipeline consists
-of this node and two supporting nodes wired in a single execution chain:</p>
+<p><code class="docutils literal notranslate"><span class="pre">isaacsim.streaming.rtsp.RTSPCameraHelper</span></code> OmniGraph 노드는 카메라의 렌더 프로덕트를 RTSP로 게시합니다. 완전한 파이프라인은 이 노드와 단일 실행 체인으로 연결된 두 개의 지원 노드로 구성됩니다:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">OnPlaybackTick</span></code> — runs the graph once per timeline frame while
-playback is running.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">IsaacCreateRenderProduct</span></code> — creates (or reuses) a render product
-for the target camera at the requested resolution and emits its USD
-path on <code class="docutils literal notranslate"><span class="pre">renderProductPath</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">RTSPCameraHelper</span></code> — attaches the streaming writer to that render
-product and brings up the RTSP server on the configured port and mount
-path.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">OnPlaybackTick</span></code> — 재생 중 타임라인 프레임마다 그래프를 한 번 실행합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IsaacCreateRenderProduct</span></code> — 요청한 해상도로 대상 카메라의 렌더 프로덕트를 생성(또는 재사용)하고 <code class="docutils literal notranslate"><span class="pre">renderProductPath</span></code>에 USD 경로를 출력합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RTSPCameraHelper</span></code> — 스트리밍 라이터를 해당 렌더 프로덕트에 연결하고 설정된 포트 및 마운트 경로에서 RTSP 서버를 시작합니다.</p></li>
 </ul>
 <section id="building-the-graph-in-the-editor">
 <h3>Building the Graph in the Editor<a class="headerlink" href="rtsp_camera_streaming.html#building-the-graph-in-the-editor" title="Link to this heading">#</a></h3>
-<p>The recommended way to author the pipeline is the OmniGraph editor.
-To build the graph:</p>
+<p>파이프라인을 저작하는 권장 방법은 OmniGraph 편집기입니다. 그래프를 빌드하려면:</p>
 <ol class="arabic simple">
-<li><p>Open <strong>Window &gt; Graph Editors &gt; Action Graph</strong> and click <strong>New Action
-Graph</strong>.</p></li>
-<li><p>Add the three nodes listed above. To find them, search for <code class="docutils literal notranslate"><span class="pre">RTSP</span></code>,
-<code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Create</span> <span class="pre">Render</span> <span class="pre">Product</span></code>, and <code class="docutils literal notranslate"><span class="pre">On</span> <span class="pre">Playback</span> <span class="pre">Tick</span></code>.</p></li>
-<li><p>Connect <code class="docutils literal notranslate"><span class="pre">OnPlaybackTick.tick</span></code> to <code class="docutils literal notranslate"><span class="pre">IsaacCreateRenderProduct.execIn</span></code>,
-then <code class="docutils literal notranslate"><span class="pre">IsaacCreateRenderProduct.execOut</span></code> to <code class="docutils literal notranslate"><span class="pre">RTSPCameraHelper.execIn</span></code>.</p></li>
-<li><p>Connect <code class="docutils literal notranslate"><span class="pre">IsaacCreateRenderProduct.renderProductPath</span></code> to
-<code class="docutils literal notranslate"><span class="pre">RTSPCameraHelper.renderProductPath</span></code> so the helper attaches to the
-render product the previous node created.</p></li>
-<li><p>On the <code class="docutils literal notranslate"><span class="pre">IsaacCreateRenderProduct</span></code> node, set <strong>cameraPrim</strong> to the
-camera you want to stream.</p></li>
-<li><p>On the <code class="docutils literal notranslate"><span class="pre">RTSPCameraHelper</span></code> node, set <strong>port</strong> (default <code class="docutils literal notranslate"><span class="pre">8554</span></code>) and
-<strong>mountPath</strong> (default <code class="docutils literal notranslate"><span class="pre">/stream</span></code>).</p></li>
-<li><p>Press <strong>Play</strong> in the timeline. The RTSP server starts lazily on the
-first rendered frame and the stream becomes available at
-<code class="docutils literal notranslate"><span class="pre">rtsp://localhost:8554/&lt;mountPath&gt;</span></code>. The server shuts down cleanly when
-you press <strong>Stop</strong>.</p></li>
+<li><p><strong>Window &gt; Graph Editors &gt; Action Graph</strong>를 열고 <strong>New Action Graph</strong>를 클릭합니다.</p></li>
+<li><p>위의 세 노드를 추가합니다. 노드를 찾으려면 <code class="docutils literal notranslate"><span class="pre">RTSP</span></code>, <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Create</span> <span class="pre">Render</span> <span class="pre">Product</span></code>, <code class="docutils literal notranslate"><span class="pre">On</span> <span class="pre">Playback</span> <span class="pre">Tick</span></code>를 검색하세요.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">OnPlaybackTick.tick</span></code>을 <code class="docutils literal notranslate"><span class="pre">IsaacCreateRenderProduct.execIn</span></code>에, 그리고 <code class="docutils literal notranslate"><span class="pre">IsaacCreateRenderProduct.execOut</span></code>을 <code class="docutils literal notranslate"><span class="pre">RTSPCameraHelper.execIn</span></code>에 연결합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IsaacCreateRenderProduct.renderProductPath</span></code>를 <code class="docutils literal notranslate"><span class="pre">RTSPCameraHelper.renderProductPath</span></code>에 연결하여 헬퍼가 이전 노드에서 생성한 렌더 프로덕트에 연결되도록 합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IsaacCreateRenderProduct</span></code> 노드에서 <strong>cameraPrim</strong>을 스트리밍할 카메라로 설정합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RTSPCameraHelper</span></code> 노드에서 <strong>port</strong>(기본값 <code class="docutils literal notranslate"><span class="pre">8554</span></code>)와 <strong>mountPath</strong>(기본값 <code class="docutils literal notranslate"><span class="pre">/stream</span></code>)를 설정합니다.</p></li>
+<li><p>타임라인에서 <strong>Play</strong>를 누릅니다. RTSP 서버는 첫 번째 렌더링 프레임에서 지연 시작되며 스트림은 <code class="docutils literal notranslate"><span class="pre">rtsp://localhost:8554/&lt;mountPath&gt;</span></code>에서 사용 가능해집니다. <strong>Stop</strong>을 누르면 서버가 정상적으로 종료됩니다.</p></li>
 </ol>
-<p>Refer to <a class="reference internal" href="rtsp_camera_streaming.html#isaac-sim-rtsp-streaming-parameters"><span class="std std-ref">Stream Parameters</span></a> for the full set of node
-inputs. The screencast below shows the full sequence end-to-end:</p>
-<a class="reference internal image-reference" href="../_images/isim_6.0_streaming_rtsp_gui_create_action_graph.gif"><img alt="Animated walkthrough showing how to create an action graph in the OmniGraph editor with OnPlaybackTick, IsaacCreateRenderProduct, and RTSPCameraHelper nodes wired together to stream a camera over RTSP." class="align-center" src="../_images/isim_6.0_streaming_rtsp_gui_create_action_graph.gif" style="width: 100%;" />
+<p>노드 입력의 전체 목록은 <a class="reference internal" href="rtsp_camera_streaming.html#isaac-sim-rtsp-streaming-parameters"><span class="std std-ref">Stream Parameters</span></a>를 참조하세요. 아래 화면 녹화는 전체 과정을 엔드투엔드로 보여줍니다:</p>
+<a class="reference internal image-reference" href="../_images/isim_6.0_streaming_rtsp_gui_create_action_graph.gif"><img alt="Animated walkthrough showing how to create an action graph in the OmniGraph editor with OnPlaybackTick, IsaacCreateRenderProduct, and RTSPCameraHelper nodes wired together to stream a camera over RTSP." class="align-center" src="../_images/isim_6.0_streaming_rtsp_gui_create_action_graph.gif" style="width: 100%;"/>
 </a>
 </section>
 <section id="building-the-graph-from-a-script">
 <h3>Building the Graph from a Script<a class="headerlink" href="rtsp_camera_streaming.html#building-the-graph-from-a-script" title="Link to this heading">#</a></h3>
-<p>The same pipeline can be authored programmatically using
-<code class="xref py py-class docutils literal notranslate"><span class="pre">omni.graph.core.Controller</span></code>. This is useful for headless setups,
-batch jobs, and tests. The snippet below builds the equivalent graph against
-a camera at <code class="docutils literal notranslate"><span class="pre">/Camera</span></code> and configures the stream at
-<code class="docutils literal notranslate"><span class="pre">rtsp://localhost:8554/stream</span></code>. Press <strong>Play</strong> or start Replicator capture
-to produce frames and start the RTSP server.</p>
+<p>동일한 파이프라인은 <code class="xref py py-class docutils literal notranslate"><span class="pre">omni.graph.core.Controller</span></code>를 사용하여 프로그래밍 방식으로 작성할 수 있습니다. 이는 헤드리스 설정, 배치 작업 및 테스트에 유용합니다. 아래 코드는 <code class="docutils literal notranslate"><span class="pre">/Camera</span></code>의 카메라에 대한 동등한 그래프를 빌드하고 <code class="docutils literal notranslate"><span class="pre">rtsp://localhost:8554/stream</span></code>에서 스트림을 구성합니다. <strong>Play</strong>를 누르거나 Replicator 캡처를 시작하여 프레임을 생성하고 RTSP 서버를 시작합니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni.graph.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">og</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">omni.kit.app</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">omni.usd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">UsdGeom</span>
 
 <span class="n">ext_mgr</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get_app</span><span class="p">()</span><span class="o">.</span><span class="n">get_extension_manager</span><span class="p">()</span>
-<span class="n">ext_mgr</span><span class="o">.</span><span class="n">set_extension_enabled_immediate</span><span class="p">(</span><span class="s2">&quot;isaacsim.core.nodes&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">ext_mgr</span><span class="o">.</span><span class="n">set_extension_enabled_immediate</span><span class="p">(</span><span class="s2">&quot;isaacsim.streaming.rtsp&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">ext_mgr</span><span class="o">.</span><span class="n">set_extension_enabled_immediate</span><span class="p">(</span><span class="s2">"isaacsim.core.nodes"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">ext_mgr</span><span class="o">.</span><span class="n">set_extension_enabled_immediate</span><span class="p">(</span><span class="s2">"isaacsim.streaming.rtsp"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
 <span class="n">stage</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">get_stage</span><span class="p">()</span>
-<span class="n">UsdGeom</span><span class="o">.</span><span class="n">Camera</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="s2">&quot;/Camera&quot;</span><span class="p">)</span>
+<span class="n">UsdGeom</span><span class="o">.</span><span class="n">Camera</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="s2">"/Camera"</span><span class="p">)</span>
 
 <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">edit</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;graph_path&quot;</span><span class="p">:</span> <span class="s2">&quot;/RTSPGraph&quot;</span><span class="p">,</span> <span class="s2">&quot;evaluator_name&quot;</span><span class="p">:</span> <span class="s2">&quot;execution&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"graph_path"</span><span class="p">:</span> <span class="s2">"/RTSPGraph"</span><span class="p">,</span> <span class="s2">"evaluator_name"</span><span class="p">:</span> <span class="s2">"execution"</span><span class="p">},</span>
     <span class="p">{</span>
         <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">Keys</span><span class="o">.</span><span class="n">CREATE_NODES</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;OnPlaybackTick&quot;</span><span class="p">,</span> <span class="s2">&quot;omni.graph.action.OnPlaybackTick&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;CreateRenderProduct&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.core.nodes.IsaacCreateRenderProduct&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;RTSPHelper&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.streaming.rtsp.RTSPCameraHelper&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"OnPlaybackTick"</span><span class="p">,</span> <span class="s2">"omni.graph.action.OnPlaybackTick"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"CreateRenderProduct"</span><span class="p">,</span> <span class="s2">"isaacsim.core.nodes.IsaacCreateRenderProduct"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"RTSPHelper"</span><span class="p">,</span> <span class="s2">"isaacsim.streaming.rtsp.RTSPCameraHelper"</span><span class="p">),</span>
         <span class="p">],</span>
         <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">Keys</span><span class="o">.</span><span class="n">SET_VALUES</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;CreateRenderProduct.inputs:cameraPrim&quot;</span><span class="p">,</span> <span class="s2">&quot;/Camera&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;CreateRenderProduct.inputs:width&quot;</span><span class="p">,</span> <span class="mi">1280</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;CreateRenderProduct.inputs:height&quot;</span><span class="p">,</span> <span class="mi">720</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;RTSPHelper.inputs:port&quot;</span><span class="p">,</span> <span class="mi">8554</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;RTSPHelper.inputs:mountPath&quot;</span><span class="p">,</span> <span class="s2">&quot;/stream&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;RTSPHelper.inputs:useRawEncoding&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"CreateRenderProduct.inputs:cameraPrim"</span><span class="p">,</span> <span class="s2">"/Camera"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"CreateRenderProduct.inputs:width"</span><span class="p">,</span> <span class="mi">1280</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"CreateRenderProduct.inputs:height"</span><span class="p">,</span> <span class="mi">720</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"RTSPHelper.inputs:port"</span><span class="p">,</span> <span class="mi">8554</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"RTSPHelper.inputs:mountPath"</span><span class="p">,</span> <span class="s2">"/stream"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"RTSPHelper.inputs:useRawEncoding"</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
         <span class="p">],</span>
         <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">Keys</span><span class="o">.</span><span class="n">CONNECT</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;OnPlaybackTick.outputs:tick&quot;</span><span class="p">,</span> <span class="s2">&quot;CreateRenderProduct.inputs:execIn&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;CreateRenderProduct.outputs:execOut&quot;</span><span class="p">,</span> <span class="s2">&quot;RTSPHelper.inputs:execIn&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;CreateRenderProduct.outputs:renderProductPath&quot;</span><span class="p">,</span> <span class="s2">&quot;RTSPHelper.inputs:renderProductPath&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"OnPlaybackTick.outputs:tick"</span><span class="p">,</span> <span class="s2">"CreateRenderProduct.inputs:execIn"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"CreateRenderProduct.outputs:execOut"</span><span class="p">,</span> <span class="s2">"RTSPHelper.inputs:execIn"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"CreateRenderProduct.outputs:renderProductPath"</span><span class="p">,</span> <span class="s2">"RTSPHelper.inputs:renderProductPath"</span><span class="p">),</span>
         <span class="p">],</span>
     <span class="p">},</span>
 <span class="p">)</span>
@@ -1347,58 +947,45 @@ to produce frames and start the RTSP server.</p>
 </section>
 <section id="connecting-a-client">
 <h3>Connecting a Client<a class="headerlink" href="rtsp_camera_streaming.html#connecting-a-client" title="Link to this heading">#</a></h3>
-<p>Any standard RTSP client (such as VLC, <code class="docutils literal notranslate"><span class="pre">ffplay</span></code>, or GStreamer) can
-subscribe to the stream at <code class="docutils literal notranslate"><span class="pre">rtsp://&lt;host&gt;:&lt;port&gt;&lt;mountPath&gt;</span></code>.</p>
-<p>When connecting from another machine, replace <code class="docutils literal notranslate"><span class="pre">localhost</span></code> with the
-simulator host’s IP and make sure the port is reachable through any
-firewalls.</p>
+<p>표준 RTSP 클라이언트(VLC, <code class="docutils literal notranslate"><span class="pre">ffplay</span></code>, GStreamer 등)는 <code class="docutils literal notranslate"><span class="pre">rtsp://&lt;host&gt;:&lt;port&gt;&lt;mountPath&gt;</span></code>에서 스트림을 구독할 수 있습니다.</p>
+<p>다른 컴퓨터에서 연결할 때는 <code class="docutils literal notranslate"><span class="pre">localhost</span></code>를 시뮬레이터 호스트의 IP로 교체하고 포트가 방화벽을 통해 접근 가능한지 확인하세요.</p>
 </section>
 </section>
 <section id="stream-parameters">
 <span id="isaac-sim-rtsp-streaming-parameters"></span><h2>Stream Parameters<a class="headerlink" href="rtsp_camera_streaming.html#stream-parameters" title="Link to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">RTSPCameraHelper</span></code> node exposes the following inputs:</p>
+<p><code class="docutils literal notranslate"><span class="pre">RTSPCameraHelper</span></code> 노드는 다음 입력을 제공합니다:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <colgroup>
-<col style="width: 25.0%" />
-<col style="width: 15.0%" />
-<col style="width: 60.0%" />
+<col style="width: 25.0%"/>
+<col style="width: 15.0%"/>
+<col style="width: 60.0%"/>
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Input</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Description</p></th>
+<tr class="row-odd"><th class="head"><p>입력</p></th>
+<th class="head"><p>기본값</p></th>
+<th class="head"><p>설명</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">renderProductPath</span></code></p></td>
 <td><p>—</p></td>
-<td><p>Path of the render product whose <code class="docutils literal notranslate"><span class="pre">LdrColor</span></code> Arbitrary Output Variable
-(AOV) is streamed. Wire it
-to the <code class="docutils literal notranslate"><span class="pre">renderProductPath</span></code> output of <code class="docutils literal notranslate"><span class="pre">IsaacCreateRenderProduct</span></code> or
-set it to a pre-authored render product prim.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">LdrColor</span></code> Arbitrary Output Variable(AOV)이 스트리밍될 렌더 프로덕트의 경로입니다. <code class="docutils literal notranslate"><span class="pre">IsaacCreateRenderProduct</span></code>의 <code class="docutils literal notranslate"><span class="pre">renderProductPath</span></code> 출력에 연결하거나 미리 작성된 렌더 프로덕트 프림으로 설정하세요.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">port</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">8554</span></code></p></td>
-<td><p>TCP port the RTSP server listens on. Must be in <code class="docutils literal notranslate"><span class="pre">1</span></code>–<code class="docutils literal notranslate"><span class="pre">65535</span></code>. Each
-simultaneous stream needs a unique port.</p></td>
+<td><p>RTSP 서버가 수신 대기하는 TCP 포트입니다. <code class="docutils literal notranslate"><span class="pre">1</span></code>–<code class="docutils literal notranslate"><span class="pre">65535</span></code> 범위여야 합니다. 동시 스트림마다 고유한 포트가 필요합니다.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mountPath</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">/stream</span></code></p></td>
-<td><p>Path appended to the server URL (for example <code class="docutils literal notranslate"><span class="pre">/front</span></code>, <code class="docutils literal notranslate"><span class="pre">/cam_1</span></code>).
-Must start with <code class="docutils literal notranslate"><span class="pre">/</span></code>.</p></td>
+<td><p>서버 URL에 추가되는 경로입니다(예: <code class="docutils literal notranslate"><span class="pre">/front</span></code>, <code class="docutils literal notranslate"><span class="pre">/cam_1</span></code>). <code class="docutils literal notranslate"><span class="pre">/</span></code>로 시작해야 합니다.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">useRawEncoding</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
-<td><p>When <code class="docutils literal notranslate"><span class="pre">false</span></code>, frames are pre-encoded as H.264 in the render pipeline
-(NVENC) and Supplemental Enhancement Information (SEI) metadata is
-injected per frame. When <code class="docutils literal notranslate"><span class="pre">true</span></code>, raw RGBA
-CUDA buffers are streamed and the RTSP server encodes them. Refer to
-<a class="reference internal" href="rtsp_camera_streaming.html#isaac-sim-rtsp-encoding-modes"><span class="std std-ref">Encoding Modes</span></a>.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code>일 때, 프레임은 렌더 파이프라인(NVENC)에서 H.264로 사전 인코딩되며 프레임마다 Supplemental Enhancement Information(SEI) 메타데이터가 삽입됩니다. <code class="docutils literal notranslate"><span class="pre">true</span></code>일 때, 원시 RGBA CUDA 버퍼가 스트리밍되고 RTSP 서버에서 인코딩합니다. <a class="reference internal" href="rtsp_camera_streaming.html#isaac-sim-rtsp-encoding-modes"><span class="std std-ref">Encoding Modes</span></a>를 참조하세요.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
-<td><p>Toggle the stream at runtime. Setting it to <code class="docutils literal notranslate"><span class="pre">false</span></code> after attachment
-tears down the server and releases the port.</p></td>
+<td><p>런타임에 스트림을 전환합니다. 연결 후 <code class="docutils literal notranslate"><span class="pre">false</span></code>로 설정하면 서버가 종료되고 포트가 해제됩니다.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1406,251 +993,182 @@ tears down the server and releases the port.</p></td>
 </section>
 <section id="encoding-modes">
 <span id="isaac-sim-rtsp-encoding-modes"></span><h2>Encoding Modes<a class="headerlink" href="rtsp_camera_streaming.html#encoding-modes" title="Link to this heading">#</a></h2>
-<p>The writer supports two encoding paths, controlled by <code class="docutils literal notranslate"><span class="pre">useRawEncoding</span></code>:</p>
+<p>라이터는 <code class="docutils literal notranslate"><span class="pre">useRawEncoding</span></code>으로 제어되는 두 가지 인코딩 경로를 지원합니다:</p>
 <section id="h-264-default-recommended">
 <h3>H.264 (Default, Recommended)<a class="headerlink" href="rtsp_camera_streaming.html#h-264-default-recommended" title="Link to this heading">#</a></h3>
-<p>The render pipeline produces H.264-encoded bytes directly using NVENC and
-hands them to the RTSP server already compressed. This mode:</p>
+<p>렌더 파이프라인은 NVENC를 사용하여 H.264 인코딩 바이트를 직접 생성하고 이미 압축된 상태로 RTSP 서버에 전달합니다. 이 모드는:</p>
 <ul class="simple">
-<li><p>Minimizes copies (no CPU readback, no double-encode).</p></li>
-<li><p>Supports per-frame SEI metadata. Refer to <a class="reference internal" href="rtsp_camera_streaming.html#isaac-sim-rtsp-frame-metadata"><span class="std std-ref">Frame Metadata</span></a>.</p></li>
-<li><p>Sends the simulation timestamp with each streamed frame so downstream
-consumers can align frames to the sim time.</p></li>
+<li><p>복사를 최소화합니다(CPU 읽기 없음, 이중 인코딩 없음).</p></li>
+<li><p>프레임당 SEI 메타데이터를 지원합니다. <a class="reference internal" href="rtsp_camera_streaming.html#isaac-sim-rtsp-frame-metadata"><span class="std std-ref">Frame Metadata</span></a>를 참조하세요.</p></li>
+<li><p>하위 소비자가 프레임을 시뮬레이션 시간에 맞출 수 있도록 스트리밍되는 각 프레임과 함께 시뮬레이션 타임스탬프를 전송합니다.</p></li>
 </ul>
-<p>Use this mode unless you have a specific reason to bypass NVENC.</p>
+<p>NVENC를 우회해야 할 특별한 이유가 없는 한 이 모드를 사용하세요.</p>
 </section>
 <section id="raw">
 <h3>Raw<a class="headerlink" href="rtsp_camera_streaming.html#raw" title="Link to this heading">#</a></h3>
-<p>The writer streams uncompressed RGBA CUDA buffers and lets the RTSP server
-encode them internally.</p>
-<p>The render product’s resolution is read from the CUDA buffer shape on the
-first frame. SEI metadata injection is <strong>not</strong> supported in raw mode.</p>
+<p>라이터는 압축되지 않은 RGBA CUDA 버퍼를 스트리밍하고 RTSP 서버가 내부적으로 인코딩하도록 합니다.</p>
+<p>렌더 프로덕트의 해상도는 첫 번째 프레임의 CUDA 버퍼 형태에서 읽습니다. SEI 메타데이터 삽입은 원시 모드에서 <strong>지원되지 않습니다</strong>.</p>
 </section>
 </section>
 <section id="streaming-multiple-cameras">
 <span id="isaac-sim-rtsp-streaming-multi-camera"></span><h2>Streaming Multiple Cameras<a class="headerlink" href="rtsp_camera_streaming.html#streaming-multiple-cameras" title="Link to this heading">#</a></h2>
-<p>To publish several cameras simultaneously, instantiate one <code class="docutils literal notranslate"><span class="pre">RTSPCameraHelper</span></code>
-per camera and give each helper a unique <code class="docutils literal notranslate"><span class="pre">port</span></code>. The <code class="docutils literal notranslate"><span class="pre">mountPath</span></code> can be
-shared across streams, but using a descriptive mount path per camera (such as
-<code class="docutils literal notranslate"><span class="pre">/front</span></code> and <code class="docutils literal notranslate"><span class="pre">/rear</span></code>) makes the URLs self-documenting:</p>
+<p>여러 카메라를 동시에 게시하려면, 카메라당 하나의 <code class="docutils literal notranslate"><span class="pre">RTSPCameraHelper</span></code>를 인스턴스화하고 각 헬퍼에 고유한 <code class="docutils literal notranslate"><span class="pre">port</span></code>를 지정하세요. <code class="docutils literal notranslate"><span class="pre">mountPath</span></code>는 스트림 간에 공유할 수 있지만, 카메라당 설명적인 마운트 경로(예: <code class="docutils literal notranslate"><span class="pre">/front</span></code>, <code class="docutils literal notranslate"><span class="pre">/rear</span></code>)를 사용하면 URL이 자체 설명적이 됩니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni.graph.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">og</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">omni.kit.app</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">omni.usd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">UsdGeom</span>
 
 <span class="n">ext_mgr</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get_app</span><span class="p">()</span><span class="o">.</span><span class="n">get_extension_manager</span><span class="p">()</span>
-<span class="n">ext_mgr</span><span class="o">.</span><span class="n">set_extension_enabled_immediate</span><span class="p">(</span><span class="s2">&quot;isaacsim.core.nodes&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">ext_mgr</span><span class="o">.</span><span class="n">set_extension_enabled_immediate</span><span class="p">(</span><span class="s2">&quot;isaacsim.streaming.rtsp&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">ext_mgr</span><span class="o">.</span><span class="n">set_extension_enabled_immediate</span><span class="p">(</span><span class="s2">"isaacsim.core.nodes"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">ext_mgr</span><span class="o">.</span><span class="n">set_extension_enabled_immediate</span><span class="p">(</span><span class="s2">"isaacsim.streaming.rtsp"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
 <span class="n">stage</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">get_stage</span><span class="p">()</span>
-<span class="n">UsdGeom</span><span class="o">.</span><span class="n">Camera</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="s2">&quot;/CameraFront&quot;</span><span class="p">)</span>
-<span class="n">UsdGeom</span><span class="o">.</span><span class="n">Camera</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="s2">&quot;/CameraRear&quot;</span><span class="p">)</span>
+<span class="n">UsdGeom</span><span class="o">.</span><span class="n">Camera</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="s2">"/CameraFront"</span><span class="p">)</span>
+<span class="n">UsdGeom</span><span class="o">.</span><span class="n">Camera</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="s2">"/CameraRear"</span><span class="p">)</span>
 
 <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">edit</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;graph_path&quot;</span><span class="p">:</span> <span class="s2">&quot;/MultiStreamGraph&quot;</span><span class="p">,</span> <span class="s2">&quot;evaluator_name&quot;</span><span class="p">:</span> <span class="s2">&quot;execution&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"graph_path"</span><span class="p">:</span> <span class="s2">"/MultiStreamGraph"</span><span class="p">,</span> <span class="s2">"evaluator_name"</span><span class="p">:</span> <span class="s2">"execution"</span><span class="p">},</span>
     <span class="p">{</span>
         <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">Keys</span><span class="o">.</span><span class="n">CREATE_NODES</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;OnPlaybackTick&quot;</span><span class="p">,</span> <span class="s2">&quot;omni.graph.action.OnPlaybackTick&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;FrontRP&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.core.nodes.IsaacCreateRenderProduct&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;RearRP&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.core.nodes.IsaacCreateRenderProduct&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;FrontRTSP&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.streaming.rtsp.RTSPCameraHelper&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;RearRTSP&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.streaming.rtsp.RTSPCameraHelper&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"OnPlaybackTick"</span><span class="p">,</span> <span class="s2">"omni.graph.action.OnPlaybackTick"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"FrontRP"</span><span class="p">,</span> <span class="s2">"isaacsim.core.nodes.IsaacCreateRenderProduct"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"RearRP"</span><span class="p">,</span> <span class="s2">"isaacsim.core.nodes.IsaacCreateRenderProduct"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"FrontRTSP"</span><span class="p">,</span> <span class="s2">"isaacsim.streaming.rtsp.RTSPCameraHelper"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"RearRTSP"</span><span class="p">,</span> <span class="s2">"isaacsim.streaming.rtsp.RTSPCameraHelper"</span><span class="p">),</span>
         <span class="p">],</span>
         <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">Keys</span><span class="o">.</span><span class="n">SET_VALUES</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;FrontRP.inputs:cameraPrim&quot;</span><span class="p">,</span> <span class="s2">&quot;/CameraFront&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;FrontRP.inputs:width&quot;</span><span class="p">,</span> <span class="mi">1280</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;FrontRP.inputs:height&quot;</span><span class="p">,</span> <span class="mi">720</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;RearRP.inputs:cameraPrim&quot;</span><span class="p">,</span> <span class="s2">&quot;/CameraRear&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;RearRP.inputs:width&quot;</span><span class="p">,</span> <span class="mi">1280</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;RearRP.inputs:height&quot;</span><span class="p">,</span> <span class="mi">720</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;FrontRTSP.inputs:port&quot;</span><span class="p">,</span> <span class="mi">8554</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;FrontRTSP.inputs:mountPath&quot;</span><span class="p">,</span> <span class="s2">&quot;/front&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;RearRTSP.inputs:port&quot;</span><span class="p">,</span> <span class="mi">8555</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;RearRTSP.inputs:mountPath&quot;</span><span class="p">,</span> <span class="s2">&quot;/rear&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"FrontRP.inputs:cameraPrim"</span><span class="p">,</span> <span class="s2">"/CameraFront"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"FrontRP.inputs:width"</span><span class="p">,</span> <span class="mi">1280</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"FrontRP.inputs:height"</span><span class="p">,</span> <span class="mi">720</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"RearRP.inputs:cameraPrim"</span><span class="p">,</span> <span class="s2">"/CameraRear"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"RearRP.inputs:width"</span><span class="p">,</span> <span class="mi">1280</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"RearRP.inputs:height"</span><span class="p">,</span> <span class="mi">720</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"FrontRTSP.inputs:port"</span><span class="p">,</span> <span class="mi">8554</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"FrontRTSP.inputs:mountPath"</span><span class="p">,</span> <span class="s2">"/front"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"RearRTSP.inputs:port"</span><span class="p">,</span> <span class="mi">8555</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"RearRTSP.inputs:mountPath"</span><span class="p">,</span> <span class="s2">"/rear"</span><span class="p">),</span>
         <span class="p">],</span>
         <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">Keys</span><span class="o">.</span><span class="n">CONNECT</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;OnPlaybackTick.outputs:tick&quot;</span><span class="p">,</span> <span class="s2">&quot;FrontRP.inputs:execIn&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;OnPlaybackTick.outputs:tick&quot;</span><span class="p">,</span> <span class="s2">&quot;RearRP.inputs:execIn&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;FrontRP.outputs:execOut&quot;</span><span class="p">,</span> <span class="s2">&quot;FrontRTSP.inputs:execIn&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;RearRP.outputs:execOut&quot;</span><span class="p">,</span> <span class="s2">&quot;RearRTSP.inputs:execIn&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;FrontRP.outputs:renderProductPath&quot;</span><span class="p">,</span> <span class="s2">&quot;FrontRTSP.inputs:renderProductPath&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;RearRP.outputs:renderProductPath&quot;</span><span class="p">,</span> <span class="s2">&quot;RearRTSP.inputs:renderProductPath&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"OnPlaybackTick.outputs:tick"</span><span class="p">,</span> <span class="s2">"FrontRP.inputs:execIn"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"OnPlaybackTick.outputs:tick"</span><span class="p">,</span> <span class="s2">"RearRP.inputs:execIn"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"FrontRP.outputs:execOut"</span><span class="p">,</span> <span class="s2">"FrontRTSP.inputs:execIn"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"RearRP.outputs:execOut"</span><span class="p">,</span> <span class="s2">"RearRTSP.inputs:execIn"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"FrontRP.outputs:renderProductPath"</span><span class="p">,</span> <span class="s2">"FrontRTSP.inputs:renderProductPath"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"RearRP.outputs:renderProductPath"</span><span class="p">,</span> <span class="s2">"RearRTSP.inputs:renderProductPath"</span><span class="p">),</span>
         <span class="p">],</span>
     <span class="p">},</span>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>The two streams above are addressable as <code class="docutils literal notranslate"><span class="pre">rtsp://localhost:8554/front</span></code> and
-<code class="docutils literal notranslate"><span class="pre">rtsp://localhost:8555/rear</span></code>. Each helper owns its own RTSP server, so a
-client connecting to one stream does not affect the other.</p>
+<p>위의 두 스트림은 <code class="docutils literal notranslate"><span class="pre">rtsp://localhost:8554/front</span></code>와 <code class="docutils literal notranslate"><span class="pre">rtsp://localhost:8555/rear</span></code>로 접근할 수 있습니다. 각 헬퍼는 자체 RTSP 서버를 소유하므로 한 스트림에 연결하는 클라이언트는 다른 스트림에 영향을 미치지 않습니다.</p>
 </section>
 <section id="frame-metadata">
 <span id="isaac-sim-rtsp-frame-metadata"></span><h2>Frame Metadata<a class="headerlink" href="rtsp_camera_streaming.html#frame-metadata" title="Link to this heading">#</a></h2>
-<p>In H.264 mode, each frame carries a Supplemental Enhancement Information
-(SEI) Network Abstraction Layer (NAL) unit with a JSON payload. The payload uses the fixed UUID
-<code class="docutils literal notranslate"><span class="pre">aa71e48f-0711-5d80-a247-cd31ca6fa49c</span></code>, derived from
-<code class="docutils literal notranslate"><span class="pre">isaacsim.streaming.rtsp.sei_metadata</span></code>, so consumers can identify and filter
-the metadata stream. The schema is:</p>
+<p>H.264 모드에서, 각 프레임은 JSON 페이로드가 있는 Supplemental Enhancement Information(SEI) Network Abstraction Layer(NAL) 유닛을 전달합니다. 페이로드는 고정 UUID <code class="docutils literal notranslate"><span class="pre">aa71e48f-0711-5d80-a247-cd31ca6fa49c</span></code>를 사용하며, <code class="docutils literal notranslate"><span class="pre">isaacsim.streaming.rtsp.sei_metadata</span></code>에서 파생되므로 소비자가 메타데이터 스트림을 식별하고 필터링할 수 있습니다. 스키마는 다음과 같습니다:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;publish_sim_time_ns&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1500000000</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;timestamp_iso8601&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-01T12:00:01.500Z&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1767268801500000000</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;frame_num&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span>
+<span class="w">    </span><span class="nt">"publish_sim_time_ns"</span><span class="p">:</span><span class="w"> </span><span class="mi">1500000000</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"timestamp_iso8601"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-01-01T12:00:01.500Z"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1767268801500000000</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"frame_num"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">publish_sim_time_ns</span></code> — simulation time at frame capture, in
-nanoseconds. Reset to zero when the timeline stops and restarts.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">timestamp_iso8601</span></code> — wall-clock timestamp anchored to the moment the
-RTSP server started, advanced by <code class="docutils literal notranslate"><span class="pre">publish_sim_time_ns</span></code>. Useful for
-correlating with logs and other wall-clock-stamped streams.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">timestamp</span></code> — the same instant as <code class="docutils literal notranslate"><span class="pre">timestamp_iso8601</span></code>, expressed as
-nanoseconds since the Unix epoch.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">frame_num</span></code> — monotonically increasing frame counter, starting at <code class="docutils literal notranslate"><span class="pre">1</span></code>
-and reset on detach.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">publish_sim_time_ns</span></code> — 프레임 캡처 시의 시뮬레이션 시간(나노초). 타임라인이 중지되었다가 재시작되면 0으로 초기화됩니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">timestamp_iso8601</span></code> — RTSP 서버가 시작된 순간에 고정된 벽시계 타임스탬프로, <code class="docutils literal notranslate"><span class="pre">publish_sim_time_ns</span></code>만큼 전진합니다. 로그 및 다른 벽시계 타임스탬프 스트림과 연관시키는 데 유용합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">timestamp</span></code> — <code class="docutils literal notranslate"><span class="pre">timestamp_iso8601</span></code>와 동일한 순간을 Unix 에포크 이후 나노초로 표현합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">frame_num</span></code> — 단조 증가하는 프레임 카운터로, <code class="docutils literal notranslate"><span class="pre">1</span></code>에서 시작하며 분리 시 초기화됩니다.</p></li>
 </ul>
-<p>Downstream tools that parse SEI NAL units (for example a custom
-<code class="docutils literal notranslate"><span class="pre">rtspsrc</span></code> callback in GStreamer, or NVIDIA DeepStream’s metadata API) can
-recover the payload by matching the UUID and decoding the JSON bytes.</p>
+<p>SEI NAL 유닛을 파싱하는 다운스트림 도구(예: GStreamer의 커스텀 <code class="docutils literal notranslate"><span class="pre">rtspsrc</span></code> 콜백 또는 NVIDIA DeepStream의 메타데이터 API)는 UUID를 매칭하고 JSON 바이트를 디코딩하여 페이로드를 복구할 수 있습니다.</p>
 </section>
 <section id="attaching-the-writer-directly">
 <span id="isaac-sim-rtsp-attach-writer-directly"></span><h2>Attaching the Writer Directly<a class="headerlink" href="rtsp_camera_streaming.html#attaching-the-writer-directly" title="Link to this heading">#</a></h2>
-<p>For workflows that already drive Replicator from Python and don’t need the
-OmniGraph layer (custom SDG scripts, batch jobs, headless services),
-<code class="docutils literal notranslate"><span class="pre">isaacsim.streaming.rtsp.RTSPStreamWriter</span></code> can be attached to a
-render product directly. The writer is registered with Replicator’s
-<code class="docutils literal notranslate"><span class="pre">WriterRegistry</span></code> on extension startup and accepts <code class="docutils literal notranslate"><span class="pre">port</span></code>, <code class="docutils literal notranslate"><span class="pre">mountPath</span></code>,
-<code class="docutils literal notranslate"><span class="pre">encoding</span></code>, <code class="docutils literal notranslate"><span class="pre">width</span></code>, and <code class="docutils literal notranslate"><span class="pre">height</span></code> parameters. Author the SRTX
-<code class="docutils literal notranslate"><span class="pre">LdrColor</span></code> <code class="docutils literal notranslate"><span class="pre">RenderVar</span></code> on the render product first via
-<code class="docutils literal notranslate"><span class="pre">isaacsim.streaming.rtsp.impl.render_var_utils.ensure_render_var_on_product</span></code>,
-then attach the writer:</p>
+<p>이미 Python에서 Replicator를 구동하며 OmniGraph 레이어가 필요 없는 워크플로우(커스텀 SDG 스크립트, 배치 작업, 헤드리스 서비스)의 경우, <code class="docutils literal notranslate"><span class="pre">isaacsim.streaming.rtsp.RTSPStreamWriter</span></code>를 렌더 프로덕트에 직접 연결할 수 있습니다. 라이터는 익스텐션 시작 시 Replicator의 <code class="docutils literal notranslate"><span class="pre">WriterRegistry</span></code>에 등록되며 <code class="docutils literal notranslate"><span class="pre">port</span></code>, <code class="docutils literal notranslate"><span class="pre">mountPath</span></code>, <code class="docutils literal notranslate"><span class="pre">encoding</span></code>, <code class="docutils literal notranslate"><span class="pre">width</span></code>, <code class="docutils literal notranslate"><span class="pre">height</span></code> 매개변수를 받습니다. 먼저 <code class="docutils literal notranslate"><span class="pre">isaacsim.streaming.rtsp.impl.render_var_utils.ensure_render_var_on_product</span></code>를 통해 렌더 프로덕트에 SRTX <code class="docutils literal notranslate"><span class="pre">LdrColor</span></code> <code class="docutils literal notranslate"><span class="pre">RenderVar</span></code>를 작성한 후, 라이터를 연결합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni.kit.app</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">omni.replicator.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">rep</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">omni.usd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">UsdGeom</span>
 
 <span class="n">ext_mgr</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get_app</span><span class="p">()</span><span class="o">.</span><span class="n">get_extension_manager</span><span class="p">()</span>
-<span class="n">ext_mgr</span><span class="o">.</span><span class="n">set_extension_enabled_immediate</span><span class="p">(</span><span class="s2">&quot;isaacsim.core.nodes&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">ext_mgr</span><span class="o">.</span><span class="n">set_extension_enabled_immediate</span><span class="p">(</span><span class="s2">&quot;isaacsim.streaming.rtsp&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">ext_mgr</span><span class="o">.</span><span class="n">set_extension_enabled_immediate</span><span class="p">(</span><span class="s2">"isaacsim.core.nodes"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">ext_mgr</span><span class="o">.</span><span class="n">set_extension_enabled_immediate</span><span class="p">(</span><span class="s2">"isaacsim.streaming.rtsp"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.streaming.rtsp</span><span class="w"> </span><span class="kn">import</span> <span class="n">RTSPStreamWriter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.streaming.rtsp.impl.render_var_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">ensure_render_var_on_product</span>
 
 <span class="n">stage</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">get_stage</span><span class="p">()</span>
-<span class="n">UsdGeom</span><span class="o">.</span><span class="n">Camera</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="s2">&quot;/Camera&quot;</span><span class="p">)</span>
+<span class="n">UsdGeom</span><span class="o">.</span><span class="n">Camera</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="s2">"/Camera"</span><span class="p">)</span>
 
-<span class="n">render_product</span> <span class="o">=</span> <span class="n">rep</span><span class="o">.</span><span class="n">create</span><span class="o">.</span><span class="n">render_product</span><span class="p">(</span><span class="s2">&quot;/Camera&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">1280</span><span class="p">,</span> <span class="mi">720</span><span class="p">))</span>
+<span class="n">render_product</span> <span class="o">=</span> <span class="n">rep</span><span class="o">.</span><span class="n">create</span><span class="o">.</span><span class="n">render_product</span><span class="p">(</span><span class="s2">"/Camera"</span><span class="p">,</span> <span class="p">(</span><span class="mi">1280</span><span class="p">,</span> <span class="mi">720</span><span class="p">))</span>
 
-<span class="n">success</span><span class="p">,</span> <span class="n">_rv_path</span> <span class="o">=</span> <span class="n">ensure_render_var_on_product</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">render_product</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;LdrColor&quot;</span><span class="p">,</span> <span class="s2">&quot;h264&quot;</span><span class="p">)</span>
+<span class="n">success</span><span class="p">,</span> <span class="n">_rv_path</span> <span class="o">=</span> <span class="n">ensure_render_var_on_product</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">render_product</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s2">"LdrColor"</span><span class="p">,</span> <span class="s2">"h264"</span><span class="p">)</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">success</span><span class="p">:</span>
-    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to create LdrColor render var on </span><span class="si">{</span><span class="n">render_product</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Failed to create LdrColor render var on </span><span class="si">{</span><span class="n">render_product</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="n">writer</span> <span class="o">=</span> <span class="n">RTSPStreamWriter</span><span class="p">(</span>
     <span class="n">port</span><span class="o">=</span><span class="mi">8554</span><span class="p">,</span>
-    <span class="n">mountPath</span><span class="o">=</span><span class="s2">&quot;/stream&quot;</span><span class="p">,</span>
-    <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;h264&quot;</span><span class="p">,</span>
+    <span class="n">mountPath</span><span class="o">=</span><span class="s2">"/stream"</span><span class="p">,</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="s2">"h264"</span><span class="p">,</span>
     <span class="n">width</span><span class="o">=</span><span class="mi">1280</span><span class="p">,</span>
     <span class="n">height</span><span class="o">=</span><span class="mi">720</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">writer</span><span class="o">.</span><span class="n">attach</span><span class="p">([</span><span class="n">render_product</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>After attaching the writer, start Replicator capture or play the timeline to
-produce frames. The RTSP server starts when the writer receives the first
-frame.</p>
+<p>라이터 연결 후, Replicator 캡처를 시작하거나 타임라인을 재생하여 프레임을 생성합니다. RTSP 서버는 라이터가 첫 번째 프레임을 받을 때 시작됩니다.</p>
 </section>
 <section id="server-lifecycle">
 <span id="isaac-sim-rtsp-server-lifecycle"></span><h2>Server Lifecycle<a class="headerlink" href="rtsp_camera_streaming.html#server-lifecycle" title="Link to this heading">#</a></h2>
-<p>The RTSP server starts the first time the writer receives a frame and stops
-when the writer detaches. <code class="docutils literal notranslate"><span class="pre">RTSPCameraHelper</span></code> ties this lifecycle to the
-timeline:</p>
+<p>RTSP 서버는 라이터가 처음 프레임을 받을 때 시작되며, 라이터가 분리되면 종료됩니다. <code class="docutils literal notranslate"><span class="pre">RTSPCameraHelper</span></code>는 이 수명 주기를 타임라인에 연결합니다:</p>
 <ul class="simple">
-<li><p><strong>Play</strong> — the action graph runs, the writer attaches to the render
-product, and the server starts on the first frame.</p></li>
-<li><p><strong>Stop</strong> — the writer detaches, the server is torn down, and the port
-is released.</p></li>
-<li><p><strong>Setting</strong> <code class="docutils literal notranslate"><span class="pre">enabled</span></code> <strong>to</strong> <code class="docutils literal notranslate"><span class="pre">false</span></code> — same effect as <strong>Stop</strong> for
-that helper.</p></li>
+<li><p><strong>Play</strong> — 액션 그래프가 실행되고, 라이터가 렌더 프로덕트에 연결되며, 첫 번째 프레임에서 서버가 시작됩니다.</p></li>
+<li><p><strong>Stop</strong> — 라이터가 분리되고, 서버가 종료되며, 포트가 해제됩니다.</p></li>
+<li><p><strong>Setting</strong> <code class="docutils literal notranslate"><span class="pre">enabled</span></code> <strong>to</strong> <code class="docutils literal notranslate"><span class="pre">false</span></code> — 해당 헬퍼에 대해 <strong>Stop</strong>과 동일한 효과를 냅니다.</p></li>
 </ul>
-<p>If the RTSP server encounters an unrecoverable error during streaming (for
-example a connection failure or NVENC error), the writer logs the error,
-shuts down its server, and silently skips subsequent frames until the
-timeline restarts. This prevents a broken stream from spamming the log or
-blocking the simulation loop.</p>
+<p>RTSP 서버가 스트리밍 중 복구 불가능한 오류(예: 연결 실패 또는 NVENC 오류)가 발생하면, 라이터는 오류를 로그에 기록하고 서버를 종료하며, 타임라인이 재시작될 때까지 이후 프레임을 조용히 건너뜁니다. 이는 손상된 스트림이 로그를 가득 채우거나 시뮬레이션 루프를 차단하는 것을 방지합니다.</p>
 </section>
 <section id="troubleshooting">
 <span id="isaac-sim-rtsp-troubleshooting"></span><h2>Troubleshooting<a class="headerlink" href="rtsp_camera_streaming.html#troubleshooting" title="Link to this heading">#</a></h2>
 <dl class="simple">
-<dt>The stream URL refuses connections</dt><dd><p>The RTSP server starts only after the first rendered frame. Press
-<strong>Play</strong> and confirm the timeline is advancing. If the writer logged a
-setup error (for example “render product has no resolution attribute”),
-the server never started. Check the carb log for details.</p>
+<dt>스트림 URL이 연결을 거부합니다</dt><dd><p>RTSP 서버는 첫 번째 렌더링 프레임 이후에만 시작됩니다. <strong>Play</strong>를 누르고 타임라인이 진행 중인지 확인하세요. 라이터가 설정 오류를 로그에 기록한 경우(예: "render product has no resolution attribute"), 서버가 시작되지 않은 것입니다. carb 로그에서 세부 정보를 확인하세요.</p>
 </dd>
-<dt>Port already in use</dt><dd><p>Another process (or another <code class="docutils literal notranslate"><span class="pre">RTSPCameraHelper</span></code> in the same scene) is
-already bound to the port. Pick a unique port per helper and verify that
-nothing else is listening with <code class="docutils literal notranslate"><span class="pre">ss</span> <span class="pre">-ltnp</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">8554</span></code>.</p>
+<dt>포트가 이미 사용 중입니다</dt><dd><p>다른 프로세스(또는 동일 씬의 다른 <code class="docutils literal notranslate"><span class="pre">RTSPCameraHelper</span></code>)가 이미 해당 포트를 사용 중입니다. 헬퍼당 고유한 포트를 선택하고 <code class="docutils literal notranslate"><span class="pre">ss</span> <span class="pre">-ltnp</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">8554</span></code>로 다른 프로세스가 수신 대기 중인지 확인하세요.</p>
 </dd>
-<dt>Stream stops mid-run and never recovers</dt><dd><p>The writer enters a “failed” state on the first encoder or transport
-error, drops further frames silently, and waits for the timeline to
-restart. Stop and restart the timeline (or toggle <code class="docutils literal notranslate"><span class="pre">enabled</span></code>) to retry it.</p>
+<dt>스트림이 실행 중 중단되고 복구되지 않습니다</dt><dd><p>라이터는 첫 번째 인코더 또는 전송 오류 시 "실패" 상태로 진입하고, 이후 프레임을 조용히 삭제하며, 타임라인이 재시작될 때까지 대기합니다. 타임라인을 중지하고 재시작하거나(또는 <code class="docutils literal notranslate"><span class="pre">enabled</span></code>를 전환하여) 재시도하세요.</p>
 </dd>
-<dt>SEI metadata is missing</dt><dd><p>SEI metadata is only injected in H.264 mode. Set <code class="docutils literal notranslate"><span class="pre">useRawEncoding</span></code> to
-<code class="docutils literal notranslate"><span class="pre">false</span></code> (the default).</p>
+<dt>SEI 메타데이터가 누락됩니다</dt><dd><p>SEI 메타데이터는 H.264 모드에서만 삽입됩니다. <code class="docutils literal notranslate"><span class="pre">useRawEncoding</span></code>을 <code class="docutils literal notranslate"><span class="pre">false</span></code>(기본값)로 설정하세요.</p>
 </dd>
 </dl>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="ext_isaacsim_asset_generator_occupancy_map.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Mapping</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../app_template/index.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Application Template</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="ext_isaacsim_asset_generator_occupancy_map.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Mapping</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="../app_template/index.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Application Template</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="rtsp_camera_streaming.html#prerequisites">Prerequisites</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="rtsp_camera_streaming.html#streaming-a-camera">Streaming a Camera</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="rtsp_camera_streaming.html#building-the-graph-in-the-editor">Building the Graph in the Editor</a></li>
@@ -1670,46 +1188,29 @@ restart. Stop and restart the timeline (or toggle <code class="docutils literal 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="rtsp_camera_streaming.html#server-lifecycle">Server Lifecycle</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="rtsp_camera_streaming.html#troubleshooting">Troubleshooting</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1740,36 +1241,21 @@ restart. Stop and restart the timeline (or toggle <code class="docutils literal 
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>
