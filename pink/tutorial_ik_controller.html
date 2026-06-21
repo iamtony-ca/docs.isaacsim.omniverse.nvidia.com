@@ -1,551 +1,256 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>IK Controller Tutorial &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>IK Controller Tutorial — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'pink/tutorial_ik_controller';</script>
-    <script>
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'pink/tutorial_ik_controller';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Multi-Task Tutorial" href="tutorial_multi_task.html" />
-    <link rel="prev" title="Robot Configuration Tutorial" href="tutorial_robot_configuration.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="tutorial_multi_task.html" rel="next" title="Multi-Task Tutorial"/>
+<link href="tutorial_robot_configuration.html" rel="prev" title="Robot Configuration Tutorial"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="tutorial_ik_controller.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="tutorial_ik_controller.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +270,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -593,20 +297,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -681,17 +373,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -869,7 +551,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -909,13 +590,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -962,10 +637,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1134,18 +805,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1171,119 +832,88 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="../robot_motion_experimental/index.html" class="nav-link">Robot Motion (Experimental)</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">PINK Integration</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">IK Controller Tutorial</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="../robot_motion_experimental/index.html">Robot Motion (Experimental)</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">PINK Integration</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">IK Controller Tutorial</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="ik-controller-tutorial">
+<article class="bd-article">
+<section id="ik-controller-tutorial">
 <span id="isaac-sim-pink-tutorial-ik-controller"></span><h1>IK Controller Tutorial<a class="headerlink" href="tutorial_ik_controller.html#ik-controller-tutorial" title="Link to this heading">#</a></h1>
-<p>This tutorial demonstrates how to use the <code class="xref py py-class docutils literal notranslate"><span class="pre">PinkIKController</span></code> to generate smooth, reactive motions that track
-end-effector targets. This is the PINK analog to the cuMotion <code class="xref py py-class docutils literal notranslate"><span class="pre">RmpFlowController</span></code>.</p>
-<p>By the end of this tutorial, you’ll understand:</p>
+<p>이 튜토리얼은 <code class="xref py py-class docutils literal notranslate"><span class="pre">PinkIKController</span></code>를 사용하여 엔드 이펙터 목표를 추적하는 부드럽고 반응형 모션을 생성하는 방법을 보여줍니다. 이는 cuMotion <code class="xref py py-class docutils literal notranslate"><span class="pre">RmpFlowController</span></code>에 대응하는 PINK 버전입니다.</p>
+<p>이 튜토리얼을 마치면 다음을 이해할 수 있습니다:</p>
 <ul class="simple">
-<li><p>How to create and configure the <code class="xref py py-class docutils literal notranslate"><span class="pre">PinkIKController</span></code></p></li>
-<li><p>How to use the <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> interface (<code class="docutils literal notranslate"><span class="pre">reset</span></code> / <code class="docutils literal notranslate"><span class="pre">forward</span></code>) for closed-loop IK</p></li>
-<li><p>How to provide end-effector targets via <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code></p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">PinkIKController</span></code> 생성 및 구성 방법</p></li>
+<li><p>폐쇄 루프 IK를 위한 <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> 인터페이스(<code class="docutils literal notranslate"><span class="pre">reset</span></code> / <code class="docutils literal notranslate"><span class="pre">forward</span></code>) 사용 방법</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>를 통한 엔드 이펙터 목표 제공 방법</p></li>
 </ul>
 <p><strong>Prerequisites</strong></p>
 <ul class="simple">
-<li><p>Review the <a class="reference internal" href="tutorial_robot_configuration.html#isaac-sim-pink-tutorial-robot-configuration"><span class="std std-ref">Robot Configuration tutorial</span></a> to understand how to load robot configurations.</p></li>
-<li><p>Review the <a class="reference internal" href="../motion_generation/mobile_robot_control_example.html"><span class="doc">Controllers and the RobotState</span></a> tutorial to understand the <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> interface and <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>.</p></li>
+<li><p>로봇 구성을 로드하는 방법을 이해하려면 <a class="reference internal" href="tutorial_robot_configuration.html#isaac-sim-pink-tutorial-robot-configuration"><span class="std std-ref">Robot Configuration tutorial</span></a>을 검토하세요.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> 인터페이스와 <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>를 이해하려면 <a class="reference internal" href="../motion_generation/mobile_robot_control_example.html"><span class="doc">Controllers and the RobotState</span></a> 튜토리얼을 검토하세요.</p></li>
 </ul>
-<p>To follow along with the tutorial, run your Isaac Sim instance. Then open <strong>Window &gt; Extensions</strong>, search for <strong>PINK Examples</strong> (<code class="docutils literal notranslate"><span class="pre">isaacsim.robot_motion.pink.examples</span></code>), and enable it. If you cannot find it, remove <code class="docutils literal notranslate"><span class="pre">&#64;feature</span></code> from the Extensions search bar and search again.
-Within the <code class="docutils literal notranslate"><span class="pre">isaacsim.robot_motion.pink.examples</span></code> extension, the <strong>IK Controller</strong>
-example provides a fully functional demonstration of end-effector tracking.</p>
+<p>튜토리얼을 따라 진행하려면 Isaac Sim 인스턴스를 실행하세요. 그런 다음 <strong>Window &gt; Extensions</strong>를 열고, <strong>PINK Examples</strong>(<code class="docutils literal notranslate"><span class="pre">isaacsim.robot_motion.pink.examples</span></code>)를 검색하여 활성화합니다. 찾을 수 없으면 Extensions 검색창에서 <code class="docutils literal notranslate"><span class="pre">@feature</span></code>를 제거하고 다시 검색합니다.
+<code class="docutils literal notranslate"><span class="pre">isaacsim.robot_motion.pink.examples</span></code> 확장 기능 내의 <strong>IK Controller</strong> 예제가 엔드 이펙터 추적의 완전한 기능 데모를 제공합니다.</p>
 <section id="key-concepts">
 <h2>Key Concepts<a class="headerlink" href="tutorial_ik_controller.html#key-concepts" title="Link to this heading">#</a></h2>
-<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">PinkIKController</span></code> implements the <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> interface from the
-<a class="reference internal" href="../motion_generation/index.html"><span class="doc">Motion Generation API</span></a>. On each <code class="docutils literal notranslate"><span class="pre">forward()</span></code> call it:</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">PinkIKController</span></code>는 <a class="reference internal" href="../motion_generation/index.html"><span class="doc">Motion Generation API</span></a>의 <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> 인터페이스를 구현합니다. 각 <code class="docutils literal notranslate"><span class="pre">forward()</span></code> 호출 시:</p>
 <ol class="arabic simple">
-<li><p>Updates the Pinocchio configuration from the estimated robot joint state</p></li>
-<li><p>Updates the <code class="xref py py-class docutils literal notranslate"><span class="pre">FrameTask</span></code> target from the setpoint (target end-effector pose)</p></li>
-<li><p>Solves a quadratic program to obtain a joint velocity</p></li>
-<li><p>Integrates the velocity and returns the result as a <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code></p></li>
+<li><p>추정된 로봇 관절 상태에서 Pinocchio 구성 업데이트</p></li>
+<li><p>목표점(목표 엔드 이펙터 포즈)에서 <code class="xref py py-class docutils literal notranslate"><span class="pre">FrameTask</span></code> 목표 업데이트</p></li>
+<li><p>관절 속도를 얻기 위한 이차 계획법 풀기</p></li>
+<li><p>속도를 적분하고 결과를 <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>로 반환</p></li>
 </ol>
-<p>This produces reactive, closed-loop control where the robot continuously steers toward the target.</p>
+<p>이는 로봇이 목표를 향해 지속적으로 이동하는 반응형 폐쇄 루프 제어를 생성합니다.</p>
 </section>
 <section id="setting-up-the-controller">
 <h2>Setting Up the Controller<a class="headerlink" href="tutorial_ik_controller.html#setting-up-the-controller" title="Link to this heading">#</a></h2>
-<p>First, load a robot configuration, then create the controller:</p>
+<p>먼저 로봇 구성을 로드한 다음 컨트롤러를 생성합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.robot_motion.pink</span><span class="w"> </span><span class="kn">import</span> <span class="n">PinkIKController</span><span class="p">,</span> <span class="n">load_pink_supported_robot</span>
 
 <span class="c1"># Load the robot</span>
-<span class="n">pink_robot</span> <span class="o">=</span> <span class="n">load_pink_supported_robot</span><span class="p">(</span><span class="s2">&quot;franka&quot;</span><span class="p">)</span>
+<span class="n">pink_robot</span> <span class="o">=</span> <span class="n">load_pink_supported_robot</span><span class="p">(</span><span class="s2">"franka"</span><span class="p">)</span>
 
 <span class="c1"># Get joint and site names from the Isaac Sim articulation</span>
 <span class="n">robot_joint_space</span> <span class="o">=</span> <span class="n">articulation</span><span class="o">.</span><span class="n">dof_names</span>
-<span class="n">robot_site_space</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;panda_hand&quot;</span><span class="p">]</span>  <span class="c1"># Pinocchio frame names for the tool</span>
+<span class="n">robot_site_space</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"panda_hand"</span><span class="p">]</span>  <span class="c1"># Pinocchio frame names for the tool</span>
 
 <span class="c1"># Create the controller</span>
 <span class="n">controller</span> <span class="o">=</span> <span class="n">PinkIKController</span><span class="p">(</span>
     <span class="n">pink_robot</span><span class="o">=</span><span class="n">pink_robot</span><span class="p">,</span>
     <span class="n">robot_joint_space</span><span class="o">=</span><span class="n">robot_joint_space</span><span class="p">,</span>
     <span class="n">robot_site_space</span><span class="o">=</span><span class="n">robot_site_space</span><span class="p">,</span>
-    <span class="n">tool_frame</span><span class="o">=</span><span class="s2">&quot;panda_hand&quot;</span><span class="p">,</span>
+    <span class="n">tool_frame</span><span class="o">=</span><span class="s2">"panda_hand"</span><span class="p">,</span>
     <span class="n">position_cost</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>        <span class="c1"># [cost] / [m]</span>
     <span class="n">orientation_cost</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>     <span class="c1"># [cost] / [rad]</span>
     <span class="n">posture_cost</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>        <span class="c1"># [cost] / [rad] - regularization</span>
@@ -1291,27 +921,24 @@ example provides a fully functional demonstration of end-effector tracking.</p>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>All parameters after <code class="docutils literal notranslate"><span class="pre">robot_site_space</span></code> are keyword-only.</p>
-<p>The controller needs:</p>
+<p><code class="docutils literal notranslate"><span class="pre">robot_site_space</span></code> 이후의 모든 파라미터는 키워드 전용입니다.</p>
+<p>컨트롤러에는 다음이 필요합니다:</p>
 <ul class="simple">
-<li><p><strong>Robot configuration</strong>: A <code class="xref py py-class docutils literal notranslate"><span class="pre">PinkRobot</span></code> loaded via <code class="xref py py-func docutils literal notranslate"><span class="pre">load_pink_robot()</span></code> or <code class="xref py py-func docutils literal notranslate"><span class="pre">load_pink_supported_robot()</span></code></p></li>
-<li><p><strong>Joint and site spaces</strong>: The full ordered joint names from the articulation, and the Pinocchio frame name(s) for the end-effector</p></li>
-<li><p><strong>Tool frame</strong>: The Pinocchio frame name to track. Must exist in both the Pinocchio model and <code class="docutils literal notranslate"><span class="pre">robot_site_space</span></code></p></li>
-<li><p><strong>Task costs</strong>: Weights controlling the trade-off between position accuracy, orientation accuracy, and posture regularization</p></li>
-<li><p><strong>dt</strong>: The integration timestep in seconds, which <strong>must</strong> match the rate at which <code class="docutils literal notranslate"><span class="pre">forward()</span></code> is called. There is no default; omitting it is a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code></p></li>
+<li><p><strong>Robot configuration</strong>: <code class="xref py py-func docutils literal notranslate"><span class="pre">load_pink_robot()</span></code> 또는 <code class="xref py py-func docutils literal notranslate"><span class="pre">load_pink_supported_robot()</span></code>로 로드된 <code class="xref py py-class docutils literal notranslate"><span class="pre">PinkRobot</span></code></p></li>
+<li><p><strong>Joint and site spaces</strong>: 관절형 구조의 전체 순서 있는 관절 이름과 엔드 이펙터의 Pinocchio 프레임 이름</p></li>
+<li><p><strong>Tool frame</strong>: 추적할 Pinocchio 프레임 이름. Pinocchio 모델과 <code class="docutils literal notranslate"><span class="pre">robot_site_space</span></code> 모두에 존재해야 함</p></li>
+<li><p><strong>Task costs</strong>: 위치 정확도, 방향 정확도, 자세 정규화 간의 균형을 제어하는 가중치</p></li>
+<li><p><strong>dt</strong>: 초 단위의 적분 타임스텝으로, <code class="docutils literal notranslate"><span class="pre">forward()</span></code>가 호출되는 속도와 <strong>반드시</strong> 일치해야 합니다. 기본값이 없으며 생략하면 <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>가 발생합니다</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">tool_frame</span></code> must be a frame name as it appears in the Pinocchio model (parsed from the URDF), which may
-differ from Isaac Sim prim path names. Use <code class="docutils literal notranslate"><span class="pre">robot.model.frames[i].name</span></code> to list available frames.</p>
+<p><code class="docutils literal notranslate"><span class="pre">tool_frame</span></code>은 Pinocchio 모델(URDF에서 파싱됨)에 표시된 프레임 이름이어야 하며, Isaac Sim prim 경로 이름과 다를 수 있습니다. <code class="docutils literal notranslate"><span class="pre">robot.model.frames[i].name</span></code>을 사용하여 사용 가능한 프레임을 나열하세요.</p>
 </div>
 </section>
 <section id="creating-robotstate-objects">
 <h2>Creating RobotState Objects<a class="headerlink" href="tutorial_ik_controller.html#creating-robotstate-objects" title="Link to this heading">#</a></h2>
-<p>The controller requires <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> objects for the estimated state (current robot state) and setpoint state
-(target end-effector pose). For details on <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> creation, see the
-<a class="reference internal" href="../motion_generation/mobile_robot_control_example.html"><span class="doc">Motion Generation API documentation</span></a>.</p>
-<p><strong>Estimated State</strong> (current robot configuration):</p>
+<p>컨트롤러는 추정 상태(현재 로봇 상태)와 목표점 상태(목표 엔드 이펙터 포즈)를 위한 <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> 객체가 필요합니다. <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> 생성에 대한 자세한 내용은 <a class="reference internal" href="../motion_generation/mobile_robot_control_example.html"><span class="doc">Motion Generation API documentation</span></a>을 참조하세요.</p>
+<p><strong>Estimated State</strong> (현재 로봇 구성):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">isaacsim.robot_motion.experimental.motion_generation</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mg</span>
 
 <span class="n">estimated_state</span> <span class="o">=</span> <span class="n">mg</span><span class="o">.</span><span class="n">RobotState</span><span class="p">(</span>
@@ -1323,12 +950,12 @@ differ from Isaac Sim prim path names. Use <code class="docutils literal notrans
 <span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Setpoint State</strong> (target end-effector pose):</p>
+<p><strong>Setpoint State</strong> (목표 엔드 이펙터 포즈):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">setpoint_state</span> <span class="o">=</span> <span class="n">mg</span><span class="o">.</span><span class="n">RobotState</span><span class="p">(</span>
     <span class="n">sites</span><span class="o">=</span><span class="n">mg</span><span class="o">.</span><span class="n">SpatialState</span><span class="o">.</span><span class="n">from_name</span><span class="p">(</span>
         <span class="n">spatial_space</span><span class="o">=</span><span class="n">robot_site_space</span><span class="p">,</span>
-        <span class="n">positions</span><span class="o">=</span><span class="p">([</span><span class="s2">&quot;panda_hand&quot;</span><span class="p">],</span> <span class="n">target_positions</span><span class="p">),</span>
-        <span class="n">orientations</span><span class="o">=</span><span class="p">([</span><span class="s2">&quot;panda_hand&quot;</span><span class="p">],</span> <span class="n">target_orientations</span><span class="p">),</span>
+        <span class="n">positions</span><span class="o">=</span><span class="p">([</span><span class="s2">"panda_hand"</span><span class="p">],</span> <span class="n">target_positions</span><span class="p">),</span>
+        <span class="n">orientations</span><span class="o">=</span><span class="p">([</span><span class="s2">"panda_hand"</span><span class="p">],</span> <span class="n">target_orientations</span><span class="p">),</span>
     <span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
@@ -1336,30 +963,30 @@ differ from Isaac Sim prim path names. Use <code class="docutils literal notrans
 </section>
 <section id="resetting-the-controller">
 <h2>Resetting the Controller<a class="headerlink" href="tutorial_ik_controller.html#resetting-the-controller" title="Link to this heading">#</a></h2>
-<p>Before the controller can be used, it must be reset once with the estimated state. The <code class="docutils literal notranslate"><span class="pre">reset()</span></code> method:</p>
+<p>컨트롤러를 사용하기 전에 추정 상태로 한 번 재설정해야 합니다. <code class="docutils literal notranslate"><span class="pre">reset()</span></code> 메서드는 다음을 수행합니다:</p>
 <ul class="simple">
-<li><p>Creates the internal PINK <code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code> from the current joint positions</p></li>
-<li><p>Initializes the <code class="xref py py-class docutils literal notranslate"><span class="pre">FrameTask</span></code> target to the current end-effector pose</p></li>
-<li><p>Initializes the <code class="xref py py-class docutils literal notranslate"><span class="pre">PostureTask</span></code> target to the current joint configuration</p></li>
+<li><p>현재 관절 위치에서 내부 PINK <code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code> 생성</p></li>
+<li><p>현재 엔드 이펙터 포즈로 <code class="xref py py-class docutils literal notranslate"><span class="pre">FrameTask</span></code> 목표 초기화</p></li>
+<li><p>현재 관절 구성으로 <code class="xref py py-class docutils literal notranslate"><span class="pre">PostureTask</span></code> 목표 초기화</p></li>
 </ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">forward()</span></code> method returns <code class="docutils literal notranslate"><span class="pre">None</span></code> before <code class="docutils literal notranslate"><span class="pre">reset()</span></code> is called successfully.</p>
+<p><code class="docutils literal notranslate"><span class="pre">forward()</span></code> 메서드는 <code class="docutils literal notranslate"><span class="pre">reset()</span></code>이 성공적으로 호출되기 전에 <code class="docutils literal notranslate"><span class="pre">None</span></code>을 반환합니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">success</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span>
     <span class="n">estimated_state</span><span class="o">=</span><span class="n">estimated_state</span><span class="p">,</span>
     <span class="n">setpoint_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">t</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">assert</span> <span class="n">success</span><span class="p">,</span> <span class="s2">&quot;Reset failed - check that all controlled joints are in the estimated state&quot;</span>
+<span class="k">assert</span> <span class="n">success</span><span class="p">,</span> <span class="s2">"Reset failed - check that all controlled joints are in the estimated state"</span>
 </pre></div>
 </div>
 </section>
 <section id="running-the-controller">
 <h2>Running the Controller<a class="headerlink" href="tutorial_ik_controller.html#running-the-controller" title="Link to this heading">#</a></h2>
-<p>In each physics step, follow the same pattern as any <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code>:</p>
+<p>각 물리 스텝에서 <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code>와 동일한 패턴을 따릅니다:</p>
 <ol class="arabic simple">
-<li><p>Get the current robot state (estimated state)</p></li>
-<li><p>Create a setpoint state with the target end-effector pose</p></li>
-<li><p>Call <code class="docutils literal notranslate"><span class="pre">forward()</span></code></p></li>
-<li><p>Apply the resulting desired state to the robot</p></li>
+<li><p>현재 로봇 상태 가져오기(추정 상태)</p></li>
+<li><p>목표 엔드 이펙터 포즈로 목표점 상태 생성</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">forward()</span></code> 호출</p></li>
+<li><p>결과 원하는 상태를 로봇에 적용</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">on_physics_step</span><span class="p">(</span><span class="n">step</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
     <span class="c1"># 1. Current state</span>
@@ -1376,8 +1003,8 @@ differ from Isaac Sim prim path names. Use <code class="docutils literal notrans
     <span class="n">setpoint_state</span> <span class="o">=</span> <span class="n">mg</span><span class="o">.</span><span class="n">RobotState</span><span class="p">(</span>
         <span class="n">sites</span><span class="o">=</span><span class="n">mg</span><span class="o">.</span><span class="n">SpatialState</span><span class="o">.</span><span class="n">from_name</span><span class="p">(</span>
             <span class="n">spatial_space</span><span class="o">=</span><span class="n">robot_site_space</span><span class="p">,</span>
-            <span class="n">positions</span><span class="o">=</span><span class="p">([</span><span class="s2">&quot;panda_hand&quot;</span><span class="p">],</span> <span class="n">target_positions</span><span class="p">),</span>
-            <span class="n">orientations</span><span class="o">=</span><span class="p">([</span><span class="s2">&quot;panda_hand&quot;</span><span class="p">],</span> <span class="n">target_orientations</span><span class="p">),</span>
+            <span class="n">positions</span><span class="o">=</span><span class="p">([</span><span class="s2">"panda_hand"</span><span class="p">],</span> <span class="n">target_positions</span><span class="p">),</span>
+            <span class="n">orientations</span><span class="o">=</span><span class="p">([</span><span class="s2">"panda_hand"</span><span class="p">],</span> <span class="n">target_orientations</span><span class="p">),</span>
         <span class="p">),</span>
     <span class="p">)</span>
 
@@ -1392,22 +1019,21 @@ differ from Isaac Sim prim path names. Use <code class="docutils literal notrans
         <span class="p">)</span>
 </pre></div>
 </div>
-<p>If the setpoint state is <code class="docutils literal notranslate"><span class="pre">None</span></code>, the controller continues to track the prior target.</p>
+<p>목표점 상태가 <code class="docutils literal notranslate"><span class="pre">None</span></code>이면 컨트롤러는 이전 목표를 계속 추적합니다.</p>
 </section>
 <section id="choosing-a-qp-solver">
 <h2>Choosing a QP Solver<a class="headerlink" href="tutorial_ik_controller.html#choosing-a-qp-solver" title="Link to this heading">#</a></h2>
-<p>PINK supports multiple QP solver backends through the <code class="docutils literal notranslate"><span class="pre">qpsolvers</span></code> package. The <code class="docutils literal notranslate"><span class="pre">solver</span></code> parameter
-selects which one to use:</p>
+<p>PINK는 <code class="docutils literal notranslate"><span class="pre">qpsolvers</span></code> 패키지를 통해 여러 QP 솔버 백엔드를 지원합니다. <code class="docutils literal notranslate"><span class="pre">solver</span></code> 파라미터로 사용할 백엔드를 선택합니다:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;osqp&quot;</span></code> (default) - Sparse, fast for small-to-large problems</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;clarabel&quot;</span></code> - Interior-point method, robust for ill-conditioned problems</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">"osqp"</span></code> (기본값) - 소형~대형 문제에 빠른 희소 솔버</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">"clarabel"</span></code> - 조건이 나쁜 문제에 강건한 내점법(interior-point method)</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">controller</span> <span class="o">=</span> <span class="n">PinkIKController</span><span class="p">(</span>
     <span class="n">pink_robot</span><span class="o">=</span><span class="n">pink_robot</span><span class="p">,</span>
     <span class="n">robot_joint_space</span><span class="o">=</span><span class="n">robot_joint_space</span><span class="p">,</span>
     <span class="n">robot_site_space</span><span class="o">=</span><span class="n">robot_site_space</span><span class="p">,</span>
-    <span class="n">tool_frame</span><span class="o">=</span><span class="s2">&quot;panda_hand&quot;</span><span class="p">,</span>
-    <span class="n">solver</span><span class="o">=</span><span class="s2">&quot;clarabel&quot;</span><span class="p">,</span>
+    <span class="n">tool_frame</span><span class="o">=</span><span class="s2">"panda_hand"</span><span class="p">,</span>
+    <span class="n">solver</span><span class="o">=</span><span class="s2">"clarabel"</span><span class="p">,</span>
     <span class="n">dt</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mf">60.0</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
@@ -1415,7 +1041,7 @@ selects which one to use:</p>
 </section>
 <section id="accessing-task-objects">
 <h2>Accessing Task Objects<a class="headerlink" href="tutorial_ik_controller.html#accessing-task-objects" title="Link to this heading">#</a></h2>
-<p>The controller exposes its managed tasks for direct configuration:</p>
+<p>컨트롤러는 직접 구성을 위해 관리되는 태스크를 노출합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Access the FrameTask to modify costs at runtime</span>
 <span class="n">frame_task</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">get_frame_task</span><span class="p">()</span>
 <span class="n">frame_task</span><span class="o">.</span><span class="n">set_position_cost</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
@@ -1432,23 +1058,20 @@ selects which one to use:</p>
 <h2>Example Usage<a class="headerlink" href="tutorial_ik_controller.html#example-usage" title="Link to this heading">#</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>To experiment with this tutorial interactively, see the <code class="docutils literal notranslate"><span class="pre">scenario.py</span></code> file in the
-<code class="docutils literal notranslate"><span class="pre">isaacsim.robot_motion.pink.examples</span></code> extension at
-<code class="docutils literal notranslate"><span class="pre">isaacsim/robot_motion/pink/examples/ik_controller/scenario.py</span></code>.</p>
+<p>이 튜토리얼을 대화식으로 실험하려면 <code class="docutils literal notranslate"><span class="pre">isaacsim.robot_motion.pink.examples</span></code> 확장 기능의 <code class="docutils literal notranslate"><span class="pre">isaacsim/robot_motion/pink/examples/ik_controller/scenario.py</span></code>에 있는 <code class="docutils literal notranslate"><span class="pre">scenario.py</span></code> 파일을 참조하세요.</p>
 </div>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="tutorial_ik_controller.html#summary" title="Link to this heading">#</a></h2>
-<p>This tutorial demonstrated:</p>
+<p>이 튜토리얼에서 보여준 내용:</p>
 <ol class="arabic simple">
-<li><p><strong>PinkIKController Setup</strong>: Creating the controller with task costs and solver selection</p></li>
-<li><p><strong>RobotState Creation</strong>: Building estimated and setpoint states for the controller interface</p></li>
-<li><p><strong>Controller Lifecycle</strong>: Using <code class="docutils literal notranslate"><span class="pre">reset()</span></code> and <code class="docutils literal notranslate"><span class="pre">forward()</span></code> for closed-loop IK</p></li>
-<li><p><strong>QP Solver Selection</strong>: Choosing between <code class="docutils literal notranslate"><span class="pre">osqp</span></code>, <code class="docutils literal notranslate"><span class="pre">clarabel</span></code>, and other backends</p></li>
-<li><p><strong>Task Access</strong>: Modifying task costs at runtime</p></li>
+<li><p><strong>PinkIKController Setup</strong>: 태스크 비용과 솔버 선택으로 컨트롤러 생성</p></li>
+<li><p><strong>RobotState Creation</strong>: 컨트롤러 인터페이스를 위한 추정 및 목표점 상태 구축</p></li>
+<li><p><strong>Controller Lifecycle</strong>: 폐쇄 루프 IK를 위한 <code class="docutils literal notranslate"><span class="pre">reset()</span></code> 및 <code class="docutils literal notranslate"><span class="pre">forward()</span></code> 사용</p></li>
+<li><p><strong>QP Solver Selection</strong>: <code class="docutils literal notranslate"><span class="pre">osqp</span></code>, <code class="docutils literal notranslate"><span class="pre">clarabel</span></code> 및 기타 백엔드 중 선택</p></li>
+<li><p><strong>Task Access</strong>: 런타임에 태스크 비용 수정</p></li>
 </ol>
-<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">PinkIKController</span></code> provides reactive, task-based inverse kinematics that integrates
-with the Motion Generation API.</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">PinkIKController</span></code>는 Motion Generation API와 통합되는 반응형 태스크 기반 역기구학을 제공합니다.</p>
 <section id="next-steps">
 <h3>Next Steps<a class="headerlink" href="tutorial_ik_controller.html#next-steps" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -1459,56 +1082,34 @@ with the Motion Generation API.</p>
 </section>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="tutorial_robot_configuration.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Robot Configuration Tutorial</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="tutorial_multi_task.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Multi-Task Tutorial</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="tutorial_robot_configuration.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Robot Configuration Tutorial</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="tutorial_multi_task.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Multi-Task Tutorial</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_ik_controller.html#key-concepts">Key Concepts</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_ik_controller.html#setting-up-the-controller">Setting Up the Controller</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_ik_controller.html#creating-robotstate-objects">Creating RobotState Objects</a></li>
@@ -1522,46 +1123,29 @@ with the Motion Generation API.</p>
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1592,36 +1176,21 @@ with the Motion Generation API.</p>
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

@@ -1,552 +1,257 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Multi-Task Tutorial &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Multi-Task Tutorial — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'pink/tutorial_multi_task';</script>
-    <script>
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'pink/tutorial_multi_task';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Sensors" href="../sensors/index.html" />
-    <link rel="prev" title="IK Controller Tutorial" href="tutorial_ik_controller.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="../sensors/index.html" rel="next" title="Sensors"/>
+<link href="tutorial_ik_controller.html" rel="prev" title="IK Controller Tutorial"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="tutorial_multi_task.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="tutorial_multi_task.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -566,7 +271,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -594,20 +298,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -682,17 +374,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -870,7 +552,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -910,13 +591,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -963,10 +638,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1135,18 +806,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1172,109 +833,77 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="../robot_motion_experimental/index.html" class="nav-link">Robot Motion (Experimental)</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">PINK Integration</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Multi-Task Tutorial</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="../robot_motion_experimental/index.html">Robot Motion (Experimental)</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">PINK Integration</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Multi-Task Tutorial</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="multi-task-tutorial">
+<article class="bd-article">
+<section id="multi-task-tutorial">
 <span id="isaac-sim-pink-tutorial-multi-task"></span><h1>Multi-Task Tutorial<a class="headerlink" href="tutorial_multi_task.html#multi-task-tutorial" title="Link to this heading">#</a></h1>
-<p>This tutorial demonstrates how to combine multiple weighted PINK tasks for more complex IK behaviors. You’ll learn how
-task weights control the trade-off between competing objectives and how to add safety barriers.</p>
-<p>By the end of this tutorial, you’ll understand:</p>
+<p>이 튜토리얼은 더 복잡한 IK 동작을 위해 여러 가중 PINK 태스크를 결합하는 방법을 보여줍니다. 태스크 가중치가 경쟁하는 목표 간의 균형을 어떻게 제어하는지, 그리고 안전 장벽을 추가하는 방법을 배울 수 있습니다.</p>
+<p>이 튜토리얼을 마치면 다음을 이해할 수 있습니다:</p>
 <ul class="simple">
-<li><p>How to combine <code class="xref py py-class docutils literal notranslate"><span class="pre">FrameTask</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PostureTask</span></code>, and <code class="xref py py-class docutils literal notranslate"><span class="pre">DampingTask</span></code></p></li>
-<li><p>How task cost weights affect the IK solution</p></li>
-<li><p>How to add extra tasks and barriers to <code class="xref py py-class docutils literal notranslate"><span class="pre">PinkIKController</span></code></p></li>
-<li><p>How to use <code class="xref py py-class docutils literal notranslate"><span class="pre">SelfCollisionBarrier</span></code> for collision avoidance</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">FrameTask</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PostureTask</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DampingTask</span></code> 결합 방법</p></li>
+<li><p>태스크 비용 가중치가 IK 솔루션에 미치는 영향</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">PinkIKController</span></code>에 추가 태스크 및 장벽을 추가하는 방법</p></li>
+<li><p>충돌 회피를 위한 <code class="xref py py-class docutils literal notranslate"><span class="pre">SelfCollisionBarrier</span></code> 사용 방법</p></li>
 </ul>
 <p><strong>Prerequisites</strong></p>
 <ul class="simple">
-<li><p>Review the <a class="reference internal" href="tutorial_robot_configuration.html#isaac-sim-pink-tutorial-robot-configuration"><span class="std std-ref">Robot Configuration tutorial</span></a> to understand robot loading.</p></li>
-<li><p>Review the <a class="reference internal" href="tutorial_ik_controller.html#isaac-sim-pink-tutorial-ik-controller"><span class="std std-ref">IK Controller tutorial</span></a> to understand the basic controller workflow.</p></li>
+<li><p>로봇 로딩을 이해하려면 <a class="reference internal" href="tutorial_robot_configuration.html#isaac-sim-pink-tutorial-robot-configuration"><span class="std std-ref">Robot Configuration tutorial</span></a>을 검토하세요.</p></li>
+<li><p>기본 컨트롤러 워크플로우를 이해하려면 <a class="reference internal" href="tutorial_ik_controller.html#isaac-sim-pink-tutorial-ik-controller"><span class="std std-ref">IK Controller tutorial</span></a>을 검토하세요.</p></li>
 </ul>
-<p>To follow along with the tutorial, run your Isaac Sim instance. Then open <strong>Window &gt; Extensions</strong>, search for <strong>PINK Examples</strong> (<code class="docutils literal notranslate"><span class="pre">isaacsim.robot_motion.pink.examples</span></code>), and enable it. If you cannot find it, remove <code class="docutils literal notranslate"><span class="pre">&#64;feature</span></code> from the Extensions search bar and search again.
-The <strong>Multi-Task</strong> example provides an interactive demonstration with runtime cost-weight
-adjustment.</p>
+<p>튜토리얼을 따라 진행하려면 Isaac Sim 인스턴스를 실행하세요. 그런 다음 <strong>Window &gt; Extensions</strong>를 열고, <strong>PINK Examples</strong>(<code class="docutils literal notranslate"><span class="pre">isaacsim.robot_motion.pink.examples</span></code>)를 검색하여 활성화합니다. 찾을 수 없으면 Extensions 검색창에서 <code class="docutils literal notranslate"><span class="pre">@feature</span></code>를 제거하고 다시 검색합니다.
+<strong>Multi-Task</strong> 예제는 런타임 비용-가중치 조정 기능이 있는 대화식 데모를 제공합니다.</p>
 <section id="task-composition">
 <h2>Task Composition<a class="headerlink" href="tutorial_multi_task.html#task-composition" title="Link to this heading">#</a></h2>
-<p>PINK solves a single QP that combines all tasks into a weighted least-squares objective:</p>
+<p>PINK는 모든 태스크를 가중 최소제곱 목적 함수로 결합하는 단일 QP를 풀어냅니다:</p>
 <div class="math notranslate nohighlight">
 \[\min_{v} \sum_{\text{task } e} \| J_e(q) \, v + \alpha \, e(q) \|^2_{W_e}\]</div>
 <p>where <span class="math notranslate nohighlight">\(v\)</span> is the joint velocity, <span class="math notranslate nohighlight">\(J_e\)</span> is the task Jacobian, <span class="math notranslate nohighlight">\(e(q)\)</span> is the task error,
 <span class="math notranslate nohighlight">\(\alpha\)</span> is the gain, and <span class="math notranslate nohighlight">\(W_e = \text{diag}(\text{cost})\)</span> is the weight matrix. Higher cost means the
 solver tries harder to satisfy that task.</p>
-<p>The key insight is that tasks <strong>compete</strong> when they cannot all be satisfied simultaneously. Cost weights determine
-which tasks take priority.</p>
+<p>핵심은 태스크를 동시에 모두 만족할 수 없을 때 <strong>경쟁</strong>한다는 점입니다. 비용 가중치가 어떤 태스크가 우선순위를 갖는지 결정합니다.</p>
 </section>
 <section id="using-multiple-tasks-with-pinkikcontroller">
 <h2>Using Multiple Tasks with PinkIKController<a class="headerlink" href="tutorial_multi_task.html#using-multiple-tasks-with-pinkikcontroller" title="Link to this heading">#</a></h2>
-<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">PinkIKController</span></code> manages a <code class="xref py py-class docutils literal notranslate"><span class="pre">FrameTask</span></code> and optional <code class="xref py py-class docutils literal notranslate"><span class="pre">PostureTask</span></code> internally. To add
-more tasks, pass them via the <code class="docutils literal notranslate"><span class="pre">extra_tasks</span></code> parameter:</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">PinkIKController</span></code>는 내부적으로 <code class="xref py py-class docutils literal notranslate"><span class="pre">FrameTask</span></code>와 선택적 <code class="xref py py-class docutils literal notranslate"><span class="pre">PostureTask</span></code>를 관리합니다. 더 많은 태스크를 추가하려면 <code class="docutils literal notranslate"><span class="pre">extra_tasks</span></code> 파라미터를 통해 전달합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pink.tasks</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.robot_motion.pink</span><span class="w"> </span><span class="kn">import</span> <span class="n">PinkIKController</span><span class="p">,</span> <span class="n">load_pink_supported_robot</span>
 
-<span class="n">pink_robot</span> <span class="o">=</span> <span class="n">load_pink_supported_robot</span><span class="p">(</span><span class="s2">&quot;franka&quot;</span><span class="p">)</span>
+<span class="n">pink_robot</span> <span class="o">=</span> <span class="n">load_pink_supported_robot</span><span class="p">(</span><span class="s2">"franka"</span><span class="p">)</span>
 
 <span class="c1"># Create a DampingTask to minimize joint velocities</span>
 <span class="n">damping_task</span> <span class="o">=</span> <span class="n">pink</span><span class="o">.</span><span class="n">tasks</span><span class="o">.</span><span class="n">DampingTask</span><span class="p">(</span><span class="n">cost</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
@@ -1282,8 +911,8 @@ more tasks, pass them via the <code class="docutils literal notranslate"><span c
 <span class="n">controller</span> <span class="o">=</span> <span class="n">PinkIKController</span><span class="p">(</span>
     <span class="n">pink_robot</span><span class="o">=</span><span class="n">pink_robot</span><span class="p">,</span>
     <span class="n">robot_joint_space</span><span class="o">=</span><span class="n">articulation</span><span class="o">.</span><span class="n">dof_names</span><span class="p">,</span>
-    <span class="n">robot_site_space</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;panda_hand&quot;</span><span class="p">],</span>
-    <span class="n">tool_frame</span><span class="o">=</span><span class="s2">&quot;panda_hand&quot;</span><span class="p">,</span>
+    <span class="n">robot_site_space</span><span class="o">=</span><span class="p">[</span><span class="s2">"panda_hand"</span><span class="p">],</span>
+    <span class="n">tool_frame</span><span class="o">=</span><span class="s2">"panda_hand"</span><span class="p">,</span>
     <span class="n">position_cost</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
     <span class="n">orientation_cost</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
     <span class="n">posture_cost</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
@@ -1295,15 +924,14 @@ more tasks, pass them via the <code class="docutils literal notranslate"><span c
 </section>
 <section id="understanding-cost-weights">
 <h2>Understanding Cost Weights<a class="headerlink" href="tutorial_multi_task.html#understanding-cost-weights" title="Link to this heading">#</a></h2>
-<p>The cost values are in <strong>normalized units</strong> that allow comparing position errors (meters) with orientation errors
-(radians) and joint errors (radians):</p>
+<p>비용 값은 위치 오차(미터), 방향 오차(라디안), 관절 오차(라디안)를 비교할 수 있는 <strong>정규화 단위</strong>입니다:</p>
 <ul class="simple">
-<li><p><strong>Position cost</strong> <code class="docutils literal notranslate"><span class="pre">[cost/m]</span></code>: How much each meter of position error costs</p></li>
-<li><p><strong>Orientation cost</strong> <code class="docutils literal notranslate"><span class="pre">[cost/rad]</span></code>: How much each radian of orientation error costs</p></li>
-<li><p><strong>Posture cost</strong> <code class="docutils literal notranslate"><span class="pre">[cost/rad]</span></code>: How much each radian of joint deviation from the target posture costs</p></li>
-<li><p><strong>Damping cost</strong> <code class="docutils literal notranslate"><span class="pre">[cost*s/rad]</span></code>: How much each radian/second of joint velocity costs</p></li>
+<li><p><strong>Position cost</strong> <code class="docutils literal notranslate"><span class="pre">[cost/m]</span></code>: 미터당 위치 오차 비용</p></li>
+<li><p><strong>Orientation cost</strong> <code class="docutils literal notranslate"><span class="pre">[cost/rad]</span></code>: 라디안당 방향 오차 비용</p></li>
+<li><p><strong>Posture cost</strong> <code class="docutils literal notranslate"><span class="pre">[cost/rad]</span></code>: 목표 자세에서 라디안당 관절 편차 비용</p></li>
+<li><p><strong>Damping cost</strong> <code class="docutils literal notranslate"><span class="pre">[cost*s/rad]</span></code>: 라디안/초당 관절 속도 비용</p></li>
 </ul>
-<p>Example trade-offs:</p>
+<p>트레이드오프 예시:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prioritize position accuracy, ignore orientation</span>
 <span class="n">controller</span> <span class="o">=</span> <span class="n">PinkIKController</span><span class="p">(</span>
     <span class="o">...</span><span class="p">,</span>
@@ -1327,7 +955,7 @@ more tasks, pass them via the <code class="docutils literal notranslate"><span c
 </section>
 <section id="updating-costs-at-runtime">
 <h2>Updating Costs at Runtime<a class="headerlink" href="tutorial_multi_task.html#updating-costs-at-runtime" title="Link to this heading">#</a></h2>
-<p>Task costs can be modified at runtime without recreating the controller:</p>
+<p>태스크 비용은 컨트롤러를 재생성하지 않고 런타임에 수정할 수 있습니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adjust frame task costs</span>
 <span class="n">controller</span><span class="o">.</span><span class="n">get_frame_task</span><span class="p">()</span><span class="o">.</span><span class="n">set_position_cost</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
 <span class="n">controller</span><span class="o">.</span><span class="n">get_frame_task</span><span class="p">()</span><span class="o">.</span><span class="n">set_orientation_cost</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
@@ -1341,23 +969,22 @@ more tasks, pass them via the <code class="docutils literal notranslate"><span c
 <span class="n">damping_task</span><span class="o">.</span><span class="n">cost</span> <span class="o">=</span> <span class="mf">1e-3</span>
 </pre></div>
 </div>
-<p>The Multi-Task example extension provides UI indicators for adjusting these weights interactively.</p>
+<p>Multi-Task 예제 확장 기능은 이 가중치를 대화식으로 조정하는 UI 인디케이터를 제공합니다.</p>
 </section>
 <section id="adding-self-collision-barriers">
 <h2>Adding Self-Collision Barriers<a class="headerlink" href="tutorial_multi_task.html#adding-self-collision-barriers" title="Link to this heading">#</a></h2>
-<p>PINK supports control barrier functions (CBFs) that enforce safety constraints. The most common is
-<code class="xref py py-class docutils literal notranslate"><span class="pre">SelfCollisionBarrier</span></code>, which prevents the robot from colliding with itself.</p>
-<p>First, load the robot with collision geometry enabled:</p>
+<p>PINK는 안전 제약을 적용하는 제어 장벽 함수(CBF)를 지원합니다. 가장 일반적인 것은 <code class="xref py py-class docutils literal notranslate"><span class="pre">SelfCollisionBarrier</span></code>로, 로봇이 자기 자신과 충돌하는 것을 방지합니다.</p>
+<p>먼저 충돌 기하를 활성화하여 로봇을 로드합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.robot_motion.pink</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_pink_robot</span>
 
 <span class="n">pink_robot</span> <span class="o">=</span> <span class="n">load_pink_robot</span><span class="p">(</span>
-    <span class="n">urdf_path</span><span class="o">=</span><span class="s2">&quot;/path/to/robot.urdf&quot;</span><span class="p">,</span>
-    <span class="n">srdf_path</span><span class="o">=</span><span class="s2">&quot;/path/to/robot.srdf&quot;</span><span class="p">,</span>  <span class="c1"># collision pair exclusions</span>
+    <span class="n">urdf_path</span><span class="o">=</span><span class="s2">"/path/to/robot.urdf"</span><span class="p">,</span>
+    <span class="n">srdf_path</span><span class="o">=</span><span class="s2">"/path/to/robot.srdf"</span><span class="p">,</span>  <span class="c1"># collision pair exclusions</span>
     <span class="n">build_collision_model</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>Then pass the barrier to the controller:</p>
+<p>그런 다음 장벽을 컨트롤러에 전달합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pink.barriers</span><span class="w"> </span><span class="kn">import</span> <span class="n">SelfCollisionBarrier</span>
 
 <span class="n">barrier</span> <span class="o">=</span> <span class="n">SelfCollisionBarrier</span><span class="p">(</span>
@@ -1369,8 +996,8 @@ more tasks, pass them via the <code class="docutils literal notranslate"><span c
 <span class="n">controller</span> <span class="o">=</span> <span class="n">PinkIKController</span><span class="p">(</span>
     <span class="n">pink_robot</span><span class="o">=</span><span class="n">pink_robot</span><span class="p">,</span>
     <span class="n">robot_joint_space</span><span class="o">=</span><span class="n">articulation</span><span class="o">.</span><span class="n">dof_names</span><span class="p">,</span>
-    <span class="n">robot_site_space</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;panda_hand&quot;</span><span class="p">],</span>
-    <span class="n">tool_frame</span><span class="o">=</span><span class="s2">&quot;panda_hand&quot;</span><span class="p">,</span>
+    <span class="n">robot_site_space</span><span class="o">=</span><span class="p">[</span><span class="s2">"panda_hand"</span><span class="p">],</span>
+    <span class="n">tool_frame</span><span class="o">=</span><span class="s2">"panda_hand"</span><span class="p">,</span>
     <span class="n">extra_barriers</span><span class="o">=</span><span class="p">[</span><span class="n">barrier</span><span class="p">],</span>
     <span class="n">dt</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mf">60.0</span><span class="p">,</span>
 <span class="p">)</span>
@@ -1378,42 +1005,36 @@ more tasks, pass them via the <code class="docutils literal notranslate"><span c
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Self-collision barriers require the robot to be loaded with <code class="docutils literal notranslate"><span class="pre">build_collision_model=True</span></code> and an SRDF file
-for best results. Without an SRDF, all collision pairs (including adjacent links) will be checked, which
-may cause the solver to be overly conservative.</p>
+<p>자기 충돌 장벽은 최상의 결과를 위해 <code class="docutils literal notranslate"><span class="pre">build_collision_model=True</span></code>와 SRDF 파일로 로봇을 로드해야 합니다. SRDF 없이는 모든 충돌 쌍(인접 링크 포함)이 확인되어 솔버가 지나치게 보수적으로 동작할 수 있습니다.</p>
 </div>
 </section>
 <section id="other-available-tasks">
 <h2>Other Available Tasks<a class="headerlink" href="tutorial_multi_task.html#other-available-tasks" title="Link to this heading">#</a></h2>
-<p>PINK provides additional task types that can be passed via <code class="docutils literal notranslate"><span class="pre">extra_tasks</span></code>:</p>
+<p>PINK는 <code class="docutils literal notranslate"><span class="pre">extra_tasks</span></code>를 통해 전달할 수 있는 추가 태스크 유형을 제공합니다:</p>
 <ul class="simple">
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">RelativeFrameTask</span></code> - Regulate pose of one frame relative to another (e.g., bimanual coordination)</p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ComTask</span></code> - Track center-of-mass position (useful for humanoids)</p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">JointCouplingTask</span></code> - Enforce linear relationships between joints (e.g., coupled fingers)</p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">JointVelocityTask</span></code> - Track reference joint velocities</p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">LowAccelerationTask</span></code> - Minimize joint accelerations for smoother motion</p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearHolonomicTask</span></code> - General linear equality constraint</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">RelativeFrameTask</span></code> - 한 프레임의 다른 프레임에 대한 상대 포즈 조절(예: 양팔 협조)</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ComTask</span></code> - 질량 중심 위치 추적(휴머노이드에 유용)</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">JointCouplingTask</span></code> - 관절 간 선형 관계 적용(예: 연결된 손가락)</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">JointVelocityTask</span></code> - 기준 관절 속도 추적</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">LowAccelerationTask</span></code> - 더 부드러운 동작을 위한 관절 가속도 최소화</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearHolonomicTask</span></code> - 일반 선형 등식 제약</p></li>
 </ul>
-<p>Refer to the <a class="reference external" href="https://stephane-caron.github.io/pink/">PINK documentation</a> for full API details on each task type.</p>
+<p>각 태스크 유형에 대한 전체 API 세부 정보는 <a class="reference external" href="https://stephane-caron.github.io/pink/">PINK documentation</a>을 참조하세요.</p>
 </section>
 <section id="updating-extra-task-targets-with-pre-step-callback">
 <h2>Updating Extra Task Targets with pre_step_callback<a class="headerlink" href="tutorial_multi_task.html#updating-extra-task-targets-with-pre-step-callback" title="Link to this heading">#</a></h2>
-<p>The controller automatically updates targets for its managed <code class="xref py py-class docutils literal notranslate"><span class="pre">FrameTask</span></code> (from <code class="docutils literal notranslate"><span class="pre">setpoint_state.sites</span></code>)
-and <code class="xref py py-class docutils literal notranslate"><span class="pre">PostureTask</span></code> (from <code class="docutils literal notranslate"><span class="pre">setpoint_state.joints</span></code>). Extra tasks are <strong>not</strong> auto-updated, tasks like
-<code class="xref py py-class docutils literal notranslate"><span class="pre">DampingTask</span></code> or <code class="xref py py-class docutils literal notranslate"><span class="pre">JointCouplingTask</span></code> that have fixed or no targets work as-is, but tasks that need
-per-step target updates require the <code class="docutils literal notranslate"><span class="pre">pre_step_callback</span></code> parameter.</p>
-<p>Some tasks may need per-step updates because their targets change over time:</p>
+<p>컨트롤러는 관리되는 <code class="xref py py-class docutils literal notranslate"><span class="pre">FrameTask</span></code>(<code class="docutils literal notranslate"><span class="pre">setpoint_state.sites</span></code>에서)와 <code class="xref py py-class docutils literal notranslate"><span class="pre">PostureTask</span></code>(<code class="docutils literal notranslate"><span class="pre">setpoint_state.joints</span></code>에서)의 목표를 자동으로 업데이트합니다. 추가 태스크는 <strong>자동으로 업데이트되지 않습니다</strong>. <code class="xref py py-class docutils literal notranslate"><span class="pre">DampingTask</span></code>나 <code class="xref py py-class docutils literal notranslate"><span class="pre">JointCouplingTask</span></code>처럼 고정되거나 목표가 없는 태스크는 그대로 사용하지만, 스텝마다 목표 업데이트가 필요한 태스크는 <code class="docutils literal notranslate"><span class="pre">pre_step_callback</span></code> 파라미터가 필요합니다.</p>
+<p>일부 태스크는 목표가 시간에 따라 변하므로 스텝마다 업데이트가 필요합니다:</p>
 <ul class="simple">
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ComTask</span></code> – if the desired center-of-mass follows a trajectory, the target must be set each step</p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">RelativeFrameTask</span></code> – to maintain the current relative pose between two frames as the robot moves, the target must be refreshed from the live configuration each step</p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">LowAccelerationTask</span></code> – requires <code class="docutils literal notranslate"><span class="pre">set_last_integration(v_prev,</span> <span class="pre">dt)</span></code> each step to know the previous velocity</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ComTask</span></code> – 원하는 질량 중심이 궤적을 따르는 경우, 매 스텝마다 목표를 설정해야 합니다</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">RelativeFrameTask</span></code> – 로봇이 움직이면서 두 프레임 간의 현재 상대 포즈를 유지하려면, 매 스텝마다 라이브 구성에서 목표를 갱신해야 합니다</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">LowAccelerationTask</span></code> – 이전 속도를 알기 위해 매 스텝마다 <code class="docutils literal notranslate"><span class="pre">set_last_integration(v_prev,</span></code> <code class="docutils literal notranslate"><span class="pre">dt)</span></code>가 필요합니다</p></li>
 </ul>
-<p>The callback is invoked during each <code class="docutils literal notranslate"><span class="pre">forward()</span></code> call, after the configuration is updated from the estimated state
-but before <code class="docutils literal notranslate"><span class="pre">solve_ik</span></code> runs. It receives the current PINK <code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code> and the <code class="docutils literal notranslate"><span class="pre">setpoint_state</span></code>:</p>
+<p>콜백은 각 <code class="docutils literal notranslate"><span class="pre">forward()</span></code> 호출 중 추정 상태에서 구성이 업데이트된 후, <code class="docutils literal notranslate"><span class="pre">solve_ik</span></code>가 실행되기 전에 호출됩니다. 현재 PINK <code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code>과 <code class="docutils literal notranslate"><span class="pre">setpoint_state</span></code>를 수신합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pink.tasks</span><span class="w"> </span><span class="kn">import</span> <span class="n">RelativeFrameTask</span><span class="p">,</span> <span class="n">ComTask</span>
 
 <span class="n">relative_task</span> <span class="o">=</span> <span class="n">RelativeFrameTask</span><span class="p">(</span>
-    <span class="s2">&quot;left_hand&quot;</span><span class="p">,</span> <span class="s2">&quot;right_hand&quot;</span><span class="p">,</span>
+    <span class="s2">"left_hand"</span><span class="p">,</span> <span class="s2">"right_hand"</span><span class="p">,</span>
     <span class="n">position_cost</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">orientation_cost</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">com_task</span> <span class="o">=</span> <span class="n">ComTask</span><span class="p">(</span><span class="n">cost</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
@@ -1425,47 +1046,45 @@ but before <code class="docutils literal notranslate"><span class="pre">solve_ik
 <span class="n">controller</span> <span class="o">=</span> <span class="n">PinkIKController</span><span class="p">(</span>
     <span class="n">pink_robot</span><span class="o">=</span><span class="n">pink_robot</span><span class="p">,</span>
     <span class="n">robot_joint_space</span><span class="o">=</span><span class="n">articulation</span><span class="o">.</span><span class="n">dof_names</span><span class="p">,</span>
-    <span class="n">robot_site_space</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;panda_hand&quot;</span><span class="p">],</span>
-    <span class="n">tool_frame</span><span class="o">=</span><span class="s2">&quot;panda_hand&quot;</span><span class="p">,</span>
+    <span class="n">robot_site_space</span><span class="o">=</span><span class="p">[</span><span class="s2">"panda_hand"</span><span class="p">],</span>
+    <span class="n">tool_frame</span><span class="o">=</span><span class="s2">"panda_hand"</span><span class="p">,</span>
     <span class="n">extra_tasks</span><span class="o">=</span><span class="p">[</span><span class="n">relative_task</span><span class="p">,</span> <span class="n">com_task</span><span class="p">],</span>
     <span class="n">pre_step_callback</span><span class="o">=</span><span class="n">update_targets</span><span class="p">,</span>
     <span class="n">dt</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mf">60.0</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>The callback has full access to the <code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code> object, which provides forward kinematics,
-Jacobians, and frame placements, required to compute task-specific targets.</p>
+<p>콜백은 순방향 기구학, 야코비안, 프레임 배치를 제공하는 <code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code> 객체에 완전한 접근이 가능하며, 태스크별 목표를 계산하는 데 필요합니다.</p>
 </section>
 <section id="other-available-barriers">
 <h2>Other Available Barriers<a class="headerlink" href="tutorial_multi_task.html#other-available-barriers" title="Link to this heading">#</a></h2>
-<p>Beyond self-collision, PINK provides:</p>
+<p>자기 충돌 외에도 PINK는 다음을 제공합니다:</p>
 <ul class="simple">
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">PositionBarrier</span></code> - Keep a frame’s position within axis-aligned bounds</p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">BodySphericalBarrier</span></code> - Maintain minimum distance between two robot frames</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">PositionBarrier</span></code> - 프레임의 위치를 축 정렬 경계 내에 유지</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">BodySphericalBarrier</span></code> - 두 로봇 프레임 간의 최소 거리 유지</p></li>
 </ul>
-<p>These are passed to <code class="xref py py-class docutils literal notranslate"><span class="pre">PinkIKController</span></code> via the <code class="docutils literal notranslate"><span class="pre">extra_barriers</span></code> parameter.</p>
+<p>이것들은 <code class="docutils literal notranslate"><span class="pre">extra_barriers</span></code> 파라미터를 통해 <code class="xref py py-class docutils literal notranslate"><span class="pre">PinkIKController</span></code>에 전달됩니다.</p>
 </section>
 <section id="additional-limits">
 <h2>Additional Limits<a class="headerlink" href="tutorial_multi_task.html#additional-limits" title="Link to this heading">#</a></h2>
-<p>By default, PINK automatically creates <code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigurationLimit</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">VelocityLimit</span></code> from the Pinocchio
-model (which reads them from the URDF joint limits). For additional constraints, use the <code class="docutils literal notranslate"><span class="pre">extra_limits</span></code> parameter:</p>
+<p>기본적으로 PINK는 Pinocchio 모델(URDF 관절 제한에서 읽음)에서 <code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigurationLimit</span></code>과 <code class="xref py py-class docutils literal notranslate"><span class="pre">VelocityLimit</span></code>을 자동으로 생성합니다. 추가 제약은 <code class="docutils literal notranslate"><span class="pre">extra_limits</span></code> 파라미터를 사용합니다:</p>
 <ul class="simple">
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">AccelerationLimit</span></code> - Bound joint accelerations</p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">FloatingBaseVelocityLimit</span></code> - Clamp base twist for floating-base robots</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">AccelerationLimit</span></code> - 관절 가속도 제한</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">FloatingBaseVelocityLimit</span></code> - 부동 베이스 로봇의 베이스 트위스트 제한</p></li>
 </ul>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="tutorial_multi_task.html#summary" title="Link to this heading">#</a></h2>
-<p>This tutorial demonstrated:</p>
+<p>이 튜토리얼에서 보여준 내용:</p>
 <ol class="arabic simple">
-<li><p><strong>Task Composition</strong>: Combining <code class="xref py py-class docutils literal notranslate"><span class="pre">FrameTask</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PostureTask</span></code>, and <code class="xref py py-class docutils literal notranslate"><span class="pre">DampingTask</span></code></p></li>
-<li><p><strong>Cost Weights</strong>: How weights control the trade-off between competing tasks</p></li>
-<li><p><strong>Runtime Tuning</strong>: Modifying task costs without recreating the controller</p></li>
-<li><p><strong>Self-Collision Barriers</strong>: Using <code class="xref py py-class docutils literal notranslate"><span class="pre">SelfCollisionBarrier</span></code> for safety</p></li>
-<li><p><strong>Pre-Step Callback</strong>: Updating extra task targets via <code class="docutils literal notranslate"><span class="pre">pre_step_callback</span></code> for tasks that need per-step updates</p></li>
-<li><p><strong>Additional Tasks</strong>: Overview of all available PINK task, barrier, and limit types</p></li>
+<li><p><strong>Task Composition</strong>: <code class="xref py py-class docutils literal notranslate"><span class="pre">FrameTask</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">PostureTask</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DampingTask</span></code> 결합</p></li>
+<li><p><strong>Cost Weights</strong>: 가중치가 경쟁하는 태스크 간의 균형을 제어하는 방법</p></li>
+<li><p><strong>Runtime Tuning</strong>: 컨트롤러를 재생성하지 않고 태스크 비용 수정</p></li>
+<li><p><strong>Self-Collision Barriers</strong>: 안전을 위한 <code class="xref py py-class docutils literal notranslate"><span class="pre">SelfCollisionBarrier</span></code> 사용</p></li>
+<li><p><strong>Pre-Step Callback</strong>: 스텝마다 업데이트가 필요한 태스크를 위해 <code class="docutils literal notranslate"><span class="pre">pre_step_callback</span></code>으로 추가 태스크 목표 업데이트</p></li>
+<li><p><strong>Additional Tasks</strong>: 사용 가능한 모든 PINK 태스크, 장벽, 제한 유형 개요</p></li>
 </ol>
-<p>The multi-task architecture provides a flexible, extensible framework for specifying complex IK behaviors through weighted objectives and safety constraints.</p>
+<p>다중 태스크 아키텍처는 가중 목적 함수와 안전 제약을 통해 복잡한 IK 동작을 지정하기 위한 유연하고 확장 가능한 프레임워크를 제공합니다.</p>
 <section id="next-steps">
 <h3>Next Steps<a class="headerlink" href="tutorial_multi_task.html#next-steps" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -1475,56 +1094,34 @@ model (which reads them from the URDF joint limits). For additional constraints,
 </section>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="tutorial_ik_controller.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">IK Controller Tutorial</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../sensors/index.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Sensors</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="tutorial_ik_controller.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">IK Controller Tutorial</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="../sensors/index.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Sensors</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_multi_task.html#task-composition">Task Composition</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_multi_task.html#using-multiple-tasks-with-pinkikcontroller">Using Multiple Tasks with PinkIKController</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_multi_task.html#understanding-cost-weights">Understanding Cost Weights</a></li>
@@ -1539,46 +1136,29 @@ model (which reads them from the URDF joint limits). For additional constraints,
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1609,36 +1189,21 @@ model (which reads them from the URDF joint limits). For additional constraints,
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>
