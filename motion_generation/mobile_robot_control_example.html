@@ -1,551 +1,256 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Controllers and the RobotState &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Controllers and the RobotState — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'motion_generation/mobile_robot_control_example';</script>
-    <script>
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'motion_generation/mobile_robot_control_example';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Trajectory Planning and Execution" href="trajectory_planning.html" />
-    <link rel="prev" title="Scene Interaction" href="scene_interaction.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="trajectory_planning.html" rel="next" title="Trajectory Planning and Execution"/>
+<link href="scene_interaction.html" rel="prev" title="Scene Interaction"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="mobile_robot_control_example.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="mobile_robot_control_example.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +270,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -593,20 +297,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -681,17 +373,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -869,7 +551,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -909,13 +590,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -962,10 +637,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1134,18 +805,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1171,95 +832,67 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="../robot_motion_experimental/index.html" class="nav-link">Robot Motion (Experimental)</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Motion Generation (Experimental)</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Controllers and the RobotState</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="../robot_motion_experimental/index.html">Robot Motion (Experimental)</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">Motion Generation (Experimental)</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Controllers and the RobotState</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="controllers-and-the-robotstate">
+<article class="bd-article">
+<section id="controllers-and-the-robotstate">
 <h1>Controllers and the RobotState<a class="headerlink" href="mobile_robot_control_example.html#controllers-and-the-robotstate" title="Link to this heading">#</a></h1>
-<p>This tutorial demonstrates building a complete robot controller using the Motion Generation API’s fundamental building blocks:</p>
+<p>이 튜토리얼은 Motion Generation API의 기본 구성 요소를 사용하여 완전한 로봇 컨트롤러를 구축하는 방법을 보여줍니다:</p>
 <ul class="simple">
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> class</p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> interface</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> 클래스</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> 인터페이스</p></li>
 </ul>
-<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> interface works for mobile robots, articulations, and combined systems such as humanoids. This tutorial creates a differential drive controller for a Jetbot, with optional composition of a low-pass filter controller for improved robustness in noisy conditions.</p>
-<p>You’ll build a controller that:</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> 인터페이스는 모바일 로봇, 관절형 로봇, 휴머노이드와 같은 복합 시스템에서 모두 동작합니다. 이 튜토리얼에서는 Jetbot을 위한 차동 구동(differential drive) 컨트롤러를 만들고, 노이즈 환경에서의 강건성을 위한 저역통과(low-pass) 필터 컨트롤러를 선택적으로 조합합니다.</p>
+<p>만들 컨트롤러의 기능:</p>
 <ul class="simple">
-<li><p>Converts desired robot velocities into wheel commands</p></li>
-<li><p>Applies filtering for smooth motion</p></li>
-<li><p>Runs in a real-time simulation loop</p></li>
+<li><p>원하는 로봇 속도를 바퀴 명령으로 변환</p></li>
+<li><p>부드러운 동작을 위한 필터링 적용</p></li>
+<li><p>실시간 시뮬레이션 루프에서 실행</p></li>
 </ul>
-<p>All code examples come from the complete, runnable file <code class="docutils literal notranslate"><span class="pre">mobile_robot_control_example.py</span></code>:</p>
+<p>모든 코드 예제는 실행 가능한 완전한 파일 <code class="docutils literal notranslate"><span class="pre">mobile_robot_control_example.py</span></code>에서 가져온 것입니다:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mobile robot controller with differential drive and optional filtering</span>
 ./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.robot_motion.experimental.motion_generation/mobile_robot_control_example.py
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>You can run this example with the arguments <code class="docutils literal notranslate"><span class="pre">--noise</span></code> and <code class="docutils literal notranslate"><span class="pre">--filter</span></code> to see how the Jetbot performs with different combinations of noise and filtering enabled.
-For example, try running with neither argument to see performance under ideal conditions and no filtering. Try <code class="docutils literal notranslate"><span class="pre">--noise</span></code> to see the adverse effects on the controller
-performance under noisy input conditions. Finally, try <code class="docutils literal notranslate"><span class="pre">--filter</span> <span class="pre">--noise</span></code> to see the controller’s robustness under noisy input conditions with filtering enabled:</p>
+<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">--noise</span></code>와 <code class="docutils literal notranslate"><span class="pre">--filter</span></code> 인수를 사용하여 다양한 노이즈 및 필터링 조합에서 Jetbot의 성능을 확인할 수 있습니다.
+예를 들어, 인수 없이 실행하면 이상적인 조건에서의 성능을 볼 수 있습니다. <code class="docutils literal notranslate"><span class="pre">--noise</span></code>를 추가하면 노이즈 입력 조건에서 컨트롤러 성능에 미치는 악영향을 확인할 수 있습니다. 마지막으로 <code class="docutils literal notranslate"><span class="pre">--filter</span></code> <code class="docutils literal notranslate"><span class="pre">--noise</span></code>를 함께 사용하면 필터링이 활성화된 노이즈 조건에서 컨트롤러의 강건성을 확인할 수 있습니다:</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> 인터페이스로 컨트롤러를 구축하기 전에, <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>와 <strong>제어 공간(control spaces)</strong>을 이해해야 합니다.
+제어 공간은 Motion Generation API의 핵심 개념이며, 처음부터 올바르게 이해하면 많은 일반적인 문제를 예방할 수 있습니다.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run with noise and filtering enabled</span>
 ./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.robot_motion.experimental.motion_generation/mobile_robot_control_example.py<span class="w"> </span>--noise<span class="w"> </span>--filter
 </pre></div>
@@ -1267,128 +900,120 @@ performance under noisy input conditions. Finally, try <code class="docutils lit
 </div>
 <section id="understanding-control-spaces">
 <h2>Understanding Control Spaces<a class="headerlink" href="mobile_robot_control_example.html#understanding-control-spaces" title="Link to this heading">#</a></h2>
-<p>Before building controllers with the <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> interface, you must understand <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> and <strong>control spaces</strong>.
-Control spaces are fundamental to how the Motion Generation API works, and getting them right from the start will prevent many common issues.</p>
+<p>제어 공간은 모든 컨트롤러가 공유할 <strong>전체 공유 공간</strong>을 나타냅니다. 함께 동작하는 모든 컨트롤러가 동의해야 하는 이름(관절, 링크, 또는 사이트)의 순서 있는 목록을 정의합니다.</p>
 <section id="what-are-control-spaces">
 <h3>What Are Control Spaces?<a class="headerlink" href="mobile_robot_control_example.html#what-are-control-spaces" title="Link to this heading">#</a></h3>
-<p>Control spaces represent the <strong>full shared space</strong> that all your controllers will use. They define the ordered list of names (joints, links, or sites)
-that all controllers working together must agree upon.</p>
-<p>For example, if you’re designing a collection of 6 controllers that will all share control over nine joints, they all need to know the same ordering of those nine joints.
-This shared ordering is the <strong>joint space</strong> (<code class="docutils literal notranslate"><span class="pre">robot_joint_space</span></code>). Similarly, if multiple controllers will control links or sites, they must share the same
-<strong>link space</strong> (<code class="docutils literal notranslate"><span class="pre">robot_link_space</span></code>) or <strong>site space</strong> (<code class="docutils literal notranslate"><span class="pre">robot_site_space</span></code>).</p>
-<p>When you create any part of a <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> (joints, links, or sites), you must <strong>declare the space</strong> that those components exist in.
-The space you provide must match across all controllers that will work together.</p>
+<p>예를 들어, 9개의 관절에 대한 제어를 공유하는 6개의 컨트롤러를 설계하는 경우, 모두 동일한 관절 순서를 알아야 합니다.
+이 공유 순서가 <strong>조인트 공간</strong>(<code class="docutils literal notranslate"><span class="pre">robot_joint_space</span></code>)입니다. 마찬가지로 여러 컨트롤러가 링크나 사이트를 제어하는 경우, 동일한
+<strong>링크 공간</strong>(<code class="docutils literal notranslate"><span class="pre">robot_link_space</span></code>) 또는 <strong>사이트 공간</strong>(<code class="docutils literal notranslate"><span class="pre">robot_site_space</span></code>)을 공유해야 합니다.</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>의 일부(관절, 링크, 또는 사이트)를 생성할 때는 해당 컴포넌트가 존재하는 <strong>공간을 선언</strong>해야 합니다.
+제공하는 공간은 함께 동작하는 모든 컨트롤러에서 일치해야 합니다.</p>
+<p>권장 워크플로우는 컨트롤러를 만들기 전에 <strong>공간을 먼저 정의</strong>하는 것입니다:</p>
 </section>
 <section id="the-ideal-workflow">
 <h3>The Ideal Workflow<a class="headerlink" href="mobile_robot_control_example.html#the-ideal-workflow" title="Link to this heading">#</a></h3>
-<p>The recommended workflow is to <strong>define your spaces first</strong>, before creating any controllers:</p>
+<p><strong>조인트 공간 정의</strong>: 컨트롤러가 제어할 수 있는 모든 관절 이름의 순서 있는 목록 생성</p>
 <ol class="arabic simple">
-<li><p><strong>Define your joint space</strong>: Create an ordered list of all joint names that any controller might control</p></li>
-<li><p><strong>Define your link space</strong>: Create an ordered list of all link names whose poses you want to control</p></li>
-<li><p><strong>Define your site space</strong>: Create an ordered list of all site names (end effectors, tool frames) whose poses you want to control</p></li>
+<li><p><strong>링크 공간 정의</strong>: 포즈를 제어하고자 하는 모든 링크 이름의 순서 있는 목록 생성</p></li>
+<li><p><strong>사이트 공간 정의</strong>: 포즈를 제어하고자 하는 모든 사이트 이름(엔드 이펙터, 툴 프레임)의 순서 있는 목록 생성</p></li>
+<li><p>이후 모든 컨트롤러를 생성할 때 동일한 공간 정의를 사용합니다. 이를 통해 모든 컨트롤러가 로봇 구조에 대해 동일한 이해를 공유하고, 서로 다른 컨트롤러의 상태를 결합할 때 오류를 방지합니다.</p></li>
 </ol>
-<p>Then, when you create all your controllers, use these same space definitions. This ensures all controllers share the same understanding of the robot’s structure
-and prevents errors when combining states from different controllers.</p>
-<p>Control spaces are often obtained from your robot representation (for example, <code class="docutils literal notranslate"><span class="pre">Articulation.dof_names</span></code> for joint space). However, controllers don’t depend on these sources; they work with any ordered list of names, making them flexible and usable with any robot definition.</p>
+<p>제어 공간은 주로 로봇 표현(예: 조인트 공간의 경우 <code class="docutils literal notranslate"><span class="pre">Articulation.dof_names</span></code>)에서 얻습니다. 그러나 컨트롤러는 이러한 소스에 의존하지 않으며, 이름의 순서 있는 목록이면 무엇이든 사용할 수 있어 유연하게 모든 로봇 정의와 함께 사용 가능합니다.</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>는 로봇의 여러 부분을 다양한 방식으로 제어할 수 있는 통합 표현입니다. <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>는 다음을 포함할 수 있습니다:</p>
 </section>
 <section id="robotstate-structure">
 <h3>RobotState Structure<a class="headerlink" href="mobile_robot_control_example.html#robotstate-structure" title="Link to this heading">#</a></h3>
-<p><code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> is a unified representation that supports controlling different parts of the robot in different ways. A <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> can contain:</p>
+<p><code class="docutils literal notranslate"><span class="pre">joints</span></code> - 관절 위치, 속도, 힘(조인트 공간 제어)</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">joints</span></code> - Joint positions, velocities, and efforts (joint-space control)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">sites</span></code> - Poses and twists of specific points on the robot (site-space control)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">links</span></code> - Poses and twists of robot links (link-space control)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">root</span></code> - Pose and twist of the robot root (root-space control)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sites</span></code> - 로봇의 특정 지점의 포즈 및 트위스트(사이트 공간 제어)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">links</span></code> - 로봇 링크의 포즈 및 트위스트(링크 공간 제어)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">root</span></code> - 로봇 루트의 포즈 및 트위스트(루트 공간 제어)</p></li>
+<li><p>이 필드들은 모두 선택 사항이며, 컨트롤러는 제어하려는 상태의 일부만 지정할 수 있습니다.</p></li>
 </ul>
-<p>Each of these fields are optional; a controller can specify only the parts of the state it wants to control.</p>
+<p>일반적으로 컴포넌트 상태 클래스를 사용하여 RobotState 객체를 생성합니다:</p>
 </section>
 <section id="creating-robotstates-with-control-spaces">
 <h3>Creating RobotStates with Control Spaces<a class="headerlink" href="mobile_robot_control_example.html#creating-robotstates-with-control-spaces" title="Link to this heading">#</a></h3>
-<p>You typically create RobotState objects using the component state classes:</p>
+<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">JointState.from_name()</span></code> - 조인트 공간 제어용(<code class="docutils literal notranslate"><span class="pre">robot_joint_space</span></code> 필요)</p>
 <ul class="simple">
-<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">JointState.from_name()</span></code> - For joint-space control (requires <code class="docutils literal notranslate"><span class="pre">robot_joint_space</span></code>)</p></li>
-<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">SpatialState.from_name()</span></code> - For link-space or site-space control (requires <code class="docutils literal notranslate"><span class="pre">robot_link_space</span></code> or <code class="docutils literal notranslate"><span class="pre">robot_site_space</span></code>)</p></li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">RootState</span></code> - For root-space control (no control space required, as there’s only one root)</p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">SpatialState.from_name()</span></code> - 링크 또는 사이트 공간 제어용(<code class="docutils literal notranslate"><span class="pre">robot_link_space</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">robot_site_space</span></code> 필요)</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">RootState</span></code> - 루트 공간 제어용(루트가 하나뿐이므로 제어 공간 불필요)</p></li>
+<li><p>상태 컴포넌트를 생성할 때는 전체 제어 공간(모든 이름의 순서 있는 목록)을 제공하고 제어할 부분을 지정합니다.
+이를 통해 부분 상태를 생성할 수 있으며, 특정 관절, 링크, 사이트와 필요한 속성만 제어할 수 있습니다.
+예를 들어 관절의 경우 일부는 위치로, 다른 것은 속도로 제어할 수 있습니다. 제어 모드를 완전히 건너뛰려면 <code class="docutils literal notranslate"><span class="pre">None</span></code>을 전달합니다.</p></li>
 </ul>
-<p>When creating state components, you provide the full control space (the ordered list of all names) and specify which parts you want to control.
-This allows you to create partial states; you can control only specific joints, links, or sites, and only the properties you need.
-For example, with joints you might control some through position and others through velocity. To skip a control mode entirely, pass <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">combine_robot_states()</span></code> 함수를 사용하면 두 <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> 객체를 합칠 수 있습니다. 이를 통해 서로 다른 컨트롤러가 로봇의 각기 다른 부분을 동시에 제어할 수 있습니다.</p>
 </section>
 </section>
 <section id="combining-robotstates">
 <h2>Combining RobotStates<a class="headerlink" href="mobile_robot_control_example.html#combining-robotstates" title="Link to this heading">#</a></h2>
-<p>The <code class="xref py py-func docutils literal notranslate"><span class="pre">combine_robot_states()</span></code> function lets you merge two <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> objects together. This enables different
-controllers to control different parts of the robot simultaneously.</p>
-<p>For example, one controller might control the robot’s arm joints while another controls the gripper, and a third controls the base position.
-The combine function will return <code class="docutils literal notranslate"><span class="pre">None</span></code> if the states cannot be combined. This only happens in two cases:</p>
+<p>예를 들어, 한 컨트롤러는 로봇의 팔 관절을 제어하고, 다른 컨트롤러는 그리퍼를, 세 번째 컨트롤러는 베이스 위치를 제어할 수 있습니다.
+결합 함수는 상태를 결합할 수 없는 경우 <code class="docutils literal notranslate"><span class="pre">None</span></code>을 반환합니다. 이는 두 가지 경우에만 발생합니다:</p>
+<p>두 <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> 객체가 동일한 관절 또는 프레임의 동일한 속성을 정의하려는 경우(즉, 두 객체 모두 동일한 관절의 속도나 동일한 사이트의 방향을 정의하려는 경우).</p>
 <ul class="simple">
-<li><p>Two <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> objects try to define the same property of the same joint or frame (that is, both try to define the velocity of the same joint, or orientation of the same site).</p></li>
-<li><p>The defined control spaces don’t match (for example, defined and mismatching <code class="docutils literal notranslate"><span class="pre">robot_joint_space</span></code> definitions, defined and mismatching <code class="docutils literal notranslate"><span class="pre">robot_link_space</span></code> definitions, defined and mismatching <code class="docutils literal notranslate"><span class="pre">robot_site_space</span></code> definitions).</p></li>
+<li><p>정의된 제어 공간이 일치하지 않는 경우(예: <code class="docutils literal notranslate"><span class="pre">robot_joint_space</span></code>, <code class="docutils literal notranslate"><span class="pre">robot_link_space</span></code>, <code class="docutils literal notranslate"><span class="pre">robot_site_space</span></code> 정의가 일치하지 않는 경우).</p></li>
+<li><p>공간을 먼저 정의하는 것이 중요합니다. 컨트롤러가 서로 다른 공간 정의를 사용하면 상태를 결합할 수 없습니다.</p></li>
 </ul>
-<p>Defining your spaces first is critical. If controllers use different space definitions, their states cannot be combined.</p>
+<p>다음으로 <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> 인터페이스를 이해해야 합니다. 컨트롤러는 Motion Generation API의 핵심입니다.
+현재 상태와 선택적 목표점(setpoint)을 기반으로 원하는 로봇 상태를 계산합니다.</p>
 </section>
 <section id="the-controller-interface">
 <h2>The Controller Interface<a class="headerlink" href="mobile_robot_control_example.html#the-controller-interface" title="Link to this heading">#</a></h2>
-<p>Next, you need to understand the <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> interface. Controllers are central to the Motion Generation API.
-They compute desired robot states based on the current state and optional setpoints.</p>
-<p>Every controller in the Motion Generation API implements the <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> interface, which defines two essential methods:</p>
+<p>Motion Generation API의 모든 컨트롤러는 <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> 인터페이스를 구현하며, 두 가지 필수 메서드를 정의합니다:</p>
+<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code> - 컨트롤러를 안전한 초기 상태로 초기화합니다. 컨트롤러 실행 직전에 한 번 호출됩니다.</p>
 <ul>
-<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code> - Initializes the controller to a safe starting state. Called one time, immediately before the controller starts running.</p></li>
-<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">forward()</span></code> - Computes the desired robot state for the next time step. Called every time step with:</p>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">forward()</span></code> - 다음 타임 스텝의 원하는 로봇 상태를 계산합니다. 매 타임 스텝마다 다음과 함께 호출됩니다:</p></li>
+<li><p>현재 클락 시간</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>the current clock time</p></li>
-<li><p>the current estimated <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>, and</p></li>
-<li><p>an optional setpoint <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> (the goal).</p></li>
+<li><p>현재 추정된 <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>, 그리고</p></li>
+<li><p>선택적 목표점 <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>(목표).</p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">forward()</span></code> 메서드는 다음 원하는 상태를 나타내는 <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>를 반환하거나, 유효한 출력을 생성할 수 없는 경우 <code class="docutils literal notranslate"><span class="pre">None</span></code>을 반환합니다.</p></li>
 </ul>
 </div></blockquote>
 </li>
 </ul>
-<p>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">forward()</span></code> method returns a <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> representing the next desired state, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if it cannot produce a valid output.</p>
+<p>API는 일반적인 패턴으로 컨트롤러를 조합하기 위한 편리한 클래스를 제공합니다:</p>
 </section>
 <section id="controller-composition">
 <h2>Controller Composition<a class="headerlink" href="mobile_robot_control_example.html#controller-composition" title="Link to this heading">#</a></h2>
-<p>The API provides several convenient classes to compose controllers together in common patterns:</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">ParallelController</span></code>는 여러 컨트롤러를 동시에 실행하고 출력을 결합합니다. 서로 다른 컨트롤러가 로봇의 다른 부분을 제어하도록 할 때 적합합니다. <code class="xref py py-class docutils literal notranslate"><span class="pre">ParallelController</span></code>는 출력을 자동으로 병합합니다. 컨트롤러들이 동일한 관절이나 프레임을 제어하지 않으면 상태가 원활하게 결합됩니다.</p>
 <section id="parallel-controllers">
 <h3>Parallel Controllers<a class="headerlink" href="mobile_robot_control_example.html#parallel-controllers" title="Link to this heading">#</a></h3>
-<p><code class="xref py py-class docutils literal notranslate"><span class="pre">ParallelController</span></code> runs multiple controllers simultaneously and combines their outputs. This is perfect when you want different controllers
-to control different parts of the robot. The <code class="xref py py-class docutils literal notranslate"><span class="pre">ParallelController</span></code> automatically merges the outputs. If the controllers don’t try to control
-the same joints or frames, their states are combined seamlessly.</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">SequentialController</span></code>는 여러 컨트롤러를 순서대로 실행합니다. 한 컨트롤러의 출력이 다음 컨트롤러의 목표점이 됩니다. 컨트롤러 출력을 필터링하거나 처리할 때 유용합니다. 예를 들어, 노이즈 있는 입력 데이터를 평활화하는 필터 다음에 필터링된 입력으로 로봇을 구동하는 PID 유사 컨트롤러를 배치할 수 있습니다.</p>
 </section>
 <section id="sequential-controllers">
 <h3>Sequential Controllers<a class="headerlink" href="mobile_robot_control_example.html#sequential-controllers" title="Link to this heading">#</a></h3>
-<p><code class="xref py py-class docutils literal notranslate"><span class="pre">SequentialController</span></code> runs multiple controllers in sequence. The output of one controller becomes the setpoint for the next. This is useful
-for filtering or processing controller outputs. For example, you might have a filter which smooths noisy input data, followed by a PID-like controller which drives the robot to the filtered input.</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">ControllerContainer</span></code>를 사용하면 런타임에 컨트롤러 간에 전환할 수 있습니다. 상태 머신이나 행동 트리와 같은 상위 수준 제어 시스템과의 통합에 유용합니다.
+여러 컨트롤러를 단일 컨테이너에 패키징하여 조작 작업이나 여러 단계가 필요한 작업을 위한 복잡한 동작을 만들 수 있습니다.
+컨테이너는 전환 시 새 컨트롤러에서 자동으로 <code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code>을 호출합니다.</p>
 </section>
 <section id="controller-containers">
 <h3>Controller Containers<a class="headerlink" href="mobile_robot_control_example.html#controller-containers" title="Link to this heading">#</a></h3>
-<p><code class="xref py py-class docutils literal notranslate"><span class="pre">ControllerContainer</span></code> allows you to switch between different controllers at runtime. This is useful for integrating with higher-level control systems such as state machines or behavior trees.
-By packaging multiple controllers into a single container, you can create complex behaviors for manipulation tasks, or other tasks that require many phases.
-The container automatically calls <code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code> on the new controller when switching.</p>
+<p>모든 조합 클래스는 그 자체로 컨트롤러이므로 중첩하여 복잡한 제어 계층 구조를 구축할 수 있습니다. 예를 들어, <code class="xref py py-class docutils literal notranslate"><span class="pre">SequentialController</span></code>와 다른 컨트롤러를 포함하는 <code class="xref py py-class docutils literal notranslate"><span class="pre">ParallelController</span></code>를 <code class="xref py py-class docutils literal notranslate"><span class="pre">ControllerContainer</span></code>로 감싸 런타임 전환을 구현할 수 있습니다.</p>
 </section>
 </section>
 <section id="nesting-controllers">
 <h2>Nesting Controllers<a class="headerlink" href="mobile_robot_control_example.html#nesting-controllers" title="Link to this heading">#</a></h2>
-<p>Because all composition classes are themselves controllers, you can nest them to build complex control hierarchies. For example, you might
-have a <code class="xref py py-class docutils literal notranslate"><span class="pre">ParallelController</span></code> containing a <code class="xref py py-class docutils literal notranslate"><span class="pre">SequentialController</span></code> and another controller, all wrapped in a <code class="xref py py-class docutils literal notranslate"><span class="pre">ControllerContainer</span></code> for runtime switching.</p>
+<p>제어 공간, <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> 인터페이스의 핵심 개념을 이해했으니 모바일 로봇 컨트롤러를 구축할 수 있습니다.
+핵심 차동 구동 컨트롤러로 시작하여, 필터링을 추가하고, 완전한 제어 루프로 합칩니다.</p>
 </section>
 <section id="building-our-mobile-robot-controller">
 <h2>Building Our Mobile Robot Controller<a class="headerlink" href="mobile_robot_control_example.html#building-our-mobile-robot-controller" title="Link to this heading">#</a></h2>
-<p>With the core concepts of control spaces, <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>, and the <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> interface, you can start building your mobile robot controller.
-Starting with the core differential drive controller, add filtering, and put it all together in a complete control loop.</p>
+<p>이상적인 워크플로우에 따라 제어 공간을 정의합니다. 이 모바일 로봇 컨트롤러의 경우 로봇의 관절(바퀴 관절)을 제어해야 합니다.
+로봇 관절형 표현(예: <code class="docutils literal notranslate"><span class="pre">robot.dof_names</span></code>)에서 조인트 공간을 얻습니다. 이 <code class="docutils literal notranslate"><span class="pre">robot_joint_space</span></code>는 로봇의 모든 관절의 순서 있는 목록을 정의합니다.
+생성하는 모든 컨트롤러는 이 동일한 공간 정의를 사용하므로, 함께 동작하고 상태를 결합할 수 있습니다.</p>
 <section id="defining-the-control-space">
 <h3>Defining the Control Space<a class="headerlink" href="mobile_robot_control_example.html#defining-the-control-space" title="Link to this heading">#</a></h3>
-<p>Following the ideal workflow, define your control space. For this mobile robot controller, you need to control the robot’s joints (the wheel joints).
-Get the joint space from the robot articulation (for example, <code class="docutils literal notranslate"><span class="pre">robot.dof_names</span></code>). This <code class="docutils literal notranslate"><span class="pre">robot_joint_space</span></code> defines the ordered list of all joints in your robot.
-All the controllers you create will use this same space definition, ensuring that they can work together and that their states can be combined.</p>
-<p>To use this space when creating <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> objects, you must create <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> objects in two key places:</p>
+<p>이 공간을 <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> 객체 생성에 사용하려면 두 가지 핵심 위치에서 <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> 객체를 생성해야 합니다:</p>
+<p>로봇에서 현재 상태를 읽을 때(조인트 공간)</p>
 <ul class="simple">
-<li><p>When reading the current state from the robot (joint-space)</p></li>
-<li><p>When setting desired velocities for our robot (root-space)</p></li>
+<li><p>로봇의 원하는 속도를 설정할 때(루트 공간)</p></li>
+<li><p>현재 로봇 상태를 읽고 <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>를 생성하려면:</p></li>
 </ul>
-<p>To read the current robot state and create a <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>:</p>
+<p>전체 <code class="docutils literal notranslate"><span class="pre">robot_joint_space</span></code>와 위치, 속도, 힘을 포함한 모든 관절이 지정되어 있습니다. 이를 통해 로봇의 현재 구성과 일치하는 완전한 조인트 상태가 생성됩니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_estimated_state_from_robot</span><span class="p">(</span><span class="n">robot</span><span class="p">:</span> <span class="n">Articulation</span><span class="p">,</span> <span class="n">robot_joint_space</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">mg</span><span class="o">.</span><span class="n">RobotState</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the current estimated state of the robot.</span>
+<span class="w">    </span><span class="sd">"""Get the current estimated state of the robot.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        robot: The robot articulation</span>
@@ -1396,7 +1021,7 @@ All the controllers you create will use this same space definition, ensuring tha
 
 <span class="sd">    Returns:</span>
 <span class="sd">        RobotState representing the current robot state</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Get current joint positions, velocities, and efforts</span>
     <span class="k">return</span> <span class="n">mg</span><span class="o">.</span><span class="n">RobotState</span><span class="p">(</span>
         <span class="n">joints</span><span class="o">=</span><span class="n">mg</span><span class="o">.</span><span class="n">JointState</span><span class="o">.</span><span class="n">from_name</span><span class="p">(</span>
@@ -1410,8 +1035,8 @@ All the controllers you create will use this same space definition, ensuring tha
 
 </pre></div>
 </div>
-<p>Notice that the full <code class="docutils literal notranslate"><span class="pre">robot_joint_space</span></code> and all joints with their positions, velocities, and efforts are specified. This creates a complete joint state that matches the robot’s current configuration.</p>
-<p>To create a <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>, that has the desired root state that is used to set the desired velocities for your mobile robot:</p>
+<p>모바일 로봇의 원하는 속도를 설정하는 데 사용되는 원하는 루트 상태를 가진 <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>를 생성하려면:</p>
+<p>이를 통해 원하는 루트 상태(선형 및 각속도)를 가진 <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>가 생성되고 관절은 정의되지 않은 상태로 남습니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>            <span class="n">setpoint_state</span> <span class="o">=</span> <span class="n">mg</span><span class="o">.</span><span class="n">RobotState</span><span class="p">(</span>
                 <span class="n">root</span><span class="o">=</span><span class="n">mg</span><span class="o">.</span><span class="n">RootState</span><span class="p">(</span>
                     <span class="n">linear_velocity</span><span class="o">=</span><span class="n">wp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">v_linear_command</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]),</span>  <span class="c1"># Forward velocity</span>
@@ -1420,47 +1045,45 @@ All the controllers you create will use this same space definition, ensuring tha
             <span class="p">)</span>
 </pre></div>
 </div>
-<p>This creates a <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> with a desired root state (linear and angular velocities) and leaves the joints undefined.</p>
+<p>모바일 로봇은 차동 구동 시스템을 사용하며, 독립적으로 제어할 수 있는 두 개의 바퀴가 있습니다. 첫 번째 컨트롤러는 원하는 로봇 속도(얼마나 빠르게 전진하고 회전할지)를 개별 바퀴 속도로 변환합니다. 이것이 모바일 로봇 컨트롤러의 핵심입니다.</p>
 </section>
 <section id="step-1-the-differential-drive-controller">
 <h3>Step 1: The Differential Drive Controller<a class="headerlink" href="mobile_robot_control_example.html#step-1-the-differential-drive-controller" title="Link to this heading">#</a></h3>
-<p>Your mobile robot uses a differential drive system, with two wheels that can be controlled independently. The first controller will convert the desired
-robot velocities (how fast we want the robot to move forward and turn) into individual wheel velocities. This is the core of your mobile robot controller.</p>
+<p>특정 로봇의 기하에 기반하여 컨트롤러를 매개변수화하려면, 차동 구동 컨트롤러가 바퀴 반지름, 바퀴 간 거리(휠베이스), 선택적으로 속도 제한을 알아야 합니다. 또한 왼쪽과 오른쪽 바퀴를 제어하는 관절을 지정해야 합니다:</p>
 <section id="initialization-parameterizing-the-controller">
 <h4>Initialization: Parameterizing the Controller<a class="headerlink" href="mobile_robot_control_example.html#initialization-parameterizing-the-controller" title="Link to this heading">#</a></h4>
-<p>To parameterize the controller based on the geometry of our particular robot, the differential drive controller needs to know the wheel radius,
-the distance between wheels (wheel base), and optionally some speed limits. You also need to specify which joints control the left and right wheels:</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">DifferentialDriveController</span></code>는 상태를 저장하지 않으므로 실제로 여기서 할 일이 없습니다. <code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code> 메서드는 <code class="docutils literal notranslate"><span class="pre">True</span></code>를 반환합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">robot_joint_space</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
         <span class="n">wheel_radius</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">wheel_base</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the differential drive controller.</span>
+<span class="w">        </span><span class="sd">"""Initialize the differential drive controller.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            robot_joint_space: The full joint space of the robot</span>
 <span class="sd">            wheel_radius: Radius of left and right wheels in meters</span>
 <span class="sd">            wheel_base: Distance between left and right wheels in meters</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">robot_joint_space</span> <span class="o">=</span> <span class="n">robot_joint_space</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wheel_radius</span> <span class="o">=</span> <span class="n">wheel_radius</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wheel_base</span> <span class="o">=</span> <span class="n">wheel_base</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">controlled_joints</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;left_wheel_joint&quot;</span><span class="p">,</span> <span class="s2">&quot;right_wheel_joint&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controlled_joints</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"left_wheel_joint"</span><span class="p">,</span> <span class="s2">"right_wheel_joint"</span><span class="p">]</span>
 
 </pre></div>
 </div>
 </section>
 <section id="the-reset-method-initializing-the-controller">
 <h4>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code> Method: Initializing the Controller<a class="headerlink" href="mobile_robot_control_example.html#the-reset-method-initializing-the-controller" title="Link to this heading">#</a></h4>
-<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">DifferentialDriveController</span></code> is stateless, so we don’t actually need to do anything here. The <code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code> method returns <code class="docutils literal notranslate"><span class="pre">True</span></code>:</p>
+<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">forward()</span></code> 메서드에서 컨트롤러가 작업을 수행합니다. 입력을 검증하기 위해:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">estimated_state</span><span class="p">:</span> <span class="n">mg</span><span class="o">.</span><span class="n">RobotState</span><span class="p">,</span> <span class="n">setpoint_state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">mg</span><span class="o">.</span><span class="n">RobotState</span><span class="p">],</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the controller.</span>
+<span class="w">        </span><span class="sd">"""Initialize the controller.</span>
 
-<span class="sd">        The DifferentialDriveController is stateless, so we don&#39;t need to do anything here.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        The DifferentialDriveController is stateless, so we don't need to do anything here.</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="kc">True</span>
 
 </pre></div>
@@ -1468,16 +1091,16 @@ the distance between wheels (wheel base), and optionally some speed limits. You 
 </section>
 <section id="the-forward-method-computing-wheel-velocities">
 <h4>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">forward()</span></code> Method: Computing Wheel Velocities<a class="headerlink" href="mobile_robot_control_example.html#the-forward-method-computing-wheel-velocities" title="Link to this heading">#</a></h4>
-<p>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">forward()</span></code> method is where the controller does its work. To verify the inputs:</p>
+<p>루트 상태가 없으면 <code class="docutils literal notranslate"><span class="pre">None</span></code>을 반환</p>
 <ul class="simple">
-<li><p>if there is no root state, it returns <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
-<li><p>if the input joint state doesn’t use the same <code class="docutils literal notranslate"><span class="pre">robot_joint_space</span></code> as the controller, it returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
-<li><p>Otherwise, the wheel speeds are computed using differential drive kinematics and it returns the desired <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>:</p></li>
+<li><p>입력 조인트 상태가 컨트롤러와 동일한 <code class="docutils literal notranslate"><span class="pre">robot_joint_space</span></code>를 사용하지 않으면 <code class="docutils literal notranslate"><span class="pre">None</span></code>을 반환.</p></li>
+<li><p>그렇지 않으면, 차동 구동 기구학을 사용하여 바퀴 속도를 계산하고 원하는 <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>를 반환합니다:</p></li>
+<li><p>컨트롤러는 차동 구동 기구학을 사용하여 루트 속도를 바퀴 속도로 변환합니다.</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">estimated_state</span><span class="p">:</span> <span class="n">mg</span><span class="o">.</span><span class="n">RobotState</span><span class="p">,</span> <span class="n">setpoint_state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">mg</span><span class="o">.</span><span class="n">RobotState</span><span class="p">],</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">mg</span><span class="o">.</span><span class="n">RobotState</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute desired wheel angular velocities from root velocity setpoint.</span>
+<span class="w">        </span><span class="sd">"""Compute desired wheel angular velocities from root velocity setpoint.</span>
 
 <span class="sd">        Converts desired root linear and angular velocities to wheel angular velocities</span>
 <span class="sd">        using differential drive kinematics:</span>
@@ -1486,13 +1109,13 @@ the distance between wheels (wheel base), and optionally some speed limits. You 
 
 <span class="sd">        where ω is angular velocity (yaw rate), V is linear velocity, r is wheel radius,</span>
 <span class="sd">        and b is wheel base.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># First, verify that the correct inputs are there</span>
         <span class="c1"># We need a setpoint root state. If there is no root state, we return None.</span>
         <span class="k">if</span> <span class="n">setpoint_state</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">setpoint_state</span><span class="o">.</span><span class="n">root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
 
-        <span class="c1"># If the input joint state doesn&#39;t use the same robot_joint_space, we return None.</span>
+        <span class="c1"># If the input joint state doesn't use the same robot_joint_space, we return None.</span>
         <span class="k">if</span> <span class="n">estimated_state</span><span class="o">.</span><span class="n">joints</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">estimated_state</span><span class="o">.</span><span class="n">joints</span><span class="o">.</span><span class="n">robot_joint_space</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">robot_joint_space</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
 
@@ -1530,24 +1153,23 @@ the distance between wheels (wheel base), and optionally some speed limits. You 
 
 </pre></div>
 </div>
-<p>The controller uses differential drive kinematics to convert root velocities to wheel velocities.</p>
+<p>차동 구동 컨트롤러는 동작하지만, 입력 속도가 갑자기 변하면 바퀴 명령이 불규칙해질 수 있습니다. 로봇이 더 부드럽게 움직이도록 바퀴 속도 명령을 평활화하는 저역통과 필터 컨트롤러를 추가합니다. 이 필터 컨트롤러는 범용적이며 조인트 필터링에 언제든지 재사용할 수 있습니다. 필터 컨트롤러는 차동 구동 컨트롤러에 특화된 것이 아닙니다.</p>
 </section>
 </section>
 <section id="step-2-adding-smoothing-with-a-low-pass-filter">
 <h3>Step 2: Adding Smoothing with a Low-Pass Filter<a class="headerlink" href="mobile_robot_control_example.html#step-2-adding-smoothing-with-a-low-pass-filter" title="Link to this heading">#</a></h3>
-<p>The differential drive controller works, but the wheel commands might be jerky if the input velocities change suddenly. To make your robot move more smoothly, add a low-pass filter controller that smooths the wheel velocity commands. This filter controller is generic and can be reused any time for
-joint filtering. The filter controller is not specific to differential drive controllers.</p>
+<p>저역통과 필터 컨트롤러는 로봇의 조인트 공간과 필터 계수(alpha)를 알아야 합니다. alpha 매개변수는 적용되는 필터링의 양을 제어합니다. 값이 작을수록 더 많은 필터링이 적용됩니다(더 부드럽지만 반응이 느림):</p>
 <section id="initialization-configuring-the-filter">
 <h4>Initialization: Configuring the Filter<a class="headerlink" href="mobile_robot_control_example.html#initialization-configuring-the-filter" title="Link to this heading">#</a></h4>
-<p>The low-pass filter controller needs to know the robot’s joint space and the filter coefficient (alpha). The alpha parameter controls how much filtering
-is applied. Smaller values mean more filtering (smoother but slower response):</p>
+<p>초기 필터 상태를 추정된 상태의 정확한 기반 조인트 데이터 배열로 재설정할 수 있습니다. 이를 통해 로봇의 불규칙한 움직임을 방지합니다.
+필터가 로봇의 정확한 상태와 일치하도록 초기화되면, 실행 시작 직후 로봇이 필터를 부드럽게 따라갑니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">robot_joint_space</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the low-pass filter controller.</span>
+<span class="w">        </span><span class="sd">"""Initialize the low-pass filter controller.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            robot_joint_space: The full joint space of the robot</span>
 <span class="sd">            alpha: Low-pass filter coefficient (0 &lt; alpha &lt;= 1). Smaller values = more filtering.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">robot_joint_space</span> <span class="o">=</span> <span class="n">robot_joint_space</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span>
 
@@ -1559,17 +1181,16 @@ is applied. Smaller values mean more filtering (smoother but slower response):</
 </section>
 <section id="the-reset-method-initializing-the-filter-state">
 <h4>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code> Method: Initializing the Filter State<a class="headerlink" href="mobile_robot_control_example.html#the-reset-method-initializing-the-filter-state" title="Link to this heading">#</a></h4>
-<p>You can reset the initial filter state to be exactly the underlying joint-data array from the estimated state. This prevents jerky motions in the robot.
-If the filter is initialized to match the exact state of the robot, then the robot will smoothly transition into following the filter as soon as it starts running:</p>
+<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">forward()</span></code> 메서드는 목표점 상태의 전체 기반 데이터 배열에 저역통과 필터를 적용하여 모든 조인트 출력(위치, 속도, 힘)을 동시에 필터링합니다. 목표점 상태가 없으면 <code class="docutils literal notranslate"><span class="pre">None</span></code>을 반환합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">estimated_state</span><span class="p">:</span> <span class="n">mg</span><span class="o">.</span><span class="n">RobotState</span><span class="p">,</span> <span class="n">setpoint_state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">mg</span><span class="o">.</span><span class="n">RobotState</span><span class="p">],</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the controller.</span>
+<span class="w">        </span><span class="sd">"""Initialize the controller.</span>
 
 <span class="sd">        Resets the initial filter state to be exactly the underlying joint-data array from the estimated state.</span>
 <span class="sd">        This prevents jerky motions - if the filter is initialized to match the exact state of the robot,</span>
 <span class="sd">        then the robot will smoothly transition into following the filter as soon as it starts running.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># Validate joint spaces match</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_joint_spaces</span><span class="p">(</span><span class="n">estimated_state</span><span class="p">,</span> <span class="n">setpoint_state</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">False</span>
@@ -1577,7 +1198,7 @@ If the filter is initialized to match the exact state of the robot, then the rob
         <span class="k">if</span> <span class="n">estimated_state</span><span class="o">.</span><span class="n">joints</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
 
-        <span class="c1"># Initialize filtered data array to match the estimated state&#39;s joint data array</span>
+        <span class="c1"># Initialize filtered data array to match the estimated state's joint data array</span>
         <span class="c1"># This ensures smooth transition when the filter starts running</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filtered_data_array</span> <span class="o">=</span> <span class="n">wp</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">estimated_state</span><span class="o">.</span><span class="n">joints</span><span class="o">.</span><span class="n">data_array</span><span class="p">)</span>
 
@@ -1588,16 +1209,15 @@ If the filter is initialized to match the exact state of the robot, then the rob
 </section>
 <section id="the-forward-method-applying-the-filter">
 <h4>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">forward()</span></code> Method: Applying the Filter<a class="headerlink" href="mobile_robot_control_example.html#the-forward-method-applying-the-filter" title="Link to this heading">#</a></h4>
-<p>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">forward()</span></code> method applies the low-pass filter to the entire underlying data array of the setpoint state, filtering all joint outputs (positions, velocities,
-and efforts) simultaneously. If there is no setpoint state, it returns <code class="docutils literal notranslate"><span class="pre">None</span></code>:</p>
+<p>필터 컨트롤러는 전체 기반 데이터 배열에 저역통과 필터를 적용하여 모든 조인트 출력을 동시에 평활화합니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">estimated_state</span><span class="p">:</span> <span class="n">mg</span><span class="o">.</span><span class="n">RobotState</span><span class="p">,</span> <span class="n">setpoint_state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">mg</span><span class="o">.</span><span class="n">RobotState</span><span class="p">],</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">mg</span><span class="o">.</span><span class="n">RobotState</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute filtered joint state.</span>
+<span class="w">        </span><span class="sd">"""Compute filtered joint state.</span>
 
 <span class="sd">        Applies low-pass filter to the entire data array of the setpoint state.</span>
 <span class="sd">        Filters all joint outputs (position, velocity, effort) simultaneously.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># Validate joint spaces match</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_joint_spaces</span><span class="p">(</span><span class="n">estimated_state</span><span class="p">,</span> <span class="n">setpoint_state</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">None</span>
@@ -1631,24 +1251,23 @@ and efforts) simultaneously. If there is no setpoint state, it returns <code cla
 
 </pre></div>
 </div>
-<p>The filter controller applies a low-pass filter to the entire underlying data array, smoothing all joint outputs simultaneously.</p>
+<p>이제 <code class="xref py py-class docutils literal notranslate"><span class="pre">SequentialController</span></code>를 사용하여 두 컨트롤러를 결합합니다. 차동 구동 컨트롤러가 바퀴 속도를 계산하고, 필터가 로봇으로 전송되기 전에 이를 평활화합니다:</p>
 </section>
 </section>
 <section id="step-3-composing-the-controllers">
 <h3>Step 3: Composing the Controllers<a class="headerlink" href="mobile_robot_control_example.html#step-3-composing-the-controllers" title="Link to this heading">#</a></h3>
-<p>Now, combine your two controllers using <code class="xref py py-class docutils literal notranslate"><span class="pre">SequentialController</span></code>. The differential drive controller computes the wheel velocities,
-and then the filter smooths them before they’re sent to the robot:</p>
+<p>이제 모든 부분이 준비되었습니다: 차동 구동 컨트롤러, 필터, 그리고 이들이 함께 조합되었습니다. 마지막 단계는 실시간으로 실행되는 완전한 제어 루프에 모두 통합하는 것입니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">differential_drive_control</span><span class="p">(</span>
     <span class="n">robot</span><span class="p">:</span> <span class="n">Articulation</span><span class="p">,</span> <span class="n">robot_joint_space</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">add_noise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">use_filter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example: Differential drive controller tracking root velocity.</span>
+<span class="w">    </span><span class="sd">"""Example: Differential drive controller tracking root velocity.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        robot: The robot articulation</span>
 <span class="sd">        robot_joint_space: The full joint space of the robot</span>
 <span class="sd">        add_noise: If True, add noise to the root velocity setpoints</span>
 <span class="sd">        use_filter: If True, wrap the differential controller with a low-pass filter</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Create differential drive controller</span>
     <span class="c1"># For Jetbot, adjust these parameters as needed</span>
     <span class="n">differential_controller</span> <span class="o">=</span> <span class="n">DifferentialDriveController</span><span class="p">(</span>
@@ -1677,16 +1296,16 @@ and then the filter smooths them before they’re sent to the robot:</p>
 </section>
 <section id="step-4-the-complete-control-loop">
 <h3>Step 4: The Complete Control Loop<a class="headerlink" href="mobile_robot_control_example.html#step-4-the-complete-control-loop" title="Link to this heading">#</a></h3>
-<p>Now we have all the pieces - the differential drive controller, the filter, and they’re composed together. The final step is to put it all together
-in a control loop that runs in real-time.</p>
-<p>First, this is how we will apply the desired state to the robot:</p>
+<p>먼저, 원하는 상태를 로봇에 적용하는 방법입니다:</p>
+<p>마지막으로, 모든 것을 통합하는 완전한 제어 루프입니다. 목표점 선형 및 각속도(<code class="docutils literal notranslate"><span class="pre">v_linear</span></code>와 <code class="docutils literal notranslate"><span class="pre">v_angular</span></code>)를 상수로 설정하여 로봇이 원형 경로를 따르게 합니다.
+<code class="docutils literal notranslate"><span class="pre">--noise</span></code> 인수가 전달되면 목표점 속도에 노이즈를 추가합니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">apply_desired_state_to_robot</span><span class="p">(</span><span class="n">robot</span><span class="p">:</span> <span class="n">Articulation</span><span class="p">,</span> <span class="n">desired_state</span><span class="p">:</span> <span class="n">mg</span><span class="o">.</span><span class="n">RobotState</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply a desired RobotState to the robot.</span>
+<span class="w">    </span><span class="sd">"""Apply a desired RobotState to the robot.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        robot: The robot articulation</span>
 <span class="sd">        desired_state: The desired robot state to apply</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">desired_state</span><span class="o">.</span><span class="n">joints</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span>
 
@@ -1707,9 +1326,7 @@ in a control loop that runs in real-time.</p>
 
 </pre></div>
 </div>
-<p>And finally, here’s the complete control loop that brings everything together. We set the setpoint linear and angular
-velocities (<code class="docutils literal notranslate"><span class="pre">v_linear</span></code> and <code class="docutils literal notranslate"><span class="pre">v_angular</span></code>) to be constant numbers, which should make the robot follow a circular path.
-If the <code class="docutils literal notranslate"><span class="pre">--noise</span></code> argument is passed, we add noise to the setpoint velocities.</p>
+<p>루프의 동작:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">run_differential_control_loop</span><span class="p">(</span>
     <span class="n">controller</span><span class="p">:</span> <span class="n">mg</span><span class="o">.</span><span class="n">BaseController</span><span class="p">,</span>
     <span class="n">robot</span><span class="p">:</span> <span class="n">Articulation</span><span class="p">,</span>
@@ -1717,7 +1334,7 @@ If the <code class="docutils literal notranslate"><span class="pre">--noise</spa
     <span class="n">add_noise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">duration_seconds</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">15.0</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run a real-time control loop with a differential drive controller.</span>
+<span class="w">    </span><span class="sd">"""Run a real-time control loop with a differential drive controller.</span>
 
 <span class="sd">    This function provides root velocity setpoints (with optional noise) to the controller.</span>
 
@@ -1727,7 +1344,7 @@ If the <code class="docutils literal notranslate"><span class="pre">--noise</spa
 <span class="sd">        robot_joint_space: The full joint space of the robot</span>
 <span class="sd">        add_noise: If True, add noise to the root velocity setpoints</span>
 <span class="sd">        duration_seconds: How long to run the simulation</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Start timeline</span>
     <span class="n">timeline</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">get_timeline_interface</span><span class="p">()</span>
     <span class="n">timeline</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
@@ -1793,44 +1410,41 @@ If the <code class="docutils literal notranslate"><span class="pre">--noise</spa
 
 </pre></div>
 </div>
-<p>The loop:</p>
+<p>로봇에서 현재 추정 상태 가져오기</p>
 <ol class="arabic simple">
-<li><p>Gets the current estimated state from the robot</p></li>
-<li><p>Creates a root velocity setpoint (linear and angular velocities)</p></li>
-<li><p>Calls the controller’s <code class="xref py py-meth docutils literal notranslate"><span class="pre">forward()</span></code> method</p></li>
-<li><p>Applies the desired state to the robot</p></li>
-<li><p>Repeats every simulation step</p></li>
+<li><p>루트 속도 목표점(선형 및 각속도) 생성</p></li>
+<li><p>컨트롤러의 <code class="xref py py-meth docutils literal notranslate"><span class="pre">forward()</span></code> 메서드 호출</p></li>
+<li><p>원하는 상태를 로봇에 적용</p></li>
+<li><p>모든 시뮬레이션 스텝마다 반복</p></li>
+<li><p>이제 <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code>로 로봇 상태를 표현하고 <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> 인터페이스로 원하는 명령을 계산하는 완전한 모바일 로봇 컨트롤러를 처음부터 구축했습니다.
+컨트롤러는 고수준 속도 명령을 부드러운 바퀴 동작으로 변환하며, Motion Generation API의 개념들이 실제로 어떻게 함께 동작하는지 보여줍니다.</p></li>
 </ol>
-<p>You’ve now built a complete mobile robot controller from the ground up, using <code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> to represent robot states and the <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseController</span></code> interface to compute desired commands.
-The controller converts high-level velocity commands into smooth wheel motions, demonstrating how the Motion Generation
-API’s concepts work together in practice.</p>
+<p>독립 실행형 예제를 실행하면 다양한 조건에서 컨트롤러의 성능을 관찰할 수 있습니다.
+<code class="docutils literal notranslate"><span class="pre">--noise</span></code> 인수를 추가하면 노이즈 있는 입력이 컨트롤러의 부드러운 명령 생성 능력에 영향을 미쳐 움직임이 불규칙해집니다. 그러나 <code class="docutils literal notranslate"><span class="pre">--noise</span></code>와 <code class="docutils literal notranslate"><span class="pre">--filter</span></code> 인수를 모두 추가하면 움직임이 다시 부드러워지며, 저역통과 필터 컨트롤러가 고주파 노이즈를 효과적으로 제거함을 보여줍니다.</p>
 </section>
 </section>
 <section id="observing-the-controller-performance">
 <h2>Observing the Controller Performance<a class="headerlink" href="mobile_robot_control_example.html#observing-the-controller-performance" title="Link to this heading">#</a></h2>
-<p>When you run the standalone example, you can observe how the controller performs under different conditions.
-The motion becomes jerky when you add the <code class="docutils literal notranslate"><span class="pre">--noise</span></code> argument, as the noisy input affects the controller’s ability to produce
-smooth commands. However, when you add both <code class="docutils literal notranslate"><span class="pre">--noise</span></code> and <code class="docutils literal notranslate"><span class="pre">--filter</span></code> arguments, the motion becomes smooth again,
-demonstrating how the low-pass filter controller rejects the high-frequency noise.</p>
+<p><span class="caption-text">노이즈 없음, 필터링 없음으로 컨트롤러 실행.</span><a class="headerlink" href="mobile_robot_control_example.html#id1" title="Link to this image">#</a></p>
 <figure class="align-center" id="id1">
-<a class="reference internal image-reference" href="../_images/isim_6.0_full_tut_viewport_mobile_control.webp"><img alt="../_images/isim_6.0_full_tut_viewport_mobile_control.webp" src="../_images/isim_6.0_full_tut_viewport_mobile_control.webp" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/isim_6.0_full_tut_viewport_mobile_control.webp"><img alt="../_images/isim_6.0_full_tut_viewport_mobile_control.webp" src="../_images/isim_6.0_full_tut_viewport_mobile_control.webp" style="width: 100%;"/>
 </a>
 <figcaption>
-<p><span class="caption-text">Running the controller with no noise and no filtering.</span><a class="headerlink" href="mobile_robot_control_example.html#id1" title="Link to this image">#</a></p>
+<p><span class="caption-text">노이즈 있음, 필터링 없음으로 컨트롤러 실행.</span><a class="headerlink" href="mobile_robot_control_example.html#id2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-center" id="id2">
-<a class="reference internal image-reference" href="../_images/isim_6.0_full_tut_viewport_mobile_control_noise.webp"><img alt="../_images/isim_6.0_full_tut_viewport_mobile_control_noise.webp" src="../_images/isim_6.0_full_tut_viewport_mobile_control_noise.webp" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/isim_6.0_full_tut_viewport_mobile_control_noise.webp"><img alt="../_images/isim_6.0_full_tut_viewport_mobile_control_noise.webp" src="../_images/isim_6.0_full_tut_viewport_mobile_control_noise.webp" style="width: 100%;"/>
 </a>
 <figcaption>
-<p><span class="caption-text">Running the controller with noise and no filtering.</span><a class="headerlink" href="mobile_robot_control_example.html#id2" title="Link to this image">#</a></p>
+<p><span class="caption-text">노이즈 있음, 필터링 있음으로 컨트롤러 실행.</span><a class="headerlink" href="mobile_robot_control_example.html#id3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-center" id="id3">
-<a class="reference internal image-reference" href="../_images/isim_6.0_full_tut_viewport_mobile_control_noise_filter.webp"><img alt="../_images/isim_6.0_full_tut_viewport_mobile_control_noise_filter.webp" src="../_images/isim_6.0_full_tut_viewport_mobile_control_noise_filter.webp" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/isim_6.0_full_tut_viewport_mobile_control_noise_filter.webp"><img alt="../_images/isim_6.0_full_tut_viewport_mobile_control_noise_filter.webp" src="../_images/isim_6.0_full_tut_viewport_mobile_control_noise_filter.webp" style="width: 100%;"/>
 </a>
 <figcaption>
-<p><span class="caption-text">Running the controller with noise and filtering.</span><a class="headerlink" href="mobile_robot_control_example.html#id3" title="Link to this image">#</a></p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code> 및 <code class="xref py py-class docutils literal notranslate"><span class="pre">Trajectory</span></code> 인터페이스와 <code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryFollower</span></code> 컨트롤러의 자세한 예제 참조:</p>
 </figcaption>
 </figure>
 </section>
@@ -1842,56 +1456,34 @@ demonstrating how the low-pass filter controller rejects the high-frequency nois
 </ul>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="scene_interaction.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Scene Interaction</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="trajectory_planning.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Trajectory Planning and Execution</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="scene_interaction.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Scene Interaction</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="trajectory_planning.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Trajectory Planning and Execution</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="mobile_robot_control_example.html#understanding-control-spaces">Understanding Control Spaces</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="mobile_robot_control_example.html#what-are-control-spaces">What Are Control Spaces?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="mobile_robot_control_example.html#the-ideal-workflow">The Ideal Workflow</a></li>
@@ -1929,46 +1521,29 @@ demonstrating how the low-pass filter controller rejects the high-frequency nois
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="mobile_robot_control_example.html#observing-the-controller-performance">Observing the Controller Performance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="mobile_robot_control_example.html#next-steps">Next Steps</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1999,36 +1574,21 @@ demonstrating how the low-pass filter controller rejects the high-frequency nois
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>
