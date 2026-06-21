@@ -1,551 +1,256 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Walkthrough: UR10 Bin Stacking &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Walkthrough: UR10 Bin Stacking — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'cortex_tutorials/tutorial_cortex_5_ur10_bin_stacking';</script>
-    <script>
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'cortex_tutorials/tutorial_cortex_5_ur10_bin_stacking';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Building Cortex Based Extensions" href="tutorial_cortex_7_cortex_extension.html" />
-    <link rel="prev" title="Walkthrough: Franka Block Stacking" href="tutorial_cortex_4_franka_block_stacking.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="tutorial_cortex_7_cortex_extension.html" rel="next" title="Building Cortex Based Extensions"/>
+<link href="tutorial_cortex_4_franka_block_stacking.html" rel="prev" title="Walkthrough: Franka Block Stacking"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="tutorial_cortex_5_ur10_bin_stacking.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="tutorial_cortex_5_ur10_bin_stacking.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +270,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -593,20 +297,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -681,17 +373,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -869,7 +551,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -909,13 +590,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -962,10 +637,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1134,18 +805,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1171,102 +832,65 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="../digital_twin/index.html" class="nav-link">Digital Twin</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="tutorial_cortex_1_overview.html" class="nav-link">Isaac Cortex: Overview</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Walkthrough: UR10 Bin Stacking</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="../digital_twin/index.html">Digital Twin</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="tutorial_cortex_1_overview.html">Isaac Cortex: Overview</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Walkthrough: UR10 Bin Stacking</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="walkthrough-ur10-bin-stacking">
+<article class="bd-article">
+<section id="walkthrough-ur10-bin-stacking">
 <span id="isaac-sim-app-tutorial-cortex-5-ur10-bin-stacking"></span><h1>Walkthrough: UR10 Bin Stacking<a class="headerlink" href="tutorial_cortex_5_ur10_bin_stacking.html#walkthrough-ur10-bin-stacking" title="Link to this heading">#</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>[DEPRECATED]: The Cortex framework has been deprecated as of Isaac Sim 6.0.0 and will be removed in a future release.
-For behavior programming, migrate to open-source libraries such as
-<a class="reference external" href="https://py-trees.readthedocs.io/en/devel/">py_trees</a> for behavior trees or
-<a class="reference external" href="https://github.com/pytransitions/transitions">transitions</a> for finite state machines.
-Isaac Sim 7.0 will include examples using these libraries.</p>
+<p>[DEPRECATED]: Cortex 프레임워크는 Isaac Sim 6.0.0부터 지원이 중단되었으며 향후 릴리스에서 제거될 예정입니다.
+동작 프로그래밍을 위해 동작 트리에는 <a class="reference external" href="https://py-trees.readthedocs.io/en/devel/">py_trees</a>, 유한 상태 기계에는 <a class="reference external" href="https://github.com/pytransitions/transitions">transitions</a>와 같은 오픈 소스 라이브러리로 마이그레이션하세요.
+Isaac Sim 7.0에는 이러한 라이브러리를 사용하는 예제가 포함될 예정입니다.</p>
 </div>
-<p>This tutorial walks through a complete bin stacking application using the UR10 robot. In this
-example, we use a pre-designed USD environment containing a conveyor belt, a pallet where the bins
-should be stacked, and a UR10 robot with a suction gripper. Our application doesn’t add to the scene
-(aside from invisible collision obstacles), and instead controls the existing USD elements in the
-pre-designed USD environment.</p>
-<p>In all command line examples, we use the abbreviation <code class="docutils literal notranslate"><span class="pre">isaac_python</span></code> for the Isaac Sim python
-script (<code class="docutils literal notranslate"><span class="pre">&lt;isaac_sim_root&gt;/python.sh</span></code> on Linux and <code class="docutils literal notranslate"><span class="pre">&lt;isaac_sim_root&gt;\python.bat</span></code> on Windows).
-The command lines are written relative to the working directory
-<code class="docutils literal notranslate"><span class="pre">standalone_examples/deprecated/api/isaacsim.cortex.framework</span></code>.</p>
-<p>Run the following demo</p>
+<p>이 튜토리얼은 UR10 로봇을 사용한 완전한 빈 쌓기 응용 프로그램을 단계별로 설명합니다. 이 예제에서는 컨베이어 벨트, 빈을 쌓아야 할 팔레트, 흡착 그리퍼가 있는 UR10 로봇이 포함된 미리 설계된 USD 환경을 사용합니다. 응용 프로그램은 장면에 추가하지 않고(보이지 않는 충돌 장애물 제외) 미리 설계된 USD 환경의 기존 USD 요소를 제어합니다.</p>
+<p>모든 명령줄 예제에서 Isaac Sim 파이썬 스크립트(<code class="docutils literal notranslate"><span class="pre">&lt;isaac_sim_root&gt;/python.sh</span></code> Linux, <code class="docutils literal notranslate"><span class="pre">&lt;isaac_sim_root&gt;\python.bat</span></code> Windows)의 약어로 <code class="docutils literal notranslate"><span class="pre">isaac_python</span></code>을 사용합니다. 명령줄은 작업 디렉토리 <code class="docutils literal notranslate"><span class="pre">standalone_examples/deprecated/api/isaacsim.cortex.framework</span></code>에 상대적으로 작성됩니다.</p>
+<p>다음 데모를 실행하세요</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>isaac_python<span class="w"> </span>demo_ur10_conveyor_main.py
 </pre></div>
 </div>
-<p>Press play once Isaac Sim has started up. You’ll see the bin stacking demo running.</p>
-<p>This tutorial will step through the demo.</p>
+<p>Isaac Sim이 시작되면 재생을 누르세요. 빈 쌓기 데모가 실행되는 것을 볼 수 있습니다.</p>
+<p>이 튜토리얼은 데모를 단계별로 설명합니다.</p>
 <div style="width: 100%;display: inline-block;position: relative;">
-   <div id="dummy" style="margin-top: 56%;"></div>
-   <div align="center">
-   <div id="kaltura_player_1" style="position:absolute;top:0;left:0;left: 0;right: 0;bottom:0;border:solid thin black;"></div>
-   <script type="text/javascript" src="https://cdnapisec.kaltura.com/p/2935771/embedPlaykitJs/uiconf_id/46302491"></script>
-   <script type="text/javascript">
+<div id="dummy" style="margin-top: 56%;"></div>
+<div align="center">
+<div id="kaltura_player_1" style="position:absolute;top:0;left:0;left: 0;right: 0;bottom:0;border:solid thin black;"></div>
+<script src="https://cdnapisec.kaltura.com/p/2935771/embedPlaykitJs/uiconf_id/46302491" type="text/javascript"></script>
+<script type="text/javascript">
       try {
       var kalturaPlayer = KalturaPlayer.setup({
       targetId: "kaltura_player_1",
@@ -1279,76 +903,56 @@ The command lines are written relative to the working directory
       } catch (e)
       { console.error(e.message) }
    </script>
-   </div>
-</div><p>The setting is a UR10 robot with a suction gripper moving bins from a conveyor to a pallet. Bins
-need to be stacked upside down, so any bin that that comes right-side up is flipped at a flip
-station before stacking.</p>
-<p>This demo uses a shallow decider network with a top-level dispatch node choosing among multiple
-sequential state machines.</p>
-<p>The individual behaviors demonstrate a common RMPflow programming technique where obstacle regions
-are automatically toggled on and off strategically to shape the motion behavior. These obstacle
-regions are modeled in the scene USD but are invisible by default. Try toggling their visibility. Go
-to <code class="docutils literal notranslate"><span class="pre">World/Ur10Table/Obstacles</span></code> and toggle the visibility of the <code class="docutils literal notranslate"><span class="pre">FlipStationSphere</span></code>,
-<code class="docutils literal notranslate"><span class="pre">NavigationDome</span></code>, <code class="docutils literal notranslate"><span class="pre">NavigationBarrier</span></code>, and <code class="docutils literal notranslate"><span class="pre">NavigationFlipStation</span></code> to see them.</p>
-<p>The bin placement behavior also leverages the reactivity of RMPflow in conjunction with its approach
-direction parameters to create an automatic adjustment behavior to correct on the fly for
-misalignment between bins.</p>
+</div>
+</div><p>설정은 흡착 그리퍼가 있는 UR10 로봇이 컨베이어에서 팔레트로 빈을 이동하는 것입니다. 빈은 뒤집어서 쌓아야 하므로 올바른 방향으로 오는 빈은 쌓기 전에 뒤집기 스테이션에서 뒤집힙니다.</p>
+<p>이 데모는 최상위 디스패치 노드가 여러 순차적 상태 기계 중에서 선택하는 얕은 결정자 네트워크를 사용합니다.</p>
+<p>개별 동작은 모션 동작을 형성하기 위해 장애물 영역이 전략적으로 자동으로 켜지고 꺼지는 일반적인 RMPflow 프로그래밍 기법을 보여줍니다. 이 장애물 영역은 장면 USD에서 모델링되지만 기본적으로 보이지 않습니다. 가시성 토글을 시도해보세요. <code class="docutils literal notranslate"><span class="pre">World/Ur10Table/Obstacles</span></code>로 이동하여 <code class="docutils literal notranslate"><span class="pre">FlipStationSphere</span></code>, <code class="docutils literal notranslate"><span class="pre">NavigationDome</span></code>, <code class="docutils literal notranslate"><span class="pre">NavigationBarrier</span></code>, <code class="docutils literal notranslate"><span class="pre">NavigationFlipStation</span></code>의 가시성을 토글하여 확인하세요.</p>
+<p>빈 배치 동작은 또한 접근 방향 매개변수와 함께 RMPflow의 반응성을 활용하여 빈 사이의 잘못된 정렬을 즉석에서 수정하는 자동 조정 동작을 만듭니다.</p>
 <section id="top-level-dispatch">
 <h2>Top-level dispatch<a class="headerlink" href="tutorial_cortex_5_ur10_bin_stacking.html#top-level-dispatch" title="Link to this heading">#</a></h2>
-<p>The entry point to the decider network is the <code class="docutils literal notranslate"><span class="pre">Dispatch</span></code> node as we can see in the construction.
-<code class="docutils literal notranslate"><span class="pre">DfNetwork</span></code> is the decider network structure; it’s passed the root (the <code class="docutils literal notranslate"><span class="pre">Dispatch</span></code> node) and the
-context object that will be available as a member within every decider/state node:</p>
+<p>결정자 네트워크의 진입점은 구성에서 볼 수 있듯이 <code class="docutils literal notranslate"><span class="pre">Dispatch</span></code> 노드입니다. <code class="docutils literal notranslate"><span class="pre">DfNetwork</span></code>는 결정자 네트워크 구조입니다. 루트(<code class="docutils literal notranslate"><span class="pre">Dispatch</span></code> 노드)와 모든 결정자/상태 노드 내에서 멤버로 사용 가능한 컨텍스트 객체가 전달됩니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">make_decider_network</span><span class="p">(</span><span class="n">robot</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">DfNetwork</span><span class="p">(</span><span class="n">Dispatch</span><span class="p">(),</span> <span class="n">context</span><span class="o">=</span><span class="n">BinStackingContext</span><span class="p">(</span><span class="n">robot</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>The context object gives each node access to the robot’s command API as well as any logical state
-extracted by its monitors. The <code class="docutils literal notranslate"><span class="pre">Dispatch</span></code> node’s <code class="docutils literal notranslate"><span class="pre">decide()</span></code> logic is pretty simple given the
-logical state.</p>
+<p>컨텍스트 객체는 각 노드에 로봇의 명령 API와 모니터에 의해 추출된 논리적 상태에 대한 접근을 제공합니다. <code class="docutils literal notranslate"><span class="pre">Dispatch</span></code> 노드의 <code class="docutils literal notranslate"><span class="pre">decide()</span></code> 로직은 논리적 상태를 고려하면 꽤 간단합니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Dispatch</span><span class="p">(</span><span class="n">DfDecider</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="s2">&quot;flip_bin&quot;</span><span class="p">,</span> <span class="n">FlipBin</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="s2">&quot;pick_bin&quot;</span><span class="p">,</span> <span class="n">PickBin</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="s2">&quot;place_bin&quot;</span><span class="p">,</span> <span class="n">PlaceBin</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="s2">&quot;go_home&quot;</span><span class="p">,</span> <span class="n">make_go_home</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="s2">&quot;do_nothing&quot;</span><span class="p">,</span> <span class="n">DfStateMachineDecider</span><span class="p">(</span><span class="n">DoNothing</span><span class="p">()))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="s2">"flip_bin"</span><span class="p">,</span> <span class="n">FlipBin</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="s2">"pick_bin"</span><span class="p">,</span> <span class="n">PickBin</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="s2">"place_bin"</span><span class="p">,</span> <span class="n">PlaceBin</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="s2">"go_home"</span><span class="p">,</span> <span class="n">make_go_home</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="s2">"do_nothing"</span><span class="p">,</span> <span class="n">DfStateMachineDecider</span><span class="p">(</span><span class="n">DoNothing</span><span class="p">()))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">decide</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">stack_complete</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">DfDecision</span><span class="p">(</span><span class="s2">&quot;go_home&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">DfDecision</span><span class="p">(</span><span class="s2">"go_home"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">has_active_bin</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">active_bin</span><span class="o">.</span><span class="n">is_attached</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">DfDecision</span><span class="p">(</span><span class="s2">&quot;pick_bin&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">DfDecision</span><span class="p">(</span><span class="s2">"pick_bin"</span><span class="p">)</span>
             <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">active_bin</span><span class="o">.</span><span class="n">needs_flip</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">DfDecision</span><span class="p">(</span><span class="s2">&quot;flip_bin&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">DfDecision</span><span class="p">(</span><span class="s2">"flip_bin"</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">DfDecision</span><span class="p">(</span><span class="s2">&quot;place_bin&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">DfDecision</span><span class="p">(</span><span class="s2">"place_bin"</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">DfDecision</span><span class="p">(</span><span class="s2">&quot;go_home&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">DfDecision</span><span class="p">(</span><span class="s2">"go_home"</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The logical state includes:</p>
+<p>논리적 상태에는 다음이 포함됩니다:</p>
 <ul class="simple">
-<li><p><strong>stack_complete:</strong> Notes whether all bins are on the pallet.</p></li>
-<li><p><strong>active_bin:</strong> The bin that’s currently in play. The bin remains active until it’s been placed on
-the stack. Then a new bin is selected from the bins at the end of the conveyor.</p></li>
-<li><p><strong>active_bin.is_attached:</strong> Indicates whether the active bin is attached to the end-effector via
-the suction gripper.</p></li>
-<li><p><strong>active_bin.needs_flip:</strong> Indicates whether the bin attached to the end-effector is right-side-up
-(needs flip) or up-side-down (doesn’t need flip).</p></li>
+<li><p><strong>stack_complete:</strong> 모든 빈이 팔레트에 있는지 여부를 기록합니다.</p></li>
+<li><p><strong>active_bin:</strong> 현재 사용 중인 빈. 빈은 스택에 배치될 때까지 활성 상태를 유지합니다. 그런 다음 컨베이어 끝에 있는 빈 중에서 새 빈이 선택됩니다.</p></li>
+<li><p><strong>active_bin.is_attached:</strong> 활성 빈이 흡착 그리퍼를 통해 엔드 이펙터에 부착되어 있는지 나타냅니다.</p></li>
+<li><p><strong>active_bin.needs_flip:</strong> 엔드 이펙터에 부착된 빈이 올바른 방향(뒤집기 필요) 또는 뒤집힌 방향(뒤집기 불필요)인지 나타냅니다.</p></li>
 </ul>
-<p>The decision logic becomes simply: If the stack is complete or there’s no active bin, then go home.
-Otherwise, if there’s an active bin, pick the bin if it’s not already in the gripper, and flip it if
-it needs to be flipped. Then place the bin on the stack. Decider networks make it easy to write this
-decision logic in a readable form.</p>
+<p>결정 로직은 단순해집니다: 스택이 완료되었거나 활성 빈이 없으면 홈으로 이동합니다. 그렇지 않고 활성 빈이 있으면, 이미 그리퍼에 없으면 빈을 집고 뒤집어야 하면 뒤집습니다. 그런 다음 빈을 스택에 놓습니다. 결정자 네트워크는 이 결정 로직을 읽기 쉬운 형태로 작성하기 쉽게 만듭니다.</p>
 </section>
 <section id="sequential-state-machines">
 <h2>Sequential state machines<a class="headerlink" href="tutorial_cortex_5_ur10_bin_stacking.html#sequential-state-machines" title="Link to this heading">#</a></h2>
-<p>The sequential state machines that implement the pick, flip and place behaviors are each similar in
-structure.</p>
+<p>집기, 뒤집기, 놓기 동작을 구현하는 순차적 상태 기계는 각각 구조가 유사합니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">PickBin</span><span class="p">(</span><span class="n">DfStateMachineDecider</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
@@ -1398,36 +1002,14 @@ structure.</p>
         <span class="p">)</span>
 </pre></div>
 </div>
-<p>One feature to note is the use of locking and unlocking the decider network. Decider networks are
-reactive by nature, so atomic state machine behaviors that shouldn’t be preempted need to be
-explicitly locked. The sequential state machines make use of <code class="docutils literal notranslate"><span class="pre">DfSetLockState</span></code> to lock and unlock
-the decider network. Additionally, <code class="docutils literal notranslate"><span class="pre">PlaceBin</span></code> uses <code class="docutils literal notranslate"><span class="pre">DfWriteContextState</span></code> to call a context
-function which marks the active bin as complete once it’s performed the placement procedure.</p>
+<p>주목할 만한 기능은 결정자 네트워크의 잠금 및 잠금 해제 사용입니다. 결정자 네트워크는 본질적으로 반응형이므로 선점되어서는 안 되는 원자적 상태 기계 동작은 명시적으로 잠겨야 합니다. 순차적 상태 기계는 결정자 네트워크를 잠그고 해제하기 위해 <code class="docutils literal notranslate"><span class="pre">DfSetLockState</span></code>를 사용합니다. 또한 <code class="docutils literal notranslate"><span class="pre">PlaceBin</span></code>은 배치 절차를 수행한 후 활성 빈을 완료로 표시하는 컨텍스트 함수를 호출하기 위해 <code class="docutils literal notranslate"><span class="pre">DfWriteContextState</span></code>를 사용합니다.</p>
 </section>
 <section id="navigation-obstacle-monitors">
 <h2>Navigation obstacle monitors<a class="headerlink" href="tutorial_cortex_5_ur10_bin_stacking.html#navigation-obstacle-monitors" title="Link to this heading">#</a></h2>
-<p>The underlying motion generator for the <code class="docutils literal notranslate"><span class="pre">MotionCommander</span></code> is <code class="docutils literal notranslate"><span class="pre">RMPflow</span></code> which will automatically
-avoid registered obstacles. However, there are times where those obstacles need to be turned off to
-enable interaction. E.g. en route we want to avoid a manipulable object as obstacle, but once we’re
-there we should grab it. The <code class="docutils literal notranslate"><span class="pre">ObstacleMonitor</span></code> and <code class="docutils literal notranslate"><span class="pre">ObstacleMonitorContext</span></code> classes of
-<code class="docutils literal notranslate"><span class="pre">isaacsim.cortex.framework/isaacsim/cortex/framework/obstacle_monitor_context.py</span></code> facilitate developing obstacle
-monitors which automatically toggle obstacles on and off based on programmed conditions.</p>
-<p>Take a look at the <code class="docutils literal notranslate"><span class="pre">ObstacleMonitor</span></code> implementation in the file listed above. On construction it
-takes a set of obstacles which it will monitor as well as the context object, and the API requires
-deriving classes to implement <code class="docutils literal notranslate"><span class="pre">is_obstacle_required()</span></code> to define when the obstacles should be
-enabled and disabled based on information accessible from the context object. The method has access
-to the context as <code class="docutils literal notranslate"><span class="pre">self.context</span></code> similar to the decider / state objects. The API also supplies
-<code class="docutils literal notranslate"><span class="pre">activate_autotoggle()</span></code> and <code class="docutils literal notranslate"><span class="pre">deactivate_autotoggle()</span></code> to activate and deactivate the monitor.
-When active, it’ll automatically enable and disable the obstacles based on the truth value of
-<code class="docutils literal notranslate"><span class="pre">is_obstacle_required()</span></code>. When deactivated, the obstacles will be disabled and remain disabled
-until the monitor is reactivated.</p>
-<p><code class="docutils literal notranslate"><span class="pre">ObstacleMonitorContext</span></code> is a convenient base class which adds a <code class="docutils literal notranslate"><span class="pre">monitor_obstacles</span></code> logical
-state monitor automatically, so deriving classes only need to add the obstacle monitor objects using
-<code class="docutils literal notranslate"><span class="pre">add_obstacle_monitors()</span></code>.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">BinStackingContext</span></code> object derives from <code class="docutils literal notranslate"><span class="pre">ObstacleMonitorContext</span></code> and adds two obstacle
-monitors which it uses to shape both the navigation behavior moving between the pallet and the
-conveyor and the navigation around the bin flip station while flipping the bin. They’re constructed
-and added in the <code class="docutils literal notranslate"><span class="pre">BinStackingContext</span></code> constructor:</p>
+<p><code class="docutils literal notranslate"><span class="pre">MotionCommander</span></code>의 기본 모션 생성기는 등록된 장애물을 자동으로 피하는 <code class="docutils literal notranslate"><span class="pre">RMPflow</span></code>입니다. 그러나 상호 작용을 가능하게 하기 위해 이러한 장애물을 꺼야 할 때가 있습니다. 예를 들어 이동 중에는 조작 가능한 물체를 장애물로 피하고 싶지만 도착하면 잡아야 합니다. <code class="docutils literal notranslate"><span class="pre">isaacsim.cortex.framework/isaacsim/cortex/framework/obstacle_monitor_context.py</span></code>의 <code class="docutils literal notranslate"><span class="pre">ObstacleMonitor</span></code>와 <code class="docutils literal notranslate"><span class="pre">ObstacleMonitorContext</span></code> 클래스는 프로그래밍된 조건에 따라 장애물을 자동으로 켜고 끄는 장애물 모니터 개발을 용이하게 합니다.</p>
+<p>위에 나열된 파일에서 <code class="docutils literal notranslate"><span class="pre">ObstacleMonitor</span></code> 구현을 살펴보세요. 생성 시 모니터링할 장애물 세트와 컨텍스트 객체를 받으며, API는 파생 클래스가 컨텍스트 객체에서 접근 가능한 정보를 기반으로 장애물을 언제 활성화하고 비활성화해야 하는지 정의하는 <code class="docutils literal notranslate"><span class="pre">is_obstacle_required()</span></code>를 구현하도록 요구합니다. 메서드는 결정자/상태 객체와 유사하게 <code class="docutils literal notranslate"><span class="pre">self.context</span></code>로 컨텍스트에 접근합니다. API는 또한 모니터를 활성화하고 비활성화하기 위해 <code class="docutils literal notranslate"><span class="pre">activate_autotoggle()</span></code>과 <code class="docutils literal notranslate"><span class="pre">deactivate_autotoggle()</span></code>을 제공합니다. 활성 상태일 때 <code class="docutils literal notranslate"><span class="pre">is_obstacle_required()</span></code>의 참/거짓 값에 따라 자동으로 장애물을 활성화하고 비활성화합니다. 비활성화 시 장애물이 비활성화되고 모니터가 재활성화될 때까지 비활성화 상태를 유지합니다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ObstacleMonitorContext</span></code>는 자동으로 <code class="docutils literal notranslate"><span class="pre">monitor_obstacles</span></code> 논리적 상태 모니터를 추가하는 편리한 기본 클래스로, 파생 클래스는 <code class="docutils literal notranslate"><span class="pre">add_obstacle_monitors()</span></code>를 사용하여 장애물 모니터 객체만 추가하면 됩니다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">BinStackingContext</span></code> 객체는 <code class="docutils literal notranslate"><span class="pre">ObstacleMonitorContext</span></code>에서 파생되어 팔레트와 컨베이어 사이의 네비게이션 동작과 빈을 뒤집는 동안 빈 뒤집기 스테이션 주변 네비게이션을 형성하는 데 사용하는 두 개의 장애물 모니터를 추가합니다. <code class="docutils literal notranslate"><span class="pre">BinStackingContext</span></code> 생성자에서 구성하고 추가합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">BinStackingContext</span><span class="p">(</span><span class="n">ObstacleMonitorContext</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">robot</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -1439,10 +1021,10 @@ and added in the <code class="docutils literal notranslate"><span class="pre">Bi
         <span class="bp">self</span><span class="o">.</span><span class="n">add_obstacle_monitors</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">flip_station_obs_monitor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">navigation_obs_monitor</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>Both monitors have simple logic:</p>
+<p>두 모니터 모두 간단한 로직을 가집니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">FlipStationObstacleMonitor</span><span class="p">(</span><span class="n">ObstacleMonitor</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="p">[</span><span class="n">context</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="s2">&quot;flip_station_sphere&quot;</span><span class="p">)])</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="p">[</span><span class="n">context</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="s2">"flip_station_sphere"</span><span class="p">)])</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">is_obstacle_required</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">eff_T</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">robot</span><span class="o">.</span><span class="n">arm</span><span class="o">.</span><span class="n">get_fk_T</span><span class="p">()</span>
@@ -1460,9 +1042,9 @@ and added in the <code class="docutils literal notranslate"><span class="pre">Bi
 <span class="k">class</span><span class="w"> </span><span class="nc">NavigationObstacleMonitor</span><span class="p">(</span><span class="n">ObstacleMonitor</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
         <span class="n">obstacles</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">context</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="s2">&quot;navigation_dome_obs&quot;</span><span class="p">),</span>
-            <span class="n">context</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="s2">&quot;navigation_barrier_obs&quot;</span><span class="p">),</span>
-            <span class="n">context</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="s2">&quot;navigation_flip_station_obs&quot;</span><span class="p">),</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="s2">"navigation_dome_obs"</span><span class="p">),</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="s2">"navigation_barrier_obs"</span><span class="p">),</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="s2">"navigation_flip_station_obs"</span><span class="p">),</span>
         <span class="p">]</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">obstacles</span><span class="p">)</span>
 
@@ -1482,13 +1064,7 @@ and added in the <code class="docutils literal notranslate"><span class="pre">Bi
         <span class="k">return</span> <span class="n">is_required</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">FlipStationObstacleMonitor</span></code> monitors the <code class="docutils literal notranslate"><span class="pre">flip_station_sphere</span></code> which is a spherical
-obstacle around the flip station. When active, it’ll enable the obstacle until the end-effector is
-descending along the approach direction of its motion command toward the pose target. The monitor is
-used to avoid the flip station and bin (resting on the station) after releasing it from the bottom
-and moving to pick it from the top. It’s activated on entry to the <code class="docutils literal notranslate"><span class="pre">ReachToPick</span></code> class (used any
-time the bin needs to be picked, independent of whether the bin is on the flip station) and
-deactivated on exit.</p>
+<p><code class="docutils literal notranslate"><span class="pre">FlipStationObstacleMonitor</span></code>는 뒤집기 스테이션 주변의 구형 장애물인 <code class="docutils literal notranslate"><span class="pre">flip_station_sphere</span></code>를 모니터링합니다. 활성 상태일 때 엔드 이펙터가 포즈 목표를 향해 모션 명령의 접근 방향을 따라 하강할 때까지 장애물을 활성화합니다. 모니터는 빈을 아래에서 해제하고 위에서 집기 위해 이동한 후 뒤집기 스테이션과 빈(스테이션에 놓인)을 피하는 데 사용됩니다. <code class="docutils literal notranslate"><span class="pre">ReachToPick</span></code> 클래스(빈이 뒤집기 스테이션에 있는지 여부에 관계없이 빈을 집어야 할 때마다 사용됨)에 진입 시 활성화되고 종료 시 비활성화됩니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ReachToPick</span><span class="p">(</span><span class="n">MoveWithNavObs</span><span class="p">):</span>
     <span class="o">...</span>
 
@@ -1503,12 +1079,8 @@ deactivated on exit.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">flip_station_obs_monitor</span><span class="o">.</span><span class="n">deactivate_autotoggle</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Similarly, the <code class="docutils literal notranslate"><span class="pre">NavigationObstacleMonitor</span></code> monitors a collection of obstacles which shape the
-navigation behavior between the pallet and conveyor (both directions) to avoid the robot base and
-current bin stack in transit. They’re needed while moving from one to the other, but not needed once
-the arm reaches the region of its destination (either the pallet or conveyor).</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">MoveWithNavObs</span></code> state object extends the <code class="docutils literal notranslate"><span class="pre">Move</span></code> state with entry and exit conditions that
-automatically toggle the navigation obstacle:</p>
+<p>마찬가지로 <code class="docutils literal notranslate"><span class="pre">NavigationObstacleMonitor</span></code>는 이동 중에 로봇 베이스와 현재 빈 스택을 피하기 위해 팔레트와 컨베이어 사이(양방향)의 네비게이션 동작을 형성하는 장애물 컬렉션을 모니터링합니다. 하나에서 다른 하나로 이동하는 동안에는 필요하지만, 팔이 목적지 영역(팔레트 또는 컨베이어)에 도달하면 더 이상 필요하지 않습니다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">MoveWithNavObs</span></code> 상태 객체는 네비게이션 장애물을 자동으로 토글하는 진입 및 종료 조건으로 <code class="docutils literal notranslate"><span class="pre">Move</span></code> 상태를 확장합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MoveWithNavObs</span><span class="p">(</span><span class="n">Move</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">enter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">enter</span><span class="p">()</span>
@@ -1519,16 +1091,11 @@ automatically toggle the navigation obstacle:</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">navigation_obs_monitor</span><span class="o">.</span><span class="n">deactivate_autotoggle</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>This class is the base class for both the <code class="docutils literal notranslate"><span class="pre">ReachToPick</span></code> state and the <code class="docutils literal notranslate"><span class="pre">ReachToPlace</span></code> state used
-by <code class="docutils literal notranslate"><span class="pre">PickBin</span></code> and <code class="docutils literal notranslate"><span class="pre">PlaceBin</span></code> listed above.</p>
+<p>이 클래스는 위에 나열된 <code class="docutils literal notranslate"><span class="pre">PickBin</span></code>과 <code class="docutils literal notranslate"><span class="pre">PlaceBin</span></code>에서 사용하는 <code class="docutils literal notranslate"><span class="pre">ReachToPick</span></code> 상태와 <code class="docutils literal notranslate"><span class="pre">ReachToPlace</span></code> 상태 모두의 기본 클래스입니다.</p>
 </section>
 <section id="robustness-reactivity-on-placement">
 <h2>Robustness reactivity on placement<a class="headerlink" href="tutorial_cortex_5_ur10_bin_stacking.html#robustness-reactivity-on-placement" title="Link to this heading">#</a></h2>
-<p>The bin attachment to the end-effector and the stacking alignment of the bins are both physically
-simulated. Just blindly grasping and moving the bin to a target without adjusting for errors will
-result in slightly misaligned bins which don’t rest against each other correctly. Since we’re using
-a reactive motion generator (RMPflow), implementing reactive adjustments is straightforward. In
-<code class="docutils literal notranslate"><span class="pre">ReachToPlace</span></code> the adjustments are made every cycle in the <code class="docutils literal notranslate"><span class="pre">step()</span></code> method:</p>
+<p>엔드 이펙터에 빈 부착과 빈의 쌓기 정렬이 모두 물리적으로 시뮬레이션됩니다. 오류를 조정하지 않고 맹목적으로 빈을 잡고 목표로 이동하면 서로 제대로 접하지 않는 약간 잘못 정렬된 빈이 됩니다. 반응형 모션 생성기(RMPflow)를 사용하므로 반응형 조정 구현은 간단합니다. <code class="docutils literal notranslate"><span class="pre">ReachToPlace</span></code>에서 조정은 <code class="docutils literal notranslate"><span class="pre">step()</span></code> 메서드에서 매 사이클 이루어집니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ReachToPlace</span><span class="p">(</span><span class="n">MoveWithNavObs</span><span class="p">):</span>
     <span class="o">...</span>
 
@@ -1549,24 +1116,15 @@ a reactive motion generator (RMPflow), implementing reactive adjustments is stra
         <span class="p">)</span>
 </pre></div>
 </div>
-<p>If we’re placing a bin on top of another bin (<code class="docutils literal notranslate"><span class="pre">bin_under</span></code>) this code adjusts the end-effector
-target based on the xy position alignment error between the bin in the gripper and the bin under
-it. (The orientational alignment generally is already sufficient for successful placement.)</p>
-<p>Additionally, RMPflow is configured to take reactive state feedback from the simulator, and we use
-tight approach parameters for reaching the target (<code class="docutils literal notranslate"><span class="pre">std_dev=0.005</span></code>) so it needs to follow a narrow
-funnel on approach. If the bin is misaligned on first approach, the bin physics will shove the
-end-effector out of that funnel and it’ll attempt the approach again.</p>
-<p>In combination, this gets the robot to reactively adjust the positioning of the bin and retry the
-approach (repeatedly if needed) until it gets it right. Often the adjustment process is sufficient,
-but periodically it needs to retry the approach. Usually a single retry suffices. This is a subtle
-behavior and the code is concise, but it’s the difference between approximately 85% successful bin
-placement and 100% success.</p>
+<p>빈을 다른 빈 위에 놓는 경우(<code class="docutils literal notranslate"><span class="pre">bin_under</span></code>) 이 코드는 그리퍼의 빈과 그 아래 빈 사이의 xy 위치 정렬 오류를 기반으로 엔드 이펙터 목표를 조정합니다. (방향 정렬은 일반적으로 성공적인 배치에 이미 충분합니다.)</p>
+<p>또한 RMPflow는 시뮬레이터에서 반응형 상태 피드백을 받도록 구성되어 있으며, 목표 도달을 위해 타이트한 접근 매개변수(<code class="docutils literal notranslate"><span class="pre">std_dev=0.005</span></code>)를 사용하므로 접근 시 좁은 깔때기를 따라야 합니다. 첫 번째 접근 시 빈이 잘못 정렬되면 빈 물리가 엔드 이펙터를 그 깔때기에서 밀어내고 다시 접근을 시도합니다.</p>
+<p>이 조합은 로봇이 빈의 위치를 반응적으로 조정하고 올바르게 될 때까지 접근을 재시도(필요시 반복적으로)하게 합니다. 조정 과정이 충분한 경우가 많지만 주기적으로 접근을 재시도해야 합니다. 일반적으로 단 한 번의 재시도로 충분합니다. 이는 미묘한 동작이고 코드는 간결하지만, 약 85%의 성공적인 빈 배치와 100% 성공의 차이입니다.</p>
 <div style="width: 100%;display: inline-block;position: relative;">
-   <div id="dummy" style="margin-top: 56%;"></div>
-   <div align="center">
-   <div id="kaltura_player_2" style="position:absolute;top:0;left:0;left: 0;right: 0;bottom:0;border:solid thin black;"></div>
-   <script type="text/javascript" src="https://cdnapisec.kaltura.com/p/2935771/embedPlaykitJs/uiconf_id/46302491"></script>
-   <script type="text/javascript">
+<div id="dummy" style="margin-top: 56%;"></div>
+<div align="center">
+<div id="kaltura_player_2" style="position:absolute;top:0;left:0;left: 0;right: 0;bottom:0;border:solid thin black;"></div>
+<script src="https://cdnapisec.kaltura.com/p/2935771/embedPlaykitJs/uiconf_id/46302491" type="text/javascript"></script>
+<script type="text/javascript">
       try {
       var kalturaPlayer = KalturaPlayer.setup({
       targetId: "kaltura_player_2",
@@ -1579,13 +1137,11 @@ placement and 100% success.</p>
       } catch (e)
       { console.error(e.message) }
    </script>
-   </div>
+</div>
 </div></section>
 <section id="logical-state-context">
 <h2>Logical state context<a class="headerlink" href="tutorial_cortex_5_ur10_bin_stacking.html#logical-state-context" title="Link to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">BinStackingContext</span></code> object additionally monitors all logical state needed to support the
-above behaviors. These monitors are set up in the constructor and the logical state is
-reset/initialized in the <code class="docutils literal notranslate"><span class="pre">reset()</span></code> method:</p>
+<p><code class="docutils literal notranslate"><span class="pre">BinStackingContext</span></code> 객체는 또한 위의 동작을 지원하는 데 필요한 모든 논리적 상태를 모니터링합니다. 이 모니터들은 생성자에서 설정되고 논리적 상태는 <code class="docutils literal notranslate"><span class="pre">reset()</span></code> 메서드에서 재설정/초기화됩니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">BinStackingContext</span><span class="p">(</span><span class="n">ObstacleMonitorContext</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">robot</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -1608,7 +1164,7 @@ reset/initialized in the <code class="docutils literal notranslate"><span class=
             <span class="bp">self</span><span class="o">.</span><span class="n">bins</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-                <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;bin_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="s2">"bin_</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
                 <span class="n">bin_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">bin_obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="k">break</span>
@@ -1619,116 +1175,73 @@ reset/initialized in the <code class="docutils literal notranslate"><span class=
             <span class="bp">self</span><span class="o">.</span><span class="n">stacked_bins</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>These monitors perform the following:</p>
+<p>이 모니터들은 다음을 수행합니다:</p>
 <ol class="arabic simple">
-<li><p><strong>Monitor bins:</strong> If there’s no active bin, it checks whether there’s a bin at the end of the
-conveyor and activates it if so.</p></li>
-<li><p><strong>Monitor the active bin:</strong> Deactivates a bin if it’s dropped on the floor.</p></li>
-<li><p><strong>Monitor the grasp transform of the active bin:</strong> Monitors the best grasp for the current active bin.</p></li>
-<li><p><strong>Monitor whether the active bin is reached:</strong> Sets the <code class="docutils literal notranslate"><span class="pre">active_bin.{is_grasp_reached,is_attached}</span></code>
-flags based on the proximity between the end-effector and desired grasp transform, and whether
-the suction gripper is “closed”.</p></li>
-<li><p><strong>Monitor diagnostics:</strong> Prints some information about the logical state at a readable
-(throttled) rate.</p></li>
+<li><p><strong>Monitor bins:</strong> 활성 빈이 없으면 컨베이어 끝에 빈이 있는지 확인하고 있으면 활성화합니다.</p></li>
+<li><p><strong>Monitor the active bin:</strong> 바닥에 떨어진 빈을 비활성화합니다.</p></li>
+<li><p><strong>Monitor the grasp transform of the active bin:</strong> 현재 활성 빈의 최적 그립을 모니터링합니다.</p></li>
+<li><p><strong>Monitor whether the active bin is reached:</strong> 엔드 이펙터와 원하는 그립 변환 사이의 근접성과 흡착 그리퍼가 "닫혀" 있는지 여부를 기반으로 <code class="docutils literal notranslate"><span class="pre">active_bin.{is_grasp_reached,is_attached}</span></code> 플래그를 설정합니다.</p></li>
+<li><p><strong>Monitor diagnostics:</strong> 읽기 쉬운(조절된) 속도로 논리적 상태에 대한 일부 정보를 출력합니다.</p></li>
 </ol>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="tutorial_cortex_4_franka_block_stacking.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Walkthrough: Franka Block Stacking</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="tutorial_cortex_7_cortex_extension.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Building Cortex Based Extensions</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="tutorial_cortex_4_franka_block_stacking.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Walkthrough: Franka Block Stacking</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="tutorial_cortex_7_cortex_extension.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Building Cortex Based Extensions</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_cortex_5_ur10_bin_stacking.html#top-level-dispatch">Top-level dispatch</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_cortex_5_ur10_bin_stacking.html#sequential-state-machines">Sequential state machines</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_cortex_5_ur10_bin_stacking.html#navigation-obstacle-monitors">Navigation obstacle monitors</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_cortex_5_ur10_bin_stacking.html#robustness-reactivity-on-placement">Robustness reactivity on placement</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_cortex_5_ur10_bin_stacking.html#logical-state-context">Logical state context</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1759,36 +1272,21 @@ the suction gripper is “closed”.</p></li>
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>
