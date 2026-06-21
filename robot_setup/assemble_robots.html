@@ -1,561 +1,257 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Robot Assembler &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Robot Assembler — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
-  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
-</script>
-<script type="text/javascript">
-  function OptanonWrapper() {
-    var event = new Event('bannerLoaded');
-    window.dispatchEvent(event);
-  }
-</script>
-<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
-</script>
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'robot_setup/assemble_robots';</script>
-    <script>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'robot_setup/assemble_robots';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Inspector Tools" href="inspector_tools.html" />
-    <link rel="prev" title="Robot Self-Collision Detector" href="ext_isaacsim_robot_setup_collision_detector.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="inspector_tools.html" rel="next" title="Inspector Tools"/>
+<link href="ext_isaacsim_robot_setup_collision_detector.html" rel="prev" title="Robot Self-Collision Detector"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="assemble_robots.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="assemble_robots.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -575,7 +271,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -603,20 +298,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -691,17 +374,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -879,7 +552,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -919,13 +591,7 @@
 <li class="toctree-l2"><a class="reference internal" href="robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="editing_tools.html">Editor Tools</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -972,10 +638,6 @@
 <li class="toctree-l2"><a class="reference internal" href="asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1144,18 +806,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1181,145 +833,107 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Robot Setup</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="editing_tools.html" class="nav-link">Editor Tools</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Robot Assembler</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">Robot Setup</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="editing_tools.html">Editor Tools</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Robot Assembler</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="robot-assembler">
+<article class="bd-article">
+<section id="robot-assembler">
 <span id="isaac-sim-app-tutorial-advanced-assembling-robots"></span><h1>Robot Assembler<a class="headerlink" href="assemble_robots.html#robot-assembler" title="Link to this heading">#</a></h1>
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="assemble_robots.html#learning-objectives" title="Link to this heading">#</a></h2>
-<p>This tutorial shows how to use the <cite>isaacsim.robot_setup.assembler</cite> extension to assemble two USD assets into a single rigid body.
-This tutorial will primarily demonstrate the use of the <cite>Robot Assembler</cite> UI tool. By the end of this tutorial, you will understand
-the physical mechanics of assembled bodies, when to use the <cite>Robot Assembler</cite>,
-and the current limitations with assembling rigid bodies in NVIDIA Isaac Sim.</p>
-<p><em>5-10 Minutes Tutorial</em></p>
+<p>이 튜토리얼은 <cite>isaacsim.robot_setup.assembler</cite> 확장을 사용하여 두 개의 USD 에셋을 단일 강체로 조립하는 방법을 보여줍니다.
+이 튜토리얼은 주로 <cite>Robot Assembler</cite> UI 도구 사용을 시연합니다. 이 튜토리얼이 끝나면 조립된 물체의 물리적 메커니즘, <cite>Robot Assembler</cite>를 사용해야 하는 경우와 NVIDIA Isaac Sim에서 강체를 조립할 때의 현재 한계점을 이해하게 됩니다.</p>
+<p><em>5-10분 튜토리얼</em></p>
 </section>
 <section id="getting-started">
 <h2>Getting Started<a class="headerlink" href="assemble_robots.html#getting-started" title="Link to this heading">#</a></h2>
-<p>To find this tutorial of use, you must have two USD assets to assemble into one. This can include:</p>
+<p>이 튜토리얼을 유용하게 사용하려면 하나로 조립할 두 개의 USD 에셋이 있어야 합니다. 이에는 다음이 포함될 수 있습니다:</p>
 <ul class="simple">
-<li><p>A robot arm that needs to be attached to a gripper.</p></li>
-<li><p>A robot that needs to be fixed to a moving base.</p></li>
+<li><p>그리퍼에 부착해야 하는 로봇 팔.</p></li>
+<li><p>이동 베이스에 고정해야 하는 로봇.</p></li>
 </ul>
-<p>The use of the word ‘robot’ here indicates a USD asset that Contains the <a class="reference internal" href="../omniverse_usd/robot_schema.html#isaac-sim-robot-schema"><span class="std std-ref">Robot Schema</span></a> Applied.</p>
+<p>여기서 'robot'이라는 단어는 <a class="reference internal" href="../omniverse_usd/robot_schema.html#isaac-sim-robot-schema"><span class="std std-ref">Robot Schema</span></a>가 적용된 USD 에셋을 나타냅니다.</p>
 </section>
 <section id="understanding-the-mechanics-of-assembled-bodies">
 <h2>Understanding the Mechanics of Assembled Bodies<a class="headerlink" href="assemble_robots.html#understanding-the-mechanics-of-assembled-bodies" title="Link to this heading">#</a></h2>
-<p>The <cite>Robot Assembler</cite> tool allows you to combine two USD assets together by a physically simulated fixed joint. The result is a USD
-asset that can be saved and loaded without needing to use the <cite>Robot Assembler</cite> each time. The fact that the fixed joint is physically
-simulated is key in understanding proper application of the <cite>Robot Assembler</cite> extension. In Omniverse, physics is only simulated
-while the timeline is playing. When physics is not active, the fixed joint will not have any effect. Only use the <cite>Robot Assembler</cite> to combine USD assets that are going to be moving while the timeline is playing. For example, a robot that is fixed in place
-on a static table does not need to have a fixed joint connecting it to the table; you can place both the robot and the table
-independently of each other and they will stay in place after the timeline is played.</p>
-<p>Additionally, because two assembled assets are attached using a physically simulated fixed joint, the position of one asset relative to another
-is resolved by a physics solver. This solution is easy if the assets are already placed correctly relative to each other while the timeline is
-stopped, but you might experience instability if, on a stopped timeline, you move one part of an assembled asset far away from the other and
-start the timeline.</p>
+<p><cite>Robot Assembler</cite> 도구를 사용하면 물리적으로 시뮬레이션된 고정 조인트로 두 개의 USD 에셋을 결합할 수 있습니다. 결과는 매번 <cite>Robot Assembler</cite>를 사용하지 않고도 저장하고 로드할 수 있는 USD 에셋입니다. 고정 조인트가 물리적으로 시뮬레이션된다는 사실은 <cite>Robot Assembler</cite> 확장의 적절한 적용을 이해하는 데 핵심입니다. Omniverse에서 물리는 타임라인이 재생될 때만 시뮬레이션됩니다. 물리가 활성화되지 않으면 고정 조인트는 아무런 효과가 없습니다. 타임라인이 재생되는 동안 움직이는 USD 에셋을 결합하는 경우에만 <cite>Robot Assembler</cite>를 사용하세요. 예를 들어, 정적 테이블 위의 고정된 위치에 있는 로봇은 테이블과 연결하는 고정 조인트가 필요하지 않습니다. 로봇과 테이블을 독립적으로 배치하면 타임라인이 재생된 후에도 제자리를 유지합니다.</p>
+<p>또한, 두 개의 조립된 에셋이 물리적으로 시뮬레이션된 고정 조인트로 연결되어 있으므로 한 에셋의 다른 에셋에 대한 상대 위치는 물리 솔버로 해결됩니다. 타임라인이 정지된 상태에서 에셋이 서로 상대적으로 올바르게 배치된 경우 이 해결은 쉽지만, 정지된 타임라인에서 조립된 에셋의 한 부분을 다른 부분에서 멀리 이동시키고 타임라인을 시작하면 불안정성이 발생할 수 있습니다.</p>
 </section>
 <section id="using-the-robot-assembler-tool">
 <h2>Using the Robot Assembler Tool<a class="headerlink" href="assemble_robots.html#using-the-robot-assembler-tool" title="Link to this heading">#</a></h2>
 <section id="assembling-robots">
 <span id="isaac-sim-using-robot-assembler-robots"></span><h3>Assembling Robots<a class="headerlink" href="assemble_robots.html#assembling-robots" title="Link to this heading">#</a></h3>
-<p>The Robot Assembler UI tool can be found in the NVIDIA Isaac Sim toolbar by under <strong>Tools &gt; Robotics &gt; Asset Editors &gt; Robot Assembler</strong>.</p>
-<p>To use the Robot Assembler, start by loading the assets you want  to assemble on the USD stage. There are two editing modes for the Robot Assembler. The workflow is the same for both modes, but the final result will be slightly different:</p>
-<p>-<strong>Direct Asset editing</strong>: Open the robot that will serve as a base of the assembly directly, and add a reference to the components to be assembled. This will configure the attached component as a configuration option in the original asset.
--<strong>Stage Editing</strong>: Add both components to be assembled together as a reference to the stage. This will connect both components together at the current stage and will not modify the original assets.</p>
-<img alt="../_images/isim_6.0_full_tut_gui_connect_gripper_assembler.png" class="align-center" src="../_images/isim_6.0_full_tut_gui_connect_gripper_assembler.png" />
-<p>With the <strong>Robot Assembler</strong> window open and both Robots available in the current stage, you can select a <strong>Base Robot</strong> and an <strong>Attach Robot</strong>.</p>
-<p>Each robot has an “Attach Point” frame that can be used to specify the point on the robot that will be attached to the other robot. This attach point should be a <a class="reference internal" href="../omniverse_usd/robot_schema.html#isaac-sim-robot-schema-link-api"><span class="std std-ref">Robot Link</span></a> or a <a class="reference internal" href="../omniverse_usd/robot_schema.html#isaac-sim-robot-schema-site-api"><span class="std std-ref">Site</span></a>.</p>
-<p>The Assembler also expects an assembly namespace, which defaults to “Gripper”, but can be changed to any string. This namespace is used to identify the attachment point on the base robot when making the assembly directly on the base robot asset.</p>
-<p>After selections are made, click on the <strong>Begin Assembly</strong> button to begin the assembly process. This will move the “Attach Robot” to the “Attach Point” of the “Base Robot”, and let you make any final adjustments to the transform. For convenience, a set of Buttons will be shown to allow you to rotate the “Attach Robot” around the X, Y, and Z axes, by increments of 90 degrees. You can also move it through the viewport gizmos however you choose. If you de-select the “attach robot”, the <strong>Select Attach Point Prim</strong> button will re-select it so you can manually move it to the desired position.</p>
-<img alt="../_images/isim_6.0_full_tut_gui_connect_gripper_assembler_2.png" class="align-center" src="../_images/isim_6.0_full_tut_gui_connect_gripper_assembler_2.png" />
-<p>After you are happy with the transform, you can click on the <strong>Assemble and Simulate</strong> button to verify the assembly and check if the resulting robot is stable.</p>
-<p>At any point, you can click on the <strong>Cancel Assemble</strong> button to undo the assembly and start over.</p>
-<p>After assembly and simulation, you can click on the <strong>End Simulation and Finish</strong> button to save the assembly.</p>
-<p>If the assembly is performed on the Base asset stage, the resulting assembly is saved as a configuration option under <code class="docutils literal notranslate"><span class="pre">configuration/&lt;robot_name&gt;_&lt;assembly_namespace&gt;_&lt;attach_robot_name&gt;.usd</span></code>, and the <code class="docutils literal notranslate"><span class="pre">&lt;assembly_namespace&gt;</span></code> will be used to create a Variant set on the robot interface layer, such that the new attachment can be selected for use wherever the base robot is used. While the configuration file is automatically saved, you must save the stage to keep the changes.</p>
-<p>If the base robot is loaded as a reference, the attachment will be available on the open stage directly, without configuration through variants, and you can save the stage to keep the changes.</p>
-<p>With the robot assembled, you might need to execute additional tests to verify simulation stability, given that the articulation system is changed. For a complete guide in tuning articulations, refer to <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/guides/articulation_stability_guide.html">Articulation Stability Guide</a>.</p>
-<img alt="../_images/isim_5.0_base_ref_gui_assemble_robots_variant.png" class="align-center" src="../_images/isim_5.0_base_ref_gui_assemble_robots_variant.png" />
+<p>Robot Assembler UI 도구는 NVIDIA Isaac Sim 툴바에서 <strong>Tools &gt; Robotics &gt; Asset Editors &gt; Robot Assembler</strong> 아래에서 찾을 수 있습니다.</p>
+<p>Robot Assembler를 사용하려면 먼저 USD 스테이지에 조립하려는 에셋을 로드하세요. Robot Assembler에는 두 가지 편집 모드가 있습니다. 워크플로는 두 모드 모두 동일하지만 최종 결과는 약간 다릅니다:</p>
+<p>-<strong>Direct Asset editing</strong>: 조립의 기반이 될 로봇을 직접 열고 조립할 구성요소에 대한 참조를 추가합니다. 이렇게 하면 연결된 구성요소가 원본 에셋의 구성 옵션으로 설정됩니다.
+-<strong>Stage Editing</strong>: 조립할 두 구성요소를 스테이지에 대한 참조로 추가합니다. 이렇게 하면 두 구성요소가 현재 스테이지에서 연결되고 원본 에셋은 수정되지 않습니다.</p>
+<img alt="../_images/isim_6.0_full_tut_gui_connect_gripper_assembler.png" class="align-center" src="../_images/isim_6.0_full_tut_gui_connect_gripper_assembler.png"/>
+<p><strong>Robot Assembler</strong> 창이 열려 있고 두 로봇이 현재 스테이지에서 사용 가능한 경우 <strong>Base Robot</strong>과 <strong>Attach Robot</strong>을 선택할 수 있습니다.</p>
+<p>각 로봇에는 다른 로봇에 부착될 로봇의 지점을 지정하는 데 사용할 수 있는 "Attach Point" 프레임이 있습니다. 이 부착 지점은 <a class="reference internal" href="../omniverse_usd/robot_schema.html#isaac-sim-robot-schema-link-api"><span class="std std-ref">Robot Link</span></a> 또는 <a class="reference internal" href="../omniverse_usd/robot_schema.html#isaac-sim-robot-schema-site-api"><span class="std std-ref">Site</span></a>여야 합니다.</p>
+<p>Assembler는 또한 조립 네임스페이스를 기대하며 기본값은 "Gripper"이지만 임의의 문자열로 변경할 수 있습니다. 이 네임스페이스는 기본 로봇 에셋에서 직접 조립할 때 기본 로봇의 부착 지점을 식별하는 데 사용됩니다.</p>
+<p>선택 후 <strong>Begin Assembly</strong> 버튼을 클릭하여 조립 프로세스를 시작하세요. 이렇게 하면 "Attach Robot"이 "Base Robot"의 "Attach Point"로 이동하고 변환에 대한 최종 조정을 할 수 있습니다. 편의를 위해 90도 단위로 X, Y, Z 축을 중심으로 "Attach Robot"을 회전할 수 있는 버튼 세트가 표시됩니다. 뷰포트 기즈모를 통해 원하는 대로 이동할 수도 있습니다. "attach robot"을 선택 해제하면 <strong>Select Attach Point Prim</strong> 버튼이 다시 선택하여 원하는 위치로 수동으로 이동할 수 있습니다.</p>
+<img alt="../_images/isim_6.0_full_tut_gui_connect_gripper_assembler_2.png" class="align-center" src="../_images/isim_6.0_full_tut_gui_connect_gripper_assembler_2.png"/>
+<p>변환에 만족하면 <strong>Assemble and Simulate</strong> 버튼을 클릭하여 조립을 확인하고 결과 로봇이 안정적인지 확인하세요.</p>
+<p>언제든지 <strong>Cancel Assemble</strong> 버튼을 클릭하여 조립을 취소하고 처음부터 시작할 수 있습니다.</p>
+<p>조립 및 시뮬레이션 후 <strong>End Simulation and Finish</strong> 버튼을 클릭하여 조립을 저장하세요.</p>
+<p>기본 에셋 스테이지에서 조립을 수행한 경우 결과 조립은 <code class="docutils literal notranslate"><span class="pre">configuration/&lt;robot_name&gt;_&lt;assembly_namespace&gt;_&lt;attach_robot_name&gt;.usd</span></code> 아래에 구성 옵션으로 저장되고, <code class="docutils literal notranslate"><span class="pre">&lt;assembly_namespace&gt;</span></code>는 로봇 인터페이스 레이어에 Variant set을 생성하는 데 사용되므로 기본 로봇이 사용되는 곳마다 새로운 부착을 선택할 수 있습니다. 구성 파일은 자동으로 저장되지만 변경 사항을 유지하려면 스테이지를 저장해야 합니다.</p>
+<p>기본 로봇이 참조로 로드된 경우, 부착은 변형을 통한 구성 없이 열린 스테이지에서 직접 사용할 수 있으며 스테이지를 저장하여 변경 사항을 유지할 수 있습니다.</p>
+<p>로봇이 조립되면 아티큘레이션 시스템이 변경되었으므로 시뮬레이션 안정성을 확인하기 위한 추가 테스트를 수행해야 할 수 있습니다. 아티큘레이션 튜닝에 대한 완전한 가이드는 <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/guides/articulation_stability_guide.html">Articulation Stability Guide</a>를 참조하세요.</p>
+<img alt="../_images/isim_5.0_base_ref_gui_assemble_robots_variant.png" class="align-center" src="../_images/isim_5.0_base_ref_gui_assemble_robots_variant.png"/>
 </section>
 </section>
 <section id="robot-assembler-api">
 <h2>Robot Assembler API<a class="headerlink" href="assemble_robots.html#robot-assembler-api" title="Link to this heading">#</a></h2>
-<p>The <cite>Robot Assembler</cite> can also be accessed by a Python API, where the assembly settings can be specified programmatically.</p>
+<p><cite>Robot Assembler</cite>는 Python API를 통해서도 접근할 수 있으며, 여기서 조립 설정을 프로그래밍 방식으로 지정할 수 있습니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.robot_setup.assembler</span><span class="w"> </span><span class="kn">import</span> <span class="n">RobotAssembler</span>
 
 <span class="c1"># Prerequisites: Have both the base robot and the attach robot loaded in the stage at the paths specified below (or change the paths to where the assets are loaded in your stage)</span>
 
 <span class="c1"># Prim path to the base robot</span>
-<span class="n">robot_base</span> <span class="o">=</span> <span class="s2">&quot;/World/BaseRobot&quot;</span>
+<span class="n">robot_base</span> <span class="o">=</span> <span class="s2">"/World/BaseRobot"</span>
 <span class="c1"># Prim path to the mount point of the base robot</span>
-<span class="n">robot_base_mount</span> <span class="o">=</span> <span class="s2">&quot;/World/BaseRobot/Mount&quot;</span>
+<span class="n">robot_base_mount</span> <span class="o">=</span> <span class="s2">"/World/BaseRobot/Mount"</span>
 <span class="c1"># Prim path to the attach robot</span>
-<span class="n">robot_attach</span> <span class="o">=</span> <span class="s2">&quot;/World/AttachRobot&quot;</span>
+<span class="n">robot_attach</span> <span class="o">=</span> <span class="s2">"/World/AttachRobot"</span>
 <span class="c1"># Prim path to the mount point of the attach robot</span>
-<span class="n">robot_attach_mount</span> <span class="o">=</span> <span class="s2">&quot;/World/AttachRobot/Mount&quot;</span>
+<span class="n">robot_attach_mount</span> <span class="o">=</span> <span class="s2">"/World/AttachRobot/Mount"</span>
 <span class="c1"># Assembly namespace</span>
-<span class="n">assembly_namespace</span> <span class="o">=</span> <span class="s2">&quot;Gripper&quot;</span>
-<span class="n">variant_name</span> <span class="o">=</span> <span class="s2">&quot;my_assembled_robot&quot;</span>
+<span class="n">assembly_namespace</span> <span class="o">=</span> <span class="s2">"Gripper"</span>
+<span class="n">variant_name</span> <span class="o">=</span> <span class="s2">"my_assembled_robot"</span>
 
 
 <span class="n">stage</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">get_stage</span><span class="p">()</span>
@@ -1335,8 +949,8 @@ start the timeline.</p>
 
 <span class="n">assembler</span><span class="o">.</span><span class="n">assemble</span><span class="p">()</span>
 
-<span class="c1"># That&#39;s where the Robot Assembler will create the fixed joint between the two robots.</span>
-<span class="c1"># It will also remove Physic&#39;s Articualtion Root from the attached robot, and disable the root joint that attaches 	robot to the world, if it exists.</span>
+<span class="c1"># That's where the Robot Assembler will create the fixed joint between the two robots.</span>
+<span class="c1"># It will also remove Physic's Articualtion Root from the attached robot, and disable the root joint that attaches 	robot to the world, if it exists.</span>
 <span class="c1"># If you need to perform any physics simulation test - this is the time to do it.</span>
 <span class="c1"># If the assembly is successful, and you are ready to finish the assembly, you can call the following function.</span>
 <span class="c1"># Otherwise at any point you can call the `assembler.cancel_assemble()` function to cancel the assembly process.</span>
@@ -1352,65 +966,43 @@ start the timeline.</p>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="assemble_robots.html#summary" title="Link to this heading">#</a></h2>
-<p>In this tutorial, you learned that:</p>
+<p>이 튜토리얼에서 배운 내용:</p>
 <ol class="arabic simple">
-<li><p>The <cite>Robot Assembler</cite> tool exists to attach two robots or rigid bodies using a user-specified fixed joint.</p></li>
-<li><p>The <cite>Robot Assembler</cite> creates a fixed joint that is physically simulated, and so it will only be active while the timeline is playing.</p></li>
-<li><p>The <cite>Robot Assembler</cite> is only needed to attach Robot components together.</p></li>
-<li><p>The <cite>Robot Assembler</cite> can also be accessed by a Python API that is demonstrated on the example code above.</p></li>
+<li><p><cite>Robot Assembler</cite> 도구는 사용자가 지정한 고정 조인트를 사용하여 두 로봇 또는 강체를 부착하기 위해 존재합니다.</p></li>
+<li><p><cite>Robot Assembler</cite>는 물리적으로 시뮬레이션된 고정 조인트를 생성하므로 타임라인이 재생되는 동안만 활성화됩니다.</p></li>
+<li><p><cite>Robot Assembler</cite>는 로봇 구성요소를 함께 부착하는 데만 필요합니다.</p></li>
+<li><p><cite>Robot Assembler</cite>는 위의 예제 코드에 시연된 Python API를 통해서도 접근할 수 있습니다.</p></li>
 </ol>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="ext_isaacsim_robot_setup_collision_detector.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Robot Self-Collision Detector</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="inspector_tools.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Inspector Tools</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="ext_isaacsim_robot_setup_collision_detector.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Robot Self-Collision Detector</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="inspector_tools.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Inspector Tools</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="assemble_robots.html#learning-objectives">Learning Objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="assemble_robots.html#getting-started">Getting Started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="assemble_robots.html#understanding-the-mechanics-of-assembled-bodies">Understanding the Mechanics of Assembled Bodies</a></li>
@@ -1421,46 +1013,29 @@ start the timeline.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="assemble_robots.html#robot-assembler-api">Robot Assembler API</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="assemble_robots.html#summary">Summary</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1491,36 +1066,21 @@ start the timeline.</p>
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

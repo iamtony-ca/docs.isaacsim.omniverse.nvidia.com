@@ -1,561 +1,257 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Running a Reinforcement Learning Policy through ROS 2 and Isaac Sim &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Running a Reinforcement Learning Policy through ROS 2 and Isaac Sim — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
-  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
-</script>
-<script type="text/javascript">
-  function OptanonWrapper() {
-    var event = new Event('bannerLoaded');
-    window.dispatchEvent(event);
-  }
-</script>
-<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
-</script>
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'ros2_tutorials/tutorial_ros2_rl_controller';</script>
-    <script>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'ros2_tutorials/tutorial_ros2_rl_controller';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Getting Started with Cloner" href="../isaac_lab_tutorials/tutorial_cloner.html" />
-    <link rel="prev" title="Deploying Policies in Isaac Sim" href="../isaac_lab_tutorials/tutorial_policy_deployment.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="../isaac_lab_tutorials/tutorial_cloner.html" rel="next" title="Getting Started with Cloner"/>
+<link href="../isaac_lab_tutorials/tutorial_policy_deployment.html" rel="prev" title="Deploying Policies in Isaac Sim"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="tutorial_ros2_rl_controller.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="tutorial_ros2_rl_controller.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -575,7 +271,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -603,20 +298,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -691,17 +374,7 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="ros2_landing_page.html">ROS 2</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">ROS 2 Tutorials (Linux and Windows)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -879,7 +552,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -919,13 +591,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -972,10 +638,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1144,18 +806,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1181,262 +833,236 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="../isaac_lab_tutorials/index.html" class="nav-link">Isaac Lab</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Running a Reinforcement Learning Policy through ROS 2 and Isaac Sim</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="../isaac_lab_tutorials/index.html">Isaac Lab</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Running a Reinforcement Learning Policy through ROS 2 and Isaac Sim</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="running-a-reinforcement-learning-policy-through-ros-2-and-isaac-sim">
+<article class="bd-article">
+<section id="running-a-reinforcement-learning-policy-through-ros-2-and-isaac-sim">
 <span id="isaac-sim-app-tutorial-ros2-rl-controller"></span><h1>Running a Reinforcement Learning Policy through ROS 2 and Isaac Sim<a class="headerlink" href="tutorial_ros2_rl_controller.html#running-a-reinforcement-learning-policy-through-ros-2-and-isaac-sim" title="Link to this heading">#</a></h1>
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="tutorial_ros2_rl_controller.html#learning-objectives" title="Link to this heading">#</a></h2>
-<p>In this example, you learn to run a reinforcement learning policy through ROS 2 and Isaac Sim. You will learn to:</p>
+<p>이 예제에서는 ROS 2와 Isaac Sim을 통해 강화 학습 정책을 실행하는 방법을 배웁니다. 다음 내용을 학습합니다:</p>
 <ul class="simple">
-<li><p>Set up a ROS 2 node to publish observations and receive actions from Isaac Sim for the H1 flat terrain locomotion policy.</p></li>
-<li><p>Set up an Isaac Sim environment to run a reinforcement learning policy.</p></li>
+<li><p>H1 평탄 지형 이동 정책을 위해 Isaac Sim에서 관측값을 발행하고 행동을 수신하는 ROS 2 노드 설정.</p></li>
+<li><p>강화 학습 정책을 실행하는 Isaac Sim 환경 설정.</p></li>
 </ul>
 </section>
 <section id="getting-started">
 <h2>Getting Started<a class="headerlink" href="tutorial_ros2_rl_controller.html#getting-started" title="Link to this heading">#</a></h2>
-<p><strong>Prerequisites</strong></p>
+<p><strong>사전 준비사항</strong></p>
 <ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">torch</span></code> package is required to run this sample. Follow the <a class="reference external" href="https://pytorch.org/get-started/locally">PyTorch</a> installation instructions to install it (if not already installed).
-Since PyTorch runs in a separate process, no specific version is required. It does not have to match Isaac Sim’s PyTorch version.</p></li>
-<li><p>Enable the <code class="docutils literal notranslate"><span class="pre">isaacsim.ros2.bridge</span></code> extension in the <cite>Extension Manager</cite> window by navigating to <strong>Window</strong> &gt; <strong>Extensions</strong>.</p></li>
-<li><p>This tutorial requires the <code class="docutils literal notranslate"><span class="pre">h1_fullbody_controller</span></code> ROS 2 package, which is provided in the <a class="reference external" href="https://github.com/isaac-sim/IsaacSim-ros_workspaces">IsaacSim-ros_workspaces</a> repo. Complete <a class="reference internal" href="../installation/install_ros.html#isaac-sim-app-install-ros"><span class="std std-ref">ROS 2 Installation (Default)</span></a> to make sure the ROS 2 workspace environment is set up correctly.</p></li>
-<li><p>This tutorial requires an H1 asset with joint configurations that match the locomotion policy parameters. To create this asset yourself, complete <a class="reference internal" href="../robot_setup_tutorials/tutorial_rig_legged_robot.html#isaac-sim-app-tutorial-rig-legged-robot"><span class="std std-ref">Tutorial 13: Rigging a Legged Robot for a Locomotion Policy</span></a>. To skip the rigging steps, use the preconfigured asset described below.</p></li>
+<li><p>이 샘플을 실행하려면 <code class="docutils literal notranslate"><span class="pre">torch</span></code> 패키지가 필요합니다. 설치되지 않은 경우 <a class="reference external" href="https://pytorch.org/get-started/locally">PyTorch</a> 설치 지침에 따라 설치하세요.
+PyTorch는 별도의 프로세스에서 실행되므로 특정 버전이 필요하지 않습니다. Isaac Sim의 PyTorch 버전과 일치할 필요가 없습니다.</p></li>
+<li><p><cite>Extension Manager</cite> 창에서 <strong>Window</strong> &gt; <strong>Extensions</strong>으로 이동하여 <code class="docutils literal notranslate"><span class="pre">isaacsim.ros2.bridge</span></code> extension을 활성화합니다.</p></li>
+<li><p>이 튜토리얼에는 <a class="reference external" href="https://github.com/isaac-sim/IsaacSim-ros_workspaces">IsaacSim-ros_workspaces</a> 저장소에 제공된 <code class="docutils literal notranslate"><span class="pre">h1_fullbody_controller</span></code> ROS 2 패키지가 필요합니다. ROS 2 workspace 환경이 올바르게 설정되어 있는지 확인하기 위해 <a class="reference internal" href="../installation/install_ros.html#isaac-sim-app-install-ros"><span class="std std-ref">ROS 2 Installation (Default)</span></a>을 완료하세요.</p></li>
+<li><p>이 튜토리얼에는 이동 정책 파라미터와 일치하는 joint 구성을 가진 H1 에셋이 필요합니다. 이 에셋을 직접 생성하려면 <a class="reference internal" href="../robot_setup_tutorials/tutorial_rig_legged_robot.html#isaac-sim-app-tutorial-rig-legged-robot"><span class="std std-ref">Tutorial 13: Rigging a Legged Robot for a Locomotion Policy</span></a>를 완료하세요. 리깅 단계를 건너뛰려면 아래에 설명된 사전 구성된 에셋을 사용하세요.</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The preconfigured H1 robot is available in the content browser at <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Sim/Samples/Rigging/H1/h1_rigged.usd</span></code>. Use this asset if you want to skip the rigging tutorial. You still need to add the IMU sensor and ROS 2 graphs in the sections below.</p>
+<p>사전 구성된 H1 로봇은 Content Browser의 <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Sim/Samples/Rigging/H1/h1_rigged.usd</span></code>에서 사용할 수 있습니다. 리깅 튜토리얼을 건너뛰려면 이 에셋을 사용하세요. 아래 섹션에서 IMU 센서와 ROS 2 그래프를 추가해야 합니다.</p>
 </div>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <ul class="simple">
-<li><p>If you encounter <code class="docutils literal notranslate"><span class="pre">error:</span> <span class="pre">externally-managed-environment</span></code> when installing PyTorch, try installing it in a virtual Python environment.</p></li>
-<li><p>If you encounter <code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError:</span> <span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span> <span class="pre">'yaml'</span></code>, install PyYAML using <code class="docutils literal notranslate"><span class="pre">pip</span></code>.</p></li>
+<li><p>PyTorch를 설치할 때 <code class="docutils literal notranslate"><span class="pre">error:</span> <span class="pre">externally-managed-environment</span></code>가 발생하면, 가상 Python 환경에서 설치해 보세요.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError:</span> <span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span> <span class="pre">'yaml'</span></code>가 발생하면 <code class="docutils literal notranslate"><span class="pre">pip</span></code>를 사용하여 PyYAML을 설치하세요.</p></li>
 </ul>
 </div>
 </section>
 <section id="about-the-h1-flat-terrain-locomotion-policy">
 <h2>About the H1 Flat Terrain Locomotion Policy<a class="headerlink" href="tutorial_ros2_rl_controller.html#about-the-h1-flat-terrain-locomotion-policy" title="Link to this heading">#</a></h2>
-<p>The policy is trained based on the <strong>Isaac-Velocity-Flat-H1-v0</strong> environment from Isaac Lab. This policy tracks a velocity command on flat terrain for the H1 humanoid robot. The policy is capable of walking forward and turning left or right. The policy does not support moving backward or sideways.</p>
+<p>정책은 Isaac Lab의 <strong>Isaac-Velocity-Flat-H1-v0</strong> 환경을 기반으로 훈련되었습니다. 이 정책은 H1 휴머노이드 로봇의 평탄 지형에서 속도 명령을 추적합니다. 정책은 앞으로 걷고 왼쪽 또는 오른쪽으로 회전하는 능력이 있습니다. 정책은 뒤로 이동하거나 옆으로 이동하는 것을 지원하지 않습니다.</p>
 </section>
 <section id="set-up-robot-joint-configurations">
 <h2>Set Up Robot Joint Configurations<a class="headerlink" href="tutorial_ros2_rl_controller.html#set-up-robot-joint-configurations" title="Link to this heading">#</a></h2>
-<p>If you are building the robot asset yourself, follow the steps in <a class="reference internal" href="../robot_setup_tutorials/tutorial_rig_legged_robot.html#isaac-sim-app-tutorial-rig-legged-robot"><span class="std std-ref">Tutorial 13: Rigging a Legged Robot for a Locomotion Policy</span></a> to set up the robot joint configurations based on the locomotion policy parameters. If you use <code class="docutils literal notranslate"><span class="pre">h1_rigged.usd</span></code>, you can skip the rigging tutorial and continue with the next section. This step is important because mismatched joint configurations can result in unexpected robot behavior.</p>
+<p>로봇 에셋을 직접 빌드하는 경우, <a class="reference internal" href="../robot_setup_tutorials/tutorial_rig_legged_robot.html#isaac-sim-app-tutorial-rig-legged-robot"><span class="std std-ref">Tutorial 13: Rigging a Legged Robot for a Locomotion Policy</span></a>의 단계에 따라 이동 정책 파라미터를 기반으로 로봇 joint 구성을 설정합니다. <code class="docutils literal notranslate"><span class="pre">h1_rigged.usd</span></code>를 사용하는 경우 리깅 튜토리얼을 건너뛰고 다음 섹션으로 계속할 수 있습니다. joint 구성 불일치는 예상치 못한 로봇 동작을 초래할 수 있으므로 이 단계가 중요합니다.</p>
 <ul class="simple">
-<li><p>The H1 flat terrain policy environment definition file is the <a class="reference external" href="https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.0/Isaac/Samples/Policies/H1_Policies/h1_env.yaml">YAML file</a>.</p></li>
-<li><p>The angle units specified in the policy environment definition file are in radians. The Isaac Sim USD GUI interface expects the angles to be specified in degrees.</p></li>
+<li><p>H1 평탄 지형 정책 환경 정의 파일은 <a class="reference external" href="https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.0/Isaac/Samples/Policies/H1_Policies/h1_env.yaml">YAML 파일</a>입니다.</p></li>
+<li><p>정책 환경 정의 파일에 지정된 각도 단위는 라디안입니다. Isaac Sim USD GUI 인터페이스는 각도를 도 단위로 지정해야 합니다.</p></li>
 </ul>
 </section>
 <section id="add-imu-sensor">
 <h2>Add IMU Sensor<a class="headerlink" href="tutorial_ros2_rl_controller.html#add-imu-sensor" title="Link to this heading">#</a></h2>
-<p>Use the IMU sensor to obtain the body frame linear acceleration, angular velocity, and orientation.
-The flat terrain policy requires the linear velocity, angular velocity, and gravity vector from the pelvis link. You need to add an IMU sensor to the pelvis link to compute these values.</p>
+<p>IMU 센서를 사용하여 바디 프레임 선형 가속도, 각속도, 방향을 얻습니다.
+평탄 지형 정책에는 pelvis 링크에서의 선속도, 각속도, 중력 벡터가 필요합니다. 이 값들을 계산하기 위해 pelvis 링크에 IMU 센서를 추가해야 합니다.</p>
 <ul class="simple">
-<li><p>You can create an IMU sensor by right-clicking <code class="docutils literal notranslate"><span class="pre">/h1/pelvis</span></code> and selecting <strong>Create</strong> &gt; <strong>Isaac</strong> &gt; <strong>Sensors</strong> &gt; <strong>Imu Sensor</strong>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/h1/pelvis</span></code>를 우클릭하고 <strong>Create</strong> &gt; <strong>Isaac</strong> &gt; <strong>Sensors</strong> &gt; <strong>Imu Sensor</strong>를 선택하여 IMU 센서를 생성할 수 있습니다.</p></li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>If you add the IMU to a different link, for example, the torso link, you must first transform the IMU data to the pelvis link frame before using it in the policy.</p>
+<p>예를 들어 torso 링크와 같이 다른 링크에 IMU를 추가하는 경우, 정책에서 사용하기 전에 IMU 데이터를 pelvis 링크 프레임으로 변환해야 합니다.</p>
 </div>
 </section>
 <section id="set-up-ros-2-node-for-the-h1-humanoid-robot">
 <h2>Set Up ROS 2 Node for the H1 Humanoid Robot<a class="headerlink" href="tutorial_ros2_rl_controller.html#set-up-ros-2-node-for-the-h1-humanoid-robot" title="Link to this heading">#</a></h2>
-<p>The ROS 2 node publishes the observations and receives the actions from Isaac Sim. As specified in the environment definition file, the observations require the following information:</p>
+<p>ROS 2 노드는 관측값을 발행하고 Isaac Sim에서 행동을 수신합니다. 환경 정의 파일에 지정된 대로, 관측값에는 다음 정보가 필요합니다:</p>
 <ul class="simple">
-<li><p>Body frame linear velocity</p></li>
-<li><p>Body frame angular velocity</p></li>
-<li><p>Body frame gravity vector</p></li>
-<li><p>Command (linear and angular velocity)</p></li>
-<li><p>Relative joint position</p></li>
-<li><p>Relative joint velocity</p></li>
-<li><p>Previous Action</p></li>
+<li><p>바디 프레임 선속도</p></li>
+<li><p>바디 프레임 각속도</p></li>
+<li><p>바디 프레임 중력 벡터</p></li>
+<li><p>명령 (선속도 및 각속도)</p></li>
+<li><p>상대 joint 위치</p></li>
+<li><p>상대 joint 속도</p></li>
+<li><p>이전 행동</p></li>
 </ul>
-<p>You can obtain the body frame linear velocity, angular velocity, and gravity vector by processing the IMU data.
-The command is the desired linear and angular velocity of the robot, which can be retrieved from a ROS 2 twist message.
-The relative joint position and velocity can be computed from the Isaac Sim joint state topic.
-The previous action is the action applied last iteration and can be tracked by the policy node.</p>
-<p>The action is a joint state message, which is a dictionary of joint names and their desired positions.</p>
-<p>In this section, we will set up OmniGraph nodes that publish the observations and receive the actions from Isaac Sim at each physics step.</p>
+<p>IMU 데이터를 처리하여 바디 프레임 선속도, 각속도, 중력 벡터를 얻을 수 있습니다.
+명령은 로봇의 원하는 선속도 및 각속도로, ROS 2 twist 메시지에서 검색할 수 있습니다.
+상대 joint 위치와 속도는 Isaac Sim joint state 토픽에서 계산할 수 있습니다.
+이전 행동은 마지막 반복에서 적용된 행동으로, 정책 노드에서 추적할 수 있습니다.</p>
+<p>행동은 joint 이름과 원하는 위치의 딕셔너리인 joint state 메시지입니다.</p>
+<p>이 섹션에서는 각 물리 스텝에서 Isaac Sim의 관측값을 발행하고 행동을 수신하는 OmniGraph 노드를 설정합니다.</p>
 <section id="create-an-on-demand-omnigraph">
 <h3>Create an On-Demand OmniGraph<a class="headerlink" href="tutorial_ros2_rl_controller.html#create-an-on-demand-omnigraph" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Open the Unitree H1 robot model that you rigged in <a class="reference internal" href="../robot_setup_tutorials/tutorial_rig_legged_robot.html#isaac-sim-app-tutorial-rig-legged-robot"><span class="std std-ref">Tutorial 13: Rigging a Legged Robot for a Locomotion Policy</span></a>, or open the preconfigured <code class="docutils literal notranslate"><span class="pre">h1_rigged.usd</span></code> asset.</p></li>
-<li><p>Create a scope under <code class="docutils literal notranslate"><span class="pre">/h1</span></code> to hold the ActionGraphs by right-clicking <code class="docutils literal notranslate"><span class="pre">/h1</span></code> and selecting <strong>Create</strong> &gt; <strong>Scope</strong>, then rename it “Graph”.</p></li>
-<li><p>Right-click the <code class="docutils literal notranslate"><span class="pre">/h1/Graph</span></code> scope and select <strong>Create</strong> &gt; <strong>Visual Scripting</strong> &gt; <strong>ActionGraph</strong>.</p></li>
-<li><p>Rename the ActionGraph to “ROS_Imu”.</p></li>
-<li><p>Left-click the ActionGraph node, scroll down in the property editor and set the <code class="docutils literal notranslate"><span class="pre">pipelineStage</span></code> to <code class="docutils literal notranslate"><span class="pre">pipelineStageOnDemand</span></code>.</p></li>
+<li><p><a class="reference internal" href="../robot_setup_tutorials/tutorial_rig_legged_robot.html#isaac-sim-app-tutorial-rig-legged-robot"><span class="std std-ref">Tutorial 13: Rigging a Legged Robot for a Locomotion Policy</span></a>에서 리깅한 Unitree H1 로봇 모델을 열거나, 사전 구성된 <code class="docutils literal notranslate"><span class="pre">h1_rigged.usd</span></code> 에셋을 엽니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/h1</span></code>을 우클릭하고 <strong>Create</strong> &gt; <strong>Scope</strong>를 선택한 다음 "Graph"로 이름을 변경하여 ActionGraph를 보관할 scope를 <code class="docutils literal notranslate"><span class="pre">/h1</span></code> 아래에 생성합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/h1/Graph</span></code> scope를 우클릭하고 <strong>Create</strong> &gt; <strong>Visual Scripting</strong> &gt; <strong>ActionGraph</strong>를 선택합니다.</p></li>
+<li><p>ActionGraph 이름을 "ROS_Imu"로 변경합니다.</p></li>
+<li><p>ActionGraph 노드를 좌클릭하고 property 편집기에서 아래로 스크롤하여 <code class="docutils literal notranslate"><span class="pre">pipelineStage</span></code>를 <code class="docutils literal notranslate"><span class="pre">pipelineStageOnDemand</span></code>로 설정합니다.</p></li>
 </ol>
-<p>This ensures that the ActionGraph node runs on each Isaac Sim physics step.</p>
-<a class="reference internal image-reference" href="../_images/isim_5.0_full_tut_gui_rl_ros_controller_1.png"><img alt="../_images/isim_5.0_full_tut_gui_rl_ros_controller_1.png" class="align-center" src="../_images/isim_5.0_full_tut_gui_rl_ros_controller_1.png" style="width: 80%;" />
+<p>이렇게 하면 ActionGraph 노드가 각 Isaac Sim 물리 스텝에서 실행됩니다.</p>
+<a class="reference internal image-reference" href="../_images/isim_5.0_full_tut_gui_rl_ros_controller_1.png"><img alt="../_images/isim_5.0_full_tut_gui_rl_ros_controller_1.png" class="align-center" src="../_images/isim_5.0_full_tut_gui_rl_ros_controller_1.png" style="width: 80%;"/>
 </a>
 </section>
 <section id="create-imu-publisher-node">
 <h3>Create IMU Publisher Node<a class="headerlink" href="tutorial_ros2_rl_controller.html#create-imu-publisher-node" title="Link to this heading">#</a></h3>
-<p>This node publishes the IMU data to ROS 2, which contains the body frame linear acceleration, angular velocity, and orientation.</p>
+<p>이 노드는 바디 프레임 선형 가속도, 각속도, 방향이 포함된 IMU 데이터를 ROS 2에 발행합니다.</p>
 <ol class="arabic simple">
-<li><p>Right-click the ActionGraph node and select <strong>Open Graph</strong>.</p></li>
-<li><p>Copy the following nodes into the ActionGraph:</p>
+<li><p>ActionGraph 노드를 우클릭하고 <strong>Open Graph</strong>를 선택합니다.</p></li>
+<li><p>다음 노드들을 ActionGraph에 복사합니다:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">On</span> <span class="pre">Physics</span> <span class="pre">Step</span></code>: This node is triggered when Isaac Sim steps physics, and runs the entire graph.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Context</span></code>: This node creates a context for the ROS 2 node.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">QoS</span> <span class="pre">Profile</span></code>: This node sets the QoS profile for the ROS 2 node.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Read</span> <span class="pre">IMU</span> <span class="pre">Node</span></code>: This node reads the IMU data from Isaac Sim.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Read</span> <span class="pre">Simulation</span> <span class="pre">Time</span></code>: This node reads the simulation time from Isaac Sim.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Publish</span> <span class="pre">IMU</span></code>: This node publishes the IMU data to ROS 2 using the <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Read</span> <span class="pre">IMU</span> <span class="pre">Node</span></code> and <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Read</span> <span class="pre">Simulation</span> <span class="pre">Time</span></code> nodes as sources.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">On</span> <span class="pre">Physics</span> <span class="pre">Step</span></code>: Isaac Sim이 물리를 스텝할 때 트리거되어 전체 그래프를 실행하는 노드.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Context</span></code>: ROS 2 노드의 컨텍스트를 생성하는 노드.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">QoS</span> <span class="pre">Profile</span></code>: ROS 2 노드의 QoS 프로파일을 설정하는 노드.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Read</span> <span class="pre">IMU</span> <span class="pre">Node</span></code>: Isaac Sim에서 IMU 데이터를 읽는 노드.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Read</span> <span class="pre">Simulation</span> <span class="pre">Time</span></code>: Isaac Sim에서 시뮬레이션 시간을 읽는 노드.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Publish</span> <span class="pre">IMU</span></code>: <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Read</span> <span class="pre">IMU</span> <span class="pre">Node</span></code>와 <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Read</span> <span class="pre">Simulation</span> <span class="pre">Time</span></code> 노드를 소스로 사용하여 IMU 데이터를 ROS 2에 발행하는 노드.</p></li>
 </ul>
 </li>
-<li><p>Connect the nodes as shown in the image below.</p>
+<li><p>아래 이미지에 표시된 대로 노드를 연결합니다.</p>
 <ul class="simple">
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Read</span> <span class="pre">IMU</span> <span class="pre">Node</span></code> input <code class="docutils literal notranslate"><span class="pre">IMU</span> <span class="pre">Prim</span></code> to <code class="docutils literal notranslate"><span class="pre">/h1/pelvis/Imu_Sensor</span></code> to read the IMU sensor data.</p></li>
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Publish</span> <span class="pre">IMU</span></code> input <code class="docutils literal notranslate"><span class="pre">Frame</span> <span class="pre">ID</span></code> to <code class="docutils literal notranslate"><span class="pre">pelvis_imu</span></code>.</p></li>
-<li><p>Uncheck the <code class="docutils literal notranslate"><span class="pre">Read</span> <span class="pre">Gravity</span></code> input of the <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Read</span> <span class="pre">IMU</span> <span class="pre">Node</span></code> to avoid reading the gravity vector from the pelvis link. This prevents gravity from being included in the pelvis-link IMU data.</p></li>
-<li><p>Check the <code class="docutils literal notranslate"><span class="pre">Reset</span> <span class="pre">on</span> <span class="pre">Stop</span></code> input of <code class="docutils literal notranslate"><span class="pre">Read</span> <span class="pre">Simulation</span> <span class="pre">Time</span></code> node to reset the simulation time when the simulation stops.</p></li>
+<li><p>IMU 센서 데이터를 읽기 위해 <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Read</span> <span class="pre">IMU</span> <span class="pre">Node</span></code> 입력 <code class="docutils literal notranslate"><span class="pre">IMU</span> <span class="pre">Prim</span></code>을 <code class="docutils literal notranslate"><span class="pre">/h1/pelvis/Imu_Sensor</span></code>로 설정합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Publish</span> <span class="pre">IMU</span></code> 입력 <code class="docutils literal notranslate"><span class="pre">Frame</span> <span class="pre">ID</span></code>를 <code class="docutils literal notranslate"><span class="pre">pelvis_imu</span></code>로 설정합니다.</p></li>
+<li><p>pelvis 링크에서 중력 벡터를 읽는 것을 피하기 위해 <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Read</span> <span class="pre">IMU</span> <span class="pre">Node</span></code>의 <code class="docutils literal notranslate"><span class="pre">Read</span> <span class="pre">Gravity</span></code> 입력을 선택 해제합니다. 이렇게 하면 중력이 pelvis 링크 IMU 데이터에 포함되지 않습니다.</p></li>
+<li><p>시뮬레이션이 멈출 때 시뮬레이션 시간을 재설정하기 위해 <code class="docutils literal notranslate"><span class="pre">Read</span> <span class="pre">Simulation</span> <span class="pre">Time</span></code> 노드의 <code class="docutils literal notranslate"><span class="pre">Reset</span> <span class="pre">on</span> <span class="pre">Stop</span></code> 입력을 체크합니다.</p></li>
 </ul>
 </li>
 </ol>
-<a class="reference internal image-reference" href="../_images/isim_5.0_full_tut_gui_rl_ros_controller_2.png"><img alt="../_images/isim_5.0_full_tut_gui_rl_ros_controller_2.png" class="align-center" src="../_images/isim_5.0_full_tut_gui_rl_ros_controller_2.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="../_images/isim_5.0_full_tut_gui_rl_ros_controller_2.png"><img alt="../_images/isim_5.0_full_tut_gui_rl_ros_controller_2.png" class="align-center" src="../_images/isim_5.0_full_tut_gui_rl_ros_controller_2.png" style="width: 80%;"/>
 </a>
 </section>
 <section id="create-joint-state-publisher-and-subscriber-nodes">
 <h3>Create Joint State Publisher and Subscriber Nodes<a class="headerlink" href="tutorial_ros2_rl_controller.html#create-joint-state-publisher-and-subscriber-nodes" title="Link to this heading">#</a></h3>
-<p>This node publishes joint states from Isaac Sim to ROS 2, including the joint names, positions, and velocities. It also subscribes to joint state commands from the external policy node.</p>
+<p>이 노드는 joint 이름, 위치, 속도를 포함한 joint state를 Isaac Sim에서 ROS 2로 발행합니다. 또한 외부 정책 노드에서 joint state 명령을 구독합니다.</p>
 <ol class="arabic simple">
-<li><p>Create a new ActionGraph node under <code class="docutils literal notranslate"><span class="pre">/h1/Graph</span></code> and rename it to “ROS_Joint_States”.</p></li>
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">pipelineStage</span></code> to <code class="docutils literal notranslate"><span class="pre">pipelineStageOnDemand</span></code>.</p></li>
-<li><p>Copy the following nodes into the ActionGraph:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">/h1/Graph</span></code> 아래에 새 ActionGraph 노드를 생성하고 "ROS_Joint_States"로 이름을 변경합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pipelineStage</span></code>를 <code class="docutils literal notranslate"><span class="pre">pipelineStageOnDemand</span></code>로 설정합니다.</p></li>
+<li><p>다음 노드들을 ActionGraph에 복사합니다:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">On</span> <span class="pre">Physics</span> <span class="pre">Step</span></code>: This node is triggered when Isaac Sim steps physics, and runs the entire graph.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Context</span></code>: This node creates a context for the ROS 2 node.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">QoS</span> <span class="pre">Profile</span></code>: This node sets the QoS profile for the ROS 2 node.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Subscribe</span> <span class="pre">Joint</span> <span class="pre">State</span></code>: This node subscribes to the joint state commands from the external policy node.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Publish</span> <span class="pre">Joint</span> <span class="pre">State</span></code>: This node publishes the current joint states to ROS 2 from Isaac Sim.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Read</span> <span class="pre">Simulation</span> <span class="pre">Time</span></code>: This node reads the simulation time from Isaac Sim.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Articulation</span> <span class="pre">Controller</span></code>: This node executes the joint state commands from the <code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Subscribe</span> <span class="pre">Joint</span> <span class="pre">State</span></code> node.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">On</span> <span class="pre">Physics</span> <span class="pre">Step</span></code>: Isaac Sim이 물리를 스텝할 때 트리거되어 전체 그래프를 실행하는 노드.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Context</span></code>: ROS 2 노드의 컨텍스트를 생성하는 노드.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">QoS</span> <span class="pre">Profile</span></code>: ROS 2 노드의 QoS 프로파일을 설정하는 노드.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Subscribe</span> <span class="pre">Joint</span> <span class="pre">State</span></code>: 외부 정책 노드에서 joint state 명령을 구독하는 노드.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Publish</span> <span class="pre">Joint</span> <span class="pre">State</span></code>: Isaac Sim에서 현재 joint state를 ROS 2에 발행하는 노드.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Read</span> <span class="pre">Simulation</span> <span class="pre">Time</span></code>: Isaac Sim에서 시뮬레이션 시간을 읽는 노드.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Articulation</span> <span class="pre">Controller</span></code>: <code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Subscribe</span> <span class="pre">Joint</span> <span class="pre">State</span></code> 노드에서 joint state 명령을 실행하는 노드.</p></li>
 </ul>
 </li>
-<li><p>Connect the nodes as shown in the image below.</p>
+<li><p>아래 이미지에 표시된 대로 노드를 연결합니다.</p>
 <ul class="simple">
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Publish</span> <span class="pre">Joint</span> <span class="pre">State</span></code> input <code class="docutils literal notranslate"><span class="pre">Target</span> <span class="pre">Prim</span></code> to <code class="docutils literal notranslate"><span class="pre">/h1</span></code> and <code class="docutils literal notranslate"><span class="pre">Topic</span> <span class="pre">Name</span></code> to <code class="docutils literal notranslate"><span class="pre">/joint_states</span></code>.</p></li>
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Subscribe</span> <span class="pre">Joint</span> <span class="pre">State</span></code> input <code class="docutils literal notranslate"><span class="pre">Topic</span> <span class="pre">Name</span></code> to <code class="docutils literal notranslate"><span class="pre">/joint_command</span></code>.</p></li>
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">Articulation</span> <span class="pre">Controller</span></code> input <code class="docutils literal notranslate"><span class="pre">Target</span> <span class="pre">Prim</span></code> to <code class="docutils literal notranslate"><span class="pre">/h1</span></code>.</p></li>
-<li><p>Check the <code class="docutils literal notranslate"><span class="pre">Reset</span> <span class="pre">on</span> <span class="pre">Stop</span></code> input of <code class="docutils literal notranslate"><span class="pre">Read</span> <span class="pre">Simulation</span> <span class="pre">Time</span></code> node to reset the simulation time when the simulation stops.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Publish</span> <span class="pre">Joint</span> <span class="pre">State</span></code> 입력 <code class="docutils literal notranslate"><span class="pre">Target</span> <span class="pre">Prim</span></code>을 <code class="docutils literal notranslate"><span class="pre">/h1</span></code>로, <code class="docutils literal notranslate"><span class="pre">Topic</span> <span class="pre">Name</span></code>을 <code class="docutils literal notranslate"><span class="pre">/joint_states</span></code>로 설정합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Subscribe</span> <span class="pre">Joint</span> <span class="pre">State</span></code> 입력 <code class="docutils literal notranslate"><span class="pre">Topic</span> <span class="pre">Name</span></code>을 <code class="docutils literal notranslate"><span class="pre">/joint_command</span></code>로 설정합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Articulation</span> <span class="pre">Controller</span></code> 입력 <code class="docutils literal notranslate"><span class="pre">Target</span> <span class="pre">Prim</span></code>을 <code class="docutils literal notranslate"><span class="pre">/h1</span></code>로 설정합니다.</p></li>
+<li><p>시뮬레이션이 멈출 때 시뮬레이션 시간을 재설정하기 위해 <code class="docutils literal notranslate"><span class="pre">Read</span> <span class="pre">Simulation</span> <span class="pre">Time</span></code> 노드의 <code class="docutils literal notranslate"><span class="pre">Reset</span> <span class="pre">on</span> <span class="pre">Stop</span></code> 입력을 체크합니다.</p></li>
 </ul>
 </li>
 </ol>
-<a class="reference internal image-reference" href="../_images/isim_6.0_full_tut_gui_rl_ros_controller_3.png"><img alt="../_images/isim_6.0_full_tut_gui_rl_ros_controller_3.png" class="align-center" src="../_images/isim_6.0_full_tut_gui_rl_ros_controller_3.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="../_images/isim_6.0_full_tut_gui_rl_ros_controller_3.png"><img alt="../_images/isim_6.0_full_tut_gui_rl_ros_controller_3.png" class="align-center" src="../_images/isim_6.0_full_tut_gui_rl_ros_controller_3.png" style="width: 80%;"/>
 </a>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The completed asset is available in the content browser at <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Sim/Samples/ROS2/Robots/h1_ROS.usd</span></code>.</p>
+<p>완성된 에셋은 Content Browser의 <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Sim/Samples/ROS2/Robots/h1_ROS.usd</span></code>에서 사용할 수 있습니다.</p>
 </div>
 </section>
 </section>
 <section id="publish-ros-clock-and-set-up-environment">
 <h2>Publish ROS Clock and Set Up Environment<a class="headerlink" href="tutorial_ros2_rl_controller.html#publish-ros-clock-and-set-up-environment" title="Link to this heading">#</a></h2>
-<p>Now that the asset is set up, create a simulation scenario to place the robot in, configure the physics settings, and publish ROS time.</p>
+<p>에셋 설정이 완료되면, 로봇을 배치할 시뮬레이션 시나리오를 생성하고 물리 설정을 구성하며 ROS 시간을 발행합니다.</p>
 <section id="set-up-simulation-scenario">
 <h3>Set Up Simulation Scenario<a class="headerlink" href="tutorial_ros2_rl_controller.html#set-up-simulation-scenario" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Create a new file. In the Content Browser, go to <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Sim/Environments/Simple_Warehouse</span></code> and drag the <code class="docutils literal notranslate"><span class="pre">warehouse.usd</span></code> asset into the stage.</p></li>
-<li><p>Drag and drop the <code class="docutils literal notranslate"><span class="pre">h1_ROS.usd</span></code> asset that you made earlier into the stage. Set the Z transform to <code class="docutils literal notranslate"><span class="pre">1.0</span></code> so it is above the ground.</p></li>
-<li><p>In the <strong>Layer</strong> tab, select the <strong>Root Layer</strong>, and in the Properties panel set <strong>Time Codes Per Second</strong> to <code class="docutils literal notranslate"><span class="pre">200</span></code>. For more information, see <a class="reference internal" href="../physics/simulation_fundamentals.html#simulation-fundamentals-configuring-frame-rate"><span class="std std-ref">Configuring Frame Rate</span></a>.</p></li>
-<li><p>Create a <code class="docutils literal notranslate"><span class="pre">Physics</span> <span class="pre">Scene</span></code> by right-clicking the stage and selecting <strong>Create</strong> &gt; <strong>Physics</strong> &gt; <strong>Physics Scene</strong>.</p></li>
-<li><p>If using PhysX, because this tutorial uses only one robot, use CPU physics for better performance. Uncheck <code class="docutils literal notranslate"><span class="pre">Enable</span> <span class="pre">GPU</span> <span class="pre">Dynamics</span></code> and set the <code class="docutils literal notranslate"><span class="pre">Broadphase</span> <span class="pre">Type</span></code> to <code class="docutils literal notranslate"><span class="pre">MBP</span></code>. Set <code class="docutils literal notranslate"><span class="pre">Time</span> <span class="pre">Steps</span> <span class="pre">Per</span> <span class="pre">Second</span></code> to <code class="docutils literal notranslate"><span class="pre">200</span></code>.</p></li>
+<li><p>새 파일을 생성합니다. Content Browser에서 <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Sim/Environments/Simple_Warehouse</span></code>로 이동하여 <code class="docutils literal notranslate"><span class="pre">warehouse.usd</span></code> 에셋을 stage에 드래그합니다.</p></li>
+<li><p>이전에 만든 <code class="docutils literal notranslate"><span class="pre">h1_ROS.usd</span></code> 에셋을 stage에 드래그 앤 드롭합니다. Z transform을 <code class="docutils literal notranslate"><span class="pre">1.0</span></code>으로 설정하여 지면 위에 있도록 합니다.</p></li>
+<li><p><strong>Layer</strong> 탭에서 <strong>Root Layer</strong>를 선택하고 Properties 패널에서 <strong>Time Codes Per Second</strong>를 <code class="docutils literal notranslate"><span class="pre">200</span></code>으로 설정합니다. 자세한 내용은 <a class="reference internal" href="../physics/simulation_fundamentals.html#simulation-fundamentals-configuring-frame-rate"><span class="std std-ref">Configuring Frame Rate</span></a>를 참조하세요.</p></li>
+<li><p>stage를 우클릭하고 <strong>Create</strong> &gt; <strong>Physics</strong> &gt; <strong>Physics Scene</strong>을 선택하여 <code class="docutils literal notranslate"><span class="pre">Physics</span> <span class="pre">Scene</span></code>을 생성합니다.</p></li>
+<li><p>PhysX를 사용하는 경우, 이 튜토리얼은 하나의 로봇만 사용하므로 더 나은 성능을 위해 CPU 물리를 사용합니다. <code class="docutils literal notranslate"><span class="pre">Enable</span> <span class="pre">GPU</span> <span class="pre">Dynamics</span></code>를 선택 해제하고 <code class="docutils literal notranslate"><span class="pre">Broadphase</span> <span class="pre">Type</span></code>을 <code class="docutils literal notranslate"><span class="pre">MBP</span></code>로 설정합니다. <code class="docutils literal notranslate"><span class="pre">Time</span> <span class="pre">Steps</span> <span class="pre">Per</span> <span class="pre">Second</span></code>를 <code class="docutils literal notranslate"><span class="pre">200</span></code>으로 설정합니다.</p></li>
 </ol>
 </section>
 <section id="set-up-ros-2-clock-publisher">
 <h3>Set Up ROS 2 Clock Publisher<a class="headerlink" href="tutorial_ros2_rl_controller.html#set-up-ros-2-clock-publisher" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Create a new ActionGraph node and rename it to “ROS_Clock”.</p></li>
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">pipelineStage</span></code> to <code class="docutils literal notranslate"><span class="pre">pipelineStageOnDemand</span></code>.</p></li>
-<li><p>Copy the following nodes into the ActionGraph:</p>
+<li><p>새 ActionGraph 노드를 생성하고 "ROS_Clock"으로 이름을 변경합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pipelineStage</span></code>를 <code class="docutils literal notranslate"><span class="pre">pipelineStageOnDemand</span></code>로 설정합니다.</p></li>
+<li><p>다음 노드들을 ActionGraph에 복사합니다:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">On</span> <span class="pre">Physics</span> <span class="pre">Step</span></code>: This node is triggered when Isaac Sim steps physics, and runs the entire graph.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Context</span></code>: This node creates a context for the ROS 2 node.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">QoS</span> <span class="pre">Profile</span></code>: This node sets the QoS profile for the ROS 2 node.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Publish</span> <span class="pre">Clock</span></code>: This node publishes the ROS 2 clock to ROS 2.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Read</span> <span class="pre">Simulation</span> <span class="pre">Time</span></code>: This node reads the simulation time from Isaac Sim.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">On</span> <span class="pre">Physics</span> <span class="pre">Step</span></code>: Isaac Sim이 물리를 스텝할 때 트리거되어 전체 그래프를 실행하는 노드.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Context</span></code>: ROS 2 노드의 컨텍스트를 생성하는 노드.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">QoS</span> <span class="pre">Profile</span></code>: ROS 2 노드의 QoS 프로파일을 설정하는 노드.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Publish</span> <span class="pre">Clock</span></code>: ROS 2 클록을 ROS 2에 발행하는 노드.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Read</span> <span class="pre">Simulation</span> <span class="pre">Time</span></code>: Isaac Sim에서 시뮬레이션 시간을 읽는 노드.</p></li>
 </ul>
 </li>
-<li><p>Connect the nodes as shown in the image below.</p>
+<li><p>아래 이미지에 표시된 대로 노드를 연결합니다.</p>
 <ul class="simple">
-<li><p>Check the <code class="docutils literal notranslate"><span class="pre">Reset</span> <span class="pre">on</span> <span class="pre">Stop</span></code> input of <code class="docutils literal notranslate"><span class="pre">Read</span> <span class="pre">Simulation</span> <span class="pre">Time</span></code> node to reset the simulation time when the simulation stops.</p></li>
+<li><p>시뮬레이션이 멈출 때 시뮬레이션 시간을 재설정하기 위해 <code class="docutils literal notranslate"><span class="pre">Read</span> <span class="pre">Simulation</span> <span class="pre">Time</span></code> 노드의 <code class="docutils literal notranslate"><span class="pre">Reset</span> <span class="pre">on</span> <span class="pre">Stop</span></code> 입력을 체크합니다.</p></li>
 </ul>
 </li>
 </ol>
-<a class="reference internal image-reference" href="../_images/isim_5.0_full_tut_gui_rl_ros_controller_4.png"><img alt="../_images/isim_5.0_full_tut_gui_rl_ros_controller_4.png" class="align-center" src="../_images/isim_5.0_full_tut_gui_rl_ros_controller_4.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="../_images/isim_5.0_full_tut_gui_rl_ros_controller_4.png"><img alt="../_images/isim_5.0_full_tut_gui_rl_ros_controller_4.png" class="align-center" src="../_images/isim_5.0_full_tut_gui_rl_ros_controller_4.png" style="width: 80%;"/>
 </a>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The completed environment is available in the content browser at <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Sim/Samples/ROS2/Scenario/h1_ros_locomotion_policy_tutorial.usd</span></code>.</p>
+<p>완성된 환경은 Content Browser의 <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Sim/Samples/ROS2/Scenario/h1_ros_locomotion_policy_tutorial.usd</span></code>에서 사용할 수 있습니다.</p>
 </div>
 </section>
 </section>
 <section id="run-ros-2-policy">
 <h2>Run ROS 2 Policy<a class="headerlink" href="tutorial_ros2_rl_controller.html#run-ros-2-policy" title="Link to this heading">#</a></h2>
-<p>Now that the asset is set up, you can run the ROS 2 policy. Build the ROS 2 workspace and source the <code class="docutils literal notranslate"><span class="pre">setup.bash</span></code> file.</p>
+<p>에셋 설정이 완료되면 ROS 2 정책을 실행할 수 있습니다. ROS 2 workspace를 빌드하고 <code class="docutils literal notranslate"><span class="pre">setup.bash</span></code> 파일을 소스합니다.</p>
 <ol class="arabic">
-<li><p>Launch the <code class="docutils literal notranslate"><span class="pre">h1_fullbody_controller</span></code> ROS 2 package by running the following command in the environment where PyTorch is installed:</p>
+<li><p>PyTorch가 설치된 환경에서 다음 명령어를 실행하여 <code class="docutils literal notranslate"><span class="pre">h1_fullbody_controller</span></code> ROS 2 패키지를 실행합니다:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>h1_fullbody_controller<span class="w"> </span>h1_fullbody_controller.launch.py
 </pre></div>
@@ -1446,12 +1072,12 @@ The previous action is the action applied last iteration and can be tracked by t
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This ROS 2 package computes observations and actions using the ROS messages that you published above and the flat terrain locomotion policy.
-When no command velocities are received, the robot stands still and maintains balance. Make sure to start the ROS 2 policy before starting the simulation. Otherwise, the robot will fall over.</p>
+<p>이 ROS 2 패키지는 위에서 발행한 ROS 메시지와 평탄 지형 이동 정책을 사용하여 관측값과 행동을 계산합니다.
+명령 속도가 수신되지 않으면 로봇은 가만히 서서 균형을 유지합니다. 시뮬레이션을 시작하기 전에 ROS 2 정책을 시작해야 합니다. 그렇지 않으면 로봇이 넘어집니다.</p>
 </div>
 <ol class="arabic" start="2">
-<li><p>Open the H1 scenario you created earlier and press <strong>PLAY</strong> to start the simulation.</p></li>
-<li><p>In a separate terminal, source ROS and launch <code class="docutils literal notranslate"><span class="pre">teleop_twist_keyboard</span></code> or another desired package to publish Twist messages:</p>
+<li><p>이전에 생성한 H1 시나리오를 열고 <strong>PLAY</strong>를 눌러 시뮬레이션을 시작합니다.</p></li>
+<li><p>별도의 터미널에서 ROS를 소스하고 Twist 메시지를 발행하기 위해 <code class="docutils literal notranslate"><span class="pre">teleop_twist_keyboard</span></code> 또는 다른 원하는 패키지를 실행합니다:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>teleop_twist_keyboard<span class="w"> </span>teleop_twist_keyboard
 </pre></div>
@@ -1459,91 +1085,69 @@ When no command velocities are received, the robot stands still and maintains ba
 </div></blockquote>
 </li>
 </ol>
-<p>You can now control the H1 humanoid robot using your keyboard. Try the controls and observe if the robot moves as expected.</p>
+<p>이제 키보드로 H1 휴머노이드 로봇을 제어할 수 있습니다. 컨트롤을 시험해보고 로봇이 예상대로 이동하는지 확인합니다.</p>
 <ul class="simple">
-<li><p>Forward: <code class="docutils literal notranslate"><span class="pre">i</span></code></p></li>
-<li><p>Forward + Turn Left: <code class="docutils literal notranslate"><span class="pre">u</span></code></p></li>
-<li><p>Forward + Turn Right: <code class="docutils literal notranslate"><span class="pre">o</span></code></p></li>
-<li><p>Turn Left: <code class="docutils literal notranslate"><span class="pre">j</span></code></p></li>
-<li><p>Turn Right: <code class="docutils literal notranslate"><span class="pre">l</span></code></p></li>
-<li><p>Stand Still: <code class="docutils literal notranslate"><span class="pre">k</span></code></p></li>
+<li><p>앞으로: <code class="docutils literal notranslate"><span class="pre">i</span></code></p></li>
+<li><p>앞으로 + 왼쪽 회전: <code class="docutils literal notranslate"><span class="pre">u</span></code></p></li>
+<li><p>앞으로 + 오른쪽 회전: <code class="docutils literal notranslate"><span class="pre">o</span></code></p></li>
+<li><p>왼쪽 회전: <code class="docutils literal notranslate"><span class="pre">j</span></code></p></li>
+<li><p>오른쪽 회전: <code class="docutils literal notranslate"><span class="pre">l</span></code></p></li>
+<li><p>제자리 서기: <code class="docutils literal notranslate"><span class="pre">k</span></code></p></li>
 </ul>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <ul class="simple">
-<li><p>Moving backward is not supported in this version of the policy. Pressing <code class="docutils literal notranslate"><span class="pre">m</span></code>, <code class="docutils literal notranslate"><span class="pre">,</span></code>, or <code class="docutils literal notranslate"><span class="pre">.</span></code> causes the robot to fall over.</p></li>
-<li><p>Setting linear and angular velocity above 0.75 exceeds the velocity limits of the policy and causes the robot to fall over.</p></li>
-<li><p>The robot might drift over time when there are no command velocities. This is expected behavior.</p></li>
+<li><p>이 버전의 정책에서는 뒤로 이동이 지원되지 않습니다. <code class="docutils literal notranslate"><span class="pre">m</span></code>, <code class="docutils literal notranslate"><span class="pre">,</span></code>, 또는 <code class="docutils literal notranslate"><span class="pre">.</span></code>를 누르면 로봇이 넘어집니다.</p></li>
+<li><p>선속도와 각속도를 0.75 이상으로 설정하면 정책의 속도 한계를 초과하여 로봇이 넘어집니다.</p></li>
+<li><p>명령 속도가 없을 때 로봇이 시간이 지남에 따라 드리프트할 수 있습니다. 이는 예상된 동작입니다.</p></li>
 </ul>
 </div>
-<a class="reference internal image-reference" href="../_images/isim_5.0_full_tut_gui_rl_ros_controller_5.webp"><img alt="../_images/isim_5.0_full_tut_gui_rl_ros_controller_5.webp" class="align-center" src="../_images/isim_5.0_full_tut_gui_rl_ros_controller_5.webp" style="width: 80%;" />
+<a class="reference internal image-reference" href="../_images/isim_5.0_full_tut_gui_rl_ros_controller_5.webp"><img alt="../_images/isim_5.0_full_tut_gui_rl_ros_controller_5.webp" class="align-center" src="../_images/isim_5.0_full_tut_gui_rl_ros_controller_5.webp" style="width: 80%;"/>
 </a>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="tutorial_ros2_rl_controller.html#summary" title="Link to this heading">#</a></h2>
-<p>This tutorial covered:</p>
+<p>이 튜토리얼에서 다룬 내용:</p>
 <ol class="arabic simple">
-<li><p>Creating and setting up a ROS 2 node to publish observations and receive actions from Isaac Sim for the H1 flat terrain locomotion policy.</p></li>
-<li><p>Setting up an Isaac Sim environment to run a reinforcement learning policy.</p></li>
+<li><p>H1 평탄 지형 이동 정책을 위해 Isaac Sim에서 관측값을 발행하고 행동을 수신하는 ROS 2 노드 생성 및 설정.</p></li>
+<li><p>강화 학습 정책을 실행하는 Isaac Sim 환경 설정.</p></li>
 </ol>
 <section id="next-steps">
 <h3>Next Steps<a class="headerlink" href="tutorial_ros2_rl_controller.html#next-steps" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Learn more about <a class="reference internal" href="../isaac_lab_tutorials/index.html#isaac-lab-tutorials-page"><span class="std std-ref">Isaac Lab</span></a> here and the Isaac Sim native method for <a class="reference internal" href="../isaac_lab_tutorials/tutorial_policy_deployment.html#isaac-sim-app-tutorial-policy-deployment"><span class="std std-ref">policy deployment</span></a>.</p></li>
+<li><p><a class="reference internal" href="../isaac_lab_tutorials/index.html#isaac-lab-tutorials-page"><span class="std std-ref">Isaac Lab</span></a>에 대해 더 알아보고 <a class="reference internal" href="../isaac_lab_tutorials/tutorial_policy_deployment.html#isaac-sim-app-tutorial-policy-deployment"><span class="std std-ref">policy deployment</span></a>를 위한 Isaac Sim 네이티브 방법을 알아보세요.</p></li>
 </ul>
 </section>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../isaac_lab_tutorials/tutorial_policy_deployment.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Deploying Policies in Isaac Sim</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../isaac_lab_tutorials/tutorial_cloner.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Getting Started with Cloner</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="../isaac_lab_tutorials/tutorial_policy_deployment.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Deploying Policies in Isaac Sim</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="../isaac_lab_tutorials/tutorial_cloner.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Getting Started with Cloner</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_ros2_rl_controller.html#learning-objectives">Learning Objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_ros2_rl_controller.html#getting-started">Getting Started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_ros2_rl_controller.html#about-the-h1-flat-terrain-locomotion-policy">About the H1 Flat Terrain Locomotion Policy</a></li>
@@ -1566,46 +1170,29 @@ When no command velocities are received, the robot stands still and maintains ba
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1636,36 +1223,21 @@ When no command velocities are received, the robot stands still and maintains ba
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

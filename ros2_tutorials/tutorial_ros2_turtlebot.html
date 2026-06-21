@@ -1,563 +1,259 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta content="Isaac Sim ROS 2 Tutorials" name="title" />
-<meta content="lang=en isaac isaac-sim ros2" name="keywords" />
-
-    <title>URDF Import: Turtlebot &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Isaac Sim ROS 2 Tutorials" name="title"/>
+<meta content="lang=en isaac isaac-sim ros2" name="keywords"/>
+<title>URDF Import: Turtlebot — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
-  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
-</script>
-<script type="text/javascript">
-  function OptanonWrapper() {
-    var event = new Event('bannerLoaded');
-    window.dispatchEvent(event);
-  }
-</script>
-<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
-</script>
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'ros2_tutorials/tutorial_ros2_turtlebot';</script>
-    <script>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'ros2_tutorials/tutorial_ros2_turtlebot';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Driving TurtleBot using ROS 2 Messages" href="tutorial_ros2_drive_turtlebot.html" />
-    <link rel="prev" title="ROS 2 Tutorials (Linux and Windows)" href="index.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="tutorial_ros2_drive_turtlebot.html" rel="next" title="Driving TurtleBot using ROS 2 Messages"/>
+<link href="index.html" rel="prev" title="ROS 2 Tutorials (Linux and Windows)"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="tutorial_ros2_turtlebot.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="tutorial_ros2_turtlebot.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -577,7 +273,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -605,20 +300,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -693,17 +376,7 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="ros2_landing_page.html">ROS 2</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">ROS 2 Tutorials (Linux and Windows)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3 current active"><a class="current reference internal" href="tutorial_ros2_turtlebot.html#">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -881,7 +554,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -921,13 +593,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -974,10 +640,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1146,18 +808,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1183,95 +835,67 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="ros2_landing_page.html" class="nav-link">ROS 2</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">ROS 2 Tutorials (Linux and Windows)</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">URDF Import: Turtlebot</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="ros2_landing_page.html">ROS 2</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">ROS 2 Tutorials (Linux and Windows)</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">URDF Import: Turtlebot</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="urdf-import-turtlebot">
+<article class="bd-article">
+<section id="urdf-import-turtlebot">
 <span id="isaac-sim-app-tutorial-ros2-turtlebot"></span><h1>URDF Import: Turtlebot<a class="headerlink" href="tutorial_ros2_turtlebot.html#urdf-import-turtlebot" title="Link to this heading">#</a></h1>
-<p>NVIDIA Isaac Sim has several tools to facilitate integration with ROS systems. There is the ROS 2 bridge, a method to import URDF, and much more. This tutorial series gives examples of how to use these tools.</p>
+<p>NVIDIA Isaac Sim에는 ROS 시스템과의 통합을 용이하게 하는 여러 도구가 있습니다. ROS 2 브릿지, URDF 가져오기 방법 등 다양한 기능이 있습니다. 이 튜토리얼 시리즈는 이러한 도구를 사용하는 방법의 예를 제공합니다.</p>
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="tutorial_ros2_turtlebot.html#learning-objectives" title="Link to this heading">#</a></h2>
-<p>In this example, you set up a <a class="reference external" href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview">Turtlebot3</a> in Isaac Sim and enable it to drive around.</p>
-<p>If you already have a robot with rigged joints and properties in USD format, and you want to jump straight into using our ROS 2 bridge, go to the next tutorial in the series <a class="reference internal" href="tutorial_ros2_drive_turtlebot.html#isaac-sim-app-tutorial-ros2-drive-turtlebot"><span class="std std-ref">Driving TurtleBot using ROS 2 Messages</span></a>.</p>
+<p>이 예제에서는 Isaac Sim에서 <a class="reference external" href="https://emanual.robotis.com/docs/en/platform/turtlebot3/overview">Turtlebot3</a>를 설정하고 주행할 수 있도록 합니다.</p>
+<p>USD 형식으로 관절과 속성이 이미 설정된 로봇이 있고 바로 ROS 2 브릿지 사용으로 넘어가고 싶다면, 시리즈의 다음 튜토리얼인 <a class="reference internal" href="tutorial_ros2_drive_turtlebot.html#isaac-sim-app-tutorial-ros2-drive-turtlebot"><span class="std std-ref">Driving TurtleBot using ROS 2 Messages</span></a>로 이동하세요.</p>
 </section>
 <section id="getting-started">
 <h2>Getting Started<a class="headerlink" href="tutorial_ros2_turtlebot.html#getting-started" title="Link to this heading">#</a></h2>
-<p><strong>Prerequisite</strong></p>
+<p><strong>필수 조건</strong></p>
 <ul>
-<li><p>Completed <a class="reference internal" href="../installation/install_ros.html#isaac-sim-app-install-ros"><span class="std std-ref">ROS 2 Installation (Default)</span></a> so that ROS 2 is available, the ROS 2 extension is enabled, and necessary environment variables are set.</p></li>
-<li><p>Basic understanding of ROS workspaces.</p></li>
-<li><p>Install xacro using the following command:</p>
+<li><p>ROS 2를 사용할 수 있고, ROS 2 확장이 활성화되어 있으며, 필요한 환경 변수가 설정되도록 <a class="reference internal" href="../installation/install_ros.html#isaac-sim-app-install-ros"><span class="std std-ref">ROS 2 Installation (Default)</span></a>를 완료하세요.</p></li>
+<li><p>ROS 워크스페이스에 대한 기본 이해.</p></li>
+<li><p>다음 명령을 사용하여 xacro를 설치합니다:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio"/>
 <label class="sd-tab-label" for="sd-tab-item-0">
 Linux</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-<span class="nv">$ROS_DISTRO</span>-xacro
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio"/>
 <label class="sd-tab-label" for="sd-tab-item-1">
 Windows (Pixi)</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>add<span class="w"> </span>ros-<span class="nv">$ROS_DISTRO</span>-xacro
@@ -1285,48 +909,48 @@ Windows (Pixi)</label><div class="sd-tab-content docutils">
 <section id="importing-turtlebot-urdf">
 <h2>Importing TurtleBot URDF<a class="headerlink" href="tutorial_ros2_turtlebot.html#importing-turtlebot-urdf" title="Link to this heading">#</a></h2>
 <ul>
-<li><p>In a ROS-source terminal, clone the Turtlebot3’s description package if you haven’t done so already.</p>
+<li><p>ROS 소싱된 터미널에서 Turtlebot3 설명 패키지를 아직 클론하지 않았다면 클론합니다.</p>
 <blockquote>
 <div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="n">$ROS_DISTRO</span><span class="w"> </span><span class="n">https</span><span class="o">:</span><span class="c1">//github.com/ROBOTIS-GIT/turtlebot3.git turtlebot3</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Locate the URDF file for Turtlebot3 Burger in <code class="docutils literal notranslate"><span class="pre">turtlebot3/turtlebot3_description/urdf/turtlebot3_burger.urdf</span></code> and navigate to that directory.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">turtlebot3/turtlebot3_description/urdf/turtlebot3_burger.urdf</span></code>에서 Turtlebot3 Burger의 URDF 파일을 찾아 해당 디렉토리로 이동합니다.</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>turtlebot3/turtlebot3_description/urdf
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>In the same terminal, pre-process the URDF file to manually remove the namespace argument values and save to the <code class="docutils literal notranslate"><span class="pre">tb3_burger_processed.urdf</span></code> file:</p>
+<li><p>같은 터미널에서 URDF 파일을 사전 처리하여 네임스페이스 인수 값을 수동으로 제거하고 <code class="docutils literal notranslate"><span class="pre">tb3_burger_processed.urdf</span></code> 파일로 저장합니다:</p>
 <blockquote>
 <div><div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio"/>
 <label class="sd-tab-label" for="sd-tab-item-2">
 Linux</label><div class="sd-tab-content docutils">
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">namespace</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-xacro<span class="w"> </span>./turtlebot3_burger.urdf<span class="w"> </span><span class="s2">&quot;namespace:=</span><span class="si">${</span><span class="nv">namespace</span><span class="p">:+</span><span class="nv">$namespace</span><span class="p">/</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>tb3_burger_processed.urdf
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">namespace</span><span class="o">=</span><span class="s2">""</span>
+xacro<span class="w"> </span>./turtlebot3_burger.urdf<span class="w"> </span><span class="s2">"namespace:=</span><span class="si">${</span><span class="nv">namespace</span><span class="p">:+</span><span class="nv">$namespace</span><span class="p">/</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>&gt;<span class="w"> </span>tb3_burger_processed.urdf
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio"/>
 <label class="sd-tab-label" for="sd-tab-item-3">
 Windows (Pixi)</label><div class="sd-tab-content docutils">
-<p>The <a class="reference internal" href="../installation/install_ros_other_platforms.html#isaac-sim-app-install-ros-other-platforms"><span class="std std-ref">ROS 2 Installation (Other Platforms)</span></a> instructions prescribe Command Prompt. Use the matching tab below for the shell you launched <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">shell</span></code> from:</p>
+<p><a class="reference internal" href="../installation/install_ros_other_platforms.html#isaac-sim-app-install-ros-other-platforms"><span class="std std-ref">ROS 2 Installation (Other Platforms)</span></a> 지침은 명령 프롬프트를 사용합니다. <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">shell</span></code>을 실행한 셸에 맞는 아래 탭을 사용하세요:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
+<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio"/>
 <label class="sd-tab-label" for="sd-tab-item-4">
 Command Prompt</label><div class="sd-tab-content docutils">
-<div class="highlight-winbatch notranslate"><div class="highlight"><pre><span></span>xacro .\turtlebot3_burger.urdf <span class="s2">&quot;namespace:=&quot;</span> <span class="p">&gt;</span> tb3_burger_processed.urdf
+<div class="highlight-winbatch notranslate"><div class="highlight"><pre><span></span>xacro .\turtlebot3_burger.urdf <span class="s2">"namespace:="</span> <span class="p">&gt;</span> tb3_burger_processed.urdf
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+<input id="sd-tab-item-5" name="sd-tab-set-2" type="radio"/>
 <label class="sd-tab-label" for="sd-tab-item-5">
 PowerShell</label><div class="sd-tab-content docutils">
-<p>In PowerShell, the <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> redirect operator writes UTF-16 LE, which the URDF importer cannot parse. Pipe through <code class="docutils literal notranslate"><span class="pre">Out-File</span> <span class="pre">-Encoding</span> <span class="pre">utf8</span></code> so the file is written as UTF-8:</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">xacro</span> <span class="p">.\</span><span class="n">turtlebot3_burger</span><span class="p">.</span><span class="n">urdf</span> <span class="s2">&quot;namespace:=&quot;</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-Encoding</span> <span class="n">utf8</span> <span class="n">tb3_burger_processed</span><span class="p">.</span><span class="n">urdf</span>
+<p>PowerShell에서 <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> 리디렉션 연산자는 UTF-16 LE로 작성되어 URDF 가져오기가 파싱할 수 없습니다. 파일이 UTF-8로 작성되도록 <code class="docutils literal notranslate"><span class="pre">Out-File</span> <span class="pre">-Encoding</span> <span class="pre">utf8</span></code>을 통해 파이프합니다:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">xacro</span> <span class="p">.\</span><span class="n">turtlebot3_burger</span><span class="p">.</span><span class="n">urdf</span> <span class="s2">"namespace:="</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-Encoding</span> <span class="n">utf8</span> <span class="n">tb3_burger_processed</span><span class="p">.</span><span class="n">urdf</span>
 </pre></div>
 </div>
 </div>
@@ -1337,51 +961,51 @@ PowerShell</label><div class="sd-tab-content docutils">
 </li>
 </ul>
 <ol class="arabic">
-<li><p>Click <strong>File &gt; Import</strong>, then locate the URDF file and select it.</p></li>
-<li><p>Select the Base Type as “Mobile” to indicate that the robot has a moveable base</p></li>
-<li><p>Optionally, set Robot Type <em>Wheeled</em> to denote that the robot is a wheeled robot on the robot schema.</p></li>
-<li><p>Verify that the configuration of the robot matches the following:</p>
+<li><p><strong>File &gt; Import</strong>를 클릭한 다음 URDF 파일을 찾아 선택합니다.</p></li>
+<li><p>로봇이 이동 가능한 베이스를 가지고 있음을 나타내기 위해 Base Type으로 "Mobile"을 선택합니다</p></li>
+<li><p>선택적으로, 로봇 스키마에서 로봇이 바퀴 달린 로봇임을 나타내기 위해 Robot Type <em>Wheeled</em>를 설정합니다.</p></li>
+<li><p>로봇의 구성이 다음과 일치하는지 확인합니다:</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="../_images/isim_6.0_ros_tut_gui_tb_urdf_import.png"><img alt="../_images/isim_6.0_ros_tut_gui_tb_urdf_import.png" class="align-center" src="../_images/isim_6.0_ros_tut_gui_tb_urdf_import.png" style="width: 800px;" />
+<div><a class="reference internal image-reference" href="../_images/isim_6.0_ros_tut_gui_tb_urdf_import.png"><img alt="../_images/isim_6.0_ros_tut_gui_tb_urdf_import.png" class="align-center" src="../_images/isim_6.0_ros_tut_gui_tb_urdf_import.png" style="width: 800px;"/>
 </a>
 </div></blockquote>
 </li>
-<li><p>Click <strong>Import</strong>, the URDF importer will automatically open this file</p></li>
+<li><p><strong>Import</strong>를 클릭하면 URDF 가져오기가 자동으로 이 파일을 열 것입니다</p></li>
 </ol>
 <section id="tune-the-robot">
 <h3>Tune the Robot<a class="headerlink" href="tutorial_ros2_turtlebot.html#tune-the-robot" title="Link to this heading">#</a></h3>
-<p>Importing the URDF automatically imports material, physical, and joint properties whenever it is available and has matching categories in NVIDIA Isaac Sim. However, when there are no available or matching categories, or if the units are different between the two systems, what gets automatically filled in might not be accurate and changes the robot’s behavior. Here are some properties that can be tuned to correct the robot’s behavior.</p>
-<p><strong>Frictional Properties</strong></p>
-<p>If your robot’s wheels are slipping, try changing the friction coefficients of the wheels and potentially the ground as well following steps in <a class="reference internal" href="../robot_setup_tutorials/tutorial_intro_assemble_robot.html#isaac-sim-app-tutorial-intro-assemble-robot"><span class="std std-ref">Tutorial 2: Assemble a Simple Robot</span></a>.</p>
-<p><strong>Physical Properties</strong></p>
-<p>If no explicit mass or inertial properties are given, the physics engine will estimate them from the geometry mesh. To update the mass and inertial properties, find the prim that contains the rigid body for the given link. You can verify this by finding <strong>Physics &gt; Rigid Body</strong> under its property tab. If it already has a “Mass” category under its <strong>Physics</strong> property tab, modify them accordingly. If there isn’t already a “Mass” category, you can add it by clicking on the <strong>+Add</strong> button on top of the Property tab, and select <strong>Physics &gt; Mass</strong>.</p>
-<p><strong>Joint Properties</strong></p>
-<p>If your robot is oscillating at the joint or moving too slow, take a look at the stiffness and damping parameters for the joints. High stiffness makes the joints snap faster and harder to the desired target, and higher damping smooths but also slows down the joint’s movement to target. For pure position drives, set relatively high stiffness and low damping. For velocity drives, stiffness must be set to zero with a non-zero damping.</p>
+<p>URDF를 가져오면 사용 가능하고 NVIDIA Isaac Sim에서 일치하는 카테고리가 있을 때마다 재질, 물리적 및 조인트 속성이 자동으로 가져와집니다. 그러나 사용 가능하거나 일치하는 카테고리가 없거나 두 시스템 간 단위가 다른 경우 자동으로 채워진 내용이 정확하지 않아 로봇의 동작이 변경될 수 있습니다. 다음은 로봇의 동작을 수정하기 위해 조정할 수 있는 몇 가지 속성입니다.</p>
+<p><strong>마찰 속성</strong></p>
+<p>로봇의 바퀴가 미끄러지면 <a class="reference internal" href="../robot_setup_tutorials/tutorial_intro_assemble_robot.html#isaac-sim-app-tutorial-intro-assemble-robot"><span class="std std-ref">Tutorial 2: Assemble a Simple Robot</span></a>의 단계에 따라 바퀴 및 잠재적으로 지면의 마찰 계수를 변경해 보세요.</p>
+<p><strong>물리적 속성</strong></p>
+<p>명시적인 질량이나 관성 속성이 없는 경우, 물리 엔진은 기하학적 메시에서 이를 추정합니다. 질량 및 관성 속성을 업데이트하려면 주어진 링크의 리지드 바디를 포함하는 프림을 찾으세요. 속성 탭에서 <strong>Physics &gt; Rigid Body</strong>를 찾아 이를 확인할 수 있습니다. <strong>Physics</strong> 속성 탭에 이미 "Mass" 카테고리가 있다면 적절히 수정합니다. 아직 "Mass" 카테고리가 없다면 Property 탭 상단의 <strong>+Add</strong> 버튼을 클릭하고 <strong>Physics &gt; Mass</strong>를 선택하여 추가할 수 있습니다.</p>
+<p><strong>조인트 속성</strong></p>
+<p>로봇이 조인트에서 진동하거나 너무 느리게 움직이면 조인트의 강성 및 감쇠 파라미터를 살펴보세요. 높은 강성은 조인트가 원하는 목표에 더 빠르고 강하게 스냅되게 하고, 높은 감쇠는 부드럽게 하지만 목표에 대한 조인트 이동을 느리게 합니다. 순수한 위치 드라이브의 경우 상대적으로 높은 강성과 낮은 감쇠를 설정합니다. 속도 드라이브의 경우 강성을 0으로 설정하고 0이 아닌 감쇠를 설정해야 합니다.</p>
 <ol class="arabic simple">
-<li><p>Go to <em>Tools &gt; Robotics &gt; Asset Editors &gt; Gain Tuner</em>.</p></li>
-<li><p>Select the robot in the stage tree.</p></li>
-<li><p>Set the <strong>Damping</strong> to a value of <code class="docutils literal notranslate"><span class="pre">10000000.0</span></code> for the <strong>wheel_left_joint</strong> and <strong>wheel_right_joint</strong>.</p></li>
-<li><p>Click the <strong>Save Gains to Physics Layer</strong> button to save the gains to the physics layer.</p></li>
+<li><p><em>Tools &gt; Robotics &gt; Asset Editors &gt; Gain Tuner</em>로 이동합니다.</p></li>
+<li><p>스테이지 트리에서 로봇을 선택합니다.</p></li>
+<li><p><strong>wheel_left_joint</strong> 및 <strong>wheel_right_joint</strong>에 대해 <strong>Damping</strong>을 <code class="docutils literal notranslate"><span class="pre">10000000.0</span></code> 값으로 설정합니다.</p></li>
+<li><p><strong>Save Gains to Physics Layer</strong> 버튼을 클릭하여 게인을 물리 레이어에 저장합니다.</p></li>
 </ol>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/isim_6.0_ros_tut_gui_gain_tuner.png"><img alt="../_images/isim_6.0_ros_tut_gui_gain_tuner.png" src="../_images/isim_6.0_ros_tut_gui_gain_tuner.png" style="width: 800px;" />
+<a class="reference internal image-reference" href="../_images/isim_6.0_ros_tut_gui_gain_tuner.png"><img alt="../_images/isim_6.0_ros_tut_gui_gain_tuner.png" src="../_images/isim_6.0_ros_tut_gui_gain_tuner.png" style="width: 800px;"/>
 </a>
 </figure>
 </section>
 <section id="assemble-the-scenes">
 <h3>Assemble the scenes<a class="headerlink" href="tutorial_ros2_turtlebot.html#assemble-the-scenes" title="Link to this heading">#</a></h3>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>On multi-GPU systems running Windows, loading and playing this scene may currently result in a fatal application crash. This is a known issue and will be addressed in a future release.</p>
+<p class="admonition-title">참고</p>
+<p>Windows에서 멀티 GPU 시스템의 경우, 이 씬을 로드하고 재생하면 현재 치명적인 애플리케이션 충돌이 발생할 수 있습니다. 이는 알려진 문제이며 향후 릴리스에서 해결될 것입니다.</p>
 </div>
 <ol class="arabic">
-<li><p>For the purpose of this tutorial series, use an Isaac environment, later you can import the robot into any environment of your choosing. Open the environment by going to the Isaac Sim Content browser and clicking <strong>Isaac Sim/Environments/Simple_Room/simple_room.usd</strong>. If you do not want to use the provided environment, make sure there is a <em>GroundPlane</em> and a <em>PhysicsScene</em> to your environment. Both can be found in <strong>Create &gt; Physics</strong>. You might also need some lighting, play with the various types of lighting in <strong>Create &gt; Light</strong> to get the desired effect.</p></li>
-<li><p>On a new stage, drag the <code class="docutils literal notranslate"><span class="pre">simple_room.usd</span></code> onto the stage, and place it at the origin by zeroing out all the <em>Translate</em> components in the <strong>Transform Property</strong>. You may need to zoom in a bit to observe the table inside the room</p></li>
-<li><p>Now add the turtle bot to the stage by dragging the turtlebot robot asset file onto the stage.</p></li>
-<li><p>When the Turtlebot is first imported, it will be on the table. Place it just above the floor of the room using the gizmo. The transform used in the screenshot is <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">1.5,</span> <span class="pre">-0.75)</span></code>.</p></li>
-<li><p>Press <strong>Play</strong> and you validate that you observe the Turtlebot fall onto the floor.</p>
+<li><p>이 튜토리얼 시리즈를 위해 Isaac 환경을 사용하고, 나중에 원하는 환경으로 로봇을 가져올 수 있습니다. Isaac Sim Content 브라우저로 이동하여 <strong>Isaac Sim/Environments/Simple_Room/simple_room.usd</strong>를 클릭하여 환경을 엽니다. 제공된 환경을 사용하지 않으려면 환경에 <em>GroundPlane</em>과 <em>PhysicsScene</em>이 있는지 확인하세요. 둘 다 <strong>Create &gt; Physics</strong>에서 찾을 수 있습니다. 원하는 효과를 얻기 위해 <strong>Create &gt; Light</strong>의 다양한 조명 유형을 사용해볼 수도 있습니다.</p></li>
+<li><p>새 스테이지에서 <code class="docutils literal notranslate"><span class="pre">simple_room.usd</span></code>를 스테이지로 드래그하고, <strong>Transform Property</strong>의 모든 <em>Translate</em> 컴포넌트를 0으로 만들어 원점에 배치합니다. 방 안의 테이블을 보려면 약간 확대해야 할 수 있습니다</p></li>
+<li><p>이제 터틀봇 로봇 에셋 파일을 스테이지로 드래그하여 스테이지에 추가합니다.</p></li>
+<li><p>Turtlebot을 처음 가져오면 테이블 위에 있습니다. 기즈모를 사용하여 방 바닥 바로 위에 배치합니다. 스크린샷에서 사용된 변환은 <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">1.5,</span> <span class="pre">-0.75)</span></code>입니다.</p></li>
+<li><p><strong>Play</strong>를 눌러 Turtlebot이 바닥에 떨어지는 것을 확인합니다.</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="../_images/isim_6.0_ros_tut_gui_tb_urdf_import_2.png"><img alt="../_images/isim_6.0_ros_tut_gui_tb_urdf_import_2.png" class="align-center" src="../_images/isim_6.0_ros_tut_gui_tb_urdf_import_2.png" style="width: 800px;" />
+<div><a class="reference internal image-reference" href="../_images/isim_6.0_ros_tut_gui_tb_urdf_import_2.png"><img alt="../_images/isim_6.0_ros_tut_gui_tb_urdf_import_2.png" class="align-center" src="../_images/isim_6.0_ros_tut_gui_tb_urdf_import_2.png" style="width: 800px;"/>
 </a>
 </div></blockquote>
 </li>
@@ -1390,75 +1014,53 @@ PowerShell</label><div class="sd-tab-content docutils">
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="tutorial_ros2_turtlebot.html#summary" title="Link to this heading">#</a></h2>
-<p>This tutorial covered the following topics:</p>
+<p>이 튜토리얼에서 다룬 주제:</p>
 <ol class="arabic simple">
-<li><p>URDF import</p></li>
-<li><p>Tuning the robot parameters</p></li>
+<li><p>URDF 가져오기</p></li>
+<li><p>로봇 파라미터 조정</p></li>
 </ol>
 <section id="next-steps">
 <h3>Next Steps<a class="headerlink" href="tutorial_ros2_turtlebot.html#next-steps" title="Link to this heading">#</a></h3>
-<p>Continue on to the next tutorial in our ROS Tutorials series, <a class="reference internal" href="tutorial_ros2_drive_turtlebot.html#isaac-sim-app-tutorial-ros2-drive-turtlebot"><span class="std std-ref">Driving TurtleBot using ROS 2 Messages</span></a>, to learn how to add OmniGraph nodes to move the robot, and ROS 2 bridge nodes to connect to the ROS network.</p>
+<p>ROS 튜토리얼 시리즈의 다음 튜토리얼인 <a class="reference internal" href="tutorial_ros2_drive_turtlebot.html#isaac-sim-app-tutorial-ros2-drive-turtlebot"><span class="std std-ref">Driving TurtleBot using ROS 2 Messages</span></a>로 계속 진행하여 로봇을 이동시키는 OmniGraph 노드와 ROS 네트워크에 연결하는 ROS 2 브릿지 노드를 추가하는 방법을 배우세요.</p>
 </section>
 <section id="further-learning">
 <h3>Further Learning<a class="headerlink" href="tutorial_ros2_turtlebot.html#further-learning" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>More details <a class="reference internal" href="../importer_exporter/ext_isaacsim_asset_importer_urdf.html#isaac-sim-urdf-importer"><span class="std std-ref">URDF Importer Extension</span></a>.</p></li>
-<li><p>More details on world building <a class="reference internal" href="../robot_setup_tutorials/tutorial_gui_simple_robot.html#isaac-sim-app-tutorial-gui-simple-robot"><span class="std std-ref">Tutorial 3: Articulate a Basic Robot</span></a>.</p></li>
-<li><p>More details about <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html#isaac-gain-tuner"><span class="std std-ref">Gain Tuner Extension</span></a> and <a class="reference internal" href="../physics/joint_inspector.html#isaac-sim-physics-joint-inspector"><span class="std std-ref">Physics Inspector</span></a>.</p></li>
+<li><p>자세한 내용 <a class="reference internal" href="../importer_exporter/ext_isaacsim_asset_importer_urdf.html#isaac-sim-urdf-importer"><span class="std std-ref">URDF Importer Extension</span></a>.</p></li>
+<li><p>월드 구축에 대한 자세한 내용 <a class="reference internal" href="../robot_setup_tutorials/tutorial_gui_simple_robot.html#isaac-sim-app-tutorial-gui-simple-robot"><span class="std std-ref">Tutorial 3: Articulate a Basic Robot</span></a>.</p></li>
+<li><p><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html#isaac-gain-tuner"><span class="std std-ref">Gain Tuner Extension</span></a> 및 <a class="reference internal" href="../physics/joint_inspector.html#isaac-sim-physics-joint-inspector"><span class="std std-ref">Physics Inspector</span></a>에 대한 자세한 내용.</p></li>
 </ul>
 </section>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="index.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">ROS 2 Tutorials (Linux and Windows)</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="tutorial_ros2_drive_turtlebot.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Driving TurtleBot using ROS 2 Messages</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="index.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">ROS 2 Tutorials (Linux and Windows)</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="tutorial_ros2_drive_turtlebot.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Driving TurtleBot using ROS 2 Messages</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_ros2_turtlebot.html#learning-objectives">Learning Objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_ros2_turtlebot.html#getting-started">Getting Started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_ros2_turtlebot.html#importing-turtlebot-urdf">Importing TurtleBot URDF</a><ul class="nav section-nav flex-column">
@@ -1472,46 +1074,29 @@ PowerShell</label><div class="sd-tab-content docutils">
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1542,36 +1127,21 @@ PowerShell</label><div class="sd-tab-content docutils">
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

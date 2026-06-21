@@ -1,561 +1,257 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>ROS 2 Putting It All Together &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>ROS 2 Putting It All Together — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
-  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
-</script>
-<script type="text/javascript">
-  function OptanonWrapper() {
-    var event = new Event('bannerLoaded');
-    window.dispatchEvent(event);
-  }
-</script>
-<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
-</script>
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'ros2_tutorials/tutorial_ros2_putting_it_all_together';</script>
-    <script>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'ros2_tutorials/tutorial_ros2_putting_it_all_together';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="ROS 2 Frequently Asked Questions" href="ros2_faq.html" />
-    <link rel="prev" title="ROS2 Simulation Control" href="tutorial_ros2_simulation_control.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="ros2_faq.html" rel="next" title="ROS 2 Frequently Asked Questions"/>
+<link href="tutorial_ros2_simulation_control.html" rel="prev" title="ROS2 Simulation Control"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="tutorial_ros2_putting_it_all_together.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="tutorial_ros2_putting_it_all_together.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -575,7 +271,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -603,20 +298,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -691,17 +374,7 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="ros2_landing_page.html">ROS 2</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">ROS 2 Tutorials (Linux and Windows)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -879,7 +552,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -919,13 +591,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -972,10 +638,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1144,18 +806,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1181,187 +833,159 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="ros2_landing_page.html" class="nav-link">ROS 2</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">ROS 2 Tutorials (Linux and Windows)</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ROS 2 Putting It All Together</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="ros2_landing_page.html">ROS 2</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">ROS 2 Tutorials (Linux and Windows)</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">ROS 2 Putting It All Together</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="ros-2-putting-it-all-together">
+<article class="bd-article">
+<section id="ros-2-putting-it-all-together">
 <span id="isaac-sim-app-tutorial-ros2-putting-it-all-together"></span><h1>ROS 2 Putting It All Together<a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#ros-2-putting-it-all-together" title="Link to this heading">#</a></h1>
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#learning-objectives" title="Link to this heading">#</a></h2>
-<p>In this example, you will use ideas introduced in many other ROS 2 and Isaac Sim tutorials to go from a robot URDF definition to a fully ROS 2-driven robot system.</p>
+<p>이 예제에서는 다른 많은 ROS 2 및 Isaac Sim 튜토리얼에서 소개된 아이디어를 사용하여 로봇 URDF 정의에서 완전한 ROS 2 기반 로봇 시스템으로 전환합니다.</p>
 <ul class="simple">
-<li><p>Import a URDF robot model into Isaac Sim</p></li>
-<li><p>Incorporate physics and collision properties into the robot model</p></li>
-<li><p>Attach physically accurate sensors to the model</p></li>
-<li><p>Build out publisher and subscribers using code or OmniGraph to connect the robot to the ROS 2 network</p></li>
-<li><p>Integrate a navigation stack to enable the robot to move around an environment</p></li>
+<li><p>URDF 로봇 모델을 Isaac Sim으로 가져오기</p></li>
+<li><p>로봇 모델에 물리 및 충돌 속성 통합</p></li>
+<li><p>모델에 물리적으로 정확한 센서 부착</p></li>
+<li><p>코드 또는 OmniGraph를 사용하여 로봇을 ROS 2 네트워크에 연결하는 publisher 및 subscriber 구축</p></li>
+<li><p>로봇이 환경에서 이동할 수 있도록 내비게이션 스택 통합</p></li>
 </ul>
-<p>This tutorial uses the <a class="reference external" href="https://clearpathrobotics.com/dingo-indoor-mobile-robot/">Clearpath Robotics Dingo-D</a> as the robot model.
-It is a differential drive robot made for indoor use.</p>
+<p>이 튜토리얼은 로봇 모델로 <a class="reference external" href="https://clearpathrobotics.com/dingo-indoor-mobile-robot/">Clearpath Robotics Dingo-D</a>를 사용합니다.
+이것은 실내 사용을 위한 차동 구동 로봇입니다.</p>
 </section>
 <section id="getting-started">
 <h2>Getting Started<a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#getting-started" title="Link to this heading">#</a></h2>
-<p><strong>Prerequisites</strong></p>
+<p><strong>사전 준비사항</strong></p>
 <ul class="simple">
-<li><p>Completed <a class="reference internal" href="../installation/install_ros.html#isaac-sim-app-install-ros"><span class="std std-ref">ROS 2 Installation (Default)</span></a> so that ROS 2 is available, the ROS 2 extension is enabled, and necessary environment variables are set.</p></li>
-<li><p>Enable the <code class="docutils literal notranslate"><span class="pre">isaacsim.ros2.bridge</span></code> Extension in the <strong>Extension Manager</strong> window by navigating to <strong>Window</strong> &gt; <strong>Extensions</strong>.</p></li>
-<li><p>Have cloned the <a class="reference external" href="https://github.com/isaac-sim/IsaacSim-ros_workspaces">IsaacSim-ros_workspaces</a> repo and sourced the workspace.</p></li>
+<li><p>ROS 2를 사용할 수 있고, ROS 2 extension이 활성화되어 있으며, 필요한 환경 변수가 설정되도록 <a class="reference internal" href="../installation/install_ros.html#isaac-sim-app-install-ros"><span class="std std-ref">ROS 2 Installation (Default)</span></a>을 완료하세요.</p></li>
+<li><p><strong>Window</strong> &gt; <strong>Extensions</strong>으로 이동하여 <strong>Extension Manager</strong> 창에서 <code class="docutils literal notranslate"><span class="pre">isaacsim.ros2.bridge</span></code> Extension을 활성화합니다.</p></li>
+<li><p><a class="reference external" href="https://github.com/isaac-sim/IsaacSim-ros_workspaces">IsaacSim-ros_workspaces</a> 저장소를 클론하고 workspace를 소스했어야 합니다.</p></li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>This tutorial supports the PhysX SDK backend only; Newton is not supported because these assets use negatively scaled meshes. See <a class="reference internal" href="../physics/newton_physics.html#newton-physics-asset-compatibility"><span class="std std-ref">Newton asset compatibility</span></a>.</p>
+<p>이 튜토리얼은 PhysX SDK 백엔드만 지원합니다; 이 에셋이 음수 스케일 메시를 사용하기 때문에 Newton은 지원되지 않습니다. <a class="reference internal" href="../physics/newton_physics.html#newton-physics-asset-compatibility"><span class="std std-ref">Newton asset compatibility</span></a>를 참조하세요.</p>
 </div>
 </section>
 <section id="importing-the-urdf">
 <h2>Importing the URDF<a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#importing-the-urdf" title="Link to this heading">#</a></h2>
-<p>Use the <a class="reference internal" href="../importer_exporter/ext_isaacsim_asset_importer_urdf.html#isaac-sim-urdf-importer"><span class="std std-ref">URDF Importer Extension</span></a> to import the robot into Isaac Sim. This involves first generating a URDF, and then publishing it to the <code class="docutils literal notranslate"><span class="pre">/robot_description</span></code> topic.</p>
+<p>로봇을 Isaac Sim으로 가져오려면 <a class="reference internal" href="../importer_exporter/ext_isaacsim_asset_importer_urdf.html#isaac-sim-urdf-importer"><span class="std std-ref">URDF Importer Extension</span></a>을 사용합니다. 이를 위해 먼저 URDF를 생성한 다음 <code class="docutils literal notranslate"><span class="pre">/robot_description</span></code> 토픽에 발행합니다.</p>
 <section id="generate-the-robot-description">
 <h3>Generate the Robot Description<a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#generate-the-robot-description" title="Link to this heading">#</a></h3>
 <ol class="arabic">
-<li><p>In a ROS-sourced terminal, install the Clearpath Robotics packages and other necessary dependencies.</p>
+<li><p>ROS가 소스된 터미널에서 Clearpath Robotics 패키지와 기타 필요한 의존성을 설치합니다.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="linux" for="sd-tab-item-0">
 Linux</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-<span class="nv">$ROS_DISTRO</span>-clearpath-common<span class="w"> </span>ros-<span class="nv">$ROS_DISTRO</span>-xacro
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="windows" for="sd-tab-item-1">
 Windows</label><div class="sd-tab-content docutils">
-<p>All Windows commands in this tutorial use PowerShell syntax. Run them from a PowerShell terminal with the ROS 2 workspace sourced.</p>
-<p>These packages are included with your sourced ROS 2 workspace; no additional install step is required.</p>
+<p>이 튜토리얼의 모든 Windows 명령은 PowerShell 구문을 사용합니다. ROS 2 workspace가 소스된 PowerShell 터미널에서 실행하세요.</p>
+<p>이 패키지들은 소스된 ROS 2 workspace에 포함되어 있어 추가 설치 단계가 필요하지 않습니다.</p>
 </div>
 </div>
 </li>
-<li><p>Set a convenience variable pointing to the <code class="docutils literal notranslate"><span class="pre">isaacsim_clearpath_nav2</span></code> package’s params directory. All generated files will be stored here. Any Clearpath robot configuration will work; this tutorial uses the Dingo-D (<code class="docutils literal notranslate"><span class="pre">dd100</span></code>).</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">isaacsim_clearpath_nav2</span></code> 패키지의 params 디렉터리를 가리키는 편의 변수를 설정합니다. 생성된 모든 파일이 여기에 저장됩니다. 모든 Clearpath 로봇 구성이 작동합니다; 이 튜토리얼은 Dingo-D (<code class="docutils literal notranslate"><span class="pre">dd100</span></code>)를 사용합니다.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="linux" for="sd-tab-item-2">
 Linux</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">ROBOT_PARAMS</span><span class="o">=</span><span class="k">$(</span>ros2<span class="w"> </span>pkg<span class="w"> </span>prefix<span class="w"> </span>isaacsim_clearpath_nav2<span class="k">)</span>/share/isaacsim_clearpath_nav2/params/dd100
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="windows" for="sd-tab-item-3">
 Windows</label><div class="sd-tab-content docutils">
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nv">$env:ROBOT_PARAMS</span> <span class="p">=</span> <span class="s2">&quot;</span><span class="p">$(</span><span class="n">ros2</span> <span class="n">pkg</span> <span class="n">prefix</span> <span class="n">isaacsim_clearpath_nav2</span><span class="p">)</span><span class="s2">\share\isaacsim_clearpath_nav2\params\dd100&quot;</span>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nv">$env:ROBOT_PARAMS</span> <span class="p">=</span> <span class="s2">"</span><span class="p">$(</span><span class="n">ros2</span> <span class="n">pkg</span> <span class="n">prefix</span> <span class="n">isaacsim_clearpath_nav2</span><span class="p">)</span><span class="s2">\share\isaacsim_clearpath_nav2\params\dd100"</span>
 </pre></div>
 </div>
 </div>
 </div>
 </li>
-<li><p>Copy the sample Dingo-D configuration as <code class="docutils literal notranslate"><span class="pre">robot.yaml</span></code>.</p>
+<li><p>샘플 Dingo-D 구성을 <code class="docutils literal notranslate"><span class="pre">robot.yaml</span></code>로 복사합니다.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio">
+<input checked="checked" id="sd-tab-item-4" name="sd-tab-set-2" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="linux" for="sd-tab-item-4">
 Linux</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span><span class="k">$(</span>ros2<span class="w"> </span>pkg<span class="w"> </span>prefix<span class="w"> </span>clearpath_config<span class="k">)</span>/share/clearpath_config/sample/dd100_default.yaml<span class="w"> </span><span class="nv">$ROBOT_PARAMS</span>/robot.yaml
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+<input id="sd-tab-item-5" name="sd-tab-set-2" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="windows" for="sd-tab-item-5">
 Windows</label><div class="sd-tab-content docutils">
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">Copy-Item</span> <span class="s2">&quot;</span><span class="p">$(</span><span class="n">ros2</span> <span class="n">pkg</span> <span class="n">prefix</span> <span class="n">clearpath_config</span><span class="p">)</span><span class="s2">\share\clearpath_config\sample\dd100_default.yaml&quot;</span> <span class="p">`</span>
-          <span class="s2">&quot;$env:ROBOT_PARAMS\robot.yaml&quot;</span>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">Copy-Item</span> <span class="s2">"</span><span class="p">$(</span><span class="n">ros2</span> <span class="n">pkg</span> <span class="n">prefix</span> <span class="n">clearpath_config</span><span class="p">)</span><span class="s2">\share\clearpath_config\sample\dd100_default.yaml"</span> <span class="p">`</span>
+          <span class="s2">"$env:ROBOT_PARAMS\robot.yaml"</span>
 </pre></div>
 </div>
 </div>
 </div>
 </li>
-<li><p>Generate the robot description with the Clearpath generator.</p>
+<li><p>Clearpath generator로 로봇 설명을 생성합니다.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-6" name="sd-tab-set-3" type="radio">
+<input checked="checked" id="sd-tab-item-6" name="sd-tab-set-3" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="linux" for="sd-tab-item-6">
 Linux</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>clearpath_generator_common<span class="w"> </span>generate_description<span class="w"> </span>-s<span class="w"> </span><span class="nv">$ROBOT_PARAMS</span>
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-7" name="sd-tab-set-3" type="radio">
+<input id="sd-tab-item-7" name="sd-tab-set-3" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="windows" for="sd-tab-item-7">
 Windows</label><div class="sd-tab-content docutils">
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="s2">&quot;</span><span class="p">$(</span><span class="n">ros2</span> <span class="n">pkg</span> <span class="n">prefix</span> <span class="n">clearpath_generator_common</span><span class="p">)</span><span class="s2">\lib\clearpath_generator_common\generate_description&quot;</span> <span class="n">-s</span> <span class="nv">$env:ROBOT_PARAMS</span>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="s2">"</span><span class="p">$(</span><span class="n">ros2</span> <span class="n">pkg</span> <span class="n">prefix</span> <span class="n">clearpath_generator_common</span><span class="p">)</span><span class="s2">\lib\clearpath_generator_common\generate_description"</span> <span class="n">-s</span> <span class="nv">$env:ROBOT_PARAMS</span>
 </pre></div>
 </div>
 </div>
 </div>
 </li>
-<li><p>Launch the robot description node to publish the URDF on the <code class="docutils literal notranslate"><span class="pre">/robot_description</span></code> topic. Keep this terminal open.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">/robot_description</span></code> 토픽에 URDF를 발행하는 로봇 설명 노드를 실행합니다. 이 터미널을 열어두세요.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-8" name="sd-tab-set-4" type="radio">
+<input checked="checked" id="sd-tab-item-8" name="sd-tab-set-4" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="linux" for="sd-tab-item-8">
 Linux</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>clearpath_platform_description<span class="w"> </span>description.launch.py<span class="w"> </span>--<span class="w"> </span>setup_path:<span class="o">=</span><span class="nv">$ROBOT_PARAMS</span>
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-9" name="sd-tab-set-4" type="radio">
+<input id="sd-tab-item-9" name="sd-tab-set-4" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="windows" for="sd-tab-item-9">
 Windows</label><div class="sd-tab-content docutils">
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">launch</span> <span class="n">clearpath_platform_description</span> <span class="n">description</span><span class="p">.</span><span class="n">launch</span><span class="p">.</span><span class="n">py</span> <span class="p">--</span> <span class="n">setup_path</span><span class="p">:=</span><span class="nv">$env:ROBOT_PARAMS</span>
@@ -1373,9 +997,9 @@ Windows</label><div class="sd-tab-content docutils">
 </ol>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">Full copy-paste command</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<span class="sd-summary-text">Full copy-paste command</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-right" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-10" name="sd-tab-set-5" type="radio">
+<input checked="checked" id="sd-tab-item-10" name="sd-tab-set-5" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="linux" for="sd-tab-item-10">
 Linux</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">ROBOT_PARAMS</span><span class="o">=</span><span class="k">$(</span>ros2<span class="w"> </span>pkg<span class="w"> </span>prefix<span class="w"> </span>isaacsim_clearpath_nav2<span class="k">)</span>/share/isaacsim_clearpath_nav2/params/dd100
@@ -1385,13 +1009,13 @@ ros2<span class="w"> </span>launch<span class="w"> </span>clearpath_platform_des
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-11" name="sd-tab-set-5" type="radio">
+<input id="sd-tab-item-11" name="sd-tab-set-5" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="windows" for="sd-tab-item-11">
 Windows</label><div class="sd-tab-content docutils">
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nv">$env:ROBOT_PARAMS</span> <span class="p">=</span> <span class="s2">&quot;</span><span class="p">$(</span><span class="n">ros2</span> <span class="n">pkg</span> <span class="n">prefix</span> <span class="n">isaacsim_clearpath_nav2</span><span class="p">)</span><span class="s2">\share\isaacsim_clearpath_nav2\params\dd100&quot;</span>
-<span class="nb">Copy-Item</span> <span class="s2">&quot;</span><span class="p">$(</span><span class="n">ros2</span> <span class="n">pkg</span> <span class="n">prefix</span> <span class="n">clearpath_config</span><span class="p">)</span><span class="s2">\share\clearpath_config\sample\dd100_default.yaml&quot;</span> <span class="p">`</span>
-          <span class="s2">&quot;$env:ROBOT_PARAMS\robot.yaml&quot;</span>
-<span class="n">python</span> <span class="s2">&quot;</span><span class="p">$(</span><span class="n">ros2</span> <span class="n">pkg</span> <span class="n">prefix</span> <span class="n">clearpath_generator_common</span><span class="p">)</span><span class="s2">\lib\clearpath_generator_common\generate_description&quot;</span> <span class="n">-s</span> <span class="nv">$env:ROBOT_PARAMS</span>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nv">$env:ROBOT_PARAMS</span> <span class="p">=</span> <span class="s2">"</span><span class="p">$(</span><span class="n">ros2</span> <span class="n">pkg</span> <span class="n">prefix</span> <span class="n">isaacsim_clearpath_nav2</span><span class="p">)</span><span class="s2">\share\isaacsim_clearpath_nav2\params\dd100"</span>
+<span class="nb">Copy-Item</span> <span class="s2">"</span><span class="p">$(</span><span class="n">ros2</span> <span class="n">pkg</span> <span class="n">prefix</span> <span class="n">clearpath_config</span><span class="p">)</span><span class="s2">\share\clearpath_config\sample\dd100_default.yaml"</span> <span class="p">`</span>
+          <span class="s2">"$env:ROBOT_PARAMS\robot.yaml"</span>
+<span class="n">python</span> <span class="s2">"</span><span class="p">$(</span><span class="n">ros2</span> <span class="n">pkg</span> <span class="n">prefix</span> <span class="n">clearpath_generator_common</span><span class="p">)</span><span class="s2">\lib\clearpath_generator_common\generate_description"</span> <span class="n">-s</span> <span class="nv">$env:ROBOT_PARAMS</span>
 <span class="n">ros2</span> <span class="n">launch</span> <span class="n">clearpath_platform_description</span> <span class="n">description</span><span class="p">.</span><span class="n">launch</span><span class="p">.</span><span class="n">py</span> <span class="p">--</span> <span class="n">setup_path</span><span class="p">:=</span><span class="nv">$env:ROBOT_PARAMS</span>
 </pre></div>
 </div>
@@ -1401,125 +1025,125 @@ Windows</label><div class="sd-tab-content docutils">
 </details></section>
 <section id="import-into-isaac-sim">
 <h3>Import into Isaac Sim<a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#import-into-isaac-sim" title="Link to this heading">#</a></h3>
-<p>Use the <a class="reference internal" href="../importer_exporter/ext_isaacsim_asset_importer_urdf.html#isaac-sim-urdf-importer"><span class="std std-ref">URDF Importer Extension</span></a> to import the robot description directly from the running robot description node you created in the previous step.</p>
+<p><a class="reference internal" href="../importer_exporter/ext_isaacsim_asset_importer_urdf.html#isaac-sim-urdf-importer"><span class="std std-ref">URDF Importer Extension</span></a>을 사용하여 이전 단계에서 생성한 실행 중인 로봇 설명 노드에서 직접 로봇 설명을 가져옵니다.</p>
 <ol class="arabic simple">
-<li><p>Launch Isaac Sim from a terminal where an <a class="reference external" href="https://github.com/isaac-sim/IsaacSim-ros_workspaces">IsaacSim-ros_workspaces</a> build is sourced.</p></li>
-<li><p>Install and enable the <code class="docutils literal notranslate"><span class="pre">isaacsim.ros2.urdf</span></code> extension in the <strong>Extension Manager</strong> window by navigating to <strong>Window</strong> &gt; <strong>Extensions</strong>.</p></li>
-<li><p>Navigate to <strong>File</strong> &gt; <strong>Import from ROS2 URDF Node</strong>.</p></li>
-<li><p>Type <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code> in the <strong>ROS 2 Node</strong> text box and click <strong>Find Node</strong>. It should say “ROS package paths resolved” if it was successful.</p></li>
-<li><p>Click <strong>Import</strong> to import the robot description.</p></li>
-<li><p>Rename the default prim to <code class="docutils literal notranslate"><span class="pre">dd100</span></code>.</p></li>
-<li><p>Save the stage with <code class="docutils literal notranslate"><span class="pre">SHIFT+CTRL+S</span></code> as <code class="docutils literal notranslate"><span class="pre">dd100.usd</span></code>.</p></li>
+<li><p><a class="reference external" href="https://github.com/isaac-sim/IsaacSim-ros_workspaces">IsaacSim-ros_workspaces</a> 빌드가 소스된 터미널에서 Isaac Sim을 실행합니다.</p></li>
+<li><p><strong>Window</strong> &gt; <strong>Extensions</strong>으로 이동하여 <strong>Extension Manager</strong> 창에서 <code class="docutils literal notranslate"><span class="pre">isaacsim.ros2.urdf</span></code> extension을 설치하고 활성화합니다.</p></li>
+<li><p><strong>File</strong> &gt; <strong>Import from ROS2 URDF Node</strong>로 이동합니다.</p></li>
+<li><p><strong>ROS 2 Node</strong> 텍스트 박스에 <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code>를 입력하고 <strong>Find Node</strong>를 클릭합니다. 성공하면 "ROS package paths resolved"라고 표시됩니다.</p></li>
+<li><p><strong>Import</strong>를 클릭하여 로봇 설명을 가져옵니다.</p></li>
+<li><p>기본 prim을 <code class="docutils literal notranslate"><span class="pre">dd100</span></code>으로 이름을 변경합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SHIFT+CTRL+S</span></code>로 stage를 <code class="docutils literal notranslate"><span class="pre">dd100.usd</span></code>로 저장합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="DD100 in Isaac Sim after import" src="../_images/tutorial_ros2_putting_it_all_together_dd100_import.png" />
+<img alt="DD100 in Isaac Sim after import" src="../_images/tutorial_ros2_putting_it_all_together_dd100_import.png"/>
 </figure>
 </section>
 <section id="adjust-model-physics">
 <h3>Adjust Model Physics<a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#adjust-model-physics" title="Link to this heading">#</a></h3>
-<p>By default, the imported URDF model has a few oddities to fix.</p>
+<p>기본적으로 가져온 URDF 모델에는 수정해야 할 몇 가지 이상한 점이 있습니다.</p>
 <ol class="arabic simple">
-<li><p>Disable non-physical joints. The URDF, and USD as a result, has some unnecessary joints. Disable all joints <em>except</em> <code class="docutils literal notranslate"><span class="pre">front_left_wheel_joint</span></code>, <code class="docutils literal notranslate"><span class="pre">front_right_wheel_joint</span></code>, and <code class="docutils literal notranslate"><span class="pre">rear_caster_joint</span></code> joints. This can be done by clicking each joint with CTRL+LMB in the <strong>Stage Tree</strong> and deselecting <strong>Joint Enabled</strong> under <strong>Physics</strong>.</p></li>
-<li><p>Update the <strong>Damping</strong> of the <code class="docutils literal notranslate"><span class="pre">front_left_wheel_joint</span></code> and <code class="docutils literal notranslate"><span class="pre">front_right_wheel_joint</span></code> to <code class="docutils literal notranslate"><span class="pre">10000</span></code>. This enables velocity control of the robot. You can find <strong>Damping</strong> under <strong>Physics &gt; Drive</strong> in the <strong>Property</strong> tab of each joint.</p></li>
-<li><p>Add more accurate friction coefficients. The robot is a differential drive bot, so the rear caster should slide freely while the drive wheels need good traction.</p>
+<li><p>비물리적 조인트를 비활성화합니다. URDF와 결과적으로 USD에는 불필요한 조인트가 있습니다. <code class="docutils literal notranslate"><span class="pre">front_left_wheel_joint</span></code>, <code class="docutils literal notranslate"><span class="pre">front_right_wheel_joint</span></code>, <code class="docutils literal notranslate"><span class="pre">rear_caster_joint</span></code>를 <em>제외한</em> 모든 조인트를 비활성화합니다. <strong>Stage Tree</strong>에서 CTRL+LMB로 각 조인트를 클릭하고 <strong>Physics</strong> 아래의 <strong>Joint Enabled</strong>를 선택 해제하면 됩니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">front_left_wheel_joint</span></code>와 <code class="docutils literal notranslate"><span class="pre">front_right_wheel_joint</span></code>의 <strong>Damping</strong>을 <code class="docutils literal notranslate"><span class="pre">10000</span></code>으로 업데이트합니다. 이를 통해 로봇의 속도 제어가 가능합니다. 각 조인트의 <strong>Property</strong> 탭에서 <strong>Physics &gt; Drive</strong> 아래에서 <strong>Damping</strong>을 찾을 수 있습니다.</p></li>
+<li><p>더 정확한 마찰 계수를 추가합니다. 이 로봇은 차동 구동 봇이므로 후면 캐스터는 자유롭게 미끄러져야 하고 구동 바퀴는 좋은 견인력이 필요합니다.</p>
 <ol class="arabic simple">
-<li><p>Create two physics materials under <code class="docutils literal notranslate"><span class="pre">/dd100/Materials</span></code>: <code class="docutils literal notranslate"><span class="pre">CasterMaterial</span></code> with <strong>Dynamic Friction</strong> and <strong>Static Friction</strong> set to <code class="docutils literal notranslate"><span class="pre">0.0</span></code>, and <code class="docutils literal notranslate"><span class="pre">WheelMaterial</span></code> with both set to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. You can create a new material by clicking <strong>Create &gt; Physics &gt; Physics Material</strong> and selecting <strong>Rigid Body Material</strong>.</p></li>
-<li><p>Assign <code class="docutils literal notranslate"><span class="pre">CasterMaterial</span></code> to <code class="docutils literal notranslate"><span class="pre">rear_caster</span></code> and <code class="docutils literal notranslate"><span class="pre">WheelMaterial</span></code> to <code class="docutils literal notranslate"><span class="pre">front_left_wheel_link</span></code> and <code class="docutils literal notranslate"><span class="pre">front_right_wheel_link</span></code>. You can find these prims using the search bar, then apply the material via the <strong>Materials on selected models</strong> dropdown.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/dd100/Materials</span></code> 아래에 두 개의 물리 재질을 생성합니다: <strong>Dynamic Friction</strong>과 <strong>Static Friction</strong>이 <code class="docutils literal notranslate"><span class="pre">0.0</span></code>으로 설정된 <code class="docutils literal notranslate"><span class="pre">CasterMaterial</span></code>과, 둘 다 <code class="docutils literal notranslate"><span class="pre">1.0</span></code>으로 설정된 <code class="docutils literal notranslate"><span class="pre">WheelMaterial</span></code>. <strong>Create &gt; Physics &gt; Physics Material</strong>을 클릭하고 <strong>Rigid Body Material</strong>을 선택하여 새 재질을 생성할 수 있습니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rear_caster</span></code>에 <code class="docutils literal notranslate"><span class="pre">CasterMaterial</span></code>을, <code class="docutils literal notranslate"><span class="pre">front_left_wheel_link</span></code>와 <code class="docutils literal notranslate"><span class="pre">front_right_wheel_link</span></code>에 <code class="docutils literal notranslate"><span class="pre">WheelMaterial</span></code>을 할당합니다. 검색 바를 사용하여 이 prim을 찾은 다음 <strong>Materials on selected models</strong> 드롭다운을 통해 재질을 적용할 수 있습니다.</p></li>
 </ol>
 </li>
-<li><p>Create an empty Xform by clicking <strong>Create &gt; Xform</strong>, move it to <code class="docutils literal notranslate"><span class="pre">/dd100/Geometry/base_link/chassis_link</span></code>, and call it <code class="docutils literal notranslate"><span class="pre">base_link</span></code>. This will be used in ROS to represent the robot’s base transform.</p></li>
+<li><p><strong>Create &gt; Xform</strong>을 클릭하여 빈 Xform을 생성하고 <code class="docutils literal notranslate"><span class="pre">/dd100/Geometry/base_link/chassis_link</span></code>로 이동한 다음 <code class="docutils literal notranslate"><span class="pre">base_link</span></code>로 이름 지정합니다. 이것은 ROS에서 로봇의 기본 변환을 나타내는 데 사용됩니다.</p></li>
 </ol>
-<p>Ensure you save the stage.</p>
+<p>stage를 저장했는지 확인합니다.</p>
 </section>
 <section id="test-the-urdf-in-isaac-sim">
 <h3>Test the URDF in Isaac Sim<a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#test-the-urdf-in-isaac-sim" title="Link to this heading">#</a></h3>
-<p>To verify the import, construct a simple environment and add the robot to it.</p>
+<p>가져오기를 확인하려면 간단한 환경을 구성하고 로봇을 추가합니다.</p>
 <ol class="arabic simple">
-<li><p>Create a new stage with <code class="docutils literal notranslate"><span class="pre">CTRL+N</span></code>.</p></li>
-<li><p>Add an existing environment at <strong>Create &gt; Environments &gt; Flat Grid</strong>.</p></li>
-<li><p>In the Content browser, drag the USD file you created in the previous step onto the stage.</p></li>
-<li><p>Zero out the <strong>Translate</strong> components in <strong>Transform</strong> to place the robot at the origin. Click <strong>Add Transforms</strong> if no <strong>Transform</strong> is present.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CTRL+N</span></code>으로 새 stage를 생성합니다.</p></li>
+<li><p><strong>Create &gt; Environments &gt; Flat Grid</strong>에서 기존 환경을 추가합니다.</p></li>
+<li><p>Content browser에서 이전 단계에서 생성한 USD 파일을 stage로 드래그합니다.</p></li>
+<li><p>로봇을 원점에 배치하기 위해 <strong>Transform</strong>의 <strong>Translate</strong> 컴포넌트를 0으로 설정합니다. <strong>Transform</strong>이 없으면 <strong>Add Transforms</strong>를 클릭합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="DD100 in Isaac Sim" src="../_images/tutorial_ros2_putting_it_all_together_dd100_viewport.png" />
+<img alt="DD100 in Isaac Sim" src="../_images/tutorial_ros2_putting_it_all_together_dd100_viewport.png"/>
 </figure>
-<p>As a quick test, for both wheel joints, set the <strong>Target Velocity</strong> to <code class="docutils literal notranslate"><span class="pre">100</span></code>. You can find <strong>Target Velocity</strong> under <strong>Physics &gt; Drive</strong> in the <strong>Property</strong> tab of the <code class="docutils literal notranslate"><span class="pre">front_left_wheel_joint</span></code> and <code class="docutils literal notranslate"><span class="pre">front_right_wheel_joint</span></code> joints.</p>
+<p>빠른 테스트로, 두 바퀴 조인트 모두에 <strong>Target Velocity</strong>를 <code class="docutils literal notranslate"><span class="pre">100</span></code>으로 설정합니다. <code class="docutils literal notranslate"><span class="pre">front_left_wheel_joint</span></code>와 <code class="docutils literal notranslate"><span class="pre">front_right_wheel_joint</span></code> 조인트의 <strong>Property</strong> 탭에서 <strong>Physics &gt; Drive</strong> 아래에서 <strong>Target Velocity</strong>를 찾을 수 있습니다.</p>
 <figure class="align-default" id="id3">
-<img alt="../_images/tutorial_ros2_putting_it_all_together_dd100_forward.webp" src="../_images/tutorial_ros2_putting_it_all_together_dd100_forward.webp" />
+<img alt="../_images/tutorial_ros2_putting_it_all_together_dd100_forward.webp" src="../_images/tutorial_ros2_putting_it_all_together_dd100_forward.webp"/>
 <figcaption>
-<p><span class="caption-text">Dingo-D moving forward after wheel joint <strong>Target Velocity</strong> is applied.</span><a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#id3" title="Link to this image">#</a></p>
+<p><span class="caption-text">바퀴 조인트 <strong>Target Velocity</strong>가 적용된 후 앞으로 이동하는 Dingo-D.</span><a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#id3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section id="adding-sensors">
 <h2>Adding Sensors<a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#adding-sensors" title="Link to this heading">#</a></h2>
-<p>To allow the robot to perceive the environment, create a few sensors.</p>
+<p>로봇이 환경을 인식할 수 있도록 몇 가지 센서를 생성합니다.</p>
 <ol class="arabic">
-<li><p>Open the robot USD you created earlier using <strong>File &gt; Open</strong> or by double-clicking it in the Content browser.</p></li>
-<li><p>Save the stage as <code class="docutils literal notranslate"><span class="pre">dd100_with_sensors.usd</span></code>.</p></li>
-<li><p>Start by adding a common off-the-shelf camera, the <a class="reference external" href="https://www.realsenseai.com/products/stereo-depth-camera-d455f/">RealSense D455</a>.</p>
+<li><p><strong>File &gt; Open</strong>을 사용하거나 Content browser에서 더블 클릭하여 이전에 생성한 로봇 USD를 엽니다.</p></li>
+<li><p>stage를 <code class="docutils literal notranslate"><span class="pre">dd100_with_sensors.usd</span></code>로 저장합니다.</p></li>
+<li><p>일반적인 시판 카메라인 <a class="reference external" href="https://www.realsenseai.com/products/stereo-depth-camera-d455f/">RealSense D455</a>를 추가하는 것으로 시작합니다.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Create the sensor by clicking <strong>Create &gt; Sensors &gt; Camera and Depth Sensors &gt; RealSense &gt; Realsense D455</strong>.</p></li>
-<li><p>Drag the sensor to <code class="docutils literal notranslate"><span class="pre">/dd100/Geometry/base_link/chassis_link</span></code> and rename it to <code class="docutils literal notranslate"><span class="pre">sim_camera</span></code>.</p></li>
-<li><p>Set <strong>Translate</strong> components to <code class="docutils literal notranslate"><span class="pre">(0.3,</span> <span class="pre">0,</span> <span class="pre">0.05)</span></code> to position it at the front of the chassis.</p></li>
-<li><p>By default, the RealSense is a Rigid Body affected by gravity. To fix it to the robot, click <code class="docutils literal notranslate"><span class="pre">/dd100/Geometry/base_link/chassis_link/sim_camera/RSD455</span></code> and uncheck <strong>Rigid Body Enabled</strong> under <strong>Physics</strong> in the <strong>Property</strong> tab.</p></li>
+<li><p><strong>Create &gt; Sensors &gt; Camera and Depth Sensors &gt; RealSense &gt; Realsense D455</strong>를 클릭하여 센서를 생성합니다.</p></li>
+<li><p>센서를 <code class="docutils literal notranslate"><span class="pre">/dd100/Geometry/base_link/chassis_link</span></code>로 드래그하고 <code class="docutils literal notranslate"><span class="pre">sim_camera</span></code>로 이름을 변경합니다.</p></li>
+<li><p>섀시 앞쪽에 배치하기 위해 <strong>Translate</strong> 컴포넌트를 <code class="docutils literal notranslate"><span class="pre">(0.3,</span> <span class="pre">0,</span> <span class="pre">0.05)</span></code>로 설정합니다.</p></li>
+<li><p>기본적으로 RealSense는 중력의 영향을 받는 Rigid Body입니다. 로봇에 고정하려면 <code class="docutils literal notranslate"><span class="pre">/dd100/Geometry/base_link/chassis_link/sim_camera/RSD455</span></code>를 클릭하고 <strong>Property</strong> 탭의 <strong>Physics</strong> 아래에서 <strong>Rigid Body Enabled</strong>를 선택 해제합니다.</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p>Next add a LiDAR.</p>
+<li><p>다음으로 LiDAR를 추가합니다.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Create the sensor by clicking <strong>Create &gt; Sensors &gt; RTX Lidar &gt; SICK &gt; microScan3</strong>.</p></li>
-<li><p>Drag the sensor to <code class="docutils literal notranslate"><span class="pre">/dd100/Geometry/base_link/chassis_link</span></code> and rename it to <code class="docutils literal notranslate"><span class="pre">sim_lidar</span></code>.</p></li>
-<li><p>Set <strong>Translate</strong> components to <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">0.15)</span></code> to position it above the chassis.</p></li>
+<li><p><strong>Create &gt; Sensors &gt; RTX Lidar &gt; SICK &gt; microScan3</strong>를 클릭하여 센서를 생성합니다.</p></li>
+<li><p>센서를 <code class="docutils literal notranslate"><span class="pre">/dd100/Geometry/base_link/chassis_link</span></code>로 드래그하고 <code class="docutils literal notranslate"><span class="pre">sim_lidar</span></code>로 이름을 변경합니다.</p></li>
+<li><p>섀시 위에 배치하기 위해 <strong>Translate</strong> 컴포넌트를 <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">0.15)</span></code>로 설정합니다.</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p>Save the stage.</p></li>
+<li><p>stage를 저장합니다.</p></li>
 </ol>
 <figure class="align-default" id="id4">
-<img alt="../_images/tutorial_ros2_putting_it_all_together_dd100_realsense_front.png" src="../_images/tutorial_ros2_putting_it_all_together_dd100_realsense_front.png" />
+<img alt="../_images/tutorial_ros2_putting_it_all_together_dd100_realsense_front.png" src="../_images/tutorial_ros2_putting_it_all_together_dd100_realsense_front.png"/>
 <figcaption>
-<p><span class="caption-text">DD100 with sensors attached: a RealSense D455 depth camera on the front and a SICK LiDAR on top.</span><a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#id4" title="Link to this image">#</a></p>
+<p><span class="caption-text">센서가 부착된 DD100: 앞면의 RealSense D455 depth 카메라와 상단의 SICK LiDAR.</span><a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#id4" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Next, place the robot in a visually interesting environment.</p>
+<p>다음으로 로봇을 시각적으로 흥미로운 환경에 배치합니다.</p>
 <ol class="arabic simple">
-<li><p>Create a new stage with <code class="docutils literal notranslate"><span class="pre">CTRL+N</span></code>.</p></li>
-<li><p>Drag in a warehouse environment from the Content browser at <strong>Isaac Sim &gt; Environments &gt; Simple_Warehouse &gt; warehouse.usd</strong>.</p></li>
-<li><p>Zero out the <strong>Translate</strong> components.</p></li>
-<li><p>Drag the <code class="docutils literal notranslate"><span class="pre">dd100_with_sensors.usd</span></code> USD file onto the stage.</p></li>
-<li><p>Set the <strong>Translate</strong> components to <code class="docutils literal notranslate"><span class="pre">(-5.0,</span> <span class="pre">10.0,</span> <span class="pre">0.0)</span></code> and the <strong>Orient</strong> components to <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">135.0)</span></code>.</p></li>
-<li><p>To see what the robot sees, create an additional viewport by clicking <strong>Window &gt; Viewports &gt; Viewport 2</strong>.</p></li>
-<li><p>In the second viewport, change the camera by clicking <strong>Perspective</strong> at the top left and selecting <strong>Cameras &gt; Camera_OmniVision_OV9782_Color</strong>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CTRL+N</span></code>으로 새 stage를 생성합니다.</p></li>
+<li><p>Content browser에서 <strong>Isaac Sim &gt; Environments &gt; Simple_Warehouse &gt; warehouse.usd</strong>의 창고 환경을 드래그합니다.</p></li>
+<li><p><strong>Translate</strong> 컴포넌트를 0으로 설정합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dd100_with_sensors.usd</span></code> USD 파일을 stage로 드래그합니다.</p></li>
+<li><p><strong>Translate</strong> 컴포넌트를 <code class="docutils literal notranslate"><span class="pre">(-5.0,</span> <span class="pre">10.0,</span> <span class="pre">0.0)</span></code>으로, <strong>Orient</strong> 컴포넌트를 <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">135.0)</span></code>으로 설정합니다.</p></li>
+<li><p>로봇이 보는 것을 보려면 <strong>Window &gt; Viewports &gt; Viewport 2</strong>를 클릭하여 추가 뷰포트를 생성합니다.</p></li>
+<li><p>두 번째 뷰포트에서 왼쪽 상단의 <strong>Perspective</strong>를 클릭하고 <strong>Cameras &gt; Camera_OmniVision_OV9782_Color</strong>를 선택하여 카메라를 변경합니다.</p></li>
 </ol>
 <figure class="align-default" id="id5">
-<img alt="../_images/tutorial_ros2_putting_it_all_together_dd100_warehouse_dual_viewport.png" src="../_images/tutorial_ros2_putting_it_all_together_dd100_warehouse_dual_viewport.png" />
+<img alt="../_images/tutorial_ros2_putting_it_all_together_dd100_warehouse_dual_viewport.png" src="../_images/tutorial_ros2_putting_it_all_together_dd100_warehouse_dual_viewport.png"/>
 <figcaption>
-<p><span class="caption-text">DD100 in the Simple Warehouse: Perspective view in Viewport 1 (left) and the <code class="docutils literal notranslate"><span class="pre">Camera_OmniVision_OV9782_Color</span></code> sensor view in Viewport 2 (right).</span><a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#id5" title="Link to this image">#</a></p>
+<p><span class="caption-text">Simple Warehouse의 DD100: Viewport 1의 원근 보기 (왼쪽)와 Viewport 2의 <code class="docutils literal notranslate"><span class="pre">Camera_OmniVision_OV9782_Color</span></code> 센서 보기 (오른쪽).</span><a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#id5" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="ros-2-integration">
 <h2>ROS 2 Integration<a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#ros-2-integration" title="Link to this heading">#</a></h2>
-<p>Now that the robot has sensors, you can control it to do something useful. The goal is to develop a ROS 2 stack that controls the robot between two points in a crowded warehouse. To accomplish this, you need to:</p>
+<p>이제 로봇에 센서가 있으므로 유용한 작업을 수행하도록 제어할 수 있습니다. 목표는 복잡한 창고에서 두 지점 사이에서 로봇을 제어하는 ROS 2 스택을 개발하는 것입니다. 이를 위해 다음이 필요합니다:</p>
 <ul class="simple">
-<li><p>Set up the warehouse environment</p></li>
-<li><p>Create an occupancy map of the warehouse</p></li>
-<li><p>Build an interface between the robot and a ROS 2-based control stack (<a class="reference external" href="https://docs.nav2.org/">Nav2</a> specifically)</p></li>
-<li><p>Control the robot to move between two points in the scenario</p></li>
+<li><p>창고 환경 설정</p></li>
+<li><p>창고의 점유 지도 생성</p></li>
+<li><p>로봇과 ROS 2 기반 제어 스택 (구체적으로 <a class="reference external" href="https://docs.nav2.org/">Nav2</a>) 사이의 인터페이스 구축</p></li>
+<li><p>시나리오에서 두 지점 사이에서 로봇을 제어</p></li>
 </ul>
 <section id="building-omnigraph-nodes">
 <h3>Building OmniGraph Nodes<a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#building-omnigraph-nodes" title="Link to this heading">#</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>It’s possible to write <code class="docutils literal notranslate"><span class="pre">rclpy</span></code> code which creates the necessary Python nodes to publish and subscribe to the Nav2 stack directly within Isaac Sim. However, for the sake of example, this tutorial uses the ROS 2 OmniGraph nodes to build the necessary ROS nodes.</p>
+<p>Isaac Sim 내에서 Nav2 스택에 직접 발행하고 구독하는 데 필요한 Python 노드를 생성하는 <code class="docutils literal notranslate"><span class="pre">rclpy</span></code> 코드를 작성할 수 있습니다. 그러나 예시를 위해 이 튜토리얼은 ROS 2 OmniGraph 노드를 사용하여 필요한 ROS 노드를 구축합니다.</p>
 </div>
-<p>Nav2 requires a publish and subscribe to the following topics (the exact topic names depend on the Nav2 configuration):</p>
+<p>Nav2에는 다음 토픽에 대한 발행과 구독이 필요합니다 (정확한 토픽 이름은 Nav2 구성에 따라 다릅니다):</p>
 <blockquote>
-<div><p><strong>Publish</strong></p>
+<div><p><strong>발행</strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>ROS 2 Topic</p></th>
@@ -1530,7 +1154,7 @@ Windows</label><div class="sd-tab-content docutils">
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">/platform/joint_states</span></code></p></td>
 <td><p>sensor_msgs/JointState</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">/tf</span></code> and <code class="docutils literal notranslate"><span class="pre">/tf_static</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">/tf</span></code> 및 <code class="docutils literal notranslate"><span class="pre">/tf_static</span></code></p></td>
 <td><p>tf2_msgs/TFMessage</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">/odom</span></code></p></td>
@@ -1545,7 +1169,7 @@ Windows</label><div class="sd-tab-content docutils">
 </tbody>
 </table>
 </div>
-<p><strong>Subscribe</strong></p>
+<p><strong>구독</strong></p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>ROS 2 Topic</p></th>
@@ -1560,20 +1184,20 @@ Windows</label><div class="sd-tab-content docutils">
 </table>
 </div>
 </div></blockquote>
-<p>Create separate ActionGraphs for each topic system:</p>
+<p>각 토픽 시스템에 대해 별도의 ActionGraph를 생성합니다:</p>
 <ol class="arabic">
-<li><p>Open the <code class="docutils literal notranslate"><span class="pre">dd100_with_sensors.usd</span></code> file.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">dd100_with_sensors.usd</span></code> 파일을 엽니다.</p>
 <blockquote>
-<div><p>This tutorial only creates three ActionGraphs in the robot:</p>
+<div><p>이 튜토리얼에서는 로봇에 세 개의 ActionGraph만 생성합니다:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">joint_states</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">scan</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cmd_vel</span></code></p></li>
 </ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">clock</span></code> graph is added to the larger scene later. <code class="docutils literal notranslate"><span class="pre">odom</span></code> is included in the <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> ActionGraph and <code class="docutils literal notranslate"><span class="pre">tf</span></code> will be calculated by an external <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code> that you launch separately.</p>
+<p><code class="docutils literal notranslate"><span class="pre">clock</span></code> 그래프는 나중에 더 큰 씬에 추가됩니다. <code class="docutils literal notranslate"><span class="pre">odom</span></code>은 <code class="docutils literal notranslate"><span class="pre">joint_states</span></code> ActionGraph에 포함되며 <code class="docutils literal notranslate"><span class="pre">tf</span></code>는 별도로 실행하는 외부 <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code>가 계산합니다.</p>
 </div></blockquote>
 </li>
-<li><p>Place the ActionGraphs at the following paths:</p>
+<li><p>다음 경로에 ActionGraph를 배치합니다:</p>
 <blockquote>
 <div><div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -1598,31 +1222,31 @@ Windows</label><div class="sd-tab-content docutils">
 </li>
 </ol>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-12" name="sd-tab-set-6" type="radio">
+<input checked="checked" id="sd-tab-item-12" name="sd-tab-set-6" type="radio"/>
 <label class="sd-tab-label" for="sd-tab-item-12">
 scan</label><div class="sd-tab-content docutils">
-<p>Use the <strong>ROS2 RTX Lidar Helper</strong> to publish <code class="docutils literal notranslate"><span class="pre">LaserScan</span></code> data.</p>
+<p><strong>ROS2 RTX Lidar Helper</strong>를 사용하여 <code class="docutils literal notranslate"><span class="pre">LaserScan</span></code> 데이터를 발행합니다.</p>
 <ol class="arabic simple">
-<li><p>Create an <strong>On Playback Tick</strong> node and connect <code class="docutils literal notranslate"><span class="pre">Tick</span></code> to an <strong>Isaac Run One Simulation Frame</strong> node.</p></li>
-<li><p>Connect the output of <strong>Isaac Run One Simulation Frame</strong> to an <strong>Isaac Create Render Product</strong> node. Set its <code class="docutils literal notranslate"><span class="pre">cameraPrim</span></code> property to the <code class="docutils literal notranslate"><span class="pre">.../sim_lidar/Lidar</span></code> prim from the sensor you created earlier.</p></li>
-<li><p>Create a <strong>ROS2 RTX Lidar Helper</strong> node. Set <code class="docutils literal notranslate"><span class="pre">frameId</span></code> to <code class="docutils literal notranslate"><span class="pre">sim_lidar</span></code>, <code class="docutils literal notranslate"><span class="pre">topicName</span></code> to <code class="docutils literal notranslate"><span class="pre">scan</span></code>, and <code class="docutils literal notranslate"><span class="pre">type</span></code> to <code class="docutils literal notranslate"><span class="pre">laser_scan</span></code>.</p></li>
-<li><p>Connect the outputs of <strong>Isaac Create Render Product</strong> to the input of <strong>ROS2 RTX Lidar Helper</strong>.</p></li>
-<li><p>Create a <strong>ROS2 Context</strong> node and connect it to the <strong>ROS2 RTX Lidar Helper</strong> node.</p></li>
+<li><p><strong>On Playback Tick</strong> 노드를 생성하고 <code class="docutils literal notranslate"><span class="pre">Tick</span></code>을 <strong>Isaac Run One Simulation Frame</strong> 노드에 연결합니다.</p></li>
+<li><p><strong>Isaac Run One Simulation Frame</strong>의 출력을 <strong>Isaac Create Render Product</strong> 노드에 연결합니다. 이전에 생성한 센서의 <code class="docutils literal notranslate"><span class="pre">.../sim_lidar/Lidar</span></code> prim으로 <code class="docutils literal notranslate"><span class="pre">cameraPrim</span></code> 속성을 설정합니다.</p></li>
+<li><p><strong>ROS2 RTX Lidar Helper</strong> 노드를 생성합니다. <code class="docutils literal notranslate"><span class="pre">frameId</span></code>를 <code class="docutils literal notranslate"><span class="pre">sim_lidar</span></code>로, <code class="docutils literal notranslate"><span class="pre">topicName</span></code>을 <code class="docutils literal notranslate"><span class="pre">scan</span></code>으로, <code class="docutils literal notranslate"><span class="pre">type</span></code>을 <code class="docutils literal notranslate"><span class="pre">laser_scan</span></code>으로 설정합니다.</p></li>
+<li><p><strong>Isaac Create Render Product</strong>의 출력을 <strong>ROS2 RTX Lidar Helper</strong>의 입력에 연결합니다.</p></li>
+<li><p><strong>ROS2 Context</strong> 노드를 생성하고 <strong>ROS2 RTX Lidar Helper</strong> 노드에 연결합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Scan ActionGraph" src="../_images/tutorial_ros2_putting_it_all_together_omnigraph_scan.png" />
+<img alt="Scan ActionGraph" src="../_images/tutorial_ros2_putting_it_all_together_omnigraph_scan.png"/>
 </figure>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">Script Editor Code</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<span class="sd-summary-text">Script Editor Code</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-right" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni.graph.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">og</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">omni.usd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sdf</span>
 
-<span class="n">ROBOT_PRIM</span> <span class="o">=</span> <span class="s2">&quot;/dd100&quot;</span>
-<span class="n">CHASSIS_LINK</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ROBOT_PRIM</span><span class="si">}</span><span class="s2">/Geometry/base_link/chassis_link&quot;</span>
-<span class="n">LIDAR_SENSOR_PRIM</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">CHASSIS_LINK</span><span class="si">}</span><span class="s2">/sim_lidar/Lidar&quot;</span>
-<span class="n">GRAPH_PATH</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">CHASSIS_LINK</span><span class="si">}</span><span class="s2">/sim_lidar/scan&quot;</span>
+<span class="n">ROBOT_PRIM</span> <span class="o">=</span> <span class="s2">"/dd100"</span>
+<span class="n">CHASSIS_LINK</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ROBOT_PRIM</span><span class="si">}</span><span class="s2">/Geometry/base_link/chassis_link"</span>
+<span class="n">LIDAR_SENSOR_PRIM</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">CHASSIS_LINK</span><span class="si">}</span><span class="s2">/sim_lidar/Lidar"</span>
+<span class="n">GRAPH_PATH</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">CHASSIS_LINK</span><span class="si">}</span><span class="s2">/sim_lidar/scan"</span>
 
 <span class="n">stage</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">get_stage</span><span class="p">()</span>
 <span class="k">if</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="n">GRAPH_PATH</span><span class="p">):</span>
@@ -1631,27 +1255,27 @@ scan</label><div class="sd-tab-content docutils">
 <span class="n">keys</span> <span class="o">=</span> <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">Keys</span>
 
 <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">edit</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;graph_path&quot;</span><span class="p">:</span> <span class="n">GRAPH_PATH</span><span class="p">,</span> <span class="s2">&quot;evaluator_name&quot;</span><span class="p">:</span> <span class="s2">&quot;execution&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"graph_path"</span><span class="p">:</span> <span class="n">GRAPH_PATH</span><span class="p">,</span> <span class="s2">"evaluator_name"</span><span class="p">:</span> <span class="s2">"execution"</span><span class="p">},</span>
     <span class="p">{</span>
         <span class="n">keys</span><span class="o">.</span><span class="n">CREATE_NODES</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;OnPlaybackTick&quot;</span><span class="p">,</span> <span class="s2">&quot;omni.graph.action.OnPlaybackTick&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;RunOneFrame&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.core.nodes.OgnIsaacRunOneSimulationFrame&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;CreateRenderProduct&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.core.nodes.IsaacCreateRenderProduct&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;Context&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.ros2.bridge.ROS2Context&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;LidarHelper&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.ros2.bridge.ROS2RtxLidarHelper&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"OnPlaybackTick"</span><span class="p">,</span> <span class="s2">"omni.graph.action.OnPlaybackTick"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"RunOneFrame"</span><span class="p">,</span> <span class="s2">"isaacsim.core.nodes.OgnIsaacRunOneSimulationFrame"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"CreateRenderProduct"</span><span class="p">,</span> <span class="s2">"isaacsim.core.nodes.IsaacCreateRenderProduct"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"Context"</span><span class="p">,</span> <span class="s2">"isaacsim.ros2.bridge.ROS2Context"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"LidarHelper"</span><span class="p">,</span> <span class="s2">"isaacsim.ros2.bridge.ROS2RtxLidarHelper"</span><span class="p">),</span>
         <span class="p">],</span>
         <span class="n">keys</span><span class="o">.</span><span class="n">SET_VALUES</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;CreateRenderProduct.inputs:cameraPrim&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">Sdf</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">LIDAR_SENSOR_PRIM</span><span class="p">)]),</span>
-            <span class="p">(</span><span class="s2">&quot;LidarHelper.inputs:topicName&quot;</span><span class="p">,</span> <span class="s2">&quot;scan&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;LidarHelper.inputs:type&quot;</span><span class="p">,</span> <span class="s2">&quot;laser_scan&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;LidarHelper.inputs:frameId&quot;</span><span class="p">,</span> <span class="s2">&quot;sim_lidar&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"CreateRenderProduct.inputs:cameraPrim"</span><span class="p">,</span> <span class="p">[</span><span class="n">Sdf</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">LIDAR_SENSOR_PRIM</span><span class="p">)]),</span>
+            <span class="p">(</span><span class="s2">"LidarHelper.inputs:topicName"</span><span class="p">,</span> <span class="s2">"scan"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"LidarHelper.inputs:type"</span><span class="p">,</span> <span class="s2">"laser_scan"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"LidarHelper.inputs:frameId"</span><span class="p">,</span> <span class="s2">"sim_lidar"</span><span class="p">),</span>
         <span class="p">],</span>
         <span class="n">keys</span><span class="o">.</span><span class="n">CONNECT</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;OnPlaybackTick.outputs:tick&quot;</span><span class="p">,</span> <span class="s2">&quot;RunOneFrame.inputs:execIn&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;RunOneFrame.outputs:step&quot;</span><span class="p">,</span> <span class="s2">&quot;CreateRenderProduct.inputs:execIn&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;CreateRenderProduct.outputs:execOut&quot;</span><span class="p">,</span> <span class="s2">&quot;LidarHelper.inputs:execIn&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;CreateRenderProduct.outputs:renderProductPath&quot;</span><span class="p">,</span> <span class="s2">&quot;LidarHelper.inputs:renderProductPath&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;Context.outputs:context&quot;</span><span class="p">,</span> <span class="s2">&quot;LidarHelper.inputs:context&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"OnPlaybackTick.outputs:tick"</span><span class="p">,</span> <span class="s2">"RunOneFrame.inputs:execIn"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"RunOneFrame.outputs:step"</span><span class="p">,</span> <span class="s2">"CreateRenderProduct.inputs:execIn"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"CreateRenderProduct.outputs:execOut"</span><span class="p">,</span> <span class="s2">"LidarHelper.inputs:execIn"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"CreateRenderProduct.outputs:renderProductPath"</span><span class="p">,</span> <span class="s2">"LidarHelper.inputs:renderProductPath"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"Context.outputs:context"</span><span class="p">,</span> <span class="s2">"LidarHelper.inputs:context"</span><span class="p">),</span>
         <span class="p">],</span>
     <span class="p">},</span>
 <span class="p">)</span>
@@ -1659,35 +1283,35 @@ scan</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </details></div>
-<input id="sd-tab-item-13" name="sd-tab-set-6" type="radio">
+<input id="sd-tab-item-13" name="sd-tab-set-6" type="radio"/>
 <label class="sd-tab-label" for="sd-tab-item-13">
 joint_states</label><div class="sd-tab-content docutils">
-<p>This ActionGraph publishes joint state and odometry data, broadcasts the <code class="docutils literal notranslate"><span class="pre">odom</span></code> → <code class="docutils literal notranslate"><span class="pre">base_link</span></code> transform, and publishes a static transform for the <code class="docutils literal notranslate"><span class="pre">sim_lidar</span></code> sensor frame.</p>
+<p>이 ActionGraph는 joint state 및 odometry 데이터를 발행하고, <code class="docutils literal notranslate"><span class="pre">odom</span></code> → <code class="docutils literal notranslate"><span class="pre">base_link</span></code> 변환을 브로드캐스트하며, <code class="docutils literal notranslate"><span class="pre">sim_lidar</span></code> 센서 프레임에 대한 정적 변환을 발행합니다.</p>
 <ol class="arabic simple">
-<li><p>Create an <strong>On Playback Tick</strong> node.</p></li>
-<li><p>Create a <strong>ROS2 Publish Joint State</strong> node. Set <code class="docutils literal notranslate"><span class="pre">targetPrim</span></code> to <code class="docutils literal notranslate"><span class="pre">/dd100/Geometry/base_link/chassis_link</span></code> and <code class="docutils literal notranslate"><span class="pre">topicName</span></code> to <code class="docutils literal notranslate"><span class="pre">platform/joint_states</span></code>.</p></li>
-<li><p>Create an <strong>Isaac Compute Odometry Node</strong> and set <code class="docutils literal notranslate"><span class="pre">chassisPrim</span></code> to <code class="docutils literal notranslate"><span class="pre">/dd100/Geometry/base_link/chassis_link</span></code>.</p></li>
-<li><p>Create a <strong>ROS2 Publish Odometry</strong> node and set <code class="docutils literal notranslate"><span class="pre">topicName</span></code> and <code class="docutils literal notranslate"><span class="pre">odomFrameId</span></code> to <code class="docutils literal notranslate"><span class="pre">odom</span></code>.</p></li>
-<li><p>Create a <strong>ROS2 Publish Raw Transform Tree</strong> node and set <code class="docutils literal notranslate"><span class="pre">childFrameId</span></code> to <code class="docutils literal notranslate"><span class="pre">base_link</span></code> and <code class="docutils literal notranslate"><span class="pre">parentFrameId</span></code> to <code class="docutils literal notranslate"><span class="pre">odom</span></code>.</p></li>
-<li><p>Create an <strong>Isaac Compute Transform Tree</strong> node. Set <code class="docutils literal notranslate"><span class="pre">parentPrim</span></code> to <code class="docutils literal notranslate"><span class="pre">/dd100/Geometry/base_link/chassis_link</span></code> and <code class="docutils literal notranslate"><span class="pre">targetPrims</span></code> to <code class="docutils literal notranslate"><span class="pre">/dd100/Geometry/base_link/chassis_link/sim_lidar</span></code>.</p></li>
-<li><p>Create a <strong>ROS2 Publish Transform Tree</strong> node. Set <code class="docutils literal notranslate"><span class="pre">topicName</span></code> to <code class="docutils literal notranslate"><span class="pre">tf_static</span></code> and enable <code class="docutils literal notranslate"><span class="pre">staticPublisher</span></code>. Connect the outputs of <strong>Isaac Compute Transform Tree</strong> (<code class="docutils literal notranslate"><span class="pre">childFrames</span></code>, <code class="docutils literal notranslate"><span class="pre">orientations</span></code>, <code class="docutils literal notranslate"><span class="pre">parentFrames</span></code>, <code class="docutils literal notranslate"><span class="pre">translations</span></code>) to the corresponding inputs of <strong>ROS2 Publish Transform Tree</strong>. This publishes the static transform from <code class="docutils literal notranslate"><span class="pre">base_link</span></code> to <code class="docutils literal notranslate"><span class="pre">sim_lidar</span></code> so that Nav2 can use the LiDAR data.</p></li>
-<li><p>Connect each matching output from <strong>Isaac Compute Odometry Node</strong> to the corresponding inputs of <strong>ROS2 Publish Odometry</strong> and <strong>ROS2 Publish Raw Transform Tree</strong>.</p></li>
-<li><p>Create <strong>Isaac Read Simulation Time</strong> and <strong>ROS2 Context</strong> nodes and connect them to each of the other nodes.</p></li>
+<li><p><strong>On Playback Tick</strong> 노드를 생성합니다.</p></li>
+<li><p><strong>ROS2 Publish Joint State</strong> 노드를 생성합니다. <code class="docutils literal notranslate"><span class="pre">targetPrim</span></code>을 <code class="docutils literal notranslate"><span class="pre">/dd100/Geometry/base_link/chassis_link</span></code>로, <code class="docutils literal notranslate"><span class="pre">topicName</span></code>을 <code class="docutils literal notranslate"><span class="pre">platform/joint_states</span></code>로 설정합니다.</p></li>
+<li><p><strong>Isaac Compute Odometry Node</strong>를 생성하고 <code class="docutils literal notranslate"><span class="pre">chassisPrim</span></code>을 <code class="docutils literal notranslate"><span class="pre">/dd100/Geometry/base_link/chassis_link</span></code>로 설정합니다.</p></li>
+<li><p><strong>ROS2 Publish Odometry</strong> 노드를 생성하고 <code class="docutils literal notranslate"><span class="pre">topicName</span></code>과 <code class="docutils literal notranslate"><span class="pre">odomFrameId</span></code>를 <code class="docutils literal notranslate"><span class="pre">odom</span></code>으로 설정합니다.</p></li>
+<li><p><strong>ROS2 Publish Raw Transform Tree</strong> 노드를 생성하고 <code class="docutils literal notranslate"><span class="pre">childFrameId</span></code>를 <code class="docutils literal notranslate"><span class="pre">base_link</span></code>로, <code class="docutils literal notranslate"><span class="pre">parentFrameId</span></code>를 <code class="docutils literal notranslate"><span class="pre">odom</span></code>으로 설정합니다.</p></li>
+<li><p><strong>Isaac Compute Transform Tree</strong> 노드를 생성합니다. <code class="docutils literal notranslate"><span class="pre">parentPrim</span></code>을 <code class="docutils literal notranslate"><span class="pre">/dd100/Geometry/base_link/chassis_link</span></code>로, <code class="docutils literal notranslate"><span class="pre">targetPrims</span></code>를 <code class="docutils literal notranslate"><span class="pre">/dd100/Geometry/base_link/chassis_link/sim_lidar</span></code>로 설정합니다.</p></li>
+<li><p><strong>ROS2 Publish Transform Tree</strong> 노드를 생성합니다. <code class="docutils literal notranslate"><span class="pre">topicName</span></code>을 <code class="docutils literal notranslate"><span class="pre">tf_static</span></code>으로 설정하고 <code class="docutils literal notranslate"><span class="pre">staticPublisher</span></code>를 활성화합니다. <strong>Isaac Compute Transform Tree</strong>의 출력 (<code class="docutils literal notranslate"><span class="pre">childFrames</span></code>, <code class="docutils literal notranslate"><span class="pre">orientations</span></code>, <code class="docutils literal notranslate"><span class="pre">parentFrames</span></code>, <code class="docutils literal notranslate"><span class="pre">translations</span></code>)을 <strong>ROS2 Publish Transform Tree</strong>의 해당 입력에 연결합니다. 이렇게 하면 Nav2가 LiDAR 데이터를 사용할 수 있도록 <code class="docutils literal notranslate"><span class="pre">base_link</span></code>에서 <code class="docutils literal notranslate"><span class="pre">sim_lidar</span></code>까지의 정적 변환이 발행됩니다.</p></li>
+<li><p><strong>Isaac Compute Odometry Node</strong>의 각 일치하는 출력을 <strong>ROS2 Publish Odometry</strong>와 <strong>ROS2 Publish Raw Transform Tree</strong>의 해당 입력에 연결합니다.</p></li>
+<li><p><strong>Isaac Read Simulation Time</strong>과 <strong>ROS2 Context</strong> 노드를 생성하고 다른 각 노드에 연결합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="joint_states ActionGraph" src="../_images/tutorial_ros2_putting_it_all_together_omnigraph_joint_states.png" />
+<img alt="joint_states ActionGraph" src="../_images/tutorial_ros2_putting_it_all_together_omnigraph_joint_states.png"/>
 </figure>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">Script Editor Code</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<span class="sd-summary-text">Script Editor Code</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-right" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni.graph.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">og</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">omni.usd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sdf</span>
 
-<span class="n">ROBOT_PRIM</span> <span class="o">=</span> <span class="s2">&quot;/dd100&quot;</span>
-<span class="n">CHASSIS_LINK</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ROBOT_PRIM</span><span class="si">}</span><span class="s2">/Geometry/base_link/chassis_link&quot;</span>
-<span class="n">SIM_LIDAR</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">CHASSIS_LINK</span><span class="si">}</span><span class="s2">/sim_lidar&quot;</span>
-<span class="n">GRAPH_PATH</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">CHASSIS_LINK</span><span class="si">}</span><span class="s2">/joint_states&quot;</span>
+<span class="n">ROBOT_PRIM</span> <span class="o">=</span> <span class="s2">"/dd100"</span>
+<span class="n">CHASSIS_LINK</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ROBOT_PRIM</span><span class="si">}</span><span class="s2">/Geometry/base_link/chassis_link"</span>
+<span class="n">SIM_LIDAR</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">CHASSIS_LINK</span><span class="si">}</span><span class="s2">/sim_lidar"</span>
+<span class="n">GRAPH_PATH</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">CHASSIS_LINK</span><span class="si">}</span><span class="s2">/joint_states"</span>
 
 <span class="n">stage</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">get_stage</span><span class="p">()</span>
 <span class="k">if</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="n">GRAPH_PATH</span><span class="p">):</span>
@@ -1696,57 +1320,57 @@ joint_states</label><div class="sd-tab-content docutils">
 <span class="n">keys</span> <span class="o">=</span> <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">Keys</span>
 
 <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">edit</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;graph_path&quot;</span><span class="p">:</span> <span class="n">GRAPH_PATH</span><span class="p">,</span> <span class="s2">&quot;evaluator_name&quot;</span><span class="p">:</span> <span class="s2">&quot;execution&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"graph_path"</span><span class="p">:</span> <span class="n">GRAPH_PATH</span><span class="p">,</span> <span class="s2">"evaluator_name"</span><span class="p">:</span> <span class="s2">"execution"</span><span class="p">},</span>
     <span class="p">{</span>
         <span class="n">keys</span><span class="o">.</span><span class="n">CREATE_NODES</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;OnPlaybackTick&quot;</span><span class="p">,</span> <span class="s2">&quot;omni.graph.action.OnPlaybackTick&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ReadSimTime&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.core.nodes.IsaacReadSimulationTime&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;Context&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.ros2.bridge.ROS2Context&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;PublishJointState&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.ros2.bridge.ROS2PublishJointState&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ComputeOdom&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.core.nodes.IsaacComputeOdometry&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;PublishOdom&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.ros2.bridge.ROS2PublishOdometry&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;PublishRawTF&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.ros2.bridge.ROS2PublishRawTransformTree&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ComputeTransformTree&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.core.nodes.IsaacComputeTransformTree&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;PublishTF&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.ros2.bridge.ROS2PublishTransformTree&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"OnPlaybackTick"</span><span class="p">,</span> <span class="s2">"omni.graph.action.OnPlaybackTick"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ReadSimTime"</span><span class="p">,</span> <span class="s2">"isaacsim.core.nodes.IsaacReadSimulationTime"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"Context"</span><span class="p">,</span> <span class="s2">"isaacsim.ros2.bridge.ROS2Context"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"PublishJointState"</span><span class="p">,</span> <span class="s2">"isaacsim.ros2.bridge.ROS2PublishJointState"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ComputeOdom"</span><span class="p">,</span> <span class="s2">"isaacsim.core.nodes.IsaacComputeOdometry"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"PublishOdom"</span><span class="p">,</span> <span class="s2">"isaacsim.ros2.bridge.ROS2PublishOdometry"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"PublishRawTF"</span><span class="p">,</span> <span class="s2">"isaacsim.ros2.bridge.ROS2PublishRawTransformTree"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ComputeTransformTree"</span><span class="p">,</span> <span class="s2">"isaacsim.core.nodes.IsaacComputeTransformTree"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"PublishTF"</span><span class="p">,</span> <span class="s2">"isaacsim.ros2.bridge.ROS2PublishTransformTree"</span><span class="p">),</span>
         <span class="p">],</span>
         <span class="n">keys</span><span class="o">.</span><span class="n">SET_VALUES</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;PublishJointState.inputs:targetPrim&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">Sdf</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">CHASSIS_LINK</span><span class="p">)]),</span>
-            <span class="p">(</span><span class="s2">&quot;PublishJointState.inputs:topicName&quot;</span><span class="p">,</span> <span class="s2">&quot;platform/joint_states&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ComputeOdom.inputs:chassisPrim&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">Sdf</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">CHASSIS_LINK</span><span class="p">)]),</span>
-            <span class="p">(</span><span class="s2">&quot;PublishOdom.inputs:topicName&quot;</span><span class="p">,</span> <span class="s2">&quot;odom&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;PublishOdom.inputs:odomFrameId&quot;</span><span class="p">,</span> <span class="s2">&quot;odom&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;PublishRawTF.inputs:childFrameId&quot;</span><span class="p">,</span> <span class="s2">&quot;base_link&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;PublishRawTF.inputs:parentFrameId&quot;</span><span class="p">,</span> <span class="s2">&quot;odom&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ComputeTransformTree.inputs:parentPrim&quot;</span><span class="p">,</span> <span class="n">Sdf</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">CHASSIS_LINK</span><span class="p">)),</span>
-            <span class="p">(</span><span class="s2">&quot;ComputeTransformTree.inputs:targetPrims&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">Sdf</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">SIM_LIDAR</span><span class="p">)]),</span>
-            <span class="p">(</span><span class="s2">&quot;PublishTF.inputs:topicName&quot;</span><span class="p">,</span> <span class="s2">&quot;tf_static&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;PublishTF.inputs:staticPublisher&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"PublishJointState.inputs:targetPrim"</span><span class="p">,</span> <span class="p">[</span><span class="n">Sdf</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">CHASSIS_LINK</span><span class="p">)]),</span>
+            <span class="p">(</span><span class="s2">"PublishJointState.inputs:topicName"</span><span class="p">,</span> <span class="s2">"platform/joint_states"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ComputeOdom.inputs:chassisPrim"</span><span class="p">,</span> <span class="p">[</span><span class="n">Sdf</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">CHASSIS_LINK</span><span class="p">)]),</span>
+            <span class="p">(</span><span class="s2">"PublishOdom.inputs:topicName"</span><span class="p">,</span> <span class="s2">"odom"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"PublishOdom.inputs:odomFrameId"</span><span class="p">,</span> <span class="s2">"odom"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"PublishRawTF.inputs:childFrameId"</span><span class="p">,</span> <span class="s2">"base_link"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"PublishRawTF.inputs:parentFrameId"</span><span class="p">,</span> <span class="s2">"odom"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ComputeTransformTree.inputs:parentPrim"</span><span class="p">,</span> <span class="n">Sdf</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">CHASSIS_LINK</span><span class="p">)),</span>
+            <span class="p">(</span><span class="s2">"ComputeTransformTree.inputs:targetPrims"</span><span class="p">,</span> <span class="p">[</span><span class="n">Sdf</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">SIM_LIDAR</span><span class="p">)]),</span>
+            <span class="p">(</span><span class="s2">"PublishTF.inputs:topicName"</span><span class="p">,</span> <span class="s2">"tf_static"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"PublishTF.inputs:staticPublisher"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
         <span class="p">],</span>
         <span class="n">keys</span><span class="o">.</span><span class="n">CONNECT</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;OnPlaybackTick.outputs:tick&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishJointState.inputs:execIn&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ReadSimTime.outputs:simulationTime&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishJointState.inputs:timeStamp&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;OnPlaybackTick.outputs:tick&quot;</span><span class="p">,</span> <span class="s2">&quot;ComputeOdom.inputs:execIn&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ComputeOdom.outputs:execOut&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishOdom.inputs:execIn&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ComputeOdom.outputs:angularVelocity&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishOdom.inputs:angularVelocity&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ComputeOdom.outputs:linearVelocity&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishOdom.inputs:linearVelocity&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ComputeOdom.outputs:orientation&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishOdom.inputs:orientation&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ComputeOdom.outputs:position&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishOdom.inputs:position&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ReadSimTime.outputs:simulationTime&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishOdom.inputs:timeStamp&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;OnPlaybackTick.outputs:tick&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishRawTF.inputs:execIn&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ComputeOdom.outputs:orientation&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishRawTF.inputs:rotation&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ComputeOdom.outputs:position&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishRawTF.inputs:translation&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ReadSimTime.outputs:simulationTime&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishRawTF.inputs:timeStamp&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;OnPlaybackTick.outputs:tick&quot;</span><span class="p">,</span> <span class="s2">&quot;ComputeTransformTree.inputs:execIn&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ComputeTransformTree.outputs:execOut&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishTF.inputs:execIn&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ComputeTransformTree.outputs:childFrames&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishTF.inputs:childFrames&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ComputeTransformTree.outputs:orientations&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishTF.inputs:orientations&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ComputeTransformTree.outputs:parentFrames&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishTF.inputs:parentFrames&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ComputeTransformTree.outputs:translations&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishTF.inputs:translations&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ReadSimTime.outputs:simulationTime&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishTF.inputs:timeStamp&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;Context.outputs:context&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishJointState.inputs:context&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;Context.outputs:context&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishOdom.inputs:context&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;Context.outputs:context&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishRawTF.inputs:context&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;Context.outputs:context&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishTF.inputs:context&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"OnPlaybackTick.outputs:tick"</span><span class="p">,</span> <span class="s2">"PublishJointState.inputs:execIn"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ReadSimTime.outputs:simulationTime"</span><span class="p">,</span> <span class="s2">"PublishJointState.inputs:timeStamp"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"OnPlaybackTick.outputs:tick"</span><span class="p">,</span> <span class="s2">"ComputeOdom.inputs:execIn"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ComputeOdom.outputs:execOut"</span><span class="p">,</span> <span class="s2">"PublishOdom.inputs:execIn"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ComputeOdom.outputs:angularVelocity"</span><span class="p">,</span> <span class="s2">"PublishOdom.inputs:angularVelocity"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ComputeOdom.outputs:linearVelocity"</span><span class="p">,</span> <span class="s2">"PublishOdom.inputs:linearVelocity"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ComputeOdom.outputs:orientation"</span><span class="p">,</span> <span class="s2">"PublishOdom.inputs:orientation"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ComputeOdom.outputs:position"</span><span class="p">,</span> <span class="s2">"PublishOdom.inputs:position"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ReadSimTime.outputs:simulationTime"</span><span class="p">,</span> <span class="s2">"PublishOdom.inputs:timeStamp"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"OnPlaybackTick.outputs:tick"</span><span class="p">,</span> <span class="s2">"PublishRawTF.inputs:execIn"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ComputeOdom.outputs:orientation"</span><span class="p">,</span> <span class="s2">"PublishRawTF.inputs:rotation"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ComputeOdom.outputs:position"</span><span class="p">,</span> <span class="s2">"PublishRawTF.inputs:translation"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ReadSimTime.outputs:simulationTime"</span><span class="p">,</span> <span class="s2">"PublishRawTF.inputs:timeStamp"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"OnPlaybackTick.outputs:tick"</span><span class="p">,</span> <span class="s2">"ComputeTransformTree.inputs:execIn"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ComputeTransformTree.outputs:execOut"</span><span class="p">,</span> <span class="s2">"PublishTF.inputs:execIn"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ComputeTransformTree.outputs:childFrames"</span><span class="p">,</span> <span class="s2">"PublishTF.inputs:childFrames"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ComputeTransformTree.outputs:orientations"</span><span class="p">,</span> <span class="s2">"PublishTF.inputs:orientations"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ComputeTransformTree.outputs:parentFrames"</span><span class="p">,</span> <span class="s2">"PublishTF.inputs:parentFrames"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ComputeTransformTree.outputs:translations"</span><span class="p">,</span> <span class="s2">"PublishTF.inputs:translations"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ReadSimTime.outputs:simulationTime"</span><span class="p">,</span> <span class="s2">"PublishTF.inputs:timeStamp"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"Context.outputs:context"</span><span class="p">,</span> <span class="s2">"PublishJointState.inputs:context"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"Context.outputs:context"</span><span class="p">,</span> <span class="s2">"PublishOdom.inputs:context"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"Context.outputs:context"</span><span class="p">,</span> <span class="s2">"PublishRawTF.inputs:context"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"Context.outputs:context"</span><span class="p">,</span> <span class="s2">"PublishTF.inputs:context"</span><span class="p">),</span>
         <span class="p">],</span>
     <span class="p">},</span>
 <span class="p">)</span>
@@ -1754,15 +1378,15 @@ joint_states</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </details></div>
-<input id="sd-tab-item-14" name="sd-tab-set-6" type="radio">
+<input id="sd-tab-item-14" name="sd-tab-set-6" type="radio"/>
 <label class="sd-tab-label" for="sd-tab-item-14">
 cmd_vel</label><div class="sd-tab-content docutils">
-<p>This ActionGraph subscribes to the <code class="docutils literal notranslate"><span class="pre">cmd_vel</span></code> topic and drives the robot’s wheels.</p>
+<p>이 ActionGraph는 <code class="docutils literal notranslate"><span class="pre">cmd_vel</span></code> 토픽을 구독하고 로봇의 바퀴를 구동합니다.</p>
 <ol class="arabic">
-<li><p>Create an <strong>On Playback Tick</strong> node.</p></li>
-<li><p>Create a <strong>ROS2 Subscribe Twist</strong> node and set <code class="docutils literal notranslate"><span class="pre">topicName</span></code> to <code class="docutils literal notranslate"><span class="pre">cmd_vel</span></code>.</p></li>
-<li><p>Because the robot is flat and you only need forward speed and yaw, use two <strong>Break 3-Vector</strong> nodes to extract the <code class="docutils literal notranslate"><span class="pre">X</span></code> component of the linear velocity and the <code class="docutils literal notranslate"><span class="pre">Z</span></code> component of the angular velocity.</p></li>
-<li><p>Create a <strong>Differential Controller</strong> node with the following properties:</p>
+<li><p><strong>On Playback Tick</strong> 노드를 생성합니다.</p></li>
+<li><p><strong>ROS2 Subscribe Twist</strong> 노드를 생성하고 <code class="docutils literal notranslate"><span class="pre">topicName</span></code>을 <code class="docutils literal notranslate"><span class="pre">cmd_vel</span></code>로 설정합니다.</p></li>
+<li><p>로봇이 평탄하고 전진 속도와 yaw만 필요하므로, 두 개의 <strong>Break 3-Vector</strong> 노드를 사용하여 선속도의 <code class="docutils literal notranslate"><span class="pre">X</span></code> 컴포넌트와 각속도의 <code class="docutils literal notranslate"><span class="pre">Z</span></code> 컴포넌트를 추출합니다.</p></li>
+<li><p>다음 속성으로 <strong>Differential Controller</strong> 노드를 생성합니다:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Field</p></th>
@@ -1786,23 +1410,23 @@ cmd_vel</label><div class="sd-tab-content docutils">
 </table>
 </div>
 </li>
-<li><p>Create an <strong>Articulation Controller</strong> node. Set <strong>jointNames</strong> to <code class="docutils literal notranslate"><span class="pre">front_left_wheel_joint</span></code> and <code class="docutils literal notranslate"><span class="pre">front_right_wheel_joint</span></code>, and <strong>targetPrim</strong> to <code class="docutils literal notranslate"><span class="pre">/dd100</span></code>.</p></li>
-<li><p>Create a <strong>ROS2 Context</strong> node and connect it to the <strong>ROS2 Subscribe Twist</strong> node.</p></li>
-<li><p>Connect the pipeline: <strong>ROS2 Subscribe Twist</strong> outputs through the <strong>Break 3-Vector</strong> nodes into <strong>Differential Controller</strong>, then into <strong>Articulation Controller</strong>.</p></li>
+<li><p><strong>Articulation Controller</strong> 노드를 생성합니다. <strong>jointNames</strong>를 <code class="docutils literal notranslate"><span class="pre">front_left_wheel_joint</span></code>와 <code class="docutils literal notranslate"><span class="pre">front_right_wheel_joint</span></code>로, <strong>targetPrim</strong>을 <code class="docutils literal notranslate"><span class="pre">/dd100</span></code>으로 설정합니다.</p></li>
+<li><p><strong>ROS2 Context</strong> 노드를 생성하고 <strong>ROS2 Subscribe Twist</strong> 노드에 연결합니다.</p></li>
+<li><p>파이프라인을 연결합니다: <strong>ROS2 Subscribe Twist</strong> 출력이 <strong>Break 3-Vector</strong> 노드를 통해 <strong>Differential Controller</strong>로, 그 다음 <strong>Articulation Controller</strong>로 이어집니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="cmd_vel ActionGraph" src="../_images/tutorial_ros2_putting_it_all_together_omnigraph_cmd_vel.png" />
+<img alt="cmd_vel ActionGraph" src="../_images/tutorial_ros2_putting_it_all_together_omnigraph_cmd_vel.png"/>
 </figure>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">Script Editor Code</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<span class="sd-summary-text">Script Editor Code</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-right" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni.graph.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">og</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">omni.usd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sdf</span>
 
-<span class="n">ROBOT_PRIM</span> <span class="o">=</span> <span class="s2">&quot;/dd100&quot;</span>
-<span class="n">CHASSIS_LINK</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ROBOT_PRIM</span><span class="si">}</span><span class="s2">/Geometry/base_link/chassis_link&quot;</span>
-<span class="n">GRAPH_PATH</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">CHASSIS_LINK</span><span class="si">}</span><span class="s2">/cmd_vel&quot;</span>
+<span class="n">ROBOT_PRIM</span> <span class="o">=</span> <span class="s2">"/dd100"</span>
+<span class="n">CHASSIS_LINK</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">ROBOT_PRIM</span><span class="si">}</span><span class="s2">/Geometry/base_link/chassis_link"</span>
+<span class="n">GRAPH_PATH</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">CHASSIS_LINK</span><span class="si">}</span><span class="s2">/cmd_vel"</span>
 
 <span class="n">stage</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">get_stage</span><span class="p">()</span>
 <span class="k">if</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="n">GRAPH_PATH</span><span class="p">):</span>
@@ -1811,37 +1435,37 @@ cmd_vel</label><div class="sd-tab-content docutils">
 <span class="n">keys</span> <span class="o">=</span> <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">Keys</span>
 
 <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">edit</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;graph_path&quot;</span><span class="p">:</span> <span class="n">GRAPH_PATH</span><span class="p">,</span> <span class="s2">&quot;evaluator_name&quot;</span><span class="p">:</span> <span class="s2">&quot;execution&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"graph_path"</span><span class="p">:</span> <span class="n">GRAPH_PATH</span><span class="p">,</span> <span class="s2">"evaluator_name"</span><span class="p">:</span> <span class="s2">"execution"</span><span class="p">},</span>
     <span class="p">{</span>
         <span class="n">keys</span><span class="o">.</span><span class="n">CREATE_NODES</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;OnPlaybackTick&quot;</span><span class="p">,</span> <span class="s2">&quot;omni.graph.action.OnPlaybackTick&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;Context&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.ros2.bridge.ROS2Context&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;SubscribeTwist&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.ros2.bridge.ROS2SubscribeTwist&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;BreakLinVel&quot;</span><span class="p">,</span> <span class="s2">&quot;omni.graph.nodes.BreakVector3&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;BreakAngVel&quot;</span><span class="p">,</span> <span class="s2">&quot;omni.graph.nodes.BreakVector3&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;DiffController&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.robot.wheeled_robots.DifferentialController&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ArtController&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.core.nodes.IsaacArticulationController&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"OnPlaybackTick"</span><span class="p">,</span> <span class="s2">"omni.graph.action.OnPlaybackTick"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"Context"</span><span class="p">,</span> <span class="s2">"isaacsim.ros2.bridge.ROS2Context"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"SubscribeTwist"</span><span class="p">,</span> <span class="s2">"isaacsim.ros2.bridge.ROS2SubscribeTwist"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"BreakLinVel"</span><span class="p">,</span> <span class="s2">"omni.graph.nodes.BreakVector3"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"BreakAngVel"</span><span class="p">,</span> <span class="s2">"omni.graph.nodes.BreakVector3"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"DiffController"</span><span class="p">,</span> <span class="s2">"isaacsim.robot.wheeled_robots.DifferentialController"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ArtController"</span><span class="p">,</span> <span class="s2">"isaacsim.core.nodes.IsaacArticulationController"</span><span class="p">),</span>
         <span class="p">],</span>
         <span class="n">keys</span><span class="o">.</span><span class="n">SET_VALUES</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;SubscribeTwist.inputs:topicName&quot;</span><span class="p">,</span> <span class="s2">&quot;cmd_vel&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;DiffController.inputs:maxAngularSpeed&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;DiffController.inputs:maxLinearSpeed&quot;</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;DiffController.inputs:wheelDistance&quot;</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;DiffController.inputs:wheelRadius&quot;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ArtController.inputs:jointNames&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;front_left_wheel_joint&quot;</span><span class="p">,</span> <span class="s2">&quot;front_right_wheel_joint&quot;</span><span class="p">]),</span>
-            <span class="p">(</span><span class="s2">&quot;ArtController.inputs:targetPrim&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">Sdf</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">ROBOT_PRIM</span><span class="p">)]),</span>
+            <span class="p">(</span><span class="s2">"SubscribeTwist.inputs:topicName"</span><span class="p">,</span> <span class="s2">"cmd_vel"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"DiffController.inputs:maxAngularSpeed"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"DiffController.inputs:maxLinearSpeed"</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"DiffController.inputs:wheelDistance"</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"DiffController.inputs:wheelRadius"</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ArtController.inputs:jointNames"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"front_left_wheel_joint"</span><span class="p">,</span> <span class="s2">"front_right_wheel_joint"</span><span class="p">]),</span>
+            <span class="p">(</span><span class="s2">"ArtController.inputs:targetPrim"</span><span class="p">,</span> <span class="p">[</span><span class="n">Sdf</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">ROBOT_PRIM</span><span class="p">)]),</span>
         <span class="p">],</span>
         <span class="n">keys</span><span class="o">.</span><span class="n">CONNECT</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;OnPlaybackTick.outputs:tick&quot;</span><span class="p">,</span> <span class="s2">&quot;SubscribeTwist.inputs:execIn&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;OnPlaybackTick.outputs:deltaSeconds&quot;</span><span class="p">,</span> <span class="s2">&quot;DiffController.inputs:dt&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;SubscribeTwist.outputs:execOut&quot;</span><span class="p">,</span> <span class="s2">&quot;DiffController.inputs:execIn&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;SubscribeTwist.outputs:linearVelocity&quot;</span><span class="p">,</span> <span class="s2">&quot;BreakLinVel.inputs:tuple&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;BreakLinVel.outputs:x&quot;</span><span class="p">,</span> <span class="s2">&quot;DiffController.inputs:linearVelocity&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;SubscribeTwist.outputs:angularVelocity&quot;</span><span class="p">,</span> <span class="s2">&quot;BreakAngVel.inputs:tuple&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;BreakAngVel.outputs:z&quot;</span><span class="p">,</span> <span class="s2">&quot;DiffController.inputs:angularVelocity&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;DiffController.outputs:velocityCommand&quot;</span><span class="p">,</span> <span class="s2">&quot;ArtController.inputs:velocityCommand&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;OnPlaybackTick.outputs:tick&quot;</span><span class="p">,</span> <span class="s2">&quot;ArtController.inputs:execIn&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;Context.outputs:context&quot;</span><span class="p">,</span> <span class="s2">&quot;SubscribeTwist.inputs:context&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"OnPlaybackTick.outputs:tick"</span><span class="p">,</span> <span class="s2">"SubscribeTwist.inputs:execIn"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"OnPlaybackTick.outputs:deltaSeconds"</span><span class="p">,</span> <span class="s2">"DiffController.inputs:dt"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"SubscribeTwist.outputs:execOut"</span><span class="p">,</span> <span class="s2">"DiffController.inputs:execIn"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"SubscribeTwist.outputs:linearVelocity"</span><span class="p">,</span> <span class="s2">"BreakLinVel.inputs:tuple"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"BreakLinVel.outputs:x"</span><span class="p">,</span> <span class="s2">"DiffController.inputs:linearVelocity"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"SubscribeTwist.outputs:angularVelocity"</span><span class="p">,</span> <span class="s2">"BreakAngVel.inputs:tuple"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"BreakAngVel.outputs:z"</span><span class="p">,</span> <span class="s2">"DiffController.inputs:angularVelocity"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"DiffController.outputs:velocityCommand"</span><span class="p">,</span> <span class="s2">"ArtController.inputs:velocityCommand"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"OnPlaybackTick.outputs:tick"</span><span class="p">,</span> <span class="s2">"ArtController.inputs:execIn"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"Context.outputs:context"</span><span class="p">,</span> <span class="s2">"SubscribeTwist.inputs:context"</span><span class="p">),</span>
         <span class="p">],</span>
     <span class="p">},</span>
 <span class="p">)</span>
@@ -1850,15 +1474,15 @@ cmd_vel</label><div class="sd-tab-content docutils">
 </div>
 </details></div>
 </div>
-<p>With the ActionGraphs created, you can validate in a ROS 2 sourced terminal that the expected data appears on the ROS 2 topics:</p>
+<p>ActionGraph가 생성되면, ROS 2가 소스된 터미널에서 예상 데이터가 ROS 2 토픽에 나타나는지 확인할 수 있습니다:</p>
 <ol class="arabic">
-<li><p>Select <strong>Play</strong> in Isaac Sim.</p></li>
-<li><p>Verify that you receive the following topics:</p>
+<li><p>Isaac Sim에서 <strong>Play</strong>를 선택합니다.</p></li>
+<li><p>다음 토픽들이 수신되는지 확인합니다:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>list
 </pre></div>
 </div>
-<p>Expected output:</p>
+<p>예상 출력:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/cmd_vel
 /platform/joint_states
 /odom
@@ -1872,19 +1496,19 @@ cmd_vel</label><div class="sd-tab-content docutils">
 </div></blockquote>
 </li>
 </ol>
-<p>To visualize the full TF tree:</p>
+<p>전체 TF 트리를 시각화하려면:</p>
 <ol class="arabic">
-<li><p>Make sure the robot description launch file from the <strong>Generate the Robot Description</strong> step is still running. If it was closed, relaunch it:</p>
+<li><p><strong>Generate the Robot Description</strong> 단계의 로봇 설명 launch 파일이 아직 실행 중인지 확인합니다. 닫혀 있으면 다시 실행합니다:</p>
 <blockquote>
 <div><div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-15" name="sd-tab-set-7" type="radio">
+<input checked="checked" id="sd-tab-item-15" name="sd-tab-set-7" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="linux" for="sd-tab-item-15">
 Linux</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>clearpath_platform_description<span class="w"> </span>description.launch.py<span class="w"> </span>--<span class="w"> </span>setup_path:<span class="o">=</span><span class="nv">$ROBOT_PARAMS</span>
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-16" name="sd-tab-set-7" type="radio">
+<input id="sd-tab-item-16" name="sd-tab-set-7" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="windows" for="sd-tab-item-16">
 Windows</label><div class="sd-tab-content docutils">
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">launch</span> <span class="n">clearpath_platform_description</span> <span class="n">description</span><span class="p">.</span><span class="n">launch</span><span class="p">.</span><span class="n">py</span> <span class="p">--</span> <span class="n">setup_path</span><span class="p">:=</span><span class="nv">$env:ROBOT_PARAMS</span>
@@ -1894,41 +1518,41 @@ Windows</label><div class="sd-tab-content docutils">
 </div>
 </div></blockquote>
 </li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">view_frames</span></code> from the <code class="docutils literal notranslate"><span class="pre">tf2_tools</span></code> package to generate the TF tree PDF.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">tf2_tools</span></code> 패키지의 <code class="docutils literal notranslate"><span class="pre">view_frames</span></code>를 사용하여 TF 트리 PDF를 생성합니다.</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>tf2_tools<span class="w"> </span>view_frames
 </pre></div>
 </div>
 <figure class="align-center">
-<img alt="TF tree view generated from view_frames" src="../_images/tutorial_ros2_putting_it_all_together_tf_tree_view.png" />
+<img alt="TF tree view generated from view_frames" src="../_images/tutorial_ros2_putting_it_all_together_tf_tree_view.png"/>
 </figure>
 </div></blockquote>
 </li>
-<li><p>Once the TF tree PDF has been generated, you can close the robot description launch terminal.</p></li>
+<li><p>TF 트리 PDF가 생성되면 로봇 설명 launch 터미널을 닫을 수 있습니다.</p></li>
 </ol>
-<p>To run a test to verify that the <code class="docutils literal notranslate"><span class="pre">cmd_vel</span></code> ActionGraph is working properly:</p>
+<p><code class="docutils literal notranslate"><span class="pre">cmd_vel</span></code> ActionGraph가 제대로 작동하는지 확인하는 테스트를 실행하려면:</p>
 <ol class="arabic">
-<li><p>Add a ground plane by clicking <strong>Create &gt; Physics &gt; Ground Plane</strong> and click <strong>Play</strong>.</p></li>
-<li><p>In a ROS 2 sourced terminal, publish a twist message to the <code class="docutils literal notranslate"><span class="pre">/cmd_vel</span></code> topic (see below).</p></li>
-<li><p>Verify that the robot moves around the environment.</p>
+<li><p><strong>Create &gt; Physics &gt; Ground Plane</strong>을 클릭하여 지면 평면을 추가하고 <strong>Play</strong>를 클릭합니다.</p></li>
+<li><p>ROS 2가 소스된 터미널에서 <code class="docutils literal notranslate"><span class="pre">/cmd_vel</span></code> 토픽에 twist 메시지를 발행합니다 (아래 참조).</p></li>
+<li><p>로봇이 환경에서 이동하는지 확인합니다.</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/cmd_vel<span class="w"> </span>geometry_msgs/Twist<span class="w"> </span><span class="s2">&quot;{&#39;linear&#39;: {&#39;x&#39;: 1, &#39;y&#39;: 0.0, &#39;z&#39;: 0.0}, &#39;angular&#39;: {&#39;x&#39;: 0.0, &#39;y&#39;: 0.0, &#39;z&#39;: 1.0}}&quot;</span><span class="w"> </span>--once
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>/cmd_vel<span class="w"> </span>geometry_msgs/Twist<span class="w"> </span><span class="s2">"{'linear': {'x': 1, 'y': 0.0, 'z': 0.0}, 'angular': {'x': 0.0, 'y': 0.0, 'z': 1.0}}"</span><span class="w"> </span>--once
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Save the stage after verifying the robot moves. You can delete the ground plane or move it outside the default prim before saving.</p></li>
+<li><p>로봇이 이동하는지 확인한 후 stage를 저장합니다. 저장 전에 지면 평면을 삭제하거나 기본 prim 밖으로 이동할 수 있습니다.</p></li>
 </ol>
 </section>
 <section id="add-automatic-namespace-attributes">
 <h3>Add Automatic Namespace Attributes<a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#add-automatic-namespace-attributes" title="Link to this heading">#</a></h3>
-<p>Adding <code class="docutils literal notranslate"><span class="pre">isaac:namespace</span></code> attributes ensures topic names are descriptive and scales cleanly when multiple robots share a scene. For full details, see the <a class="reference internal" href="tutorial_ros2_auto_namespace.html#isaac-sim-app-tutorial-ros2-auto-namespace"><span class="std std-ref">Automatic ROS 2 Namespace Generation</span></a> tutorial.</p>
-<p>For each prim listed in the table below, add the <code class="docutils literal notranslate"><span class="pre">isaac:namespace</span></code> attribute:</p>
+<p><code class="docutils literal notranslate"><span class="pre">isaac:namespace</span></code> 속성을 추가하면 토픽 이름이 설명적이 되고 여러 로봇이 씬을 공유할 때 깔끔하게 확장됩니다. 자세한 내용은 <a class="reference internal" href="tutorial_ros2_auto_namespace.html#isaac-sim-app-tutorial-ros2-auto-namespace"><span class="std std-ref">Automatic ROS 2 Namespace Generation</span></a> 튜토리얼을 참조하세요.</p>
+<p>아래 표에 나열된 각 prim에 대해 <code class="docutils literal notranslate"><span class="pre">isaac:namespace</span></code> 속성을 추가합니다:</p>
 <ol class="arabic simple">
-<li><p>Select the prim.</p></li>
-<li><p>Click <strong>Add</strong> in the Property panel.</p></li>
-<li><p>Navigate to <strong>Isaac &gt; Namespace</strong>.</p></li>
-<li><p>Set the value to the corresponding <strong>Namespace Value</strong> from the table.</p></li>
+<li><p>prim을 선택합니다.</p></li>
+<li><p>Property 패널에서 <strong>Add</strong>를 클릭합니다.</p></li>
+<li><p><strong>Isaac &gt; Namespace</strong>로 이동합니다.</p></li>
+<li><p>값을 표의 해당 <strong>Namespace Value</strong>로 설정합니다.</p></li>
 </ol>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -1949,11 +1573,11 @@ Windows</label><div class="sd-tab-content docutils">
 </tbody>
 </table>
 </div>
-<p>Now, after selecting <strong>Play</strong>, run:</p>
+<p>이제 <strong>Play</strong>를 선택한 후 다음을 실행합니다:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>list
 </pre></div>
 </div>
-<p>Expected output, with the namespaced topics:</p>
+<p>네임스페이스가 지정된 토픽의 예상 출력:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/dd100_0000/cmd_vel
 /dd100_0000/platform/joint_states
 /dd100_0000/odom
@@ -1964,37 +1588,37 @@ Windows</label><div class="sd-tab-content docutils">
 /rosout
 </pre></div>
 </div>
-<p>Save the stage.</p>
+<p>stage를 저장합니다.</p>
 </section>
 <section id="simulation-scene">
 <h3>Simulation Scene<a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#simulation-scene" title="Link to this heading">#</a></h3>
-<p>Start by loading a larger warehouse environment.</p>
+<p>더 큰 창고 환경을 로드하는 것으로 시작합니다.</p>
 <ol class="arabic simple">
-<li><p>Create a new stage with <code class="docutils literal notranslate"><span class="pre">CTRL+N</span></code>.</p></li>
-<li><p>Drag in a warehouse environment from the Content browser at <strong>Isaac Sim &gt; Environments &gt; Simple_Warehouse &gt; full_warehouse.usd</strong>.</p></li>
-<li><p>Zero out the <strong>Translate</strong> components.</p></li>
-<li><p>Drag the <code class="docutils literal notranslate"><span class="pre">dd100_with_sensors.usd</span></code> USD file onto the stage.</p></li>
-<li><p>Set the <strong>Translate</strong> components to <code class="docutils literal notranslate"><span class="pre">(-3.0,</span> <span class="pre">6.0,</span> <span class="pre">0.025)</span></code> and the <strong>Orient</strong> components to <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">90.0)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CTRL+N</span></code>으로 새 stage를 생성합니다.</p></li>
+<li><p>Content browser에서 <strong>Isaac Sim &gt; Environments &gt; Simple_Warehouse &gt; full_warehouse.usd</strong>의 창고 환경을 드래그합니다.</p></li>
+<li><p><strong>Translate</strong> 컴포넌트를 0으로 설정합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dd100_with_sensors.usd</span></code> USD 파일을 stage로 드래그합니다.</p></li>
+<li><p><strong>Translate</strong> 컴포넌트를 <code class="docutils literal notranslate"><span class="pre">(-3.0,</span> <span class="pre">6.0,</span> <span class="pre">0.025)</span></code>로, <strong>Orient</strong> 컴포넌트를 <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">90.0)</span></code>으로 설정합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Warehouse scene with DD100 robot" src="../_images/tutorial_ros2_putting_it_all_together_warehouse_scene.png" />
+<img alt="Warehouse scene with DD100 robot" src="../_images/tutorial_ros2_putting_it_all_together_warehouse_scene.png"/>
 </figure>
-<p>Next, add a <code class="docutils literal notranslate"><span class="pre">clock</span></code> ActionGraph. This should be added to the final scene instead of in the robot directly so that adding multiple robots does not publish duplicate clock messages.</p>
+<p>다음으로, <code class="docutils literal notranslate"><span class="pre">clock</span></code> ActionGraph를 추가합니다. 여러 로봇을 추가해도 중복 clock 메시지가 발행되지 않도록 이것은 로봇에 직접 추가하는 것이 아니라 최종 씬에 추가되어야 합니다.</p>
 <ol class="arabic">
-<li><p>Create a new ActionGraph by right-clicking on the stage and selecting <strong>Create &gt; Action Graph</strong>. Rename it to <code class="docutils literal notranslate"><span class="pre">clock</span></code>.</p></li>
-<li><p>Add the following nodes: <strong>On Playback Tick</strong>, <strong>ROS2 Context</strong>, <strong>Isaac Read Simulation Time</strong>, and <strong>ROS2 Publish Clock</strong>.</p></li>
-<li><p>Connect them together as shown below.</p>
+<li><p>stage를 우클릭하고 <strong>Create &gt; Action Graph</strong>를 선택하여 새 ActionGraph를 생성합니다. <code class="docutils literal notranslate"><span class="pre">clock</span></code>으로 이름을 변경합니다.</p></li>
+<li><p>다음 노드를 추가합니다: <strong>On Playback Tick</strong>, <strong>ROS2 Context</strong>, <strong>Isaac Read Simulation Time</strong>, <strong>ROS2 Publish Clock</strong>.</p></li>
+<li><p>아래와 같이 연결합니다.</p>
 <blockquote>
 <div><figure class="align-center">
-<img alt="Clock ActionGraph with ROS2 Publish Clock node" src="../_images/tutorial_ros2_putting_it_all_together_omnigraph_clock.png" />
+<img alt="Clock ActionGraph with ROS2 Publish Clock node" src="../_images/tutorial_ros2_putting_it_all_together_omnigraph_clock.png"/>
 </figure>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">Script Editor Code</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<span class="sd-summary-text">Script Editor Code</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-right" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni.graph.core</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">og</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">omni.usd</span>
 
-<span class="n">GRAPH_PATH</span> <span class="o">=</span> <span class="s2">&quot;/World/clock&quot;</span>
+<span class="n">GRAPH_PATH</span> <span class="o">=</span> <span class="s2">"/World/clock"</span>
 
 <span class="n">stage</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">get_stage</span><span class="p">()</span>
 <span class="k">if</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="n">GRAPH_PATH</span><span class="p">):</span>
@@ -2003,18 +1627,18 @@ Windows</label><div class="sd-tab-content docutils">
 <span class="n">keys</span> <span class="o">=</span> <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">Keys</span>
 
 <span class="n">og</span><span class="o">.</span><span class="n">Controller</span><span class="o">.</span><span class="n">edit</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;graph_path&quot;</span><span class="p">:</span> <span class="n">GRAPH_PATH</span><span class="p">,</span> <span class="s2">&quot;evaluator_name&quot;</span><span class="p">:</span> <span class="s2">&quot;execution&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">"graph_path"</span><span class="p">:</span> <span class="n">GRAPH_PATH</span><span class="p">,</span> <span class="s2">"evaluator_name"</span><span class="p">:</span> <span class="s2">"execution"</span><span class="p">},</span>
     <span class="p">{</span>
         <span class="n">keys</span><span class="o">.</span><span class="n">CREATE_NODES</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;OnPlaybackTick&quot;</span><span class="p">,</span> <span class="s2">&quot;omni.graph.action.OnPlaybackTick&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;Context&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.ros2.bridge.ROS2Context&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ReadSimTime&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.core.nodes.IsaacReadSimulationTime&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;PublishClock&quot;</span><span class="p">,</span> <span class="s2">&quot;isaacsim.ros2.bridge.ROS2PublishClock&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"OnPlaybackTick"</span><span class="p">,</span> <span class="s2">"omni.graph.action.OnPlaybackTick"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"Context"</span><span class="p">,</span> <span class="s2">"isaacsim.ros2.bridge.ROS2Context"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ReadSimTime"</span><span class="p">,</span> <span class="s2">"isaacsim.core.nodes.IsaacReadSimulationTime"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"PublishClock"</span><span class="p">,</span> <span class="s2">"isaacsim.ros2.bridge.ROS2PublishClock"</span><span class="p">),</span>
         <span class="p">],</span>
         <span class="n">keys</span><span class="o">.</span><span class="n">CONNECT</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;OnPlaybackTick.outputs:tick&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishClock.inputs:execIn&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;ReadSimTime.outputs:simulationTime&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishClock.inputs:timeStamp&quot;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s2">&quot;Context.outputs:context&quot;</span><span class="p">,</span> <span class="s2">&quot;PublishClock.inputs:context&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"OnPlaybackTick.outputs:tick"</span><span class="p">,</span> <span class="s2">"PublishClock.inputs:execIn"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"ReadSimTime.outputs:simulationTime"</span><span class="p">,</span> <span class="s2">"PublishClock.inputs:timeStamp"</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">"Context.outputs:context"</span><span class="p">,</span> <span class="s2">"PublishClock.inputs:context"</span><span class="p">),</span>
         <span class="p">],</span>
     <span class="p">},</span>
 <span class="p">)</span>
@@ -2023,38 +1647,38 @@ Windows</label><div class="sd-tab-content docutils">
 </div>
 </details></div></blockquote>
 </li>
-<li><p>Save the stage as <code class="docutils literal notranslate"><span class="pre">dd100_warehouse_navigation.usd</span></code>.</p></li>
+<li><p>stage를 <code class="docutils literal notranslate"><span class="pre">dd100_warehouse_navigation.usd</span></code>로 저장합니다.</p></li>
 </ol>
 </section>
 <section id="occupancy-map">
 <h3>Occupancy Map<a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#occupancy-map" title="Link to this heading">#</a></h3>
-<p>Nav2 requires an occupancy map of the environment to plan collision-free paths. Generate one using the <a class="reference internal" href="../digital_twin/ext_isaacsim_asset_generator_occupancy_map.html#ext-isaacsim-asset-generator-occupancy-map"><span class="std std-ref">Occupancy Map Generator extension</span></a>. For a more detailed walkthrough with screenshots, refer to the <a class="reference internal" href="tutorial_ros2_navigation.html#isaac-sim-app-tutorial-ros2-navigation"><span class="std std-ref">Occupancy Map section of the ROS 2 Navigation tutorial</span></a>.</p>
+<p>Nav2는 충돌 없는 경로를 계획하기 위해 환경의 점유 지도가 필요합니다. <a class="reference internal" href="../digital_twin/ext_isaacsim_asset_generator_occupancy_map.html#ext-isaacsim-asset-generator-occupancy-map"><span class="std std-ref">Occupancy Map Generator extension</span></a>을 사용하여 생성합니다. 스크린샷이 있는 더 자세한 안내는 <a class="reference internal" href="tutorial_ros2_navigation.html#isaac-sim-app-tutorial-ros2-navigation"><span class="std std-ref">Occupancy Map section of the ROS 2 Navigation tutorial</span></a>을 참조하세요.</p>
 <ol class="arabic simple">
-<li><p>Switch to a <strong>Top</strong> camera view ( <strong>Camera</strong> dropdown at the upper-left of the viewport &gt; <strong>Top</strong> ).</p></li>
-<li><p>Open <strong>Tools &gt; Robotics &gt; Occupancy Map</strong>.</p></li>
-<li><p>Set the origin to <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0)</span></code>. Set the <strong>Lower Bound Z</strong> to <code class="docutils literal notranslate"><span class="pre">0.2</span></code> and the <strong>Upper Bound Z</strong> to <code class="docutils literal notranslate"><span class="pre">0.62</span></code>.</p></li>
-<li><p>Select the warehouse root prim in the <strong>Stage Tree</strong>, then click <strong>BOUND SELECTION</strong> in the Occupancy Map extension to auto-fit the map bounds.</p></li>
-<li><p>Click <strong>CALCULATE</strong>, then <strong>VISUALIZE IMAGE</strong>.</p></li>
-<li><p>Click <strong>Save YAML</strong> and save as <code class="docutils literal notranslate"><span class="pre">dd100_warehouse_navigation.yaml</span></code>.</p></li>
-<li><p>Click <strong>Save Image</strong> and save as <code class="docutils literal notranslate"><span class="pre">dd100_warehouse_navigation.png</span></code> in the same directory as the YAML file.</p></li>
+<li><p><strong>Top</strong> 카메라 보기로 전환합니다 (뷰포트 왼쪽 상단의 <strong>Camera</strong> 드롭다운 &gt; <strong>Top</strong>).</p></li>
+<li><p><strong>Tools &gt; Robotics &gt; Occupancy Map</strong>을 엽니다.</p></li>
+<li><p>원점을 <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0)</span></code>으로 설정합니다. <strong>Lower Bound Z</strong>를 <code class="docutils literal notranslate"><span class="pre">0.2</span></code>로, <strong>Upper Bound Z</strong>를 <code class="docutils literal notranslate"><span class="pre">0.62</span></code>로 설정합니다.</p></li>
+<li><p><strong>Stage Tree</strong>에서 창고 루트 prim을 선택한 다음 Occupancy Map extension의 <strong>BOUND SELECTION</strong>을 클릭하여 지도 경계를 자동으로 맞춥니다.</p></li>
+<li><p><strong>CALCULATE</strong>를 클릭한 다음 <strong>VISUALIZE IMAGE</strong>를 클릭합니다.</p></li>
+<li><p><strong>Save YAML</strong>을 클릭하고 <code class="docutils literal notranslate"><span class="pre">dd100_warehouse_navigation.yaml</span></code>로 저장합니다.</p></li>
+<li><p><strong>Save Image</strong>를 클릭하고 YAML 파일과 동일한 디렉터리에 <code class="docutils literal notranslate"><span class="pre">dd100_warehouse_navigation.png</span></code>로 저장합니다.</p></li>
 </ol>
-<p>The generated occupancy map should look similar to the following:</p>
+<p>생성된 점유 지도는 다음과 유사해야 합니다:</p>
 <figure class="align-default" id="id6">
-<img alt="../_images/tutorial_ros2_putting_it_all_together_dd100_occupancy_map.png" src="../_images/tutorial_ros2_putting_it_all_together_dd100_occupancy_map.png" />
+<img alt="../_images/tutorial_ros2_putting_it_all_together_dd100_occupancy_map.png" src="../_images/tutorial_ros2_putting_it_all_together_dd100_occupancy_map.png"/>
 <figcaption>
-<p><span class="caption-text">Occupancy map generated from the full warehouse environment. The robot is not visible because you set the <strong>Lower Bound Z</strong> to <code class="docutils literal notranslate"><span class="pre">0.2</span></code> (above the robot).</span><a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#id6" title="Link to this image">#</a></p>
+<p><span class="caption-text">전체 창고 환경에서 생성된 점유 지도. <strong>Lower Bound Z</strong>를 <code class="docutils literal notranslate"><span class="pre">0.2</span></code> (로봇 위)로 설정했기 때문에 로봇이 보이지 않습니다.</span><a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#id6" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="running-nav2">
 <h3>Running Nav2<a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#running-nav2" title="Link to this heading">#</a></h3>
-<p>Control the robot using the Nav2 stack. <a class="reference external" href="https://docs.nav2.org/">Nav2</a> is a ROS 2-based navigation stack for mobile robots. It provides a set of tools and libraries for building and running navigation systems.</p>
+<p>Nav2 스택을 사용하여 로봇을 제어합니다. <a class="reference external" href="https://docs.nav2.org/">Nav2</a>는 모바일 로봇을 위한 ROS 2 기반 내비게이션 스택입니다. 내비게이션 시스템 구축 및 실행을 위한 도구와 라이브러리 세트를 제공합니다.</p>
 <ol class="arabic">
-<li><p>Click <strong>Play</strong> in Isaac Sim.</p></li>
-<li><p>In a ROS-sourced terminal, launch the full navigation stack. This starts <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code>, Nav2, and RViz in a single command. The Nav2 parameters are pre-configured in the <code class="docutils literal notranslate"><span class="pre">isaacsim_clearpath_nav2</span></code> package.</p>
+<li><p>Isaac Sim에서 <strong>Play</strong>를 클릭합니다.</p></li>
+<li><p>ROS가 소스된 터미널에서 전체 내비게이션 스택을 실행합니다. 이것은 단일 명령으로 <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code>, Nav2, RViz를 시작합니다. Nav2 파라미터는 <code class="docutils literal notranslate"><span class="pre">isaacsim_clearpath_nav2</span></code> 패키지에 미리 구성되어 있습니다.</p>
 <blockquote>
 <div><div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-17" name="sd-tab-set-8" type="radio">
+<input checked="checked" id="sd-tab-item-17" name="sd-tab-set-8" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="linux" for="sd-tab-item-17">
 Linux</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>isaacsim_clearpath_nav2<span class="w"> </span>clearpath_navigation.launch.py<span class="w"> </span><span class="se">\</span>
@@ -2063,7 +1687,7 @@ Linux</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-18" name="sd-tab-set-8" type="radio">
+<input id="sd-tab-item-18" name="sd-tab-set-8" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="windows" for="sd-tab-item-18">
 Windows</label><div class="sd-tab-content docutils">
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">launch</span> <span class="n">isaacsim_clearpath_nav2</span> <span class="n">clearpath_navigation</span><span class="p">.</span><span class="n">launch</span><span class="p">.</span><span class="n">py</span> <span class="p">`</span>
@@ -2075,87 +1699,65 @@ Windows</label><div class="sd-tab-content docutils">
 </div>
 </div></blockquote>
 </li>
-<li><p>When <code class="docutils literal notranslate"><span class="pre">rviz</span></code> opens, set the robot’s initial pose by clicking the <strong>2D Pose Estimate</strong> button at the top of the window and clicking to place the pose estimate at the robot’s current location on the map.</p></li>
-<li><p>After Adaptive Monte Carlo Localization (AMCL) localizes the robot, use the <strong>Nav2 Goal</strong> button to send a navigation goal. Place the goal above the equipment in the aisle.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rviz</span></code>가 열리면, 창 상단의 <strong>2D Pose Estimate</strong> 버튼을 클릭하고 지도에서 로봇의 현재 위치에 포즈 추정값을 클릭하여 배치하여 로봇의 초기 포즈를 설정합니다.</p></li>
+<li><p>Adaptive Monte Carlo Localization (AMCL)이 로봇의 위치를 파악한 후, <strong>Nav2 Goal</strong> 버튼을 사용하여 내비게이션 목표를 전송합니다. 목표를 통로의 장비 위에 배치합니다.</p></li>
 </ol>
 <figure class="align-default" id="id7">
-<a class="reference internal image-reference" href="../_images/tutorial_ros2_putting_it_all_together_nav2_goal.webp"><img alt="Nav2 navigation goal" src="../_images/tutorial_ros2_putting_it_all_together_nav2_goal.webp" style="width: 80%;" />
+<a class="reference internal image-reference" href="../_images/tutorial_ros2_putting_it_all_together_nav2_goal.webp"><img alt="Nav2 navigation goal" src="../_images/tutorial_ros2_putting_it_all_together_nav2_goal.webp" style="width: 80%;"/>
 </a>
 <figcaption>
-<p><span class="caption-text">Setting the initial pose estimate and Nav2 goal in RViz, then watching the robot navigate toward the goal in Isaac Sim.</span><a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#id7" title="Link to this image">#</a></p>
+<p><span class="caption-text">RViz에서 초기 포즈 추정값과 Nav2 목표를 설정한 후 Isaac Sim에서 로봇이 목표를 향해 이동하는 것을 관찰합니다.</span><a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#id7" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Because the robot has a LiDAR and Nav2 actively recomputes paths when obstacles appear, you can interact with the robot through the environment.</p>
+<p>로봇에 LiDAR가 있고 Nav2가 장애물이 나타날 때 경로를 능동적으로 재계산하기 때문에, 환경을 통해 로봇과 상호작용할 수 있습니다.</p>
 <figure class="align-center" id="id8">
-<img alt="../_images/tutorial_ros2_putting_it_all_together_interactive.webp" src="../_images/tutorial_ros2_putting_it_all_together_interactive.webp" />
+<img alt="../_images/tutorial_ros2_putting_it_all_together_interactive.webp" src="../_images/tutorial_ros2_putting_it_all_together_interactive.webp"/>
 <figcaption>
-<p><span class="caption-text">Interactive robot response based on environmental disturbances.</span><a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#id8" title="Link to this image">#</a></p>
+<p><span class="caption-text">환경 교란에 기반한 대화형 로봇 반응.</span><a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#id8" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="tutorial_ros2_putting_it_all_together.html#summary" title="Link to this heading">#</a></h2>
-<p>In this tutorial, you:</p>
+<p>이 튜토리얼에서 수행한 작업:</p>
 <ul class="simple">
-<li><p>Imported the Clearpath Dingo-D URDF robot model into Isaac Sim using the URDF Importer Extension.</p></li>
-<li><p>Incorporated physics and collision properties, including joint damping and physics materials for the drive wheels and caster.</p></li>
-<li><p>Attached a RealSense D455 depth camera and a SICK microScan3 LiDAR sensor to the robot model.</p></li>
-<li><p>Built OmniGraph publishers and subscribers to connect the robot to the ROS 2 network (joint states, odometry, TF, laser scan, clock, and cmd_vel).</p></li>
-<li><p>Integrated the Nav2 navigation stack to autonomously move the robot between two points in a warehouse environment.</p></li>
+<li><p>URDF Importer Extension을 사용하여 Clearpath Dingo-D URDF 로봇 모델을 Isaac Sim으로 가져왔습니다.</p></li>
+<li><p>구동 바퀴와 캐스터의 조인트 감쇠 및 물리 재질을 포함하여 물리 및 충돌 속성을 통합했습니다.</p></li>
+<li><p>RealSense D455 depth 카메라와 SICK microScan3 LiDAR 센서를 로봇 모델에 부착했습니다.</p></li>
+<li><p>OmniGraph publisher와 subscriber를 구축하여 로봇을 ROS 2 네트워크 (joint state, odometry, TF, laser scan, clock, cmd_vel)에 연결했습니다.</p></li>
+<li><p>창고 환경에서 두 지점 사이에서 로봇을 자율적으로 이동시키기 위해 Nav2 내비게이션 스택을 통합했습니다.</p></li>
 </ul>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="tutorial_ros2_simulation_control.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">ROS2 Simulation Control</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="ros2_faq.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">ROS 2 Frequently Asked Questions</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="tutorial_ros2_simulation_control.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">ROS2 Simulation Control</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="ros2_faq.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">ROS 2 Frequently Asked Questions</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_ros2_putting_it_all_together.html#learning-objectives">Learning Objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_ros2_putting_it_all_together.html#getting-started">Getting Started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_ros2_putting_it_all_together.html#importing-the-urdf">Importing the URDF</a><ul class="nav section-nav flex-column">
@@ -2176,46 +1778,29 @@ Windows</label><div class="sd-tab-content docutils">
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_ros2_putting_it_all_together.html#summary">Summary</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -2246,36 +1831,21 @@ Windows</label><div class="sd-tab-content docutils">
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

@@ -1,561 +1,257 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Joint Inspector &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Joint Inspector — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
-  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
-</script>
-<script type="text/javascript">
-  function OptanonWrapper() {
-    var event = new Event('bannerLoaded');
-    window.dispatchEvent(event);
-  }
-</script>
-<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
-</script>
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'robot_setup/joint_inspector';</script>
-    <script>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'robot_setup/joint_inspector';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Physics Inspector" href="../physics/joint_inspector.html" />
-    <link rel="prev" title="Inspector Tools" href="inspector_tools.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="../physics/joint_inspector.html" rel="next" title="Physics Inspector"/>
+<link href="inspector_tools.html" rel="prev" title="Inspector Tools"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="joint_inspector.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="joint_inspector.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -575,7 +271,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -603,20 +298,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -691,17 +374,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -879,7 +552,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -919,13 +591,7 @@
 <li class="toctree-l2"><a class="reference internal" href="robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -972,10 +638,6 @@
 <li class="toctree-l2"><a class="reference internal" href="asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1144,18 +806,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1181,122 +833,94 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Robot Setup</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="inspector_tools.html" class="nav-link">Inspector Tools</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Joint Inspector</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">Robot Setup</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="inspector_tools.html">Inspector Tools</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Joint Inspector</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="joint-inspector">
+<article class="bd-article">
+<section id="joint-inspector">
 <span id="isaac-sim-joint-inspector"></span><h1>Joint Inspector<a class="headerlink" href="joint_inspector.html#joint-inspector" title="Link to this heading">#</a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">isaacsim.gui.property</span></code> extension provides a standalone <strong>Joint Inspector</strong> window for Adjusting per-joint values across the robots present on the stage.</p>
-<a class="reference internal image-reference" href="../_images/isim_6.0_base_ref_gui_joint_inspector_overview.png"><img alt="Joint Inspector window showing a robot drop-down, the New Inspector button, the joint name filter, the columns hamburger menu, and a per-joint table with editable cells." class="align-center" src="../_images/isim_6.0_base_ref_gui_joint_inspector_overview.png" style="width: 800px;" />
+<p><code class="docutils literal notranslate"><span class="pre">isaacsim.gui.property</span></code> 확장은 스테이지에 있는 로봇의 조인트별 값을 조정하기 위한 독립 실행형 <strong>Joint Inspector</strong> 창을 제공합니다.</p>
+<a class="reference internal image-reference" href="../_images/isim_6.0_base_ref_gui_joint_inspector_overview.png"><img alt="Joint Inspector window showing a robot drop-down, the New Inspector button, the joint name filter, the columns hamburger menu, and a per-joint table with editable cells." class="align-center" src="../_images/isim_6.0_base_ref_gui_joint_inspector_overview.png" style="width: 800px;"/>
 </a>
 <section id="opening-the-window">
 <h2>Opening the Window<a class="headerlink" href="joint_inspector.html#opening-the-window" title="Link to this heading">#</a></h2>
-<p>Open the inspector through <strong>Tools &gt; Robotics &gt; Joint Inspector</strong>.</p>
-<a class="reference internal image-reference" href="../_images/isim_6.0_base_ref_gui_joint_inspector_menu.png"><img alt="Tools &gt; Robotics submenu with the Joint Inspector entry and its checkmark indicator." class="align-center" src="../_images/isim_6.0_base_ref_gui_joint_inspector_menu.png" style="width: 360px;" />
+<p><strong>Tools &gt; Robotics &gt; Joint Inspector</strong>를 통해 인스펙터를 엽니다.</p>
+<a class="reference internal image-reference" href="../_images/isim_6.0_base_ref_gui_joint_inspector_menu.png"><img alt="Tools &gt; Robotics submenu with the Joint Inspector entry and its checkmark indicator." class="align-center" src="../_images/isim_6.0_base_ref_gui_joint_inspector_menu.png" style="width: 360px;"/>
 </a>
-<p>The window docks to the left of the viewport.</p>
+<p>창은 뷰포트의 왼쪽에 도킹됩니다.</p>
 </section>
 <section id="selecting-a-robot">
 <h2>Selecting a Robot<a class="headerlink" href="joint_inspector.html#selecting-a-robot" title="Link to this heading">#</a></h2>
-<p>The header exposes a robot picker, a refresh button, and a <strong>+ New Inspector</strong> button.</p>
+<p>헤더에는 로봇 선택기, 새로고침 버튼, <strong>+ New Inspector</strong> 버튼이 있습니다.</p>
 <ul class="simple">
-<li><p><strong>Robot drop-down</strong> – lists every prim on the stage that has <code class="docutils literal notranslate"><span class="pre">IsaacRobotAPI</span></code> applied. Click the drop-down to open a searchable popup; type any substring of the prim path to narrow the list. Selecting a robot rebinds the table to that robot’s joints.</p></li>
-<li><p><strong>Refresh</strong> – rescans the stage for prims with <code class="docutils literal notranslate"><span class="pre">IsaacRobotAPI</span></code>. Use this after authoring a new robot in a script editor or after switching layers.</p></li>
-<li><p><strong>+ New Inspector</strong> – spawns an additional Joint Inspector window. Each window keeps an independent robot selection and column set, which is useful for side-by-side comparison of two robots or two views of the same robot.</p></li>
+<li><p><strong>Robot 드롭다운</strong> – 스테이지에서 <code class="docutils literal notranslate"><span class="pre">IsaacRobotAPI</span></code>가 적용된 모든 프림을 나열합니다. 드롭다운을 클릭하면 검색 가능한 팝업이 열립니다. 프림 경로의 임의의 하위 문자열을 입력하여 목록을 좁힐 수 있습니다. 로봇을 선택하면 해당 로봇의 조인트에 맞게 테이블이 업데이트됩니다.</p></li>
+<li><p><strong>Refresh</strong> – <code class="docutils literal notranslate"><span class="pre">IsaacRobotAPI</span></code>가 있는 프림의 스테이지를 다시 스캔합니다. 스크립트 편집기에서 새 로봇을 작성하거나 레이어를 전환한 후 사용하세요.</p></li>
+<li><p><strong>+ New Inspector</strong> – 추가 Joint Inspector 창을 생성합니다. 각 창은 독립적인 로봇 선택과 열 집합을 유지하므로 두 로봇 또는 동일한 로봇의 두 뷰를 나란히 비교하는 데 유용합니다.</p></li>
 </ul>
-<a class="reference internal image-reference" href="../_images/isim_6.0_base_ref_gui_joint_inspector_robot_picker.png"><img alt="Robot picker popup with a search field and a list of robot prim paths, the active selection highlighted." class="align-center" src="../_images/isim_6.0_base_ref_gui_joint_inspector_robot_picker.png" style="width: 480px;" />
+<a class="reference internal image-reference" href="../_images/isim_6.0_base_ref_gui_joint_inspector_robot_picker.png"><img alt="Robot picker popup with a search field and a list of robot prim paths, the active selection highlighted." class="align-center" src="../_images/isim_6.0_base_ref_gui_joint_inspector_robot_picker.png" style="width: 480px;"/>
 </a>
-<p>The window listens to stage open/close and asset-load events so the robot list refreshes automatically when assets finish loading.</p>
+<p>창은 스테이지 열기/닫기 및 에셋 로드 이벤트를 감지하므로 에셋 로드가 완료되면 로봇 목록이 자동으로 새로고침됩니다.</p>
 </section>
 <section id="filtering-joints">
 <h2>Filtering Joints<a class="headerlink" href="joint_inspector.html#filtering-joints" title="Link to this heading">#</a></h2>
-<p>A search field above the table filters the joint rows by name. Two matching modes are supported:</p>
+<p>테이블 위의 검색 필드는 이름으로 조인트 행을 필터링합니다. 두 가지 매칭 모드가 지원됩니다:</p>
 <ul class="simple">
-<li><p><strong>Substring (default)</strong> – a case-insensitive substring match against the joint short name and the full prim path. <code class="docutils literal notranslate"><span class="pre">arm</span></code> matches <code class="docutils literal notranslate"><span class="pre">shoulder_arm_joint</span></code> as well as <code class="docutils literal notranslate"><span class="pre">/World/UR10/shoulder/arm</span></code>.</p></li>
-<li><p><strong>Glob (``*`` or ``?`` in the query)</strong> – <code class="docutils literal notranslate"><span class="pre">fnmatch</span></code>-style wildcards. The query is also matched in a substring-fenced form (<code class="docutils literal notranslate"><span class="pre">*pattern*</span></code>) so <code class="docutils literal notranslate"><span class="pre">hand*</span></code> finds anything that contains <code class="docutils literal notranslate"><span class="pre">hand</span></code>, mirroring the typical search-bar mental model.</p></li>
+<li><p><strong>Substring (기본값)</strong> – 조인트 짧은 이름과 전체 프림 경로에 대한 대소문자를 구분하지 않는 하위 문자열 매칭. <code class="docutils literal notranslate"><span class="pre">arm</span></code>은 <code class="docutils literal notranslate"><span class="pre">shoulder_arm_joint</span></code>뿐만 아니라 <code class="docutils literal notranslate"><span class="pre">/World/UR10/shoulder/arm</span></code>도 매칭합니다.</p></li>
+<li><p><strong>Glob (쿼리에 <code class="docutils literal notranslate"><span class="pre">*</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">?</span></code> 포함)</strong> – <code class="docutils literal notranslate"><span class="pre">fnmatch</span></code> 스타일 와일드카드. 쿼리는 하위 문자열 형식(<code class="docutils literal notranslate"><span class="pre">*pattern*</span></code>)으로도 매칭되므로 <code class="docutils literal notranslate"><span class="pre">hand*</span></code>는 <code class="docutils literal notranslate"><span class="pre">hand</span></code>를 포함하는 모든 항목을 찾습니다.</p></li>
 </ul>
-<a class="reference internal image-reference" href="../_images/isim_6.0_base_ref_gui_joint_inspector_filter.png"><img alt="Joint name filter showing the magnifier icon, the typed query, and the trailing clear button that appears when text is present." class="align-center" src="../_images/isim_6.0_base_ref_gui_joint_inspector_filter.png" style="width: 700px;" />
+<a class="reference internal image-reference" href="../_images/isim_6.0_base_ref_gui_joint_inspector_filter.png"><img alt="Joint name filter showing the magnifier icon, the typed query, and the trailing clear button that appears when text is present." class="align-center" src="../_images/isim_6.0_base_ref_gui_joint_inspector_filter.png" style="width: 700px;"/>
 </a>
-<p>A clear button on the right of the field removes the query and restores the full list.</p>
+<p>필드 오른쪽의 지우기 버튼은 쿼리를 제거하고 전체 목록을 복원합니다.</p>
 </section>
 <section id="choosing-columns">
 <h2>Choosing Columns<a class="headerlink" href="joint_inspector.html#choosing-columns" title="Link to this heading">#</a></h2>
-<p>The hamburger button on the right of the toolbar opens a categorized columns popup.</p>
-<a class="reference internal image-reference" href="../_images/isim_6.0_base_ref_gui_joint_inspector_columns_menu.png"><img alt="Columns popup with the BACKENDS pill toggles (PhysX, MuJoCo) at the top and grouped checkbox rows for Joint Limits, Drives, Performance Envelope, Joint State, and MuJoCo Joint columns." class="align-center" src="../_images/isim_6.0_base_ref_gui_joint_inspector_columns_menu.png" style="width: 360px;" />
+<p>툴바 오른쪽의 햄버거 버튼은 분류된 열 팝업을 엽니다.</p>
+<a class="reference internal image-reference" href="../_images/isim_6.0_base_ref_gui_joint_inspector_columns_menu.png"><img alt="Columns popup with the BACKENDS pill toggles (PhysX, MuJoCo) at the top and grouped checkbox rows for Joint Limits, Drives, Performance Envelope, Joint State, and MuJoCo Joint columns." class="align-center" src="../_images/isim_6.0_base_ref_gui_joint_inspector_columns_menu.png" style="width: 360px;"/>
 </a>
-<p>The popup contains:</p>
+<p>팝업에는 다음이 포함됩니다:</p>
 <ul class="simple">
-<li><p><strong>Backend pills</strong> at the top – <code class="docutils literal notranslate"><span class="pre">PhysX</span></code> and <code class="docutils literal notranslate"><span class="pre">MuJoCo</span></code> toggle the visibility of every column belonging to that simulation backend. The pill state does not flip the per-column checkboxes, so re-enabling a backend restores the previously checked columns.</p></li>
-<li><p><strong>Categorized checkbox rows</strong> for the available column groups.</p></li>
+<li><p>상단의 <strong>Backend 필</strong> – <code class="docutils literal notranslate"><span class="pre">PhysX</span></code>와 <code class="docutils literal notranslate"><span class="pre">MuJoCo</span></code>는 해당 시뮬레이션 백엔드에 속하는 모든 열의 가시성을 전환합니다. 필 상태는 열별 체크박스를 바꾸지 않으므로 백엔드를 다시 활성화하면 이전에 체크된 열이 복원됩니다.</p></li>
+<li><p>사용 가능한 열 그룹에 대한 <strong>분류된 체크박스 행</strong>.</p></li>
 </ul>
-<p>The available column groups are summarized below.</p>
+<p>사용 가능한 열 그룹은 아래에 요약되어 있습니다.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <colgroup>
-<col style="width: 22.0%" />
-<col style="width: 18.0%" />
-<col style="width: 60.0%" />
+<col style="width: 22.0%"/>
+<col style="width: 18.0%"/>
+<col style="width: 60.0%"/>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Group</p></th>
@@ -1328,91 +952,69 @@
 </tbody>
 </table>
 </div>
-<p>Column behavior:</p>
+<p>열 동작:</p>
 <ul class="simple">
-<li><p>Items whose backing API is not applied on any joint of the current robot stay clickable but render dimmed; their tooltip explains why the column is currently empty.</p></li>
-<li><p>The user’s column selection persists across robot switches. A column reappears as soon as a robot whose joints back the column is selected.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Joint</span> <span class="pre">Limits</span></code> columns belong to USD core schemas and are not affected by the backend pills.</p></li>
+<li><p>백킹 API가 현재 로봇의 어떤 조인트에도 적용되지 않은 항목은 클릭 가능하지만 흐리게 렌더링됩니다. 툴팁에 열이 현재 비어 있는 이유가 설명됩니다.</p></li>
+<li><p>사용자의 열 선택은 로봇 전환 시에도 유지됩니다. 해당 열을 지원하는 로봇의 조인트가 선택되는 즉시 열이 다시 나타납니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Joint</span> <span class="pre">Limits</span></code> 열은 USD 코어 스키마에 속하며 백엔드 필의 영향을 받지 않습니다.</p></li>
 </ul>
 <section id="per-axis-fan-out">
 <h3>Per-axis fan-out<a class="headerlink" href="joint_inspector.html#per-axis-fan-out" title="Link to this heading">#</a></h3>
-<p>When every joint authoring a multi-apply schema has at most one axis applied (the common case for revolute and prismatic chains), the per-axis dimension is collapsed and the column appears once. The cell automatically picks the joint’s authored axis or its natural axis (<code class="docutils literal notranslate"><span class="pre">angular</span></code> for revolute, <code class="docutils literal notranslate"><span class="pre">linear</span></code> for prismatic).</p>
-<p>Multi-DOF (for example, <code class="docutils literal notranslate"><span class="pre">D6Joint</span></code>) joints make the column fan out: one column per distinct axis (<code class="docutils literal notranslate"><span class="pre">transX</span></code>, <code class="docutils literal notranslate"><span class="pre">transY</span></code>, <code class="docutils literal notranslate"><span class="pre">transZ</span></code>, <code class="docutils literal notranslate"><span class="pre">rotX</span></code>, <code class="docutils literal notranslate"><span class="pre">rotY</span></code>, <code class="docutils literal notranslate"><span class="pre">rotZ</span></code>) is rendered, with the axis token appended to the header label.</p>
+<p>다중 적용 스키마를 작성하는 모든 조인트에 최대 하나의 축이 적용된 경우(회전형 및 직선형 체인의 일반적인 경우), 축별 차원이 축소되고 열이 한 번 나타납니다. 셀은 조인트의 작성된 축 또는 자연 축(회전형의 경우 <code class="docutils literal notranslate"><span class="pre">angular</span></code>, 직선형의 경우 <code class="docutils literal notranslate"><span class="pre">linear</span></code>)을 자동으로 선택합니다.</p>
+<p>다중 DOF(예: <code class="docutils literal notranslate"><span class="pre">D6Joint</span></code>) 조인트는 열을 펼칩니다: 각 고유 축(<code class="docutils literal notranslate"><span class="pre">transX</span></code>, <code class="docutils literal notranslate"><span class="pre">transY</span></code>, <code class="docutils literal notranslate"><span class="pre">transZ</span></code>, <code class="docutils literal notranslate"><span class="pre">rotX</span></code>, <code class="docutils literal notranslate"><span class="pre">rotY</span></code>, <code class="docutils literal notranslate"><span class="pre">rotZ</span></code>)마다 하나의 열이 렌더링되며, 헤더 레이블에 축 토큰이 추가됩니다.</p>
 </section>
 </section>
 <section id="editing-values">
 <h2>Editing Values<a class="headerlink" href="joint_inspector.html#editing-values" title="Link to this heading">#</a></h2>
-<p>Each cell is a free-form <code class="docutils literal notranslate"><span class="pre">ui.FloatDrag</span></code> bound directly to the underlying USD attribute. Drag horizontally to scrub the value or click to type a number. double-click or Ctrl-click to type a number.</p>
-<p>Behavior of empty cells, multi-row edits, and array-typed attributes:</p>
+<p>각 셀은 기본 USD 속성에 직접 바인딩된 자유 형식 <code class="docutils literal notranslate"><span class="pre">ui.FloatDrag</span></code>입니다. 수평으로 드래그하여 값을 조정하거나 클릭하여 숫자를 입력하세요. 더블 클릭 또는 Ctrl-클릭하여 숫자를 입력하세요.</p>
+<p>빈 셀, 다중 행 편집, 배열 유형 속성의 동작:</p>
 <ul class="simple">
-<li><p>Cells whose backing API is not applied on the joint render empty rather than as a disabled <code class="docutils literal notranslate"><span class="pre">0.0</span></code> field. This avoids implying a meaningful zero where no value is authored.</p></li>
-<li><p>Click rows to select them. <code class="docutils literal notranslate"><span class="pre">Ctrl</span></code> / <code class="docutils literal notranslate"><span class="pre">Cmd</span></code> and <code class="docutils literal notranslate"><span class="pre">Shift</span></code> allow multi-row selection. Editing one cell of a selected row mirrors the new value to the same column on every other selected row whose attribute exists.</p></li>
-<li><p>The MuJoCo <code class="docutils literal notranslate"><span class="pre">solreflimit</span></code> and <code class="docutils literal notranslate"><span class="pre">solimplimit</span></code> columns surface only the dominant element of the underlying array (<code class="docutils literal notranslate"><span class="pre">timeconst</span></code> and <code class="docutils literal notranslate"><span class="pre">dmin</span></code>); the rest of the array is preserved on write.</p></li>
+<li><p>조인트에 백킹 API가 적용되지 않은 셀은 비활성화된 <code class="docutils literal notranslate"><span class="pre">0.0</span></code> 필드가 아닌 빈 상태로 렌더링됩니다. 이렇게 하면 값이 작성되지 않은 곳에 의미 있는 0을 암시하지 않을 수 있습니다.</p></li>
+<li><p>행을 클릭하여 선택하세요. <code class="docutils literal notranslate"><span class="pre">Ctrl</span></code>/<code class="docutils literal notranslate"><span class="pre">Cmd</span></code> 및 <code class="docutils literal notranslate"><span class="pre">Shift</span></code>를 사용하여 다중 행을 선택할 수 있습니다. 선택된 행의 한 셀을 편집하면 해당 속성이 존재하는 다른 모든 선택된 행의 같은 열에 새 값이 미러링됩니다.</p></li>
+<li><p>MuJoCo <code class="docutils literal notranslate"><span class="pre">solreflimit</span></code> 및 <code class="docutils literal notranslate"><span class="pre">solimplimit</span></code> 열은 기본 배열의 주요 요소(<code class="docutils literal notranslate"><span class="pre">timeconst</span></code> 및 <code class="docutils literal notranslate"><span class="pre">dmin</span></code>)만 노출합니다. 나머지 배열은 쓰기 시 보존됩니다.</p></li>
 </ul>
-<p>The status line above the table shows the number of joints currently displayed.</p>
+<p>테이블 위의 상태 줄에는 현재 표시된 조인트 수가 나타납니다.</p>
 </section>
 <section id="default-visible-columns">
 <h2>Default Visible Columns<a class="headerlink" href="joint_inspector.html#default-visible-columns" title="Link to this heading">#</a></h2>
-<p>The first time the inspector is opened, the following columns are visible:</p>
+<p>인스펙터를 처음 열면 다음 열이 표시됩니다:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Position</span> <span class="pre">Min</span></code> and <code class="docutils literal notranslate"><span class="pre">Position</span> <span class="pre">Max</span></code> (Joint Limits)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Position</span> <span class="pre">Min</span></code> 및 <code class="docutils literal notranslate"><span class="pre">Position</span> <span class="pre">Max</span></code> (Joint Limits)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Target</span> <span class="pre">Position</span></code>, <code class="docutils literal notranslate"><span class="pre">Stiffness</span></code>, <code class="docutils literal notranslate"><span class="pre">Damping</span></code> (Drives)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">State</span> <span class="pre">Position</span></code> (Joint State)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Armature</span></code>, <code class="docutils literal notranslate"><span class="pre">Damping</span></code>, <code class="docutils literal notranslate"><span class="pre">Stiffness</span></code>, <code class="docutils literal notranslate"><span class="pre">Friction</span> <span class="pre">Loss</span></code> (MuJoCo Joint)</p></li>
 </ul>
-<p>Use the columns menu to add or remove columns from this set.</p>
+<p>열 메뉴를 사용하여 이 세트에서 열을 추가하거나 제거하세요.</p>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="inspector_tools.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Inspector Tools</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../physics/joint_inspector.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Physics Inspector</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="inspector_tools.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Inspector Tools</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="../physics/joint_inspector.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Physics Inspector</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="joint_inspector.html#opening-the-window">Opening the Window</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="joint_inspector.html#selecting-a-robot">Selecting a Robot</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="joint_inspector.html#filtering-joints">Filtering Joints</a></li>
@@ -1423,46 +1025,29 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="joint_inspector.html#editing-values">Editing Values</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="joint_inspector.html#default-visible-columns">Default Visible Columns</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1493,36 +1078,21 @@
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

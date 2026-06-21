@@ -1,562 +1,258 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Camera Sensors &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Camera Sensors — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
-  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
-</script>
-<script type="text/javascript">
-  function OptanonWrapper() {
-    var event = new Event('bannerLoaded');
-    window.dispatchEvent(event);
-  }
-</script>
-<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
-</script>
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'sensors/isaacsim_sensors_camera';</script>
-    <script>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'sensors/isaacsim_sensors_camera';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Depth Sensors" href="isaacsim_sensors_camera_depth.html" />
-    <link rel="prev" title="Sensors" href="index.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="isaacsim_sensors_camera_depth.html" rel="next" title="Depth Sensors"/>
+<link href="index.html" rel="prev" title="Sensors"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="isaacsim_sensors_camera.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="isaacsim_sensors_camera.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -576,7 +272,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -604,20 +299,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -692,17 +375,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -880,7 +553,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -920,13 +592,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -973,10 +639,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1145,18 +807,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1182,202 +834,132 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Sensors</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Camera Sensors</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">Sensors</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Camera Sensors</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="camera-sensors">
+<article class="bd-article">
+<section id="camera-sensors">
 <span id="isaacsim-sensors-camera"></span><h1>Camera Sensors<a class="headerlink" href="isaacsim_sensors_camera.html#camera-sensors" title="Link to this heading">#</a></h1>
-<p>Cameras are modeled using the Camera USD prim type. Camera data is acquired from camera prims using render products, which can be created by multiple different extensions in Omniverse,
-including the <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_replicator.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">omni.replicator</span></a> extension.</p>
+<p>카메라는 Camera USD prim 유형을 사용하여 모델링됩니다. 카메라 데이터는 렌더 제품을 사용하여 카메라 prim에서 획득되며, <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_replicator.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">omni.replicator</span></a> extension을 포함한 Omniverse의 여러 extension이 렌더 제품을 생성할 수 있습니다.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Isaac Sim camera functionality is based on <a class="reference external" href="https://docs.omniverse.nvidia.com/materials-and-rendering/latest/cameras.html">Omniverse cameras</a>.</p>
+<p class="admonition-title">참고</p>
+<p>Isaac Sim 카메라 기능은 <a class="reference external" href="https://docs.omniverse.nvidia.com/materials-and-rendering/latest/cameras.html">Omniverse cameras</a>를 기반으로 합니다.</p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">Deprecated since version 6.0: </span>The <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.camera</span></code> extension is deprecated. Use <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.rtx</span></code> instead.
-The new extension provides <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code>, <code class="docutils literal notranslate"><span class="pre">CameraSensor</span></code>, <code class="docutils literal notranslate"><span class="pre">TiledCameraSensor</span></code>,
-<code class="docutils literal notranslate"><span class="pre">SingleViewDepthCameraSensor</span></code>, and <code class="docutils literal notranslate"><span class="pre">StructuredLightCamera</span></code> with a uniform authoring/runtime
-split. See <a class="reference internal" href="../migration_guides/isaac_sim_6_0/sensors_camera_to_experimental_rtx.html#isaacsim-sensors-camera-migration"><span class="std std-ref">Camera Sensors</span></a>.</p>
+<p><span class="versionmodified deprecated">버전 6.0부터 deprecated: </span><code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.camera</span></code> extension은 deprecated되었습니다. 대신 <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.rtx</span></code>를 사용하세요. 새 extension은 균일한 작성/런타임 분리와 함께 <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code>, <code class="docutils literal notranslate"><span class="pre">CameraSensor</span></code>, <code class="docutils literal notranslate"><span class="pre">TiledCameraSensor</span></code>, <code class="docutils literal notranslate"><span class="pre">SingleViewDepthCameraSensor</span></code>, <code class="docutils literal notranslate"><span class="pre">StructuredLightCamera</span></code>를 제공합니다. <a class="reference internal" href="../migration_guides/isaac_sim_6_0/sensors_camera_to_experimental_rtx.html#isaacsim-sensors-camera-migration"><span class="std std-ref">Camera Sensors</span></a>를 참조하세요.</p>
 </div>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="isaacsim_sensors_camera.html#overview" title="Link to this heading">#</a></h2>
-<p>Isaac Sim cameras are USD <code class="docutils literal notranslate"><span class="pre">Camera</span></code> prims rendered by the RTX renderer. The
-<code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.rtx</span></code> extension wraps these prims with two paired classes:</p>
+<p>Isaac Sim 카메라는 RTX 렌더러로 렌더링되는 USD <code class="docutils literal notranslate"><span class="pre">Camera</span></code> prim입니다. <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.rtx</span></code> extension은 이 prim을 두 개의 쌍으로 이루어진 클래스로 감쌉니다:</p>
 <ul class="simple">
-<li><p><strong>Authoring</strong> — <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code> creates or wraps a USD <code class="docutils literal notranslate"><span class="pre">Camera</span></code> prim, applies the
-<code class="docutils literal notranslate"><span class="pre">OmniSensorAPI</span></code> schema, and exposes the optical parameters (focal length, aperture,
-clipping range) through its <code class="docutils literal notranslate"><span class="pre">.camera</span></code> property.</p></li>
-<li><p><strong>Runtime</strong> — <code class="docutils literal notranslate"><span class="pre">CameraSensor</span></code> wraps an <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code> object, creates a Replicator render
-product at a specified resolution, attaches annotators (<code class="docutils literal notranslate"><span class="pre">rgb</span></code>, <code class="docutils literal notranslate"><span class="pre">distance_to_camera</span></code>,
-<code class="docutils literal notranslate"><span class="pre">semantic_segmentation</span></code>, etc.), and provides <code class="docutils literal notranslate"><span class="pre">get_data()</span></code> for retrieving rendered frames
-as numpy/warp arrays.</p></li>
+<li><p><strong>작성</strong> — <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code>는 USD <code class="docutils literal notranslate"><span class="pre">Camera</span></code> prim을 생성하거나 감싸고, <code class="docutils literal notranslate"><span class="pre">OmniSensorAPI</span></code> 스키마를 적용하며, <code class="docutils literal notranslate"><span class="pre">.camera</span></code> 속성을 통해 광학 파라미터 (초점 거리, 조리개, 클리핑 범위)를 노출합니다.</p></li>
+<li><p><strong>런타임</strong> — <code class="docutils literal notranslate"><span class="pre">CameraSensor</span></code>는 <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code> 객체를 감싸고, 지정된 해상도에서 Replicator 렌더 제품을 생성하고, annotator (<code class="docutils literal notranslate"><span class="pre">rgb</span></code>, <code class="docutils literal notranslate"><span class="pre">distance_to_camera</span></code>, <code class="docutils literal notranslate"><span class="pre">semantic_segmentation</span></code> 등)를 연결하고, 렌더링된 프레임을 numpy/warp 배열로 검색하기 위한 <code class="docutils literal notranslate"><span class="pre">get_data()</span></code>를 제공합니다.</p></li>
 </ul>
-<p>Two specialized camera variants extend this base — <code class="docutils literal notranslate"><span class="pre">SingleViewDepthCameraSensor</span></code> for
-stereoscopic depth simulation and <code class="docutils literal notranslate"><span class="pre">StructuredLightCamera</span></code> for projected-pattern depth
-recovery. See <a class="reference internal" href="isaacsim_sensors_camera.html#isaacsim-sensors-camera-specialized-types"><span class="std std-ref">Specialized Camera Types</span></a> below.</p>
+<p>두 개의 전문 카메라 변형이 이 기반을 확장합니다 — 입체적 깊이 시뮬레이션을 위한 <code class="docutils literal notranslate"><span class="pre">SingleViewDepthCameraSensor</span></code>와 투영 패턴 깊이 복원을 위한 <code class="docutils literal notranslate"><span class="pre">StructuredLightCamera</span></code>. 아래 <a class="reference internal" href="isaacsim_sensors_camera.html#isaacsim-sensors-camera-specialized-types"><span class="std std-ref">Specialized Camera Types</span></a>를 참조하세요.</p>
 </section>
 <section id="how-to-create-a-camera">
 <h2>How to Create a Camera<a class="headerlink" href="isaacsim_sensors_camera.html#how-to-create-a-camera" title="Link to this heading">#</a></h2>
-<p>Isaac Sim supports creating camera prims through the GUI <strong>Create</strong> menu or
-programmatically via the <code class="xref py py-class docutils literal notranslate"><span class="pre">RtxCamera</span></code> class.</p>
+<p>Isaac Sim은 GUI <strong>Create</strong> 메뉴를 통해 또는 <code class="xref py py-class docutils literal notranslate"><span class="pre">RtxCamera</span></code> 클래스를 통해 프로그래밍 방식으로 카메라 prim을 생성하는 것을 지원합니다.</p>
 <section id="create-from-the-create-menu">
 <h3>Create from the Create Menu<a class="headerlink" href="isaacsim_sensors_camera.html#create-from-the-create-menu" title="Link to this heading">#</a></h3>
 <ol class="arabic">
-<li><p>Create a cube by selecting <strong>Create &gt; Shape &gt; Cube</strong> and change its location and scale through the property panel as indicated in the screenshot below.</p>
+<li><p><strong>Create &gt; Shape &gt; Cube</strong>를 선택하여 큐브를 생성하고 아래 스크린샷에 표시된 대로 속성 패널을 통해 위치와 크기를 변경합니다.</p>
 <blockquote>
-<div><img alt="../_images/isim_4.5_full_ext-isaacsim.sensors.camera-0.2.5_gui_1.png" class="align-center" src="../_images/isim_4.5_full_ext-isaacsim.sensors.camera-0.2.5_gui_1.png" />
+<div><img alt="../_images/isim_4.5_full_ext-isaacsim.sensors.camera-0.2.5_gui_1.png" class="align-center" src="../_images/isim_4.5_full_ext-isaacsim.sensors.camera-0.2.5_gui_1.png"/>
 </div></blockquote>
 </li>
-<li><p>Create a camera prim by selecting <strong>Create &gt; Camera</strong> and then select it from the stage window to view its field of view as indicated below.</p>
+<li><p><strong>Create &gt; Camera</strong>를 선택하여 카메라 prim을 생성하고 아래와 같이 시야각을 보기 위해 stage 창에서 선택합니다.</p>
 <blockquote>
-<div><img alt="../_images/isim_4.5_full_ext-isaacsim.sensors.camera-0.2.5_gui_2.png" class="align-center" src="../_images/isim_4.5_full_ext-isaacsim.sensors.camera-0.2.5_gui_2.png" />
+<div><img alt="../_images/isim_4.5_full_ext-isaacsim.sensors.camera-0.2.5_gui_2.png" class="align-center" src="../_images/isim_4.5_full_ext-isaacsim.sensors.camera-0.2.5_gui_2.png"/>
 </div></blockquote>
 </li>
-<li><p>To render the frames from the camera, switch the default viewport (which is a render product itself) to the camera prim that you just created.
-Select the video icon at the top of the viewport window and then select the camera prim you just created under the <code class="docutils literal notranslate"><span class="pre">Cameras</span></code> menu.</p>
+<li><p>카메라에서 프레임을 렌더링하려면 기본 뷰포트 (자체적으로 렌더 제품)를 방금 생성한 카메라 prim으로 전환합니다. 뷰포트 창 상단의 비디오 아이콘을 선택한 다음 <code class="docutils literal notranslate"><span class="pre">Cameras</span></code> 메뉴 아래에서 방금 생성한 카메라 prim을 선택합니다.</p>
 <blockquote>
-<div><img alt="../_images/isim_4.5_full_ext-isaacsim.sensors.camera-0.2.5_gui_3.png" class="align-center" src="../_images/isim_4.5_full_ext-isaacsim.sensors.camera-0.2.5_gui_3.png" />
+<div><img alt="../_images/isim_4.5_full_ext-isaacsim.sensors.camera-0.2.5_gui_3.png" class="align-center" src="../_images/isim_4.5_full_ext-isaacsim.sensors.camera-0.2.5_gui_3.png"/>
 </div></blockquote>
 </li>
 </ol>
 </section>
 <section id="create-with-the-rtxcamera-class">
 <h3>Create with the <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code> Class<a class="headerlink" href="isaacsim_sensors_camera.html#create-with-the-rtxcamera-class" title="Link to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code> authoring class creates (or wraps) a <code class="docutils literal notranslate"><span class="pre">Camera</span></code> prim with the <code class="docutils literal notranslate"><span class="pre">OmniSensorAPI</span></code> schema applied,
-sets transforms via plural-array constructor parameters (<code class="docutils literal notranslate"><span class="pre">positions</span></code>, <code class="docutils literal notranslate"><span class="pre">translations</span></code>, <code class="docutils literal notranslate"><span class="pre">orientations</span></code>, <code class="docutils literal notranslate"><span class="pre">scales</span></code>),
-and exposes optical parameters through its <code class="docutils literal notranslate"><span class="pre">.camera</span></code> property. The standalone example
-<code class="docutils literal notranslate"><span class="pre">standalone_examples/api/isaacsim.sensors.experimental.rtx/create_camera_basic.py</span></code> demonstrates
-the full create-and-read workflow:</p>
+<p><code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code> 작성 클래스는 <code class="docutils literal notranslate"><span class="pre">OmniSensorAPI</span></code> 스키마가 적용된 <code class="docutils literal notranslate"><span class="pre">Camera</span></code> prim을 생성하거나 감싸고, 복수형 배열 생성자 파라미터 (<code class="docutils literal notranslate"><span class="pre">positions</span></code>, <code class="docutils literal notranslate"><span class="pre">translations</span></code>, <code class="docutils literal notranslate"><span class="pre">orientations</span></code>, <code class="docutils literal notranslate"><span class="pre">scales</span></code>)를 통해 변환을 설정하고, <code class="docutils literal notranslate"><span class="pre">.camera</span></code> 속성을 통해 광학 파라미터를 노출합니다. 독립 실행형 예제 <code class="docutils literal notranslate"><span class="pre">standalone_examples/api/isaacsim.sensors.experimental.rtx/create_camera_basic.py</span></code>는 전체 생성 및 읽기 워크플로를 시연합니다:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.sensors.experimental.rtx/create_camera_basic.py
 </pre></div>
 </div>
-<p>The example loads a warehouse environment, creates an <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code> at <code class="docutils literal notranslate"><span class="pre">/World/camera</span></code>, attaches
-<code class="docutils literal notranslate"><span class="pre">rgb</span></code> and <code class="docutils literal notranslate"><span class="pre">distance_to_image_plane</span></code> annotators via <code class="docutils literal notranslate"><span class="pre">CameraSensor</span></code>, and saves a rendered
-RGB frame to disk every 100 ticks under
-<code class="docutils literal notranslate"><span class="pre">_example_output_isaacsim.sensors.experimental.rtx/create_camera_basic/</span></code>. The frame at tick 100
-looks like:</p>
+<p>예제는 창고 환경을 로드하고, <code class="docutils literal notranslate"><span class="pre">/World/camera</span></code>에 <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code>를 생성하고, <code class="docutils literal notranslate"><span class="pre">CameraSensor</span></code>를 통해 <code class="docutils literal notranslate"><span class="pre">rgb</span></code>와 <code class="docutils literal notranslate"><span class="pre">distance_to_image_plane</span></code> annotator를 연결하고, 매 100 틱마다 렌더링된 RGB 프레임을 저장합니다. 틱 100의 프레임은 다음과 같습니다:</p>
 <figure class="align-center" id="id1">
-<a class="reference internal image-reference" href="../_images/isim_6.0_base_tut_external_create_camera_basic_rgb.png"><img alt="Rendered RGB frame from create_camera_basic.py — the Simple Warehouse environment viewed from an RtxCamera at (0, 0, 1.5) looking down the +Y axis." src="../_images/isim_6.0_base_tut_external_create_camera_basic_rgb.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="../_images/isim_6.0_base_tut_external_create_camera_basic_rgb.png"><img alt="Rendered RGB frame from create_camera_basic.py — the Simple Warehouse environment viewed from an RtxCamera at (0, 0, 1.5) looking down the +Y axis." src="../_images/isim_6.0_base_tut_external_create_camera_basic_rgb.png" style="width: 80%;"/>
 </a>
 <figcaption>
-<p><span class="caption-text">RGB frame saved by <code class="docutils literal notranslate"><span class="pre">create_camera_basic.py</span></code> (tick 100, 480x640).</span><a class="headerlink" href="isaacsim_sensors_camera.html#id1" title="Link to this image">#</a></p>
+<p><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">create_camera_basic.py</span></code>에서 저장한 RGB 프레임 (틱 100, 480x640).</span><a class="headerlink" href="isaacsim_sensors_camera.html#id1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="tick-rate">
 <h3>Tick Rate<a class="headerlink" href="isaacsim_sensors_camera.html#tick-rate" title="Link to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">tick_rate</span></code> parameter (Hz) on <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code> controls how frequently the camera renders. A value
-of <code class="docutils literal notranslate"><span class="pre">0</span></code> (the default) enables autotrigger mode, where the camera renders every simulation frame.
-Setting a nonzero value causes the camera to render at the specified frequency independently of the
-simulation step rate. This maps to the <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> prim attribute and requires the
-<code class="docutils literal notranslate"><span class="pre">OmniSensorAPI</span></code> schema to be applied to the Camera prim — <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code> does this automatically.</p>
+<p><code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code>의 <code class="docutils literal notranslate"><span class="pre">tick_rate</span></code> 파라미터 (Hz)는 카메라가 렌더링하는 빈도를 제어합니다. <code class="docutils literal notranslate"><span class="pre">0</span></code> (기본값)은 카메라가 모든 시뮬레이션 프레임마다 렌더링하는 자동 트리거 모드를 활성화합니다. 0이 아닌 값을 설정하면 카메라가 시뮬레이션 스텝 속도와 무관하게 지정된 빈도로 렌더링합니다. 이는 <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> prim 속성에 매핑되며 <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code>가 자동으로 처리합니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.sensors.experimental.rtx</span><span class="w"> </span><span class="kn">import</span> <span class="n">RtxCamera</span>
 
 <span class="c1"># Render the Camera at 30 Hz independently of the simulation frame rate.</span>
-<span class="n">camera</span> <span class="o">=</span> <span class="n">RtxCamera</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/World/Camera&quot;</span><span class="p">,</span> <span class="n">tick_rate</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+<span class="n">camera</span> <span class="o">=</span> <span class="n">RtxCamera</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"/World/Camera"</span><span class="p">,</span> <span class="n">tick_rate</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">tick_rate</span></code> is the recommended replacement for the deprecated <code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code> input on
-<code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Camera</span> <span class="pre">Helper</span></code>, <code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Camera</span> <span class="pre">Info</span> <span class="pre">Helper</span></code>, and <code class="docutils literal notranslate"><span class="pre">UCX</span> <span class="pre">Camera</span> <span class="pre">Helper</span></code> nodes. See
-<a class="reference internal" href="isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-rendering"><span class="std std-ref">Multi-Tick Rendering</span></a> for the full migration guide and the list of
-related known issues.</p>
+<p><code class="docutils literal notranslate"><span class="pre">tick_rate</span></code>는 <code class="docutils literal notranslate"><span class="pre">ROS2 Camera Helper</span></code>, <code class="docutils literal notranslate"><span class="pre">ROS2 Camera Info Helper</span></code>, <code class="docutils literal notranslate"><span class="pre">UCX Camera Helper</span></code> 노드의 deprecated된 <code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code> 입력에 대한 권장 대체제입니다. 전체 마이그레이션 가이드와 관련 알려진 문제 목록은 <a class="reference internal" href="isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-rendering"><span class="std std-ref">Multi-Tick Rendering</span></a>을 참조하세요.</p>
 </section>
 </section>
 <section id="how-to-collect-data-from-a-camera">
 <h2>How to Collect Data from a Camera<a class="headerlink" href="isaacsim_sensors_camera.html#how-to-collect-data-from-a-camera" title="Link to this heading">#</a></h2>
-<p>The recommended method for collecting data from a camera is to use the <code class="docutils literal notranslate"><span class="pre">CameraSensor</span></code> runtime class,
-which wraps an <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code> authoring object and manages Replicator annotators on its render product.
-For batched multi-camera workflows, use <code class="docutils literal notranslate"><span class="pre">TiledCameraSensor</span></code>. For stereoscopic depth simulation, use
-<code class="docutils literal notranslate"><span class="pre">SingleViewDepthCameraSensor</span></code> (see
-<a class="reference internal" href="isaacsim_sensors_camera.html#isaacsim-sensors-camera-specialized-types"><span class="std std-ref">Specialized Camera Types</span></a> for the full sub-page).</p>
+<p>카메라에서 데이터를 수집하는 권장 방법은 <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code> 작성 객체를 감싸고 렌더 제품의 Replicator annotator를 관리하는 <code class="docutils literal notranslate"><span class="pre">CameraSensor</span></code> 런타임 클래스를 사용하는 것입니다. 배치 다중 카메라 워크플로의 경우 <code class="docutils literal notranslate"><span class="pre">TiledCameraSensor</span></code>를 사용합니다. 입체적 깊이 시뮬레이션의 경우 <code class="docutils literal notranslate"><span class="pre">SingleViewDepthCameraSensor</span></code>를 사용합니다 (전체 서브 페이지는 <a class="reference internal" href="isaacsim_sensors_camera.html#isaacsim-sensors-camera-specialized-types"><span class="std std-ref">Specialized Camera Types</span></a> 참조).</p>
 <section id="annotators">
 <h3>Annotators<a class="headerlink" href="isaacsim_sensors_camera.html#annotators" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">CameraSensor</span></code> accepts a list of annotator names (<code class="docutils literal notranslate"><span class="pre">rgb</span></code>, <code class="docutils literal notranslate"><span class="pre">distance_to_camera</span></code>,
-<code class="docutils literal notranslate"><span class="pre">distance_to_image_plane</span></code>, <code class="docutils literal notranslate"><span class="pre">semantic_segmentation</span></code>, <code class="docutils literal notranslate"><span class="pre">motion_vectors</span></code>, etc.) at construction
-time and exposes the latest data through <code class="docutils literal notranslate"><span class="pre">get_data(&quot;annotator-name&quot;)</span></code>, which returns a
-<code class="docutils literal notranslate"><span class="pre">(warp.array,</span> <span class="pre">info_dict)</span></code> tuple. Run the basic example to see <code class="docutils literal notranslate"><span class="pre">rgb</span></code> and
-<code class="docutils literal notranslate"><span class="pre">distance_to_image_plane</span></code> collection end-to-end:</p>
+<p><code class="docutils literal notranslate"><span class="pre">CameraSensor</span></code>는 구성 시간에 annotator 이름 목록을 받아들이고 <code class="docutils literal notranslate"><span class="pre">get_data("annotator-name")</span></code>를 통해 최신 데이터를 노출하며 이는 <code class="docutils literal notranslate"><span class="pre">(warp.array, info_dict)</span></code> 튜플을 반환합니다. 엔드투엔드로 <code class="docutils literal notranslate"><span class="pre">rgb</span></code> 및 <code class="docutils literal notranslate"><span class="pre">distance_to_image_plane</span></code> 수집을 보려면 기본 예제를 실행합니다:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.sensors.experimental.rtx/create_camera_basic.py
 </pre></div>
 </div>
-<p>To select between CPU- and CUDA-resident annotator buffers, see the standalone example
-<code class="docutils literal notranslate"><span class="pre">standalone_examples/api/isaacsim.sensors.experimental.rtx/camera_annotator_devices.py</span></code>.</p>
+<p>CPU 및 CUDA 상주 annotator 버퍼 간에 선택하려면 독립 실행형 예제 <code class="docutils literal notranslate"><span class="pre">standalone_examples/api/isaacsim.sensors.experimental.rtx/camera_annotator_devices.py</span></code>를 참조하세요.</p>
 </section>
 <section id="tiled-batched-cameras">
 <h3>Tiled / Batched Cameras<a class="headerlink" href="isaacsim_sensors_camera.html#tiled-batched-cameras" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">TiledCameraSensor</span></code> packs many cameras into a single tiled render product, which is significantly
-more efficient than one render product per camera for reinforcement-learning and multi-environment
-workflows. Pass an explicit list of camera prim paths (or an <code class="docutils literal notranslate"><span class="pre">isaacsim.core.experimental.objects.Camera</span></code>
-instance) plus a per-tile <code class="docutils literal notranslate"><span class="pre">resolution</span></code>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">TiledCameraSensor</span></code>는 여러 카메라를 단일 타일식 렌더 제품으로 패킹하며, 이는 강화 학습 및 다중 환경 워크플로에서 카메라당 하나의 렌더 제품보다 훨씬 효율적입니다.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.sensors.experimental.rtx/camera_tiled.py
 </pre></div>
 </div>
 </section>
 <section id="single-view-depth-cameras">
 <h3>Single-View Depth Cameras<a class="headerlink" href="isaacsim_sensors_camera.html#single-view-depth-cameras" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">SingleViewDepthCameraSensor</span></code> extends <code class="docutils literal notranslate"><span class="pre">CameraSensor</span></code> with stereoscopic-depth simulation
-post-processing (disparity, baseline, noise, outlier removal). See the
-<a class="reference internal" href="isaacsim_sensors_camera_depth.html#isaacsim-sensors-camera-depth-stereoscopic-pipeline"><span class="std std-ref">Single-View Post-Processing Pipeline</span></a> sub-page for the full pipeline
-description. End-to-end example:</p>
+<p><code class="docutils literal notranslate"><span class="pre">SingleViewDepthCameraSensor</span></code>는 입체적 깊이 시뮬레이션 후처리 (시차, 기준선, 노이즈, 이상값 제거)로 <code class="docutils literal notranslate"><span class="pre">CameraSensor</span></code>를 확장합니다. 전체 파이프라인 설명은 <a class="reference internal" href="isaacsim_sensors_camera_depth.html#isaacsim-sensors-camera-depth-stereoscopic-pipeline"><span class="std std-ref">Single-View Post-Processing Pipeline</span></a> 서브 페이지를 참조하세요.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.sensors.experimental.rtx/camera_stereoscopic_depth.py
 </pre></div>
 </div>
@@ -1385,7 +967,7 @@ description. End-to-end example:</p>
 </section>
 <section id="specialized-camera-types">
 <span id="isaacsim-sensors-camera-specialized-types"></span><h2>Specialized Camera Types<a class="headerlink" href="isaacsim_sensors_camera.html#specialized-camera-types" title="Link to this heading">#</a></h2>
-<p>Two specialized camera sensors build on <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code> and <code class="docutils literal notranslate"><span class="pre">CameraSensor</span></code> for depth and structured-light workflows:</p>
+<p>두 개의 전문 카메라 센서가 깊이 및 구조화된 광 워크플로를 위해 <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code>와 <code class="docutils literal notranslate"><span class="pre">CameraSensor</span></code>를 기반으로 합니다:</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="isaacsim_sensors_camera_depth.html">Depth Sensors</a></li>
@@ -1397,47 +979,41 @@ description. End-to-end example:</p>
 <h2>Advanced Topics<a class="headerlink" href="isaacsim_sensors_camera.html#advanced-topics" title="Link to this heading">#</a></h2>
 <section id="calibration-and-camera-lens-distortion-models">
 <span id="isaacsim-sensors-camera-calibration-and-camera-lens-distortion-models"></span><h3>Calibration and Camera Lens Distortion Models<a class="headerlink" href="isaacsim_sensors_camera.html#calibration-and-camera-lens-distortion-models" title="Link to this heading">#</a></h3>
-<p>Omniverse cameras support a variety of lens distortion models, described <a class="reference external" href="https://docs.omniverse.nvidia.com/materials-and-rendering/latest/cameras.html#omniverse-cameras">here</a>.
-The <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code> class from <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.rtx</span></code> supports applying lens distortion schemas (e.g. <code class="docutils literal notranslate"><span class="pre">OmniLensDistortionOpenCvFisheyeAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">OmniLensDistortionOpenCvPinholeAPI</span></code>) via the <code class="docutils literal notranslate"><span class="pre">schemas</span></code> parameter and setting distortion coefficients via the <code class="docutils literal notranslate"><span class="pre">attributes</span></code> parameter.</p>
-<p>Calibration toolkits like OpenCV normally provide the calibration parameters as an intrinsic matrix and distortion coefficients. Omniverse includes native renderer support for the OpenCV pinhole and
-OpenCV fisheye lens distortion models. Isaac Sim provides two standalone examples demonstrating the use of <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code> with OpenCV lens distortion models,
-located at <code class="docutils literal notranslate"><span class="pre">standalone_examples/api/isaacsim.sensors.experimental.rtx/camera_opencv_pinhole.py</span></code> and <code class="docutils literal notranslate"><span class="pre">standalone_examples/api/isaacsim.sensors.experimental.rtx/camera_opencv_fisheye.py</span></code>.</p>
+<p>Omniverse 카메라는 다양한 렌즈 왜곡 모델을 지원합니다. <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.rtx</span></code>의 <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code> 클래스는 <code class="docutils literal notranslate"><span class="pre">schemas</span></code> 파라미터를 통해 렌즈 왜곡 스키마 (예: <code class="docutils literal notranslate"><span class="pre">OmniLensDistortionOpenCvFisheyeAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">OmniLensDistortionOpenCvPinholeAPI</span></code>)를 적용하고 <code class="docutils literal notranslate"><span class="pre">attributes</span></code> 파라미터를 통해 왜곡 계수를 설정하는 것을 지원합니다.</p>
+<p>OpenCV와 같은 보정 툴킷은 일반적으로 내재 행렬과 왜곡 계수로 보정 파라미터를 제공합니다. Omniverse는 OpenCV 핀홀 및 OpenCV 피시아이 렌즈 왜곡 모델을 기본적으로 지원합니다. Isaac Sim은 OpenCV 렌즈 왜곡 모델과 함께 <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code> 사용을 시연하는 두 가지 독립 실행형 예제를 제공합니다.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
+<p class="admonition-title">참고</p>
 <ul class="simple">
-<li><p>Previously, the <code class="docutils literal notranslate"><span class="pre">Camera</span></code> class included APIs to approximate OpenCV pinhole and fisheye models distortion parameters by setting coefficients for the <code class="docutils literal notranslate"><span class="pre">fisheyePolynomial</span></code> distortion model. Now that OpenCV lens distortion models are natively supported, those APIs have been deprecated.</p></li>
-<li><p><a class="reference external" href="https://docs.omniverse.nvidia.com/materials-and-rendering/latest/cameras.html#rtx-camera-projection-attributes-deprecated">Omniverse RTX Camera Projection Attributes</a> have been deprecated as of Isaac Sim 5.0, in favor of the <code class="docutils literal notranslate"><span class="pre">OmniLensDistortion</span></code> <a class="reference external" href="https://docs.omniverse.nvidia.com/materials-and-rendering/latest/cameras.html#omnilensdistortion-schemata">schemata</a>. The deprecated attributes are still visible in the UI in the <code class="docutils literal notranslate"><span class="pre">Fisheye</span> <span class="pre">Lens</span></code> panel when selecting a Camera prim, but will be ignored if you have set an <code class="docutils literal notranslate"><span class="pre">OmniLensDistortion</span></code> schema instead. Follow the instructions in <a class="reference external" href="https://docs.omniverse.nvidia.com/materials-and-rendering/latest/cameras.html#omnilensdistortion-schemata">“How To Add Schemata to Cameras”</a> to see how to update Camera prim attributes for the new schemata in the UI.</p></li>
+<li><p>이전에는 <code class="docutils literal notranslate"><span class="pre">Camera</span></code> 클래스에 <code class="docutils literal notranslate"><span class="pre">fisheyePolynomial</span></code> 왜곡 모델의 계수를 설정하여 OpenCV 핀홀 및 피시아이 모델 왜곡 파라미터를 근사화하는 API가 포함되어 있었습니다. OpenCV 렌즈 왜곡 모델이 기본적으로 지원되므로 이러한 API는 deprecated되었습니다.</p></li>
+<li><p><a class="reference external" href="https://docs.omniverse.nvidia.com/materials-and-rendering/latest/cameras.html#rtx-camera-projection-attributes-deprecated">Omniverse RTX Camera Projection Attributes</a>는 Isaac Sim 5.0부터 <code class="docutils literal notranslate"><span class="pre">OmniLensDistortion</span></code> 스키마를 위해 deprecated되었습니다. deprecated된 속성은 Camera prim을 선택할 때 UI의 <code class="docutils literal notranslate"><span class="pre">Fisheye Lens</span></code> 패널에 여전히 표시되지만 <code class="docutils literal notranslate"><span class="pre">OmniLensDistortion</span></code> 스키마를 설정한 경우 무시됩니다.</p></li>
 </ul>
 </div>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>In Isaac Sim 6.0, enabling arbitrary distortion models using a generalized projection model by
-applying the <code class="docutils literal notranslate"><span class="pre">OmniLensDistortionLutAPI</span></code> schema to Camera prims does not correctly function, and if set,
-the renderer will fallback to the default pinhole model. Instead, use the deprecated Omniverse RTX Camera
-Projection Attributes referenced above to specify an arbitrary distortion model. This will be fixed in a future release.</p>
+<p class="admonition-title">경고</p>
+<p>Isaac Sim 6.0에서 Camera prim에 <code class="docutils literal notranslate"><span class="pre">OmniLensDistortionLutAPI</span></code> 스키마를 적용하여 일반화된 투영 모델을 사용하는 임의의 왜곡 모델을 활성화하는 것이 올바르게 작동하지 않으며, 설정된 경우 렌더러가 기본 핀홀 모델로 폴백합니다. 대신 임의의 왜곡 모델을 지정하려면 위에 참조된 deprecated된 Omniverse RTX Camera Projection Attributes를 사용하세요. 이는 향후 릴리스에서 수정될 것입니다.</p>
 </div>
 <section id="opencv-fisheye">
 <h4>OpenCV Fisheye<a class="headerlink" href="isaacsim_sensors_camera.html#opencv-fisheye" title="Link to this heading">#</a></h4>
-<p>Run the standalone example to create an <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code> with the <code class="docutils literal notranslate"><span class="pre">OmniLensDistortionOpenCvFisheyeAPI</span></code> schema applied:</p>
+<p><code class="docutils literal notranslate"><span class="pre">OmniLensDistortionOpenCvFisheyeAPI</span></code> 스키마가 적용된 <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code>를 생성하기 위해 독립 실행형 예제를 실행합니다:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.sensors.experimental.rtx/camera_opencv_fisheye.py
 </pre></div>
 </div>
-<p>After running the example and setting the viewport to the newly-created camera, validate that you see an image like the one below.</p>
-<img alt="../_images/isim_5.0_full_ext-isaacsim.sensors.camera-1.1.0_viewport_camera-opencv-fisheye-test.png" class="align-center" src="../_images/isim_5.0_full_ext-isaacsim.sensors.camera-1.1.0_viewport_camera-opencv-fisheye-test.png" />
+<p>예제를 실행하고 뷰포트를 새로 생성된 카메라로 설정한 후 아래와 같은 이미지가 표시되는지 확인합니다.</p>
+<img alt="../_images/isim_5.0_full_ext-isaacsim.sensors.camera-1.1.0_viewport_camera-opencv-fisheye-test.png" class="align-center" src="../_images/isim_5.0_full_ext-isaacsim.sensors.camera-1.1.0_viewport_camera-opencv-fisheye-test.png"/>
 </section>
 <section id="opencv-pinhole">
 <h4>OpenCV Pinhole<a class="headerlink" href="isaacsim_sensors_camera.html#opencv-pinhole" title="Link to this heading">#</a></h4>
-<p>Run the standalone example to create an <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code> with the <code class="docutils literal notranslate"><span class="pre">OmniLensDistortionOpenCvPinholeAPI</span></code> schema applied:</p>
+<p><code class="docutils literal notranslate"><span class="pre">OmniLensDistortionOpenCvPinholeAPI</span></code> 스키마가 적용된 <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code>를 생성하기 위해 독립 실행형 예제를 실행합니다:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.sensors.experimental.rtx/camera_opencv_pinhole.py
 </pre></div>
 </div>
-<p>After running the example and setting the viewport to the newly-created camera, you should see an image like the one below.</p>
-<img alt="../_images/isim_5.0_full_ext-isaacsim.sensors.camera-1.1.0_viewport_camera-opencv-pinhole-test.png" class="align-center" src="../_images/isim_5.0_full_ext-isaacsim.sensors.camera-1.1.0_viewport_camera-opencv-pinhole-test.png" />
+<p>예제를 실행하고 뷰포트를 새로 생성된 카메라로 설정한 후 아래와 같은 이미지가 표시되어야 합니다.</p>
+<img alt="../_images/isim_5.0_full_ext-isaacsim.sensors.camera-1.1.0_viewport_camera-opencv-pinhole-test.png" class="align-center" src="../_images/isim_5.0_full_ext-isaacsim.sensors.camera-1.1.0_viewport_camera-opencv-pinhole-test.png"/>
 </section>
 <section id="extrinsic-calibration">
 <h4>Extrinsic Calibration<a class="headerlink" href="isaacsim_sensors_camera.html#extrinsic-calibration" title="Link to this heading">#</a></h4>
-<p>Extrinsic calibration parameters are normally provided by the calibration toolkits in a form of a transformation matrix. The convention between the axis and rotation order is important and it varies between the toolkits.</p>
-<p>To set the extrinsic parameters for the individual camera sensor, use the following example to convert the transformation matrix from the calibration toolkit to the Isaac Sim units:</p>
+<p>외재 보정 파라미터는 일반적으로 보정 툴킷에서 변환 행렬의 형태로 제공됩니다. 축과 회전 순서 사이의 규칙이 중요하며 툴킷마다 다릅니다.</p>
+<p>개별 카메라 센서의 외재 파라미터를 설정하려면 다음 예제를 사용하여 보정 툴킷의 변환 행렬을 Isaac Sim 단위로 변환합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pseudocode -- adapt axis remapping and quaternion reordering to your calibration toolkit.</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.sensors.experimental.rtx</span><span class="w"> </span><span class="kn">import</span> <span class="n">RtxCamera</span>
@@ -1446,19 +1022,19 @@ Projection Attributes referenced above to specify an arbitrary distortion model.
 <span class="n">rW</span><span class="p">,</span> <span class="n">rX</span><span class="p">,</span> <span class="n">rY</span><span class="p">,</span> <span class="n">rZ</span> <span class="o">=</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span>  <span class="c1"># Note the order of the rotation parameters, it depends on the toolkit</span>
 
 <span class="n">RtxCamera</span><span class="p">(</span>
-    <span class="s2">&quot;/rig/camera_color&quot;</span><span class="p">,</span>
+    <span class="s2">"/rig/camera_color"</span><span class="p">,</span>
     <span class="n">positions</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">dZ</span><span class="p">,</span> <span class="n">dX</span><span class="p">,</span> <span class="n">dY</span><span class="p">]),</span>  <span class="c1"># Translation in the local frame of the prim</span>
     <span class="n">orientations</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">rW</span><span class="p">,</span> <span class="o">-</span><span class="n">rZ</span><span class="p">,</span> <span class="n">rX</span><span class="p">,</span> <span class="n">rY</span><span class="p">]),</span>  <span class="c1"># Quaternion orientation (wxyz) in the world/local frame</span>
     <span class="c1"># (depends if translations or positions is specified)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>As an alternative, the camera sensor can be attached to a prim. In that case, the camera sensor will inherit the position and orientation from the prim.</p>
+<p>대안으로 카메라 센서를 prim에 부착할 수 있습니다. 이 경우 카메라 센서는 prim에서 위치와 방향을 상속합니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.sensors.experimental.rtx</span><span class="w"> </span><span class="kn">import</span> <span class="n">RtxCamera</span>
 
 <span class="c1"># Create a camera prim with the OmniSensorAPI schema</span>
 <span class="n">cam</span> <span class="o">=</span> <span class="n">RtxCamera</span><span class="p">(</span>
-    <span class="s2">&quot;/World/camera&quot;</span><span class="p">,</span>
+    <span class="s2">"/World/camera"</span><span class="p">,</span>
     <span class="c1"># translations = ...</span>
     <span class="c1"># orientations = ...</span>
 <span class="p">)</span>
@@ -1468,106 +1044,94 @@ Projection Attributes referenced above to specify an arbitrary distortion model.
 </section>
 <section id="exposing-the-isp-camera-pipeline">
 <h3>Exposing the ISP Camera Pipeline<a class="headerlink" href="isaacsim_sensors_camera.html#exposing-the-isp-camera-pipeline" title="Link to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">omni.sensors.nv.camera</span></code> extension <a class="reference external" href="https://docs.omniverse.nvidia.com/materials-and-rendering/latest/cameras.html#omni-sensors-nv-camera-extension">simulates the camera sensor and Image Signal Processor (ISP) pipeline</a>.
-Isaac Sim includes a standalone example that configures the ISP pipeline via the <code class="docutils literal notranslate"><span class="pre">OmniSensorGenericCameraCoreAPI</span></code> USD schema and saves the introspection output from every pipeline stage as viewable images.
-You can use these outputs to test your own ISP against images rendered in RTX, or compare them with the Omniverse-simulated ISP output.</p>
-<p>Refer to the <a class="reference external" href="https://docs.omniverse.nvidia.com/materials-and-rendering/latest/cameras.html#omni-sensors-nv-camera-extension">extension documentation</a> for details on individual pipeline stages and schema attributes.</p>
+<p><code class="docutils literal notranslate"><span class="pre">omni.sensors.nv.camera</span></code> extension은 카메라 센서와 이미지 신호 처리기 (ISP) 파이프라인을 시뮬레이션합니다. Isaac Sim에는 <code class="docutils literal notranslate"><span class="pre">OmniSensorGenericCameraCoreAPI</span></code> USD 스키마를 통해 ISP 파이프라인을 구성하고 모든 파이프라인 단계의 내성 출력을 볼 수 있는 이미지로 저장하는 독립 실행형 예제가 포함되어 있습니다.</p>
+<p>ISP 파이프라인의 개별 단계 및 스키마 속성에 대한 자세한 내용은 <a class="reference external" href="https://docs.omniverse.nvidia.com/materials-and-rendering/latest/cameras.html#omni-sensors-nv-camera-extension">extension 문서</a>를 참조하세요.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The sample ISP program bundled with <code class="docutils literal notranslate"><span class="pre">omni.sensors.nv.camera</span></code> is only available on Linux x86_64.
-Running the example on any other platform will print an informative message and exit early.
-If you have your own ISP program for a different platform, update the <code class="docutils literal notranslate"><span class="pre">_isp_program_path</span></code>
-variable in the script to point to it, and comment-out the platform check.</p>
+<p class="admonition-title">참고</p>
+<p><code class="docutils literal notranslate"><span class="pre">omni.sensors.nv.camera</span></code>와 함께 번들된 샘플 ISP 프로그램은 Linux x86_64에서만 사용 가능합니다. 다른 플랫폼에서 예제를 실행하면 정보 메시지가 출력되고 조기에 종료됩니다. 다른 플랫폼을 위한 자체 ISP 프로그램이 있으면 스크립트의 <code class="docutils literal notranslate"><span class="pre">_isp_program_path</span></code> 변수를 업데이트하여 가리키고 플랫폼 검사를 주석 처리합니다.</p>
 </div>
-<p>Run the example:</p>
+<p>예제 실행:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.sensors.experimental.rtx/camera_isp_pipeline.py
 </pre></div>
 </div>
-<p>The example renders 20 frames and saves output from each ISP stage to the <code class="docutils literal notranslate"><span class="pre">camera_isp_pipeline_outputs</span></code> directory.
-The pipeline stages, in order, are described below.</p>
-<p><strong>HDR texture read</strong> — the raw HDR radiance buffer read from the renderer before any sensor processing.</p>
-<a class="reference internal image-reference" href="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_texread.png"><img alt="HDR texture read output from the ISP pipeline example" class="align-center" src="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_texread.png" style="width: 80%;" />
+<p>예제는 20 프레임을 렌더링하고 <code class="docutils literal notranslate"><span class="pre">camera_isp_pipeline_outputs</span></code> 디렉터리에 각 ISP 단계의 출력을 저장합니다. 파이프라인 단계는 순서대로 아래에 설명되어 있습니다.</p>
+<p><strong>HDR 텍스처 읽기</strong> — 센서 처리 전에 렌더러에서 읽은 원시 HDR 방사 버퍼.</p>
+<a class="reference internal image-reference" href="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_texread.png"><img alt="HDR texture read output from the ISP pipeline example" class="align-center" src="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_texread.png" style="width: 80%;"/>
 </a>
-<p><strong>Color correction</strong> — applies black-level subtraction, white-balance gains, a 3x3 color-correction matrix, and sensor-response scaling.</p>
-<a class="reference internal image-reference" href="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_color.png"><img alt="Color-corrected output from the ISP pipeline example" class="align-center" src="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_color.png" style="width: 80%;" />
+<p><strong>색상 보정</strong> — 블랙 레벨 감산, 화이트 밸런스 이득, 3x3 색상 보정 행렬, 센서 응답 스케일링을 적용합니다.</p>
+<a class="reference internal image-reference" href="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_color.png"><img alt="Color-corrected output from the ISP pipeline example" class="align-center" src="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_color.png" style="width: 80%;"/>
 </a>
-<p><strong>CFA encoding</strong> — encodes the RGB image into a single-channel Bayer mosaic using the configured Color Filter Array pattern (GRBG in this example).</p>
-<a class="reference internal image-reference" href="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_cfa.png"><img alt="CFA-encoded Bayer output from the ISP pipeline example" class="align-center" src="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_cfa.png" style="width: 80%;" />
+<p><strong>CFA 인코딩</strong> — 구성된 Color Filter Array 패턴 (이 예제에서 GRBG)을 사용하여 RGB 이미지를 단일 채널 Bayer 모자이크로 인코딩합니다.</p>
+<a class="reference internal image-reference" href="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_cfa.png"><img alt="CFA-encoded Bayer output from the ISP pipeline example" class="align-center" src="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_cfa.png" style="width: 80%;"/>
 </a>
-<p><strong>Noise simulation</strong> — adds Gaussian and shot noise to the Bayer image to approximate real sensor behavior.</p>
-<a class="reference internal image-reference" href="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_noise.png"><img alt="Noise-simulated Bayer output from the ISP pipeline example" class="align-center" src="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_noise.png" style="width: 80%;" />
+<p><strong>노이즈 시뮬레이션</strong> — 실제 센서 동작을 근사화하기 위해 Bayer 이미지에 가우시안 및 샷 노이즈를 추가합니다.</p>
+<a class="reference internal image-reference" href="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_noise.png"><img alt="Noise-simulated Bayer output from the ISP pipeline example" class="align-center" src="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_noise.png" style="width: 80%;"/>
 </a>
-<p><strong>Companding</strong> — applies a piecewise-linear tone curve that compresses the high-dynamic-range Bayer data into a lower bit depth.</p>
-<a class="reference internal image-reference" href="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_comp.png"><img alt="Companded output from the ISP pipeline example" class="align-center" src="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_comp.png" style="width: 80%;" />
+<p><strong>압축</strong> — Bayer 데이터의 고동적 범위를 낮은 비트 깊이로 압축하는 구간별 선형 톤 커브를 적용합니다.</p>
+<a class="reference internal image-reference" href="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_comp.png"><img alt="Companded output from the ISP pipeline example" class="align-center" src="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_comp.png" style="width: 80%;"/>
 </a>
-<p><strong>ISP output</strong> — the fully processed image after the on-chip ISP program runs (demosaic, denoise, tone-map, and color grading).</p>
-<a class="reference internal image-reference" href="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_isp_output.png"><img alt="ISP-processed output from the ISP pipeline example" class="align-center" src="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_isp_output.png" style="width: 80%;" />
+<p><strong>ISP 출력</strong> — 온칩 ISP 프로그램 (디모자이크, 노이즈 제거, 톤 매핑, 색상 그레이딩)이 실행된 후 완전히 처리된 이미지.</p>
+<a class="reference internal image-reference" href="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_isp_output.png"><img alt="ISP-processed output from the ISP pipeline example" class="align-center" src="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_isp_output.png" style="width: 80%;"/>
 </a>
-<p><strong>YUV conversion</strong> — the final ISP output converted from RGB to YUV color space.</p>
-<a class="reference internal image-reference" href="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_yuv.png"><img alt="YUV-converted output from the ISP pipeline example" class="align-center" src="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_yuv.png" style="width: 80%;" />
+<p><strong>YUV 변환</strong> — RGB에서 YUV 색상 공간으로 변환된 최종 ISP 출력.</p>
+<a class="reference internal image-reference" href="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_yuv.png"><img alt="YUV-converted output from the ISP pipeline example" class="align-center" src="../_images/isim_6.0_base_tut_external_camera_isp_pipeline_yuv.png" style="width: 80%;"/>
 </a>
 </section>
 <section id="camera-sensor-rigs">
 <span id="isaacsim-sensors-camera-creating-camera-sensors"></span><h3>Camera Sensor Rigs<a class="headerlink" href="isaacsim_sensors_camera.html#camera-sensor-rigs" title="Link to this heading">#</a></h3>
-<p>The camera sensor rig is a collection of camera sensors that are attached to a single prim. It can be assembled from the individual sensors, that are either created manually or derived from the calibration parameters.</p>
-<p>This will be a short discussion on how we created a digital twin of the RealSense™ Depth Camera D455.  The USD for the camera can be found in the content folder as: <code class="docutils literal notranslate"><span class="pre">/Isaac/Sensors/RealSense/D455/rsd455.usd</span></code>.</p>
-<p>There are three visual sensors, and one IMU sensor on the RealSense.  Their placement relative to the camera origin was taken from the layout diagram in
-the <a class="reference external" href="https://www.intelrealsense.com/wp-content/uploads/2023/07/Intel-RealSense-D400-Series-Datasheet-July-2023.pdf">TechSpec document</a> from <a class="reference external" href="https://www.intelrealsense.com/depth-camera-d455/">Intel’s web site</a>.</p>
-<p>Most camera parameters were also found in the TechSpec, for example, the USD parameter <code class="docutils literal notranslate"><span class="pre">fStop</span></code> is the denominator of the F Number from the TechSpec; the <code class="docutils literal notranslate"><span class="pre">focalLength</span></code> is the Focal Length, and the <code class="docutils literal notranslate"><span class="pre">ftheatMaxFov</span></code>
-is the Diagonal Field of View.  However, some parameters, like the <code class="docutils literal notranslate"><span class="pre">focusDistance</span></code> were estimated by comparing real output and informed guesses.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">horizontalAperture</span></code> and <code class="docutils literal notranslate"><span class="pre">verticalAperture</span></code> in that example are derived from the technical specification. From the TechSpec, the left, right, and color sensors are listed as a OmniVision Technologies OV9782, and
-the <a class="reference external" href="https://www.ovt.com/products/ov09782-ga4a/">Tech Spec</a> for that sensor lists the image area as 3896 x 2453 µm.  We used that as the aperture sizes.</p>
-<p>The resolution for the depth and color cameras are 1280 x 800, but it’s up to you to attach a render product of that size to the outputs.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">Pseudo</span> <span class="pre">Depth</span></code> camera is a stand in for the depth image created by the camera’s firmware.  We don’t attempt to copy the algorithms that create the image from stereo, but the <code class="docutils literal notranslate"><span class="pre">Camera_Pseudo_Depth</span></code> component
-is a convenience camera that can return the scene depth as seen from that camera position between the left and right stereo cameras.  It would be more accurate to create a depth image from stereo, and if
-the same algorithm that is used in the RealSense was used then the same results (including artifacts) would be produced.</p>
+<p>카메라 센서 리그는 단일 prim에 부착된 카메라 센서 모음입니다. 수동으로 생성하거나 보정 파라미터에서 파생된 개별 센서로 조립할 수 있습니다.</p>
+<p>이것은 RealSense™ 깊이 카메라 D455의 디지털 트윈을 어떻게 생성했는지에 대한 간략한 설명입니다. 카메라의 USD는 콘텐츠 폴더에서 찾을 수 있습니다: <code class="docutils literal notranslate"><span class="pre">/Isaac/Sensors/RealSense/D455/rsd455.usd</span></code>.</p>
+<p>RealSense에는 세 개의 시각 센서와 하나의 IMU 센서가 있습니다. 카메라 원점에 대한 배치는 <a class="reference external" href="https://www.intelrealsense.com/wp-content/uploads/2023/07/Intel-RealSense-D400-Series-Datasheet-July-2023.pdf">TechSpec 문서</a>의 레이아웃 다이어그램에서 가져왔습니다.</p>
+<p>대부분의 카메라 파라미터는 TechSpec에서도 찾을 수 있었습니다. 예를 들어 USD 파라미터 <code class="docutils literal notranslate"><span class="pre">fStop</span></code>은 TechSpec의 F 번호의 분모이며; <code class="docutils literal notranslate"><span class="pre">focalLength</span></code>는 초점 거리이고 <code class="docutils literal notranslate"><span class="pre">ftheatMaxFov</span></code>는 대각선 시야각입니다. 그러나 <code class="docutils literal notranslate"><span class="pre">focusDistance</span></code>와 같은 일부 파라미터는 실제 출력을 비교하고 정보에 입각한 추측을 통해 추정되었습니다.</p>
+<p>해당 예제의 <code class="docutils literal notranslate"><span class="pre">horizontalAperture</span></code>와 <code class="docutils literal notranslate"><span class="pre">verticalAperture</span></code>는 기술 사양에서 파생되었습니다. TechSpec에서 왼쪽, 오른쪽 및 색상 센서는 OmniVision Technologies OV9782로 나열되며, 해당 센서의 이미지 영역은 3896 x 2453 µm입니다.</p>
+<p>깊이 및 색상 카메라의 해상도는 1280 x 800이지만 해당 크기의 렌더 제품을 출력에 부착하는 것은 사용자에게 달려 있습니다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Pseudo Depth</span></code> 카메라는 카메라 펌웨어에 의해 생성된 깊이 이미지의 대체물입니다. 스테레오에서 이미지를 생성하는 알고리즘을 복사하려고 시도하지는 않지만, <code class="docutils literal notranslate"><span class="pre">Camera_Pseudo_Depth</span></code> 컴포넌트는 왼쪽과 오른쪽 스테레오 카메라 사이의 카메라 위치에서 보이는 씬 깊이를 반환할 수 있는 편의 카메라입니다. 스테레오에서 깊이 이미지를 생성하는 것이 더 정확하며, RealSense에서 사용된 것과 동일한 알고리즘을 사용하면 동일한 결과 (아티팩트 포함)가 생성됩니다.</p>
 </section>
 <section id="camera-inspector-extension">
 <span id="isaac-sim-app-tutorial-camera-inspector-extension"></span><h3>Camera Inspector Extension<a class="headerlink" href="isaacsim_sensors_camera.html#camera-inspector-extension" title="Link to this heading">#</a></h3>
-<p>The Camera Inspector Extension allows you to:</p>
+<p>Camera Inspector Extension을 사용하면 다음을 할 수 있습니다:</p>
 <ul class="simple">
-<li><p>Create multiple viewports for each camera</p></li>
-<li><p>Check camera coverage</p></li>
-<li><p>Get and set camera poses in the desired frames</p></li>
+<li><p>각 카메라에 대한 여러 뷰포트 생성</p></li>
+<li><p>카메라 커버리지 확인</p></li>
+<li><p>원하는 프레임에서 카메라 포즈를 가져오고 설정하기</p></li>
 </ul>
 <section id="launching-extension">
 <h4>Launching Extension<a class="headerlink" href="isaacsim_sensors_camera.html#launching-extension" title="Link to this heading">#</a></h4>
-<p>To open the Camera Inspector extension:</p>
+<p>Camera Inspector extension을 열려면:</p>
 <ol class="arabic simple">
-<li><p>Go to the Menu Bar.</p></li>
-<li><p>Select <strong>Tools &gt; Sensors &gt; Camera Inspector</strong>.</p></li>
-<li><p>After launching the extension, verify that you can see your camera in the dropdown.</p></li>
-<li><p>When adding a new camera, you must click the Refresh button to ensure that the extension finds this new camera.</p></li>
-<li><p>Select the camera you want to inspect.</p></li>
+<li><p>Menu Bar로 이동합니다.</p></li>
+<li><p><strong>Tools &gt; Sensors &gt; Camera Inspector</strong>를 선택합니다.</p></li>
+<li><p>extension을 실행한 후 드롭다운에서 카메라를 볼 수 있는지 확인합니다.</p></li>
+<li><p>새 카메라를 추가할 때 extension이 이 새 카메라를 찾을 수 있도록 Refresh 버튼을 클릭해야 합니다.</p></li>
+<li><p>검사할 카메라를 선택합니다.</p></li>
 </ol>
 </section>
 <section id="camera-state-textbox">
 <h4>Camera State Textbox<a class="headerlink" href="isaacsim_sensors_camera.html#camera-state-textbox" title="Link to this heading">#</a></h4>
-<img alt="../_images/isim_4.5_base_ref_gui_camera_status_textbox.png" class="align-center" src="../_images/isim_4.5_base_ref_gui_camera_status_textbox.png" />
-<p>The <strong>Camera State</strong> textbox near the top of the extension provides a convenient way to copy the position and orientation of your camera directly into code.
-Click the copy icon on the right of the textbox to copy to your clipboard.</p>
+<img alt="../_images/isim_4.5_base_ref_gui_camera_status_textbox.png" class="align-center" src="../_images/isim_4.5_base_ref_gui_camera_status_textbox.png"/>
+<p>extension 상단 근처의 <strong>Camera State</strong> 텍스트 박스는 카메라의 위치와 방향을 코드로 직접 복사하는 편리한 방법을 제공합니다. 텍스트 박스 오른쪽의 복사 아이콘을 클릭하여 클립보드에 복사합니다.</p>
 </section>
 <section id="creating-a-viewport">
 <h4>Creating a Viewport<a class="headerlink" href="isaacsim_sensors_camera.html#creating-a-viewport" title="Link to this heading">#</a></h4>
-<p>With the camera selected, you can create a new viewport for your camera.</p>
+<p>카메라가 선택된 상태에서 카메라에 대한 새 뷰포트를 생성할 수 있습니다.</p>
 <ol class="arabic">
-<li><p>Click on the <strong>Create Viewport</strong> button to the right of the camera dropdown menu.</p>
+<li><p>카메라 드롭다운 메뉴 오른쪽에 있는 <strong>Create Viewport</strong> 버튼을 클릭합니다.</p>
 <blockquote>
-<div><p>By default, this creates a new viewport and assigns the current selected Camera to it.</p>
+<div><p>기본적으로 새 뷰포트를 생성하고 현재 선택된 카메라를 할당합니다.</p>
 </div></blockquote>
 </li>
-<li><p>Assign different cameras to different viewports using the two dropdown menus and buttons in the extension:</p>
+<li><p>extension의 두 드롭다운 메뉴와 버튼을 사용하여 다양한 카메라를 다양한 뷰포트에 할당합니다:</p>
 <blockquote>
-<div><img alt="../_images/isim_4.5_base_ref_gui_camera_sensors_create_viewport.png" class="align-center" src="../_images/isim_4.5_base_ref_gui_camera_sensors_create_viewport.png" />
+<div><img alt="../_images/isim_4.5_base_ref_gui_camera_sensors_create_viewport.png" class="align-center" src="../_images/isim_4.5_base_ref_gui_camera_sensors_create_viewport.png"/>
 </div></blockquote>
 </li>
-<li><p>After launching your viewport, you can change the resolution using the menu in the top left and going to <strong>Viewport</strong>.</p>
+<li><p>뷰포트를 실행한 후 왼쪽 상단 메뉴를 사용하여 <strong>Viewport</strong>로 이동하여 해상도를 변경할 수 있습니다.</p>
 <blockquote>
 <div><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>When changing the resolution, Omniverse Kit only supports square pixels. This means that the resolution aspect ratio must be the same as the aperture ratio.</p>
+<p class="admonition-title">참고</p>
+<p>해상도를 변경할 때 Omniverse Kit은 정사각형 픽셀만 지원합니다. 이는 해상도 종횡비가 조리개 비율과 같아야 함을 의미합니다.</p>
 </div>
-<a class="reference internal image-reference" href="../_images/isim_4.5_base_ref_gui_camera_sensors_config.png"><img alt="../_images/isim_4.5_base_ref_gui_camera_sensors_config.png" class="align-center" src="../_images/isim_4.5_base_ref_gui_camera_sensors_config.png" style="width: 50%;" />
+<a class="reference internal image-reference" href="../_images/isim_4.5_base_ref_gui_camera_sensors_config.png"><img alt="../_images/isim_4.5_base_ref_gui_camera_sensors_config.png" class="align-center" src="../_images/isim_4.5_base_ref_gui_camera_sensors_config.png" style="width: 50%;"/>
 </a>
 </div></blockquote>
 </li>
@@ -1577,13 +1141,13 @@ Click the copy icon on the right of the textbox to copy to your clipboard.</p>
 </section>
 <section id="standalone-examples">
 <h2>Standalone Examples<a class="headerlink" href="isaacsim_sensors_camera.html#standalone-examples" title="Link to this heading">#</a></h2>
-<p>For end-to-end examples of creating and collecting data from camera sensors, refer to the following.</p>
-<p><strong>Basic Creation and Visualization</strong></p>
+<p>카메라 센서 생성 및 데이터 수집에 대한 엔드투엔드 예제는 다음을 참조하세요.</p>
+<p><strong>기본 생성 및 시각화</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basic camera creation with rgb + distance_to_image_plane annotators in a warehouse scene</span>
 ./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.sensors.experimental.rtx/create_camera_basic.py
 </pre></div>
 </div>
-<p><strong>Specialized Cameras</strong></p>
+<p><strong>전문 카메라</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Single-view stereoscopic depth sensor</span>
 ./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.sensors.experimental.rtx/create_camera_depth_sensor.py
 ./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.sensors.experimental.rtx/camera_stereoscopic_depth.py
@@ -1592,84 +1156,62 @@ Click the copy icon on the right of the textbox to copy to your clipboard.</p>
 ./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.sensors.experimental.rtx/camera_structured_light.py
 </pre></div>
 </div>
-<p><strong>Batched / Tiled</strong></p>
+<p><strong>배치 / 타일식</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># TiledCameraSensor for multi-camera batched rendering</span>
 ./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.sensors.experimental.rtx/camera_tiled.py
 </pre></div>
 </div>
-<p><strong>Calibration</strong></p>
+<p><strong>보정</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># OpenCV pinhole and fisheye lens distortion models on RtxCamera</span>
 ./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.sensors.experimental.rtx/camera_opencv_pinhole.py
 ./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.sensors.experimental.rtx/camera_opencv_fisheye.py
 </pre></div>
 </div>
-<p><strong>Annotator Device Selection</strong></p>
+<p><strong>Annotator 장치 선택</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># CPU vs CUDA-resident annotator buffers</span>
 ./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.sensors.experimental.rtx/camera_annotator_devices.py
 </pre></div>
 </div>
-<p><strong>ISP Pipeline</strong></p>
+<p><strong>ISP 파이프라인</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Per-stage ISP pipeline introspection (Linux x86_64 only)</span>
 ./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.sensors.experimental.rtx/camera_isp_pipeline.py
 </pre></div>
 </div>
-<p><strong>ROS 2 Integration</strong></p>
+<p><strong>ROS 2 통합</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Publish camera frames over ROS 2</span>
 ./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.sensors.experimental.rtx/camera_ros.py
 </pre></div>
 </div>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="index.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Sensors</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="isaacsim_sensors_camera_depth.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Depth Sensors</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="index.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Sensors</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="isaacsim_sensors_camera_depth.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Depth Sensors</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="isaacsim_sensors_camera.html#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="isaacsim_sensors_camera.html#how-to-create-a-camera">How to Create a Camera</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="isaacsim_sensors_camera.html#create-from-the-create-menu">Create from the Create Menu</a></li>
@@ -1703,46 +1245,29 @@ Click the copy icon on the right of the textbox to copy to your clipboard.</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="isaacsim_sensors_camera.html#standalone-examples">Standalone Examples</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1773,36 +1298,21 @@ Click the copy icon on the right of the textbox to copy to your clipboard.</p>
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

@@ -1,561 +1,257 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>ROS 2 Python Custom OmniGraph Node &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>ROS 2 Python Custom OmniGraph Node — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
-  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
-</script>
-<script type="text/javascript">
-  function OptanonWrapper() {
-    var event = new Event('bannerLoaded');
-    window.dispatchEvent(event);
-  }
-</script>
-<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
-</script>
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'ros2_tutorials/tutorial_ros2_custom_omnigraph_node_python';</script>
-    <script>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'ros2_tutorials/tutorial_ros2_custom_omnigraph_node_python';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="ROS 2 Custom C++ OmniGraph Node" href="tutorial_ros2_omnigraph_cpp_node.html" />
-    <link rel="prev" title="ROS 2 Python Custom Messages" href="tutorial_ros2_custom_message_python.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="tutorial_ros2_omnigraph_cpp_node.html" rel="next" title="ROS 2 Custom C++ OmniGraph Node"/>
+<link href="tutorial_ros2_custom_message_python.html" rel="prev" title="ROS 2 Python Custom Messages"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="tutorial_ros2_custom_omnigraph_node_python.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="tutorial_ros2_custom_omnigraph_node_python.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -575,7 +271,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -603,20 +298,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -691,17 +374,7 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="ros2_landing_page.html">ROS 2</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">ROS 2 Tutorials (Linux and Windows)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -879,7 +552,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -919,13 +591,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -972,10 +638,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1144,18 +806,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1181,158 +833,128 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="ros2_landing_page.html" class="nav-link">ROS 2</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">ROS 2 Tutorials (Linux and Windows)</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">ROS 2 Python Custom OmniGraph Node</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="ros2_landing_page.html">ROS 2</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">ROS 2 Tutorials (Linux and Windows)</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">ROS 2 Python Custom OmniGraph Node</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="ros-2-python-custom-omnigraph-short-node">
+<article class="bd-article">
+<section id="ros-2-python-custom-omnigraph-short-node">
 <span id="isaac-sim-app-ros2-custom-omnigraph-node-python"></span><h1>ROS 2 Python Custom OmniGraph Node<a class="headerlink" href="tutorial_ros2_custom_omnigraph_node_python.html#ros-2-python-custom-omnigraph-short-node" title="Link to this heading">#</a></h1>
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="tutorial_ros2_custom_omnigraph_node_python.html#learning-objectives" title="Link to this heading">#</a></h2>
-<p>This is an optional, advanced tutorial where you will learn how to</p>
+<p>이것은 선택적 고급 튜토리얼로, 다음 내용을 배웁니다:</p>
 <ul class="simple">
-<li><p>Use ROS 2 <em>rclpy</em> Python interface with Isaac Sim</p></li>
-<li><p>Create a basic custom OmniGraph Python node (using the <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=NVIDIA.isaacsim-vscode-edition">Isaac Sim VS Code Edition</a>) that can subscribe to a topic (with message type <code class="docutils literal notranslate"><span class="pre">std_msgs/msg/Int32</span></code>) and output the Fibonacci computation of the published number.</p></li>
+<li><p>Isaac Sim과 함께 ROS 2 <em>rclpy</em> Python 인터페이스 사용</p></li>
+<li><p>(<a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=NVIDIA.isaacsim-vscode-edition">Isaac Sim VS Code Edition</a>을 사용하여) 토픽을 구독하고 (<code class="docutils literal notranslate"><span class="pre">std_msgs/msg/Int32</span></code> 메시지 유형) 발행된 숫자의 피보나치 계산 결과를 출력할 수 있는 기본 커스텀 OmniGraph Python 노드 생성.</p></li>
 </ul>
 </section>
 <section id="getting-started">
 <h2>Getting Started<a class="headerlink" href="tutorial_ros2_custom_omnigraph_node_python.html#getting-started" title="Link to this heading">#</a></h2>
-<p><strong>Prerequisite</strong></p>
+<p><strong>사전 준비사항</strong></p>
 <ul class="simple">
-<li><p>Completed <a class="reference internal" href="../installation/install_ros.html#isaac-sim-app-install-ros"><span class="std std-ref">ROS 2 Installation (Default)</span></a>: installed ROS2, enabled the ROS2 extension, built the provided <em>Isaac Sim</em> ROS 2 workspace, and set up the necessary environment variables.</p></li>
-<li><p>Completed the tutorial for writing custom Python nodes: <a class="reference internal" href="../omnigraph/omnigraph_custom_python_nodes.html#isaac-sim-app-omnigraph-custom-python-nodes"><span class="std std-ref">Custom Python Nodes</span></a></p></li>
+<li><p><a class="reference internal" href="../installation/install_ros.html#isaac-sim-app-install-ros"><span class="std std-ref">ROS 2 Installation (Default)</span></a>을 완료했어야 합니다: ROS2를 설치하고, ROS2 extension을 활성화하고, 제공된 <em>Isaac Sim</em> ROS 2 workspace를 빌드하고, 필요한 환경 변수를 설정했어야 합니다.</p></li>
+<li><p>커스텀 Python 노드 작성 튜토리얼을 완료했어야 합니다: <a class="reference internal" href="../omnigraph/omnigraph_custom_python_nodes.html#isaac-sim-app-omnigraph-custom-python-nodes"><span class="std std-ref">Custom Python Nodes</span></a></p></li>
 </ul>
 </section>
 <section id="creating-the-ros-2-custom-omnigraph-short-python-node-template">
 <h2>Creating the ROS 2 Custom OmniGraph Python Node Template<a class="headerlink" href="tutorial_ros2_custom_omnigraph_node_python.html#creating-the-ros-2-custom-omnigraph-short-python-node-template" title="Link to this heading">#</a></h2>
 <ol class="arabic">
-<li><p>Go to <em>Template &gt; Extension</em> in the <strong>Isaac Sim VS Code Edition</strong> (VS Code extension) to open a wizard to create a new Isaac Sim extension.</p>
+<li><p><strong>Isaac Sim VS Code Edition</strong> (VS Code 확장)에서 <em>Template &gt; Extension</em>으로 이동하여 새 Isaac Sim extension을 생성하는 마법사를 엽니다.</p>
 <blockquote>
-<div><p>Take action on the following fields:</p>
+<div><p>다음 필드에 대해 작업합니다:</p>
 <ul class="simple">
-<li><p><strong>Ext. name:</strong> Set to <code class="docutils literal notranslate"><span class="pre">custom.python.ros2_node</span></code></p></li>
-<li><p><strong>Ext. path:</strong> Define the target path where the extension will be created.</p></li>
-<li><p><strong>Ext. title:</strong> Set to <code class="docutils literal notranslate"><span class="pre">ROS</span> <span class="pre">2</span> <span class="pre">Python</span> <span class="pre">Custom</span> <span class="pre">OmniGraph</span> <span class="pre">Node</span></code></p></li>
-<li><p><strong>Ready-to-use extension:</strong> Check it to create a ready-to-use extension in Python.</p></li>
-<li><p><strong>OmniGraph node:</strong> Check it to generate OmniGraph-specific files/folders when creating the extension.</p></li>
+<li><p><strong>Ext. name:</strong> <code class="docutils literal notranslate"><span class="pre">custom.python.ros2_node</span></code>으로 설정</p></li>
+<li><p><strong>Ext. path:</strong> extension이 생성될 대상 경로를 정의합니다.</p></li>
+<li><p><strong>Ext. title:</strong> <code class="docutils literal notranslate"><span class="pre">ROS</span> <span class="pre">2</span> <span class="pre">Python</span> <span class="pre">Custom</span> <span class="pre">OmniGraph</span> <span class="pre">Node</span></code>으로 설정</p></li>
+<li><p><strong>Ready-to-use extension:</strong> Python에서 즉시 사용 가능한 extension을 생성하기 위해 체크합니다.</p></li>
+<li><p><strong>OmniGraph node:</strong> extension을 생성할 때 OmniGraph 관련 파일/폴더를 생성하기 위해 체크합니다.</p></li>
 </ul>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/tutorial_ros2_custom_omnigraph_node_python_vscode_extension_template.png"><img alt="Extension template wizard" src="../_images/tutorial_ros2_custom_omnigraph_node_python_vscode_extension_template.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/tutorial_ros2_custom_omnigraph_node_python_vscode_extension_template.png"><img alt="Extension template wizard" src="../_images/tutorial_ros2_custom_omnigraph_node_python_vscode_extension_template.png" style="width: 100%;"/>
 </a>
 </figure>
 </div></blockquote>
 </li>
-<li><p>Edit the extension configuration file (<code class="docutils literal notranslate"><span class="pre">custom.python.ros2_node/config/extension.toml</span></code>) to add the Isaac Sim’s ROS 2 Bridge extension as a dependency (under <code class="docutils literal notranslate"><span class="pre">[dependencies]</span></code>)</p>
+<li><p>extension 구성 파일 (<code class="docutils literal notranslate"><span class="pre">custom.python.ros2_node/config/extension.toml</span></code>)을 편집하여 Isaac Sim의 ROS 2 Bridge extension을 의존성으로 추가합니다 (<code class="docutils literal notranslate"><span class="pre">[dependencies]</span></code> 아래)</p>
 <blockquote>
 <div><div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[dependencies]</span>
-<span class="s2">&quot;isaacsim.ros2.bridge&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+<span class="s2">"isaacsim.ros2.bridge"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Edit the OmniGraph definition file (<code class="docutils literal notranslate"><span class="pre">OgnCustomPythonRos2NodePy.ogn</span></code> located in the <code class="docutils literal notranslate"><span class="pre">custom.python.ros2_node/custom/python/ros2_node/ogn/python/nodes</span></code> folder) with the following specification.</p>
+<li><p>OmniGraph 정의 파일 (<code class="docutils literal notranslate"><span class="pre">custom.python.ros2_node/custom/python/ros2_node/ogn/python/nodes</span></code> 폴더에 있는 <code class="docutils literal notranslate"><span class="pre">OgnCustomPythonRos2NodePy.ogn</span></code>)을 다음 사양으로 편집합니다.</p>
 <blockquote>
-<div><p>This specification defines an OmniGraph node with two inputs (the input execution trigger, and the topic name to subscribe to (a string)) and two outputs (the output execution trigger, and the computed Fibonacci number (an integer)).</p>
+<div><p>이 사양은 두 개의 입력 (입력 실행 트리거 및 구독할 토픽 이름 (문자열))과 두 개의 출력 (출력 실행 트리거 및 계산된 피보나치 수 (정수))이 있는 OmniGraph 노드를 정의합니다.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>Visit the <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni.graph.docs/latest/dev/ogn/ogn_reference_guide.html">OGN Reference Guide</a>
-for a detailed guide to the syntax of <code class="docutils literal notranslate"><span class="pre">.ogn</span></code> files.
-Visit OmniGraph’s <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni.graph.docs/latest/dev/ogn/attribute_types.html">Attribute Data Types</a>
-for more details about the supported attribute data types for inputs and outputs.</p>
+<p><code class="docutils literal notranslate"><span class="pre">.ogn</span></code> 파일 구문에 대한 자세한 가이드는 <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni.graph.docs/latest/dev/ogn/ogn_reference_guide.html">OGN Reference Guide</a>를 방문하세요.
+입력 및 출력에 지원되는 속성 데이터 유형에 대한 자세한 내용은 OmniGraph의 <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni.graph.docs/latest/dev/ogn/attribute_types.html">Attribute Data Types</a>를 방문하세요.</p>
 </div>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;CustomPythonRos2NodePy&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;icons/icon.svg&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;uiName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Custom Python ROS 2 Node&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="s2">&quot;This node subscribes to a ROS 2 topic (with message type &#39;std_msgs/msg/Int32&#39;) and computes and outputs the Fibonacci number&quot;</span>
+<span class="w">    </span><span class="nt">"CustomPythonRos2NodePy"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"python"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"icons/icon.svg"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"uiName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom Python ROS 2 Node"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s2">"This node subscribes to a ROS 2 topic (with message type 'std_msgs/msg/Int32') and computes and outputs the Fibonacci number"</span>
 <span class="w">        </span><span class="p">],</span>
-<span class="w">        </span><span class="nt">&quot;categoryDefinitions&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;config/CategoryDefinition.json&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;categories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;extension:Category&quot;</span><span class="p">],</span>
-<span class="w">        </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;execIn&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;execution&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Input execution trigger&quot;</span>
+<span class="w">        </span><span class="nt">"categoryDefinitions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"config/CategoryDefinition.json"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"extension:Category"</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"execIn"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"execution"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Input execution trigger"</span>
 <span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;topic&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;uiName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Subscription topic&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Topic to subscribe to&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/number&quot;</span>
+<span class="w">            </span><span class="nt">"topic"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"uiName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subscription topic"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Topic to subscribe to"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/number"</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">},</span>
-<span class="w">        </span><span class="nt">&quot;outputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;execOut&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;execution&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Output execution trigger&quot;</span>
+<span class="w">        </span><span class="nt">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"execOut"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"execution"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Output execution trigger"</span>
 <span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;fibonacci&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uint64&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;uiName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fibonacci&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Computed Fibonacci number&quot;</span>
+<span class="w">            </span><span class="nt">"fibonacci"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uint64"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"uiName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fibonacci"</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Computed Fibonacci number"</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
@@ -1341,11 +963,11 @@ for more details about the supported attribute data types for inputs and outputs
 </div>
 </div></blockquote>
 </li>
-<li><p>Edit the OmniGraph Python source code file (<code class="docutils literal notranslate"><span class="pre">OgnCustomPythonRos2NodePy.py</span></code> located in the <code class="docutils literal notranslate"><span class="pre">custom.python.ros2_node/custom/python/ros2_node/ogn/python/nodes</span></code> folder) with the following content.</p>
+<li><p>OmniGraph Python 소스 코드 파일 (<code class="docutils literal notranslate"><span class="pre">custom.python.ros2_node/custom/python/ros2_node/ogn/python/nodes</span></code> 폴더에 있는 <code class="docutils literal notranslate"><span class="pre">OgnCustomPythonRos2NodePy.py</span></code>)을 다음 내용으로 편집합니다.</p>
 <blockquote>
-<div><p>The code is self-commented enough.
-Basically, the <code class="docutils literal notranslate"><span class="pre">OgnCustomPythonRos2NodePyInternalState</span></code> class handles the communication with ROS. It creates the ROS 2 node, the subscription and handles the received messages.
-On the other hand, the <code class="docutils literal notranslate"><span class="pre">OgnCustomPythonRos2NodePy</span></code> class implements the custom OmniGraph node. It computes and sets the outputs according to the input values and the internal state.</p>
+<div><p>코드에는 충분한 주석이 달려 있습니다.
+기본적으로 <code class="docutils literal notranslate"><span class="pre">OgnCustomPythonRos2NodePyInternalState</span></code> 클래스는 ROS와의 통신을 처리합니다. ROS 2 노드, 구독을 생성하고 수신된 메시지를 처리합니다.
+한편 <code class="docutils literal notranslate"><span class="pre">OgnCustomPythonRos2NodePy</span></code> 클래스는 커스텀 OmniGraph 노드를 구현합니다. 입력 값과 내부 상태에 따라 출력을 계산하고 설정합니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni.graph.core</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">rclpy</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">std_msgs.msg</span>
@@ -1354,12 +976,12 @@ On the other hand, the <code class="docutils literal notranslate"><span class="p
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">OgnCustomPythonRos2NodePyInternalState</span><span class="p">(</span><span class="n">BaseResetNode</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convenience class for maintaining per-node state information.</span>
+<span class="w">    </span><span class="sd">"""Convenience class for maintaining per-node state information.</span>
 
-<span class="sd">    It inherits from ``BaseResetNode`` to do custom reset operation when the timeline is stopped.&quot;&quot;&quot;</span>
+<span class="sd">    It inherits from ``BaseResetNode`` to do custom reset operation when the timeline is stopped."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiate the per-node state information&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Instantiate the per-node state information"""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ros2_node</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_subscription</span> <span class="o">=</span> <span class="kc">None</span>
@@ -1368,17 +990,17 @@ On the other hand, the <code class="docutils literal notranslate"><span class="p
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get received data, and clean it after reading&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Get received data, and clean it after reading"""</span>
         <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">tmp</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Function that is called when a message is received by the subscription.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Function that is called when a message is received by the subscription."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">data</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_name</span><span class="p">,</span> <span class="n">topic_name</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Intitialize ROS 2 node and subscription.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Intitialize ROS 2 node and subscription."""</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
         <span class="k">except</span><span class="p">:</span>
@@ -1394,11 +1016,11 @@ On the other hand, the <code class="docutils literal notranslate"><span class="p
         <span class="bp">self</span><span class="o">.</span><span class="n">initialized</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">spin_once</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout_sec</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Do ROS 2 work to take an incoming message from the topic, if any.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Do ROS 2 work to take an incoming message from the topic, if any."""</span>
         <span class="n">rclpy</span><span class="o">.</span><span class="n">spin_once</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ros2_node</span><span class="p">,</span> <span class="n">timeout_sec</span><span class="o">=</span><span class="n">timeout_sec</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">custom_reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;On timeline stop, destroy ROS 2 subscription and node.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""On timeline stop, destroy ROS 2 subscription and node."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ros2_node</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_ros2_node</span><span class="o">.</span><span class="n">destroy_subscription</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_subscription</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_ros2_node</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
@@ -1412,11 +1034,11 @@ On the other hand, the <code class="docutils literal notranslate"><span class="p
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">OgnCustomPythonRos2NodePy</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;The OmniGraph node class&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""The OmniGraph node class"""</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute the Fibonacci sequence value for the given number iteratively&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Compute the Fibonacci sequence value for the given number iteratively"""</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="mi">0</span>
         <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -1428,18 +1050,18 @@ On the other hand, the <code class="docutils literal notranslate"><span class="p
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">internal_state</span><span class="p">():</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get per-node state information.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Get per-node state information."""</span>
         <span class="k">return</span> <span class="n">OgnCustomPythonRos2NodePyInternalState</span><span class="p">()</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="n">db</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute the output based on inputs and internal state.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Compute the output based on inputs and internal state."""</span>
         <span class="n">state</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">per_instance_state</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># check if state (ROS 2 node and subscriber is initialized)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">state</span><span class="o">.</span><span class="n">initialized</span><span class="p">:</span>
-                <span class="n">state</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">node_name</span><span class="o">=</span><span class="s2">&quot;custom_python_ros2_node&quot;</span><span class="p">,</span> <span class="n">topic_name</span><span class="o">=</span><span class="n">db</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">topic</span><span class="p">)</span>
+                <span class="n">state</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">node_name</span><span class="o">=</span><span class="s2">"custom_python_ros2_node"</span><span class="p">,</span> <span class="n">topic_name</span><span class="o">=</span><span class="n">db</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">topic</span><span class="p">)</span>
             <span class="c1"># spin state to take incoming messages</span>
             <span class="n">state</span><span class="o">.</span><span class="n">spin_once</span><span class="p">()</span>
 
@@ -1450,19 +1072,19 @@ On the other hand, the <code class="docutils literal notranslate"><span class="p
                 <span class="n">value</span> <span class="o">=</span> <span class="n">OgnCustomPythonRos2NodePy</span><span class="o">.</span><span class="n">fibonacci</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
                 <span class="c1"># check for uint64 overflow</span>
                 <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">**</span><span class="mi">64</span><span class="p">:</span>
-                    <span class="n">db</span><span class="o">.</span><span class="n">log_warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fibonacci number </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2"> exceeds uint64&#39;s storage capacity&quot;</span><span class="p">)</span>
+                    <span class="n">db</span><span class="o">.</span><span class="n">log_warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Fibonacci number </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2"> exceeds uint64's storage capacity"</span><span class="p">)</span>
                     <span class="k">return</span> <span class="kc">False</span>
                 <span class="c1"># output value and trigger output execution</span>
                 <span class="n">db</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">fibonacci</span> <span class="o">=</span> <span class="n">value</span>
                 <span class="n">db</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">execOut</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">ExecutionAttributeState</span><span class="o">.</span><span class="n">ENABLED</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">db</span><span class="o">.</span><span class="n">log_error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Computation error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">log_error</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Computation error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">release</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Release per-node state information.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Release per-node state information."""</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">state</span> <span class="o">=</span> <span class="n">OgnCustomPythonRos2NodePyDatabase</span><span class="o">.</span><span class="n">per_instance_internal_state</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
@@ -1480,112 +1102,90 @@ On the other hand, the <code class="docutils literal notranslate"><span class="p
 <h2>Running the Custom OmniGraph Node<a class="headerlink" href="tutorial_ros2_custom_omnigraph_node_python.html#running-the-custom-omnigraph-short-node" title="Link to this heading">#</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>The custom extension must first be activated for the OmniGraph node to be available.</p>
-<p>Open the extension manager using the <em>Window &gt; Extensions</em> menu and search for the <code class="docutils literal notranslate"><span class="pre">custom.python.ros2_node</span></code> extension to enable it.</p>
+<p>OmniGraph 노드를 사용할 수 있으려면 먼저 커스텀 extension을 활성화해야 합니다.</p>
+<p><em>Window &gt; Extensions</em> 메뉴를 사용하여 extension manager를 열고 <code class="docutils literal notranslate"><span class="pre">custom.python.ros2_node</span></code> extension을 검색하여 활성화합니다.</p>
 </div>
 <ol class="arabic">
-<li><p>In a new stage, go to <em>Window &gt; Graph Editors &gt; Action Graph</em> to create an Action Graph and add, connect and configure the following OmniGraph nodes into the Action Graph:</p>
+<li><p>새 stage에서 <em>Window &gt; Graph Editors &gt; Action Graph</em>로 이동하여 Action Graph를 생성하고 다음 OmniGraph 노드를 추가, 연결, 구성합니다:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><strong>On Playback Tick</strong> node to execute other graph nodes every simulation frame.</p></li>
-<li><p><strong>Custom Python ROS 2 Node</strong> custom node.</p></li>
-<li><p><strong>To String</strong> node to convert the output of our custom node to a string.</p></li>
-<li><p><strong>Print Text</strong> node to display the output of our custom node (as string) to the viewport or terminal.
-Edit this node’s properties, in the <em>Property</em> panel, and check the <em>To Screen</em> attribute to display the text in the viewport.</p></li>
+<li><p>매 시뮬레이션 프레임마다 다른 그래프 노드를 실행하는 <strong>On Playback Tick</strong> 노드.</p></li>
+<li><p><strong>Custom Python ROS 2 Node</strong> 커스텀 노드.</p></li>
+<li><p>커스텀 노드의 출력을 문자열로 변환하는 <strong>To String</strong> 노드.</p></li>
+<li><p>커스텀 노드의 출력을 (문자열로) 뷰포트 또는 터미널에 표시하는 <strong>Print Text</strong> 노드.
+이 노드의 속성을 <em>Property</em> 패널에서 편집하고 <em>To Screen</em> 속성을 체크하여 텍스트를 뷰포트에 표시합니다.</p></li>
 </ul>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/tutorial_ros2_custom_omnigraph_node_python_node_graph.png"><img alt="OmniGraph nodes" src="../_images/tutorial_ros2_custom_omnigraph_node_python_node_graph.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/tutorial_ros2_custom_omnigraph_node_python_node_graph.png"><img alt="OmniGraph nodes" src="../_images/tutorial_ros2_custom_omnigraph_node_python_node_graph.png" style="width: 100%;"/>
 </a>
 </figure>
 </div></blockquote>
 </li>
-<li><p>Play the simulation</p></li>
-<li><p>In a new ROS 2-sourced terminal, run the next command to publish a number to the <code class="docutils literal notranslate"><span class="pre">/number</span></code> topic.</p>
+<li><p>시뮬레이션을 재생합니다.</p></li>
+<li><p>새 ROS 2가 소스된 터미널에서 다음 명령어를 실행하여 <code class="docutils literal notranslate"><span class="pre">/number</span></code> 토픽에 숫자를 발행합니다.</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>-1<span class="w"> </span>/number<span class="w"> </span>std_msgs/msg/Int32<span class="w"> </span><span class="s2">&quot;{data: 10}&quot;</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>-1<span class="w"> </span>/number<span class="w"> </span>std_msgs/msg/Int32<span class="w"> </span><span class="s2">"{data: 10}"</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>After messages are being received from the topic, the Fibonacci number will appear in the top-left corner of the viewport.
-If no new values are received, the display will fade over time.</p>
+<li><p>토픽에서 메시지가 수신되면 피보나치 수가 뷰포트의 왼쪽 상단 모서리에 나타납니다.
+새 값이 수신되지 않으면 디스플레이가 시간이 지남에 따라 희미해집니다.</p>
 <blockquote>
 <div><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>To view the values in the Isaac Sim console, you can edit the <em>Print Text</em> node properties and uncheck the <em>To Screen</em> attribute and set the <em>Log Level</em> attribute to <em>Warning</em>.</p>
+<p>Isaac Sim 콘솔에서 값을 보려면 <em>Print Text</em> 노드 속성을 편집하고 <em>To Screen</em> 속성을 선택 해제한 후 <em>Log Level</em> 속성을 <em>Warning</em>으로 설정할 수 있습니다.</p>
 </div>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/tutorial_ros2_custom_omnigraph_node_python_results_display.png"><img alt="Results display" src="../_images/tutorial_ros2_custom_omnigraph_node_python_results_display.png" style="width: 200px;" />
+<a class="reference internal image-reference" href="../_images/tutorial_ros2_custom_omnigraph_node_python_results_display.png"><img alt="Results display" src="../_images/tutorial_ros2_custom_omnigraph_node_python_results_display.png" style="width: 200px;"/>
 </a>
 </figure>
 </div></blockquote>
 </li>
-<li><p>Publish a different number using the previous ROS 2 topic command and notice the change in Isaac Sim.</p></li>
+<li><p>이전 ROS 2 토픽 명령을 사용하여 다른 숫자를 발행하고 Isaac Sim에서의 변화를 확인합니다.</p></li>
 </ol>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="tutorial_ros2_custom_omnigraph_node_python.html#summary" title="Link to this heading">#</a></h2>
-<p>This tutorial covered the following topics:</p>
+<p>이 튜토리얼에서 다룬 주제:</p>
 <ol class="arabic simple">
-<li><p>Creating a custom OmniGraph Python node in an extension.</p></li>
-<li><p>Using <em>rclpy</em> interface to create a ROS 2 node within a custom OmniGraph node to subscribe to a topic, perform the Fibonacci computation and trigger downstream nodes when the computed OmniGraph output is ready.</p></li>
+<li><p>extension에서 커스텀 OmniGraph Python 노드 생성.</p></li>
+<li><p><em>rclpy</em> 인터페이스를 사용하여 커스텀 OmniGraph 노드 내에서 토픽 구독, 피보나치 계산 수행, 계산된 OmniGraph 출력이 준비되면 다운스트림 노드 트리거를 위한 ROS 2 노드 생성.</p></li>
 </ol>
 <section id="next-steps">
 <h3>Next Steps<a class="headerlink" href="tutorial_ros2_custom_omnigraph_node_python.html#next-steps" title="Link to this heading">#</a></h3>
-<p>Continue on to the next tutorial in our ROS2 Tutorials series, <a class="reference internal" href="tutorial_ros2_omnigraph_cpp_node.html#isaac-sim-app-ros2-omnigraph-cpp-node"><span class="std std-ref">ROS 2 Custom C++ OmniGraph Node</span></a>.</p>
+<p>ROS2 Tutorials 시리즈의 다음 튜토리얼인 <a class="reference internal" href="tutorial_ros2_omnigraph_cpp_node.html#isaac-sim-app-ros2-omnigraph-cpp-node"><span class="std std-ref">ROS 2 Custom C++ OmniGraph Node</span></a>로 계속 진행하세요.</p>
 </section>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="tutorial_ros2_custom_message_python.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">ROS 2 Python Custom Messages</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="tutorial_ros2_omnigraph_cpp_node.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">ROS 2 Custom C++ OmniGraph Node</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="tutorial_ros2_custom_message_python.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">ROS 2 Python Custom Messages</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="tutorial_ros2_omnigraph_cpp_node.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">ROS 2 Custom C++ OmniGraph Node</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_ros2_custom_omnigraph_node_python.html#learning-objectives">Learning Objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_ros2_custom_omnigraph_node_python.html#getting-started">Getting Started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_ros2_custom_omnigraph_node_python.html#creating-the-ros-2-custom-omnigraph-short-python-node-template">Creating the ROS 2 Custom OmniGraph Python Node Template</a></li>
@@ -1595,46 +1195,29 @@ If no new values are received, the display will fade over time.</p>
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1665,36 +1248,21 @@ If no new values are received, the display will fade over time.</p>
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

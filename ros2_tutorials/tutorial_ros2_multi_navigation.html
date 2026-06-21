@@ -1,561 +1,257 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Multiple Robot ROS2 Navigation &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Multiple Robot ROS2 Navigation — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
-  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
-</script>
-<script type="text/javascript">
-  function OptanonWrapper() {
-    var event = new Event('bannerLoaded');
-    window.dispatchEvent(event);
-  }
-</script>
-<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
-</script>
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'ros2_tutorials/tutorial_ros2_multi_navigation';</script>
-    <script>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'ros2_tutorials/tutorial_ros2_multi_navigation';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="ROS 2 Navigation with Heightmap Importer" href="tutorial_ros2_navigation_heightmap.html" />
-    <link rel="prev" title="ROS 2 Navigation" href="tutorial_ros2_navigation.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="tutorial_ros2_navigation_heightmap.html" rel="next" title="ROS 2 Navigation with Heightmap Importer"/>
+<link href="tutorial_ros2_navigation.html" rel="prev" title="ROS 2 Navigation"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="tutorial_ros2_multi_navigation.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="tutorial_ros2_multi_navigation.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -575,7 +271,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -603,20 +298,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -691,17 +374,7 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="ros2_landing_page.html">ROS 2</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">ROS 2 Tutorials (Linux and Windows)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -879,7 +552,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -919,13 +591,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -972,10 +638,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1144,18 +806,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1181,144 +833,116 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="ros2_landing_page.html" class="nav-link">ROS 2</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">ROS 2 Tutorials (Linux and Windows)</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Multiple Robot ROS2 Navigation</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="ros2_landing_page.html">ROS 2</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">ROS 2 Tutorials (Linux and Windows)</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Multiple Robot ROS2 Navigation</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="multiple-robot-ros2-navigation">
+<article class="bd-article">
+<section id="multiple-robot-ros2-navigation">
 <span id="isaac-sim-app-tutorial-ros2-multi-navigation"></span><h1>Multiple Robot ROS2 Navigation<a class="headerlink" href="tutorial_ros2_multi_navigation.html#multiple-robot-ros2-navigation" title="Link to this heading">#</a></h1>
-<p><strong>Support Limitations</strong></p>
+<p><strong>지원 제한 사항</strong></p>
 <ul class="simple">
-<li><p>Multiple Robot ROS2 Navigation with Isaac Sim is fully supported on Linux and Windows with Pixi-based installation. On Windows (WSL), Multiple Robot ROS2 Navigation with Isaac Sim could potentially produce errors.</p></li>
+<li><p>Isaac Sim과 함께하는 다중 로봇 ROS2 Navigation은 Pixi 기반 설치를 사용하는 Linux와 Windows에서 완전히 지원됩니다. Windows (WSL)에서는 Isaac Sim과 함께하는 다중 로봇 ROS2 Navigation이 잠재적으로 오류를 발생시킬 수 있습니다.</p></li>
 </ul>
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="tutorial_ros2_multi_navigation.html#learning-objectives" title="Link to this heading">#</a></h2>
-<p>In this ROS2 sample, we are demonstrating NVIDIA Isaac Sim integrated with the ROS2 Nav2 stack to perform simultaneous multiple robot navigation.</p>
+<p>이 ROS2 샘플에서는 동시에 여러 로봇을 navigation하기 위해 ROS2 Nav2 스택과 통합된 NVIDIA Isaac Sim을 시연합니다.</p>
 </section>
 <section id="getting-started">
 <h2>Getting Started<a class="headerlink" href="tutorial_ros2_multi_navigation.html#getting-started" title="Link to this heading">#</a></h2>
-<p><strong>Prerequisite</strong></p>
+<p><strong>사전 준비사항</strong></p>
 <ul>
-<li><p>Completed <a class="reference internal" href="tutorial_ros2_navigation.html#isaac-sim-app-tutorial-ros2-navigation"><span class="std std-ref">ROS 2 Navigation</span></a> for ROS2 Nav2 with a single robot. So that</p>
+<li><p>단일 로봇과 함께 ROS2 Nav2를 위한 <a class="reference internal" href="tutorial_ros2_navigation.html#isaac-sim-app-tutorial-ros2-navigation"><span class="std std-ref">ROS 2 Navigation</span></a>을 완료했어야 합니다. 따라서</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>ROS2 and Nav2 are installed.</p></li>
-<li><p>ROS2 bridge is enabled.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ros2_ws</span></code> is built and sourced (see <a class="reference internal" href="../installation/install_ros.html#isaac-sim-ros-workspace-setup"><span class="std std-ref">Setup ROS 2 Workspaces</span></a>) so that <code class="docutils literal notranslate"><span class="pre">carter_navigation</span></code> and <code class="docutils literal notranslate"><span class="pre">isaac_ros_navigation_goal</span></code> are inside your workspace.</p></li>
+<li><p>ROS2와 Nav2가 설치되어 있어야 합니다.</p></li>
+<li><p>ROS2 bridge가 활성화되어 있어야 합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">carter_navigation</span></code>과 <code class="docutils literal notranslate"><span class="pre">isaac_ros_navigation_goal</span></code>이 워크스페이스 내에 있도록 <code class="docutils literal notranslate"><span class="pre">ros2_ws</span></code>가 빌드되고 소스되어야 합니다 (<a class="reference internal" href="../installation/install_ros.html#isaac-sim-ros-workspace-setup"><span class="std std-ref">Setup ROS 2 Workspaces</span></a> 참조).</p></li>
 </ul>
 </div></blockquote>
 </li>
 </ul>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>In Windows 11, depending on your machine’s configuration, RViz2 might not open properly.</p>
+<p class="admonition-title">참고</p>
+<p>Windows 11에서는 머신 구성에 따라 RViz2가 제대로 열리지 않을 수 있습니다.</p>
 </div>
 <section id="occupancy-map">
 <h3>Occupancy Map<a class="headerlink" href="tutorial_ros2_multi_navigation.html#occupancy-map" title="Link to this heading">#</a></h3>
-<p>We generate the map of both the Hospital and Office environments using the <a class="reference internal" href="../digital_twin/ext_isaacsim_asset_generator_occupancy_map.html#ext-isaacsim-asset-generator-occupancy-map"><span class="std std-ref">Occupancy Map Generator extension</span></a> within NVIDIA Isaac Sim.</p>
-<p>Follow the steps depending on what environment you would like to use.</p>
+<p>NVIDIA Isaac Sim 내의 <a class="reference internal" href="../digital_twin/ext_isaacsim_asset_generator_occupancy_map.html#ext-isaacsim-asset-generator-occupancy-map"><span class="std std-ref">Occupancy Map Generator extension</span></a>을 사용하여 Hospital과 Office 환경 모두의 지도를 생성합니다.</p>
+<p>사용하고 싶은 환경에 따라 단계를 따르세요.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="hospital" for="sd-tab-item-0">
 Hospital Environment</label><div class="sd-tab-content docutils">
 <ol class="arabic">
-<li><p>Go to the Isaac Sim Content browser and click <strong>Isaac Sim&gt;Environments&gt;Hospital</strong>. Search for hospital and drag and drop the <strong>hospital.usd</strong> asset into the scene. Ensure that it is placed at the origin by zero’ing out all the <em>Translate</em> components in the Transform Property.</p></li>
-<li><p>At the upper left corner of the viewport, click on <strong>Perspective</strong>. Select <strong>Top</strong> from the dropdown menu. Select the <cite>/Hospital</cite> prim and press <strong>F</strong> to zoom to selection. Adjust the camera view as needed.</p></li>
-<li><p>Go to <strong>Tools &gt; Robotics &gt; Occupancy Map</strong>.</p></li>
-<li><p>In the Occupancy Map extension, ensure the Origin is set to <code class="docutils literal notranslate"><span class="pre">X:</span> <span class="pre">0.0,</span> <span class="pre">Y:</span> <span class="pre">0.0,</span> <span class="pre">Z:</span> <span class="pre">0.0</span></code>. For the lower bound, set <code class="docutils literal notranslate"><span class="pre">Z:</span> <span class="pre">0.1</span></code>. For the Upper Bound, set <code class="docutils literal notranslate"><span class="pre">Z:</span> <span class="pre">0.62</span></code>. Keep in mind, the upper bound Z distance has been set to 0.62 meters to match the vertical distance of the Lidar onboard Carter with respect to the ground.</p></li>
-<li><p>Select the <cite>Hospital</cite> prim in the stage. In the Occupancy Map extension, click on <strong>BOUND SELECTION</strong>. The bounds of the occupancy map should be updated to incorporate the selected <cite>Hospital</cite> prim.</p>
+<li><p>Isaac Sim Content 브라우저로 이동하여 <strong>Isaac Sim&gt;Environments&gt;Hospital</strong>을 클릭합니다. hospital을 검색하고 <strong>hospital.usd</strong> 에셋을 씬으로 드래그 앤 드롭합니다. Transform Property의 모든 <em>Translate</em> 컴포넌트를 0으로 설정하여 원점에 배치되었는지 확인합니다.</p></li>
+<li><p>뷰포트 왼쪽 상단 모서리에서 <strong>Perspective</strong>를 클릭합니다. 드롭다운 메뉴에서 <strong>Top</strong>을 선택합니다. <cite>/Hospital</cite> prim을 선택하고 <strong>F</strong>를 눌러 선택 영역으로 줌합니다. 필요에 따라 카메라 뷰를 조정합니다.</p></li>
+<li><p><strong>Tools &gt; Robotics &gt; Occupancy Map</strong>으로 이동합니다.</p></li>
+<li><p>Occupancy Map extension에서 Origin이 <code class="docutils literal notranslate"><span class="pre">X:</span> <span class="pre">0.0,</span> <span class="pre">Y:</span> <span class="pre">0.0,</span> <span class="pre">Z:</span> <span class="pre">0.0</span></code>으로 설정되어 있는지 확인합니다. 하한값의 경우 <code class="docutils literal notranslate"><span class="pre">Z:</span> <span class="pre">0.1</span></code>로 설정합니다. 상한값의 경우 <code class="docutils literal notranslate"><span class="pre">Z:</span> <span class="pre">0.62</span></code>로 설정합니다. 상한값 Z 거리는 Carter에 탑재된 Lidar의 지면으로부터의 수직 거리에 맞게 0.62미터로 설정되었음을 주의하세요.</p></li>
+<li><p>stage에서 <cite>Hospital</cite> prim을 선택합니다. Occupancy Map extension에서 <strong>BOUND SELECTION</strong>을 클릭합니다. occupancy map의 경계가 선택된 <cite>Hospital</cite> prim을 포함하도록 업데이트되어야 합니다.</p>
 <blockquote>
-<div><p>The map parameters should now look similar to the following image:</p>
+<div><p>지도 파라미터는 이제 다음 이미지와 유사하게 보여야 합니다:</p>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/isaac_sample_ros_multiple_robot_nav_1.png"><img alt="Occupancy Map Properties UI Window for the Hospital Environment" src="../_images/isaac_sample_ros_multiple_robot_nav_1.png" style="width: 600px;" />
+<a class="reference internal image-reference" href="../_images/isaac_sample_ros_multiple_robot_nav_1.png"><img alt="Occupancy Map Properties UI Window for the Hospital Environment" src="../_images/isaac_sample_ros_multiple_robot_nav_1.png" style="width: 600px;"/>
 </a>
 </figure>
-<p>A perimeter will be generated and it should resemble this image (Top View):</p>
+<p>경계가 생성되고 이 이미지 (Top View)와 유사해야 합니다:</p>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/isim_5.0_ros_tut_viewport_ros_multiple_robot_nav_occupancy_map.png"><img alt="Top View of Hospital with Occupancy Map" src="../_images/isim_5.0_ros_tut_viewport_ros_multiple_robot_nav_occupancy_map.png" style="width: 600px;" />
+<a class="reference internal image-reference" href="../_images/isim_5.0_ros_tut_viewport_ros_multiple_robot_nav_occupancy_map.png"><img alt="Top View of Hospital with Occupancy Map" src="../_images/isim_5.0_ros_tut_viewport_ros_multiple_robot_nav_occupancy_map.png" style="width: 600px;"/>
 </a>
 </figure>
 </div></blockquote>
 </li>
 </ol>
 </div>
-<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="office" for="sd-tab-item-1">
 Office Environment</label><div class="sd-tab-content docutils">
 <ol class="arabic">
-<li><p>Go to the Isaac Sim Content browser <strong>Isaac Sim&gt;Environments&gt;Office</strong>. Search for office and drag and drop the <strong>office.usd</strong> asset into the scene. Ensure that it is placed at the origin by zero’ing out all the <em>Translate</em> components in the Transform Property.</p></li>
-<li><p>At the upper left corner of the viewport, click on <strong>Perspective</strong>. Select <strong>Top</strong> from the dropdown menu. Select the <cite>/Office</cite> prim and press <strong>F</strong> to zoom to selection. Adjust the camera view as needed.</p></li>
-<li><p>Go to <strong>Tools &gt; Robotics &gt; Occupancy Map</strong>. In the Occupancy Map extension, set the map parameters to be similar to the following image:</p>
+<li><p>Isaac Sim Content 브라우저 <strong>Isaac Sim&gt;Environments&gt;Office</strong>로 이동합니다. office를 검색하고 <strong>office.usd</strong> 에셋을 씬으로 드래그 앤 드롭합니다. Transform Property의 모든 <em>Translate</em> 컴포넌트를 0으로 설정하여 원점에 배치되었는지 확인합니다.</p></li>
+<li><p>뷰포트 왼쪽 상단 모서리에서 <strong>Perspective</strong>를 클릭합니다. 드롭다운 메뉴에서 <strong>Top</strong>을 선택합니다. <cite>/Office</cite> prim을 선택하고 <strong>F</strong>를 눌러 선택 영역으로 줌합니다. 필요에 따라 카메라 뷰를 조정합니다.</p></li>
+<li><p><strong>Tools &gt; Robotics &gt; Occupancy Map</strong>으로 이동합니다. Occupancy Map extension에서 지도 파라미터를 다음 이미지와 유사하게 설정합니다:</p>
 <blockquote>
 <div><figure class="align-center">
-<a class="reference internal image-reference" href="../_images/isaac_sample_ros_multiple_robot_nav_3.png"><img alt="Occupancy Map Properties UI Window for Office Environment" src="../_images/isaac_sample_ros_multiple_robot_nav_3.png" style="width: 600px;" />
+<a class="reference internal image-reference" href="../_images/isaac_sample_ros_multiple_robot_nav_3.png"><img alt="Occupancy Map Properties UI Window for Office Environment" src="../_images/isaac_sample_ros_multiple_robot_nav_3.png" style="width: 600px;"/>
 </a>
 </figure>
-<p>Keep in mind, the upper bound Z distance has been set to 0.62 meters to match the vertical distance of the Lidar onboard Nova Carter with respect to the ground.</p>
-<p>A perimeter will be generated, verify that it resembles this image (Top View):</p>
+<p>상한값 Z 거리는 Nova Carter에 탑재된 Lidar의 지면으로부터의 수직 거리에 맞게 0.62미터로 설정되었음을 주의하세요.</p>
+<p>경계가 생성되고 이 이미지 (Top View)와 유사한지 확인합니다:</p>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/isaac_sample_ros_multiple_robot_nav_4.jpg"><img alt="Top View of Office with Occupancy Map" src="../_images/isaac_sample_ros_multiple_robot_nav_4.jpg" style="width: 600px;" />
+<a class="reference internal image-reference" href="../_images/isaac_sample_ros_multiple_robot_nav_4.jpg"><img alt="Top View of Office with Occupancy Map" src="../_images/isaac_sample_ros_multiple_robot_nav_4.jpg" style="width: 600px;"/>
 </a>
 </figure>
 </div></blockquote>
@@ -1327,67 +951,67 @@ Office Environment</label><div class="sd-tab-content docutils">
 </div>
 </div>
 <ol class="arabic">
-<li><p>After the setup for either environment is complete, click on <strong>CALCULATE</strong> followed by <strong>VISUALIZE IMAGE</strong>. A Visualization popup will appear.</p></li>
-<li><p>For <cite>Rotate Image</cite>, select 180 degrees and for Coordinate Type select <strong>ROS Occupancy Map Parameters File (YAML)</strong>. Click <strong>RE-GENERATE IMAGE</strong>. Occupancy map parameters formatted to YAML will appear in the field below. Change the image name to your preference. Copy the full text.</p></li>
-<li><p>Click <strong>Save YAML</strong> and save the YAML file to the <cite>maps</cite> directory, which is located in the sample <code class="docutils literal notranslate"><span class="pre">carter_navigation</span></code> ROS2 package (<code class="docutils literal notranslate"><span class="pre">carter_navigation/maps/carter_hospital_navigation.yaml</span></code>).</p></li>
-<li><p>Back in the visualization tab in NVIDIA Isaac Sim, click <strong>Save Image</strong>. Set the same image name as in the map parameters and choose to save in the same directory as the map parameters file.</p>
+<li><p>어느 환경이든 설정이 완료되면 <strong>CALCULATE</strong>를 클릭하고 <strong>VISUALIZE IMAGE</strong>를 클릭합니다. Visualization 팝업이 나타납니다.</p></li>
+<li><p><cite>Rotate Image</cite>에서 180도를 선택하고 Coordinate Type에서 <strong>ROS Occupancy Map Parameters File (YAML)</strong>을 선택합니다. <strong>RE-GENERATE IMAGE</strong>를 클릭합니다. YAML 형식의 occupancy map 파라미터가 아래 필드에 나타납니다. 이미지 이름을 원하는 대로 변경합니다. 전체 텍스트를 복사합니다.</p></li>
+<li><p><strong>Save YAML</strong>을 클릭하고 YAML 파일을 샘플 <code class="docutils literal notranslate"><span class="pre">carter_navigation</span></code> ROS2 패키지에 있는 <cite>maps</cite> 디렉터리에 저장합니다 (<code class="docutils literal notranslate"><span class="pre">carter_navigation/maps/carter_hospital_navigation.yaml</span></code>).</p></li>
+<li><p>NVIDIA Isaac Sim의 visualization 탭으로 돌아가서 <strong>Save Image</strong>를 클릭합니다. 지도 파라미터와 같은 이미지 이름으로 설정하고 지도 파라미터 파일과 같은 디렉터리에 저장하도록 선택합니다.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>The final saved image of the Hospital environment will look like the following:</p></li>
+<li><p>Hospital 환경의 최종 저장된 이미지는 다음과 같이 보입니다:</p></li>
 </ul>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/isaac_sample_ros_nav_hospital_map.png"><img alt="Sample Occupancy Map generated from hospital stage" src="../_images/isaac_sample_ros_nav_hospital_map.png" style="width: 500px;" />
+<a class="reference internal image-reference" href="../_images/isaac_sample_ros_nav_hospital_map.png"><img alt="Sample Occupancy Map generated from hospital stage" src="../_images/isaac_sample_ros_nav_hospital_map.png" style="width: 500px;"/>
 </a>
 </figure>
 <ul class="simple">
-<li><p>The final saved image of the Office environment will look like the following:</p></li>
+<li><p>Office 환경의 최종 저장된 이미지는 다음과 같이 보입니다:</p></li>
 </ul>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/isaac_sample_ros_nav_office_map.png"><img alt="Sample Occupancy Map generated from office stage" src="../_images/isaac_sample_ros_nav_office_map.png" style="width: 500px;" />
+<a class="reference internal image-reference" href="../_images/isaac_sample_ros_nav_office_map.png"><img alt="Sample Occupancy Map generated from office stage" src="../_images/isaac_sample_ros_nav_office_map.png" style="width: 500px;"/>
 </a>
 </figure>
 </div></blockquote>
 </li>
 </ol>
-<p>An occupancy map is now ready to be used with Multiple Robot ROS2 Navigation.</p>
+<p>이제 다중 로봇 ROS2 Navigation과 함께 사용할 수 있는 occupancy map이 준비되었습니다.</p>
 </section>
 </section>
 <section id="multiple-robot-ros2-navigation-setup">
 <span id="isaac-sim-app-tutorial-ros2-multi-nav-instructions"></span><h2>Multiple Robot ROS2 Navigation Setup<a class="headerlink" href="tutorial_ros2_multi_navigation.html#multiple-robot-ros2-navigation-setup" title="Link to this heading">#</a></h2>
-<p>Open hospital scene by going to <strong>Window &gt; Examples &gt; Robotics Examples</strong>, and then click on the <strong>Robotics Examples</strong> tab and expand the sections on the left hand side and open the example: <strong>ROS2 &gt; Navigation &gt; Multiple Robots &gt; Hospital Scene</strong>.</p>
-<p>For details on the ROS2 Navigation setup refer to the <a class="reference internal" href="tutorial_ros2_navigation.html#isaac-sim-app-tutorial-ros2-navigation"><span class="std std-ref">ROS2 Navigation Sample</span></a>.</p>
-<p>For operating multiple robots in the same environment, namespaces are utilized.
-This modifies the rostopic and rosnode names for different ROS2 packages, allowing for multiple instances of the same ROS2 node to run simultaneously.</p>
-<p>To publish and receive ROS2 messages under namespaces, the <code class="docutils literal notranslate"><span class="pre">node_namespace</span></code> OmniGraph node found in each of the action graphs under <code class="docutils literal notranslate"><span class="pre">Nova_Carter_ROS_X</span></code> has been set to the corresponding robot names.
-The <code class="docutils literal notranslate"><span class="pre">multiple_robot_carter_navigation_hospital.launch.py</span></code> and <code class="docutils literal notranslate"><span class="pre">multiple_robot_carter_navigation_office.launch.py</span></code> launch files found in the sample <code class="docutils literal notranslate"><span class="pre">carter_navigation</span></code> ROS2 package are also configured with the same robot namespaces.</p>
+<p><strong>Window &gt; Examples &gt; Robotics Examples</strong>로 이동하여 hospital 씬을 열고, <strong>Robotics Examples</strong> 탭을 클릭하고 왼쪽의 섹션을 확장하여 예제를 엽니다: <strong>ROS2 &gt; Navigation &gt; Multiple Robots &gt; Hospital Scene</strong>.</p>
+<p>ROS2 Navigation 설정에 대한 자세한 내용은 <a class="reference internal" href="tutorial_ros2_navigation.html#isaac-sim-app-tutorial-ros2-navigation"><span class="std std-ref">ROS2 Navigation Sample</span></a>을 참조하세요.</p>
+<p>같은 환경에서 여러 로봇을 운영하기 위해 namespace를 사용합니다.
+이는 다양한 ROS2 패키지에 대한 rostopic과 rosnode 이름을 수정하여 동일한 ROS2 노드의 여러 인스턴스가 동시에 실행될 수 있게 합니다.</p>
+<p>namespace 하에 ROS2 메시지를 발행하고 수신하기 위해 <code class="docutils literal notranslate"><span class="pre">Nova_Carter_ROS_X</span></code> 아래의 각 action graph에 있는 <code class="docutils literal notranslate"><span class="pre">node_namespace</span></code> OmniGraph 노드가 해당 로봇 이름으로 설정되어 있습니다.
+샘플 <code class="docutils literal notranslate"><span class="pre">carter_navigation</span></code> ROS2 패키지에 있는 <code class="docutils literal notranslate"><span class="pre">multiple_robot_carter_navigation_hospital.launch.py</span></code> 및 <code class="docutils literal notranslate"><span class="pre">multiple_robot_carter_navigation_office.launch.py</span></code> launch 파일도 동일한 로봇 namespace로 구성되어 있습니다.</p>
 </section>
 <section id="running-multiple-robot-ros2-navigation">
 <h2>Running Multiple Robot ROS2 Navigation<a class="headerlink" href="tutorial_ros2_multi_navigation.html#running-multiple-robot-ros2-navigation" title="Link to this heading">#</a></h2>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>On multi-GPU systems running Windows, loading and playing this scene may currently result in a fatal application crash. This is a known issue and will be addressed in a future release.</p>
+<p class="admonition-title">참고</p>
+<p>Windows를 실행하는 멀티 GPU 시스템에서는 이 씬을 로드하고 재생하면 현재 치명적인 애플리케이션 충돌이 발생할 수 있습니다. 이것은 알려진 문제이며 향후 릴리스에서 해결될 것입니다.</p>
 </div>
 <ol class="arabic">
-<li><p>Load scenario:</p>
+<li><p>시나리오 로드:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>For the hospital environment, go to <strong>Window &gt; Examples &gt; Robotics Examples</strong>, and then click on the <strong>Robotics Examples</strong> tab and expand the sections on the left hand side and open the example: <strong>ROS2 &gt; Navigation &gt; Multiple Robots &gt; Hospital Scene</strong>.</p></li>
-<li><p>For the Office scenario, go to <strong>Window &gt; Examples &gt; Robotics Examples</strong>, and then click on the <strong>Robotics Examples</strong> tab and expand the sections on the left hand side and open the example: <strong>ROS2 &gt; Navigation &gt; Multiple Robots &gt; Office Scene</strong>.</p></li>
+<li><p>hospital 환경의 경우, <strong>Window &gt; Examples &gt; Robotics Examples</strong>로 이동한 다음 <strong>Robotics Examples</strong> 탭을 클릭하고 왼쪽의 섹션을 확장하여 예제를 엽니다: <strong>ROS2 &gt; Navigation &gt; Multiple Robots &gt; Hospital Scene</strong>.</p></li>
+<li><p>Office 시나리오의 경우, <strong>Window &gt; Examples &gt; Robotics Examples</strong>로 이동한 다음 <strong>Robotics Examples</strong> 탭을 클릭하고 왼쪽의 섹션을 확장하여 예제를 엽니다: <strong>ROS2 &gt; Navigation &gt; Multiple Robots &gt; Office Scene</strong>.</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p>Click on <strong>Play</strong> to begin simulation.</p></li>
-<li><p>In a new terminal, run the specific ROS2 launch file to begin Multiple Robot Navigation with the desired environment.</p>
+<li><p>시뮬레이션을 시작하려면 <strong>Play</strong>를 클릭합니다.</p></li>
+<li><p>새 터미널에서 원하는 환경으로 다중 로봇 Navigation을 시작하기 위해 특정 ROS2 launch 파일을 실행합니다.</p>
 <blockquote>
 <div><div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="hospital" for="sd-tab-item-2">
 Hospital Environment</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>carter_navigation<span class="w"> </span>multiple_robot_carter_navigation_hospital.launch.py
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio"/>
 <label class="sd-tab-label" data-sync-group="tab" data-sync-id="office" for="sd-tab-item-3">
 Office Environment</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>carter_navigation<span class="w"> </span>multiple_robot_carter_navigation_office.launch.py
@@ -1395,21 +1019,21 @@ Office Environment</label><div class="sd-tab-content docutils">
 </div>
 </div>
 </div>
-<p>Three RViz2 windows will be launched. This process can take a few moments to startup.</p>
+<p>세 개의 RViz2 창이 실행됩니다. 이 프로세스가 시작되는 데 몇 초가 걸릴 수 있습니다.</p>
 </div></blockquote>
 </li>
-<li><p>In each RViz2 window, click on the <strong>Map</strong> located in the <strong>Displays</strong> panel to observe the <strong>Topic</strong> name and take note of the robot namespace corresponding to the RViz2 window.</p></li>
-<li><p>Since the positions of each robot are defined in parameter files in <code class="docutils literal notranslate"><span class="pre">carter_navigation/params/hospital/</span></code> or <code class="docutils literal notranslate"><span class="pre">carter_navigation/params/office/</span></code>, the robots should already be properly localized.</p></li>
-<li><p>In the <code class="docutils literal notranslate"><span class="pre">/carter1</span></code> namespaced RViz2 window, click on the <strong>2D Nav Goal</strong> button and then click and drag at the desired location point in the map. The ROS2 Navigation stack will now generate a trajectory and the <code class="docutils literal notranslate"><span class="pre">/carter1</span></code> robot will start moving towards its destination!</p></li>
-<li><p>Repeat the previous step for the <code class="docutils literal notranslate"><span class="pre">/carter2</span></code> and <code class="docutils literal notranslate"><span class="pre">/carter3</span></code> robots.</p></li>
+<li><p>각 RViz2 창에서 <strong>Displays</strong> 패널에 있는 <strong>Map</strong>을 클릭하여 <strong>Topic</strong> 이름을 관찰하고 RViz2 창에 해당하는 로봇 namespace를 기록합니다.</p></li>
+<li><p>각 로봇의 위치가 <code class="docutils literal notranslate"><span class="pre">carter_navigation/params/hospital/</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">carter_navigation/params/office/</span></code>의 파라미터 파일에 정의되어 있으므로 로봇은 이미 올바르게 로컬라이즈되어 있어야 합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/carter1</span></code> namespace RViz2 창에서 <strong>2D Nav Goal</strong> 버튼을 클릭한 다음 지도에서 원하는 위치 지점을 클릭하고 드래그합니다. ROS2 Navigation 스택이 이제 경로를 생성하고 <code class="docutils literal notranslate"><span class="pre">/carter1</span></code> 로봇이 목적지를 향해 이동하기 시작합니다!</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/carter2</span></code>와 <code class="docutils literal notranslate"><span class="pre">/carter3</span></code> 로봇에 대해 이전 단계를 반복합니다.</p></li>
 </ol>
 <div style="width: 100%;display: inline-block;position: relative;">
-    <div id="dummy" style="margin-top: 56%;">
-    </div>
-    <div align="center">
-    <div id="kaltura_player_1" style="position:absolute;top:0;left:0;left: 0;right: 0;bottom:0;border:solid thin black;"></div>
-    <script type="text/javascript" src="https://cdnapisec.kaltura.com/p/2935771/embedPlaykitJs/uiconf_id/46302491"></script>
-    <script type="text/javascript">
+<div id="dummy" style="margin-top: 56%;">
+</div>
+<div align="center">
+<div id="kaltura_player_1" style="position:absolute;top:0;left:0;left: 0;right: 0;bottom:0;border:solid thin black;"></div>
+<script src="https://cdnapisec.kaltura.com/p/2935771/embedPlaykitJs/uiconf_id/46302491" type="text/javascript"></script>
+<script type="text/javascript">
         try {
         var kalturaPlayer = KalturaPlayer.setup({
         targetId: "kaltura_player_1",
@@ -1422,25 +1046,25 @@ Office Environment</label><div class="sd-tab-content docutils">
         } catch (e)
         { console.error(e.message) }
     </script>
-    </div>
+</div>
 </div><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The ROS2 Image publisher pipelines are disabled by default to improve performance. To start publishing images, open the <cite>_hawk</cite> action graphs found under each of the <cite>Nova_Carter_ROS</cite> prims and enable the <cite>_camera_render_product</cite> nodes. The ROS Camera publisher nodes, which are downstream of the render product nodes, must be enabled by default and will only start publishing when the render product node is enabled. All sensors and images in Nova Carter are being published with <a class="reference external" href="https://docs.ros.org/en/rolling/Concepts/Intermediate/About-Quality-of-Service-Settings.html#qos-profiles">Sensor Data QoS</a>. If you wish to visualize the images in RViz2, expand the image tab, navigate to <strong>Topic &gt; Reliability Policy</strong> and change the policy to <cite>Best Effort</cite>.</p>
+<p class="admonition-title">참고</p>
+<p>ROS2 Image publisher 파이프라인은 성능 향상을 위해 기본적으로 비활성화되어 있습니다. 이미지 발행을 시작하려면 각 <cite>Nova_Carter_ROS</cite> prim 아래에 있는 <cite>_hawk</cite> action graph를 열고 <cite>_camera_render_product</cite> 노드를 활성화합니다. 렌더 제품 노드의 다운스트림에 있는 ROS Camera publisher 노드는 기본적으로 활성화되어야 하며 렌더 제품 노드가 활성화될 때만 발행을 시작합니다. Nova Carter의 모든 센서와 이미지는 <a class="reference external" href="https://docs.ros.org/en/rolling/Concepts/Intermediate/About-Quality-of-Service-Settings.html#qos-profiles">Sensor Data QoS</a>로 발행됩니다. RViz2에서 이미지를 시각화하려면 이미지 탭을 확장하고 <strong>Topic &gt; Reliability Policy</strong>로 이동하여 정책을 <cite>Best Effort</cite>로 변경합니다.</p>
 </div>
 <section id="troubleshooting">
 <span id="isaac-sim-app-tutorial-ros2-multi-nav-instructions-troubleshoot"></span><h3>Troubleshooting<a class="headerlink" href="tutorial_ros2_multi_navigation.html#troubleshooting" title="Link to this heading">#</a></h3>
-<p>This tutorial exhibits high CPU usage. If you observe instances of robots colliding or experiencing localization issues, it’s likely because the Nav2 stack is unable to properly synchronize with sensor data, resulting in missed controller commands.
-To improve Nav2 performance:</p>
+<p>이 튜토리얼은 CPU 사용량이 높습니다. 로봇이 충돌하거나 로컬라이제이션 문제를 경험하는 경우, Nav2 스택이 센서 데이터와 제대로 동기화할 수 없어 컨트롤러 명령이 누락되기 때문일 가능성이 높습니다.
+Nav2 성능을 개선하려면:</p>
 <ol class="arabic">
-<li><p>Try enabling the <strong>Publish Full Scan</strong> checkbox accessible through the <cite>publish_front_3d_lidar_scan</cite> OmniGraph node found in the <cite>ros_lidars</cite> action graph found under each <code class="docutils literal notranslate"><span class="pre">Nova_Carter_ROS_X</span></code> robot.</p></li>
-<li><p>If the previous step still results in issues, also try running Isaac Sim from the terminal using the following command:</p>
+<li><p>각 <code class="docutils literal notranslate"><span class="pre">Nova_Carter_ROS_X</span></code> 로봇 아래의 <cite>ros_lidars</cite> action graph에 있는 <cite>publish_front_3d_lidar_scan</cite> OmniGraph 노드를 통해 접근할 수 있는 <strong>Publish Full Scan</strong> 체크박스를 활성화해보세요.</p></li>
+<li><p>이전 단계에서 여전히 문제가 발생하는 경우, 다음 명령을 사용하여 터미널에서 Isaac Sim을 실행해보세요:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./isaac-sim.fabric.sh<span class="w"> </span>--reset-user
 </pre></div>
 </div>
 <div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>The above command is experimental and not all functionality of Isaac Sim is supported there. However you might observe better overall performance.</p>
+<p class="admonition-title">중요</p>
+<p>위 명령은 실험적이며 Isaac Sim의 모든 기능이 지원되지는 않습니다. 그러나 전반적으로 더 나은 성능을 관찰할 수 있습니다.</p>
 </div>
 </div></blockquote>
 </li>
@@ -1448,67 +1072,67 @@ To improve Nav2 performance:</p>
 </section>
 <section id="running-in-python-directly">
 <h3>Running in Python Directly<a class="headerlink" href="tutorial_ros2_multi_navigation.html#running-in-python-directly" title="Link to this heading">#</a></h3>
-<p>Alternatively, to load this sample environment from Python directly, follow the steps outlined <a class="reference internal" href="tutorial_ros2_python.html#isaac-sim-app-tutorial-ros2-python-multi-navigation"><span class="std std-ref">here</span></a>.</p>
+<p>또는 Python에서 직접 이 샘플 환경을 로드하려면 <a class="reference internal" href="tutorial_ros2_python.html#isaac-sim-app-tutorial-ros2-python-multi-navigation"><span class="std std-ref">여기</span></a>에 설명된 단계를 따르세요.</p>
 </section>
 </section>
 <section id="sending-goals-programmatically-for-multiple-robots">
 <span id="isaac-sim-app-tutorial-ros2-multi-nav-goals"></span><h2>Sending Goals Programmatically for Multiple Robots<a class="headerlink" href="tutorial_ros2_multi_navigation.html#sending-goals-programmatically-for-multiple-robots" title="Link to this heading">#</a></h2>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">isaac_ros_navigation_goal</span></code> package is fully supported on Linux. On Windows, running this package could potentially produce errors.</p>
+<p class="admonition-title">참고</p>
+<p><code class="docutils literal notranslate"><span class="pre">isaac_ros_navigation_goal</span></code> 패키지는 Linux에서 완전히 지원됩니다. Windows에서는 이 패키지를 실행하면 잠재적으로 오류가 발생할 수 있습니다.</p>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">isaac_ros_navigation_goal</span></code> ROS2 package can be used to set goal poses for multiple robots simultaneously. Refer to <a class="reference internal" href="tutorial_ros2_navigation.html#isaac-sim-app-tutorial-ros2-nav-goals"><span class="std std-ref">Sending Goals Programmatically</span></a> to learn about the configurations and parameters of this package.</p>
-<p>To send navigation goals to multiple robots simultaneously, setting up node namespaces are required. In a Python launch file, one way to setup namespaces is to provide a value for the <code class="docutils literal notranslate"><span class="pre">namespace</span></code> argument in each node object.</p>
+<p><code class="docutils literal notranslate"><span class="pre">isaac_ros_navigation_goal</span></code> ROS2 패키지는 여러 로봇에 동시에 목표 포즈를 설정하는 데 사용할 수 있습니다. 이 패키지의 구성 및 파라미터에 대해 알아보려면 <a class="reference internal" href="tutorial_ros2_navigation.html#isaac-sim-app-tutorial-ros2-nav-goals"><span class="std std-ref">Sending Goals Programmatically</span></a>를 참조하세요.</p>
+<p>여러 로봇에 동시에 navigation 목표를 전송하려면 노드 namespace를 설정해야 합니다. Python launch 파일에서 namespace를 설정하는 한 가지 방법은 각 노드 객체에서 <code class="docutils literal notranslate"><span class="pre">namespace</span></code> 인수에 값을 제공하는 것입니다.</p>
 <ol class="arabic">
-<li><p>Set up the namespace “carter1” by defining the node using the <code class="docutils literal notranslate"><span class="pre">namespace</span></code> argument in <code class="docutils literal notranslate"><span class="pre">isaac_ros_navigation_goal/launch/isaac_ros_navigation_goal.launch.py</span></code>. The node object should be defined as such:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">isaac_ros_navigation_goal/launch/isaac_ros_navigation_goal.launch.py</span></code>에서 <code class="docutils literal notranslate"><span class="pre">namespace</span></code> 인수를 사용하여 노드를 정의함으로써 "carter1" namespace를 설정합니다. 노드 객체는 다음과 같이 정의되어야 합니다:</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">navigation_goal_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;set_navigation_goal&quot;</span><span class="p">,</span>
-    <span class="n">package</span><span class="o">=</span><span class="s2">&quot;isaac_ros_navigation_goal&quot;</span><span class="p">,</span>
-    <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;SetNavigationGoal&quot;</span><span class="p">,</span>
-    <span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;carter1&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"set_navigation_goal"</span><span class="p">,</span>
+    <span class="n">package</span><span class="o">=</span><span class="s2">"isaac_ros_navigation_goal"</span><span class="p">,</span>
+    <span class="n">executable</span><span class="o">=</span><span class="s2">"SetNavigationGoal"</span><span class="p">,</span>
+    <span class="n">namespace</span><span class="o">=</span><span class="s2">"carter1"</span><span class="p">,</span>
     <span class="n">parameters</span><span class="o">=</span><span class="p">[</span>
         <span class="p">{</span>
-            <span class="s2">&quot;map_yaml_path&quot;</span><span class="p">:</span> <span class="n">map_yaml_file</span><span class="p">,</span>
-            <span class="s2">&quot;iteration_count&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-            <span class="s2">&quot;goal_generator_type&quot;</span><span class="p">:</span> <span class="s2">&quot;RandomGoalGenerator&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;action_server_name&quot;</span><span class="p">:</span> <span class="s2">&quot;navigate_to_pose&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;obstacle_search_distance_in_meters&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
-            <span class="s2">&quot;goal_text_file_path&quot;</span><span class="p">:</span> <span class="n">goal_text_file</span><span class="p">,</span>
-            <span class="s2">&quot;initial_pose&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+            <span class="s2">"map_yaml_path"</span><span class="p">:</span> <span class="n">map_yaml_file</span><span class="p">,</span>
+            <span class="s2">"iteration_count"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s2">"goal_generator_type"</span><span class="p">:</span> <span class="s2">"RandomGoalGenerator"</span><span class="p">,</span>
+            <span class="s2">"action_server_name"</span><span class="p">:</span> <span class="s2">"navigate_to_pose"</span><span class="p">,</span>
+            <span class="s2">"obstacle_search_distance_in_meters"</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+            <span class="s2">"goal_text_file_path"</span><span class="p">:</span> <span class="n">goal_text_file</span><span class="p">,</span>
+            <span class="s2">"initial_pose"</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
         <span class="p">}</span>
     <span class="p">],</span>
-    <span class="n">output</span><span class="o">=</span><span class="s2">&quot;screen&quot;</span><span class="p">,</span>
+    <span class="n">output</span><span class="o">=</span><span class="s2">"screen"</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>Remember to update the map YAML file path and the initial pose of <cite>carter1</cite> for either the hospital or office scenario.</p>
+<p>hospital 또는 office 시나리오에 맞게 <cite>carter1</cite>의 지도 YAML 파일 경로와 초기 포즈를 업데이트하는 것을 잊지 마세요.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If goal generator type is set to <code class="docutils literal notranslate"><span class="pre">RandomGoalGenerator</span></code> then a goal text file will not be used.</p>
+<p class="admonition-title">참고</p>
+<p>목표 생성기 유형이 <code class="docutils literal notranslate"><span class="pre">RandomGoalGenerator</span></code>로 설정된 경우 목표 텍스트 파일이 사용되지 않습니다.</p>
 </div>
 </div></blockquote>
 </li>
-<li><p>Copy and paste the <cite>carter1</cite> node declaration (shown in the previous step) twice and modify them for <cite>carter2</cite> and <cite>carter3</cite> namespaces (uniquely naming each node variable). The map YAML file path can be identical in all three nodes. Make sure to update the initial poses of <cite>carter2</cite> and <cite>carter3</cite>.</p>
+<li><p><cite>carter1</cite> 노드 선언 (이전 단계에 표시)을 두 번 복사하여 붙여넣고 <cite>carter2</cite>와 <cite>carter3</cite> namespace에 맞게 수정합니다 (각 노드 변수에 고유한 이름 지정). 지도 YAML 파일 경로는 세 노드 모두에서 동일할 수 있습니다. <cite>carter2</cite>와 <cite>carter3</cite>의 초기 포즈를 업데이트하는 것을 잊지 마세요.</p>
 <blockquote>
 <div><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If goal generator type is set to <code class="docutils literal notranslate"><span class="pre">GoalReader</span></code> then a separate goal text file must be created for each namespaced node.</p>
+<p class="admonition-title">참고</p>
+<p>목표 생성기 유형이 <code class="docutils literal notranslate"><span class="pre">GoalReader</span></code>로 설정된 경우 각 namespace 노드에 대해 별도의 목표 텍스트 파일을 만들어야 합니다.</p>
 </div>
 </div></blockquote>
 </li>
-<li><p>Finally at the end of the launch file, add the two newly created nodes in the launch description similar to following:</p>
+<li><p>마지막으로 launch 파일 끝에 다음과 유사하게 새로 만든 두 노드를 launch 설명에 추가합니다:</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="n">LaunchDescription</span><span class="p">([</span><span class="n">navigation_goal_node</span><span class="p">,</span> <span class="n">navigation_goal_node_2</span><span class="p">,</span> <span class="n">navigation_goal_node_3</span><span class="p">])</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>To run the newly modified launch file, use the following command:</p>
+<li><p>새로 수정된 launch 파일을 실행하려면 다음 명령을 사용합니다:</p>
 <blockquote>
 <div><div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Before running the following command, ensure you have run steps 1 to 4 from <a class="reference internal" href="tutorial_ros2_multi_navigation.html#isaac-sim-app-tutorial-ros2-multi-nav-instructions"><span class="std std-ref">Multiple Robot ROS2 Navigation Setup</span></a>.</p>
+<p class="admonition-title">중요</p>
+<p>다음 명령을 실행하기 전에 <a class="reference internal" href="tutorial_ros2_multi_navigation.html#isaac-sim-app-tutorial-ros2-multi-nav-instructions"><span class="std std-ref">Multiple Robot ROS2 Navigation Setup</span></a>의 단계 1~4를 실행했는지 확인하세요.</p>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>isaac_ros_navigation_goal<span class="w"> </span>isaac_ros_navigation_goal.launch.py
 </pre></div>
@@ -1519,70 +1143,48 @@ To improve Nav2 performance:</p>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="tutorial_ros2_multi_navigation.html#summary" title="Link to this heading">#</a></h2>
-<p>In this tutorial, we covered running multiple robots with ROS2 navigation stack.</p>
+<p>이 튜토리얼에서는 ROS2 navigation 스택으로 여러 로봇을 실행하는 방법을 다루었습니다.</p>
 <section id="next-steps">
 <h3>Next Steps<a class="headerlink" href="tutorial_ros2_multi_navigation.html#next-steps" title="Link to this heading">#</a></h3>
-<p>Continue on to the next tutorial in our ROS2 Tutorials series, <a class="reference internal" href="tutorial_ros2_navigation_heightmap.html#isaac-sim-app-tutorial-ros2-navigation-heightmap"><span class="std std-ref">ROS 2 Navigation with Heightmap Importer</span></a>.</p>
+<p>ROS2 Tutorials 시리즈의 다음 튜토리얼인 <a class="reference internal" href="tutorial_ros2_navigation_heightmap.html#isaac-sim-app-tutorial-ros2-navigation-heightmap"><span class="std std-ref">ROS 2 Navigation with Heightmap Importer</span></a>로 계속 진행하세요.</p>
 </section>
 <section id="further-learning">
 <h3>Further Learning<a class="headerlink" href="tutorial_ros2_multi_navigation.html#further-learning" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>To learn more about Nav2 refer to the website: <a class="reference external" href="https://nav2.org/">https://nav2.org/</a></p></li>
-<li><p>Standalone Python scripting version: <a class="reference internal" href="tutorial_ros2_python.html#isaac-sim-app-tutorial-ros2-python-multi-navigation"><span class="std std-ref">Multiple Robot ROS 2 Navigation</span></a>. With this approach you have the ability to manually control the timestep and rate at which ROS components are published.</p></li>
+<li><p>Nav2에 대해 더 알아보려면 웹사이트 <a class="reference external" href="https://nav2.org/">https://nav2.org/</a>를 참조하세요.</p></li>
+<li><p>독립 실행형 Python 스크립팅 버전: <a class="reference internal" href="tutorial_ros2_python.html#isaac-sim-app-tutorial-ros2-python-multi-navigation"><span class="std std-ref">Multiple Robot ROS 2 Navigation</span></a>. 이 방법을 사용하면 타임스텝과 ROS 컴포넌트가 발행되는 속도를 수동으로 제어할 수 있습니다.</p></li>
 </ul>
 </section>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="tutorial_ros2_navigation.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">ROS 2 Navigation</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="tutorial_ros2_navigation_heightmap.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">ROS 2 Navigation with Heightmap Importer</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="tutorial_ros2_navigation.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">ROS 2 Navigation</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="tutorial_ros2_navigation_heightmap.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">ROS 2 Navigation with Heightmap Importer</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_ros2_multi_navigation.html#learning-objectives">Learning Objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_ros2_multi_navigation.html#getting-started">Getting Started</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_ros2_multi_navigation.html#occupancy-map">Occupancy Map</a></li>
@@ -1601,46 +1203,29 @@ To improve Nav2 performance:</p>
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1671,36 +1256,21 @@ To improve Nav2 performance:</p>
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

@@ -1,561 +1,257 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Adding a Manipulator Robot &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Adding a Manipulator Robot — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
-  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
-</script>
-<script type="text/javascript">
-  function OptanonWrapper() {
-    var event = new Event('bannerLoaded');
-    window.dispatchEvent(event);
-  }
-</script>
-<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
-</script>
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'core_api_tutorials/tutorial_core_adding_manipulator';</script>
-    <script>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'core_api_tutorials/tutorial_core_adding_manipulator';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Adding Multiple Robots" href="tutorial_core_adding_multiple_robots.html" />
-    <link rel="prev" title="Hello Robot" href="tutorial_core_hello_robot.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="tutorial_core_adding_multiple_robots.html" rel="next" title="Adding Multiple Robots"/>
+<link href="tutorial_core_hello_robot.html" rel="prev" title="Hello Robot"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="tutorial_core_adding_manipulator.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="tutorial_core_adding_manipulator.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -575,7 +271,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -603,20 +298,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -691,17 +374,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -879,7 +552,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -919,13 +591,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -972,10 +638,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1144,18 +806,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1181,133 +833,99 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="../python_scripting/index.html" class="nav-link">Python Scripting and Tutorials</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Core API Tutorial Series</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Adding a Manipulator Robot</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="../python_scripting/index.html">Python Scripting and Tutorials</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">Core API Tutorial Series</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Adding a Manipulator Robot</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="adding-a-manipulator-robot">
+<article class="bd-article">
+<section id="adding-a-manipulator-robot">
 <span id="isaac-sim-app-tutorial-core-adding-manipulator"></span><h1>Adding a Manipulator Robot<a class="headerlink" href="tutorial_core_adding_manipulator.html#adding-a-manipulator-robot" title="Link to this heading">#</a></h1>
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="tutorial_core_adding_manipulator.html#learning-objectives" title="Link to this heading">#</a></h2>
-<p>This tutorial introduces a manipulator robot to the simulation, a Franka Panda.
-It describes how to add the robot to the scene and execute a pick-and-place operation.
-After this tutorial, you will have more experience using manipulator robots and
-controlling them with inverse kinematics in NVIDIA Isaac Sim.</p>
-<p><em>15-20 Minute Tutorial</em></p>
+<p>이 튜토리얼에서는 Franka Panda 매니퓰레이터 로봇을 시뮬레이션에 추가합니다. 씬에 로봇을 추가하고 집기-놓기(pick-and-place) 동작을 실행하는 방법을 설명합니다. 이 튜토리얼을 마치면 NVIDIA Isaac Sim에서 역운동학(inverse kinematics)을 사용하여 매니퓰레이터 로봇을 제어하는 경험을 쌓게 됩니다.</p>
+<p><em>소요 시간: 15~20분</em></p>
 </section>
 <section id="getting-started">
 <h2>Getting Started<a class="headerlink" href="tutorial_core_adding_manipulator.html#getting-started" title="Link to this heading">#</a></h2>
 <p><strong>Prerequisites</strong></p>
 <ul class="simple">
-<li><p>Review <a class="reference internal" href="tutorial_core_hello_robot.html#isaac-sim-app-tutorial-core-hello-robot"><span class="std std-ref">Hello Robot</span></a> prior to beginning this tutorial.</p></li>
+<li><p>이 튜토리얼을 시작하기 전에 <a class="reference internal" href="tutorial_core_hello_robot.html#isaac-sim-app-tutorial-core-hello-robot"><span class="std std-ref">Hello Robot</span></a>을 먼저 검토하세요.</p></li>
 </ul>
-<p>This tutorial uses <strong>standalone Python scripts</strong>. Run them with a Python environment where Isaac Sim is installed:</p>
+<p>이 튜토리얼은 <strong>standalone Python 스크립트</strong>를 사용합니다. Isaac Sim이 설치된 Python 환경에서 실행하세요:</p>
 </section>
 <section id="creating-the-scene-with-a-franka-robot">
 <h2>Creating the Scene with a Franka Robot<a class="headerlink" href="tutorial_core_adding_manipulator.html#creating-the-scene-with-a-franka-robot" title="Link to this heading">#</a></h2>
-<p>Add a Franka robot and a cube for the robot to pick up using the <code class="code docutils literal notranslate"><span class="pre">Franka</span></code> class.
-This class inherits from <code class="code docutils literal notranslate"><span class="pre">Articulation</span></code> and provides high-level control methods including
-inverse kinematics and gripper control.</p>
-<p>When you set <code class="code docutils literal notranslate"><span class="pre">create_robot=True</span></code> in the constructor, <code class="code docutils literal notranslate"><span class="pre">Franka</span></code> automatically
-spawns the Franka robot USD asset at the specified path.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">&quot;&quot;&quot;Create a scene with ground, Franka robot, and blue cube.&quot;&quot;&quot;</span>
+<p><code class="code docutils literal notranslate"><span class="pre">Franka</span></code> 클래스를 사용하여 로봇이 집을 큐브와 Franka 로봇을 추가합니다. 이 클래스는 <code class="code docutils literal notranslate"><span class="pre">Articulation</span></code>을 상속받으며 역운동학과 그리퍼 제어를 포함한 고수준 제어 메서드를 제공합니다.</p>
+<p>생성자에서 <code class="code docutils literal notranslate"><span class="pre">create_robot=True</span></code>로 설정하면 <code class="code docutils literal notranslate"><span class="pre">Franka</span></code>가 지정된 경로에 Franka 로봇 USD 에셋을 자동으로 생성합니다.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">"""Create a scene with ground, Franka robot, and blue cube."""</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
 <span class="linenos"> 4</span>
 <span class="linenos"> 5</span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
-<span class="linenos"> 6</span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--test&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">)</span>
+<span class="linenos"> 6</span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--test"</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">"store_true"</span><span class="p">)</span>
 <span class="linenos"> 7</span><span class="n">args</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">()</span>
 <span class="linenos"> 8</span>
 <span class="linenos"> 9</span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationApp</span>
 <span class="linenos">10</span>
-<span class="linenos">11</span><span class="n">simulation_app</span> <span class="o">=</span> <span class="n">SimulationApp</span><span class="p">({</span><span class="s2">&quot;headless&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+<span class="linenos">11</span><span class="n">simulation_app</span> <span class="o">=</span> <span class="n">SimulationApp</span><span class="p">({</span><span class="s2">"headless"</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
 <span class="linenos">12</span>
 <span class="linenos">13</span><span class="kn">import</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.utils.app</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">app_utils</span>
 <span class="linenos">14</span>
-<span class="linenos">15</span><span class="n">app_utils</span><span class="o">.</span><span class="n">enable_extension</span><span class="p">(</span><span class="s2">&quot;isaacsim.robot.experimental.manipulators.examples&quot;</span><span class="p">)</span>
+<span class="linenos">15</span><span class="n">app_utils</span><span class="o">.</span><span class="n">enable_extension</span><span class="p">(</span><span class="s2">"isaacsim.robot.experimental.manipulators.examples"</span><span class="p">)</span>
 <span class="linenos">16</span>
 <span class="linenos">17</span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.objects</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cube</span><span class="p">,</span> <span class="n">DomeLight</span><span class="p">,</span> <span class="n">GroundPlane</span>
 <span class="linenos">18</span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.prims</span><span class="w"> </span><span class="kn">import</span> <span class="n">GeomPrim</span><span class="p">,</span> <span class="n">RigidPrim</span>
 <span class="linenos">19</span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.simulation_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationManager</span>
 <span class="linenos">20</span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.robot.experimental.manipulators.examples.franka</span><span class="w"> </span><span class="kn">import</span> <span class="n">Franka</span>
 <span class="linenos">21</span>
-<span class="linenos">22</span><span class="n">DEVICE</span> <span class="o">=</span> <span class="s2">&quot;cpu&quot;</span>
+<span class="linenos">22</span><span class="n">DEVICE</span> <span class="o">=</span> <span class="s2">"cpu"</span>
 <span class="linenos">23</span>
-<span class="linenos">24</span><span class="n">GroundPlane</span><span class="p">(</span><span class="s2">&quot;/World/ground_plane&quot;</span><span class="p">)</span>
-<span class="linenos">25</span><span class="n">dome_light</span> <span class="o">=</span> <span class="n">DomeLight</span><span class="p">(</span><span class="s2">&quot;/World/DomeLight&quot;</span><span class="p">)</span>
+<span class="linenos">24</span><span class="n">GroundPlane</span><span class="p">(</span><span class="s2">"/World/ground_plane"</span><span class="p">)</span>
+<span class="linenos">25</span><span class="n">dome_light</span> <span class="o">=</span> <span class="n">DomeLight</span><span class="p">(</span><span class="s2">"/World/DomeLight"</span><span class="p">)</span>
 <span class="linenos">26</span><span class="n">dome_light</span><span class="o">.</span><span class="n">set_intensities</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
 <span class="linenos">27</span>
 <span class="linenos">28</span><span class="c1"># Create the Franka robot</span>
-<span class="linenos">29</span><span class="n">robot</span> <span class="o">=</span> <span class="n">Franka</span><span class="p">(</span><span class="n">robot_path</span><span class="o">=</span><span class="s2">&quot;/World/robot&quot;</span><span class="p">,</span> <span class="n">create_robot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">29</span><span class="n">robot</span> <span class="o">=</span> <span class="n">Franka</span><span class="p">(</span><span class="n">robot_path</span><span class="o">=</span><span class="s2">"/World/robot"</span><span class="p">,</span> <span class="n">create_robot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="linenos">30</span>
 <span class="linenos">31</span><span class="c1"># Create a blue cube for the robot to pick up</span>
 <span class="linenos">32</span><span class="n">cube_shape</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span>
-<span class="linenos">33</span>    <span class="n">paths</span><span class="o">=</span><span class="s2">&quot;/World/Cube&quot;</span><span class="p">,</span>
+<span class="linenos">33</span>    <span class="n">paths</span><span class="o">=</span><span class="s2">"/World/Cube"</span><span class="p">,</span>
 <span class="linenos">34</span>    <span class="n">positions</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0258</span><span class="p">],</span>
 <span class="linenos">35</span>    <span class="n">sizes</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
 <span class="linenos">36</span>    <span class="n">scales</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0515</span><span class="p">,</span> <span class="mf">0.0515</span><span class="p">,</span> <span class="mf">0.0515</span><span class="p">],</span>
-<span class="linenos">37</span>    <span class="n">colors</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+<span class="linenos">37</span>    <span class="n">colors</span><span class="o">=</span><span class="s2">"blue"</span><span class="p">,</span>
 <span class="linenos">38</span><span class="p">)</span>
 <span class="linenos">39</span><span class="n">GeomPrim</span><span class="p">(</span><span class="n">paths</span><span class="o">=</span><span class="n">cube_shape</span><span class="o">.</span><span class="n">paths</span><span class="p">,</span> <span class="n">apply_collision_apis</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="linenos">40</span><span class="n">RigidPrim</span><span class="p">(</span><span class="n">paths</span><span class="o">=</span><span class="n">cube_shape</span><span class="o">.</span><span class="n">paths</span><span class="p">)</span>
@@ -1330,45 +948,43 @@ spawns the Franka robot USD asset at the specified path.</p>
 <span class="linenos">57</span><span class="n">simulation_app</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Run the script. A window opens with the Franka robot and cube in the scene; the simulation runs until you close the window.</p>
-<p>The <code class="code docutils literal notranslate"><span class="pre">Franka</span></code> class provides these key methods for robot control:</p>
+<p>스크립트를 실행합니다. Franka 로봇과 큐브가 있는 씬 창이 열리고, 창을 닫을 때까지 시뮬레이션이 실행됩니다.</p>
+<p><code class="code docutils literal notranslate"><span class="pre">Franka</span></code> 클래스가 제공하는 핵심 제어 메서드:</p>
 <ul class="simple">
-<li><p><code class="code docutils literal notranslate"><span class="pre">set_end_effector_pose(position,</span> <span class="pre">orientation)</span></code> - Move end-effector using inverse kinematics</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">open_gripper()</span></code> / <code class="code docutils literal notranslate"><span class="pre">close_gripper()</span></code> - Control the gripper</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">get_current_state()</span></code> - Get DOF positions and end-effector pose</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">get_downward_orientation()</span></code> - Get quaternion for downward-facing orientation</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">reset_to_default_pose()</span></code> - Reset robot to home position</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">set_end_effector_pose(position,</span> <span class="pre">orientation)</span></code> - 역운동학으로 엔드 이펙터 이동</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">open_gripper()</span></code> / <code class="code docutils literal notranslate"><span class="pre">close_gripper()</span></code> - 그리퍼 제어</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">get_current_state()</span></code> - DOF 위치 및 엔드 이펙터 포즈 가져오기</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">get_downward_orientation()</span></code> - 아래 방향 쿼터니언 가져오기</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">reset_to_default_pose()</span></code> - 로봇을 홈 포지션으로 초기화</p></li>
 </ul>
 </section>
 <section id="using-frankapickplace-for-complete-pick-and-place">
 <h2>Using FrankaPickPlace for Complete Pick-and-Place<a class="headerlink" href="tutorial_core_adding_manipulator.html#using-frankapickplace-for-complete-pick-and-place" title="Link to this heading">#</a></h2>
-<p>For a complete pick-and-place operation, use the <code class="code docutils literal notranslate"><span class="pre">FrankaPickPlace</span></code> class. This class has a
-<code class="code docutils literal notranslate"><span class="pre">setup_scene()</span></code> method that spawns everything needed for pick-and-place: the Franka robot,
-ground plane, and a cube to manipulate.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">&quot;&quot;&quot;Pick-and-place using FrankaPickPlace.&quot;&quot;&quot;</span>
+<p>완전한 집기-놓기 동작을 위해 <code class="code docutils literal notranslate"><span class="pre">FrankaPickPlace</span></code> 클래스를 사용합니다. <code class="code docutils literal notranslate"><span class="pre">setup_scene()</span></code> 메서드는 Franka 로봇, 지면 평면, 조작할 큐브 등 집기-놓기에 필요한 모든 요소를 생성합니다.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">"""Pick-and-place using FrankaPickPlace."""</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
 <span class="linenos"> 4</span>
 <span class="linenos"> 5</span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
-<span class="linenos"> 6</span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--test&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">)</span>
+<span class="linenos"> 6</span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--test"</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">"store_true"</span><span class="p">)</span>
 <span class="linenos"> 7</span><span class="n">args</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">()</span>
 <span class="linenos"> 8</span>
 <span class="linenos"> 9</span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationApp</span>
 <span class="linenos">10</span>
-<span class="linenos">11</span><span class="n">simulation_app</span> <span class="o">=</span> <span class="n">SimulationApp</span><span class="p">({</span><span class="s2">&quot;headless&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+<span class="linenos">11</span><span class="n">simulation_app</span> <span class="o">=</span> <span class="n">SimulationApp</span><span class="p">({</span><span class="s2">"headless"</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
 <span class="linenos">12</span>
 <span class="linenos">13</span><span class="kn">import</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.utils.app</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">app_utils</span>
 <span class="linenos">14</span>
-<span class="linenos">15</span><span class="n">app_utils</span><span class="o">.</span><span class="n">enable_extension</span><span class="p">(</span><span class="s2">&quot;isaacsim.robot.experimental.manipulators.examples&quot;</span><span class="p">)</span>
+<span class="linenos">15</span><span class="n">app_utils</span><span class="o">.</span><span class="n">enable_extension</span><span class="p">(</span><span class="s2">"isaacsim.robot.experimental.manipulators.examples"</span><span class="p">)</span>
 <span class="linenos">16</span>
 <span class="linenos">17</span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.objects</span><span class="w"> </span><span class="kn">import</span> <span class="n">DomeLight</span><span class="p">,</span> <span class="n">GroundPlane</span>
 <span class="linenos">18</span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.simulation_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationManager</span>
 <span class="linenos">19</span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.robot.experimental.manipulators.examples.franka</span><span class="w"> </span><span class="kn">import</span> <span class="n">FrankaPickPlace</span>
 <span class="linenos">20</span>
-<span class="linenos">21</span><span class="n">DEVICE</span> <span class="o">=</span> <span class="s2">&quot;cpu&quot;</span>
+<span class="linenos">21</span><span class="n">DEVICE</span> <span class="o">=</span> <span class="s2">"cpu"</span>
 <span class="linenos">22</span>
-<span class="linenos">23</span><span class="n">GroundPlane</span><span class="p">(</span><span class="s2">&quot;/World/ground_plane&quot;</span><span class="p">)</span>
-<span class="linenos">24</span><span class="n">dome_light</span> <span class="o">=</span> <span class="n">DomeLight</span><span class="p">(</span><span class="s2">&quot;/World/DomeLight&quot;</span><span class="p">)</span>
+<span class="linenos">23</span><span class="n">GroundPlane</span><span class="p">(</span><span class="s2">"/World/ground_plane"</span><span class="p">)</span>
+<span class="linenos">24</span><span class="n">dome_light</span> <span class="o">=</span> <span class="n">DomeLight</span><span class="p">(</span><span class="s2">"/World/DomeLight"</span><span class="p">)</span>
 <span class="linenos">25</span><span class="n">dome_light</span><span class="o">.</span><span class="n">set_intensities</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
 <span class="linenos">26</span>
 <span class="linenos">27</span><span class="c1"># FrankaPickPlace spawns robot and cube, and provides the pick-place state machine</span>
@@ -1379,7 +995,7 @@ ground plane, and a cube to manipulate.</p>
 <span class="linenos">32</span><span class="n">physics_scene</span> <span class="o">=</span> <span class="n">SimulationManager</span><span class="o">.</span><span class="n">get_physics_scenes</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
 <span class="linenos">33</span><span class="n">physics_scene</span><span class="o">.</span><span class="n">set_enabled_gpu_dynamics</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 <span class="linenos">34</span><span class="n">app_utils</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
-<span class="linenos">35</span><span class="c1"># Run a few steps so the articulation&#39;s physics tensor entity is valid before `controller.reset()`</span>
+<span class="linenos">35</span><span class="c1"># Run a few steps so the articulation's physics tensor entity is valid before `controller.reset()`</span>
 <span class="linenos">36</span><span class="n">app_utils</span><span class="o">.</span><span class="n">update_app</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="linenos">37</span><span class="n">controller</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 <span class="linenos">38</span>
@@ -1393,22 +1009,22 @@ ground plane, and a cube to manipulate.</p>
 <span class="linenos">46</span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">controller</span><span class="o">.</span><span class="n">is_done</span><span class="p">():</span>
 <span class="linenos">47</span>            <span class="n">controller</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
 <span class="linenos">48</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">49</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pick-and-place completed&quot;</span><span class="p">)</span>
+<span class="linenos">49</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">"Pick-and-place completed"</span><span class="p">)</span>
 <span class="linenos">50</span>            <span class="n">app_utils</span><span class="o">.</span><span class="n">pause</span><span class="p">()</span>
 <span class="linenos">51</span>            <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">test</span><span class="p">:</span>
 <span class="linenos">52</span>                <span class="k">break</span>
 <span class="linenos">53</span>    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">test</span> <span class="ow">and</span> <span class="n">step_count</span> <span class="o">&gt;=</span> <span class="n">max_test_steps</span><span class="p">:</span>
-<span class="linenos">54</span>        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Pick-and-place did not complete within the test step budget&quot;</span><span class="p">)</span>
+<span class="linenos">54</span>        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"Pick-and-place did not complete within the test step budget"</span><span class="p">)</span>
 <span class="linenos">55</span>
 <span class="linenos">56</span><span class="n">app_utils</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 <span class="linenos">57</span><span class="n">simulation_app</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Run the script. The robot automatically executes all phases of picking up and placing the cube.</p>
+<p>스크립트를 실행합니다. 로봇이 큐브를 집고 놓는 모든 단계를 자동으로 실행합니다.</p>
 </section>
 <section id="understanding-the-pick-and-place-state-machine">
 <h2>Understanding the Pick-and-Place State Machine<a class="headerlink" href="tutorial_core_adding_manipulator.html#understanding-the-pick-and-place-state-machine" title="Link to this heading">#</a></h2>
-<p>The <code class="code docutils literal notranslate"><span class="pre">FrankaPickPlace</span></code> class uses a state machine with the following phases:</p>
+<p><code class="code docutils literal notranslate"><span class="pre">FrankaPickPlace</span></code> 클래스는 다음 단계로 구성된 상태 머신을 사용합니다:</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id1">
 <caption><span class="caption-text">Pick-and-Place Phases</span><a class="headerlink" href="tutorial_core_adding_manipulator.html#id1" title="Link to this table">#</a></caption>
 <thead>
@@ -1419,37 +1035,37 @@ ground plane, and a cube to manipulate.</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>0</p></td>
-<td><p>Move to x,y position above cube</p></td>
+<td><p>큐브 위 x,y 위치로 이동</p></td>
 <td><p>60</p></td>
 </tr>
 <tr class="row-odd"><td><p>1</p></td>
-<td><p>Approach down to cube</p></td>
+<td><p>큐브까지 아래로 접근</p></td>
 <td><p>40</p></td>
 </tr>
 <tr class="row-even"><td><p>2</p></td>
-<td><p>Close gripper to grasp</p></td>
+<td><p>그리퍼를 닫아 파지</p></td>
 <td><p>20</p></td>
 </tr>
 <tr class="row-odd"><td><p>3</p></td>
-<td><p>Lift cube upward</p></td>
+<td><p>큐브를 위로 들어올림</p></td>
 <td><p>40</p></td>
 </tr>
 <tr class="row-even"><td><p>4</p></td>
-<td><p>Move cube to target location</p></td>
+<td><p>목표 위치로 큐브 이동</p></td>
 <td><p>80</p></td>
 </tr>
 <tr class="row-odd"><td><p>5</p></td>
-<td><p>Open gripper to release</p></td>
+<td><p>그리퍼를 열어 놓기</p></td>
 <td><p>20</p></td>
 </tr>
 <tr class="row-even"><td><p>6</p></td>
-<td><p>Move up and away</p></td>
+<td><p>위로 이동하여 후진</p></td>
 <td><p>20</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>You can customize the phase durations by passing <code class="code docutils literal notranslate"><span class="pre">events_dt</span></code> to the constructor, and change the cube starting position using <code class="code docutils literal notranslate"><span class="pre">setup_scene</span></code>:</p>
+<p>생성자에 <code class="code docutils literal notranslate"><span class="pre">events_dt</span></code>를 전달하여 단계 지속 시간을 커스터마이즈하고, <code class="code docutils literal notranslate"><span class="pre">setup_scene</span></code>으로 큐브 시작 위치를 변경할 수 있습니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># Custom phase durations (steps for each phase)</span>
 <span class="linenos">2</span><span class="n">controller</span> <span class="o">=</span> <span class="n">FrankaPickPlace</span><span class="p">(</span><span class="n">events_dt</span><span class="o">=</span><span class="p">[</span><span class="mi">80</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span>
 <span class="linenos">3</span><span class="c1"># Customize cube position, size, and target position</span>
@@ -1458,31 +1074,31 @@ ground plane, and a cube to manipulate.</p>
 <span class="linenos">6</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Complete code:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">&quot;&quot;&quot;Pick-and-place using FrankaPickPlace.&quot;&quot;&quot;</span>
+<p>전체 코드:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="sd">"""Pick-and-place using FrankaPickPlace."""</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
 <span class="linenos"> 4</span>
 <span class="linenos"> 5</span><span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
-<span class="linenos"> 6</span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--test&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">)</span>
+<span class="linenos"> 6</span><span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--test"</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">"store_true"</span><span class="p">)</span>
 <span class="linenos"> 7</span><span class="n">args</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">()</span>
 <span class="linenos"> 8</span>
 <span class="linenos"> 9</span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationApp</span>
 <span class="linenos">10</span>
-<span class="linenos">11</span><span class="n">simulation_app</span> <span class="o">=</span> <span class="n">SimulationApp</span><span class="p">({</span><span class="s2">&quot;headless&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+<span class="linenos">11</span><span class="n">simulation_app</span> <span class="o">=</span> <span class="n">SimulationApp</span><span class="p">({</span><span class="s2">"headless"</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
 <span class="linenos">12</span>
 <span class="linenos">13</span><span class="kn">import</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.utils.app</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">app_utils</span>
 <span class="linenos">14</span>
-<span class="linenos">15</span><span class="n">app_utils</span><span class="o">.</span><span class="n">enable_extension</span><span class="p">(</span><span class="s2">&quot;isaacsim.robot.experimental.manipulators.examples&quot;</span><span class="p">)</span>
+<span class="linenos">15</span><span class="n">app_utils</span><span class="o">.</span><span class="n">enable_extension</span><span class="p">(</span><span class="s2">"isaacsim.robot.experimental.manipulators.examples"</span><span class="p">)</span>
 <span class="linenos">16</span>
 <span class="linenos">17</span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.objects</span><span class="w"> </span><span class="kn">import</span> <span class="n">DomeLight</span><span class="p">,</span> <span class="n">GroundPlane</span>
 <span class="linenos">18</span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.simulation_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationManager</span>
 <span class="linenos">19</span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.robot.experimental.manipulators.examples.franka</span><span class="w"> </span><span class="kn">import</span> <span class="n">FrankaPickPlace</span>
 <span class="linenos">20</span>
-<span class="linenos">21</span><span class="n">DEVICE</span> <span class="o">=</span> <span class="s2">&quot;cpu&quot;</span>
+<span class="linenos">21</span><span class="n">DEVICE</span> <span class="o">=</span> <span class="s2">"cpu"</span>
 <span class="linenos">22</span>
-<span class="linenos">23</span><span class="n">GroundPlane</span><span class="p">(</span><span class="s2">&quot;/World/ground_plane&quot;</span><span class="p">)</span>
-<span class="linenos">24</span><span class="n">dome_light</span> <span class="o">=</span> <span class="n">DomeLight</span><span class="p">(</span><span class="s2">&quot;/World/DomeLight&quot;</span><span class="p">)</span>
+<span class="linenos">23</span><span class="n">GroundPlane</span><span class="p">(</span><span class="s2">"/World/ground_plane"</span><span class="p">)</span>
+<span class="linenos">24</span><span class="n">dome_light</span> <span class="o">=</span> <span class="n">DomeLight</span><span class="p">(</span><span class="s2">"/World/DomeLight"</span><span class="p">)</span>
 <span class="linenos">25</span><span class="n">dome_light</span><span class="o">.</span><span class="n">set_intensities</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
 <span class="linenos">26</span>
 <span class="linenos">27</span><span class="c1"># -- Begin custom setup -- #</span>
@@ -1498,7 +1114,7 @@ ground plane, and a cube to manipulate.</p>
 <span class="linenos">37</span><span class="n">physics_scene</span> <span class="o">=</span> <span class="n">SimulationManager</span><span class="o">.</span><span class="n">get_physics_scenes</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
 <span class="linenos">38</span><span class="n">physics_scene</span><span class="o">.</span><span class="n">set_enabled_gpu_dynamics</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 <span class="linenos">39</span><span class="n">app_utils</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
-<span class="linenos">40</span><span class="c1"># Run a few steps so the articulation&#39;s physics tensor entity is valid before `controller.reset()`</span>
+<span class="linenos">40</span><span class="c1"># Run a few steps so the articulation's physics tensor entity is valid before `controller.reset()`</span>
 <span class="linenos">41</span><span class="n">app_utils</span><span class="o">.</span><span class="n">update_app</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="linenos">42</span><span class="n">controller</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 <span class="linenos">43</span>
@@ -1512,91 +1128,67 @@ ground plane, and a cube to manipulate.</p>
 <span class="linenos">51</span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">controller</span><span class="o">.</span><span class="n">is_done</span><span class="p">():</span>
 <span class="linenos">52</span>            <span class="n">controller</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
 <span class="linenos">53</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">54</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pick-and-place completed&quot;</span><span class="p">)</span>
+<span class="linenos">54</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">"Pick-and-place completed"</span><span class="p">)</span>
 <span class="linenos">55</span>            <span class="n">app_utils</span><span class="o">.</span><span class="n">pause</span><span class="p">()</span>
 <span class="linenos">56</span>            <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">test</span><span class="p">:</span>
 <span class="linenos">57</span>                <span class="k">break</span>
 <span class="linenos">58</span>    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">test</span> <span class="ow">and</span> <span class="n">step_count</span> <span class="o">&gt;=</span> <span class="n">max_test_steps</span><span class="p">:</span>
-<span class="linenos">59</span>        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Pick-and-place did not complete within the test step budget&quot;</span><span class="p">)</span>
+<span class="linenos">59</span>        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"Pick-and-place did not complete within the test step budget"</span><span class="p">)</span>
 <span class="linenos">60</span>
 <span class="linenos">61</span><span class="n">app_utils</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 <span class="linenos">62</span><span class="n">simulation_app</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="../_images/core_api_tutorials_4_1.webp"><img alt="../_images/core_api_tutorials_4_1.webp" class="align-center" src="../_images/core_api_tutorials_4_1.webp" style="width: 600px;" />
+<a class="reference internal image-reference" href="../_images/core_api_tutorials_4_1.webp"><img alt="../_images/core_api_tutorials_4_1.webp" class="align-center" src="../_images/core_api_tutorials_4_1.webp" style="width: 600px;"/>
 </a>
 </section>
 <section id="see-also">
 <h2>See Also<a class="headerlink" href="tutorial_core_adding_manipulator.html#see-also" title="Link to this heading">#</a></h2>
-<p>For a complete standalone pick-and-place example with <code class="docutils literal notranslate"><span class="pre">--device</span></code>, <code class="docutils literal notranslate"><span class="pre">--ik-method</span></code>, and <code class="docutils literal notranslate"><span class="pre">--test</span></code> options, see
-<code class="docutils literal notranslate"><span class="pre">standalone_examples/api/isaacsim.robot.experimental.manipulators/franka/pick_place.py</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">--device</span></code>, <code class="docutils literal notranslate"><span class="pre">--ik-method</span></code>, <code class="docutils literal notranslate"><span class="pre">--test</span></code> 옵션이 포함된 완전한 standalone 집기-놓기 예제는 <code class="docutils literal notranslate"><span class="pre">standalone_examples/api/isaacsim.robot.experimental.manipulators/franka/pick_place.py</span></code>를 참고하세요.</p>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="tutorial_core_adding_manipulator.html#summary" title="Link to this heading">#</a></h2>
-<p>This tutorial covered the following topics:</p>
+<p>이 튜토리얼에서 다룬 내용:</p>
 <ol class="arabic simple">
-<li><p>Adding a Franka manipulator robot using <code class="code docutils literal notranslate"><span class="pre">Franka</span></code> with <code class="code docutils literal notranslate"><span class="pre">create_robot=True</span></code></p></li>
-<li><p>Using the <code class="code docutils literal notranslate"><span class="pre">FrankaPickPlace.setup_scene()</span></code> method to spawn a complete pick-and-place scene</p></li>
-<li><p>Executing pick-and-place operations with the <code class="code docutils literal notranslate"><span class="pre">forward()</span></code> method</p></li>
-<li><p>Understanding and customizing the pick-and-place state machine phases</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">create_robot=True</span></code>와 함께 <code class="code docutils literal notranslate"><span class="pre">Franka</span></code>를 사용하여 Franka 매니퓰레이터 추가하기</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">FrankaPickPlace.setup_scene()</span></code> 메서드로 완전한 집기-놓기 씬 생성하기</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">forward()</span></code> 메서드로 집기-놓기 동작 실행하기</p></li>
+<li><p>집기-놓기 상태 머신 단계 이해 및 커스터마이즈하기</p></li>
 </ol>
 <section id="next-steps">
 <h3>Next Steps<a class="headerlink" href="tutorial_core_adding_manipulator.html#next-steps" title="Link to this heading">#</a></h3>
-<p>Continue to the next tutorial in our Essential Tutorials series, <a class="reference internal" href="tutorial_core_adding_multiple_robots.html#isaac-sim-app-tutorial-core-adding-multiple-robots"><span class="std std-ref">Adding Multiple Robots</span></a>,
-to learn how to add multiple robots to the simulation.</p>
+<p>Essential Tutorials 시리즈의 다음 튜토리얼인 <a class="reference internal" href="tutorial_core_adding_multiple_robots.html#isaac-sim-app-tutorial-core-adding-multiple-robots"><span class="std std-ref">Adding Multiple Robots</span></a>으로 계속 진행하여 여러 로봇을 추가하는 방법을 배워보세요.</p>
 </section>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="tutorial_core_hello_robot.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Hello Robot</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="tutorial_core_adding_multiple_robots.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Adding Multiple Robots</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="tutorial_core_hello_robot.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Hello Robot</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="tutorial_core_adding_multiple_robots.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Adding Multiple Robots</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_core_adding_manipulator.html#learning-objectives">Learning Objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_core_adding_manipulator.html#getting-started">Getting Started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_core_adding_manipulator.html#creating-the-scene-with-a-franka-robot">Creating the Scene with a Franka Robot</a></li>
@@ -1608,46 +1200,29 @@ to learn how to add multiple robots to the simulation.</p>
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1678,36 +1253,21 @@ to learn how to add multiple robots to the simulation.</p>
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

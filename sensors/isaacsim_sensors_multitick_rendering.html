@@ -1,561 +1,257 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Multi-Tick Rendering &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Multi-Tick Rendering — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
-  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
-</script>
-<script type="text/javascript">
-  function OptanonWrapper() {
-    var event = new Event('bannerLoaded');
-    window.dispatchEvent(event);
-  }
-</script>
-<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
-</script>
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'sensors/isaacsim_sensors_multitick_rendering';</script>
-    <script>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'sensors/isaacsim_sensors_multitick_rendering';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Creating Custom RTX Sensor Profiles" href="isaacsim_sensors_rtx_custom.html" />
-    <link rel="prev" title="RTX Sensor Annotators" href="isaacsim_sensors_rtx_annotators.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="isaacsim_sensors_rtx_custom.html" rel="next" title="Creating Custom RTX Sensor Profiles"/>
+<link href="isaacsim_sensors_rtx_annotators.html" rel="prev" title="RTX Sensor Annotators"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="isaacsim_sensors_multitick_rendering.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="isaacsim_sensors_multitick_rendering.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -575,7 +271,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -603,20 +298,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -691,17 +374,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -879,7 +552,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -919,13 +591,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -972,10 +638,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1144,18 +806,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1181,78 +833,48 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Sensors</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="isaacsim_sensors_rtx.html" class="nav-link">RTX Sensors</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Multi-Tick Rendering</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">Sensors</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="isaacsim_sensors_rtx.html">RTX Sensors</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Multi-Tick Rendering</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="multi-tick-rendering">
+<article class="bd-article">
+<section id="multi-tick-rendering">
 <span id="isaac-sim-sensors-multitick-rendering"></span><h1>Multi-Tick Rendering<a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#multi-tick-rendering" title="Link to this heading">#</a></h1>
-<p>Multi-tick rendering decouples each sensor’s render rate from the main simulation frame rate.
-Instead of rendering every sensor every frame, each sensor ticks independently at its
-own configurable rate. This significantly improves performance in scenes with many sensors
-by avoiding redundant rendering work.</p>
-<p>Multi-tick rendering is <strong>enabled by default</strong> in Isaac Sim 6.0 and later.</p>
+<p>멀티틱 렌더링은 각 센서의 렌더 속도를 메인 시뮬레이션 프레임 속도로부터 분리합니다.
+매 프레임마다 모든 센서를 렌더링하는 대신, 각 센서는 독립적으로 자체 설정 속도로 틱을 발생시킵니다. 이를 통해 불필요한 렌더링 작업을 방지하여 많은 센서가 있는 장면에서 성능이 크게 향상됩니다.</p>
+<p>멀티틱 렌더링은 Isaac Sim 6.0 이상에서 <strong>기본적으로 활성화</strong>되어 있습니다.</p>
 <nav class="contents local" id="on-this-page">
 <p class="topic-title">On this page</p>
 <ul class="simple">
@@ -1296,400 +918,279 @@ by avoiding redundant rendering work.</p>
 </nav>
 <section id="overview">
 <h2><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id1" role="doc-backlink">Overview</a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#overview" title="Link to this heading">#</a></h2>
-<p>Before Isaac Sim-6.0, every camera and RTX sensor rendered at the simulation
-frame rate. With multi-tick rendering enabled, the renderer maintains independent tick
-counters for each sensor and only renders a sensor when its tick interval has elapsed.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> attribute on each sensor prim controls the render frequency
-in Hz. A value of <code class="docutils literal notranslate"><span class="pre">0</span></code> (the default) puts the sensor in <em>autotrigger</em> mode, where it
-renders every frame, as if multi-tick rendering was disabled.</p>
+<p>Isaac Sim 6.0 이전에는 모든 카메라와 RTX 센서가 시뮬레이션 프레임 속도로 렌더링되었습니다. 멀티틱 렌더링이 활성화되면, 렌더러는 각 센서에 대해 독립적인 틱 카운터를 유지하고 센서의 틱 인터벌이 경과했을 때만 렌더링합니다.</p>
+<p>각 센서 프림의 <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> 속성은 렌더 빈도를 Hz 단위로 제어합니다. 값이 <code class="docutils literal notranslate"><span class="pre">0</span></code>(기본값)이면 센서를 <em>자동트리거</em> 모드로 설정하여, 멀티틱 렌더링이 비활성화된 것처럼 매 프레임마다 렌더링합니다.</p>
 <section id="performance-benefits">
 <h3><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id2" role="doc-backlink">Performance Benefits</a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#performance-benefits" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Reduced GPU load</strong>: Sensors that do not need to update every frame skip rendering
-entirely, freeing GPU resources for other sensors or simulation work.</p></li>
-<li><p><strong>Independent rates</strong>: A stereoscopic depth camera running at 60 Hz no longer forces a
-30 Hz RGB camera to also render at the same rate.</p></li>
-<li><p><strong>Better scaling</strong>: Scenes with many sensors (for example multi-robot fleets) see
-proportionally larger improvements because each sensor only consumes GPU time when it
-actually ticks.</p></li>
+<li><p><strong>GPU 부하 감소</strong>: 매 프레임마다 업데이트할 필요가 없는 센서는 렌더링을 완전히 건너뛰어 다른 센서나 시뮬레이션 작업을 위한 GPU 리소스를 확보합니다.</p></li>
+<li><p><strong>독립적인 속도</strong>: 60Hz로 동작하는 입체 깊이 카메라가 더 이상 30Hz RGB 카메라도 같은 속도로 렌더링하도록 강제하지 않습니다.</p></li>
+<li><p><strong>향상된 확장성</strong>: 많은 센서를 사용하는 장면(예: 멀티 로봇 플릿)에서 각 센서가 실제로 틱을 발생시킬 때만 GPU 시간을 소비하므로 비례적으로 더 큰 개선 효과를 얻습니다.</p></li>
 </ul>
 </section>
 </section>
 <section id="configuring-per-sensor-tick-rates">
 <span id="isaac-sim-sensors-multitick-configuring-per-sensor-tick-rates"></span><h2><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id3" role="doc-backlink">Configuring Per-Sensor Tick Rates</a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#configuring-per-sensor-tick-rates" title="Link to this heading">#</a></h2>
-<p>Sensor tick rates are controlled by the <code class="docutils literal notranslate"><span class="pre">omni::sensor::tickRate</span></code> attribute in the <code class="docutils literal notranslate"><span class="pre">OmniSensorAPI</span></code>
-USD schema, which is applied to Camera and OmniLidar prims. The shipped USD assets in Isaac Sim 6.0
-already have this schema applied with appropriate default tick rates.</p>
+<p>센서 틱 속도는 Camera와 OmniLidar 프림에 적용되는 <code class="docutils literal notranslate"><span class="pre">OmniSensorAPI</span></code> USD 스키마의 <code class="docutils literal notranslate"><span class="pre">omni::sensor::tickRate</span></code> 속성으로 제어됩니다. Isaac Sim 6.0의 기본 제공 USD 애셋에는 이미 이 스키마가 적용되어 적절한 기본 틱 속도가 설정되어 있습니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">OmniSensorAPI</span></code> schema is also applied to <code class="docutils literal notranslate"><span class="pre">OmniRadar</span></code> prims, but in
-Isaac Sim 6.0 GA the RTX Radar renderer ignores <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code>
-and always autotriggers. See <a class="reference internal" href="isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-known-issue-radar-autotrigger"><span class="std std-ref">RTX Radar autotriggers in 6.0 GA</span></a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">OmniSensorAPI</span></code> 스키마는 <code class="docutils literal notranslate"><span class="pre">OmniRadar</span></code> 프림에도 적용되지만, Isaac Sim 6.0 GA에서 RTX Radar 렌더러는 <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code>를 무시하고 항상 자동트리거합니다. <a class="reference internal" href="isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-known-issue-radar-autotrigger"><span class="std std-ref">RTX Radar autotriggers in 6.0 GA</span></a>를 참조하십시오.</p>
 </div>
 <section id="using-the-isaac-sim-extension-api">
 <h3><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id4" role="doc-backlink">Using the Isaac Sim Extension API</a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#using-the-isaac-sim-extension-api" title="Link to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.rtx</span></code> extension provides Python APIs for authoring sensor prims and configuring their tick rates.
-For example, to author an OmniLidar prim at <code class="docutils literal notranslate"><span class="pre">/World/Lidar</span></code> with a tick rate of 10 Hz:</p>
+<p><code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.rtx</span></code> 확장은 센서 프림을 작성하고 틱 속도를 설정하기 위한 Python API를 제공합니다. 예를 들어, <code class="docutils literal notranslate"><span class="pre">/World/Lidar</span></code>에 10Hz 틱 속도로 OmniLidar 프림을 작성하려면:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.sensors.experimental.rtx</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lidar</span>
 
 <span class="c1"># Render the Lidar at 10 Hz independently of the simulation frame rate.</span>
-<span class="n">lidar</span> <span class="o">=</span> <span class="n">Lidar</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/World/Lidar&quot;</span><span class="p">,</span> <span class="n">tick_rate</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="n">lidar</span> <span class="o">=</span> <span class="n">Lidar</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"/World/Lidar"</span><span class="p">,</span> <span class="n">tick_rate</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>For cameras:</p>
+<p>카메라의 경우:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.sensors.experimental.rtx</span><span class="w"> </span><span class="kn">import</span> <span class="n">RtxCamera</span>
 
 <span class="c1"># Render the Camera at 30 Hz independently of the simulation frame rate.</span>
-<span class="n">camera</span> <span class="o">=</span> <span class="n">RtxCamera</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/World/Camera&quot;</span><span class="p">,</span> <span class="n">tick_rate</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+<span class="n">camera</span> <span class="o">=</span> <span class="n">RtxCamera</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">"/World/Camera"</span><span class="p">,</span> <span class="n">tick_rate</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="using-omnigraph">
 <h3><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id5" role="doc-backlink">Using OmniGraph</a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#using-omnigraph" title="Link to this heading">#</a></h3>
-<p>When using the ROS2, UCX, or HSB helper OmniGraph nodes, the sensor tick rate is read
-from the <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> attribute on the sensor prim. No additional node
-configuration is needed.</p>
-<p>For a worked ROS2 example that scales sensor and graph publish rates with simulation frame
-rate, see <a class="reference internal" href="../ros2_tutorials/tutorial_ros2_publish_rate.html#isaac-sim-app-tutorial-ros2-publish-rate"><span class="std std-ref">ROS2 Setting Publish Rates</span></a>.</p>
+<p>ROS2, UCX, 또는 HSB 헬퍼 OmniGraph 노드를 사용할 때, 센서 틱 속도는 센서 프림의 <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> 속성에서 읽어옵니다. 추가적인 노드 구성은 필요하지 않습니다.</p>
+<p>시뮬레이션 프레임 속도에 맞춰 센서 및 그래프 발행 속도를 조정하는 ROS2 예제는 <a class="reference internal" href="../ros2_tutorials/tutorial_ros2_publish_rate.html#isaac-sim-app-tutorial-ros2-publish-rate"><span class="std std-ref">ROS2 Setting Publish Rates</span></a>를 참조하십시오.</p>
 </section>
 <section id="omnilidar-tick-rate-must-equal-scanratebasehz">
 <span id="isaac-sim-sensors-multitick-lidar-tickrate-must-match-scanrate"></span><h3><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id6" role="doc-backlink">OmniLidar Tick Rate Must Equal <code class="docutils literal notranslate"><span class="pre">scanRateBaseHz</span></code></a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#omnilidar-tick-rate-must-equal-scanratebasehz" title="Link to this heading">#</a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>For <code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code> prims, <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> <strong>must</strong> be set equal to
-<code class="docutils literal notranslate"><span class="pre">omni:sensor:Core:scanRateBaseHz</span></code> for scan accumulation and multi-tick rendering to
-behave correctly.</p>
+<p><code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code> 프림의 경우, 스캔 누적과 멀티틱 렌더링이 올바르게 동작하려면 <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code>는 반드시 <code class="docutils literal notranslate"><span class="pre">omni:sensor:Core:scanRateBaseHz</span></code>와 <strong>동일하게</strong> 설정해야 합니다.</p>
 </div>
-<p>If the two values differ, the Lidar model falls back to producing <strong>partial scans every
-frame</strong> instead of accumulating to a full rotation (rotary Lidars) or full azimuth sweep
-(solid-state Lidars). Downstream pipelines that assume a full scan per tick - including
-<code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">RTX</span> <span class="pre">Lidar</span> <span class="pre">Helper</span></code> <code class="docutils literal notranslate"><span class="pre">laser_scan</span></code> publishers, <code class="docutils literal notranslate"><span class="pre">IsaacComputeRTXLidarFlatScan</span></code>, and
-any consumer of accumulated <code class="docutils literal notranslate"><span class="pre">GenericModelOutput</span></code> data - silently see truncated output.
-The renderer does not log an error in this case.</p>
-<p>For example, the shipped <code class="docutils literal notranslate"><span class="pre">Example_Rotary</span></code> Lidar config has <code class="docutils literal notranslate"><span class="pre">scanRateBaseHz</span> <span class="pre">=</span> <span class="pre">10</span></code>, so
-the sensor must tick at 10 Hz:</p>
+<p>두 값이 다르면, Lidar 모델은 전체 회전(회전식 Lidar) 또는 전체 방위각 스윕(고체 상태 Lidar)을 누적하는 대신 <strong>매 프레임마다 부분 스캔</strong>을 생성하는 폴백으로 전환됩니다. 프레임당 전체 스캔을 가정하는 다운스트림 파이프라인들—<code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">RTX</span> <span class="pre">Lidar</span> <span class="pre">Helper</span></code> <code class="docutils literal notranslate"><span class="pre">laser_scan</span></code> 발행자, <code class="docutils literal notranslate"><span class="pre">IsaacComputeRTXLidarFlatScan</span></code>, 및 누적된 <code class="docutils literal notranslate"><span class="pre">GenericModelOutput</span></code> 데이터의 모든 소비자—는 자동으로 잘린 출력을 보게 됩니다. 렌더러는 이 경우 오류를 기록하지 않습니다.</p>
+<p>예를 들어, 기본 제공 <code class="docutils literal notranslate"><span class="pre">Example_Rotary</span></code> Lidar 구성은 <code class="docutils literal notranslate"><span class="pre">scanRateBaseHz</span> <span class="pre">=</span> <span class="pre">10</span></code>이므로, 센서는 10Hz로 틱을 발생시켜야 합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.sensors.experimental.rtx</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lidar</span>
 
 <span class="c1"># Render at 10 Hz regardless of simulation frame rate.</span>
-<span class="n">lidar</span> <span class="o">=</span> <span class="n">Lidar</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s2">&quot;/World/Lidar&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="s2">&quot;Example_Rotary&quot;</span><span class="p">,</span> <span class="n">tick_rate</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="n">lidar</span> <span class="o">=</span> <span class="n">Lidar</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s2">"/World/Lidar"</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="s2">"Example_Rotary"</span><span class="p">,</span> <span class="n">tick_rate</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The same constraint applies to <code class="docutils literal notranslate"><span class="pre">Example_Solid_State</span></code> and to vendor configs in
-<a class="reference internal" href="../assets/usd_assets_nonvisual_sensors.html#isaac-assets-nonvisual-sensors-rtx-lidar"><span class="std std-ref">RTX Lidars</span></a>. When wrapping an existing <code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code>
-prim, read <code class="docutils literal notranslate"><span class="pre">omni:sensor:Core:scanRateBaseHz</span></code> from the prim and pass that value as
-<code class="docutils literal notranslate"><span class="pre">tick_rate</span></code>.</p>
+<p>같은 제약이 <code class="docutils literal notranslate"><span class="pre">Example_Solid_State</span></code>와 <a class="reference internal" href="../assets/usd_assets_nonvisual_sensors.html#isaac-assets-nonvisual-sensors-rtx-lidar"><span class="std std-ref">RTX Lidars</span></a>의 벤더 구성에도 적용됩니다. 기존 <code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code> 프림을 래핑할 때는 프림에서 <code class="docutils literal notranslate"><span class="pre">omni:sensor:Core:scanRateBaseHz</span></code>를 읽어 해당 값을 <code class="docutils literal notranslate"><span class="pre">tick_rate</span></code>로 전달하십시오.</p>
 </section>
 </section>
 <section id="architecture-timeline-physics-and-the-renderer">
 <span id="isaac-sim-sensors-multitick-clock-relationships"></span><h2><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id7" role="doc-backlink">Architecture: Timeline, Physics, and the Renderer</a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#architecture-timeline-physics-and-the-renderer" title="Link to this heading">#</a></h2>
-<p>With multi-tick rendering enabled, three clocks advance independently per <code class="docutils literal notranslate"><span class="pre">omni.kit.app</span></code> update.
-This section explains what each clock is, how each one advances,
-and how they interact. Code that mixes <code class="docutils literal notranslate"><span class="pre">omni.timeline</span></code> time with physics or sensor time can
-produce inconsistent timestamps in some configurations, so these relationships matter
-when configuring deterministic simulations or interpreting sensor output.</p>
+<p>멀티틱 렌더링이 활성화되면, 세 개의 클럭이 <code class="docutils literal notranslate"><span class="pre">omni.kit.app</span></code> 업데이트당 독립적으로 진행됩니다. 이 섹션에서는 각 클럭이 무엇인지, 어떻게 진행되는지, 그리고 서로 어떻게 상호작용하는지 설명합니다. <code class="docutils literal notranslate"><span class="pre">omni.timeline</span></code> 시간을 물리 또는 센서 시간과 혼합하는 코드는 일부 구성에서 일관되지 않은 타임스탬프를 생성할 수 있으므로, 결정론적 시뮬레이션을 구성하거나 센서 출력을 해석할 때 이러한 관계가 중요합니다.</p>
 <section id="the-three-clocks">
 <h3><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id8" role="doc-backlink">The three clocks</a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#the-three-clocks" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
 <colgroup>
-<col style="width: 25.0%" />
-<col style="width: 30.0%" />
-<col style="width: 25.0%" />
-<col style="width: 20.0%" />
+<col style="width: 25.0%"/>
+<col style="width: 30.0%"/>
+<col style="width: 25.0%"/>
+<col style="width: 20.0%"/>
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Clock</p></th>
-<th class="head"><p>Source of advance</p></th>
-<th class="head"><p>Controlled by</p></th>
-<th class="head"><p>Read by</p></th>
+<tr class="row-odd"><th class="head"><p>클럭</p></th>
+<th class="head"><p>진행 소스</p></th>
+<th class="head"><p>제어 주체</p></th>
+<th class="head"><p>읽기 주체</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Run-loop / <code class="docutils literal notranslate"><span class="pre">omni.timeline</span></code> time</p></td>
-<td><p>Wall-clock dt per app update, or a fixed manual dt when set</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">RenderingManager.set_dt(...)</span></code> (manual mode), <code class="docutils literal notranslate"><span class="pre">/app/runLoops/main/rateLimitFrequency</span></code></p></td>
-<td><p>Timeline UI, <code class="docutils literal notranslate"><span class="pre">timeCodesPerSecond</span></code>, stage update scheduling</p></td>
+<tr class="row-even"><td><p>실행 루프 / <code class="docutils literal notranslate"><span class="pre">omni.timeline</span></code> 시간</p></td>
+<td><p>앱 업데이트당 벽시계 dt, 또는 수동으로 설정된 경우 고정 수동 dt</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RenderingManager.set_dt(...)</span></code> (수동 모드), <code class="docutils literal notranslate"><span class="pre">/app/runLoops/main/rateLimitFrequency</span></code></p></td>
+<td><p>Timeline UI, <code class="docutils literal notranslate"><span class="pre">timeCodesPerSecond</span></code>, 스테이지 업데이트 스케줄링</p></td>
 </tr>
-<tr class="row-odd"><td><p>Physics simulation time</p></td>
-<td><p>Recomputed on every physics step as <code class="docutils literal notranslate"><span class="pre">stepCount</span> <span class="pre">/</span> <span class="pre">stepsPerSecond</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">PhysicsScene.set_dt(...)</span></code> or <code class="docutils literal notranslate"><span class="pre">SimulationManager.setup_simulation(dt=...)</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">SimulationManager.get_simulation_time()</span></code>, <code class="docutils literal notranslate"><span class="pre">IsaacReadSimulationTime</span></code>, ROS 2 / UCX / HSB timestamps</p></td>
+<tr class="row-odd"><td><p>물리 시뮬레이션 시간</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stepCount</span> <span class="pre">/</span> <span class="pre">stepsPerSecond</span></code>로 매 물리 스텝마다 재계산됨</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PhysicsScene.set_dt(...)</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">SimulationManager.setup_simulation(dt=...)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SimulationManager.get_simulation_time()</span></code>, <code class="docutils literal notranslate"><span class="pre">IsaacReadSimulationTime</span></code>, ROS 2 / UCX / HSB 타임스탬프</p></td>
 </tr>
-<tr class="row-even"><td><p>Renderer simulation time</p></td>
-<td><p>Mirror of physics time, written to the Fabric prim <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime.omni:time</span></code> after each physics step</p></td>
-<td><p>Driven by <code class="docutils literal notranslate"><span class="pre">isaacsim.core.simulation_manager</span></code>; seeded by <code class="docutils literal notranslate"><span class="pre">RenderingManager</span></code> when the simulation manager is absent</p></td>
-<td><p>The multi-tick renderer’s per-sensor tick scheduler at <code class="docutils literal notranslate"><span class="pre">eHydraRendering</span></code></p></td>
+<tr class="row-even"><td><p>렌더러 시뮬레이션 시간</p></td>
+<td><p>물리 시간의 미러로, 매 물리 스텝 후 Fabric 프림 <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime.omni:time</span></code>에 기록됨</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">isaacsim.core.simulation_manager</span></code>에 의해 구동됨; 시뮬레이션 매니저가 없을 때는 <code class="docutils literal notranslate"><span class="pre">RenderingManager</span></code>에 의해 시딩됨</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">eHydraRendering</span></code>의 멀티틱 렌더러 센서당 틱 스케줄러</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>The renderer no longer reads <code class="docutils literal notranslate"><span class="pre">omni.timeline</span></code> to obtain the current simulation time;
-it reads the <code class="docutils literal notranslate"><span class="pre">omni:time</span></code> attribute on the <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code> prim from Fabric. Physics writes that attribute on
-every <code class="docutils literal notranslate"><span class="pre">onPhysicsStep</span></code> callback at stage-update order <code class="docutils literal notranslate"><span class="pre">-10</span></code>, so the latest value is
-available to Hydra at order <code class="docutils literal notranslate"><span class="pre">30</span></code> within the same app update.</p>
+<p>렌더러는 더 이상 현재 시뮬레이션 시간을 얻기 위해 <code class="docutils literal notranslate"><span class="pre">omni.timeline</span></code>을 읽지 않습니다; 대신 Fabric의 <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code> 프림의 <code class="docutils literal notranslate"><span class="pre">omni:time</span></code> 속성을 읽습니다. 물리는 스테이지 업데이트 순서 <code class="docutils literal notranslate"><span class="pre">-10</span></code>에서 모든 <code class="docutils literal notranslate"><span class="pre">onPhysicsStep</span></code> 콜백에서 해당 속성을 기록하므로, 최신 값은 같은 앱 업데이트 내 순서 <code class="docutils literal notranslate"><span class="pre">30</span></code>에서 Hydra에서 사용할 수 있습니다.</p>
 </section>
 <section id="per-frame-ordering">
 <h3><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id9" role="doc-backlink">Per-frame ordering</a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#per-frame-ordering" title="Link to this heading">#</a></h3>
-<p>For one <code class="docutils literal notranslate"><span class="pre">App.update()</span></code> with the timeline playing:</p>
+<p>타임라인이 재생 중인 하나의 <code class="docutils literal notranslate"><span class="pre">App.update()</span></code>의 경우:</p>
 <ol class="arabic simple">
-<li><p>The run loop computes <code class="docutils literal notranslate"><span class="pre">loop_dt</span></code> (manual or wall-clock) and <code class="docutils literal notranslate"><span class="pre">omni.timeline</span></code>
-advances by <code class="docutils literal notranslate"><span class="pre">loop_dt</span></code>.</p></li>
-<li><p>The physics stage-update phase runs <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code> substeps of <code class="docutils literal notranslate"><span class="pre">physics_dt</span></code> to catch
-the loop time. Each substep recomputes the physics simulation time and writes it to
-<code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code>.</p></li>
-<li><p>Hydra reads <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code> once. The per-sensor tick scheduler compares
-that value to each sensor’s last-rendered time and its <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> to
-decide which sensors render this frame.</p></li>
-<li><p>OmniGraph nodes such as <code class="docutils literal notranslate"><span class="pre">IsaacReadSimulationTime</span></code> read the same simulation time,
-either directly or, when given a reference frame <code class="docutils literal notranslate"><span class="pre">RationalTime</span></code>, via interpolation
-from the <code class="docutils literal notranslate"><span class="pre">TimeSampleStorage</span></code> ring buffer maintained by
-<code class="docutils literal notranslate"><span class="pre">isaacsim.core.simulation_manager</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loop_dt</span></code>(수동 또는 벽시계)를 계산하고 <code class="docutils literal notranslate"><span class="pre">omni.timeline</span></code>은 <code class="docutils literal notranslate"><span class="pre">loop_dt</span></code>만큼 진행합니다.</p></li>
+<li><p>물리 스테이지 업데이트 단계는 루프 시간을 따라잡기 위해 <code class="docutils literal notranslate"><span class="pre">physics_dt</span></code>의 <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code> 서브스텝을 실행합니다. 각 서브스텝은 물리 시뮬레이션 시간을 재계산하고 <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code>에 기록합니다.</p></li>
+<li><p>Hydra는 <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code>을 한 번 읽습니다. 센서당 틱 스케줄러는 해당 값을 각 센서의 마지막 렌더링 시간 및 <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code>와 비교하여 이 프레임에서 렌더링할 센서를 결정합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IsaacReadSimulationTime</span></code> 같은 OmniGraph 노드는 동일한 시뮬레이션 시간을 직접 읽거나, 기준 프레임 <code class="docutils literal notranslate"><span class="pre">RationalTime</span></code>이 주어진 경우 <code class="docutils literal notranslate"><span class="pre">isaacsim.core.simulation_manager</span></code>에서 유지하는 <code class="docutils literal notranslate"><span class="pre">TimeSampleStorage</span></code> 링 버퍼에서 보간하여 읽습니다.</p></li>
 </ol>
 </section>
 <section id="behavior-depends-on-the-ratio-of-physics-dt-to-loop-dt">
 <h3><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id10" role="doc-backlink">Behavior depends on the ratio of <code class="docutils literal notranslate"><span class="pre">physics_dt</span></code> to <code class="docutils literal notranslate"><span class="pre">loop_dt</span></code></a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#behavior-depends-on-the-ratio-of-physics-dt-to-loop-dt" title="Link to this heading">#</a></h3>
 <div class="pst-scrollable-table-container"><table class="table">
 <colgroup>
-<col style="width: 22.0%" />
-<col style="width: 13.0%" />
-<col style="width: 25.0%" />
-<col style="width: 25.0%" />
-<col style="width: 15.0%" />
+<col style="width: 22.0%"/>
+<col style="width: 13.0%"/>
+<col style="width: 25.0%"/>
+<col style="width: 25.0%"/>
+<col style="width: 15.0%"/>
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Configuration</p></th>
-<th class="head"><p>Physics steps per app update</p></th>
-<th class="head"><p>End-of-frame <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code></p></th>
-<th class="head"><p>Timeline vs physics time</p></th>
-<th class="head"><p>Per-sensor ticking</p></th>
+<tr class="row-odd"><th class="head"><p>구성</p></th>
+<th class="head"><p>앱 업데이트당 물리 스텝</p></th>
+<th class="head"><p>프레임 종료 시 <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code></p></th>
+<th class="head"><p>타임라인 vs 물리 시간</p></th>
+<th class="head"><p>센서당 틱</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">physics_dt</span> <span class="pre">==</span> <span class="pre">loop_dt</span></code></p></td>
 <td><p>1</p></td>
-<td><p>Equal to loop time</p></td>
-<td><p>Equal each frame</p></td>
-<td><p>As scheduled</p></td>
+<td><p>1</p></td>
+<td><p>루프 시간과 동일</p></td>
+<td><p>매 프레임 동일</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">physics_dt</span> <span class="pre">&lt;</span> <span class="pre">loop_dt</span></code></p></td>
+<tr class="row-odd"><td><p>스케줄에 따라</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">physics_dt</span> <span class="pre">&lt;</span> <span class="pre">loop_dt</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">&gt;=</span> <span class="pre">1</span></code></p></td>
-<td><p>Equal to loop time within one substep</p></td>
-<td><p>Equal each frame</p></td>
-<td><p>As scheduled</p></td>
+<td><p>하나의 서브스텝 내에서 루프 시간과 동일</p></td>
+<td><p>매 프레임 동일</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">physics_dt</span> <span class="pre">&gt;</span> <span class="pre">loop_dt</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
-<td><p>Lags loop time by up to one <code class="docutils literal notranslate"><span class="pre">physics_dt</span></code></p></td>
-<td><p>Drifts within a physics step, resyncs when physics advances</p></td>
-<td><p>Only on frames where <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code> advanced</p></td>
+<tr class="row-even"><td><p>스케줄에 따라</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">physics_dt</span> <span class="pre">&gt;</span> <span class="pre">loop_dt</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p>최대 하나의 <code class="docutils literal notranslate"><span class="pre">physics_dt</span></code>만큼 루프 시간보다 뒤처짐</p></td>
+<td><p>물리 스텝 내에서 드리프트, 물리 진행 시 재동기화</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>In the <code class="docutils literal notranslate"><span class="pre">physics_dt</span> <span class="pre">&lt;=</span> <span class="pre">loop_dt</span></code> cases, multiple physics substeps in the same frame all
-write to <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code>, but only the last value is what the renderer
-reads. <code class="docutils literal notranslate"><span class="pre">TimeSampleStorage</span></code> collapses these writes to a single sample per frame, keyed
-by the frame’s <code class="docutils literal notranslate"><span class="pre">RationalTime</span></code>, holding the cumulative physics time.</p>
-<p>In the <code class="docutils literal notranslate"><span class="pre">physics_dt</span> <span class="pre">&gt;</span> <span class="pre">loop_dt</span></code> case, frames where no physics step runs leave
-<code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code> unchanged. The render pipeline still runs every app update,
-but per-sensor tick counters do not advance and no sensor produces a new output on those
-frames. When physics finally steps, the prim jumps forward by <code class="docutils literal notranslate"><span class="pre">physics_dt</span></code> and due
-sensors render on that frame.</p>
+<p><code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code>이 진행된 프레임에서만</p>
+<p><code class="docutils literal notranslate"><span class="pre">physics_dt</span> <span class="pre">&lt;=</span> <span class="pre">loop_dt</span></code> 경우에서, 같은 프레임의 여러 물리 서브스텝은 모두 <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code>에 기록되지만, 렌더러가 읽는 것은 마지막 값뿐입니다. <code class="docutils literal notranslate"><span class="pre">TimeSampleStorage</span></code>는 이러한 기록을 프레임당 단일 샘플로 축소하며, 이는 프레임의 <code class="docutils literal notranslate"><span class="pre">RationalTime</span></code>을 키로 하여 누적 물리 시간을 보유합니다.</p>
 </section>
 <section id="when-usefixedtimestepping-true-the-full-isaac-sim-gui-default">
 <span id="isaac-sim-sensors-multitick-clock-relationships-use-fixed-time-stepping"></span><h3><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id11" role="doc-backlink">When <code class="docutils literal notranslate"><span class="pre">useFixedTimeStepping=true</span></code> (the full Isaac Sim GUI default)</a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#when-usefixedtimestepping-true-the-full-isaac-sim-gui-default" title="Link to this heading">#</a></h3>
-<p>The table above describes the substep-to-catch-up behavior that applies when
-<code class="docutils literal notranslate"><span class="pre">/app/player/useFixedTimeStepping</span></code> is <strong>false</strong> (the default in standalone Python).
-The full Isaac Sim GUI app sets this carb setting to <strong>true</strong> in
-<code class="docutils literal notranslate"><span class="pre">source/apps/isaacsim.exp.full.kit</span></code>. With it true, the timeline ignores the run-loop’s
-measured <code class="docutils literal notranslate"><span class="pre">dt</span></code> and forces <code class="docutils literal notranslate"><span class="pre">dt</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">/</span> <span class="pre">timeCodesPerSecond</span></code> per accepted update inside
-<code class="docutils literal notranslate"><span class="pre">Timeline::update()</span></code>. Sensor and timeline time then advance at:</p>
+<p><code class="docutils literal notranslate"><span class="pre">physics_dt</span> <span class="pre">&gt;</span> <span class="pre">loop_dt</span></code> 경우에서, 물리 스텝이 실행되지 않는 프레임은 <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code>을 변경하지 않습니다. 렌더 파이프라인은 여전히 매 앱 업데이트마다 실행되지만, 센서당 틱 카운터는 진행되지 않으며 해당 프레임에서 새 출력을 생성하는 센서가 없습니다. 물리가 마침내 스텝을 밟으면, 프림은 <code class="docutils literal notranslate"><span class="pre">physics_dt</span></code>만큼 앞으로 점프하고 예정된 센서들이 해당 프레임에서 렌더링됩니다.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sim_advance_per_wall_sec  =  (1 / timeCodesPerSecond)  *  loop_hz_wall
 </pre></div>
 </div>
-<p>Consequences:</p>
+<p><code class="docutils literal notranslate"><span class="pre">/app/player/useFixedTimeStepping</span></code>이 <strong>false</strong>일 때(독립형 Python의 기본값) 위 표에 설명된 서브스텝-따라잡기 동작이 적용됩니다. 전체 Isaac Sim GUI 앱은 <code class="docutils literal notranslate"><span class="pre">source/apps/isaacsim.exp.full.kit</span></code>에서 이 carb 설정을 <strong>true</strong>로 설정합니다. true일 때, 타임라인은 실행 루프의 측정된 <code class="docutils literal notranslate"><span class="pre">dt</span></code>를 무시하고 <code class="docutils literal notranslate"><span class="pre">Timeline::update()</span></code> 내의 허용된 업데이트당 <code class="docutils literal notranslate"><span class="pre">dt</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">/</span> <span class="pre">timeCodesPerSecond</span></code>를 강제합니다. 그러면 센서와 타임라인 시간은 다음과 같이 진행됩니다:</p>
 <ul class="simple">
-<li><p>If <code class="docutils literal notranslate"><span class="pre">loop_hz_wall</span> <span class="pre">==</span> <span class="pre">timeCodesPerSecond</span></code> (the default 60 Hz on both), <code class="docutils literal notranslate"><span class="pre">sim/wall</span> <span class="pre">=</span> <span class="pre">1.0</span></code>
-and the system runs in real time. This is what
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">isaacsim.core.rendering_manager.RenderingManager.set_dt()</span></code> configures when called
-alone - it aligns <code class="docutils literal notranslate"><span class="pre">rateLimitFrequency</span></code>, <code class="docutils literal notranslate"><span class="pre">targetFramerate</span></code>, and <code class="docutils literal notranslate"><span class="pre">timeCodesPerSecond</span></code>
-to the same value.</p></li>
-<li><p>If <code class="docutils literal notranslate"><span class="pre">loop_hz_wall</span> <span class="pre">&lt;</span> <span class="pre">timeCodesPerSecond</span></code> (e.g. the loop is rate-limited below the
-timeline’s per-tick rate), the simulation runs in <strong>slow motion</strong> at ratio
-<code class="docutils literal notranslate"><span class="pre">loop_hz_wall</span> <span class="pre">/</span> <span class="pre">timeCodesPerSecond</span></code>. RTX sensors gated by
-<code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code> publish proportionally slower; OnPlaybackTick-driven
-publishers (<code class="docutils literal notranslate"><span class="pre">/clock</span></code>, OmniGraph ticks) still fire at <code class="docutils literal notranslate"><span class="pre">loop_hz_wall</span></code>. This is the
-trap when users only set <code class="docutils literal notranslate"><span class="pre">/app/runLoops/main/rateLimitFrequency</span></code> without updating
-<code class="docutils literal notranslate"><span class="pre">timeCodesPerSecond</span></code>: physics step time and wall clock decouple in a non-obvious way.</p></li>
-<li><p>If <code class="docutils literal notranslate"><span class="pre">loop_hz_wall</span> <span class="pre">&gt;</span> <span class="pre">timeCodesPerSecond</span></code>, the behavior depends on
-<code class="docutils literal notranslate"><span class="pre">/app/player/useFastMode</span></code> (also exposed as <code class="docutils literal notranslate"><span class="pre">timeline.set_play_every_frame(...)</span></code>):</p>
+<li><p>결과:</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loop_hz_wall</span> <span class="pre">==</span> <span class="pre">timeCodesPerSecond</span></code>(기본값 둘 다 60Hz)이면, <code class="docutils literal notranslate"><span class="pre">sim/wall</span> <span class="pre">=</span> <span class="pre">1.0</span></code>이고 시스템은 실시간으로 실행됩니다. 이것이 단독으로 호출될 때 <code class="xref py py-meth docutils literal notranslate"><span class="pre">isaacsim.core.rendering_manager.RenderingManager.set_dt()</span></code>가 구성하는 것입니다 — <code class="docutils literal notranslate"><span class="pre">rateLimitFrequency</span></code>, <code class="docutils literal notranslate"><span class="pre">targetFramerate</span></code>, 및 <code class="docutils literal notranslate"><span class="pre">timeCodesPerSecond</span></code>를 동일한 값으로 정렬합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loop_hz_wall</span> <span class="pre">&lt;</span> <span class="pre">timeCodesPerSecond</span></code>(예: 루프가 타임라인의 틱당 속도 아래로 속도 제한됨)이면, 시뮬레이션은 <code class="docutils literal notranslate"><span class="pre">loop_hz_wall</span> <span class="pre">/</span> <span class="pre">timeCodesPerSecond</span></code> 비율로 <strong>슬로우 모션</strong>으로 실행됩니다. <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code>으로 게이팅된 RTX 센서는 비례적으로 느리게 발행합니다; OnPlaybackTick 기반 발행자(<code class="docutils literal notranslate"><span class="pre">/clock</span></code>, OmniGraph 틱)는 여전히 <code class="docutils literal notranslate"><span class="pre">loop_hz_wall</span></code>에서 발동됩니다. 이것이 사용자가 <code class="docutils literal notranslate"><span class="pre">timeCodesPerSecond</span></code>를 업데이트하지 않고 <code class="docutils literal notranslate"><span class="pre">/app/runLoops/main/rateLimitFrequency</span></code>만 설정할 때의 함정입니다: 물리 스텝 시간과 벽시계가 명확하지 않은 방식으로 분리됩니다.</p>
 <ul>
-<li><p><strong>``useFastMode = false`` (the default)</strong>: the timeline subsamples (advances time on
-every Nth run-loop tick where <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">=</span> <span class="pre">ceil(targetFramerate</span> <span class="pre">/</span> <span class="pre">timeCodesPerSecond)</span></code>) so
-the timeline stays at its configured rate while the run loop ticks faster. This is
-used to drive higher render-product / OnPlaybackTick rates without speeding up
-sim time.</p></li>
-<li><p><strong>``useFastMode = true``</strong> (set when, for example, <code class="docutils literal notranslate"><span class="pre">timeline.set_play_every_frame(True)</span></code>
-is called - some Replicator examples and benchmarks do this): the subsample gate is
-bypassed. Every run-loop tick advances the timeline by <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">timeCodesPerSecond</span></code>,
-so sim time runs <strong>faster than wall time</strong> (fast-forward) at ratio
-<code class="docutils literal notranslate"><span class="pre">loop_hz_wall</span> <span class="pre">/</span> <span class="pre">timeCodesPerSecond</span></code>. This is the intended behavior for offline
-data generation where you want to ingest as much simulated time as possible per
-wall second, but it breaks any code that assumes sim time tracks wall time.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loop_hz_wall</span> <span class="pre">&gt;</span> <span class="pre">timeCodesPerSecond</span></code>이면, 동작은 <code class="docutils literal notranslate"><span class="pre">/app/player/useFastMode</span></code>(<code class="docutils literal notranslate"><span class="pre">timeline.set_play_every_frame(...)</span></code>로도 노출됨)에 따라 달라집니다:</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">useFastMode</span> <span class="pre">=</span> <span class="pre">false</span></code> (기본값)</strong>: 타임라인은 서브샘플링하여(<code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">=</span> <span class="pre">ceil(targetFramerate</span> <span class="pre">/</span> <span class="pre">timeCodesPerSecond)</span></code>번째 실행 루프 틱마다 시간 진행) 런 루프가 더 빠르게 틱을 발생시키는 동안 타임라인이 구성된 속도를 유지합니다. 이는 시뮬레이션 시간을 빠르게 하지 않고 더 높은 렌더 제품 / OnPlaybackTick 속도를 구동하는 데 사용됩니다.</p></li>
 </ul>
 </li>
 </ul>
-<p>The reference example in
-<a class="reference internal" href="../ros2_tutorials/tutorial_ros2_publish_rate.html#isaac-sim-app-tutorial-ros2-publish-rate-set-simulation-frame-rates"><span class="std std-ref">Setting the Simulation Rate (Advanced)</span></a> uses
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">isaacsim.core.simulation_manager.SimulationManager.setup_simulation()</span></code> plus
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">isaacsim.core.rendering_manager.RenderingManager.set_dt()</span></code> to keep all three
-clocks coherent - avoiding all of the above modes by construction. It leaves
-<code class="docutils literal notranslate"><span class="pre">useFastMode</span></code> at its default of <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">useFastMode</span> <span class="pre">=</span> <span class="pre">true</span></code></strong>(예: <code class="docutils literal notranslate"><span class="pre">timeline.set_play_every_frame(True)</span></code>가 호출될 때 설정됨 — 일부 Replicator 예제 및 벤치마크가 이를 수행함): 서브샘플 게이트가 우회됩니다. 모든 런루프 틱이 타임라인을 <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">timeCodesPerSecond</span></code>만큼 진행시키므로, 시뮬레이션 시간은 <code class="docutils literal notranslate"><span class="pre">loop_hz_wall</span> <span class="pre">/</span> <span class="pre">timeCodesPerSecond</span></code> 비율로 <strong>벽시계 시간보다 빠르게</strong> 실행됩니다(빨리 감기). 이는 벽초당 가능한 많은 시뮬레이션 시간을 수집하려는 오프라인 데이터 생성을 위한 의도된 동작이지만, 시뮬레이션 시간이 벽시계 시간을 추적한다고 가정하는 코드를 깨뜨립니다.</p>
 </section>
 <section id="practical-implications">
 <h3><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id12" role="doc-backlink">Practical implications</a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#practical-implications" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Always read simulation time through <code class="docutils literal notranslate"><span class="pre">SimulationManager.get_simulation_time()</span></code>,
-<code class="docutils literal notranslate"><span class="pre">IsaacReadSimulationTime</span></code>, or the per-frame <code class="docutils literal notranslate"><span class="pre">getSimulationTimeAtTime(rtime)</span></code>
-lookup. These return the physics-driven value that the renderer also sees, so sensor
-stamps, TF stamps, and downstream consumers stay consistent.</p></li>
-<li><p>Do not use <code class="docutils literal notranslate"><span class="pre">omni.timeline</span></code> current time as a sensor or message timestamp. In the
-<code class="docutils literal notranslate"><span class="pre">physics_dt</span> <span class="pre">&gt;</span> <span class="pre">loop_dt</span></code> configuration the two clocks drift each frame and only
-resync on physics steps, producing inconsistent stamps.</p></li>
-<li><p>To keep physics, the renderer, and downstream pipelines all advancing once per
-frame, set <code class="docutils literal notranslate"><span class="pre">physics_dt</span> <span class="pre">==</span> <span class="pre">loop_dt</span></code> via
-<code class="docutils literal notranslate"><span class="pre">SimulationManager.setup_simulation(dt=1.0</span> <span class="pre">/</span> <span class="pre">hz)</span></code> and
-<code class="docutils literal notranslate"><span class="pre">RenderingManager.set_dt(1.0</span> <span class="pre">/</span> <span class="pre">hz)</span></code>. The <code class="docutils literal notranslate"><span class="pre">isaacsim.exp.base.zero_delay.kit</span></code>
-experience configures this and is the reference setup for deterministic single-frame
-TF / image pairing.</p></li>
+<li><p><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_publish_rate.html#isaac-sim-app-tutorial-ros2-publish-rate-set-simulation-frame-rates"><span class="std std-ref">Setting the Simulation Rate (Advanced)</span></a>의 참조 예제는 <code class="xref py py-meth docutils literal notranslate"><span class="pre">isaacsim.core.simulation_manager.SimulationManager.setup_simulation()</span></code>과 <code class="xref py py-meth docutils literal notranslate"><span class="pre">isaacsim.core.rendering_manager.RenderingManager.set_dt()</span></code>를 함께 사용하여 세 클럭 모두를 일관되게 유지합니다 — 위의 모든 모드를 구조적으로 방지합니다. <code class="docutils literal notranslate"><span class="pre">useFastMode</span></code>는 기본값인 <code class="docutils literal notranslate"><span class="pre">false</span></code>로 유지됩니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SimulationManager.get_simulation_time()</span></code>, <code class="docutils literal notranslate"><span class="pre">IsaacReadSimulationTime</span></code>, 또는 프레임당 <code class="docutils literal notranslate"><span class="pre">getSimulationTimeAtTime(rtime)</span></code> 조회를 통해 항상 시뮬레이션 시간을 읽으십시오. 이것들은 렌더러도 보는 물리 기반 값을 반환하므로, 센서 스탬프, TF 스탬프 및 다운스트림 소비자가 일관성을 유지합니다.</p></li>
+<li><p>센서 또는 메시지 타임스탬프로 <code class="docutils literal notranslate"><span class="pre">omni.timeline</span></code> 현재 시간을 사용하지 마십시오. <code class="docutils literal notranslate"><span class="pre">physics_dt</span> <span class="pre">&gt;</span> <span class="pre">loop_dt</span></code> 구성에서 두 클럭은 매 프레임마다 드리프트하며 물리 스텝에서만 재동기화되어 일관되지 않은 스탬프를 생성합니다.</p></li>
 </ul>
 </section>
 </section>
 <section id="settings-reference">
 <span id="isaac-sim-sensors-multitick-settings-reference"></span><h2><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id13" role="doc-backlink">Settings Reference</a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#settings-reference" title="Link to this heading">#</a></h2>
-<p>The settings, APIs, and USD attributes below configure multi-tick rendering, per-sensor
-tick rates, and the underlying loop / physics clocks discussed in
-<a class="reference internal" href="isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-clock-relationships"><span class="std std-ref">Architecture: Timeline, Physics, and the Renderer</span></a>.</p>
+<p>물리, 렌더러, 및 다운스트림 파이프라인이 모두 프레임당 한 번씩 진행되도록 유지하려면, <code class="docutils literal notranslate"><span class="pre">SimulationManager.setup_simulation(dt=1.0</span> <span class="pre">/</span> <span class="pre">hz)</span></code>와 <code class="docutils literal notranslate"><span class="pre">RenderingManager.set_dt(1.0</span> <span class="pre">/</span> <span class="pre">hz)</span></code>를 통해 <code class="docutils literal notranslate"><span class="pre">physics_dt</span> <span class="pre">==</span> <span class="pre">loop_dt</span></code>로 설정하십시오. <code class="docutils literal notranslate"><span class="pre">isaacsim.exp.base.zero_delay.kit</span></code> 경험은 이를 구성하며 결정론적 단일 프레임 TF / 이미지 페어링을 위한 참조 설정입니다.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <colgroup>
-<col style="width: 30.0%" />
-<col style="width: 10.0%" />
-<col style="width: 12.0%" />
-<col style="width: 48.0%" />
+<col style="width: 30.0%"/>
+<col style="width: 10.0%"/>
+<col style="width: 12.0%"/>
+<col style="width: 48.0%"/>
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Setting / API / Attribute</p></th>
-<th class="head"><p>Kind</p></th>
-<th class="head"><p>Default</p></th>
-<th class="head"><p>Effect</p></th>
+<tr class="row-odd"><th class="head"><p>아래 설정, API, 및 USD 속성들은 <a class="reference internal" href="isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-clock-relationships"><span class="std std-ref">Architecture: Timeline, Physics, and the Renderer</span></a>에서 설명한 멀티틱 렌더링, 센서당 틱 속도, 및 기본 루프 / 물리 클럭을 구성합니다.</p></th>
+<th class="head"><p>설정 / API / 속성</p></th>
+<th class="head"><p>종류</p></th>
+<th class="head"><p>기본값</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">/rtx/hydra/supportMultiTickRate</span></code></p></td>
-<td><p>carb setting</p></td>
+<tr class="row-even"><td><p>효과</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/rtx/hydra/supportMultiTickRate</span></code></p></td>
+<td><p>carb 설정</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
-<td><p>Enables multi-tick rendering. When <code class="docutils literal notranslate"><span class="pre">false</span></code>, the renderer reverts to per-frame rendering and does not consult <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">/rtx/rendering/perSensorTickTlas</span></code></p></td>
-<td><p>carb setting</p></td>
+<tr class="row-odd"><td><p>멀티틱 렌더링을 활성화합니다. <code class="docutils literal notranslate"><span class="pre">false</span></code>이면, 렌더러는 프레임당 렌더링으로 되돌아가며 <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code>을 참조하지 않습니다.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/rtx/rendering/perSensorTickTlas</span></code></p></td>
+<td><p>carb 설정</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
-<td><p>Builds a per-sensor Top-Level Acceleration Structure (TLAS) on each sensor tick instead of once per frame.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">/app/player/playSimulations</span></code></p></td>
-<td><p>carb setting</p></td>
+<tr class="row-even"><td><p>프레임당 한 번이 아닌 매 센서 틱마다 센서당 Top-Level Acceleration Structure(TLAS)를 빌드합니다.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/app/player/playSimulations</span></code></p></td>
+<td><p>carb 설정</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
-<td><p>When <code class="docutils literal notranslate"><span class="pre">false</span></code>, <code class="docutils literal notranslate"><span class="pre">App.update()</span></code> does not step physics, so <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code> is frozen even though <code class="docutils literal notranslate"><span class="pre">omni.timeline</span></code> may continue to advance. <code class="docutils literal notranslate"><span class="pre">RenderingManager.render()</span></code> toggles this around its update to render without ticking the simulation clock.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RenderingManager.set_dt(dt)</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">false</span></code>이면, <code class="docutils literal notranslate"><span class="pre">App.update()</span></code>는 물리를 스텝하지 않으므로, <code class="docutils literal notranslate"><span class="pre">omni.timeline</span></code>이 계속 진행될 수 있더라도 <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code>이 동결됩니다. <code class="docutils literal notranslate"><span class="pre">RenderingManager.render()</span></code>는 시뮬레이션 클럭을 틱하지 않고 렌더링하기 위해 업데이트 주위에서 이를 토글합니다.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RenderingManager.set_dt(dt)</span></code></p></td>
 <td><p>Python API</p></td>
 <td><p>n/a</p></td>
-<td><p>Sets <code class="docutils literal notranslate"><span class="pre">loop_dt</span></code>. Switches the Isaac loop runner to manual mode, sets <code class="docutils literal notranslate"><span class="pre">/app/runLoops/main/rateLimitFrequency</span></code>, and updates <code class="docutils literal notranslate"><span class="pre">omni.timeline.set_target_framerate</span></code> and the stage’s <code class="docutils literal notranslate"><span class="pre">timeCodesPerSecond</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">PhysicsScene.set_dt(dt)</span></code> / <code class="docutils literal notranslate"><span class="pre">SimulationManager.setup_simulation(dt=...)</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">loop_dt</span></code>를 설정합니다. Isaac 루프 러너를 수동 모드로 전환하고, <code class="docutils literal notranslate"><span class="pre">/app/runLoops/main/rateLimitFrequency</span></code>를 설정하며, <code class="docutils literal notranslate"><span class="pre">omni.timeline.set_target_framerate</span></code>와 스테이지의 <code class="docutils literal notranslate"><span class="pre">timeCodesPerSecond</span></code>를 업데이트합니다.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PhysicsScene.set_dt(dt)</span></code> / <code class="docutils literal notranslate"><span class="pre">SimulationManager.setup_simulation(dt=...)</span></code></p></td>
 <td><p>Python API</p></td>
-<td><p>1/60 s</p></td>
-<td><p>Sets <code class="docutils literal notranslate"><span class="pre">physics_dt</span></code> on the physics scene. The physics engine uses an internal accumulator to decide how many substeps to take each app update.</p></td>
+<td><p>1/60초</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RenderingManager.render()</span></code></p></td>
+<tr class="row-odd"><td><p>물리 씬에 <code class="docutils literal notranslate"><span class="pre">physics_dt</span></code>를 설정합니다. 물리 엔진은 내부 누산기를 사용하여 각 앱 업데이트에서 수행할 서브스텝 수를 결정합니다.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">RenderingManager.render()</span></code></p></td>
 <td><p>Python API</p></td>
 <td><p>n/a</p></td>
-<td><p>Render the stage without stepping physics. Temporarily sets <code class="docutils literal notranslate"><span class="pre">/app/player/playSimulations=false</span></code> for one app update.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> (Hz)</p></td>
-<td><p>USD attribute</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code> (autotrigger)</p></td>
-<td><p>Per-sensor render rate. Compared against <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code> by the per-sensor tick scheduler. Applied to <code class="docutils literal notranslate"><span class="pre">Camera</span></code> and <code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code> prims; ignored on <code class="docutils literal notranslate"><span class="pre">OmniRadar</span></code> in 6.0 GA (see <a class="reference internal" href="isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-known-issue-radar-autotrigger"><span class="std std-ref">RTX Radar autotriggers in 6.0 GA</span></a>).</p></td>
+<tr class="row-even"><td><p>물리를 스텝하지 않고 스테이지를 렌더링합니다. 하나의 앱 업데이트 동안 <code class="docutils literal notranslate"><span class="pre">/app/player/playSimulations=false</span></code>로 일시적으로 설정합니다.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> (Hz)</p></td>
+<td><p>USD 속성</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code> (자동트리거)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">omni:sensor:Core:scanRateBaseHz</span></code> (Hz)</p></td>
-<td><p>USD attribute</p></td>
-<td><p>Config-dependent (for example <code class="docutils literal notranslate"><span class="pre">10</span></code> for <code class="docutils literal notranslate"><span class="pre">Example_Rotary</span></code>)</p></td>
-<td><p>OmniLidar scan rate. Must equal <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> - see <a class="reference internal" href="isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-lidar-tickrate-must-match-scanrate"><span class="std std-ref">OmniLidar Tick Rate Must Equal scanRateBaseHz</span></a>.</p></td>
+<tr class="row-odd"><td><p>센서당 렌더 속도. 센서당 틱 스케줄러에 의해 <code class="docutils literal notranslate"><span class="pre">/ExternalSimulationTime</span></code>과 비교됩니다. <code class="docutils literal notranslate"><span class="pre">Camera</span></code>와 <code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code> 프림에 적용됩니다; 6.0 GA의 <code class="docutils literal notranslate"><span class="pre">OmniRadar</span></code>에서는 무시됩니다(<a class="reference internal" href="isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-known-issue-radar-autotrigger"><span class="std std-ref">RTX Radar autotriggers in 6.0 GA</span></a> 참조).</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">omni:sensor:Core:scanRateBaseHz</span></code> (Hz)</p></td>
+<td><p>USD 속성</p></td>
+<td><p>구성에 따라 다름(예: <code class="docutils literal notranslate"><span class="pre">Example_Rotary</span></code>의 경우 <code class="docutils literal notranslate"><span class="pre">10</span></code>)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">omni:sensor:Core:accumulateOutputs</span></code></p></td>
-<td><p>USD attribute</p></td>
+<tr class="row-even"><td><p>OmniLidar 스캔 속도. <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code>와 같아야 합니다 — <a class="reference internal" href="isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-lidar-tickrate-must-match-scanrate"><span class="std std-ref">OmniLidar Tick Rate Must Equal scanRateBaseHz</span></a>를 참조하십시오.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">omni:sensor:Core:accumulateOutputs</span></code></p></td>
+<td><p>USD 속성</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
-<td><p>OmniLidar scan accumulation. When <code class="docutils literal notranslate"><span class="pre">true</span></code>, full scans accumulate over multiple frames; when <code class="docutils literal notranslate"><span class="pre">false</span></code>, the GMO carries the per-frame partial scan.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">/rtx/hydra/supportMultiTickRate</span></code> and <code class="docutils literal notranslate"><span class="pre">/rtx/rendering/perSensorTickTlas</span></code> settings
-are configured in <code class="docutils literal notranslate"><span class="pre">isaacsim.exp.base.kit</span></code> and are also passed as standard test
-arguments to all extension tests.</p>
+<p>OmniLidar 스캔 누적. <code class="docutils literal notranslate"><span class="pre">true</span></code>이면 전체 스캔이 여러 프레임에 걸쳐 누적됩니다; <code class="docutils literal notranslate"><span class="pre">false</span></code>이면 GMO는 프레임당 부분 스캔을 포함합니다.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>To reproduce the Isaac Sim 5.x render-every-frame behavior in 6.0 (for
-example to debug a regression), launch with
-<code class="docutils literal notranslate"><span class="pre">--/rtx/hydra/supportMultiTickRate=false</span></code>. Most other code paths in 6.0 assume the
-global default and have not been validated with the setting disabled.</p>
+<p class="admonition-title"><code class="docutils literal notranslate"><span class="pre">/rtx/hydra/supportMultiTickRate</span></code>와 <code class="docutils literal notranslate"><span class="pre">/rtx/rendering/perSensorTickTlas</span></code> 설정은 <code class="docutils literal notranslate"><span class="pre">isaacsim.exp.base.kit</span></code>에서 구성되며 모든 확장 테스트에 표준 테스트 인수로도 전달됩니다.</p>
+<p>Note</p>
 </div>
 </section>
 <section id="migration-from-previous-releases">
 <h2><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id14" role="doc-backlink">Migration from Previous Releases</a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#migration-from-previous-releases" title="Link to this heading">#</a></h2>
-<p>If you are upgrading from a release where multi-tick rendering was not enabled by
-default, the following changes may affect your workflow.</p>
+<p>6.0에서 Isaac Sim 5.x의 매 프레임 렌더 동작을 재현하려면(예: 회귀 디버깅), <code class="docutils literal notranslate"><span class="pre">--/rtx/hydra/supportMultiTickRate=false</span></code>로 실행하십시오. 6.0의 대부분의 다른 코드 경로는 전역 기본값을 가정하며 해당 설정이 비활성화된 상태로 검증되지 않았습니다.</p>
 <section id="general-changes">
 <h3><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id15" role="doc-backlink">General changes</a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#general-changes" title="Link to this heading">#</a></h3>
 <ol class="arabic">
-<li><p><strong>Update Camera and OmniSensor prims to work with multi-tick rendering.</strong> Apply the
-<code class="docutils literal notranslate"><span class="pre">OmniSensorAPI</span></code> schema to <code class="docutils literal notranslate"><span class="pre">Camera</span></code> prims. This schema is already applied by
-default to <code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code>/<code class="docutils literal notranslate"><span class="pre">OmniRadar</span></code> prims. Set the <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code>
-attribute to control render frequency. Multi-tick rendering is transparent when
-sensors use the default <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> of <code class="docutils literal notranslate"><span class="pre">0</span></code> (autotrigger), which
-renders every frame.</p></li>
-<li><p><strong>USD assets updated.</strong> Shipped sensor assets now have the <code class="docutils literal notranslate"><span class="pre">OmniSensorAPI</span></code> schema
-applied. If you have custom USD assets with <code class="docutils literal notranslate"><span class="pre">Camera</span></code> or <code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code>/<code class="docutils literal notranslate"><span class="pre">OmniRadar</span></code>
-prims, apply the <code class="docutils literal notranslate"><span class="pre">OmniSensorAPI</span></code> schema and set <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> to control
-render frequency.</p></li>
-<li><p><strong>frameSkipCount is deprecated.</strong> Replace usage of <code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code> on
-ROS2/UCX/HSB helper nodes with <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> on the sensor prim. See
-<a class="reference internal" href="isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-frameskipcount-deprecation"><span class="std std-ref">frameSkipCount Deprecation</span></a> below.</p></li>
-<li><p><strong>RTX Lidar accumulation moved to a USD attribute.</strong> Lidar scan accumulation is now
-controlled by the <code class="docutils literal notranslate"><span class="pre">omni:sensor:Core:accumulateOutputs</span></code> attribute on the
-<code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code> prim. The deprecated <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.rtx</span></code> extension’s
-<code class="docutils literal notranslate"><span class="pre">IsaacExtractRTXSensorPointCloudNoAccumulator</span></code> annotator and its
-<code class="docutils literal notranslate"><span class="pre">IsaacCreateRTXLidarScanBuffer</span></code> and <code class="docutils literal notranslate"><span class="pre">IsaacComputeRTXLidarFlatScan</span></code> nodes have
-been updated to read this attribute. The newer <code class="docutils literal notranslate"><span class="pre">IsaacExtractRTXSensorPointCloud</span></code>
-annotator and OmniGraph node live in <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.rtx.nodes</span></code> and assume the
-GMO buffer already contains either a full scan or a per-frame partial scan based on
-<code class="docutils literal notranslate"><span class="pre">accumulateOutputs</span></code>.</p></li>
-<li><p><strong>Replace single-render-product waits with full app updates.</strong> The
-<code class="docutils literal notranslate"><span class="pre">omni.syntheticdata.sensors.next_render_simulation_async</span></code> helper (and any other
-helper that targets a single render product) does not advance per-sensor tick
-counters correctly under multi-tick rendering. Use
-<code class="docutils literal notranslate"><span class="pre">isaacsim.core.experimental.utils.app.update_app_async</span></code> instead, which performs
-full application update steps and ensures all sensor ticks are processed.</p>
-<p><em>Before:</em></p>
+<li><p>멀티틱 렌더링이 기본적으로 활성화되지 않은 릴리스에서 업그레이드하는 경우, 다음 변경 사항이 워크플로우에 영향을 미칠 수 있습니다.</p></li>
+<li><p><strong>멀티틱 렌더링과 함께 작동하도록 Camera 및 OmniSensor 프림을 업데이트하십시오.</strong> <code class="docutils literal notranslate"><span class="pre">Camera</span></code> 프림에 <code class="docutils literal notranslate"><span class="pre">OmniSensorAPI</span></code> 스키마를 적용하십시오. 이 스키마는 이미 <code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code>/<code class="docutils literal notranslate"><span class="pre">OmniRadar</span></code> 프림에 기본적으로 적용되어 있습니다. 렌더 빈도를 제어하려면 <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> 속성을 설정하십시오. 멀티틱 렌더링은 기본 <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code>가 <code class="docutils literal notranslate"><span class="pre">0</span></code>(자동트리거, 매 프레임 렌더링)인 경우 투명합니다.</p></li>
+<li><p><strong>USD 애셋이 업데이트되었습니다.</strong> 기본 제공 센서 애셋에는 이제 <code class="docutils literal notranslate"><span class="pre">OmniSensorAPI</span></code> 스키마가 적용되어 있습니다. <code class="docutils literal notranslate"><span class="pre">Camera</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code>/<code class="docutils literal notranslate"><span class="pre">OmniRadar</span></code> 프림이 있는 커스텀 USD 애셋이 있는 경우, <code class="docutils literal notranslate"><span class="pre">OmniSensorAPI</span></code> 스키마를 적용하고 <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code>를 설정하여 렌더 빈도를 제어하십시오.</p></li>
+<li><p><strong>frameSkipCount가 더 이상 사용되지 않습니다.</strong> ROS2/UCX/HSB 헬퍼 노드에서 <code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code> 사용을 센서 프림의 <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code>로 교체하십시오. <a class="reference internal" href="isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-frameskipcount-deprecation"><span class="std std-ref">frameSkipCount Deprecation</span></a>을 참조하십시오.</p></li>
+<li><p><strong>RTX Lidar 누적이 USD 속성으로 이동되었습니다.</strong> Lidar 스캔 누적은 이제 <code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code> 프림의 <code class="docutils literal notranslate"><span class="pre">omni:sensor:Core:accumulateOutputs</span></code> 속성으로 제어됩니다. 더 이상 사용되지 않는 <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.rtx</span></code> 확장의 <code class="docutils literal notranslate"><span class="pre">IsaacExtractRTXSensorPointCloudNoAccumulator</span></code> 어노테이터와 <code class="docutils literal notranslate"><span class="pre">IsaacCreateRTXLidarScanBuffer</span></code> 및 <code class="docutils literal notranslate"><span class="pre">IsaacComputeRTXLidarFlatScan</span></code> 노드들은 이 속성을 읽도록 업데이트되었습니다. 최신 <code class="docutils literal notranslate"><span class="pre">IsaacExtractRTXSensorPointCloud</span></code> 어노테이터와 OmniGraph 노드는 <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.rtx.nodes</span></code>에 있으며 <code class="docutils literal notranslate"><span class="pre">accumulateOutputs</span></code>에 따라 GMO 버퍼에 이미 전체 스캔 또는 프레임당 부분 스캔이 포함되어 있다고 가정합니다.</p>
+<p><strong>단일 렌더 제품 대기를 전체 앱 업데이트로 교체하십시오.</strong> <code class="docutils literal notranslate"><span class="pre">omni.syntheticdata.sensors.next_render_simulation_async</span></code> 헬퍼(및 단일 렌더 제품을 대상으로 하는 다른 헬퍼)는 멀티틱 렌더링 하에서 센서당 틱 카운터를 올바르게 진행하지 않습니다. 대신, 전체 애플리케이션 업데이트 단계를 수행하고 모든 센서 틱이 처리되도록 보장하는 <code class="docutils literal notranslate"><span class="pre">isaacsim.core.experimental.utils.app.update_app_async</span></code>를 사용하십시오.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni.syntheticdata</span>
 
 <span class="c1"># Example values for an attached render product and a per-product wait count.</span>
-<span class="n">render_product_path</span> <span class="o">=</span> <span class="s2">&quot;/Render/RenderProduct_Replicator&quot;</span>
+<span class="n">render_product_path</span> <span class="o">=</span> <span class="s2">"/Render/RenderProduct_Replicator"</span>
 <span class="n">N</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="c1"># Deprecated: does not advance per-sensor tick counters under multi-tick rendering.</span>
 <span class="k">await</span> <span class="n">omni</span><span class="o">.</span><span class="n">syntheticdata</span><span class="o">.</span><span class="n">sensors</span><span class="o">.</span><span class="n">next_render_simulation_async</span><span class="p">([</span><span class="n">render_product_path</span><span class="p">],</span> <span class="n">N</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><em>After:</em></p>
+<p><em>이전:</em></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.utils.app</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">app_utils</span>
 
 <span class="c1"># Number of full application update steps to perform.</span>
@@ -1703,123 +1204,89 @@ full application update steps and ensures all sensor ticks are processed.</p>
 </section>
 <section id="frameskipcount-deprecation">
 <span id="isaac-sim-sensors-multitick-frameskipcount-deprecation"></span><h3><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id16" role="doc-backlink">frameSkipCount Deprecation</a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#frameskipcount-deprecation" title="Link to this heading">#</a></h3>
-<p>In previous releases, publish rates for the ROS2 and UCX helper nodes were controlled by
-the <code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code> input on each helper node. This parameter is now <strong>deprecated</strong>.</p>
-<p>With multi-tick rendering enabled globally, the correct way to control how often a
-sensor publishes data is to set <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> on the sensor prim itself. This
-is more efficient because the sensor does not render at all during skipped ticks, rather
-than rendering and discarding the output.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code> parameter still works for backward compatibility, but a
-deprecation warning is logged when a non-zero value is used. It will be removed in a
-future release.</p>
-<p>The deprecation applies to every helper node that previously exposed <code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code>:</p>
+<p><em>이후:</em></p>
+<p>이전 릴리스에서는 ROS2 및 UCX 헬퍼 노드의 발행 속도가 각 헬퍼 노드의 <code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code> 입력으로 제어되었습니다. 이 파라미터는 이제 <strong>더 이상 사용되지 않습니다</strong>.</p>
+<p>멀티틱 렌더링이 전역적으로 활성화된 경우, 센서가 데이터를 발행하는 빈도를 제어하는 올바른 방법은 센서 프림 자체에 <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code>를 설정하는 것입니다. 이는 건너뛴 틱 동안 센서가 전혀 렌더링하지 않기 때문에 더 효율적입니다. 렌더링 후 출력을 버리는 것이 아닙니다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code> 파라미터는 이전 버전과의 호환성을 위해 여전히 작동하지만, 0이 아닌 값을 사용하면 사용 중단 경고가 기록됩니다. 향후 릴리스에서 제거될 예정입니다.</p>
 <ul class="simple">
+<li><p>사용 중단은 이전에 <code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code>를 노출했던 모든 헬퍼 노드에 적용됩니다:</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Camera</span> <span class="pre">Helper</span></code> (<code class="docutils literal notranslate"><span class="pre">isaacsim.ros2.bridge.ROS2CameraHelper</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Camera</span> <span class="pre">Info</span> <span class="pre">Helper</span></code> (<code class="docutils literal notranslate"><span class="pre">isaacsim.ros2.bridge.ROS2CameraInfoHelper</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">RTX</span> <span class="pre">Lidar</span> <span class="pre">Helper</span></code> (<code class="docutils literal notranslate"><span class="pre">isaacsim.ros2.bridge.ROS2RtxLidarHelper</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">UCX</span> <span class="pre">Camera</span> <span class="pre">Helper</span></code> (<code class="docutils literal notranslate"><span class="pre">isaacsim.ucx.bridge.UCXCameraHelper</span></code>)</p></li>
 </ul>
-<p>The newer <code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">RTX</span> <span class="pre">Radar</span> <span class="pre">Helper</span></code> (<code class="docutils literal notranslate"><span class="pre">isaacsim.ros2.bridge.ROS2RtxRadarHelper</span></code>) was
-introduced after this deprecation and does not expose <code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code> at all.</p>
+<p><code class="docutils literal notranslate"><span class="pre">UCX</span> <span class="pre">Camera</span> <span class="pre">Helper</span></code> (<code class="docutils literal notranslate"><span class="pre">isaacsim.ucx.bridge.UCXCameraHelper</span></code>)</p>
 </section>
 <section id="multi-tick-scheduling-migration">
 <h3><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id17" role="doc-backlink">Multi-tick scheduling migration</a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#multi-tick-scheduling-migration" title="Link to this heading">#</a></h3>
-<p>The table below lists 5.x rate-control inputs and the recommended 6.0 replacement for
-each sensor type. For the broader extension API migration (Kit-command-based sensor
-creation, class renames, annotator attach styles, GMO-helper changes), see
-<a class="reference internal" href="../migration_guides/isaac_sim_6_0/sensors_rtx_to_experimental_rtx.html#isaacsim-sensors-rtx-migration"><span class="std std-ref">RTX Sensors</span></a>. For the deprecated <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.camera</span></code>
-extension, see <a class="reference internal" href="../migration_guides/isaac_sim_6_0/sensors_camera_to_experimental_rtx.html#isaacsim-sensors-camera-migration"><span class="std std-ref">Camera Sensors</span></a>. For <code class="docutils literal notranslate"><span class="pre">auxOutputType</span></code> -&gt;
-<code class="docutils literal notranslate"><span class="pre">GenericModelOutput</span></code> channels, see <a class="reference internal" href="isaacsim_sensors_rtx.html#isaacsim-sensors-rtx-aux-output-level"><span class="std std-ref">Auxiliary Output Level and the GenericModelOutput RenderVar</span></a>.</p>
+<p>더 최신의 <code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">RTX</span> <span class="pre">Radar</span> <span class="pre">Helper</span></code> (<code class="docutils literal notranslate"><span class="pre">isaacsim.ros2.bridge.ROS2RtxRadarHelper</span></code>)는 이 사용 중단 이후에 도입되었으며 <code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code>를 전혀 노출하지 않습니다.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <colgroup>
-<col style="width: 18.0%" />
-<col style="width: 30.0%" />
-<col style="width: 30.0%" />
-<col style="width: 22.0%" />
+<col style="width: 18.0%"/>
+<col style="width: 30.0%"/>
+<col style="width: 30.0%"/>
+<col style="width: 22.0%"/>
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Sensor type</p></th>
-<th class="head"><p>5.x input</p></th>
-<th class="head"><p>6.0 replacement</p></th>
-<th class="head"><p>Notes</p></th>
+<tr class="row-odd"><th class="head"><p>아래 표에는 5.x 속도 제어 입력과 각 센서 유형에 대한 권장 6.0 교체 방법이 나열되어 있습니다. 더 광범위한 확장 API 마이그레이션에 대해서는 <a class="reference internal" href="../migration_guides/isaac_sim_6_0/sensors_rtx_to_experimental_rtx.html#isaacsim-sensors-rtx-migration"><span class="std std-ref">RTX Sensors</span></a>를 참조하십시오. 더 이상 사용되지 않는 <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.camera</span></code> 확장에 대해서는 <a class="reference internal" href="../migration_guides/isaac_sim_6_0/sensors_camera_to_experimental_rtx.html#isaacsim-sensors-camera-migration"><span class="std std-ref">Camera Sensors</span></a>를 참조하십시오. <code class="docutils literal notranslate"><span class="pre">auxOutputType</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">GenericModelOutput</span></code> 채널에 대해서는 <a class="reference internal" href="isaacsim_sensors_rtx.html#isaacsim-sensors-rtx-aux-output-level"><span class="std std-ref">Auxiliary Output Level and the GenericModelOutput RenderVar</span></a>를 참조하십시오.</p></th>
+<th class="head"><p>센서 유형</p></th>
+<th class="head"><p>5.x 입력</p></th>
+<th class="head"><p>6.0 교체</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>RTX Lidar</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code> on <code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">RTX</span> <span class="pre">Lidar</span> <span class="pre">Helper</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> on the <code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code> prim</p></td>
-<td><p>Must equal <code class="docutils literal notranslate"><span class="pre">omni:sensor:Core:scanRateBaseHz</span></code>. See <a class="reference internal" href="isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-lidar-tickrate-must-match-scanrate"><span class="std std-ref">OmniLidar Tick Rate Must Equal scanRateBaseHz</span></a>.</p></td>
+<tr class="row-even"><td><p>비고</p></td>
+<td><p>RTX Lidar</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">RTX</span> <span class="pre">Lidar</span> <span class="pre">Helper</span></code>의 <code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code> 프림의 <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>RTX Lidar</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">fullScan</span></code> input on <code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">RTX</span> <span class="pre">Lidar</span> <span class="pre">Helper</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">omni:sensor:Core:accumulateOutputs</span></code> on the <code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code> prim</p></td>
-<td><p>Helper input is now ignored and logs a deprecation warning when set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">omni:sensor:Core:scanRateBaseHz</span></code>와 같아야 합니다. <a class="reference internal" href="isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-lidar-tickrate-must-match-scanrate"><span class="std std-ref">OmniLidar Tick Rate Must Equal scanRateBaseHz</span></a>를 참조하십시오.</p></td>
+<td><p>RTX Lidar</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">RTX</span> <span class="pre">Lidar</span> <span class="pre">Helper</span></code>의 <code class="docutils literal notranslate"><span class="pre">fullScan</span></code> 입력</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code> 프림의 <code class="docutils literal notranslate"><span class="pre">omni:sensor:Core:accumulateOutputs</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p>Camera (ROS 2)</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code> on <code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Camera</span> <span class="pre">Helper</span></code> / <code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Camera</span> <span class="pre">Info</span> <span class="pre">Helper</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> on the <code class="docutils literal notranslate"><span class="pre">Camera</span></code> prim</p></td>
-<td><p>Camera prim must have <code class="docutils literal notranslate"><span class="pre">OmniSensorAPI</span></code> applied. <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code> applies it automatically.</p></td>
+<tr class="row-even"><td><p>헬퍼 입력은 이제 무시되며 <code class="docutils literal notranslate"><span class="pre">False</span></code>로 설정될 때 사용 중단 경고를 기록합니다.</p></td>
+<td><p>Camera (ROS 2)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Camera</span> <span class="pre">Helper</span></code> / <code class="docutils literal notranslate"><span class="pre">ROS2</span> <span class="pre">Camera</span> <span class="pre">Info</span> <span class="pre">Helper</span></code>의 <code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Camera</span></code> 프림의 <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>Camera (UCX)</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code> on <code class="docutils literal notranslate"><span class="pre">UCX</span> <span class="pre">Camera</span> <span class="pre">Helper</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> on the <code class="docutils literal notranslate"><span class="pre">Camera</span></code> prim</p></td>
-<td><p>Helper still accepts <code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code> and logs a deprecation warning.</p></td>
+<tr class="row-odd"><td><p>Camera 프림에 <code class="docutils literal notranslate"><span class="pre">OmniSensorAPI</span></code>가 적용되어 있어야 합니다. <code class="docutils literal notranslate"><span class="pre">RtxCamera</span></code>는 자동으로 적용합니다.</p></td>
+<td><p>Camera (UCX)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">UCX</span> <span class="pre">Camera</span> <span class="pre">Helper</span></code>의 <code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Camera</span></code> 프림의 <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>RTX Radar is intentionally omitted: <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> is ignored on
-<code class="docutils literal notranslate"><span class="pre">OmniRadar</span></code> in 6.0 GA (see
-<a class="reference internal" href="isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-known-issue-radar-autotrigger"><span class="std std-ref">RTX Radar autotriggers in 6.0 GA</span></a>). Gate Radar publish
-rates downstream instead.</p>
+<p>헬퍼는 여전히 <code class="docutils literal notranslate"><span class="pre">frameSkipCount</span></code>를 수락하며 사용 중단 경고를 기록합니다.</p>
 </section>
 </section>
 <section id="known-issues">
 <span id="isaac-sim-sensors-multitick-known-issues"></span><h2><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id18" role="doc-backlink">Known Issues</a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#known-issues" title="Link to this heading">#</a></h2>
 <section id="rtx-radar-autotriggers-in-6-0-ga">
 <span id="isaac-sim-sensors-multitick-known-issue-radar-autotrigger"></span><h3><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id19" role="doc-backlink">RTX Radar autotriggers in 6.0 GA</a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#rtx-radar-autotriggers-in-6-0-ga" title="Link to this heading">#</a></h3>
-<p>In Isaac Sim 6.0 GA, the RTX Radar renderer ignores <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code>
-on <code class="docutils literal notranslate"><span class="pre">OmniRadar</span></code> prims and renders every simulation frame. Setting <code class="docutils literal notranslate"><span class="pre">tick_rate</span></code> on
-<code class="xref py py-class docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.rtx.Radar</span></code> has no effect on the actual
-render cadence; the attribute is still authored on the prim, but the multi-tick
-scheduler skips Radar prims. This is expected to be corrected in a future release.</p>
-<p>The autotrigger limitation does not affect <code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code> or <code class="docutils literal notranslate"><span class="pre">Camera</span></code> prims.</p>
+<p>RTX Radar는 의도적으로 생략되었습니다: <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code>는 6.0 GA의 <code class="docutils literal notranslate"><span class="pre">OmniRadar</span></code>에서 무시됩니다(<a class="reference internal" href="isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-known-issue-radar-autotrigger"><span class="std std-ref">RTX Radar autotriggers in 6.0 GA</span></a> 참조). 대신 다운스트림에서 Radar 발행 속도를 게이팅하십시오.</p>
+<p>Isaac Sim 6.0 GA에서, RTX Radar 렌더러는 <code class="docutils literal notranslate"><span class="pre">OmniRadar</span></code> 프림의 <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code>를 무시하고 매 시뮬레이션 프레임마다 렌더링합니다. <code class="xref py py-class docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.rtx.Radar</span></code>에서 <code class="docutils literal notranslate"><span class="pre">tick_rate</span></code>를 설정해도 실제 렌더 간격에 영향이 없습니다; 속성은 여전히 프림에 작성되지만, 멀티틱 스케줄러는 Radar 프림을 건너뜁니다. 이는 향후 릴리스에서 수정될 예정입니다.</p>
 </section>
 <section id="omnilidar-partial-scan-fallback">
 <h3><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id20" role="doc-backlink">OmniLidar partial-scan fallback</a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#omnilidar-partial-scan-fallback" title="Link to this heading">#</a></h3>
-<p>If <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code> is not equal to <code class="docutils literal notranslate"><span class="pre">omni:sensor:Core:scanRateBaseHz</span></code> on an
-<code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code> prim, the sensor falls back to emitting partial scans every frame. See
-<a class="reference internal" href="isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-lidar-tickrate-must-match-scanrate"><span class="std std-ref">OmniLidar Tick Rate Must Equal scanRateBaseHz</span></a> for details and
-the recommended remediation.</p>
+<p>자동트리거 제한은 <code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">Camera</span></code> 프림에는 영향을 미치지 않습니다.</p>
 </section>
 <section id="radar-lidar-frames-in-flight-race">
 <span id="isaac-sim-sensors-multitick-known-issue-radar-lidar-fif-race"></span><h3><a class="toc-backref" href="isaacsim_sensors_multitick_rendering.html#id21" role="doc-backlink">Radar + Lidar frames-in-flight race</a><a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#radar-lidar-frames-in-flight-race" title="Link to this heading">#</a></h3>
-<p>A fatal crash from <code class="docutils literal notranslate"><span class="pre">rtx.sensors.lidar.core.plugin</span></code> may occur during the first 1-2
-wall-clock seconds after starting simulation when a scene combines RTX Radar, RTX Lidar,
-and Motion BVH. The crash is caused by a timing-dependent race in the RTX sensor
-framework’s frames-in-flight (FIF) scheduling, where the Lidar’s per-frame trace begins
-before its sensor profile has been initialized. Affected configurations crash
-deterministically; unaffected hardware does not see the issue. The error appears as a
-floating-point exception inside <code class="docutils literal notranslate"><span class="pre">LidarRotary::openTrace</span></code> or, less commonly, a
-segmentation fault in the v3.0 sensor scheduler:</p>
+<p><code class="docutils literal notranslate"><span class="pre">OmniLidar</span></code> 프림에서 <code class="docutils literal notranslate"><span class="pre">omni:sensor:tickRate</span></code>가 <code class="docutils literal notranslate"><span class="pre">omni:sensor:Core:scanRateBaseHz</span></code>와 같지 않으면, 센서는 매 프레임 부분 스캔을 방출하는 폴백으로 전환됩니다. 자세한 내용과 권장 해결책은 <a class="reference internal" href="isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-lidar-tickrate-must-match-scanrate"><span class="std std-ref">OmniLidar Tick Rate Must Equal scanRateBaseHz</span></a>를 참조하십시오.</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>Fatal<span class="o">]</span><span class="w"> </span><span class="o">[</span>carb.crashreporter-breakpad.plugin<span class="o">]</span><span class="w"> </span>Crashing:<span class="w"> </span>SIGFPE
 at<span class="w"> </span>rtx.sensors.lidar.core.plugin::LidarRotary::openTrace
 </pre></div>
 </div>
 </div></blockquote>
-<p>Once the simulation has been running for ~1-2 wall-clock seconds without crashing, the
-session is stable for the remainder of its lifetime.</p>
+<p>RTX Radar, RTX Lidar 및 Motion BVH를 결합한 씬에서 시뮬레이션 시작 후 처음 1~2 벽시계 초 동안 <code class="docutils literal notranslate"><span class="pre">rtx.sensors.lidar.core.plugin</span></code>에서 치명적 충돌이 발생할 수 있습니다. 충돌은 Lidar의 프레임당 추적이 센서 프로필이 초기화되기 전에 시작되는 RTX 센서 프레임워크의 frames-in-flight(FIF) 스케줄링의 타이밍 의존적 경쟁으로 인해 발생합니다. 영향을 받는 구성은 결정론적으로 충돌합니다; 영향을 받지 않는 하드웨어에서는 문제가 발생하지 않습니다. 오류는 <code class="docutils literal notranslate"><span class="pre">LidarRotary::openTrace</span></code> 내부의 부동 소수점 예외 또는, 드물게 v3.0 센서 스케줄러의 세그멘테이션 폴트로 나타납니다:</p>
 <section id="standalone-python-workaround">
 <h4>Standalone Python workaround<a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#standalone-python-workaround" title="Link to this heading">#</a></h4>
-<p>In standalone Python workflows, delay creating the render product for the Radar and
-attaching any Annotators or Writers until after the frames-in-flight have stabilized.
-Construct the Lidars normally before <code class="docutils literal notranslate"><span class="pre">timeline.play()</span></code>, but construct only the
-Radar’s USD authoring object pre-play and defer the <code class="docutils literal notranslate"><span class="pre">RadarSensor</span></code> wrap until after a
-short warmup window:</p>
+<p>시뮬레이션이 충돌 없이 약 1~2 벽시계 초 동안 실행되면, 세션은 나머지 수명 동안 안정적입니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationApp</span>
 
-<span class="n">simulation_app</span> <span class="o">=</span> <span class="n">SimulationApp</span><span class="p">({</span><span class="s2">&quot;headless&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;enable_motion_bvh&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+<span class="n">simulation_app</span> <span class="o">=</span> <span class="n">SimulationApp</span><span class="p">({</span><span class="s2">"headless"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">"enable_motion_bvh"</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">carb</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -1833,15 +1300,15 @@ short warmup window:</p>
     <span class="n">parse_generic_model_output_data</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">Cube</span><span class="p">(</span><span class="s2">&quot;/cube&quot;</span><span class="p">,</span> <span class="n">sizes</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]))</span>
+<span class="n">Cube</span><span class="p">(</span><span class="s2">"/cube"</span><span class="p">,</span> <span class="n">sizes</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]))</span>
 
 <span class="c1"># Lidars: full wrap pre-play (USD prim + render product + annotators).</span>
-<span class="n">lidar_sensor_1</span> <span class="o">=</span> <span class="n">LidarSensor</span><span class="p">(</span><span class="n">Lidar</span><span class="p">(</span><span class="s2">&quot;/lidar_1&quot;</span><span class="p">),</span> <span class="n">annotators</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;generic-model-output&quot;</span><span class="p">])</span>
-<span class="n">lidar_sensor_2</span> <span class="o">=</span> <span class="n">LidarSensor</span><span class="p">(</span><span class="n">Lidar</span><span class="p">(</span><span class="s2">&quot;/lidar_2&quot;</span><span class="p">),</span> <span class="n">annotators</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;generic-model-output&quot;</span><span class="p">])</span>
+<span class="n">lidar_sensor_1</span> <span class="o">=</span> <span class="n">LidarSensor</span><span class="p">(</span><span class="n">Lidar</span><span class="p">(</span><span class="s2">"/lidar_1"</span><span class="p">),</span> <span class="n">annotators</span><span class="o">=</span><span class="p">[</span><span class="s2">"generic-model-output"</span><span class="p">])</span>
+<span class="n">lidar_sensor_2</span> <span class="o">=</span> <span class="n">LidarSensor</span><span class="p">(</span><span class="n">Lidar</span><span class="p">(</span><span class="s2">"/lidar_2"</span><span class="p">),</span> <span class="n">annotators</span><span class="o">=</span><span class="p">[</span><span class="s2">"generic-model-output"</span><span class="p">])</span>
 
 <span class="c1"># Radar: USD authoring object only. Defer the RadarSensor wrap until after the</span>
 <span class="c1"># Lidar frames-in-flight slots have stabilized post-play.</span>
-<span class="n">radar</span> <span class="o">=</span> <span class="n">Radar</span><span class="p">(</span><span class="s2">&quot;/radar&quot;</span><span class="p">)</span>
+<span class="n">radar</span> <span class="o">=</span> <span class="n">Radar</span><span class="p">(</span><span class="s2">"/radar"</span><span class="p">)</span>
 
 <span class="c1"># Start playback and let the Lidars warm up for a few frames before wrapping</span>
 <span class="c1"># the Radar. 5 frames is one full rotation of the default 3-slot</span>
@@ -1851,99 +1318,69 @@ short warmup window:</p>
 <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
     <span class="n">simulation_app</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
-<span class="c1"># Now safe to wrap the Radar. This call creates the Radar&#39;s render product and</span>
+<span class="c1"># Now safe to wrap the Radar. This call creates the Radar's render product and</span>
 <span class="c1"># binds annotators - the operation that would open the FIF race window if done</span>
 <span class="c1"># concurrently with Lidar attachment.</span>
-<span class="n">radar_sensor</span> <span class="o">=</span> <span class="n">RadarSensor</span><span class="p">(</span><span class="n">radar</span><span class="p">,</span> <span class="n">annotators</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;generic-model-output&quot;</span><span class="p">])</span>
+<span class="n">radar_sensor</span> <span class="o">=</span> <span class="n">RadarSensor</span><span class="p">(</span><span class="n">radar</span><span class="p">,</span> <span class="n">annotators</span><span class="o">=</span><span class="p">[</span><span class="s2">"generic-model-output"</span><span class="p">])</span>
 
 <span class="c1"># Continue running and verify every sensor is producing output.</span>
 <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">60</span><span class="p">):</span>
     <span class="n">simulation_app</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">sensor</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span>
-        <span class="p">(</span><span class="n">lidar_sensor_1</span><span class="p">,</span> <span class="s2">&quot;lidar_1&quot;</span><span class="p">),</span>
-        <span class="p">(</span><span class="n">lidar_sensor_2</span><span class="p">,</span> <span class="s2">&quot;lidar_2&quot;</span><span class="p">),</span>
-        <span class="p">(</span><span class="n">radar_sensor</span><span class="p">,</span> <span class="s2">&quot;radar&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">lidar_sensor_1</span><span class="p">,</span> <span class="s2">"lidar_1"</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">lidar_sensor_2</span><span class="p">,</span> <span class="s2">"lidar_2"</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">radar_sensor</span><span class="p">,</span> <span class="s2">"radar"</span><span class="p">),</span>
     <span class="p">]:</span>
-        <span class="n">data</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">sensor</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">&quot;generic-model-output&quot;</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">sensor</span><span class="o">.</span><span class="n">get_data</span><span class="p">(</span><span class="s2">"generic-model-output"</span><span class="p">)</span>
         <span class="n">gmo</span> <span class="o">=</span> <span class="n">parse_generic_model_output_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-        <span class="n">carb</span><span class="o">.</span><span class="n">log_warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: numElements=</span><span class="si">{</span><span class="n">gmo</span><span class="o">.</span><span class="n">numElements</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">carb</span><span class="o">.</span><span class="n">log_warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: numElements=</span><span class="si">{</span><span class="n">gmo</span><span class="o">.</span><span class="n">numElements</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="n">timeline</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 <span class="n">simulation_app</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The 5-frame warmup is conservative: it is one full rotation of the default 3-slot
-frames-in-flight buffer plus a small margin. Heavier scenes may require a larger value.</p>
+<p>독립형 Python 워크플로우에서는 frames-in-flight가 안정화된 후까지 Radar의 렌더 제품 생성과 어노테이터 또는 라이터 연결을 지연하십시오. <code class="docutils literal notranslate"><span class="pre">timeline.play()</span></code> 이전에 Lidar를 정상적으로 구성하되, Radar의 USD 작성 객체만 재생 전에 구성하고 짧은 워밍업 윈도우 이후로 <code class="docutils literal notranslate"><span class="pre">RadarSensor</span></code> 래핑을 연기하십시오:</p>
 </section>
 <section id="omnigraph-workaround">
 <span id="isaac-sim-sensors-multitick-known-issue-radar-lidar-fif-race-omnigraph-workaround"></span><h4>OmniGraph workaround<a class="headerlink" href="isaacsim_sensors_multitick_rendering.html#omnigraph-workaround" title="Link to this heading">#</a></h4>
-<p>In OmniGraph workflows using the <code class="docutils literal notranslate"><span class="pre">ROS2RtxRadarHelper</span></code> node, you can stagger creating
-the Radar’s render product until after the Lidars have stabilized. Place an
-<code class="docutils literal notranslate"><span class="pre">omni.graph.action.Countdown</span></code> node between the <code class="docutils literal notranslate"><span class="pre">OnPlaybackTick</span></code> and the
-<code class="docutils literal notranslate"><span class="pre">ROS2RtxRadarHelper</span></code> node, setting its <code class="docutils literal notranslate"><span class="pre">duration</span></code> to <code class="docutils literal notranslate"><span class="pre">5</span></code> and its <code class="docutils literal notranslate"><span class="pre">period</span></code> to
-<code class="docutils literal notranslate"><span class="pre">1</span></code>. The <code class="docutils literal notranslate"><span class="pre">Countdown</span></code> node’s <code class="docutils literal notranslate"><span class="pre">finished</span></code> output triggers downstream graph execution
-after <code class="docutils literal notranslate"><span class="pre">duration</span></code> ticks have elapsed, analogous to the 5-frame warmup in the standalone
-Python workflow. You may need to increase the <code class="docutils literal notranslate"><span class="pre">duration</span></code> value based on your scene’s
-complexity and your hardware configuration.</p>
+<p>5프레임 워밍업은 보수적입니다: 기본 3슬롯 frames-in-flight 버퍼의 전체 회전 더하기 소량의 여유입니다. 더 무거운 씬에서는 더 큰 값이 필요할 수 있습니다.</p>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/isim_6.0_ros_tut_gui_rtx_radar_countdown_workaround.png"><img alt="RTX Radar crash workaround in OmniGraph, using Countdown node to stagger Radar writer attachment" src="../_images/isim_6.0_ros_tut_gui_rtx_radar_countdown_workaround.png" style="width: 800px;" />
+<a class="reference internal image-reference" href="../_images/isim_6.0_ros_tut_gui_rtx_radar_countdown_workaround.png"><img alt="RTX Radar crash workaround in OmniGraph, using Countdown node to stagger Radar writer attachment" src="../_images/isim_6.0_ros_tut_gui_rtx_radar_countdown_workaround.png" style="width: 800px;"/>
 </a>
 </figure>
 </section>
 </section>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="isaacsim_sensors_rtx_annotators.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">RTX Sensor Annotators</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="isaacsim_sensors_rtx_custom.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Creating Custom RTX Sensor Profiles</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="isaacsim_sensors_rtx_annotators.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">RTX Sensor Annotators</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="isaacsim_sensors_rtx_custom.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Creating Custom RTX Sensor Profiles</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="isaacsim_sensors_multitick_rendering.html#overview">Overview</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="isaacsim_sensors_multitick_rendering.html#performance-benefits">Performance Benefits</a></li>
 </ul>
@@ -1980,46 +1417,29 @@ complexity and your hardware configuration.</p>
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -2050,36 +1470,21 @@ complexity and your hardware configuration.</p>
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

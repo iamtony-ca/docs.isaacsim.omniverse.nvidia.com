@@ -1,561 +1,257 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Robot Configuration Tutorial &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Robot Configuration Tutorial — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
-  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
-</script>
-<script type="text/javascript">
-  function OptanonWrapper() {
-    var event = new Event('bannerLoaded');
-    window.dispatchEvent(event);
-  }
-</script>
-<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
-</script>
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'cumotion/tutorial_robot_configuration';</script>
-    <script>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'cumotion/tutorial_robot_configuration';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cuMotion World Interface Tutorial" href="tutorial_world_interface.html" />
-    <link rel="prev" title="cuMotion Integration" href="index.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="tutorial_world_interface.html" rel="next" title="cuMotion World Interface Tutorial"/>
+<link href="index.html" rel="prev" title="cuMotion Integration"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="tutorial_robot_configuration.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="tutorial_robot_configuration.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -575,7 +271,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -603,20 +298,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -691,17 +374,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -879,7 +552,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -919,13 +591,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -972,10 +638,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1144,18 +806,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1181,96 +833,68 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="../robot_motion_experimental/index.html" class="nav-link">Robot Motion (Experimental)</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">cuMotion Integration</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Robot Configuration Tutorial</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="../robot_motion_experimental/index.html">Robot Motion (Experimental)</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">cuMotion Integration</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Robot Configuration Tutorial</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="robot-configuration-tutorial">
+<article class="bd-article">
+<section id="robot-configuration-tutorial">
 <span id="isaac-sim-cumotion-tutorial-robot-configuration"></span><h1>Robot Configuration Tutorial<a class="headerlink" href="tutorial_robot_configuration.html#robot-configuration-tutorial" title="Link to this heading">#</a></h1>
-<p>This tutorial covers configuring robots for use with the <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> integration — from generating the required XRDF file to loading it into your application.</p>
-<p>By the end of this tutorial, you’ll understand:</p>
+<p>이 튜토리얼은 필요한 XRDF 파일 생성부터 애플리케이션에 로드하는 방법까지, <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> 통합에서 로봇을 구성하는 방법을 설명합니다.</p>
+<p>이 튜토리얼을 마치면 다음을 이해할 수 있습니다:</p>
 <ul class="simple">
-<li><p>How to load pre-configured or custom robot configurations using <code class="xref py py-func docutils literal notranslate"><span class="pre">load_cumotion_supported_robot()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">load_cumotion_robot()</span></code></p></li>
-<li><p>How to use robot configurations with <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> components</p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">load_cumotion_supported_robot()</span></code>와 <code class="xref py py-func docutils literal notranslate"><span class="pre">load_cumotion_robot()</span></code>를 사용하여 사전 구성된 로봇 또는 커스텀 로봇 설정을 로드하는 방법</p></li>
+<li><p><a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> 컴포넌트와 함께 로봇 설정을 사용하는 방법</p></li>
 </ul>
-<p><strong>Prerequisites</strong></p>
+<p><strong>사전 요구 사항</strong></p>
 <ul class="simple">
-<li><p>Basic understanding of URDF and XRDF file formats</p></li>
+<li><p>URDF 및 XRDF 파일 형식에 대한 기본적인 이해</p></li>
 </ul>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="tutorial_robot_configuration.html#overview" title="Link to this heading">#</a></h2>
-<p>An <a class="reference external" href="https://nvidia-isaac-ros.github.io/concepts/manipulation/xrdf.html">XRDF</a> file is the main configuration file required by <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> for a specific robot.
-It supplements the robot’s URDF with <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a>-specific data: collision-sphere geometries, self-collision settings, joint properties, tool frames, and modifiers.</p>
-<p><strong>Active and Fixed Joints</strong></p>
-<p>A key aspect of the XRDF is defining the robot’s configuration space. Joints are classified as either <em>active</em> or <em>fixed</em>. Active joints are directly controlled by <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a>; fixed joints are held at a specified default position. For example, on a seven-DOF arm with an attached gripper, the arm joints are active and the gripper joints are fixed. The fixed-joint positions define the robot’s default configuration, which is used for null-space behavior in reactive control.</p>
-<p><strong>Collision Spheres</strong></p>
-<p><a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> uses a set of spheres attached to each robot link for collision avoidance. These spheres must roughly cover the robot’s surface. The <em>cuMotion/Lula Robot Description Editor</em> provides tools to generate and tune this sphere set for any robot.
-For a full tutorial on XRDF and URDF file generation, see <a class="reference internal" href="../robot_setup_tutorials/tutorial_generate_robot_config.html#isaac-sim-app-tutorial-generate-robot-config-lula"><span class="std std-ref">Generate Robot Description Files and Collision Spheres</span></a>.</p>
+<p><a class="reference external" href="https://nvidia-isaac-ros.github.io/concepts/manipulation/xrdf.html">XRDF</a> 파일은 특정 로봇에 대해 <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a>이 필요로 하는 주요 설정 파일입니다.
+로봇의 URDF를 <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> 특정 데이터로 보완합니다: 충돌 구체 지오메트리, 자기 충돌 설정, 관절 속성, 툴 프레임, 수정자.</p>
+<p><strong>Active 및 Fixed 관절</strong></p>
+<p>XRDF의 핵심 측면은 로봇의 설정 공간을 정의하는 것입니다. 관절은 <em>active</em> 또는 <em>fixed</em>로 분류됩니다. Active 관절은 <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a>에 의해 직접 제어되며, fixed 관절은 지정된 기본 위치에 고정됩니다. 예를 들어, 그리퍼가 달린 7-DOF 팔에서 팔 관절은 active이고 그리퍼 관절은 fixed입니다. Fixed 관절 위치는 반응적 제어에서 null-space 동작에 사용되는 로봇의 기본 설정을 정의합니다.</p>
+<p><strong>충돌 구체</strong></p>
+<p><a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a>은 충돌 회피를 위해 각 로봇 링크에 부착된 구체 세트를 사용합니다. 이 구체들은 로봇 표면을 대략적으로 덮어야 합니다. <em>cuMotion/Lula Robot Description Editor</em>는 모든 로봇에 대해 이 구체 세트를 생성하고 조정하는 도구를 제공합니다.
+XRDF 및 URDF 파일 생성에 대한 전체 튜토리얼은 <a class="reference internal" href="../robot_setup_tutorials/tutorial_generate_robot_config.html#isaac-sim-app-tutorial-generate-robot-config-lula"><span class="std std-ref">Generate Robot Description Files and Collision Spheres</span></a>를 참조하세요.</p>
 </section>
 <section id="robot-configuration-files">
 <h2>Robot Configuration Files<a class="headerlink" href="tutorial_robot_configuration.html#robot-configuration-files" title="Link to this heading">#</a></h2>
-<p><a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> expects the following files for each robot, organized in a single directory:</p>
+<p><a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a>은 각 로봇에 대해 단일 디렉토리에 정리된 다음 파일들을 필요로 합니다:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>robot_config/
 ├── robot.urdf
 ├── robot.xrdf
@@ -1283,76 +907,76 @@ For a full tutorial on XRDF and URDF file generation, see <a class="reference in
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">robot.urdf</span></code> — The URDF file describing the robot’s kinematic structure, joint limits, and link geometries.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">robot.xrdf</span></code> — The XRDF file containing <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a>-specific configuration: collision-sphere geometries, active/fixed joint assignments, default joint positions, tool frames, and self-collision rules.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">meshes/</span></code> — Directory containing the mesh files referenced by the URDF.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">rmp_flow.yaml</span></code> (optional) — RMPflow configuration for reactive control.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">graph_based_motion_planner_config.yaml</span></code> (optional) — Graph-based motion planner configuration.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">robot.urdf</span></code> — 로봇의 기구학적 구조, 관절 제한, 링크 지오메트리를 설명하는 URDF 파일.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">robot.xrdf</span></code> — <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> 특정 설정을 포함하는 XRDF 파일: 충돌 구체 지오메트리, active/fixed 관절 할당, 기본 관절 위치, 툴 프레임, 자기 충돌 규칙.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">meshes/</span></code> — URDF에서 참조하는 메시 파일이 포함된 디렉토리.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rmp_flow.yaml</span></code> (선택 사항) — 반응형 제어를 위한 RMPflow 설정.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">graph_based_motion_planner_config.yaml</span></code> (선택 사항) — 그래프 기반 모션 플래너 설정.</p></li>
 </ul>
-<p>Both the URDF and XRDF files can be generated directly from a robot USD asset using extensions provided with Isaac Sim:</p>
+<p>URDF와 XRDF 파일 모두 Isaac Sim과 함께 제공되는 Extension을 사용하여 로봇 USD 에셋에서 직접 생성할 수 있습니다:</p>
 <ul class="simple">
-<li><p>The <a class="reference internal" href="../importer_exporter/ext_omni_exporter_urdf.html#isaac-sim-app-extension-urdf-exporter"><span class="std std-ref">Isaac Sim USD to URDF Exporter</span></a> exports a URDF file from a USD asset.</p></li>
-<li><p>The <a class="reference internal" href="../manipulators/manipulators_robot_description_editor.html#isaac-sim-app-tutorial-motion-generation-robot-description-editor"><span class="std std-ref">Robot Description Editor</span></a> (extension: <code class="docutils literal notranslate"><span class="pre">isaacsim.robot_setup.xrdf_editor</span></code>) generates the XRDF file, including collision spheres, joint properties, tool frames, and self-collision rules.</p></li>
+<li><p><a class="reference internal" href="../importer_exporter/ext_omni_exporter_urdf.html#isaac-sim-app-extension-urdf-exporter"><span class="std std-ref">Isaac Sim USD to URDF Exporter</span></a>는 USD 에셋에서 URDF 파일을 내보냅니다.</p></li>
+<li><p><a class="reference internal" href="../manipulators/manipulators_robot_description_editor.html#isaac-sim-app-tutorial-motion-generation-robot-description-editor"><span class="std std-ref">Robot Description Editor</span></a> (Extension: <code class="docutils literal notranslate"><span class="pre">isaacsim.robot_setup.xrdf_editor</span></code>)는 충돌 구체, 관절 속성, 툴 프레임, 자기 충돌 규칙을 포함한 XRDF 파일을 생성합니다.</p></li>
 </ul>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>For a complete step-by-step walkthrough generating XRDF and URDF files for a UR10e with a Robotiq 2F-140 gripper, see <a class="reference internal" href="../robot_setup_tutorials/tutorial_generate_robot_config.html#isaac-sim-app-tutorial-generate-robot-config-lula"><span class="std std-ref">Generate Robot Description Files and Collision Spheres</span></a>.</p>
+<p class="admonition-title">참고</p>
+<p>Robotiq 2F-140 그리퍼가 달린 UR10e의 XRDF 및 URDF 파일 생성에 대한 단계별 안내는 <a class="reference internal" href="../robot_setup_tutorials/tutorial_generate_robot_config.html#isaac-sim-app-tutorial-generate-robot-config-lula"><span class="std std-ref">Generate Robot Description Files and Collision Spheres</span></a>를 참조하세요.</p>
 </div>
 </section>
 <section id="loading-robot-configurations">
 <h2>Loading Robot Configurations<a class="headerlink" href="tutorial_robot_configuration.html#loading-robot-configurations" title="Link to this heading">#</a></h2>
-<p>Once you have URDF and XRDF files, load them into a <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionRobot</span></code> object, which encapsulates all data needed to work with <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a>:</p>
+<p>URDF와 XRDF 파일이 준비되면 <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> 작업에 필요한 모든 데이터를 캡슐화하는 <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionRobot</span></code> 오브젝트에 로드합니다:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">robot_description</span></code>: The <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> robot description loaded from URDF/XRDF files, including default joint positions and tool frame names</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">kinematics</span></code>: The <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> kinematics solver for forward kinematics and Jacobian computation</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">controlled_joint_names</span></code>: List of joint names controlled by <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">directory</span></code>: Path to the robot configuration directory (useful for loading related config files)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">robot_description</span></code>: URDF/XRDF 파일에서 로드된 <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> 로봇 설명 (기본 관절 위치 및 툴 프레임 이름 포함)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kinematics</span></code>: 순방향 기구학과 야코비안 계산을 위한 <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> 기구학 솔버</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">controlled_joint_names</span></code>: <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a>이 제어하는 관절 이름 목록</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">directory</span></code>: 로봇 설정 디렉토리 경로 (관련 설정 파일 로드에 유용)</p></li>
 </ul>
-<p>The provided functions for loading a <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionRobot</span></code> object are:</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionRobot</span></code> 오브젝트를 로드하는 제공 함수들:</p>
 <ul class="simple">
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">load_cumotion_supported_robot()</span></code> - Load a pre-configured robot from the extension’s robot_configurations directory.</p></li>
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">load_cumotion_robot()</span></code> - Load a custom robot from a given directory.</p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">load_cumotion_supported_robot()</span></code> - Extension의 robot_configurations 디렉토리에서 사전 구성된 로봇 로드.</p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">load_cumotion_robot()</span></code> - 지정된 디렉토리에서 커스텀 로봇 로드.</p></li>
 </ul>
 <section id="loading-supported-robots">
 <h3>Loading Supported Robots<a class="headerlink" href="tutorial_robot_configuration.html#loading-supported-robots" title="Link to this heading">#</a></h3>
-<p>The easiest way to get started is to use a pre-configured robot that comes with the extension. Currently supported robots include:</p>
+<p>시작하기 가장 쉬운 방법은 Extension과 함께 제공되는 사전 구성된 로봇을 사용하는 것입니다. 현재 지원하는 로봇:</p>
 <ul class="simple">
-<li><p><strong>franka</strong> - Franka Emika Panda robot</p></li>
-<li><p><strong>ur10</strong> - Universal Robots UR10 robot</p></li>
+<li><p><strong>franka</strong> - Franka Emika Panda 로봇</p></li>
+<li><p><strong>ur10</strong> - Universal Robots UR10 로봇</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="kn">import</span><span class="w"> </span><span class="nn">isaacsim.robot_motion.cumotion</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cu_mg</span>
 
     <span class="c1"># Load a supported robot</span>
-    <span class="n">robot</span> <span class="o">=</span> <span class="n">cu_mg</span><span class="o">.</span><span class="n">load_cumotion_supported_robot</span><span class="p">(</span><span class="s2">&quot;franka&quot;</span><span class="p">)</span>
+    <span class="n">robot</span> <span class="o">=</span> <span class="n">cu_mg</span><span class="o">.</span><span class="n">load_cumotion_supported_robot</span><span class="p">(</span><span class="s2">"franka"</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The function automatically locates the robot configuration directory within the extension and loads the URDF and XRDF files. If the robot name is not supported, a <code class="xref py py-class docutils literal notranslate"><span class="pre">FileNotFoundError</span></code> will be raised.</p>
+<p>이 함수는 Extension 내에서 로봇 설정 디렉토리를 자동으로 찾아 URDF와 XRDF 파일을 로드합니다. 로봇 이름이 지원되지 않는 경우 <code class="xref py py-class docutils literal notranslate"><span class="pre">FileNotFoundError</span></code>가 발생합니다.</p>
 </section>
 <section id="creating-custom-robot-configurations">
 <h3>Creating Custom Robot Configurations<a class="headerlink" href="tutorial_robot_configuration.html#creating-custom-robot-configurations" title="Link to this heading">#</a></h3>
-<p>If you have your own robot with URDF and XRDF files, load it using <code class="xref py py-func docutils literal notranslate"><span class="pre">load_cumotion_robot()</span></code>:</p>
+<p>자체 URDF와 XRDF 파일이 있는 로봇은 <code class="xref py py-func docutils literal notranslate"><span class="pre">load_cumotion_robot()</span></code>을 사용하여 로드하세요:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="kn">import</span><span class="w"> </span><span class="nn">isaacsim.robot_motion.cumotion</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cu_mg</span>
 
     <span class="c1"># Generate configuration with default filenames (robot.urdf, robot.xrdf)</span>
     <span class="n">robot</span> <span class="o">=</span> <span class="n">cu_mg</span><span class="o">.</span><span class="n">load_cumotion_robot</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="n">robot_directory</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>If your URDF or XRDF files have different names, specify them explicitly:</p>
+<p>URDF 또는 XRDF 파일 이름이 다른 경우 명시적으로 지정하세요:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="kn">import</span><span class="w"> </span><span class="nn">isaacsim.robot_motion.cumotion</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cu_mg</span>
 
     <span class="n">robot</span> <span class="o">=</span> <span class="n">cu_mg</span><span class="o">.</span><span class="n">load_cumotion_robot</span><span class="p">(</span>
         <span class="n">directory</span><span class="o">=</span><span class="n">absolute_path_to_robot_directory</span><span class="p">,</span>
-        <span class="n">urdf_filename</span><span class="o">=</span><span class="s2">&quot;robot.urdf&quot;</span><span class="p">,</span>  <span class="c1"># if your URDF has a different name, use it.</span>
-        <span class="n">xrdf_filename</span><span class="o">=</span><span class="s2">&quot;robot.xrdf&quot;</span><span class="p">,</span>  <span class="c1"># if your XRDF has a different name, use it.</span>
+        <span class="n">urdf_filename</span><span class="o">=</span><span class="s2">"robot.urdf"</span><span class="p">,</span>  <span class="c1"># if your URDF has a different name, use it.</span>
+        <span class="n">xrdf_filename</span><span class="o">=</span><span class="s2">"robot.xrdf"</span><span class="p">,</span>  <span class="c1"># if your XRDF has a different name, use it.</span>
     <span class="p">)</span>
 </pre></div>
 </div>
-<p>The function will raise a <code class="xref py py-class docutils literal notranslate"><span class="pre">FileNotFoundError</span></code> if the specified files cannot be found.</p>
+<p>지정된 파일을 찾을 수 없는 경우 함수는 <code class="xref py py-class docutils literal notranslate"><span class="pre">FileNotFoundError</span></code>를 발생시킵니다.</p>
 </section>
 <section id="accessing-robot-description-and-kinematics">
 <h3>Accessing Robot Description and Kinematics<a class="headerlink" href="tutorial_robot_configuration.html#accessing-robot-description-and-kinematics" title="Link to this heading">#</a></h3>
-<p>The robot configuration provides direct access to the underlying <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> objects:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">robot</span> <span class="o">=</span> <span class="n">load_cumotion_supported_robot</span><span class="p">(</span><span class="s2">&quot;franka&quot;</span><span class="p">)</span>
+<p>로봇 설정은 기본 <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> 오브젝트에 직접 접근할 수 있습니다:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">robot</span> <span class="o">=</span> <span class="n">load_cumotion_supported_robot</span><span class="p">(</span><span class="s2">"franka"</span><span class="p">)</span>
 
     <span class="c1"># Access the robot description</span>
     <span class="n">robot_description</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">robot_description</span>
@@ -1368,8 +992,8 @@ For a full tutorial on XRDF and URDF file generation, see <a class="reference in
     <span class="n">kinematics</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">kinematics</span>
 </pre></div>
 </div>
-<p>The controlled joint names are automatically extracted from the robot description and represent all joints in the configuration space:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">robot</span> <span class="o">=</span> <span class="n">load_cumotion_supported_robot</span><span class="p">(</span><span class="s2">&quot;franka&quot;</span><span class="p">)</span>
+<p>제어 관절 이름은 로봇 설명에서 자동으로 추출되며 설정 공간의 모든 관절을 나타냅니다:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">robot</span> <span class="o">=</span> <span class="n">load_cumotion_supported_robot</span><span class="p">(</span><span class="s2">"franka"</span><span class="p">)</span>
 
     <span class="c1"># Controlled joints match the configuration space coordinates</span>
     <span class="n">controlled_joints</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">controlled_joint_names</span>
@@ -1383,9 +1007,9 @@ For a full tutorial on XRDF and URDF file generation, see <a class="reference in
 </section>
 <section id="loading-configuration-files-for-reactive-control-and-path-planning">
 <h3>Loading Configuration Files for Reactive Control and Path Planning<a class="headerlink" href="tutorial_robot_configuration.html#loading-configuration-files-for-reactive-control-and-path-planning" title="Link to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">directory</span></code> attribute of the <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionRobot</span></code> object is useful for loading related configuration files.</p>
-<p>For RMPflow controllers:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">robot</span> <span class="o">=</span> <span class="n">load_cumotion_supported_robot</span><span class="p">(</span><span class="s2">&quot;franka&quot;</span><span class="p">)</span>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionRobot</span></code> 오브젝트의 <code class="docutils literal notranslate"><span class="pre">directory</span></code> 속성은 관련 설정 파일을 로드하는 데 유용합니다.</p>
+<p>RMPflow 컨트롤러의 경우:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">robot</span> <span class="o">=</span> <span class="n">load_cumotion_supported_robot</span><span class="p">(</span><span class="s2">"franka"</span><span class="p">)</span>
 
     <span class="c1"># The RmpFlowController automatically resolves relative paths relative to robot.directory</span>
     <span class="n">controller</span> <span class="o">=</span> <span class="n">RmpFlowController</span><span class="p">(</span>
@@ -1393,12 +1017,12 @@ For a full tutorial on XRDF and URDF file generation, see <a class="reference in
         <span class="n">cumotion_world_interface</span><span class="o">=</span><span class="n">world_interface</span><span class="p">,</span>
         <span class="n">robot_joint_space</span><span class="o">=</span><span class="n">robot_joint_space</span><span class="p">,</span>
         <span class="n">robot_site_space</span><span class="o">=</span><span class="n">robot_site_space</span><span class="p">,</span>
-        <span class="n">rmp_flow_configuration_filename</span><span class="o">=</span><span class="s2">&quot;rmp_flow.yaml&quot;</span><span class="p">,</span>  <span class="c1"># Relative to robot.directory</span>
+        <span class="n">rmp_flow_configuration_filename</span><span class="o">=</span><span class="s2">"rmp_flow.yaml"</span><span class="p">,</span>  <span class="c1"># Relative to robot.directory</span>
     <span class="p">)</span>
 </pre></div>
 </div>
-<p>Or specify an absolute path:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">robot</span> <span class="o">=</span> <span class="n">load_cumotion_supported_robot</span><span class="p">(</span><span class="s2">&quot;franka&quot;</span><span class="p">)</span>
+<p>또는 절대 경로를 지정하세요:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">robot</span> <span class="o">=</span> <span class="n">load_cumotion_supported_robot</span><span class="p">(</span><span class="s2">"franka"</span><span class="p">)</span>
 
     <span class="c1"># Or specify an absolute path</span>
     <span class="n">controller</span> <span class="o">=</span> <span class="n">RmpFlowController</span><span class="p">(</span>
@@ -1410,19 +1034,19 @@ For a full tutorial on XRDF and URDF file generation, see <a class="reference in
     <span class="p">)</span>
 </pre></div>
 </div>
-<p>For graph-based motion planners:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">robot</span> <span class="o">=</span> <span class="n">load_cumotion_supported_robot</span><span class="p">(</span><span class="s2">&quot;franka&quot;</span><span class="p">)</span>
+<p>그래프 기반 모션 플래너의 경우:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">robot</span> <span class="o">=</span> <span class="n">load_cumotion_supported_robot</span><span class="p">(</span><span class="s2">"franka"</span><span class="p">)</span>
 
     <span class="c1"># Relative paths are automatically resolved relative to robot.directory</span>
     <span class="n">planner</span> <span class="o">=</span> <span class="n">GraphBasedMotionPlanner</span><span class="p">(</span>
         <span class="n">cumotion_robot</span><span class="o">=</span><span class="n">robot</span><span class="p">,</span>
         <span class="n">cumotion_world_interface</span><span class="o">=</span><span class="n">world_interface</span><span class="p">,</span>
-        <span class="n">graph_planner_config_filename</span><span class="o">=</span><span class="s2">&quot;graph_based_motion_planner_config.yaml&quot;</span><span class="p">,</span>
+        <span class="n">graph_planner_config_filename</span><span class="o">=</span><span class="s2">"graph_based_motion_planner_config.yaml"</span><span class="p">,</span>
     <span class="p">)</span>
 </pre></div>
 </div>
-<p>Or specify an absolute path:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">robot</span> <span class="o">=</span> <span class="n">load_cumotion_supported_robot</span><span class="p">(</span><span class="s2">&quot;franka&quot;</span><span class="p">)</span>
+<p>또는 절대 경로를 지정하세요:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">robot</span> <span class="o">=</span> <span class="n">load_cumotion_supported_robot</span><span class="p">(</span><span class="s2">"franka"</span><span class="p">)</span>
 
     <span class="c1"># Or specify an absolute path</span>
     <span class="n">planner</span> <span class="o">=</span> <span class="n">GraphBasedMotionPlanner</span><span class="p">(</span>
@@ -1432,27 +1056,27 @@ For a full tutorial on XRDF and URDF file generation, see <a class="reference in
     <span class="p">)</span>
 </pre></div>
 </div>
-<p>The configuration files are subsequently used by all of the integrated <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> planners and controllers:</p>
+<p>설정 파일은 이후 통합된 모든 <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> 플래너 및 컨트롤러에서 사용됩니다:</p>
 <ul class="simple">
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">RmpFlowController</span></code></p></li>
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphBasedMotionPlanner</span></code></p></li>
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryGenerator</span></code></p></li>
 <li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryOptimizer</span></code></p></li>
 </ul>
-<p>See the relevant tutorials under <em>Next Steps</em> at the end of this tutorial for more information on each of the <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> components.</p>
+<p><em>다음 단계</em>의 관련 튜토리얼에서 각 <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> 컴포넌트에 대한 자세한 내용을 확인하세요.</p>
 </section>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="tutorial_robot_configuration.html#summary" title="Link to this heading">#</a></h2>
-<p>This tutorial covered:</p>
+<p>이 튜토리얼에서 다룬 내용:</p>
 <ol class="arabic simple">
-<li><p><strong>XRDF Overview</strong>: The structure of XRDF files and the concepts of active/fixed joints and collision spheres</p></li>
-<li><p><strong>Robot Configuration Files</strong>: The URDF, XRDF, and optional configuration files required by <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a>, and the Isaac Sim tools used to generate them from a USD asset</p></li>
-<li><p><strong>Loading Supported Robots</strong>: Using <code class="xref py py-func docutils literal notranslate"><span class="pre">load_cumotion_supported_robot()</span></code> for pre-configured robots</p></li>
-<li><p><strong>Custom Robots</strong>: Using <code class="xref py py-func docutils literal notranslate"><span class="pre">load_cumotion_robot()</span></code> for your own URDF/XRDF files</p></li>
-<li><p><strong>Accessing Robot Data</strong>: Using the robot description and kinematics objects directly</p></li>
+<li><p><strong>XRDF 개요</strong>: XRDF 파일의 구조와 active/fixed 관절 및 충돌 구체 개념</p></li>
+<li><p><strong>로봇 설정 파일</strong>: <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a>이 필요로 하는 URDF, XRDF 및 선택적 설정 파일, USD 에셋에서 생성하는 Isaac Sim 도구</p></li>
+<li><p><strong>지원 로봇 로드</strong>: 사전 구성된 로봇에 <code class="xref py py-func docutils literal notranslate"><span class="pre">load_cumotion_supported_robot()</span></code> 사용</p></li>
+<li><p><strong>커스텀 로봇</strong>: 자체 URDF/XRDF 파일에 <code class="xref py py-func docutils literal notranslate"><span class="pre">load_cumotion_robot()</span></code> 사용</p></li>
+<li><p><strong>로봇 데이터 접근</strong>: 로봇 설명 및 기구학 오브젝트 직접 사용</p></li>
 </ol>
-<p>Robot configurations are foundational for all <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> motion planning and control. Once you have a configuration, you can use it with any <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> component to generate motions for your robot.</p>
+<p>로봇 설정은 모든 <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> 모션 계획 및 제어의 기반입니다. 설정이 완료되면 모든 <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> 컴포넌트와 함께 사용하여 로봇의 모션을 생성할 수 있습니다.</p>
 <section id="next-steps">
 <h3>Next Steps<a class="headerlink" href="tutorial_robot_configuration.html#next-steps" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -1466,56 +1090,34 @@ For a full tutorial on XRDF and URDF file generation, see <a class="reference in
 </section>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="index.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">cuMotion Integration</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="tutorial_world_interface.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">cuMotion World Interface Tutorial</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="index.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">cuMotion Integration</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="tutorial_world_interface.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">cuMotion World Interface Tutorial</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_robot_configuration.html#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_robot_configuration.html#robot-configuration-files">Robot Configuration Files</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_robot_configuration.html#loading-robot-configurations">Loading Robot Configurations</a><ul class="nav section-nav flex-column">
@@ -1530,46 +1132,29 @@ For a full tutorial on XRDF and URDF file generation, see <a class="reference in
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1600,36 +1185,21 @@ For a full tutorial on XRDF and URDF file generation, see <a class="reference in
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

@@ -1,561 +1,257 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Trajectory Optimizer Tutorial &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Trajectory Optimizer Tutorial — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
-  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
-</script>
-<script type="text/javascript">
-  function OptanonWrapper() {
-    var event = new Event('bannerLoaded');
-    window.dispatchEvent(event);
-  }
-</script>
-<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
-</script>
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'cumotion/tutorial_trajectory_optimizer';</script>
-    <script>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'cumotion/tutorial_trajectory_optimizer';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="PINK Integration" href="../pink/index.html" />
-    <link rel="prev" title="Trajectory Generator Tutorial" href="tutorial_trajectory_generator.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="../pink/index.html" rel="next" title="PINK Integration"/>
+<link href="tutorial_trajectory_generator.html" rel="prev" title="Trajectory Generator Tutorial"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="tutorial_trajectory_optimizer.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="tutorial_trajectory_optimizer.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -575,7 +271,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -603,20 +298,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -691,17 +374,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -879,7 +552,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -919,13 +591,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -972,10 +638,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1144,18 +806,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1181,106 +833,78 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="../robot_motion_experimental/index.html" class="nav-link">Robot Motion (Experimental)</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">cuMotion Integration</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Trajectory Optimizer Tutorial</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="../robot_motion_experimental/index.html">Robot Motion (Experimental)</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">cuMotion Integration</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Trajectory Optimizer Tutorial</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="trajectory-optimizer-tutorial">
+<article class="bd-article">
+<section id="trajectory-optimizer-tutorial">
 <span id="isaac-sim-cumotion-tutorial-trajectory-optimizer"></span><h1>Trajectory Optimizer Tutorial<a class="headerlink" href="tutorial_trajectory_optimizer.html#trajectory-optimizer-tutorial" title="Link to this heading">#</a></h1>
-<p>This tutorial demonstrates how to use the <code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryOptimizer</span></code> class in the <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> integration to plan collision-free, kinematically constrained trajectories to configuration space or task space targets.</p>
-<p>By the end of this tutorial, you’ll understand:</p>
+<p>이 튜토리얼은 <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> 통합의 <code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryOptimizer</span></code> 클래스를 사용하여 설정 공간 또는 태스크 공간 목표에 대한 충돌 없는 기구학적 제약 궤적을 계획하는 방법을 보여줍니다.</p>
+<p>이 튜토리얼을 마치면 다음을 이해할 수 있습니다:</p>
 <ul class="simple">
-<li><p>How to create and configure the <code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryOptimizer</span></code></p></li>
-<li><p>How to plan trajectories to configuration space targets</p></li>
-<li><p>How to plan trajectories to task-space targets</p></li>
-<li><p>How to execute optimized trajectories</p></li>
-<li><p>How to configure optimization parameters</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryOptimizer</span></code>를 생성하고 설정하는 방법</p></li>
+<li><p>설정 공간 목표에 대한 궤적을 계획하는 방법</p></li>
+<li><p>태스크 공간 목표에 대한 궤적을 계획하는 방법</p></li>
+<li><p>최적화된 궤적을 실행하는 방법</p></li>
+<li><p>최적화 파라미터를 설정하는 방법</p></li>
 </ul>
-<p><strong>Prerequisites</strong></p>
+<p><strong>사전 요구 사항</strong></p>
 <ul class="simple">
-<li><p>Review the <a class="reference internal" href="tutorial_robot_configuration.html#isaac-sim-cumotion-tutorial-robot-configuration"><span class="std std-ref">Robot Configuration tutorial</span></a> to understand how to load robot configurations.</p></li>
-<li><p>Review the <a class="reference internal" href="../motion_generation/trajectory_planning.html"><span class="doc">Trajectory Planning and Execution</span></a> tutorial to understand the <code class="xref py py-class docutils literal notranslate"><span class="pre">Trajectory</span></code> interface.</p></li>
-<li><p>Review the <a class="reference internal" href="tutorial_world_interface.html#isaac-sim-cumotion-tutorial-world-interface"><span class="std std-ref">World Interface tutorial</span></a> to understand how to set up <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionWorldInterface</span></code>.</p></li>
+<li><p>로봇 설정 로드 방법을 이해하기 위해 <a class="reference internal" href="tutorial_robot_configuration.html#isaac-sim-cumotion-tutorial-robot-configuration"><span class="std std-ref">Robot Configuration tutorial</span></a>을 검토하세요.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Trajectory</span></code> 인터페이스를 이해하기 위해 <a class="reference internal" href="../motion_generation/trajectory_planning.html"><span class="doc">Trajectory Planning and Execution</span></a> 튜토리얼을 검토하세요.</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionWorldInterface</span></code> 설정 방법을 이해하기 위해 <a class="reference internal" href="tutorial_world_interface.html#isaac-sim-cumotion-tutorial-world-interface"><span class="std std-ref">World Interface tutorial</span></a>을 검토하세요.</p></li>
 </ul>
-<p>To follow along with the tutorial, run your Isaac Sim instance. Then open <strong>Window &gt; Extensions</strong>, search for <strong>cuMotion Examples</strong> (<code class="docutils literal notranslate"><span class="pre">isaacsim.robot_motion.cumotion.examples</span></code>), and enable it. If you cannot find it, remove <code class="docutils literal notranslate"><span class="pre">&#64;feature</span></code> from the Extensions search bar and search again.
-Within the <code class="docutils literal notranslate"><span class="pre">isaacsim.robot_motion.cumotion.examples</span></code> extension, there is a fully functional example of trajectory optimization including collision-free planning and trajectory execution.</p>
+<p>튜토리얼을 따라하려면 Isaac Sim 인스턴스를 실행하세요. 그런 다음 <strong>Window &gt; Extensions</strong>를 열고 <strong>cuMotion Examples</strong> (<code class="docutils literal notranslate"><span class="pre">isaacsim.robot_motion.cumotion.examples</span></code>)를 검색하여 활성화하세요. 찾을 수 없는 경우 Extensions 검색바에서 <code class="docutils literal notranslate"><span class="pre">@feature</span></code>를 제거하고 다시 검색하세요.
+<code class="docutils literal notranslate"><span class="pre">isaacsim.robot_motion.cumotion.examples</span></code> Extension에는 충돌 없는 계획과 궤적 실행을 포함한 완전히 기능하는 궤적 최적화 예제가 있습니다.</p>
 <section id="key-concepts">
 <h2>Key Concepts<a class="headerlink" href="tutorial_trajectory_optimizer.html#key-concepts" title="Link to this heading">#</a></h2>
-<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryOptimizer</span></code> provides global optimization-based trajectory planning that:</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryOptimizer</span></code>는 전역 최적화 기반 궤적 계획을 제공합니다:</p>
 <ul class="simple">
-<li><p><strong>Plans collision-free trajectories</strong>: Uses obstacle information from <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionWorldInterface</span></code> to avoid collisions</p></li>
-<li><p><strong>Respects kinematic constraints</strong>: Generates trajectories that respect joint limits, velocity, and acceleration constraints</p></li>
-<li><p><strong>Supports multiple target types</strong>: Can plan to configuration space targets, task space targets, or task space goalsets</p></li>
-<li><p><strong>Returns Trajectory objects</strong>: Optimized trajectories implement the <code class="xref py py-class docutils literal notranslate"><span class="pre">Trajectory</span></code> interface, enabling use with <code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryFollower</span></code></p></li>
+<li><p><strong>충돌 없는 궤적 계획</strong>: 충돌 회피를 위해 <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionWorldInterface</span></code>의 장애물 정보 사용</p></li>
+<li><p><strong>기구학적 제약 준수</strong>: 관절 제한, 속도, 가속도 제약을 준수하는 궤적 생성</p></li>
+<li><p><strong>다중 목표 유형 지원</strong>: 설정 공간 목표, 태스크 공간 목표, 또는 태스크 공간 목표 세트로 계획 가능</p></li>
+<li><p><strong>Trajectory 오브젝트 반환</strong>: 최적화된 궤적이 <code class="xref py py-class docutils literal notranslate"><span class="pre">Trajectory</span></code> 인터페이스를 구현하여 <code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryFollower</span></code>와 함께 사용 가능</p></li>
 </ul>
-<p>The optimizer requires a <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionWorldInterface</span></code> instance to provide obstacle information for collision avoidance. The <a class="reference internal" href="tutorial_world_interface.html#isaac-sim-cumotion-tutorial-world-interface"><span class="std std-ref">World Interface tutorial</span></a> shows how to set up a <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionWorldInterface</span></code>, often using <code class="xref py py-class docutils literal notranslate"><span class="pre">WorldBinding</span></code> for convenience.</p>
+<p>옵티마이저는 충돌 회피를 위한 장애물 정보를 제공하는 <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionWorldInterface</span></code> 인스턴스가 필요합니다. <a class="reference internal" href="tutorial_world_interface.html#isaac-sim-cumotion-tutorial-world-interface"><span class="std std-ref">World Interface tutorial</span></a>에 <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionWorldInterface</span></code>를 설정하는 방법이 나와 있으며, 편의를 위해 <code class="xref py py-class docutils literal notranslate"><span class="pre">WorldBinding</span></code>을 자주 사용합니다.</p>
 </section>
 <section id="initializing-the-optimizer">
 <h2>Initializing the Optimizer<a class="headerlink" href="tutorial_trajectory_optimizer.html#initializing-the-optimizer" title="Link to this heading">#</a></h2>
-<p>First, set up a <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionWorldInterface</span></code> as described in the <a class="reference internal" href="tutorial_world_interface.html#isaac-sim-cumotion-tutorial-world-interface"><span class="std std-ref">World Interface tutorial</span></a>. Once you have a <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionWorldInterface</span></code>, you can create the optimizer:</p>
+<p>먼저 <a class="reference internal" href="tutorial_world_interface.html#isaac-sim-cumotion-tutorial-world-interface"><span class="std std-ref">World Interface tutorial</span></a>에 설명된 대로 <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionWorldInterface</span></code>를 설정하세요. <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionWorldInterface</span></code>가 준비되면 옵티마이저를 생성할 수 있습니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Create trajectory optimizer</span>
-    <span class="c1"># Use controlled_joint_names (not dof_names) to match cuMotion&#39;s expected joint space</span>
+    <span class="c1"># Use controlled_joint_names (not dof_names) to match cuMotion's expected joint space</span>
     <span class="n">robot_joint_space</span> <span class="o">=</span> <span class="n">cumotion_robot</span><span class="o">.</span><span class="n">controlled_joint_names</span>
     <span class="n">optimizer</span> <span class="o">=</span> <span class="n">TrajectoryOptimizer</span><span class="p">(</span>
         <span class="n">cumotion_robot</span><span class="o">=</span><span class="n">cumotion_robot</span><span class="p">,</span>
@@ -1289,31 +913,31 @@ Within the <code class="docutils literal notranslate"><span class="pre">isaacsim
     <span class="p">)</span>
 </pre></div>
 </div>
-<p>The optimizer needs:</p>
+<p>옵티마이저에 필요한 것:</p>
 <ul class="simple">
-<li><p><strong>Robot configuration</strong>: A <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> robot configuration (retrieved via <code class="xref py py-func docutils literal notranslate"><span class="pre">load_cumotion_supported_robot()</span></code>). See the <a class="reference internal" href="tutorial_robot_configuration.html#isaac-sim-cumotion-tutorial-robot-configuration"><span class="std std-ref">Robot Configuration tutorial</span></a> for details on loading robot configurations.</p></li>
-<li><p><strong>World interface</strong>: A <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionWorldInterface</span></code> instance</p></li>
-<li><p><strong>Joint space</strong>: The controlled joint names (use <code class="docutils literal notranslate"><span class="pre">cumotion_robot.controlled_joint_names</span></code>, not <code class="docutils literal notranslate"><span class="pre">articulation.dof_names</span></code>)</p></li>
+<li><p><strong>로봇 설정</strong>: <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> 로봇 설정 (<code class="xref py py-func docutils literal notranslate"><span class="pre">load_cumotion_supported_robot()</span></code>으로 검색). 로봇 설정 로드에 대한 자세한 내용은 <a class="reference internal" href="tutorial_robot_configuration.html#isaac-sim-cumotion-tutorial-robot-configuration"><span class="std std-ref">Robot Configuration tutorial</span></a>을 참조하세요.</p></li>
+<li><p><strong>세계 인터페이스</strong>: <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionWorldInterface</span></code> 인스턴스</p></li>
+<li><p><strong>관절 공간</strong>: 제어 관절 이름 (<code class="docutils literal notranslate"><span class="pre">articulation.dof_names</span></code>가 아닌 <code class="docutils literal notranslate"><span class="pre">cumotion_robot.controlled_joint_names</span></code> 사용)</p></li>
 </ul>
 </section>
 <section id="accessing-cumotion-parameters">
 <h2>Accessing cuMotion Parameters<a class="headerlink" href="tutorial_trajectory_optimizer.html#accessing-cumotion-parameters" title="Link to this heading">#</a></h2>
-<p>The optimizer provides access to the underlying <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> trajectory optimizer configuration for parameter modification:</p>
+<p>옵티마이저는 파라미터 수정을 위해 기본 <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> 궤적 옵티마이저 설정에 접근할 수 있습니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Get the underlying cuMotion config</span>
     <span class="n">config</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">get_trajectory_optimizer_config</span><span class="p">()</span>
 
     <span class="c1"># Modify parameters using set_param</span>
     <span class="n">config</span><span class="o">.</span><span class="n">set_param</span><span class="p">(</span>
-        <span class="s2">&quot;enable_self_collision&quot;</span><span class="p">,</span>
+        <span class="s2">"enable_self_collision"</span><span class="p">,</span>
         <span class="n">cumotion</span><span class="o">.</span><span class="n">TrajectoryOptimizerConfig</span><span class="o">.</span><span class="n">ParamValue</span><span class="p">(</span><span class="kc">False</span><span class="p">),</span>
     <span class="p">)</span>
 </pre></div>
 </div>
-<p>For a complete list of available parameters and their usage, see the <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> Python and C++ API documentation.</p>
+<p>사용 가능한 파라미터 및 사용법에 대한 전체 목록은 <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> Python 및 C++ API 문서를 참조하세요.</p>
 </section>
 <section id="updating-world-state">
 <h2>Updating World State<a class="headerlink" href="tutorial_trajectory_optimizer.html#updating-world-state" title="Link to this heading">#</a></h2>
-<p>The world interface must be updated before planning if obstacles or the robot base have moved:</p>
+<p>장애물이나 로봇 베이스가 이동한 경우 계획 전에 세계 인터페이스를 업데이트해야 합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Update world state before planning</span>
     <span class="n">world_binding</span><span class="o">.</span><span class="n">get_world_interface</span><span class="p">()</span><span class="o">.</span><span class="n">update_world_to_robot_root_transforms</span><span class="p">(</span><span class="n">articulation</span><span class="o">.</span><span class="n">get_world_poses</span><span class="p">())</span>
     <span class="n">world_binding</span><span class="o">.</span><span class="n">synchronize_transforms</span><span class="p">()</span>
@@ -1322,7 +946,7 @@ Within the <code class="docutils literal notranslate"><span class="pre">isaacsim
 </section>
 <section id="planning-to-configuration-space-targets">
 <h2>Planning to Configuration Space Targets<a class="headerlink" href="tutorial_trajectory_optimizer.html#planning-to-configuration-space-targets" title="Link to this heading">#</a></h2>
-<p>The optimizer can plan to configuration space targets using <code class="xref py py-class docutils literal notranslate"><span class="pre">cumotion.TrajectoryOptimizer.CSpaceTarget</span></code>:</p>
+<p>옵티마이저는 <code class="xref py py-class docutils literal notranslate"><span class="pre">cumotion.TrajectoryOptimizer.CSpaceTarget</span></code>을 사용하여 설정 공간 목표로 계획할 수 있습니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Get initial and target configurations</span>
     <span class="c1"># Use default configuration as starting point (ensures valid configuration)</span>
     <span class="n">q_initial</span> <span class="o">=</span> <span class="n">cumotion_robot</span><span class="o">.</span><span class="n">robot_description</span><span class="o">.</span><span class="n">default_cspace_configuration</span><span class="p">()</span>
@@ -1346,20 +970,20 @@ Within the <code class="docutils literal notranslate"><span class="pre">isaacsim
     <span class="n">trajectory</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">plan_to_goal</span><span class="p">(</span><span class="n">q_initial</span><span class="p">,</span> <span class="n">cspace_target</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">trajectory</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Planning failed! Check warnings for failure status.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Planning failed! Check warnings for failure status."</span><span class="p">)</span>
         <span class="c1"># Common issues:</span>
         <span class="c1"># - Start/goal configurations outside joint limits</span>
         <span class="c1"># - Start/goal configurations in collision</span>
         <span class="c1"># - Insufficient optimization parameters</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Planning succeeded! Trajectory duration: </span><span class="si">{</span><span class="n">trajectory</span><span class="o">.</span><span class="n">duration</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Planning succeeded! Trajectory duration: </span><span class="si">{</span><span class="n">trajectory</span><span class="o">.</span><span class="n">duration</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">plan_to_goal()</span></code> method returns a <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionTrajectory</span></code> if planning succeeds, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if planning fails. The trajectory implements the <code class="xref py py-class docutils literal notranslate"><span class="pre">Trajectory</span></code> interface.</p>
+<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">plan_to_goal()</span></code> 메서드는 계획이 성공하면 <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionTrajectory</span></code>를 반환하고, 계획이 실패하면 <code class="docutils literal notranslate"><span class="pre">None</span></code>을 반환합니다. 궤적은 <code class="xref py py-class docutils literal notranslate"><span class="pre">Trajectory</span></code> 인터페이스를 구현합니다.</p>
 </section>
 <section id="planning-to-task-space-targets">
 <h2>Planning to Task-Space Targets<a class="headerlink" href="tutorial_trajectory_optimizer.html#planning-to-task-space-targets" title="Link to this heading">#</a></h2>
-<p>The optimizer can also plan to task-space targets using <code class="xref py py-class docutils literal notranslate"><span class="pre">cumotion.TrajectoryOptimizer.TaskSpaceTarget</span></code>. Task-space targets require converting from Isaac Sim world frame to the robot base frame:</p>
+<p>옵티마이저는 <code class="xref py py-class docutils literal notranslate"><span class="pre">cumotion.TrajectoryOptimizer.TaskSpaceTarget</span></code>을 사용하여 태스크 공간 목표로도 계획할 수 있습니다. 태스크 공간 목표는 Isaac Sim 월드 프레임에서 로봇 베이스 프레임으로의 변환이 필요합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Get target cube pose in world frame</span>
     <span class="n">target_positions</span><span class="p">,</span> <span class="n">target_orientations</span> <span class="o">=</span> <span class="n">target_cube</span><span class="o">.</span><span class="n">get_world_poses</span><span class="p">()</span>
     <span class="n">target_position_world</span> <span class="o">=</span> <span class="n">target_positions</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
@@ -1393,20 +1017,20 @@ Within the <code class="docutils literal notranslate"><span class="pre">isaacsim
     <span class="n">trajectory</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">plan_to_goal</span><span class="p">(</span><span class="n">q_initial</span><span class="p">,</span> <span class="n">task_space_target</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">trajectory</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Planning failed! Check warnings for failure status.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Planning failed! Check warnings for failure status."</span><span class="p">)</span>
         <span class="c1"># Common issues:</span>
         <span class="c1"># - Start configuration outside joint limits or in collision</span>
         <span class="c1"># - Target pose unreachable</span>
         <span class="c1"># - Insufficient optimization parameters</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Planning succeeded! Trajectory duration: </span><span class="si">{</span><span class="n">trajectory</span><span class="o">.</span><span class="n">duration</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Planning succeeded! Trajectory duration: </span><span class="si">{</span><span class="n">trajectory</span><span class="o">.</span><span class="n">duration</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> integration includes helper functions (like <code class="xref py py-func docutils literal notranslate"><span class="pre">isaac_sim_to_cumotion_pose()</span></code>) to convert between Isaac Sim world-frame representation (position, quaternion tuple) and <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> types in the robot base frame, since <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> works entirely in the base frame.</p>
+<p><a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> 통합에는 <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a>이 베이스 프레임에서만 작동하므로 Isaac Sim 월드 프레임 표현 (위치, 쿼터니언 튜플)과 로봇 베이스 프레임의 <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> 유형 간 변환을 위한 헬퍼 함수 (<code class="xref py py-func docutils literal notranslate"><span class="pre">isaac_sim_to_cumotion_pose()</span></code> 등)가 포함되어 있습니다.</p>
 </section>
 <section id="optional-checking-for-collisions">
 <h2>Optional: Checking for Collisions<a class="headerlink" href="tutorial_trajectory_optimizer.html#optional-checking-for-collisions" title="Link to this heading">#</a></h2>
-<p>Before planning, you can check if the initial or target configurations are in collision:</p>
+<p>계획 전에 초기 또는 목표 설정이 충돌 상태인지 확인할 수 있습니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Create robot-world inspector for collision checking</span>
     <span class="n">robot_world_inspector</span> <span class="o">=</span> <span class="n">cumotion</span><span class="o">.</span><span class="n">create_robot_world_inspector</span><span class="p">(</span>
         <span class="n">cumotion_robot</span><span class="o">.</span><span class="n">robot_description</span><span class="p">,</span>
@@ -1419,11 +1043,11 @@ Within the <code class="docutils literal notranslate"><span class="pre">isaacsim
     <span class="k">if</span> <span class="n">robot_world_inspector</span><span class="o">.</span><span class="n">in_self_collision</span><span class="p">(</span><span class="n">q_initial</span><span class="p">)</span> <span class="ow">or</span> <span class="n">robot_world_inspector</span><span class="o">.</span><span class="n">in_collision_with_obstacle</span><span class="p">(</span>
         <span class="n">q_initial</span>
     <span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initial configuration is in collision!&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Initial configuration is in collision!"</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">if</span> <span class="n">robot_world_inspector</span><span class="o">.</span><span class="n">in_self_collision</span><span class="p">(</span><span class="n">q_target</span><span class="p">)</span> <span class="ow">or</span> <span class="n">robot_world_inspector</span><span class="o">.</span><span class="n">in_collision_with_obstacle</span><span class="p">(</span><span class="n">q_target</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Target configuration is in collision!&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Target configuration is in collision!"</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">return</span> <span class="kc">True</span>
@@ -1432,12 +1056,12 @@ Within the <code class="docutils literal notranslate"><span class="pre">isaacsim
 </section>
 <section id="executing-trajectories">
 <h2>Executing Trajectories<a class="headerlink" href="tutorial_trajectory_optimizer.html#executing-trajectories" title="Link to this heading">#</a></h2>
-<p>Once you have a trajectory, you can execute it in two ways:</p>
+<p>궤적이 완성되면 두 가지 방법으로 실행할 수 있습니다:</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>These trajectory objects are not statefully tied to the <code class="xref py py-class docutils literal notranslate"><span class="pre">Articulation</span></code> class in Isaac Sim. Therefore, the user must generally make sure to design trajectories that start at the current configuration space of the robot, <em>if</em> they intend to immediately execute that trajectory.</p>
+<p class="admonition-title">참고</p>
+<p>이 궤적 오브젝트는 Isaac Sim의 <code class="xref py py-class docutils literal notranslate"><span class="pre">Articulation</span></code> 클래스와 상태적으로 연결되어 있지 않습니다. 따라서 사용자는 일반적으로 궤적을 즉시 실행하려는 경우 <em>현재</em> 로봇의 설정 공간에서 시작하는 궤적을 설계해야 합니다.</p>
 </div>
-<p><strong>Direct execution</strong>: Sample the trajectory at each time step and apply the joint states directly to the articulation:</p>
+<p><strong>직접 실행</strong>: 각 타임 스텝에서 궤적을 샘플링하고 관절 상태를 아티큘레이션에 직접 적용합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Sample the trajectory at the current time</span>
     <span class="n">target_state</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">get_target_state</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">target_state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">target_state</span><span class="o">.</span><span class="n">joints</span><span class="o">.</span><span class="n">positions</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -1448,7 +1072,7 @@ Within the <code class="docutils literal notranslate"><span class="pre">isaacsim
         <span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Using TrajectoryFollower</strong>: Use the <code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryFollower</span></code> controller from the Motion Generation API to integrate trajectory execution into a larger control system:</p>
+<p><strong>TrajectoryFollower 사용</strong>: Motion Generation API의 <code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryFollower</span></code> 컨트롤러를 사용하여 궤적 실행을 더 큰 제어 시스템에 통합합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Create TrajectoryFollower controller</span>
     <span class="n">follower</span> <span class="o">=</span> <span class="n">TrajectoryFollower</span><span class="p">()</span>
 
@@ -1489,56 +1113,54 @@ Within the <code class="docutils literal notranslate"><span class="pre">isaacsim
         <span class="n">desired_state</span> <span class="o">=</span> <span class="n">follower</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">estimated_state</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryFollower</span></code> follows the standard controller interface (<code class="docutils literal notranslate"><span class="pre">reset</span></code> and <code class="docutils literal notranslate"><span class="pre">forward</span></code>) and can be composed with other controllers in the Motion Generation API. For more details on trajectory execution, see the <a class="reference internal" href="../motion_generation/trajectory_planning.html"><span class="doc">Trajectory Planning and Execution</span></a> tutorial.</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryFollower</span></code>는 표준 컨트롤러 인터페이스 (<code class="docutils literal notranslate"><span class="pre">reset</span></code> 및 <code class="docutils literal notranslate"><span class="pre">forward</span></code>)를 따르며 Motion Generation API의 다른 컨트롤러와 조합할 수 있습니다. 궤적 실행에 대한 자세한 내용은 <a class="reference internal" href="../motion_generation/trajectory_planning.html"><span class="doc">Trajectory Planning and Execution</span></a> 튜토리얼을 참조하세요.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">scenario.py</span></code> example uses <code class="xref py py-meth docutils literal notranslate"><span class="pre">Articulation.set_dof_positions()</span></code> to directly set physics state for perfect demonstration of the planned trajectory. Real robots require controllers to follow joint targets instead,
-and should use one of the aforementioned methods to execute the trajectory.</p>
+<p class="admonition-title">참고</p>
+<p><code class="docutils literal notranslate"><span class="pre">scenario.py</span></code> 예제는 계획된 궤적의 완벽한 데모를 위해 <code class="xref py py-meth docutils literal notranslate"><span class="pre">Articulation.set_dof_positions()</span></code>를 사용하여 물리 상태를 직접 설정합니다. 실제 로봇은 관절 목표를 따르는 컨트롤러가 필요하므로 앞서 언급한 방법 중 하나를 사용하여 궤적을 실행해야 합니다.</p>
 </div>
 </section>
 <section id="example-usage">
 <h2>Example Usage<a class="headerlink" href="tutorial_trajectory_optimizer.html#example-usage" title="Link to this heading">#</a></h2>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>To experiment with this tutorial interactively, see the <code class="docutils literal notranslate"><span class="pre">scenario.py</span></code> file in the <code class="docutils literal notranslate"><span class="pre">isaacsim.robot_motion.cumotion.examples</span></code> extension at <code class="docutils literal notranslate"><span class="pre">isaacsim/robot_motion/cumotion/examples/trajectory_optimizer/scenario.py</span></code>.</p>
+<p class="admonition-title">참고</p>
+<p>이 튜토리얼을 대화형으로 실험하려면 <code class="docutils literal notranslate"><span class="pre">isaacsim.robot_motion.cumotion.examples</span></code> Extension의 <code class="docutils literal notranslate"><span class="pre">isaacsim/robot_motion/cumotion/examples/trajectory_optimizer/scenario.py</span></code>에 있는 <code class="docutils literal notranslate"><span class="pre">scenario.py</span></code> 파일을 참조하세요.</p>
 </div>
-<p>The following videos demonstrate trajectory optimization as shown in the <code class="docutils literal notranslate"><span class="pre">isaacsim.robot_motion.cumotion.examples</span></code> extension.</p>
-<p>The first video shows trajectory optimization planning trajectories to configuration space and task space targets while avoiding obstacles in the scene.</p>
+<p>다음 비디오들은 <code class="docutils literal notranslate"><span class="pre">isaacsim.robot_motion.cumotion.examples</span></code> Extension에 보여지는 궤적 최적화를 보여줍니다.</p>
+<p>첫 번째 비디오는 씬의 장애물을 회피하면서 설정 공간 및 태스크 공간 목표로 궤적을 최적화하는 모습을 보여줍니다.</p>
 <figure class="align-center" id="id1">
-<a class="reference internal image-reference" href="../_images/isim_6.0_full_tut_viewport_trajectory_optimizer_normal_usage.webp"><img alt="../_images/isim_6.0_full_tut_viewport_trajectory_optimizer_normal_usage.webp" src="../_images/isim_6.0_full_tut_viewport_trajectory_optimizer_normal_usage.webp" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/isim_6.0_full_tut_viewport_trajectory_optimizer_normal_usage.webp"><img alt="../_images/isim_6.0_full_tut_viewport_trajectory_optimizer_normal_usage.webp" src="../_images/isim_6.0_full_tut_viewport_trajectory_optimizer_normal_usage.webp" style="width: 100%;"/>
 </a>
 <figcaption>
-<p><span class="caption-text">Trajectory optimizer planning trajectories to configuration space and task space targets while avoiding obstacles</span><a class="headerlink" href="tutorial_trajectory_optimizer.html#id1" title="Link to this image">#</a></p>
+<p><span class="caption-text">설정 공간 및 태스크 공간 목표로 궤적을 계획하면서 장애물을 회피하는 궤적 옵티마이저</span><a class="headerlink" href="tutorial_trajectory_optimizer.html#id1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The second video demonstrates adding a new obstacle to the scene, resetting the world state, and running the trajectory optimizer again.
-Objects are added in the same way as described in the <a class="reference internal" href="tutorial_world_interface.html#isaac-sim-cumotion-tutorial-world-interface"><span class="std std-ref">World Interface tutorial</span></a>.
-Inside the <code class="docutils literal notranslate"><span class="pre">scenario.py</span></code> file, a new <code class="docutils literal notranslate"><span class="pre">CumotionWorldInterface</span></code> is created for every plan. This is not generally necessary
-if objects are not being added or removed from the scene.</p>
+<p>두 번째 비디오는 씬에 새 장애물을 추가하고, 세계 상태를 재설정하고, 궤적 옵티마이저를 다시 실행하는 모습을 보여줍니다.
+오브젝트는 <a class="reference internal" href="tutorial_world_interface.html#isaac-sim-cumotion-tutorial-world-interface"><span class="std std-ref">World Interface tutorial</span></a>에 설명된 것과 같은 방식으로 추가됩니다.
+<code class="docutils literal notranslate"><span class="pre">scenario.py</span></code> 파일에서는 매 계획마다 새 <code class="docutils literal notranslate"><span class="pre">CumotionWorldInterface</span></code>가 생성됩니다. 씬에서 오브젝트가 추가되거나 제거되지 않는 경우 이는 일반적으로 필요하지 않습니다.</p>
 <figure class="align-center" id="id2">
-<a class="reference internal image-reference" href="../_images/isim_6.0_full_tut_viewport_trajectory_optimizer_adding_sphere.webp"><img alt="../_images/isim_6.0_full_tut_viewport_trajectory_optimizer_adding_sphere.webp" src="../_images/isim_6.0_full_tut_viewport_trajectory_optimizer_adding_sphere.webp" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/isim_6.0_full_tut_viewport_trajectory_optimizer_adding_sphere.webp"><img alt="../_images/isim_6.0_full_tut_viewport_trajectory_optimizer_adding_sphere.webp" src="../_images/isim_6.0_full_tut_viewport_trajectory_optimizer_adding_sphere.webp" style="width: 100%;"/>
 </a>
 <figcaption>
-<p><span class="caption-text">Adding an obstacle, resetting the cuMotion world, and running the trajectory optimizer again</span><a class="headerlink" href="tutorial_trajectory_optimizer.html#id2" title="Link to this image">#</a></p>
+<p><span class="caption-text">장애물 추가, cuMotion 세계 재설정, 궤적 옵티마이저 재실행</span><a class="headerlink" href="tutorial_trajectory_optimizer.html#id2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="tutorial_trajectory_optimizer.html#summary" title="Link to this heading">#</a></h2>
-<p>This tutorial demonstrated:</p>
+<p>이 튜토리얼에서 보여준 내용:</p>
 <ol class="arabic simple">
-<li><p><strong>Optimizer Initialization</strong>: Creating the <code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryOptimizer</span></code> with a <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionWorldInterface</span></code> for obstacle awareness</p></li>
-<li><p><strong>Parameter Access</strong>: Accessing underlying <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> objects for advanced configuration</p></li>
-<li><p><strong>World Updates</strong>: Keeping world state synchronized for accurate planning</p></li>
-<li><p><strong>Configuration Space Planning</strong>: Planning trajectories to configuration space targets using <code class="xref py py-class docutils literal notranslate"><span class="pre">CSpaceTarget</span></code></p></li>
-<li><p><strong>Task-Space Planning</strong>: Planning trajectories to task-space targets using <code class="xref py py-class docutils literal notranslate"><span class="pre">TaskSpaceTarget</span></code></p></li>
-<li><p><strong>Collision Checking</strong>: Optionally checking for collisions before planning</p></li>
-<li><p><strong>Trajectory Execution</strong>: Executing optimized trajectories using the <code class="xref py py-class docutils literal notranslate"><span class="pre">Trajectory</span></code> interface</p></li>
+<li><p><strong>옵티마이저 초기화</strong>: 장애물 인식을 위해 <code class="xref py py-class docutils literal notranslate"><span class="pre">CumotionWorldInterface</span></code>와 함께 <code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryOptimizer</span></code> 생성</p></li>
+<li><p><strong>파라미터 접근</strong>: 고급 설정을 위해 기본 <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> 오브젝트 접근</p></li>
+<li><p><strong>세계 업데이트</strong>: 정확한 계획을 위해 세계 상태 동기화 유지</p></li>
+<li><p><strong>설정 공간 계획</strong>: <code class="xref py py-class docutils literal notranslate"><span class="pre">CSpaceTarget</span></code>을 사용하여 설정 공간 목표로 궤적 계획</p></li>
+<li><p><strong>태스크 공간 계획</strong>: <code class="xref py py-class docutils literal notranslate"><span class="pre">TaskSpaceTarget</span></code>을 사용하여 태스크 공간 목표로 궤적 계획</p></li>
+<li><p><strong>충돌 검사</strong>: 계획 전 선택적 충돌 검사</p></li>
+<li><p><strong>궤적 실행</strong>: <code class="xref py py-class docutils literal notranslate"><span class="pre">Trajectory</span></code> 인터페이스를 사용하여 최적화된 궤적 실행</p></li>
 </ol>
-<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryOptimizer</span></code> provides global, optimization-based trajectory planning that generates smooth, collision-free trajectories while respecting kinematic constraints.</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryOptimizer</span></code>는 기구학적 제약을 준수하면서 부드럽고 충돌 없는 궤적을 생성하는 전역 최적화 기반 궤적 계획을 제공합니다.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This tutorial covers the basic usage of the <code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryOptimizer</span></code> for configuration space and task-space targets. The <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> library provides many additional capabilities including task-space goalsets, path constraints, axis constraints, and advanced optimization parameters. For complete documentation of all available features, see the official <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> Python and C++ API documentation.</p>
+<p class="admonition-title">참고</p>
+<p>이 튜토리얼은 설정 공간 및 태스크 공간 목표에 대한 <code class="xref py py-class docutils literal notranslate"><span class="pre">TrajectoryOptimizer</span></code>의 기본 사용법을 다룹니다. <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> 라이브러리는 태스크 공간 목표 세트, 경로 제약, 축 제약, 고급 최적화 파라미터를 포함한 많은 추가 기능을 제공합니다. 사용 가능한 모든 기능의 전체 문서는 공식 <a class="reference external" href="https://nvidia-isaac.github.io/cumotion/">cuMotion</a> Python 및 C++ API 문서를 참조하세요.</p>
 </div>
 <section id="next-steps">
 <h3>Next Steps<a class="headerlink" href="tutorial_trajectory_optimizer.html#next-steps" title="Link to this heading">#</a></h3>
@@ -1552,56 +1174,34 @@ if objects are not being added or removed from the scene.</p>
 </section>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="tutorial_trajectory_generator.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Trajectory Generator Tutorial</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../pink/index.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">PINK Integration</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="tutorial_trajectory_generator.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Trajectory Generator Tutorial</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="../pink/index.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">PINK Integration</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_trajectory_optimizer.html#key-concepts">Key Concepts</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_trajectory_optimizer.html#initializing-the-optimizer">Initializing the Optimizer</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_trajectory_optimizer.html#accessing-cumotion-parameters">Accessing cuMotion Parameters</a></li>
@@ -1616,46 +1216,29 @@ if objects are not being added or removed from the scene.</p>
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1686,36 +1269,21 @@ if objects are not being added or removed from the scene.</p>
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

@@ -1,561 +1,257 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>PhysX SDK lidar &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>PhysX SDK lidar — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
-  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
-</script>
-<script type="text/javascript">
-  function OptanonWrapper() {
-    var event = new Event('bannerLoaded');
-    window.dispatchEvent(event);
-  }
-</script>
-<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
-</script>
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'sensors/isaacsim_sensors_physx_lidar';</script>
-    <script>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'sensors/isaacsim_sensors_physx_lidar';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="PhysX SDK lightbeam sensor" href="isaacsim_sensors_physx_lightbeam.html" />
-    <link rel="prev" title="PhysX SDK generic sensor" href="isaacsim_sensors_physx_generic.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="isaacsim_sensors_physx_lightbeam.html" rel="next" title="PhysX SDK lightbeam sensor"/>
+<link href="isaacsim_sensors_physx_generic.html" rel="prev" title="PhysX SDK generic sensor"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="isaacsim_sensors_physx_lidar.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="isaacsim_sensors_physx_lidar.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -575,7 +271,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -603,20 +298,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -691,17 +374,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -879,7 +552,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -919,13 +591,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -972,10 +638,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1144,18 +806,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1181,188 +833,154 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Sensors</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="isaacsim_sensors_physx.html" class="nav-link">PhysX SDK sensors</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">PhysX SDK lidar</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">Sensors</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="isaacsim_sensors_physx.html">PhysX SDK sensors</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">PhysX SDK lidar</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="physx-lidar">
+<article class="bd-article">
+<section id="physx-lidar">
 <span id="isaacsim-sensors-physx-lidar"></span><h1>PhysX SDK lidar<a class="headerlink" href="isaacsim_sensors_physx_lidar.html#physx-lidar" title="Link to this heading">#</a></h1>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">Deprecated since version 6.0: </span>The PhysX SDK Lidar sensor (<code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.physx</span></code>) is deprecated. Use
-<code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.physics.RaycastSensor</span></code> as the replacement, which provides
-configurable raycast-based sensing.
-See <a class="reference internal" href="../migration_guides/isaac_sim_6_0/sensors_physx_lidar_to_physics_raycast.html#isaacsim-sensors-physx-lidar-migration"><span class="std std-ref">PhysX Lidar</span></a> for step-by-step migration instructions, or the <a class="reference external" href="../py/source/extensions/isaacsim.sensors.experimental.physics/docs/index.html">isaacsim.sensors.experimental.physics API Documentation</a> for the replacement APIs.</p>
+<p><span class="versionmodified deprecated">6.0 이후 더 이상 사용되지 않음: </span>PhysX SDK Lidar 센서(<code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.physx</span></code>)는 더 이상 사용되지 않습니다. 구성 가능한 레이캐스트 기반 감지를 제공하는 <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.physics.RaycastSensor</span></code>를 대신 사용하십시오.
+단계별 마이그레이션 지침은 <a class="reference internal" href="../migration_guides/isaac_sim_6_0/sensors_physx_lidar_to_physics_raycast.html#isaacsim-sensors-physx-lidar-migration"><span class="std std-ref">PhysX Lidar</span></a>을, 교체 API는 <a class="reference external" href="../py/source/extensions/isaacsim.sensors.experimental.physics/docs/index.html">isaacsim.sensors.experimental.physics API Documentation</a>을 참조하십시오.</p>
 </div>
-<p>The PhysX SDK lidar sensor in Isaac Sim uses PhysX SDK raycasts to simulate a Lidar.
-You can set horizontal and vertical beam resolution, rotation rate, and other Lidar parameters; the
-PhysX SDK lidar then reports depth information from each beam. The PhysX SDK lidar cannot interact with
-non-visual materials, and it always reports ground truth information. For example, the Lidar measures depth
-of a transparent object with respect to the Lidar, even if a beam would normally pass through the transparent
-object in real life.</p>
-<p>See the <a class="reference internal" href="../reference_material/reference_conventions.html#isaac-sim-conventions"><span class="std std-ref">Isaac Sim Conventions</span></a> documentation for a complete list of Isaac Sim conventions.</p>
+<p>Isaac Sim의 PhysX SDK Lidar 센서는 PhysX SDK 레이캐스트를 사용하여 Lidar를 시뮬레이션합니다.
+수평 및 수직 빔 해상도, 회전 속도, 기타 Lidar 파라미터를 설정할 수 있으며; PhysX SDK Lidar는 각 빔의 깊이 정보를 보고합니다. PhysX SDK Lidar는 비시각적 재료와 상호작용할 수 없으며, 항상 지상 진실 정보를 보고합니다. 예를 들어, 실제로는 빔이 투명한 물체를 통과하더라도 Lidar는 투명한 물체까지의 깊이를 측정합니다.</p>
+<p>Isaac Sim 규칙의 전체 목록은 <a class="reference internal" href="../reference_material/reference_conventions.html#isaac-sim-conventions"><span class="std std-ref">Isaac Sim Conventions</span></a> 문서를 참조하십시오.</p>
 <section id="gui">
 <span id="isaacsim-sensors-physx-lidar-gui"></span><h2>GUI<a class="headerlink" href="isaacsim_sensors_physx_lidar.html#gui" title="Link to this heading">#</a></h2>
 <section id="physx-lidar-sensor-example">
 <span id="isaacsim-sensors-physx-lidar-example"></span><h3>PhysX SDK lidar sensor example<a class="headerlink" href="isaacsim_sensors_physx_lidar.html#physx-lidar-sensor-example" title="Link to this heading">#</a></h3>
-<p>To run the example:</p>
+<p>예제를 실행하려면:</p>
 <ol class="arabic simple">
-<li><p>Activate <code class="docutils literal notranslate"><span class="pre">Robotics</span> <span class="pre">Examples</span></code> tab from <strong>Windows</strong> &gt; <strong>Examples</strong> &gt; <strong>Robotics Examples</strong>.</p></li>
-<li><p>Click <strong>Robotics Examples</strong> &gt; <strong>Sensors</strong> &gt; <strong>Physx Lidar Sensor</strong>.</p></li>
-<li><p>Press the <strong>Load Sensor</strong> button.</p></li>
-<li><p>Press the <strong>Load Scene</strong> button.</p></li>
-<li><p>Press the <strong>Open Source Code</strong> button to view the source code. The source code illustrates how to add and control the sensor using the Python API.</p></li>
-<li><p>Press the <strong>Play</strong> button to begin simulating.</p></li>
+<li><p><strong>Windows</strong> &gt; <strong>Examples</strong> &gt; <strong>Robotics Examples</strong>에서 <code class="docutils literal notranslate"><span class="pre">Robotics</span> <span class="pre">Examples</span></code> 탭을 활성화하십시오.</p></li>
+<li><p><strong>Robotics Examples</strong> &gt; <strong>Sensors</strong> &gt; <strong>Physx Lidar Sensor</strong>를 클릭하십시오.</p></li>
+<li><p><strong>Load Sensor</strong> 버튼을 누르십시오.</p></li>
+<li><p><strong>Load Scene</strong> 버튼을 누르십시오.</p></li>
+<li><p><strong>Open Source Code</strong> 버튼을 눌러 소스 코드를 확인하십시오. 소스 코드는 Python API를 사용하여 센서를 추가하고 제어하는 방법을 보여줍니다.</p></li>
+<li><p><strong>Play</strong> 버튼을 눌러 시뮬레이션을 시작하십시오.</p></li>
 </ol>
-<a class="reference internal image-reference" href="../_images/isim_4.5_full_tut_viewport_rotating_sensor.webp"><img alt="PhysX rotating Lidar sensor example viewport." class="align-center" src="../_images/isim_4.5_full_tut_viewport_rotating_sensor.webp" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/isim_4.5_full_tut_viewport_rotating_sensor.webp"><img alt="PhysX rotating Lidar sensor example viewport." class="align-center" src="../_images/isim_4.5_full_tut_viewport_rotating_sensor.webp" style="width: 100%;"/>
 </a>
 </section>
 <section id="adding-a-physx-lidar-sensor-to-a-simulation">
 <h3>Adding a PhysX SDK lidar sensor to a simulation<a class="headerlink" href="isaacsim_sensors_physx_lidar.html#adding-a-physx-lidar-sensor-to-a-simulation" title="Link to this heading">#</a></h3>
 <section id="scene-setup">
 <h4>Scene setup<a class="headerlink" href="isaacsim_sensors_physx_lidar.html#scene-setup" title="Link to this heading">#</a></h4>
-<p>Begin setting up the scene by creating a <code class="docutils literal notranslate"><span class="pre">PhysicsScene</span></code> and a <code class="docutils literal notranslate"><span class="pre">PhysX</span> <span class="pre">Lidar</span></code> in the environment:</p>
+<p>환경에서 <code class="docutils literal notranslate"><span class="pre">PhysicsScene</span></code>과 <code class="docutils literal notranslate"><span class="pre">PhysX</span> <span class="pre">Lidar</span></code>를 생성하여 씬 설정을 시작하십시오:</p>
 <ol class="arabic simple">
-<li><p>To create a Physics Scene, go to the top Menu Bar and click <strong>Create &gt; Physics &gt; Physics Scene</strong>. Verify that there is now a <code class="docutils literal notranslate"><span class="pre">PhysicsScene</span></code> <a class="reference internal" href="../reference_material/reference_glossary.html#isaac-sim-glossary-prim"><span class="std std-ref">Prim</span></a> in the <a class="reference internal" href="../reference_material/reference_glossary.html#isaac-sim-glossary-stage"><span class="std std-ref">Stage</span></a> panel on the right.</p></li>
-<li><p>To create a Lidar, go to the top Menu Bar and click <strong>Create &gt; Sensors &gt; PhysX Lidar &gt; Rotating</strong>.
-Next, set the Lidar properties for rotation and visualization:</p></li>
-<li><p>Select the newly created Lidar prim from the <a class="reference internal" href="../reference_material/reference_glossary.html#isaac-sim-glossary-stage"><span class="std std-ref">Stage</span></a> panel.</p></li>
-<li><p>After selecting it, the <strong>Property</strong> panel in the lower left populates with all available Lidar properties.</p></li>
-<li><p>Scroll down in the <strong>Property</strong> panel to the <strong>Raw USD Properties</strong> section.</p></li>
-<li><p>Enable the <strong>drawLines</strong> checkbox to enable line rendering.</p></li>
-<li><p>Set the revolutions per second to <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">Hz</span></code> by setting <code class="docutils literal notranslate"><span class="pre">rotationRate</span></code> to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p>
+<li><p>상단 메뉴 바에서 <strong>Create &gt; Physics &gt; Physics Scene</strong>을 클릭하여 Physics Scene을 생성하십시오. 오른쪽 <a class="reference internal" href="../reference_material/reference_glossary.html#isaac-sim-glossary-stage"><span class="std std-ref">Stage</span></a> 패널에 <code class="docutils literal notranslate"><span class="pre">PhysicsScene</span></code> <a class="reference internal" href="../reference_material/reference_glossary.html#isaac-sim-glossary-prim"><span class="std std-ref">Prim</span></a>이 생성되었는지 확인하십시오.</p></li>
+<li><p>Lidar를 생성하려면, 상단 메뉴 바에서 <strong>Create &gt; Sensors &gt; PhysX Lidar &gt; Rotating</strong>을 클릭하십시오.
+다음으로, 회전 및 시각화를 위한 Lidar 속성을 설정하십시오:</p></li>
+<li><p><a class="reference internal" href="../reference_material/reference_glossary.html#isaac-sim-glossary-stage"><span class="std std-ref">Stage</span></a> 패널에서 새로 생성된 Lidar 프림을 선택하십시오.</p></li>
+<li><p>선택한 후, 왼쪽 하단의 <strong>Property</strong> 패널에 사용 가능한 모든 Lidar 속성이 채워집니다.</p></li>
+<li><p><strong>Property</strong> 패널에서 <strong>Raw USD Properties</strong> 섹션으로 스크롤하십시오.</p></li>
+<li><p><strong>drawLines</strong> 체크박스를 활성화하여 선 렌더링을 활성화하십시오.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rotationRate</span></code>를 <code class="docutils literal notranslate"><span class="pre">1.0</span></code>으로 설정하여 초당 회전 수를 <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">Hz</span></code>로 설정하십시오.</p>
 <ul class="simple">
-<li><p>To fire LIDAR rays in all directions at once, set the <code class="docutils literal notranslate"><span class="pre">rotationRate</span></code> to <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.</p></li>
+<li><p>LIDAR 레이를 모든 방향으로 한 번에 발사하려면 <code class="docutils literal notranslate"><span class="pre">rotationRate</span></code>를 <code class="docutils literal notranslate"><span class="pre">0.0</span></code>으로 설정하십시오.</p></li>
 </ul>
 </li>
 </ol>
-<a class="reference internal image-reference" href="../_images/isim_4.5_full_tut_gui_rotating_sensor_2.webp"><img alt="PhysX Lidar raw USD properties." class="align-center" src="../_images/isim_4.5_full_tut_gui_rotating_sensor_2.webp" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/isim_4.5_full_tut_gui_rotating_sensor_2.webp"><img alt="PhysX Lidar raw USD properties." class="align-center" src="../_images/isim_4.5_full_tut_gui_rotating_sensor_2.webp" style="width: 100%;"/>
 </a>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>You can update all of the Lidar parameters on the fly while the stage is running.
-When the rotation rate reaches zero or less, the Lidar prim casts rays in all directions based on your FOV and resolution.</p>
+<p>스테이지가 실행되는 동안 모든 Lidar 파라미터를 즉시 업데이트할 수 있습니다.
+회전 속도가 0 이하가 되면, Lidar 프림은 FOV 및 해상도에 따라 모든 방향으로 레이를 발사합니다.</p>
 </div>
 </section>
 <section id="set-up-collision-detection">
 <h4>Set up collision detection<a class="headerlink" href="isaacsim_sensors_physx_lidar.html#set-up-collision-detection" title="Link to this heading">#</a></h4>
-<p>The Lidar can only detect objects with <strong>Collisions Enabled</strong>. Add an object for the Lidar to detect:</p>
+<p>Lidar는 <strong>충돌이 활성화된</strong> 물체만 감지할 수 있습니다. Lidar가 감지할 물체를 추가하십시오:</p>
 <ol class="arabic simple">
-<li><p>Go to the top Menu Bar and click <strong>Create &gt; Mesh &gt; Cube</strong>.</p></li>
-<li><p>Translate the cube to <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">0,</span> <span class="pre">0)</span></code>.</p></li>
+<li><p>상단 메뉴 바에서 <strong>Create &gt; Mesh &gt; Cube</strong>를 클릭하십시오.</p></li>
+<li><p>큐브를 <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">0,</span> <span class="pre">0)</span></code>으로 이동하십시오.</p></li>
 </ol>
-<p>Next, add a Physics Collider to the Cube:</p>
+<p>다음으로, 큐브에 Physics Collider를 추가하십시오:</p>
 <ol class="arabic simple">
-<li><p>With the Cube selected, go to the <strong>Property</strong> panel and click the <strong>+ Add</strong> button.</p></li>
-<li><p>Select <strong>+ Add &gt; Physics &gt; Collider</strong>.</p></li>
+<li><p>큐브를 선택한 상태에서 <strong>Property</strong> 패널로 이동하여 <strong>+ Add</strong> 버튼을 클릭하십시오.</p></li>
+<li><p><strong>+ Add &gt; Physics &gt; Collider</strong>를 선택하십시오.</p></li>
 </ol>
-<a class="reference internal image-reference" href="../_images/isim_4.5_full_tut_viewport_rotating_sensor_3.webp"><img alt="PhysX Lidar rays intersecting a cube." class="align-center" src="../_images/isim_4.5_full_tut_viewport_rotating_sensor_3.webp" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/isim_4.5_full_tut_viewport_rotating_sensor_3.webp"><img alt="PhysX Lidar rays intersecting a cube." class="align-center" src="../_images/isim_4.5_full_tut_viewport_rotating_sensor_3.webp" style="width: 100%;"/>
 </a>
 <ul class="simple">
-<li><p>Use the mouse to move the Cube around the scene and see how the Lidar rays interact with the geometry.</p></li>
+<li><p>마우스를 사용하여 씬에서 큐브를 이동하고 Lidar 레이가 지오메트리와 어떻게 상호작용하는지 확인하십시오.</p></li>
 </ul>
 </section>
 <section id="attach-a-lidar-to-geometry">
 <h4>Attach a Lidar to geometry<a class="headerlink" href="isaacsim_sensors_physx_lidar.html#attach-a-lidar-to-geometry" title="Link to this heading">#</a></h4>
-<p>For most use cases, attach Lidars to more complex assemblies, such as cars or robots.
-Use a Cylinder as a placeholder for a more complex prim.
-Add a Cylinder to the scene and nest the Lidar prim under it:</p>
+<p>대부분의 사용 사례에서는 자동차나 로봇과 같은 더 복잡한 어셈블리에 Lidar를 연결합니다.
+더 복잡한 프림의 자리 표시자로 실린더를 사용하십시오.
+씬에 실린더를 추가하고 Lidar 프림을 그 아래에 중첩하십시오:</p>
 <ol class="arabic simple">
-<li><p>Right click in the viewport and select <strong>Create &gt; Mesh &gt; Cylinder</strong>.</p></li>
-<li><p>Set the translation of the Cylinder to <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code>.</p></li>
-<li><p>In the <a class="reference internal" href="../reference_material/reference_glossary.html#isaac-sim-glossary-stage"><span class="std std-ref">Stage</span></a> panel, drag-and-drop the <code class="docutils literal notranslate"><span class="pre">LIDAR</span></code> prim onto the <code class="docutils literal notranslate"><span class="pre">Cylinder</span></code>.</p></li>
-<li><p>This makes the <code class="docutils literal notranslate"><span class="pre">Cylinder</span></code> the parent of the <code class="docutils literal notranslate"><span class="pre">LIDAR</span></code>. When the <code class="docutils literal notranslate"><span class="pre">Cylinder</span></code> moves, the <code class="docutils literal notranslate"><span class="pre">LIDAR</span></code> moves with it. All information reported by the LIDAR is now relative to the <code class="docutils literal notranslate"><span class="pre">Cylinder</span></code>.</p></li>
-<li><p>Add an offset to <code class="docutils literal notranslate"><span class="pre">LIDAR</span></code> to precisely position it relative to the <code class="docutils literal notranslate"><span class="pre">Cylinder</span></code>. Select the <code class="docutils literal notranslate"><span class="pre">LIDAR</span></code> prim from the <a class="reference internal" href="../reference_material/reference_glossary.html#isaac-sim-glossary-stage"><span class="std std-ref">Stage</span></a> and move it to <code class="docutils literal notranslate"><span class="pre">(0.5,</span> <span class="pre">0.5,</span> <span class="pre">0)</span></code>.</p></li>
-<li><p>Move the <code class="docutils literal notranslate"><span class="pre">Cylinder</span></code> around the environment. The LIDAR maintains this relative transform.</p></li>
-<li><p>Re-select the <code class="docutils literal notranslate"><span class="pre">LIDAR</span></code> prim and reset its <code class="docutils literal notranslate"><span class="pre">Translate</span></code> value to its default setting <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code>.</p></li>
+<li><p>뷰포트에서 마우스 오른쪽 버튼을 클릭하고 <strong>Create &gt; Mesh &gt; Cylinder</strong>를 선택하십시오.</p></li>
+<li><p>실린더의 이동을 <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code>으로 설정하십시오.</p></li>
+<li><p><a class="reference internal" href="../reference_material/reference_glossary.html#isaac-sim-glossary-stage"><span class="std std-ref">Stage</span></a> 패널에서 <code class="docutils literal notranslate"><span class="pre">LIDAR</span></code> 프림을 <code class="docutils literal notranslate"><span class="pre">Cylinder</span></code>로 드래그 앤 드롭하십시오.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Cylinder</span></code>가 <code class="docutils literal notranslate"><span class="pre">LIDAR</span></code>의 부모가 됩니다. <code class="docutils literal notranslate"><span class="pre">Cylinder</span></code>가 이동하면 <code class="docutils literal notranslate"><span class="pre">LIDAR</span></code>도 함께 이동합니다. LIDAR가 보고하는 모든 정보는 이제 <code class="docutils literal notranslate"><span class="pre">Cylinder</span></code>를 기준으로 합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Cylinder</span></code>를 기준으로 <code class="docutils literal notranslate"><span class="pre">LIDAR</span></code>를 정밀하게 배치하려면 오프셋을 추가하십시오. <a class="reference internal" href="../reference_material/reference_glossary.html#isaac-sim-glossary-stage"><span class="std std-ref">Stage</span></a>에서 <code class="docutils literal notranslate"><span class="pre">LIDAR</span></code> 프림을 선택하고 <code class="docutils literal notranslate"><span class="pre">(0.5,</span> <span class="pre">0.5,</span> <span class="pre">0)</span></code>으로 이동하십시오.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Cylinder</span></code>를 환경 주위로 이동하십시오. LIDAR는 이 상대 변환을 유지합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LIDAR</span></code> 프림을 다시 선택하고 <code class="docutils literal notranslate"><span class="pre">Translate</span></code> 값을 기본 설정 <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></code>으로 재설정하십시오.</p></li>
 </ol>
-<a class="reference internal image-reference" href="../_images/isim_4.5_full_tut_viewport_rotating_sensor_4.webp"><img alt="PhysX Lidar nested under a cylinder prim." class="align-center" src="../_images/isim_4.5_full_tut_viewport_rotating_sensor_4.webp" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/isim_4.5_full_tut_viewport_rotating_sensor_4.webp"><img alt="PhysX Lidar nested under a cylinder prim." class="align-center" src="../_images/isim_4.5_full_tut_viewport_rotating_sensor_4.webp" style="width: 100%;"/>
 </a>
 </section>
 <section id="attach-a-lidar-to-a-moving-robot">
 <h4>Attach a Lidar to a moving robot<a class="headerlink" href="isaacsim_sensors_physx_lidar.html#attach-a-lidar-to-a-moving-robot" title="Link to this heading">#</a></h4>
-<p>You can attach a LIDAR prim to a robot. You can use the Carter V1 robot as an example.</p>
+<p>LIDAR 프림을 로봇에 연결할 수 있습니다. Carter V1 로봇을 예제로 사용할 수 있습니다.</p>
 <ol class="arabic simple">
-<li><p>Open the Isaac Sim <strong>Content Browser</strong>, navigate to <code class="docutils literal notranslate"><span class="pre">Robots/NVIDIA/Carter/carter_v1.usd</span></code>, and open the <code class="docutils literal notranslate"><span class="pre">carter_v1.usd</span></code> file.</p></li>
-<li><p>Open the left wheel joint at <cite>carter/chassis_link/left_wheel</cite>, scroll down on the property panel, and set the <cite>Target Velocity</cite> to <cite>100</cite>.</p></li>
-<li><p>Repeat the same process for the right wheel joint at <cite>carter/chassis_link/right_wheel</cite>.</p></li>
-<li><p>Press <strong>Play</strong> and the Carter robot drives forward automatically.</p></li>
-<li><p>Create a <code class="docutils literal notranslate"><span class="pre">LIDAR</span></code> by going to the top Menu Bar and clicking <strong>Create &gt; Sensors &gt; PhysX LIDAR &gt; Rotating</strong>. The <code class="docutils literal notranslate"><span class="pre">LIDAR</span></code> prim is created as a child of the selected prim.</p></li>
-<li><p>In the <a class="reference internal" href="../reference_material/reference_glossary.html#isaac-sim-glossary-stage"><span class="std std-ref">Stage</span></a> panel, select your <code class="docutils literal notranslate"><span class="pre">LIDAR</span></code> prim and drag it onto <code class="docutils literal notranslate"><span class="pre">/carter/chassis_link</span></code>.</p></li>
-<li><p>Set the translation of the PhysX lidar to <cite>-0.06, 0.0, 0.38</cite> to move it to the correct location.</p></li>
-<li><p>Enable draw lines and set the rotation rate to zero for easier debugging.</p></li>
+<li><p>Isaac Sim <strong>Content Browser</strong>를 열고, <code class="docutils literal notranslate"><span class="pre">Robots/NVIDIA/Carter/carter_v1.usd</span></code>로 이동하여 <code class="docutils literal notranslate"><span class="pre">carter_v1.usd</span></code> 파일을 여십시오.</p></li>
+<li><p><cite>carter/chassis_link/left_wheel</cite>에서 왼쪽 바퀴 조인트를 열고, 속성 패널에서 아래로 스크롤하여 <cite>Target Velocity</cite>를 <cite>100</cite>으로 설정하십시오.</p></li>
+<li><p><cite>carter/chassis_link/right_wheel</cite>의 오른쪽 바퀴 조인트에 대해 동일한 과정을 반복하십시오.</p></li>
+<li><p><strong>Play</strong>를 누르면 Carter 로봇이 자동으로 앞으로 주행합니다.</p></li>
+<li><p>상단 메뉴 바에서 <strong>Create &gt; Sensors &gt; PhysX LIDAR &gt; Rotating</strong>을 클릭하여 <code class="docutils literal notranslate"><span class="pre">LIDAR</span></code>를 생성하십시오. <code class="docutils literal notranslate"><span class="pre">LIDAR</span></code> 프림은 선택된 프림의 자식으로 생성됩니다.</p></li>
+<li><p><a class="reference internal" href="../reference_material/reference_glossary.html#isaac-sim-glossary-stage"><span class="std std-ref">Stage</span></a> 패널에서 <code class="docutils literal notranslate"><span class="pre">LIDAR</span></code> 프림을 선택하고 <code class="docutils literal notranslate"><span class="pre">/carter/chassis_link</span></code>로 드래그하십시오.</p></li>
+<li><p>PhysX lidar의 이동을 <cite>-0.06, 0.0, 0.38</cite>로 설정하여 올바른 위치로 이동하십시오.</p></li>
+<li><p>선 그리기를 활성화하고 더 쉬운 디버깅을 위해 회전 속도를 0으로 설정하십시오.</p></li>
 </ol>
-<a class="reference internal image-reference" href="../_images/isim_4.5_full_tut_viewport_rotating_sensor_3.gif"><img alt="PhysX Lidar attached to a moving Carter robot." class="align-center" src="../_images/isim_4.5_full_tut_viewport_rotating_sensor_3.gif" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/isim_4.5_full_tut_viewport_rotating_sensor_3.gif"><img alt="PhysX Lidar attached to a moving Carter robot." class="align-center" src="../_images/isim_4.5_full_tut_viewport_rotating_sensor_3.gif" style="width: 100%;"/>
 </a>
 </section>
 </section>
 <section id="script-editor">
 <h3>Script Editor<a class="headerlink" href="isaacsim_sensors_physx_lidar.html#script-editor" title="Link to this heading">#</a></h3>
-<p>Use the Lidar Python API to create, control, and query the sensor through scripts and extensions.
-Use the <strong>Script Editor</strong> and Python API to retrieve data from the Lidar’s last sweep:</p>
+<p>Lidar Python API를 사용하여 스크립트와 확장을 통해 센서를 생성, 제어, 쿼리하십시오.
+<strong>Script Editor</strong>와 Python API를 사용하여 Lidar의 마지막 스윕에서 데이터를 가져오십시오:</p>
 <ol class="arabic simple">
-<li><p>Go to the top menu bar and click <strong>Window &gt; Script Editor</strong> to open the <strong>Script Editor</strong> window.</p></li>
-<li><p>Add the necessary imports:</p></li>
+<li><p>상단 메뉴 바에서 <strong>Window &gt; Script Editor</strong>를 클릭하여 <strong>Script Editor</strong> 창을 여십시오.</p></li>
+<li><p>필요한 임포트를 추가하십시오:</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>  <span class="c1"># Used to run sample asynchronously to not block rendering thread</span>
 
@@ -1373,7 +991,7 @@ Use the <strong>Script Editor</strong> and Python API to retrieve data from the 
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
-<li><p>Grab the Stage, Simulation Timeline, and LIDAR interface:</p></li>
+<li><p>Stage, Simulation Timeline, LIDAR 인터페이스를 가져오십시오:</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni</span>
 
@@ -1382,12 +1000,12 @@ Use the <strong>Script Editor</strong> and Python API to retrieve data from the 
 <span class="n">lidarInterface</span> <span class="o">=</span> <span class="n">_range_sensor</span><span class="o">.</span><span class="n">acquire_lidar_sensor_interface</span><span class="p">()</span>  <span class="c1"># Used to interact with the LIDAR</span>
 
 <span class="c1"># These commands are the Python-equivalent of the first half of this tutorial</span>
-<span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;AddPhysicsSceneCommand&quot;</span><span class="p">,</span> <span class="n">stage</span><span class="o">=</span><span class="n">stage</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/World/PhysicsScene&quot;</span><span class="p">)</span>
-<span class="n">lidarPath</span> <span class="o">=</span> <span class="s2">&quot;/LidarName&quot;</span>
+<span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"AddPhysicsSceneCommand"</span><span class="p">,</span> <span class="n">stage</span><span class="o">=</span><span class="n">stage</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">"/World/PhysicsScene"</span><span class="p">)</span>
+<span class="n">lidarPath</span> <span class="o">=</span> <span class="s2">"/LidarName"</span>
 <span class="n">result</span><span class="p">,</span> <span class="n">prim</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
-    <span class="s2">&quot;RangeSensorCreateLidar&quot;</span><span class="p">,</span>
+    <span class="s2">"RangeSensorCreateLidar"</span><span class="p">,</span>
     <span class="n">path</span><span class="o">=</span><span class="n">lidarPath</span><span class="p">,</span>
-    <span class="n">parent</span><span class="o">=</span><span class="s2">&quot;/World&quot;</span><span class="p">,</span>
+    <span class="n">parent</span><span class="o">=</span><span class="s2">"/World"</span><span class="p">,</span>
     <span class="n">min_range</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
     <span class="n">max_range</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
     <span class="n">draw_points</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -1404,13 +1022,13 @@ Use the <strong>Script Editor</strong> and Python API to retrieve data from the 
 </pre></div>
 </div>
 <ol class="arabic simple" start="4">
-<li><p>Create an obstacle for the LIDAR:</p></li>
+<li><p>LIDAR를 위한 장애물을 생성하십시오:</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.utils.stage</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_current_stage</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">Gf</span><span class="p">,</span> <span class="n">UsdGeom</span><span class="p">,</span> <span class="n">UsdPhysics</span>
 
 <span class="n">stage</span> <span class="o">=</span> <span class="n">get_current_stage</span><span class="p">()</span>
-<span class="n">CubePath</span> <span class="o">=</span> <span class="s2">&quot;/World/CubeName&quot;</span>  <span class="c1"># Create a Cube</span>
+<span class="n">CubePath</span> <span class="o">=</span> <span class="s2">"/World/CubeName"</span>  <span class="c1"># Create a Cube</span>
 <span class="n">cubeGeom</span> <span class="o">=</span> <span class="n">UsdGeom</span><span class="o">.</span><span class="n">Cube</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">CubePath</span><span class="p">)</span>
 <span class="n">cubePrim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="n">CubePath</span><span class="p">)</span>
 <span class="n">cubeGeom</span><span class="o">.</span><span class="n">AddTranslateOp</span><span class="p">()</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">Gf</span><span class="o">.</span><span class="n">Vec3f</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>  <span class="c1"># Move it away from the LIDAR</span>
@@ -1419,12 +1037,10 @@ Use the <strong>Script Editor</strong> and Python API to retrieve data from the 
 </pre></div>
 </div>
 <ol class="arabic" start="5">
-<li><p>Get the LIDAR data:</p>
+<li><p>LIDAR 데이터를 가져오십시오:</p>
 <blockquote>
-<div><p>The Lidar needs one simulation frame to get data for the first frame, so start
-the simulation by calling <code class="docutils literal notranslate"><span class="pre">timeline.play</span></code>, wait for a frame to complete, and then pause simulation using <code class="docutils literal notranslate"><span class="pre">timeline.pause()</span></code> to populate the depth buffers in the Lidar.
-Because the simulation is running asynchronously with our script, use <code class="docutils literal notranslate"><span class="pre">asyncio</span></code> and <code class="docutils literal notranslate"><span class="pre">ensure_future</span></code> to wait for our script to complete
-calling <code class="docutils literal notranslate"><span class="pre">timeline.pause()</span></code> is optional, data from the sensor can be gathered anytime while simulating.</p>
+<div><p>Lidar는 첫 번째 프레임의 데이터를 얻기 위해 하나의 시뮬레이션 프레임이 필요합니다. <code class="docutils literal notranslate"><span class="pre">timeline.play</span></code>를 호출하여 시뮬레이션을 시작하고, 프레임이 완료될 때까지 기다린 후 <code class="docutils literal notranslate"><span class="pre">timeline.pause()</span></code>를 사용하여 시뮬레이션을 일시 중지하여 Lidar의 깊이 버퍼를 채우십시오.
+시뮬레이션이 스크립트와 비동기적으로 실행되므로, <code class="docutils literal notranslate"><span class="pre">asyncio</span></code>와 <code class="docutils literal notranslate"><span class="pre">ensure_future</span></code>를 사용하여 스크립트가 완료될 때까지 기다리십시오. <code class="docutils literal notranslate"><span class="pre">timeline.pause()</span></code> 호출은 선택 사항입니다; 시뮬레이션 중 언제든지 센서 데이터를 수집할 수 있습니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">omni.timeline</span>
@@ -1432,13 +1048,13 @@ calling <code class="docutils literal notranslate"><span class="pre">timeline.pa
 
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_lidar_param</span><span class="p">():</span>  <span class="c1"># Function to retrieve data from the LIDAR</span>
     <span class="k">await</span> <span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get_app</span><span class="p">()</span><span class="o">.</span><span class="n">next_update_async</span><span class="p">()</span>  <span class="c1"># wait one frame for data</span>
-    <span class="n">timeline</span><span class="o">.</span><span class="n">pause</span><span class="p">()</span>  <span class="c1"># Pause the simulation to populate the LIDAR&#39;s depth buffers</span>
-    <span class="n">depth</span> <span class="o">=</span> <span class="n">lidarInterface</span><span class="o">.</span><span class="n">get_linear_depth_data</span><span class="p">(</span><span class="s2">&quot;/World&quot;</span> <span class="o">+</span> <span class="n">lidarPath</span><span class="p">)</span>
-    <span class="n">zenith</span> <span class="o">=</span> <span class="n">lidarInterface</span><span class="o">.</span><span class="n">get_zenith_data</span><span class="p">(</span><span class="s2">&quot;/World&quot;</span> <span class="o">+</span> <span class="n">lidarPath</span><span class="p">)</span>
-    <span class="n">azimuth</span> <span class="o">=</span> <span class="n">lidarInterface</span><span class="o">.</span><span class="n">get_azimuth_data</span><span class="p">(</span><span class="s2">&quot;/World&quot;</span> <span class="o">+</span> <span class="n">lidarPath</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;depth&quot;</span><span class="p">,</span> <span class="n">depth</span><span class="p">)</span>  <span class="c1"># Print the data</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zenith&quot;</span><span class="p">,</span> <span class="n">zenith</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;azimuth&quot;</span><span class="p">,</span> <span class="n">azimuth</span><span class="p">)</span>
+    <span class="n">timeline</span><span class="o">.</span><span class="n">pause</span><span class="p">()</span>  <span class="c1"># Pause the simulation to populate the LIDAR's depth buffers</span>
+    <span class="n">depth</span> <span class="o">=</span> <span class="n">lidarInterface</span><span class="o">.</span><span class="n">get_linear_depth_data</span><span class="p">(</span><span class="s2">"/World"</span> <span class="o">+</span> <span class="n">lidarPath</span><span class="p">)</span>
+    <span class="n">zenith</span> <span class="o">=</span> <span class="n">lidarInterface</span><span class="o">.</span><span class="n">get_zenith_data</span><span class="p">(</span><span class="s2">"/World"</span> <span class="o">+</span> <span class="n">lidarPath</span><span class="p">)</span>
+    <span class="n">azimuth</span> <span class="o">=</span> <span class="n">lidarInterface</span><span class="o">.</span><span class="n">get_azimuth_data</span><span class="p">(</span><span class="s2">"/World"</span> <span class="o">+</span> <span class="n">lidarPath</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"depth"</span><span class="p">,</span> <span class="n">depth</span><span class="p">)</span>  <span class="c1"># Print the data</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"zenith"</span><span class="p">,</span> <span class="n">zenith</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"azimuth"</span><span class="p">,</span> <span class="n">azimuth</span><span class="p">)</span>
 
 
 <span class="n">timeline</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">get_timeline_interface</span><span class="p">()</span>
@@ -1448,7 +1064,7 @@ calling <code class="docutils literal notranslate"><span class="pre">timeline.pa
 </div>
 </div></blockquote>
 </li>
-<li><p>Run the full script:</p></li>
+<li><p>전체 스크립트를 실행하십시오:</p></li>
 </ol>
 <details>
 <summary>Expand to display full code</summary><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># provides the core omniverse APIs</span>
@@ -1466,12 +1082,12 @@ calling <code class="docutils literal notranslate"><span class="pre">timeline.pa
 <span class="n">stage</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">get_stage</span><span class="p">()</span>
 <span class="n">lidarInterface</span> <span class="o">=</span> <span class="n">_range_sensor</span><span class="o">.</span><span class="n">acquire_lidar_sensor_interface</span><span class="p">()</span>
 <span class="n">timeline</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">get_timeline_interface</span><span class="p">()</span>
-<span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;AddPhysicsSceneCommand&quot;</span><span class="p">,</span> <span class="n">stage</span><span class="o">=</span><span class="n">stage</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/World/PhysicsScene&quot;</span><span class="p">)</span>
-<span class="n">lidarPath</span> <span class="o">=</span> <span class="s2">&quot;/LidarName&quot;</span>
+<span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"AddPhysicsSceneCommand"</span><span class="p">,</span> <span class="n">stage</span><span class="o">=</span><span class="n">stage</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">"/World/PhysicsScene"</span><span class="p">)</span>
+<span class="n">lidarPath</span> <span class="o">=</span> <span class="s2">"/LidarName"</span>
 <span class="n">result</span><span class="p">,</span> <span class="n">prim</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
-    <span class="s2">&quot;RangeSensorCreateLidar&quot;</span><span class="p">,</span>
+    <span class="s2">"RangeSensorCreateLidar"</span><span class="p">,</span>
     <span class="n">path</span><span class="o">=</span><span class="n">lidarPath</span><span class="p">,</span>
-    <span class="n">parent</span><span class="o">=</span><span class="s2">&quot;/World&quot;</span><span class="p">,</span>
+    <span class="n">parent</span><span class="o">=</span><span class="s2">"/World"</span><span class="p">,</span>
     <span class="n">min_range</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
     <span class="n">max_range</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
     <span class="n">draw_points</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -1486,7 +1102,7 @@ calling <code class="docutils literal notranslate"><span class="pre">timeline.pa
     <span class="n">enable_semantics</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">CubePath</span> <span class="o">=</span> <span class="s2">&quot;/World/CubeName&quot;</span>
+<span class="n">CubePath</span> <span class="o">=</span> <span class="s2">"/World/CubeName"</span>
 <span class="n">cubeGeom</span> <span class="o">=</span> <span class="n">UsdGeom</span><span class="o">.</span><span class="n">Cube</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">CubePath</span><span class="p">)</span>
 <span class="n">cubePrim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="n">CubePath</span><span class="p">)</span>
 <span class="n">cubeGeom</span><span class="o">.</span><span class="n">AddTranslateOp</span><span class="p">()</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">Gf</span><span class="o">.</span><span class="n">Vec3f</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
@@ -1497,25 +1113,25 @@ calling <code class="docutils literal notranslate"><span class="pre">timeline.pa
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_lidar_param</span><span class="p">():</span>
     <span class="k">await</span> <span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get_app</span><span class="p">()</span><span class="o">.</span><span class="n">next_update_async</span><span class="p">()</span>
     <span class="n">timeline</span><span class="o">.</span><span class="n">pause</span><span class="p">()</span>
-    <span class="n">depth</span> <span class="o">=</span> <span class="n">lidarInterface</span><span class="o">.</span><span class="n">get_linear_depth_data</span><span class="p">(</span><span class="s2">&quot;/World&quot;</span> <span class="o">+</span> <span class="n">lidarPath</span><span class="p">)</span>
-    <span class="n">zenith</span> <span class="o">=</span> <span class="n">lidarInterface</span><span class="o">.</span><span class="n">get_zenith_data</span><span class="p">(</span><span class="s2">&quot;/World&quot;</span> <span class="o">+</span> <span class="n">lidarPath</span><span class="p">)</span>
-    <span class="n">azimuth</span> <span class="o">=</span> <span class="n">lidarInterface</span><span class="o">.</span><span class="n">get_azimuth_data</span><span class="p">(</span><span class="s2">&quot;/World&quot;</span> <span class="o">+</span> <span class="n">lidarPath</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;depth&quot;</span><span class="p">,</span> <span class="n">depth</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zenith&quot;</span><span class="p">,</span> <span class="n">zenith</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;azimuth&quot;</span><span class="p">,</span> <span class="n">azimuth</span><span class="p">)</span>
+    <span class="n">depth</span> <span class="o">=</span> <span class="n">lidarInterface</span><span class="o">.</span><span class="n">get_linear_depth_data</span><span class="p">(</span><span class="s2">"/World"</span> <span class="o">+</span> <span class="n">lidarPath</span><span class="p">)</span>
+    <span class="n">zenith</span> <span class="o">=</span> <span class="n">lidarInterface</span><span class="o">.</span><span class="n">get_zenith_data</span><span class="p">(</span><span class="s2">"/World"</span> <span class="o">+</span> <span class="n">lidarPath</span><span class="p">)</span>
+    <span class="n">azimuth</span> <span class="o">=</span> <span class="n">lidarInterface</span><span class="o">.</span><span class="n">get_azimuth_data</span><span class="p">(</span><span class="s2">"/World"</span> <span class="o">+</span> <span class="n">lidarPath</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"depth"</span><span class="p">,</span> <span class="n">depth</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"zenith"</span><span class="p">,</span> <span class="n">zenith</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"azimuth"</span><span class="p">,</span> <span class="n">azimuth</span><span class="p">)</span>
 
 
 <span class="n">timeline</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
 <span class="n">asyncio</span><span class="o">.</span><span class="n">ensure_future</span><span class="p">(</span><span class="n">get_lidar_param</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>Verify that you have the following:</p>
+<p>다음을 확인하십시오:</p>
 <figure class="align-center">
-<img alt="Segmented Lidar Point Cloud" src="../_images/isaac_range_sensor_lidar_python.png" />
+<img alt="Segmented Lidar Point Cloud" src="../_images/isaac_range_sensor_lidar_python.png"/>
 </figure>
 <section id="segment-a-point-cloud">
 <h4>Segment a Point Cloud<a class="headerlink" href="isaacsim_sensors_physx_lidar.html#segment-a-point-cloud" title="Link to this heading">#</a></h4>
-<p>This code snippet shows how to add semantic labels to the depth data for segmenting its resulting point cloud.</p>
+<p>이 코드 스니펫은 결과 포인트 클라우드를 분할하기 위해 깊이 데이터에 시맨틱 레이블을 추가하는 방법을 보여줍니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>  <span class="c1"># Used to run sample asynchronously to not block rendering thread</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">omni</span>  <span class="c1"># Provides the core omniverse APIs</span>
@@ -1526,13 +1142,13 @@ calling <code class="docutils literal notranslate"><span class="pre">timeline.pa
 <span class="n">timeline</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">get_timeline_interface</span><span class="p">()</span>  <span class="c1"># Used to interact with simulation</span>
 <span class="n">lidarInterface</span> <span class="o">=</span> <span class="n">_range_sensor</span><span class="o">.</span><span class="n">acquire_lidar_sensor_interface</span><span class="p">()</span>  <span class="c1"># Used to interact with the LIDAR</span>
 <span class="c1"># These commands are the Python-equivalent of the first half of this tutorial</span>
-<span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;AddPhysicsSceneCommand&quot;</span><span class="p">,</span> <span class="n">stage</span><span class="o">=</span><span class="n">stage</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/World/PhysicsScene&quot;</span><span class="p">)</span>
-<span class="n">lidarPath</span> <span class="o">=</span> <span class="s2">&quot;/LidarName&quot;</span>
+<span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"AddPhysicsSceneCommand"</span><span class="p">,</span> <span class="n">stage</span><span class="o">=</span><span class="n">stage</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">"/World/PhysicsScene"</span><span class="p">)</span>
+<span class="n">lidarPath</span> <span class="o">=</span> <span class="s2">"/LidarName"</span>
 <span class="c1"># Create Lidar prim</span>
 <span class="n">result</span><span class="p">,</span> <span class="n">prim</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">commands</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
-    <span class="s2">&quot;RangeSensorCreateLidar&quot;</span><span class="p">,</span>
+    <span class="s2">"RangeSensorCreateLidar"</span><span class="p">,</span>
     <span class="n">path</span><span class="o">=</span><span class="n">lidarPath</span><span class="p">,</span>
-    <span class="n">parent</span><span class="o">=</span><span class="s2">&quot;/World&quot;</span><span class="p">,</span>
+    <span class="n">parent</span><span class="o">=</span><span class="s2">"/World"</span><span class="p">,</span>
     <span class="n">min_range</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
     <span class="n">max_range</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
     <span class="n">draw_points</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -1546,21 +1162,21 @@ calling <code class="docutils literal notranslate"><span class="pre">timeline.pa
     <span class="n">yaw_offset</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
     <span class="n">enable_semantics</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="n">UsdGeom</span><span class="o">.</span><span class="n">XformCommonAPI</span><span class="p">(</span><span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="s2">&quot;/World&quot;</span> <span class="o">+</span> <span class="n">lidarPath</span><span class="p">))</span><span class="o">.</span><span class="n">SetTranslate</span><span class="p">((</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+<span class="n">UsdGeom</span><span class="o">.</span><span class="n">XformCommonAPI</span><span class="p">(</span><span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="s2">"/World"</span> <span class="o">+</span> <span class="n">lidarPath</span><span class="p">))</span><span class="o">.</span><span class="n">SetTranslate</span><span class="p">((</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
 
 <span class="c1"># Create a cube, sphere, add collision and different semantic labels</span>
-<span class="n">primType</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Cube&quot;</span><span class="p">,</span> <span class="s2">&quot;Sphere&quot;</span><span class="p">]</span>
+<span class="n">primType</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Cube"</span><span class="p">,</span> <span class="s2">"Sphere"</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-    <span class="n">prim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">DefinePrim</span><span class="p">(</span><span class="s2">&quot;/World/&quot;</span> <span class="o">+</span> <span class="n">primType</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">primType</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">prim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">DefinePrim</span><span class="p">(</span><span class="s2">"/World/"</span> <span class="o">+</span> <span class="n">primType</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">primType</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
     <span class="n">UsdGeom</span><span class="o">.</span><span class="n">XformCommonAPI</span><span class="p">(</span><span class="n">prim</span><span class="p">)</span><span class="o">.</span><span class="n">SetTranslate</span><span class="p">((</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
     <span class="n">UsdGeom</span><span class="o">.</span><span class="n">XformCommonAPI</span><span class="p">(</span><span class="n">prim</span><span class="p">)</span><span class="o">.</span><span class="n">SetScale</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
     <span class="n">collisionAPI</span> <span class="o">=</span> <span class="n">UsdPhysics</span><span class="o">.</span><span class="n">CollisionAPI</span><span class="o">.</span><span class="n">Apply</span><span class="p">(</span><span class="n">prim</span><span class="p">)</span>
 
     <span class="c1"># Add semantic label</span>
-    <span class="n">sem</span> <span class="o">=</span> <span class="n">Semantics</span><span class="o">.</span><span class="n">SemanticsAPI</span><span class="o">.</span><span class="n">Apply</span><span class="p">(</span><span class="n">prim</span><span class="p">,</span> <span class="s2">&quot;Semantics&quot;</span><span class="p">)</span>
+    <span class="n">sem</span> <span class="o">=</span> <span class="n">Semantics</span><span class="o">.</span><span class="n">SemanticsAPI</span><span class="o">.</span><span class="n">Apply</span><span class="p">(</span><span class="n">prim</span><span class="p">,</span> <span class="s2">"Semantics"</span><span class="p">)</span>
     <span class="n">sem</span><span class="o">.</span><span class="n">CreateSemanticTypeAttr</span><span class="p">()</span>
     <span class="n">sem</span><span class="o">.</span><span class="n">CreateSemanticDataAttr</span><span class="p">()</span>
-    <span class="n">sem</span><span class="o">.</span><span class="n">GetSemanticTypeAttr</span><span class="p">()</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">)</span>
+    <span class="n">sem</span><span class="o">.</span><span class="n">GetSemanticTypeAttr</span><span class="p">()</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="s2">"class"</span><span class="p">)</span>
     <span class="n">sem</span><span class="o">.</span><span class="n">GetSemanticDataAttr</span><span class="p">()</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">primType</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 
 
@@ -1568,82 +1184,60 @@ calling <code class="docutils literal notranslate"><span class="pre">timeline.pa
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_lidar_param</span><span class="p">():</span>
     <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
     <span class="n">timeline</span><span class="o">.</span><span class="n">pause</span><span class="p">()</span>
-    <span class="n">pointcloud</span> <span class="o">=</span> <span class="n">lidarInterface</span><span class="o">.</span><span class="n">get_point_cloud_data</span><span class="p">(</span><span class="s2">&quot;/World&quot;</span> <span class="o">+</span> <span class="n">lidarPath</span><span class="p">)</span>
-    <span class="n">semantics</span> <span class="o">=</span> <span class="n">lidarInterface</span><span class="o">.</span><span class="n">get_prim_data</span><span class="p">(</span><span class="s2">&quot;/World&quot;</span> <span class="o">+</span> <span class="n">lidarPath</span><span class="p">)</span>
+    <span class="n">pointcloud</span> <span class="o">=</span> <span class="n">lidarInterface</span><span class="o">.</span><span class="n">get_point_cloud_data</span><span class="p">(</span><span class="s2">"/World"</span> <span class="o">+</span> <span class="n">lidarPath</span><span class="p">)</span>
+    <span class="n">semantics</span> <span class="o">=</span> <span class="n">lidarInterface</span><span class="o">.</span><span class="n">get_prim_data</span><span class="p">(</span><span class="s2">"/World"</span> <span class="o">+</span> <span class="n">lidarPath</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Point Cloud&quot;</span><span class="p">,</span> <span class="n">pointcloud</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Semantic ID&quot;</span><span class="p">,</span> <span class="n">semantics</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Point Cloud"</span><span class="p">,</span> <span class="n">pointcloud</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Semantic ID"</span><span class="p">,</span> <span class="n">semantics</span><span class="p">)</span>
 
 
 <span class="n">timeline</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>  <span class="c1"># Start the Simulation</span>
 <span class="n">asyncio</span><span class="o">.</span><span class="n">ensure_future</span><span class="p">(</span><span class="n">get_lidar_param</span><span class="p">())</span>  <span class="c1"># Only ask for data after sweep is complete</span>
 </pre></div>
 </div>
-<p>The main differences between this example and the previous are as follows:</p>
+<p>이 예제와 이전 예제의 주요 차이점은 다음과 같습니다:</p>
 <ol class="arabic simple">
-<li><p>The LIDAR’s <code class="docutils literal notranslate"><span class="pre">enable_semantics</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">True</span></code> on creation.</p></li>
-<li><p>The Cube and Sphere prims have different <code class="docutils literal notranslate"><span class="pre">semantic</span> <span class="pre">labels</span></code>.</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">get_point_cloud_data</span></code> and <code class="docutils literal notranslate"><span class="pre">get_prim_data</span></code> to retrieve the point cloud data and semantic IDs.</p></li>
+<li><p>LIDAR의 <code class="docutils literal notranslate"><span class="pre">enable_semantics</span></code> 플래그가 생성 시 <code class="docutils literal notranslate"><span class="pre">True</span></code>로 설정됩니다.</p></li>
+<li><p>큐브와 구체 프림에는 서로 다른 <code class="docutils literal notranslate"><span class="pre">semantic</span> <span class="pre">labels</span></code>가 있습니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_point_cloud_data</span></code>와 <code class="docutils literal notranslate"><span class="pre">get_prim_data</span></code>를 사용하여 포인트 클라우드 데이터와 시맨틱 ID를 가져오십시오.</p></li>
 </ol>
-<p>The segmented point cloud from the Lidar sensor looks like the image below:</p>
+<p>Lidar 센서의 분할된 포인트 클라우드는 아래 이미지와 같습니다:</p>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/isim_5.1_full_tut_viewport_range_sensor_lidar_segmented_point_cloud.png"><img alt="Segmented Lidar Point Cloud" src="../_images/isim_5.1_full_tut_viewport_range_sensor_lidar_segmented_point_cloud.png" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/isim_5.1_full_tut_viewport_range_sensor_lidar_segmented_point_cloud.png"><img alt="Segmented Lidar Point Cloud" src="../_images/isim_5.1_full_tut_viewport_range_sensor_lidar_segmented_point_cloud.png" style="width: 100%;"/>
 </a>
 </figure>
 </section>
+</details></section>
 </section>
 </section>
-</section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="isaacsim_sensors_physx_generic.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">PhysX SDK generic sensor</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="isaacsim_sensors_physx_lightbeam.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">PhysX SDK lightbeam sensor</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="isaacsim_sensors_physx_generic.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">PhysX SDK generic sensor</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="isaacsim_sensors_physx_lightbeam.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">PhysX SDK lightbeam sensor</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="isaacsim_sensors_physx_lidar.html#gui">GUI</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="isaacsim_sensors_physx_lidar.html#physx-lidar-sensor-example">PhysX SDK lidar sensor example</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="isaacsim_sensors_physx_lidar.html#adding-a-physx-lidar-sensor-to-a-simulation">Adding a PhysX SDK lidar sensor to a simulation</a><ul class="nav section-nav flex-column">
@@ -1660,46 +1254,29 @@ calling <code class="docutils literal notranslate"><span class="pre">timeline.pa
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1730,36 +1307,21 @@ calling <code class="docutils literal notranslate"><span class="pre">timeline.pa
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

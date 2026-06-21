@@ -1,562 +1,258 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Object Simulation and Synthetic Data Generation &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Object Simulation and Synthetic Data Generation — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
-  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
-</script>
-<script type="text/javascript">
-  function OptanonWrapper() {
-    var event = new Event('bannerLoaded');
-    window.dispatchEvent(event);
-  }
-</script>
-<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
-</script>
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'action_and_event_data_generation/tutorial_replicator_object';</script>
-    <script>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'action_and_event_data_generation/tutorial_replicator_object';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Chat IRO: Natural Language Interface for Isaac Sim Replicator Object" href="ext_replicator-object/ext_chat_iro.html" />
-    <link rel="prev" title="Using the API Functions" href="ext_behavior_tree_gen/three_api_functions.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="ext_replicator-object/ext_chat_iro.html" rel="next" title="Chat IRO: Natural Language Interface for Isaac Sim Replicator Object"/>
+<link href="ext_behavior_tree_gen/three_api_functions.html" rel="prev" title="Using the API Functions"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="tutorial_replicator_object.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="tutorial_replicator_object.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -576,7 +272,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -604,20 +299,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -692,17 +375,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -880,7 +553,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -920,13 +592,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -973,10 +639,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1145,18 +807,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1182,84 +834,56 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="../synthetic_data_generation/index.html" class="nav-link">Synthetic Data Generation</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Action and Event Data Generation</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Object Simulation and Synthetic Data Generation</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="../synthetic_data_generation/index.html">Synthetic Data Generation</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">Action and Event Data Generation</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Object Simulation and Synthetic Data Generation</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="object-simulation-and-synthetic-data-generation">
+<article class="bd-article">
+<section id="object-simulation-and-synthetic-data-generation">
 <span id="isaac-sim-app-tutorial-replicator-object"></span><h1>Object Simulation and Synthetic Data Generation<a class="headerlink" href="tutorial_replicator_object.html#object-simulation-and-synthetic-data-generation" title="Link to this heading">#</a></h1>
-<p><code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.object</span></code> (IRO) is a no-code-change-required tool that generates synthetic data for model training that can be used on a range of tasks from retail object detection to robotics. The extension can be run from the UI or the <code class="docutils literal notranslate"><span class="pre">isaac-sim</span></code> container.</p>
-<p>It takes a YAML description file that describes a mutable scene, or a hierarchy of such stacked description files as input, and outputs a description file along with graphics content including RGB, 2D/3D bounding boxes, and segmentation masks.</p>
-<img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_overview.png" class="align-center" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_overview.png" />
+<p><code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.object</span></code> (IRO)는 코드 수정 없이 사용할 수 있는 합성 데이터 생성 도구로, 소매 객체 탐지부터 로봇공학까지 다양한 작업에 활용할 수 있습니다. 이 확장은 UI 또는 <code class="docutils literal notranslate"><span class="pre">isaac-sim</span></code> 컨테이너에서 실행할 수 있습니다.</p>
+<p>가변 장면을 설명하는 YAML 설명 파일 또는 그러한 파일들이 중첩된 계층을 입력으로 받아, RGB, 2D/3D 경계 상자, 분할 마스크 등 그래픽 콘텐츠와 함께 설명 파일을 출력합니다.</p>
+<img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_overview.png" class="align-center" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_overview.png"/>
 <section id="motivation">
 <h2>Motivation<a class="headerlink" href="tutorial_replicator_object.html#motivation" title="Link to this heading">#</a></h2>
-<p>Training deep learning models with synthetic data is in high demand, while 3D software that is used to generate synthetic data often take a long time to learn, including stages such as getting familiar with UI panels. IRO aims at providing you an easy way to compose scenes that are uniquely domain randomized. For example, a typical user for this product is a data scientist without experience in using 3D modeling software, such as Maya and 3ds Max.</p>
-<p>In a domain randomization scenario, rather than the actual detailed content in the 3D scene, a data scientist often focuses more on the rules that governs how the scene is randomized, and the relationship among these randomized rules. IRO provides a set of tools, using macros, to abstractly, intuitively, and compactly describe a randomized 3D scene.</p>
+<p>합성 데이터로 딥러닝 모델을 학습시키는 수요가 높지만, 합성 데이터를 생성하는 3D 소프트웨어는 UI 패널에 익숙해지는 것을 포함해 학습에 오랜 시간이 걸리는 경우가 많습니다. IRO는 도메인 랜덤화가 적용된 장면을 쉽게 구성할 수 있는 방법을 제공하는 것을 목표로 합니다. 예를 들어, 이 제품의 일반적인 사용자는 Maya나 3ds Max와 같은 3D 모델링 소프트웨어 경험이 없는 데이터 과학자입니다.</p>
+<p>도메인 랜덤화 시나리오에서 데이터 과학자는 3D 장면의 실제 세부 내용보다는 장면이 랜덤화되는 규칙과 이러한 랜덤화 규칙들 간의 관계에 더 집중하는 경우가 많습니다. IRO는 매크로를 사용하여 랜덤화된 3D 장면을 추상적이고 직관적이며 간결하게 설명할 수 있는 도구 세트를 제공합니다.</p>
 </section>
 <section id="chat-iro-natural-language-interface-for-iro">
 <h2>Chat IRO: Natural Language Interface for IRO<a class="headerlink" href="tutorial_replicator_object.html#chat-iro-natural-language-interface-for-iro" title="Link to this heading">#</a></h2>
-<p>Chat IRO is a new extension that lets you describe scenes in plain English and automatically generates IRO description files (YAML). It applies the configuration to the stage, shows an immediate viewport preview, can run simulations, and supports saving and loading YAML files enabling fast, iterative scene authoring without manual YAML editing.</p>
+<p>Chat IRO는 일반 영어로 장면을 설명하면 IRO 설명 파일(YAML)을 자동으로 생성하는 새로운 확장입니다. 구성을 스테이지에 적용하고, 즉각적인 뷰포트 미리보기를 표시하며, 시뮬레이션을 실행할 수 있고, YAML 파일 저장 및 로드를 지원하여 수동 YAML 편집 없이 빠르고 반복적인 장면 제작이 가능합니다.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="ext_replicator-object/ext_chat_iro.html">Chat IRO: Natural Language Interface for Isaac Sim Replicator Object</a></li>
@@ -1268,153 +892,152 @@
 </section>
 <section id="end-to-end-pipeline">
 <h2>End-to-end Pipeline<a class="headerlink" href="tutorial_replicator_object.html#end-to-end-pipeline" title="Link to this heading">#</a></h2>
-<p>An end-to-end pipeline is made up of groupings of the larger steps that go into using IRO.</p>
-<p><strong>Acquire Graphics Resources</strong></p>
-<p>To compose a randomized scene, IRO requires imported 3D models to be in USD format. Common 3D formats such as Wavefront OBJ can be converted to USD using <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_asset-converter.html">asset converter</a>.</p>
-<p><strong>Compose a Description File</strong></p>
-<p>The specifications of a description file is described in this multi-page documentation. It’s recommended that you start with the video guides in <a class="reference internal" href="tutorial_replicator_object.html#best-practices"><span class="std std-ref">best practices</span></a>.</p>
-<p><strong>Generate Synthetic Data</strong></p>
-<p>Follow the guidelines below to run IRO.</p>
-<p><strong>Train a CV Model; Deployment and Real-World Application</strong></p>
-<p>An example notebook showing steps to train an object detection model on the synthetic images created using IRO is in TAO 6.0.</p>
+<p>엔드투엔드 파이프라인은 IRO 사용에 필요한 큰 단계들의 그룹으로 구성됩니다.</p>
+<p><strong>그래픽 리소스 획득</strong></p>
+<p>랜덤화된 장면을 구성하려면 IRO에서 가져온 3D 모델이 USD 형식이어야 합니다. Wavefront OBJ와 같은 일반적인 3D 형식은 <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_asset-converter.html">asset converter</a>를 사용하여 USD로 변환할 수 있습니다.</p>
+<p><strong>설명 파일 작성</strong></p>
+<p>설명 파일의 사양은 이 다중 페이지 문서에 설명되어 있습니다. <a class="reference internal" href="tutorial_replicator_object.html#best-practices"><span class="std std-ref">best practices</span></a>의 동영상 가이드부터 시작하는 것을 권장합니다.</p>
+<p><strong>합성 데이터 생성</strong></p>
+<p>IRO를 실행하려면 아래 지침을 따르세요.</p>
+<p><strong>CV 모델 학습, 배포 및 실제 응용</strong></p>
+<p>IRO로 생성한 합성 이미지로 객체 탐지 모델을 학습하는 단계를 보여주는 예제 노트북이 TAO 6.0에 있습니다.</p>
 </section>
 <section id="run-from-the-ui">
 <h2>Run from the UI<a class="headerlink" href="tutorial_replicator_object.html#run-from-the-ui" title="Link to this heading">#</a></h2>
 <ol class="arabic">
-<li><p>Follow the <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_core/ext_extension-manager.html">Omniverse Extension Manager guide</a> to enable the <code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.object.core</span></code> and <code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.object.ui</span></code> extensions.</p></li>
-<li><p>If the extension is successfully enabled, Object SDG panel will be available at the top right, and <strong>Tools</strong> &gt; <strong>Action and Event Data Generation</strong> will have options <strong>Object SDG</strong> and <strong>Distribution Visualizer</strong>.</p>
-<p>If not, disable and enable the extension again. The Object SDG panel is turned on by default, and you can turn it off or on again by <strong>Tools</strong> &gt; <strong>Action and Event Data Generation</strong> &gt; <strong>Object SDG</strong>.</p>
-<img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_open_extension_folder.webp" class="align-center" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_open_extension_folder.webp" />
+<li><p><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_core/ext_extension-manager.html">Omniverse Extension Manager guide</a>를 따라 <code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.object.core</span></code> 및 <code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.object.ui</span></code> 확장을 활성화하세요.</p></li>
+<li><p>확장이 성공적으로 활성화되면 오른쪽 상단에 Object SDG 패널이 표시되고, <strong>Tools</strong> &gt; <strong>Action and Event Data Generation</strong>에 <strong>Object SDG</strong> 및 <strong>Distribution Visualizer</strong> 옵션이 표시됩니다.</p>
+<p>그렇지 않으면 확장을 비활성화했다가 다시 활성화하세요. Object SDG 패널은 기본적으로 켜져 있으며, <strong>Tools</strong> &gt; <strong>Action and Event Data Generation</strong> &gt; <strong>Object SDG</strong>로 끄거나 다시 켤 수 있습니다.</p>
+<img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_open_extension_folder.webp" class="align-center" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_open_extension_folder.webp"/>
 </li>
-<li><p>Click on the folder icon or the Visual Studio Code icon on the right side of the opened extension panel as shown above. The root folder of the extension opens.</p></li>
-<li><p>Under <code class="docutils literal notranslate"><span class="pre">PATH_TO_CORE_EXTENSION/isaacsim/replicator/object/core/configs</span></code> there are many description files in YAML format.
-It’s recommended that you start with <code class="docutils literal notranslate"><span class="pre">demo_kaleidoscope.yaml</span></code>. For <a class="reference internal" href="ext_replicator-object/empty_space_detection.html#empty-space-detection"><span class="std std-ref">empty space detection</span></a>, use <code class="docutils literal notranslate"><span class="pre">demo_empty_space.yaml</span></code> and refer to the linked catalog page.</p></li>
-<li><p>Go to <code class="docutils literal notranslate"><span class="pre">global.yaml</span></code> and update <code class="docutils literal notranslate"><span class="pre">output_path</span></code> to any local folder where you can store the simulation output.</p></li>
+<li><p>위에 표시된 것처럼 열린 확장 패널의 오른쪽에 있는 폴더 아이콘 또는 Visual Studio Code 아이콘을 클릭하세요. 확장의 루트 폴더가 열립니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PATH_TO_CORE_EXTENSION/isaacsim/replicator/object/core/configs</span></code> 아래에 YAML 형식의 설명 파일이 많이 있습니다. <code class="docutils literal notranslate"><span class="pre">demo_kaleidoscope.yaml</span></code>부터 시작하는 것을 권장합니다. <a class="reference internal" href="ext_replicator-object/empty_space_detection.html#empty-space-detection"><span class="std std-ref">빈 공간 감지</span></a>의 경우 <code class="docutils literal notranslate"><span class="pre">demo_empty_space.yaml</span></code>을 사용하고 연결된 카탈로그 페이지를 참조하세요.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">global.yaml</span></code>로 이동하여 시뮬레이션 출력을 저장할 수 있는 로컬 폴더로 <code class="docutils literal notranslate"><span class="pre">output_path</span></code>를 업데이트하세요.</p></li>
 </ol>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Select description files from the dropdown below the <strong>Simulate</strong> button. When the extension is loaded, all <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> files in the configs folder will have their names included in this list.</p>
+<p class="admonition-title">참고</p>
+<p><strong>Simulate</strong> 버튼 아래의 드롭다운에서 설명 파일을 선택하세요. 확장이 로드되면 configs 폴더의 모든 <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> 파일의 이름이 이 목록에 포함됩니다.</p>
 </div>
-<p id="placeholders"><strong>Placeholders in description files</strong></p>
-<p>Some example description files have placeholders. The paths need to be replaced with valid paths.</p>
-<p>For example:</p>
+<p id="placeholders"><strong>설명 파일의 플레이스홀더</strong></p>
+<p>일부 예제 설명 파일에는 플레이스홀더가 있습니다. 경로를 유효한 경로로 교체해야 합니다.</p>
+<p>예를 들어:</p>
 <ul>
-<li><p>In <code class="docutils literal notranslate"><span class="pre">global.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">minimum.yaml</span></code>, replace <code class="docutils literal notranslate"><span class="pre">PATH_TO_OUTPUT</span></code> with a valid path.</p></li>
-<li><p>In <code class="docutils literal notranslate"><span class="pre">demo_bottle.yaml</span></code>, replace <code class="docutils literal notranslate"><span class="pre">PATH_TO_LABEL_IMAGES</span></code> with a folder that contains JPEG images.</p></li>
-<li><p>For <code class="docutils literal notranslate"><span class="pre">tutorial_harmonizer_permutate.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">demo_macro.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">tutorial_macro.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">tutorial_scene_graph.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">tutorial_scene_graph_randomized.yaml</span></code> to run:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">global.yaml</span></code> 및 <code class="docutils literal notranslate"><span class="pre">minimum.yaml</span></code>에서 <code class="docutils literal notranslate"><span class="pre">PATH_TO_OUTPUT</span></code>을 유효한 경로로 교체하세요.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">demo_bottle.yaml</span></code>에서 <code class="docutils literal notranslate"><span class="pre">PATH_TO_LABEL_IMAGES</span></code>를 JPEG 이미지가 포함된 폴더로 교체하세요.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tutorial_harmonizer_permutate.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">demo_macro.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">tutorial_macro.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">tutorial_scene_graph.yaml</span></code> 및 <code class="docutils literal notranslate"><span class="pre">tutorial_scene_graph_randomized.yaml</span></code>을 실행하려면:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>replace <code class="docutils literal notranslate"><span class="pre">PATH_TO_ORO</span></code> in <code class="docutils literal notranslate"><span class="pre">global.yaml</span></code> with the absolute path of <code class="docutils literal notranslate"><span class="pre">data/oro_tutorial_models/oro.usd</span></code> in the extension’s root folder.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">global.yaml</span></code>의 <code class="docutils literal notranslate"><span class="pre">PATH_TO_ORO</span></code>를 확장의 루트 폴더에 있는 <code class="docutils literal notranslate"><span class="pre">data/oro_tutorial_models/oro.usd</span></code>의 절대 경로로 교체하세요.</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p>In <code class="docutils literal notranslate"><span class="pre">doc_observatory.yaml</span></code>:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">doc_observatory.yaml</span></code>에서:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>replace <code class="docutils literal notranslate"><span class="pre">PATH_TO_OBSERVATORY_SCOPE</span></code> with the absolute path of <code class="docutils literal notranslate"><span class="pre">data/oro_tutorial_models/observatory_scope.usd</span></code></p></li>
-<li><p>replace <code class="docutils literal notranslate"><span class="pre">PATH_TO_OBSERVATORY_BASE</span></code> with the absolute path of <code class="docutils literal notranslate"><span class="pre">data/oro_tutorial_models/observatory_base.usd</span></code></p></li>
-<li><p>replace <code class="docutils literal notranslate"><span class="pre">PATH_TO_OBSERVATORY_SHAFT</span></code> with the absolute path of <code class="docutils literal notranslate"><span class="pre">data/oro_tutorial_models/observatory_shaft.usd</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PATH_TO_OBSERVATORY_SCOPE</span></code>를 <code class="docutils literal notranslate"><span class="pre">data/oro_tutorial_models/observatory_scope.usd</span></code>의 절대 경로로 교체하세요</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PATH_TO_OBSERVATORY_BASE</span></code>를 <code class="docutils literal notranslate"><span class="pre">data/oro_tutorial_models/observatory_base.usd</span></code>의 절대 경로로 교체하세요</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PATH_TO_OBSERVATORY_SHAFT</span></code>를 <code class="docutils literal notranslate"><span class="pre">data/oro_tutorial_models/observatory_shaft.usd</span></code>의 절대 경로로 교체하세요.</p></li>
 </ul>
 </div></blockquote>
 </li>
-<li><p>To make <code class="docutils literal notranslate"><span class="pre">demo_bin_pack.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">demo_bins_of_bins_rack_2_layers.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">demo_bins_of_bins_rack.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">demo_bins_of_bins.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">demo_table.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">demo_transform_operator.yaml</span></code> work:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">demo_bin_pack.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">demo_bins_of_bins_rack_2_layers.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">demo_bins_of_bins_rack.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">demo_bins_of_bins.yaml</span></code>, <code class="docutils literal notranslate"><span class="pre">demo_table.yaml</span></code> 및 <code class="docutils literal notranslate"><span class="pre">demo_transform_operator.yaml</span></code>이 작동하려면:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>replace <code class="docutils literal notranslate"><span class="pre">PATH_TO_BOXES</span></code> with a folder containing USD files of boxes (or other USDs) in <code class="docutils literal notranslate"><span class="pre">global.yaml</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">global.yaml</span></code>의 <code class="docutils literal notranslate"><span class="pre">PATH_TO_BOXES</span></code>를 상자(또는 기타 USD 파일)의 USD 파일이 포함된 폴더로 교체하세요.</p></li>
 </ul>
 </div></blockquote>
 </li>
 <li><dl class="simple">
-<dt>In <code class="docutils literal notranslate"><span class="pre">demo_shader_attributes.yaml</span></code>,</dt><dd><ul class="simple">
-<li><p>replace <code class="docutils literal notranslate"><span class="pre">PATH_TO_USD</span></code> with a path to a USD file.</p></li>
+<dt><code class="docutils literal notranslate"><span class="pre">demo_shader_attributes.yaml</span></code>에서,</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PATH_TO_USD</span></code>를 USD 파일 경로로 교체하세요.</p></li>
 </ul>
 </dd>
 </dl>
 </li>
-<li><p>In <code class="docutils literal notranslate"><span class="pre">demo_frustum.yaml</span></code>:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">demo_frustum.yaml</span></code>에서:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>replace <code class="docutils literal notranslate"><span class="pre">PATH_TO_MAIN_OBJECTS</span></code> with a folder containing USD files to be used as main objects.</p></li>
-<li><p>replace <code class="docutils literal notranslate"><span class="pre">PATH_TO_DISTRACTORS</span></code> with a folder containing USD files to be used as distractors.</p></li>
-<li><p>replace <code class="docutils literal notranslate"><span class="pre">PATH_TO_BACKGROUND_IMAGES</span></code> with a folder containing JPEG images to be used as background images.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PATH_TO_MAIN_OBJECTS</span></code>를 주요 객체로 사용할 USD 파일이 포함된 폴더로 교체하세요.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PATH_TO_DISTRACTORS</span></code>를 방해 요소로 사용할 USD 파일이 포함된 폴더로 교체하세요.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PATH_TO_BACKGROUND_IMAGES</span></code>를 배경 이미지로 사용할 JPEG 이미지가 포함된 폴더로 교체하세요.</p></li>
 </ul>
 </div></blockquote>
 </li>
 </ul>
-<p>You can adjust the scale, if things are not showing up correctly, because different USD files have different sizes.</p>
+<p>서로 다른 USD 파일의 크기가 다르기 때문에 올바르게 표시되지 않으면 스케일을 조정할 수 있습니다.</p>
 <ol class="arabic simple">
-<li><p>Select <code class="docutils literal notranslate"><span class="pre">demo_kaleidoscope</span></code> from the dropdown box; <code class="docutils literal notranslate"><span class="pre">demo_kaleidoscope</span></code> will appear in the <strong>Description File</strong> text box. You can also use the full absolute path <code class="docutils literal notranslate"><span class="pre">PATH_TO_CORE_EXTENSION/isaacsim/replicator/object/core/configs/demo_kaleidoscope.yaml</span></code> to load a description file.</p></li>
-<li><p>Click <strong>Simulate</strong> to start the simulation. The progress bar will show the simulation progress.</p></li>
+<li><p>드롭다운 박스에서 <code class="docutils literal notranslate"><span class="pre">demo_kaleidoscope</span></code>를 선택하면 <strong>Description File</strong> 텍스트 박스에 <code class="docutils literal notranslate"><span class="pre">demo_kaleidoscope</span></code>가 표시됩니다. 전체 절대 경로 <code class="docutils literal notranslate"><span class="pre">PATH_TO_CORE_EXTENSION/isaacsim/replicator/object/core/configs/demo_kaleidoscope.yaml</span></code>를 사용하여 설명 파일을 로드할 수도 있습니다.</p></li>
+<li><p><strong>Simulate</strong>를 클릭하여 시뮬레이션을 시작하세요. 진행 표시줄에 시뮬레이션 진행 상황이 표시됩니다.</p></li>
 </ol>
-<p>In the above and following content, <code class="docutils literal notranslate"><span class="pre">PATH_TO_CORE_EXTENSION</span></code> varies, for <strong>Isaac on Windows</strong> it is something like <code class="docutils literal notranslate"><span class="pre">C:\isaacsim\extscache\isaacsim.replicator.object.core-0.x.y\isaacsim\replicator\object\core\configs\demo_kaleidoscope.yaml</span></code>, while for <strong>Isaac on Linux</strong> it is something like <code class="docutils literal notranslate"><span class="pre">~/isaacsim/extscache/isaacsim.replicator.object.core-0.x.y/isaacsim/replicator/object/core/configs/demo_kaleidoscope.yaml</span></code></p>
-<p>A guide on how to use the extension is available <a class="reference internal" href="tutorial_replicator_object.html#best-practices"><span class="std std-ref">here</span></a>.</p>
+<p>위 내용과 이후 내용에서 <code class="docutils literal notranslate"><span class="pre">PATH_TO_CORE_EXTENSION</span></code>은 환경에 따라 다르며, <strong>Isaac on Windows</strong>의 경우 <code class="docutils literal notranslate"><span class="pre">C:\isaacsim\extscache\isaacsim.replicator.object.core-0.x.y\isaacsim\replicator\object\core\configs\demo_kaleidoscope.yaml</span></code>과 같고, <strong>Isaac on Linux</strong>의 경우 <code class="docutils literal notranslate"><span class="pre">~/isaacsim/extscache/isaacsim.replicator.object.core-0.x.y/isaacsim/replicator/object/core/configs/demo_kaleidoscope.yaml</span></code>과 같습니다.</p>
+<p>확장 사용 방법에 대한 가이드는 <a class="reference internal" href="tutorial_replicator_object.html#best-practices"><span class="std std-ref">여기</span></a>에서 확인할 수 있습니다.</p>
 </section>
 <section id="run-from-docker">
 <h2>Run from Docker<a class="headerlink" href="tutorial_replicator_object.html#run-from-docker" title="Link to this heading">#</a></h2>
-<p>To install the Isaac Sim Docker container, visit <a class="reference internal" href="../installation/install_container.html#isaac-sim-setup-remote-headless-container"><span class="std std-ref">Container Deployment</span></a>.</p>
-<p>To run the Isaac Sim Docker container:</p>
+<p>Isaac Sim Docker 컨테이너를 설치하려면 <a class="reference internal" href="../installation/install_container.html#isaac-sim-setup-remote-headless-container"><span class="std std-ref">Container Deployment</span></a>를 방문하세요.</p>
+<p>Isaac Sim Docker 컨테이너를 실행하려면:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">--</span><span class="n">gpus</span><span class="w"> </span><span class="n">device</span><span class="o">=</span><span class="mi">0</span><span class="w"> </span><span class="o">--</span><span class="n">entrypoint</span><span class="w"> </span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="n">LOCAL_PATH</span><span class="o">:/</span><span class="n">tmp</span><span class="w"> </span><span class="o">--</span><span class="n">network</span><span class="w"> </span><span class="n">host</span><span class="w"> </span><span class="o">-</span><span class="n">it</span><span class="w"> </span><span class="n">ISAAC_SIM_DOCKER_CONTAINER_URL</span>
 </pre></div>
 </div>
-<p>Accordingly, update <code class="docutils literal notranslate"><span class="pre">global.yaml</span></code> to have <code class="docutils literal notranslate"><span class="pre">output_path</span></code> to be any folder under <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>.</p>
-<p>For example, to launch the simulation with <code class="docutils literal notranslate"><span class="pre">demo_kaleidoscope</span></code>:</p>
+<p>따라서 <code class="docutils literal notranslate"><span class="pre">global.yaml</span></code>을 업데이트하여 <code class="docutils literal notranslate"><span class="pre">output_path</span></code>를 <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> 아래의 임의 폴더로 설정하세요.</p>
+<p>예를 들어, <code class="docutils literal notranslate"><span class="pre">demo_kaleidoscope</span></code>로 시뮬레이션을 실행하려면:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">bash</span><span class="w"> </span><span class="n">isaac</span><span class="o">-</span><span class="n">sim</span><span class="p">.</span><span class="n">sh</span><span class="w"> </span><span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">window</span><span class="w"> </span><span class="o">--</span><span class="n">enable</span><span class="w"> </span><span class="n">isaacsim</span><span class="p">.</span><span class="n">replicator</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">core</span><span class="w"> </span><span class="o">--</span><span class="n">allow</span><span class="o">-</span><span class="n">root</span><span class="w"> </span><span class="o">--/</span><span class="n">log</span><span class="o">/</span><span class="n">file</span><span class="o">=/</span><span class="n">tmp</span><span class="o">/</span><span class="n">isaacsim</span><span class="p">.</span><span class="n">replicator</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">log</span><span class="w"> </span><span class="o">--/</span><span class="n">log</span><span class="o">/</span><span class="n">level</span><span class="o">=</span><span class="n">warn</span><span class="w"> </span><span class="o">--/</span><span class="n">windowless</span><span class="o">=</span><span class="n">True</span><span class="w"> </span><span class="o">--/</span><span class="n">config</span><span class="o">/</span><span class="n">file</span><span class="o">=</span><span class="n">PATH_TO_CORE_EXTENSION</span><span class="o">/</span><span class="n">isaacsim</span><span class="o">/</span><span class="n">replicator</span><span class="o">/</span><span class="n">object</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">configs</span><span class="o">/</span><span class="n">demo_kaleidoscope</span><span class="p">.</span><span class="n">yaml</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">/tmp/isaacsim.replicator.object.log</span></code> contains the messages from execution as well as from the extension. You can search the messages from the extension by filtering the file with METROPERF.</p>
+<p><code class="docutils literal notranslate"><span class="pre">/tmp/isaacsim.replicator.object.log</span></code>에는 실행 메시지와 확장 메시지가 포함됩니다. METROPERF로 파일을 필터링하여 확장의 메시지를 검색할 수 있습니다.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If it is not generating anything on the first run inside Docker container, run it again.</p>
+<p class="admonition-title">참고</p>
+<p>Docker 컨테이너 내에서 첫 번째 실행 시 아무것도 생성되지 않으면 다시 실행하세요.</p>
 </div>
 </section>
 <section id="embedded-interface">
 <span id="id1"></span><h2>Embedded Interface<a class="headerlink" href="tutorial_replicator_object.html#embedded-interface" title="Link to this heading">#</a></h2>
-<p>When writing graphics content to disk is not needed, the embedded interface is a quick way to prototype a description file.</p>
-<p>To use the embedded interface, select a description file, and then click on the <strong>Initialize Scene Randomization</strong> button in the <strong>Object Detection SDG</strong> panel to load the description file. Randomization symbols will be created and connected accordingly. From then on, the scene is randomized per click on the <strong>Randomize Scene</strong> button.</p>
+<p>그래픽 콘텐츠를 디스크에 저장할 필요가 없을 때, 임베디드 인터페이스는 설명 파일을 빠르게 프로토타입할 수 있는 방법입니다.</p>
+<p>임베디드 인터페이스를 사용하려면 설명 파일을 선택한 다음 <strong>Object Detection SDG</strong> 패널의 <strong>Initialize Scene Randomization</strong> 버튼을 클릭하여 설명 파일을 로드하세요. 랜덤화 심볼이 그에 따라 생성되고 연결됩니다. 이후 <strong>Randomize Scene</strong> 버튼을 클릭할 때마다 장면이 랜덤화됩니다.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>After clicking on the <strong>Initialize Scene Randomization</strong> button and before clicking on the <strong>Randomize Scene</strong> button, it is normal that the viewport is black. To see anything of interest at this stage, press “F” to focus on the selected prim.</p>
+<p class="admonition-title">참고</p>
+<p><strong>Initialize Scene Randomization</strong> 버튼을 클릭한 후 <strong>Randomize Scene</strong> 버튼을 클릭하기 전에는 뷰포트가 검은색인 것이 정상입니다. 이 단계에서 무언가를 보려면 "F"를 눌러 선택한 프림에 초점을 맞추세요.</p>
 </div>
-<img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_ui_embedded_interface.webp" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_ui_embedded_interface.webp" />
-<p>To preview physically, click on the triangular <strong>Play</strong> button on the left column of widgets.</p>
+<img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_ui_embedded_interface.webp" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_ui_embedded_interface.webp"/>
+<p>물리적으로 미리 보려면 위젯의 왼쪽 열에 있는 삼각형 <strong>Play</strong> 버튼을 클릭하세요.</p>
 </section>
 <section id="expected-output">
 <h2>Expected Output<a class="headerlink" href="tutorial_replicator_object.html#expected-output" title="Link to this heading">#</a></h2>
-<p>After the simulation, the output is stored in <code class="docutils literal notranslate"><span class="pre">output_path</span></code>. The output content is determined by the <a class="reference internal" href="ext_replicator-object/setting.html#output-switches"><span class="std std-ref">output switches</span></a> setting.</p>
-<p>For example, the image output of <code class="docutils literal notranslate"><span class="pre">demo_bottle</span></code> is:</p>
-<a class="reference internal image-reference" href="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_bottle_image.jpg"><img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_bottle_image.jpg" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_bottle_image.jpg" style="width: 400px;" />
+<p>시뮬레이션 후 출력은 <code class="docutils literal notranslate"><span class="pre">output_path</span></code>에 저장됩니다. 출력 내용은 <a class="reference internal" href="ext_replicator-object/setting.html#output-switches"><span class="std std-ref">output switches</span></a> 설정에 따라 결정됩니다.</p>
+<p>예를 들어, <code class="docutils literal notranslate"><span class="pre">demo_bottle</span></code>의 이미지 출력은 다음과 같습니다:</p>
+<a class="reference internal image-reference" href="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_bottle_image.jpg"><img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_bottle_image.jpg" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_bottle_image.jpg" style="width: 400px;"/>
 </a>
-<p>While the segmentation output is:</p>
-<a class="reference internal image-reference" href="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_bottle_segmentation.png"><img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_bottle_segmentation.png" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_bottle_segmentation.png" style="width: 400px;" />
+<p>분할 출력은 다음과 같습니다:</p>
+<a class="reference internal image-reference" href="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_bottle_segmentation.png"><img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_bottle_segmentation.png" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_bottle_segmentation.png" style="width: 400px;"/>
 </a>
-<p>The 2D bounding box is:</p>
+<p>2D 경계 상자는 다음과 같습니다:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">bottle_0 0 -1.0 0 1028 333 1362 2159 0 0 0 0 0 0 0</span>
 <span class="l l-Scalar l-Scalar-Plain">bottle_1 0 -1.0 0 1895 112 2277 1694 0 0 0 0 0 0 0</span>
 <span class="l l-Scalar l-Scalar-Plain">bottle_2 0 -1.0 0 1281 462 1854 2159 0 0 0 0 0 0 0</span>
 </pre></div>
 </div>
-<p>in which the four positive numbers indicate <code class="docutils literal notranslate"><span class="pre">x_min</span></code>, <code class="docutils literal notranslate"><span class="pre">x_max</span></code>, <code class="docutils literal notranslate"><span class="pre">y_min</span></code>, <code class="docutils literal notranslate"><span class="pre">y_max</span></code>. The number <code class="docutils literal notranslate"><span class="pre">-1</span></code> is where the occlusion rate should be, but because a bottle is transparent, it is <code class="docutils literal notranslate"><span class="pre">-1</span></code> here.</p>
-<p>As another example, the image output of <code class="docutils literal notranslate"><span class="pre">demo_kaleidoscope</span></code> is:</p>
-<a class="reference internal image-reference" href="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_donuts_image.jpg"><img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_donuts_image.jpg" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_donuts_image.jpg" style="width: 400px;" />
+<p>여기서 네 개의 양수는 <code class="docutils literal notranslate"><span class="pre">x_min</span></code>, <code class="docutils literal notranslate"><span class="pre">x_max</span></code>, <code class="docutils literal notranslate"><span class="pre">y_min</span></code>, <code class="docutils literal notranslate"><span class="pre">y_max</span></code>를 나타냅니다. <code class="docutils literal notranslate"><span class="pre">-1</span></code>은 폐색률이 있어야 할 자리이지만, 병이 투명하기 때문에 여기서는 <code class="docutils literal notranslate"><span class="pre">-1</span></code>입니다.</p>
+<p>또 다른 예로, <code class="docutils literal notranslate"><span class="pre">demo_kaleidoscope</span></code>의 이미지 출력은 다음과 같습니다:</p>
+<a class="reference internal image-reference" href="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_donuts_image.jpg"><img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_donuts_image.jpg" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_donuts_image.jpg" style="width: 400px;"/>
 </a>
-<p>While the segmentation output is:</p>
-<a class="reference internal image-reference" href="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_donuts_segmentation.png"><img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_donuts_segmentation.png" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_donuts_segmentation.png" style="width: 400px;" />
+<p>분할 출력은 다음과 같습니다:</p>
+<a class="reference internal image-reference" href="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_donuts_segmentation.png"><img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_donuts_segmentation.png" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_donuts_segmentation.png" style="width: 400px;"/>
 </a>
 </section>
 <section id="concepts">
 <h2>Concepts<a class="headerlink" href="tutorial_replicator_object.html#concepts" title="Link to this heading">#</a></h2>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">Description File</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">The description file is a YAML file that has a main key named <code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.object</span></code>.</p>
-<p class="sd-card-text">The description file consists of key-value pairs. Each key-value pair is a <a class="reference internal" href="ext_replicator-object/mutable.html#mutable"><span class="std std-ref">Mutable</span></a>, a <a class="reference internal" href="ext_replicator-object/harmonizer.html#harmonizer"><span class="std std-ref">Harmonizer</span></a>, or a <a class="reference internal" href="ext_replicator-object/setting.html#setting"><span class="std std-ref">Setting</span></a>.</p>
-<p class="sd-card-text">The description file generates frames as specified. Each frame the scene is randomized, <a class="reference internal" href="ext_replicator-object/setting.html#output-switches"><span class="std std-ref">graphics content</span></a> is captured, and output to disk. <a class="reference internal" href="ext_replicator-object/setting.html#setting"><span class="std std-ref">Settings</span></a> describe how the scene is configured and how data is output. For example, you can set the number of frames to output, whether or not to output 2D bounding boxes, or set the gravity and friction of physics simulation.</p>
-<p class="sd-card-text">The description file populates the scene with objects that are called <a class="reference internal" href="ext_replicator-object/mutable.html#mutable"><span class="std std-ref">mutables</span></a>.</p>
-<p class="sd-card-text">Mutables randomize every frame. Sometimes you might want to constrain how they randomize. For example, to know how other mutables are randomizing and randomize correspondingly. To do so, define <a class="reference internal" href="ext_replicator-object/harmonizer.html#harmonizer"><span class="std std-ref">harmonizers</span></a>.</p>
+<span class="sd-summary-text">Description File</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-right" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">설명 파일은 <code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.object</span></code>라는 주요 키를 가진 YAML 파일입니다.</p>
+<p class="sd-card-text">설명 파일은 키-값 쌍으로 구성됩니다. 각 키-값 쌍은 <a class="reference internal" href="ext_replicator-object/mutable.html#mutable"><span class="std std-ref">Mutable</span></a>, <a class="reference internal" href="ext_replicator-object/harmonizer.html#harmonizer"><span class="std std-ref">Harmonizer</span></a>, 또는 <a class="reference internal" href="ext_replicator-object/setting.html#setting"><span class="std std-ref">Setting</span></a>입니다.</p>
+<p class="sd-card-text">설명 파일은 지정된 대로 프레임을 생성합니다. 매 프레임마다 장면이 랜덤화되고, <a class="reference internal" href="ext_replicator-object/setting.html#output-switches"><span class="std std-ref">그래픽 콘텐츠</span></a>가 캡처되어 디스크에 출력됩니다. <a class="reference internal" href="ext_replicator-object/setting.html#setting"><span class="std std-ref">Settings</span></a>는 장면 구성 방법과 데이터 출력 방법을 설명합니다. 예를 들어, 출력할 프레임 수, 2D 경계 상자 출력 여부, 물리 시뮬레이션의 중력 및 마찰을 설정할 수 있습니다.</p>
+<p class="sd-card-text">설명 파일은 <a class="reference internal" href="ext_replicator-object/mutable.html#mutable"><span class="std std-ref">mutables</span></a>라고 하는 객체로 장면을 채웁니다.</p>
+<p class="sd-card-text">Mutable은 매 프레임마다 랜덤화됩니다. 때로는 랜덤화 방식을 제한하고 싶을 수 있습니다. 예를 들어, 다른 mutable이 어떻게 랜덤화되는지 알고 그에 맞게 랜덤화하려면 <a class="reference internal" href="ext_replicator-object/harmonizer.html#harmonizer"><span class="std std-ref">harmonizer</span></a>를 정의하세요.</p>
 </div>
 </details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">Example Minimal Description File Definition</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<span class="sd-summary-text">Example Minimal Description File Definition</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-right" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">isaacsim.replicator.object</span><span class="p">:</span>
 <span class="w">   </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.x.y</span>
 <span class="w">   </span><span class="nt">num_frames</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
@@ -1427,48 +1050,48 @@ It’s recommended that you start with <code class="docutils literal notranslate
 </div>
 </details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3" id="simulation-workflow">
 <summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">Simulation Workflow</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Every time a simulation is launched, an initialization stage happens in the beginning, and a per-frame simulation stage happens every frame.</p>
-<p class="sd-card-text">In the initialization stage, the description file is parsed by a description parser. Symbols are created for every <a class="reference internal" href="ext_replicator-object/mutable_attribute.html#mutable-attribute"><span class="std std-ref">mutable attribute</span></a> that requires a resolution to get its actual value. These symbols will resolve to actual values when they are used to interact with the USD scene once, after they are initialized; and also in every per-frame simulation.</p>
-<p class="sd-card-text">Each time a symbol is resolved, the dependent symbols of it are also recursively resolved. If an unresolved harmonized mutable attribute is met, the parser enters <code class="docutils literal notranslate"><span class="pre">AWAITING_HARMONIZATION</span></code> status, and then the <a class="reference internal" href="ext_replicator-object/harmonizer.html#harmonizer"><span class="std std-ref">harmonizers</span></a> harmonizes (collect information from the <code class="docutils literal notranslate"><span class="pre">pitch</span></code> attribute and randomize), and propagate output back to harmonized mutable attributes. After all harmonized mutable attributes are resolved, the parser will be out of <code class="docutils literal notranslate"><span class="pre">AWAITING_HARMONIZATION</span></code> status.</p>
-<p class="sd-card-text">After this, the resolved values are used to update the USD scene. If gravity is turned on, physics is resolved so that objects move away from each other when they overlap or drop onto a surface (for more details, refer to <a class="reference internal" href="ext_replicator-object/setting.html#physics-simulation-explained"><span class="std std-ref">physics simulation explained</span></a>). And <a class="reference internal" href="ext_replicator-object/setting.html#output-switches"><span class="std std-ref">graphics content</span></a> is captured. Eventually, the state of the scene in this frame is recorded and saved, such that later on, it can be restored or inspected.</p>
-<p class="sd-card-text">More details can be found in <a class="reference internal" href="ext_replicator-object/randomization_dependency.html#harmonization-example"><span class="std std-ref">harmonization example</span></a>.</p>
+<span class="sd-summary-text">Simulation Workflow</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-right" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">시뮬레이션이 실행될 때마다 처음에 초기화 단계가 발생하고, 매 프레임마다 프레임별 시뮬레이션 단계가 발생합니다.</p>
+<p class="sd-card-text">초기화 단계에서 설명 파일은 설명 파서에 의해 파싱됩니다. 실제 값을 얻기 위해 해석이 필요한 모든 <a class="reference internal" href="ext_replicator-object/mutable_attribute.html#mutable-attribute"><span class="std std-ref">mutable attribute</span></a>에 대해 심볼이 생성됩니다. 이 심볼들은 초기화된 후 USD 장면과 한 번 상호작용할 때, 그리고 모든 프레임별 시뮬레이션에서 실제 값으로 해석됩니다.</p>
+<p class="sd-card-text">심볼이 해석될 때마다 그에 의존하는 심볼도 재귀적으로 해석됩니다. 미해석된 harmonized mutable attribute가 발견되면 파서는 <code class="docutils literal notranslate"><span class="pre">AWAITING_HARMONIZATION</span></code> 상태로 진입하고, <a class="reference internal" href="ext_replicator-object/harmonizer.html#harmonizer"><span class="std std-ref">harmonizer</span></a>가 조화를 이루어(<code class="docutils literal notranslate"><span class="pre">pitch</span></code> 속성에서 정보를 수집하고 랜덤화), 조화된 mutable attribute로 출력을 전파합니다. 모든 harmonized mutable attribute가 해석되면 파서는 <code class="docutils literal notranslate"><span class="pre">AWAITING_HARMONIZATION</span></code> 상태에서 벗어납니다.</p>
+<p class="sd-card-text">이후 해석된 값들은 USD 장면을 업데이트하는 데 사용됩니다. 중력이 켜져 있으면 물리가 해석되어 객체들이 겹칠 때 서로 멀어지거나 표면에 떨어집니다(자세한 내용은 <a class="reference internal" href="ext_replicator-object/setting.html#physics-simulation-explained"><span class="std std-ref">물리 시뮬레이션 설명</span></a> 참조). 그리고 <a class="reference internal" href="ext_replicator-object/setting.html#output-switches"><span class="std std-ref">그래픽 콘텐츠</span></a>가 캡처됩니다. 최종적으로 이 프레임의 장면 상태가 기록되어 저장되므로, 나중에 복원하거나 검사할 수 있습니다.</p>
+<p class="sd-card-text">자세한 내용은 <a class="reference internal" href="ext_replicator-object/randomization_dependency.html#harmonization-example"><span class="std std-ref">harmonization example</span></a>에서 확인할 수 있습니다.</p>
 </div>
 </details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">Scene Restoration</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">To support multiple-sampling for pretrained models:</p>
-<p class="sd-card-text">In the output content, you can use the output saved from logging of a specific frame to generate the exact same graphics content as when this frame was generated. Or you can slightly modify it to have something different but everything else is the same.</p>
+<span class="sd-summary-text">Scene Restoration</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-right" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">사전 학습된 모델의 다중 샘플링을 지원하려면:</p>
+<p class="sd-card-text">출력 콘텐츠에서 특정 프레임의 로그에서 저장된 출력을 사용하여 해당 프레임이 생성될 때와 동일한 그래픽 콘텐츠를 생성할 수 있습니다. 또는 약간 수정하여 나머지는 동일하지만 다른 결과를 생성할 수 있습니다.</p>
 </div>
 </details></section>
 <section id="main-simulation-workflow-walkthrough">
 <span id="best-practices"></span><h2>Main Simulation Workflow Walkthrough<a class="headerlink" href="tutorial_replicator_object.html#main-simulation-workflow-walkthrough" title="Link to this heading">#</a></h2>
-<p>Here is a walkthrough on how to run the main simulation workflow.</p>
-<p>The first step is to set the description files. Turn on the extension manager, search for <code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.object.core</span></code>, and click on the <strong>Open Extension Folder</strong> button, as shown below.</p>
+<p>다음은 주요 시뮬레이션 워크플로우를 실행하는 방법에 대한 안내입니다.</p>
+<p>첫 번째 단계는 설명 파일을 설정하는 것입니다. 확장 관리자를 열고 <code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.object.core</span></code>를 검색한 다음 아래와 같이 <strong>Open Extension Folder</strong> 버튼을 클릭하세요.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.object.core</span></code> and/or <code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.object.ui</span></code> are not enabled, click on the capsule icons to enable them.</p>
+<p class="admonition-title">참고</p>
+<p><code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.object.core</span></code> 및/또는 <code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.object.ui</span></code>가 활성화되지 않은 경우 캡슐 아이콘을 클릭하여 활성화하세요.</p>
 </div>
-<img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_open_extension_folder.webp" class="align-center" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_open_extension_folder.webp" />
-<p>In the folder, go to <code class="docutils literal notranslate"><span class="pre">PATH_TO_CORE_EXTENSION/isaacsim/replicator/object/core/configs</span></code>. On Windows, the folder is opened after the <strong>Open Extension Folder</strong> button is clicked. On Linux, it can bring up the browser with the URL as <code class="docutils literal notranslate"><span class="pre">file://EXTENSION_PATH</span></code>, in this case, navigate to <code class="docutils literal notranslate"><span class="pre">EXTENSION_PATH</span></code> using the command line or <code class="docutils literal notranslate"><span class="pre">xdg-open</span></code>.</p>
-<p>Edit the <code class="docutils literal notranslate"><span class="pre">global.yaml</span></code> file. Set <code class="docutils literal notranslate"><span class="pre">OUTPUT_PATH</span></code> to a folder where you want to store the output. Also, update <code class="docutils literal notranslate"><span class="pre">PATH_TO_BOXES</span></code> to a folder that contains USD files of boxes.</p>
-<p>Select <code class="docutils literal notranslate"><span class="pre">demo_table</span></code> from the dropdown box, and click on the <strong>Simulate</strong> button. The simulation will run, and the output will be stored in the folder specified by <code class="docutils literal notranslate"><span class="pre">OUTPUT_PATH</span></code>.</p>
-<img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_ui_demo_table.webp" class="align-center" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_ui_demo_table.webp" />
+<img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_open_extension_folder.webp" class="align-center" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_open_extension_folder.webp"/>
+<p>폴더에서 <code class="docutils literal notranslate"><span class="pre">PATH_TO_CORE_EXTENSION/isaacsim/replicator/object/core/configs</span></code>로 이동하세요. Windows에서는 <strong>Open Extension Folder</strong> 버튼을 클릭하면 폴더가 열립니다. Linux에서는 URL이 <code class="docutils literal notranslate"><span class="pre">file://EXTENSION_PATH</span></code>인 브라우저가 열릴 수 있으며, 이 경우 명령줄 또는 <code class="docutils literal notranslate"><span class="pre">xdg-open</span></code>을 사용하여 <code class="docutils literal notranslate"><span class="pre">EXTENSION_PATH</span></code>로 이동하세요.</p>
+<p><code class="docutils literal notranslate"><span class="pre">global.yaml</span></code> 파일을 편집하세요. <code class="docutils literal notranslate"><span class="pre">OUTPUT_PATH</span></code>를 출력을 저장할 폴더로 설정하세요. 또한 <code class="docutils literal notranslate"><span class="pre">PATH_TO_BOXES</span></code>를 상자의 USD 파일이 포함된 폴더로 업데이트하세요.</p>
+<p>드롭다운 박스에서 <code class="docutils literal notranslate"><span class="pre">demo_table</span></code>을 선택하고 <strong>Simulate</strong> 버튼을 클릭하세요. 시뮬레이션이 실행되고 출력은 <code class="docutils literal notranslate"><span class="pre">OUTPUT_PATH</span></code>로 지정된 폴더에 저장됩니다.</p>
+<img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_ui_demo_table.webp" class="align-center" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_ui_demo_table.webp"/>
 </section>
 <section id="compose-a-description-file">
 <h2>Compose a Description File<a class="headerlink" href="tutorial_replicator_object.html#compose-a-description-file" title="Link to this heading">#</a></h2>
-<p>To compose a description file that generates a scene that has a table with randomized objects dropping onto it:</p>
-<p>Suppose we have the following assets:</p>
+<p>테이블 위에 랜덤화된 객체가 떨어지는 장면을 생성하는 설명 파일을 작성하려면:</p>
+<p>다음 에셋이 있다고 가정합니다:</p>
 <ul class="simple">
-<li><p>an HDRI texture for the dome light at <code class="docutils literal notranslate"><span class="pre">PATH_TO_HDRI</span></code></p></li>
-<li><p>a USD model as a table at <code class="docutils literal notranslate"><span class="pre">PATH_TO_TABLE</span></code></p></li>
-<li><p>a folder that contains USD models of objects to be scattered onto the table at <code class="docutils literal notranslate"><span class="pre">PATH_TO_OBJECTS</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PATH_TO_HDRI</span></code>의 돔 라이트를 위한 HDRI 텍스처</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PATH_TO_TABLE</span></code>의 테이블로 사용할 USD 모델</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PATH_TO_OBJECTS</span></code>의 테이블에 배치할 객체의 USD 모델이 포함된 폴더</p></li>
 </ul>
-<p>Plan the distribution of graphics assets before composing a description file. The assets are dragged into the viewport, to get an idea of them, refer to the image. Here a dome light is created, and its texture is set to <code class="docutils literal notranslate"><span class="pre">PATH_TO_HDRI</span></code>; then a table from <code class="docutils literal notranslate"><span class="pre">PATH_TO_TABLE</span></code>; then one of the objects from <code class="docutils literal notranslate"><span class="pre">PATH_TO_OBJECTS</span></code>.</p>
-<img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_drag_and_drop.webp" class="align-center" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_drag_and_drop.webp" />
-<p>Adjust the position of the object about to be scattered onto the table, for a reasonable range of its position.</p>
-<img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_gauge.webp" class="align-center" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_gauge.webp" />
-<p>From observation, from <code class="docutils literal notranslate"><span class="pre">(-13,</span> <span class="pre">100,</span> <span class="pre">-70)</span></code> to <code class="docutils literal notranslate"><span class="pre">(13,</span> <span class="pre">100,</span> <span class="pre">70)</span></code> is a reasonable range for the position of the box. Compose a description file as follows:</p>
+<p>설명 파일을 작성하기 전에 그래픽 에셋의 분포를 계획하세요. 에셋을 뷰포트로 드래그하여 파악하고 이미지를 참조하세요. 여기서 돔 라이트를 생성하고 텍스처를 <code class="docutils literal notranslate"><span class="pre">PATH_TO_HDRI</span></code>로 설정합니다. 그런 다음 <code class="docutils literal notranslate"><span class="pre">PATH_TO_TABLE</span></code>에서 테이블을, <code class="docutils literal notranslate"><span class="pre">PATH_TO_OBJECTS</span></code>에서 객체 중 하나를 가져옵니다.</p>
+<img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_drag_and_drop.webp" class="align-center" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_drag_and_drop.webp"/>
+<p>테이블에 배치될 객체의 위치를 적절한 범위로 조정하세요.</p>
+<img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_gauge.webp" class="align-center" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_gauge.webp"/>
+<p>관찰에 따르면 <code class="docutils literal notranslate"><span class="pre">(-13,</span> <span class="pre">100,</span> <span class="pre">-70)</span></code>에서 <code class="docutils literal notranslate"><span class="pre">(13,</span> <span class="pre">100,</span> <span class="pre">70)</span></code>까지가 상자 위치의 합리적인 범위입니다. 다음과 같이 설명 파일을 작성하세요:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">isaacsim.replicator.object</span><span class="p">:</span>
 <span class="w">  </span><span class="c1"># the minimum</span>
 <span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.x.y</span>
@@ -1561,39 +1184,39 @@ It’s recommended that you start with <code class="docutils literal notranslate
 <span class="w">  </span><span class="nt">table</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">geometry</span>
 <span class="w">    </span><span class="nt">subtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mesh</span>
-<span class="w">    </span><span class="nt">physics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">collision</span><span class="w"> </span><span class="c1"># rigidbodies will collide with it, but it doesn&#39;t move</span>
+<span class="w">    </span><span class="nt">physics</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">collision</span><span class="w"> </span><span class="c1"># rigidbodies will collide with it, but it doesn't move</span>
 <span class="w">    </span><span class="nt">usd_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PATH_TO_TABLE</span>
 <span class="w">    </span><span class="nt">transform_operators</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">rotateX</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-90</span>
 </pre></div>
 </div>
-<p>Run the simulation by clicking on the <strong>Simulate</strong> button to generate RGB images like:</p>
-<a class="reference internal image-reference" href="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_step_by_step_rgb.jpg"><img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_step_by_step_rgb.jpg" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_step_by_step_rgb.jpg" style="width: 400px;" />
+<p><strong>Simulate</strong> 버튼을 클릭하여 시뮬레이션을 실행하면 다음과 같은 RGB 이미지가 생성됩니다:</p>
+<a class="reference internal image-reference" href="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_step_by_step_rgb.jpg"><img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_step_by_step_rgb.jpg" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_step_by_step_rgb.jpg" style="width: 400px;"/>
 </a>
-<p>And segmentation masks like:</p>
-<a class="reference internal image-reference" href="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_step_by_step_segmentation.png"><img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_step_by_step_segmentation.png" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_step_by_step_segmentation.png" style="width: 400px;" />
+<p>그리고 다음과 같은 분할 마스크가 생성됩니다:</p>
+<a class="reference internal image-reference" href="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_step_by_step_segmentation.png"><img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_step_by_step_segmentation.png" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_step_by_step_segmentation.png" style="width: 400px;"/>
 </a>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Check whether the YAML text is formatted correctly in the description (for example, indentation). If you meet an error <code class="docutils literal notranslate"><span class="pre">mapping</span> <span class="pre">values</span> <span class="pre">are</span> <span class="pre">not</span> <span class="pre">allowed</span> <span class="pre">here</span></code> it can be due to a formatting problem.</p>
+<p class="admonition-title">참고</p>
+<p>설명에서 YAML 텍스트가 올바르게 형식화되었는지 확인하세요(예: 들여쓰기). <code class="docutils literal notranslate"><span class="pre">mapping</span> <span class="pre">values</span> <span class="pre">are</span> <span class="pre">not</span> <span class="pre">allowed</span> <span class="pre">here</span></code> 오류가 발생하면 형식 문제일 수 있습니다.</p>
 </div>
 </section>
 <section id="scene-editing">
 <h2>Scene Editing<a class="headerlink" href="tutorial_replicator_object.html#scene-editing" title="Link to this heading">#</a></h2>
-<p>For the convenience of scene planning, a basic scene editing widget is provided to toggle the visibility of prims.</p>
-<p>In a scene created by the <a class="reference internal" href="tutorial_replicator_object.html#embedded-interface"><span class="std std-ref">embedded interface</span></a> using <a class="reference internal" href="ext_replicator-object/randomization_dependency.html#iro-basic-example"><span class="std std-ref">this description file</span></a>, you can create a cube, change its translate and size (but not its rotation), and move it around to toggle visibility of prims that has its position included within the spatial range of the cube, as shown below:</p>
-<img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_toggle_visibility.webp" class="align-center" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_toggle_visibility.webp" />
+<p>장면 계획의 편의를 위해 프림의 가시성을 전환하는 기본 장면 편집 위젯이 제공됩니다.</p>
+<p><a class="reference internal" href="tutorial_replicator_object.html#embedded-interface"><span class="std std-ref">임베디드 인터페이스</span></a>를 사용하여 <a class="reference internal" href="ext_replicator-object/randomization_dependency.html#iro-basic-example"><span class="std std-ref">이 설명 파일</span></a>로 생성된 장면에서 아래와 같이 큐브를 생성하고 위치와 크기(회전 제외)를 변경하면서 이동하여 큐브의 공간 범위 내에 위치가 포함된 프림의 가시성을 전환할 수 있습니다:</p>
+<img alt="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_toggle_visibility.webp" class="align-center" src="../_images/isim_5.0_replicator_ext-isaacsim.replicator.object-0.4.2_viewport_toggle_visibility.webp"/>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Before clicking on the <strong>Toggle Visibility of selected region</strong> button, make sure the cube is selected.</p>
+<p class="admonition-title">참고</p>
+<p><strong>Toggle Visibility of selected region</strong> 버튼을 클릭하기 전에 큐브가 선택되어 있는지 확인하세요.</p>
 </div>
 </section>
 <section id="catalog">
 <h2>Catalog<a class="headerlink" href="tutorial_replicator_object.html#catalog" title="Link to this heading">#</a></h2>
-<p>Conventions in the linked catalog files:</p>
-<p><code class="docutils literal notranslate"><span class="pre">Type</span></code> in the tables indicates the expected data types. Where a type is expected, a macro string can be used for later evaluation of that specific type. For example, if you expect int in a value, you can either give an int or something like <code class="docutils literal notranslate"><span class="pre">$[index]</span></code>. See <a class="reference internal" href="ext_replicator-object/macro.html#macro"><span class="std std-ref">Macro</span></a> for details.</p>
-<p>Within a mutable, aside from these options, you can also specify a <a class="reference internal" href="ext_replicator-object/mutable_attribute.html#mutable-attribute"><span class="std std-ref">Mutable Attribute</span></a> to evaluate to this type.</p>
-<p><code class="docutils literal notranslate"><span class="pre">numeric</span></code> means literal or evaluated <code class="docutils literal notranslate"><span class="pre">float</span></code> or <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p>
+<p>연결된 카탈로그 파일의 규칙:</p>
+<p>표의 <code class="docutils literal notranslate"><span class="pre">Type</span></code>은 예상 데이터 유형을 나타냅니다. 유형이 예상되는 경우, 해당 특정 유형의 나중 평가를 위해 매크로 문자열을 사용할 수 있습니다. 예를 들어, 값에 int가 예상되는 경우 int를 직접 제공하거나 <code class="docutils literal notranslate"><span class="pre">$[index]</span></code>와 같은 것을 사용할 수 있습니다. 자세한 내용은 <a class="reference internal" href="ext_replicator-object/macro.html#macro"><span class="std std-ref">Macro</span></a>를 참조하세요.</p>
+<p>mutable 내에서 이러한 옵션 외에도 이 유형으로 평가할 <a class="reference internal" href="ext_replicator-object/mutable_attribute.html#mutable-attribute"><span class="std std-ref">Mutable Attribute</span></a>를 지정할 수 있습니다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">numeric</span></code>은 리터럴 또는 평가된 <code class="docutils literal notranslate"><span class="pre">float</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">int</span></code>를 의미합니다.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="ext_replicator-object/setting.html">Setting</a></li>
@@ -1620,56 +1243,34 @@ trimesh, MIT License
 regex, Apache License</p>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="ext_behavior_tree_gen/three_api_functions.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Using the API Functions</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="ext_replicator-object/ext_chat_iro.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chat IRO: Natural Language Interface for Isaac Sim Replicator Object</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="ext_behavior_tree_gen/three_api_functions.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Using the API Functions</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="ext_replicator-object/ext_chat_iro.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Chat IRO: Natural Language Interface for Isaac Sim Replicator Object</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_object.html#motivation">Motivation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_object.html#chat-iro-natural-language-interface-for-iro">Chat IRO: Natural Language Interface for IRO</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_object.html#end-to-end-pipeline">End-to-end Pipeline</a></li>
@@ -1684,46 +1285,29 @@ regex, Apache License</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_object.html#catalog">Catalog</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_object.html#rd-party-libraries-used">3rd-party Libraries Used</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1754,36 +1338,21 @@ regex, Apache License</p>
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

@@ -1,561 +1,257 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Contact sensor &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Contact sensor — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
-  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
-</script>
-<script type="text/javascript">
-  function OptanonWrapper() {
-    var event = new Event('bannerLoaded');
-    window.dispatchEvent(event);
-  }
-</script>
-<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
-</script>
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'sensors/isaacsim_sensors_physics_contact';</script>
-    <script>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'sensors/isaacsim_sensors_physics_contact';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Effort sensor" href="isaacsim_sensors_physics_effort.html" />
-    <link rel="prev" title="Articulation joint sensors" href="isaacsim_sensors_physics_articulation_force.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="isaacsim_sensors_physics_effort.html" rel="next" title="Effort sensor"/>
+<link href="isaacsim_sensors_physics_articulation_force.html" rel="prev" title="Articulation joint sensors"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="isaacsim_sensors_physics_contact.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="isaacsim_sensors_physics_contact.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -575,7 +271,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -603,20 +298,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -691,17 +374,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -879,7 +552,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -919,13 +591,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -972,10 +638,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1144,18 +806,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1181,167 +833,139 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Sensors</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="isaacsim_sensors_physics.html" class="nav-link">Physics-based sensors</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Contact sensor</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">Sensors</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="isaacsim_sensors_physics.html">Physics-based sensors</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Contact sensor</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="contact-sensor">
+<article class="bd-article">
+<section id="contact-sensor">
 <span id="isaacsim-sensors-physics-contact"></span><h1>Contact sensor<a class="headerlink" href="isaacsim_sensors_physics_contact.html#contact-sensor" title="Link to this heading">#</a></h1>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">Deprecated since version 6.0: </span>The <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.physics</span></code> Contact Sensor extension is deprecated.
-Use <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.physics.ContactSensor</span></code> instead.
-See the <a class="reference internal" href="isaacsim_sensors_physics_contact.html#api-documentation">API Documentation</a> section below for links.</p>
+<p><span class="versionmodified deprecated">6.0 이후 더 이상 사용되지 않음: </span><code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.physics</span></code> Contact Sensor 확장은 더 이상 사용되지 않습니다.
+대신 <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.physics.ContactSensor</span></code>를 사용하십시오.
+아래 <a class="reference internal" href="isaacsim_sensors_physics_contact.html#api-documentation">API Documentation</a> 섹션에서 링크를 확인하십시오.</p>
 </div>
-<p>The contact sensor uses the PhysX Contact Report API to generate a sensor reading similar to contact cells or pressure-based sensors placed on the surface of an object.
-The Contact Sensor API builds on the Contact Report API by providing contact data filtered by the object it was placed in, along with an optional filter that only considers contacts in a specific region of the object. For example, imagine a quadruped robot with sensors in its feet. While the simulation treats the entire leg as a rigid body, you can only measure contact on the foot pads, so you can add a region filter that discards contacts outside that boundary.
-The Contact Sensor API also provides persistent contact data, even when the PhysX engine stops streaming contacts to preserve compute time. While the simulation provides full information about contacts, such as contact pairs, normals, and contact points, the Contact Sensor API matches real data obtained by single-cell contact pads. If you need full contact data, the Contact Sensor API gets you filtered contact information without changes to the data acquired in PhysX.</p>
-<p>See the <a class="reference internal" href="../reference_material/reference_conventions.html#isaac-sim-conventions"><span class="std std-ref">Isaac Sim Conventions</span></a> documentation for a complete list of Isaac Sim conventions.</p>
-<p><strong>Contact sensor properties</strong></p>
+<p>접촉 센서는 PhysX Contact Report API를 사용하여 물체 표면에 배치된 접촉 셀 또는 압력 기반 센서와 유사한 센서 판독값을 생성합니다.
+Contact Sensor API는 Contact Report API를 기반으로 하며, 센서가 배치된 물체에 의해 필터링된 접촉 데이터를 제공하고, 물체의 특정 영역 내의 접촉만 고려하는 선택적 필터도 제공합니다. 예를 들어, 발에 센서가 있는 4족 로봇을 상상해 보십시오. 시뮬레이션은 전체 다리를 강체로 취급하지만, 발바닥 패드에서만 접촉을 측정할 수 있으므로 해당 경계 외부의 접촉을 버리는 영역 필터를 추가할 수 있습니다.
+Contact Sensor API는 PhysX 엔진이 컴퓨팅 시간을 절약하기 위해 접촉 스트리밍을 중단할 때도 지속적인 접촉 데이터를 제공합니다. 시뮬레이션은 접촉 쌍, 법선, 접촉 점 등 접촉에 대한 전체 정보를 제공하지만, Contact Sensor API는 단일 셀 접촉 패드로 얻은 실제 데이터와 일치시킵니다. 전체 접촉 데이터가 필요한 경우, Contact Sensor API는 PhysX에서 수집된 데이터를 변경하지 않고 필터링된 접촉 정보를 제공합니다.</p>
+<p>Isaac Sim 규칙의 전체 목록은 <a class="reference internal" href="../reference_material/reference_conventions.html#isaac-sim-conventions"><span class="std std-ref">Isaac Sim Conventions</span></a> 문서를 참조하십시오.</p>
+<p><strong>접촉 센서 속성</strong></p>
 <ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">radius</span></code> parameter specifies the distance of the contact force that it would detect. A value of <code class="docutils literal notranslate"><span class="pre">-1</span></code> uses the prim’s collision geometry.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code> parameter determines if the sensor is running or not.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">min</span> <span class="pre">threshold</span></code> parameter specifies the minimum amount of force to trigger a contact.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">max</span> <span class="pre">threshold</span></code> parameter specifies the maximum amount of force the sensor outputs.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">sensorPeriod</span></code> parameter specifies the time in between sensor measurement. <strong>Deprecated</strong> since <code class="docutils literal notranslate"><span class="pre">isaacsim.robot.schema</span></code> 6.2.0 — only used by the deprecated <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.physics</span></code> extension. The new <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.physics</span></code> extension reads every physics step.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">radius</span></code> 파라미터는 감지할 접촉력의 거리를 지정합니다. 값이 <code class="docutils literal notranslate"><span class="pre">-1</span></code>이면 프림의 충돌 지오메트리를 사용합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code> 파라미터는 센서가 실행 중인지 여부를 결정합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min</span> <span class="pre">threshold</span></code> 파라미터는 접촉을 트리거하는 최소 힘의 양을 지정합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max</span> <span class="pre">threshold</span></code> 파라미터는 센서가 출력하는 최대 힘의 양을 지정합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sensorPeriod</span></code> 파라미터는 센서 측정 사이의 시간을 지정합니다. <code class="docutils literal notranslate"><span class="pre">isaacsim.robot.schema</span></code> 6.2.0 이후 <strong>더 이상 사용되지 않음</strong> — 더 이상 사용되지 않는 <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.physics</span></code> 확장에서만 사용됩니다. 새로운 <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.physics</span></code> 확장은 매 물리 스텝마다 읽습니다.</p></li>
 </ol>
-<p>For the full USD attribute definitions, see the <a class="reference internal" href="../omniverse_usd/sensor_schema.html#isaac-sim-sensor-schema-contact"><span class="std std-ref">Contact Sensor schema reference</span></a>.</p>
+<p>전체 USD 속성 정의는 <a class="reference internal" href="../omniverse_usd/sensor_schema.html#isaac-sim-sensor-schema-contact"><span class="std std-ref">Contact Sensor schema reference</span></a>를 참조하십시오.</p>
 <section id="gui">
 <span id="isaacsim-sensors-physics-contact-gui"></span><h2>GUI<a class="headerlink" href="isaacsim_sensors_physics_contact.html#gui" title="Link to this heading">#</a></h2>
 <section id="creating-and-modifying-the-contact-sensor">
 <h3>Creating and modifying the contact sensor<a class="headerlink" href="isaacsim_sensors_physics_contact.html#creating-and-modifying-the-contact-sensor" title="Link to this heading">#</a></h3>
-<p>To create and modify a contact sensor, start with a prim in the scene that you want to attach the sensor to.</p>
+<p>접촉 센서를 생성하고 수정하려면, 씬에서 센서를 연결할 프림을 먼저 선택하십시오.</p>
 <ol class="arabic simple">
-<li><p>To create a Physics Scene, go to the top Menu Bar and click <strong>Create &gt; Physics &gt; Physics Scene</strong>. Verify that there is now a <code class="docutils literal notranslate"><span class="pre">PhysicsScene</span></code> <a class="reference internal" href="../reference_material/reference_glossary.html#isaac-sim-glossary-prim"><span class="std std-ref">Prim</span></a> in the <a class="reference internal" href="../reference_material/reference_glossary.html#isaac-sim-glossary-stage"><span class="std std-ref">Stage</span></a> panel on the right.</p></li>
-<li><p>To create a contact sensor, left click on the prim to attach the contact sensor on the stage, then go to the top Menu Bar and click <strong>Create &gt; Sensors &gt; Contact_sensor</strong>.</p></li>
-<li><p>To change the position and orientation of the contact sensor, use <strong>Translate and Orientate</strong> tab.</p></li>
-<li><p>To change other contact sensor properties, click <strong>Raw USD Properties</strong> and modify properties such as min/max force threshold, enable/disable sensor, and sensor period.</p></li>
+<li><p>Physics Scene를 생성하려면, 상단 메뉴 바에서 <strong>Create &gt; Physics &gt; Physics Scene</strong>을 클릭하십시오. 오른쪽 <a class="reference internal" href="../reference_material/reference_glossary.html#isaac-sim-glossary-stage"><span class="std std-ref">Stage</span></a> 패널에 <code class="docutils literal notranslate"><span class="pre">PhysicsScene</span></code> <a class="reference internal" href="../reference_material/reference_glossary.html#isaac-sim-glossary-prim"><span class="std std-ref">Prim</span></a>이 생성되었는지 확인하십시오.</p></li>
+<li><p>접촉 센서를 생성하려면, 스테이지에서 접촉 센서를 연결할 프림을 마우스 왼쪽 버튼으로 클릭한 후, 상단 메뉴 바에서 <strong>Create &gt; Sensors &gt; Contact_sensor</strong>를 클릭하십시오.</p></li>
+<li><p>접촉 센서의 위치와 방향을 변경하려면 <strong>Translate and Orientate</strong> 탭을 사용하십시오.</p></li>
+<li><p>다른 접촉 센서 속성을 변경하려면 <strong>Raw USD Properties</strong>를 클릭하고 최소/최대 힘 임계값, 센서 활성화/비활성화, 센서 주기 등의 속성을 수정하십시오.</p></li>
 </ol>
 </section>
 <section id="contact-sensor-example">
 <h3>Contact sensor example<a class="headerlink" href="isaacsim_sensors_physics_contact.html#contact-sensor-example" title="Link to this heading">#</a></h3>
-<p>To run the Contact Sensor Example:</p>
+<p>Contact Sensor 예제를 실행하려면:</p>
 <ol class="arabic simple">
-<li><p>Activate <strong>Robotics Examples</strong> tab from <strong>Windows</strong> &gt; <strong>Examples</strong> &gt; <strong>Robotics Examples</strong>.</p></li>
-<li><p>Click <strong>Robotics Examples</strong> &gt; <strong>Sensors</strong> &gt; <strong>Contact Sensor</strong>.</p></li>
-<li><p>Verify that you see a window containing the sensor’s force readings color coded by each ant’s arm.</p></li>
-<li><p>Press the <strong>Open Source Code</strong> button to view the source code. The source code illustrates how to load an Ant body into the scene and then add sensors to it using the Python API.</p></li>
-<li><p>Press the <strong>Play</strong> button to begin simulating.</p></li>
-<li><p>Press <code class="docutils literal notranslate"><span class="pre">SHIFT</span> <span class="pre">+</span> <span class="pre">LEFT_CLICK</span></code> to drag the ant around  and see changes in the readings.</p></li>
+<li><p><strong>Windows</strong> &gt; <strong>Examples</strong> &gt; <strong>Robotics Examples</strong>에서 <strong>Robotics Examples</strong> 탭을 활성화하십시오.</p></li>
+<li><p><strong>Robotics Examples</strong> &gt; <strong>Sensors</strong> &gt; <strong>Contact Sensor</strong>를 클릭하십시오.</p></li>
+<li><p>각 개미 팔별로 색상으로 구분된 센서의 힘 판독값을 포함하는 창이 나타나는지 확인하십시오.</p></li>
+<li><p><strong>Open Source Code</strong> 버튼을 눌러 소스 코드를 확인하십시오. 소스 코드는 Ant 바디를 씬에 로드하고 Python API를 사용하여 센서를 추가하는 방법을 보여줍니다.</p></li>
+<li><p><strong>Play</strong> 버튼을 눌러 시뮬레이션을 시작하십시오.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SHIFT</span> <span class="pre">+</span> <span class="pre">LEFT_CLICK</span></code>을 눌러 개미를 드래그하면서 판독값의 변화를 확인하십시오.</p></li>
 </ol>
-<a class="reference internal image-reference" href="../_images/isim_4.5_full_tut_gui_create_contact_sensor.webp"><img alt="Contact sensor example window with force readings." class="align-center" src="../_images/isim_4.5_full_tut_gui_create_contact_sensor.webp" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/isim_4.5_full_tut_gui_create_contact_sensor.webp"><img alt="Contact sensor example window with force readings." class="align-center" src="../_images/isim_4.5_full_tut_gui_create_contact_sensor.webp" style="width: 100%;"/>
 </a>
 </section>
 <section id="omnigraph-workflow">
 <h3>OmniGraph workflow<a class="headerlink" href="isaacsim_sensors_physics_contact.html#omnigraph-workflow" title="Link to this heading">#</a></h3>
-<p>The following tutorial shows how to use OmniGraph to interact with and visualize the contact sensor readings.</p>
+<p>다음 튜토리얼은 OmniGraph를 사용하여 접촉 센서 판독값을 상호작용하고 시각화하는 방법을 보여줍니다.</p>
 <section id="scene-setup">
 <h4>Scene setup<a class="headerlink" href="isaacsim_sensors_physics_contact.html#scene-setup" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
-<li><p>Add a cube to the stage by <strong>Create &gt; Mesh &gt; Cube</strong>, select the cube and drag it up. Then select the cube and right click <strong>Add &gt; Physics &gt; Rigid Body with Colliders Preset</strong>.</p></li>
-<li><p>Add a physics scene by <strong>Create &gt; Physics &gt; PhysicsScene</strong>.</p></li>
-<li><p>Add a ground plane by <strong>Create&gt; Physics &gt; GroundPlane</strong>.</p></li>
-<li><p>Add a contact sensor by selecting the cube, and select on the top menu <strong>Create &gt; Sensors &gt; Contact Sensor</strong>.</p></li>
+<li><p><strong>Create &gt; Mesh &gt; Cube</strong>로 스테이지에 큐브를 추가하고, 큐브를 선택하여 위로 드래그하십시오. 그런 다음 큐브를 선택하고 우클릭하여 <strong>Add &gt; Physics &gt; Rigid Body with Colliders Preset</strong>을 선택하십시오.</p></li>
+<li><p><strong>Create &gt; Physics &gt; PhysicsScene</strong>으로 물리 씬을 추가하십시오.</p></li>
+<li><p><strong>Create &gt; Physics &gt; GroundPlane</strong>으로 지면을 추가하십시오.</p></li>
+<li><p>큐브를 선택하고 상단 메뉴에서 <strong>Create &gt; Sensors &gt; Contact Sensor</strong>를 선택하여 접촉 센서를 추가하십시오.</p></li>
 </ol>
-<a class="reference internal image-reference" href="../_images/isim_4.5_full_tut_gui_create_contact_sensor_1.webp"><img alt="Read Contact Sensor Action Graph set up" class="align-center" src="../_images/isim_4.5_full_tut_gui_create_contact_sensor_1.webp" style="width: 100%;" />
+<a class="reference internal image-reference" href="../_images/isim_4.5_full_tut_gui_create_contact_sensor_1.webp"><img alt="Read Contact Sensor Action Graph set up" class="align-center" src="../_images/isim_4.5_full_tut_gui_create_contact_sensor_1.webp" style="width: 100%;"/>
 </a>
 </section>
 <section id="omnigraph-setup">
 <h4>OmniGraph setup<a class="headerlink" href="isaacsim_sensors_physics_contact.html#omnigraph-setup" title="Link to this heading">#</a></h4>
-<p>To set up the OmniGraph to collect readings from this sensor:</p>
+<p>이 센서에서 판독값을 수집하기 위한 OmniGraph를 설정하려면:</p>
 <ol class="arabic simple">
-<li><p>Create the new action graph by navigating to <strong>Window &gt; Graph Editors &gt; Action Graph</strong>, and selecting New Action Graph in the new tab that opens.</p></li>
-<li><p>Add the following nodes to the graph:</p></li>
+<li><p><strong>Window &gt; Graph Editors &gt; Action Graph</strong>로 이동하고 새 탭에서 New Action Graph를 선택하여 새 액션 그래프를 생성하십시오.</p></li>
+<li><p>그래프에 다음 노드를 추가하십시오:</p></li>
 </ol>
 <blockquote>
 <div><ul class="simple">
-<li><p><em>On Playback Tick</em>: Executes the graph every simulation timestep.</p></li>
-<li><p><em>Isaac Read Contact Sensor</em>: Reads the contact sensor. In the <strong>Property</strong> tab, set <cite>Contact Sensor Prim</cite> to <em>/World/Cube/Contact_Sensor</em> to point to the location of the contact sensor prim.</p></li>
-<li><p><em>To String</em>: Converts the contact sensor readings to string format.</p></li>
-<li><p><em>Print Text</em>: Prints the string readings to console. In the <strong>Property</strong> tab, set <cite>Log Level</cite> to <em>Warning</em> so that messages are visible in the terminal or console by default.</p></li>
+<li><p><em>On Playback Tick</em>: 매 시뮬레이션 타임스텝마다 그래프를 실행합니다.</p></li>
+<li><p><em>Isaac Read Contact Sensor</em>: 접촉 센서를 읽습니다. <strong>Property</strong> 탭에서 <cite>Contact Sensor Prim</cite>을 <em>/World/Cube/Contact_Sensor</em>로 설정하여 접촉 센서 프림의 위치를 지정하십시오.</p></li>
+<li><p><em>To String</em>: 접촉 센서 판독값을 문자열 형식으로 변환합니다.</p></li>
+<li><p><em>Print Text</em>: 문자열 판독값을 콘솔에 출력합니다. <strong>Property</strong> 탭에서 <cite>Log Level</cite>을 <em>Warning</em>으로 설정하면 기본적으로 터미널이나 콘솔에서 메시지를 볼 수 있습니다.</p></li>
 </ul>
 </div></blockquote>
 <ol class="arabic">
-<li><p>Connect the above nodes as follows to print out the contact sensor reading:</p>
+<li><p>접촉 센서 판독값을 출력하려면 위의 노드들을 다음과 같이 연결하십시오:</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="../_images/isaac_tutorial_advanced_read_contact_graph.png"><img alt="Read Contact Sensor Action Graph set up" class="align-center" src="../_images/isaac_tutorial_advanced_read_contact_graph.png" style="width: 800px;" />
+<div><a class="reference internal image-reference" href="../_images/isaac_tutorial_advanced_read_contact_graph.png"><img alt="Read Contact Sensor Action Graph set up" class="align-center" src="../_images/isaac_tutorial_advanced_read_contact_graph.png" style="width: 800px;"/>
 </a>
 </div></blockquote>
 </li>
-<li><p>Press the <strong>Play</strong> button on the GUI. If set up correctly, verify that the Isaac Sim internal <em>Console</em> reads out the contact sensor’s force output.</p>
+<li><p>GUI의 <strong>Play</strong> 버튼을 누르십시오. 올바르게 설정되었다면 Isaac Sim 내부 <em>Console</em>에서 접촉 센서의 힘 출력이 표시되는지 확인하십시오.</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="../_images/isim_4.5_full_tut_gui_contact_sensor_ogn.webp"><img alt="Read Contact Sensor Action Graph set up" class="align-center" src="../_images/isim_4.5_full_tut_gui_contact_sensor_ogn.webp" style="width: 100%;" />
+<div><a class="reference internal image-reference" href="../_images/isim_4.5_full_tut_gui_contact_sensor_ogn.webp"><img alt="Read Contact Sensor Action Graph set up" class="align-center" src="../_images/isim_4.5_full_tut_gui_contact_sensor_ogn.webp" style="width: 100%;"/>
 </a>
 </div></blockquote>
 </li>
 </ol>
-<p><strong>Contact sensor visualization</strong></p>
-<p>You can visualize the contact sensor position and radius using the <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">xPrim</span> <span class="pre">Radius</span> <span class="pre">Visualizer</span> <span class="pre">Node</span></code>. Connect the xPrim input to the contact sensor prim and connect <code class="docutils literal notranslate"><span class="pre">Tick</span></code> to <code class="docutils literal notranslate"><span class="pre">Exec</span> <span class="pre">in</span></code>. Then set the radius, color, and line thickness. The contact sensor appears when you press <strong>Play</strong>.</p>
+<p><strong>접촉 센서 시각화</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">xPrim</span> <span class="pre">Radius</span> <span class="pre">Visualizer</span> <span class="pre">Node</span></code>를 사용하여 접촉 센서의 위치와 반지름을 시각화할 수 있습니다. xPrim 입력을 접촉 센서 프림에 연결하고 <code class="docutils literal notranslate"><span class="pre">Tick</span></code>을 <code class="docutils literal notranslate"><span class="pre">Exec</span> <span class="pre">in</span></code>에 연결하십시오. 그런 다음 반지름, 색상, 선 두께를 설정하십시오. <strong>Play</strong>를 누르면 접촉 센서가 나타납니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The spherical region only determines the boundary for contacts that are counted. All contacts still only happen at the surface of the object bounded by the spherical region.</p>
+<p>구형 영역은 카운트되는 접촉의 경계만 결정합니다. 모든 접촉은 여전히 구형 영역으로 경계가 설정된 물체의 표면에서만 발생합니다.</p>
 </div>
-<a class="reference internal image-reference" href="../_images/isaac_tutorial_visualize_contact.png"><img alt="Contact Sensor Visualization Action Graph set up" class="align-center" src="../_images/isaac_tutorial_visualize_contact.png" style="width: 800px;" />
+<a class="reference internal image-reference" href="../_images/isaac_tutorial_visualize_contact.png"><img alt="Contact Sensor Visualization Action Graph set up" class="align-center" src="../_images/isaac_tutorial_visualize_contact.png" style="width: 800px;"/>
 </a>
 </section>
 </section>
@@ -1350,11 +974,10 @@ The Contact Sensor API also provides persistent contact data, even when the Phys
 <span id="isaacsim-sensors-physics-contact-standalone-python"></span><h2>Standalone Python<a class="headerlink" href="isaacsim_sensors_physics_contact.html#standalone-python" title="Link to this heading">#</a></h2>
 <section id="isaacsim-sensors-physics-contact-standalone-python-create-modify">
 <span id="id1"></span><h3>Creating and modifying the contact sensor<a class="headerlink" href="isaacsim_sensors_physics_contact.html#isaacsim-sensors-physics-contact-standalone-python-create-modify" title="Link to this heading">#</a></h3>
-<p>For the example snippets below, prepare the scene using the following snippet by adding a <code class="docutils literal notranslate"><span class="pre">PhysicsScene</span></code>, <code class="docutils literal notranslate"><span class="pre">GroundPlane</span></code>, and a <code class="docutils literal notranslate"><span class="pre">Cube</span></code> prim with collision and rigid body physics.
-Attach the contact sensor to the latter.</p>
+<p><code class="docutils literal notranslate"><span class="pre">PhysicsScene</span></code>, <code class="docutils literal notranslate"><span class="pre">GroundPlane</span></code>, 그리고 충돌 및 강체 물리가 적용된 <code class="docutils literal notranslate"><span class="pre">Cube</span></code> 프림을 추가하는 다음 스니펫을 사용하여 씬을 준비하고 접촉 센서를 후자에 연결하십시오.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationApp</span>
 
-<span class="n">simulation_app</span> <span class="o">=</span> <span class="n">SimulationApp</span><span class="p">({</span><span class="s2">&quot;headless&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+<span class="n">simulation_app</span> <span class="o">=</span> <span class="n">SimulationApp</span><span class="p">({</span><span class="s2">"headless"</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">omni.usd</span>
@@ -1364,29 +987,29 @@ Attach the contact sensor to the latter.</p>
 
 <span class="c1"># Create physics scene</span>
 <span class="n">stage</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">get_stage</span><span class="p">()</span>
-<span class="n">UsdPhysics</span><span class="o">.</span><span class="n">Scene</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="s2">&quot;/World/PhysicsScene&quot;</span><span class="p">)</span>
+<span class="n">UsdPhysics</span><span class="o">.</span><span class="n">Scene</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="s2">"/World/PhysicsScene"</span><span class="p">)</span>
 
 <span class="c1"># Add ground plane and a dynamic cube with collision and rigid body</span>
-<span class="n">GroundPlane</span><span class="p">(</span><span class="s2">&quot;/World/groundPlane&quot;</span><span class="p">,</span> <span class="n">sizes</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]))</span>
+<span class="n">GroundPlane</span><span class="p">(</span><span class="s2">"/World/groundPlane"</span><span class="p">,</span> <span class="n">sizes</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]))</span>
 <span class="n">Cube</span><span class="p">(</span>
-    <span class="s2">&quot;/World/Cube&quot;</span><span class="p">,</span>
+    <span class="s2">"/World/Cube"</span><span class="p">,</span>
     <span class="n">positions</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]),</span>
     <span class="n">scales</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]),</span>
     <span class="n">colors</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]),</span>
 <span class="p">)</span>
-<span class="n">RigidPrim</span><span class="p">(</span><span class="s2">&quot;/World/Cube&quot;</span><span class="p">)</span>
-<span class="n">GeomPrim</span><span class="p">(</span><span class="s2">&quot;/World/Cube&quot;</span><span class="p">,</span> <span class="n">apply_collision_apis</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">RigidPrim</span><span class="p">(</span><span class="s2">"/World/Cube"</span><span class="p">)</span>
+<span class="n">GeomPrim</span><span class="p">(</span><span class="s2">"/World/Cube"</span><span class="p">,</span> <span class="n">apply_collision_apis</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <section id="using-the-python-api">
 <h4>Using the Python API<a class="headerlink" href="isaacsim_sensors_physics_contact.html#using-the-python-api" title="Link to this heading">#</a></h4>
-<p>Contact sensors are created with Python by calling <code class="docutils literal notranslate"><span class="pre">Contact.create()</span></code> (the authoring class) and wrapping the returned authoring object with <code class="docutils literal notranslate"><span class="pre">ContactSensor</span></code> for runtime data access. Available parameters and their defaults are listed below; the path must include the parent prim path.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Contact.create()</span></code>(작성 클래스)를 호출하고 반환된 작성 객체를 <code class="docutils literal notranslate"><span class="pre">ContactSensor</span></code>로 래핑하여 런타임 데이터에 접근하는 방식으로 Python에서 접촉 센서를 생성합니다. 사용 가능한 파라미터와 기본값은 아래에 나열되어 있으며; 경로에는 부모 프림 경로가 포함되어야 합니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.sensors.experimental.physics</span><span class="w"> </span><span class="kn">import</span> <span class="n">Contact</span><span class="p">,</span> <span class="n">ContactSensor</span>
 
 <span class="n">sensor</span> <span class="o">=</span> <span class="n">ContactSensor</span><span class="p">(</span>
     <span class="n">Contact</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-        <span class="s2">&quot;/World/Cube/Contact_Sensor&quot;</span><span class="p">,</span>
+        <span class="s2">"/World/Cube/Contact_Sensor"</span><span class="p">,</span>
         <span class="n">min_threshold</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span>
         <span class="n">max_threshold</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span>
         <span class="n">translations</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]]),</span>
@@ -1397,13 +1020,13 @@ Attach the contact sensor to the latter.</p>
 </section>
 <section id="using-the-python-wrapper">
 <h4>Using the Python wrapper<a class="headerlink" href="isaacsim_sensors_physics_contact.html#using-the-python-wrapper" title="Link to this heading">#</a></h4>
-<p>The contact sensor can also be created by constructing a <code class="docutils literal notranslate"><span class="pre">Contact</span></code> authoring object directly and wrapping it with <code class="docutils literal notranslate"><span class="pre">ContactSensor</span></code> for runtime data access. The <code class="docutils literal notranslate"><span class="pre">Contact</span></code> constructor wraps an existing sensor prim or creates a new one with default attributes; the <code class="docutils literal notranslate"><span class="pre">ContactSensor</span></code> runtime exposes <code class="docutils literal notranslate"><span class="pre">get_sensor_reading()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_data()</span></code>, and <code class="docutils literal notranslate"><span class="pre">get_raw_data()</span></code> for reading sensor output. Property setters (<code class="docutils literal notranslate"><span class="pre">set_min_threshold</span></code> / <code class="docutils literal notranslate"><span class="pre">set_max_threshold</span></code> / <code class="docutils literal notranslate"><span class="pre">set_radius</span></code> / corresponding getters) live on the <code class="docutils literal notranslate"><span class="pre">Contact</span></code> authoring object, accessible as <code class="docutils literal notranslate"><span class="pre">sensor.contact</span></code> after construction.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Contact</span></code> 작성 객체를 직접 생성하고 <code class="docutils literal notranslate"><span class="pre">ContactSensor</span></code>로 래핑하여 런타임 데이터에 접근하는 방식으로 접촉 센서를 생성할 수도 있습니다. <code class="docutils literal notranslate"><span class="pre">Contact</span></code> 생성자는 기존 센서 프림을 래핑하거나 기본 속성으로 새 프림을 생성합니다; <code class="docutils literal notranslate"><span class="pre">ContactSensor</span></code> 런타임은 센서 출력을 읽기 위한 <code class="docutils literal notranslate"><span class="pre">get_sensor_reading()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_data()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_raw_data()</span></code>를 노출합니다. 속성 세터(<code class="docutils literal notranslate"><span class="pre">set_min_threshold</span></code> / <code class="docutils literal notranslate"><span class="pre">set_max_threshold</span></code> / <code class="docutils literal notranslate"><span class="pre">set_radius</span></code> / 대응 게터)는 생성 후 <code class="docutils literal notranslate"><span class="pre">sensor.contact</span></code>로 접근할 수 있는 <code class="docutils literal notranslate"><span class="pre">Contact</span></code> 작성 객체에 있습니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.sensors.experimental.physics</span><span class="w"> </span><span class="kn">import</span> <span class="n">Contact</span><span class="p">,</span> <span class="n">ContactSensor</span>
 
 <span class="n">sensor</span> <span class="o">=</span> <span class="n">ContactSensor</span><span class="p">(</span>
     <span class="n">Contact</span><span class="p">(</span>
-        <span class="s2">&quot;/World/Cube/Contact_Sensor&quot;</span><span class="p">,</span>
+        <span class="s2">"/World/Cube/Contact_Sensor"</span><span class="p">,</span>
         <span class="n">translations</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]]),</span>
     <span class="p">)</span>
 <span class="p">)</span>
@@ -1411,47 +1034,47 @@ Attach the contact sensor to the latter.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">translations</span></code> (local-frame) and <code class="docutils literal notranslate"><span class="pre">positions</span></code> (world-frame) cannot both be defined — they are mutually exclusive.</p>
+<p><code class="docutils literal notranslate"><span class="pre">translations</span></code>(로컬 프레임)와 <code class="docutils literal notranslate"><span class="pre">positions</span></code>(월드 프레임)는 동시에 정의할 수 없습니다 — 상호 배타적입니다.</p>
 </div>
-<p>Creating a contact sensor requires an enabled rigid-body ancestor, and the body depends on a Contact Report API. Contact-producing geometry still needs collision APIs. <code class="docutils literal notranslate"><span class="pre">Contact.create()</span></code> applies the Contact Report API on the rigid-body ancestor when it creates the sensor prim; when wrapping an existing sensor prim with <code class="docutils literal notranslate"><span class="pre">Contact(path)</span></code> the API is not applied by Python, but the C++ runtime ensures contact reporting is enabled when the sensor goes live on <strong>Play</strong>. You can also manually add a Contact Report API to a prim through:</p>
+<p><code class="docutils literal notranslate"><span class="pre">Contact.create()</span></code>는 센서 프림을 생성할 때 강체 상위 노드에 Contact Report API를 적용합니다; <code class="docutils literal notranslate"><span class="pre">Contact(path)</span></code>로 기존 센서 프림을 래핑할 때는 Python에서 API가 적용되지 않지만, C++ 런타임은 <strong>Play</strong> 시 센서가 활성화될 때 접촉 보고가 활성화되도록 보장합니다. 또한 다음을 통해 프림에 Contact Report API를 수동으로 추가할 수도 있습니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stage</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">get_stage</span><span class="p">()</span>
-<span class="n">parent_prim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="s2">&quot;/World/Cube&quot;</span><span class="p">)</span>
+<span class="n">parent_prim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="s2">"/World/Cube"</span><span class="p">)</span>
 <span class="n">contact_report</span> <span class="o">=</span> <span class="n">PhysxSchema</span><span class="o">.</span><span class="n">PhysxContactReportAPI</span><span class="o">.</span><span class="n">Apply</span><span class="p">(</span><span class="n">parent_prim</span><span class="p">)</span>
 <span class="c1"># Set a minimum threshold for the contact report to zero</span>
 <span class="n">contact_report</span><span class="o">.</span><span class="n">CreateThresholdAttr</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>To modify sensor parameters at runtime, use the authoring object exposed via <code class="docutils literal notranslate"><span class="pre">sensor.contact</span></code>: <code class="docutils literal notranslate"><span class="pre">sensor.contact.set_min_threshold(value)</span></code>, <code class="docutils literal notranslate"><span class="pre">sensor.contact.set_max_threshold(value)</span></code>, <code class="docutils literal notranslate"><span class="pre">sensor.contact.set_radius(value)</span></code>. The previous shorthand methods on <code class="docutils literal notranslate"><span class="pre">ContactSensor</span></code> itself were removed in 3.0.0 — call them on <code class="docutils literal notranslate"><span class="pre">sensor.contact</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">sensor.contact</span></code>를 통해 노출된 작성 객체를 사용하여 런타임에 센서 파라미터를 수정할 수 있습니다: <code class="docutils literal notranslate"><span class="pre">sensor.contact.set_min_threshold(value)</span></code>, <code class="docutils literal notranslate"><span class="pre">sensor.contact.set_max_threshold(value)</span></code>, <code class="docutils literal notranslate"><span class="pre">sensor.contact.set_radius(value)</span></code>. <code class="docutils literal notranslate"><span class="pre">ContactSensor</span></code> 자체의 이전 단축 메서드는 3.0.0에서 제거되었습니다 — <code class="docutils literal notranslate"><span class="pre">sensor.contact</span></code>에서 호출하십시오.</p>
 </section>
 </section>
 <section id="reading-sensor-output">
 <h3>Reading sensor output<a class="headerlink" href="isaacsim_sensors_physics_contact.html#reading-sensor-output" title="Link to this heading">#</a></h3>
-<p>The contact sensors are created dynamically on <strong>Play</strong>. Moving the sensor prim while the simulation is running invalidates the sensor. If you need to make hierarchical changes to the contact sensor like changing its rigid body parent, stop the simulator, make the changes, and then restart the simulation.</p>
-<p>There are three methods for reading the sensor output:</p>
+<p>접촉 센서는 <strong>Play</strong> 시 동적으로 생성됩니다. 시뮬레이션이 실행 중인 동안 센서 프림을 이동하면 센서가 무효화됩니다. 강체 부모 변경과 같은 접촉 센서에 대한 계층적 변경을 해야 할 경우, 시뮬레이터를 중지하고 변경한 후 시뮬레이션을 재시작하십시오.</p>
+<p>센서 출력을 읽는 세 가지 방법이 있습니다:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ContactSensor.get_sensor_reading()</span></code> — returns the cached <code class="xref py py-class docutils literal notranslate"><span class="pre">ContactSensorReading</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ContactSensor.get_data()</span></code> — returns a structured dictionary</p></li>
-<li><p>OmniGraph node <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Read</span> <span class="pre">Contact</span> <span class="pre">Sensor</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ContactSensor.get_sensor_reading()</span></code> — 캐시된 <code class="xref py py-class docutils literal notranslate"><span class="pre">ContactSensorReading</span></code>을 반환합니다</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ContactSensor.get_data()</span></code> — 구조화된 딕셔너리를 반환합니다</p></li>
+<li><p>OmniGraph 노드 <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Read</span> <span class="pre">Contact</span> <span class="pre">Sensor</span></code></p></li>
 </ul>
-<p>The following snippets assume you have created a <code class="docutils literal notranslate"><span class="pre">/World/Cube</span></code> prim and contact sensor prim using one of the two snippets <a class="reference internal" href="isaacsim_sensors_physics_contact.html#isaacsim-sensors-physics-contact-standalone-python-create-modify"><span class="std std-ref">above</span></a>.</p>
+<p>다음 스니펫은 <a class="reference internal" href="isaacsim_sensors_physics_contact.html#isaacsim-sensors-physics-contact-standalone-python-create-modify"><span class="std std-ref">위의</span></a> 두 스니펫 중 하나를 사용하여 <code class="docutils literal notranslate"><span class="pre">/World/Cube</span></code> 프림과 접촉 센서 프림을 생성했다고 가정합니다.</p>
 <p><strong>ContactSensor.get_sensor_reading()</strong></p>
-<p>Returns a <code class="xref py py-class docutils literal notranslate"><span class="pre">ContactSensorReading</span></code> with <code class="docutils literal notranslate"><span class="pre">is_valid</span></code>, <code class="docutils literal notranslate"><span class="pre">time</span></code>, <code class="docutils literal notranslate"><span class="pre">value</span></code> (force magnitude), and <code class="docutils literal notranslate"><span class="pre">in_contact</span></code>.</p>
-<p>Sample usage to get the reading from the current frame:</p>
+<p><code class="docutils literal notranslate"><span class="pre">is_valid</span></code>, <code class="docutils literal notranslate"><span class="pre">time</span></code>, <code class="docutils literal notranslate"><span class="pre">value</span></code>(힘의 크기), <code class="docutils literal notranslate"><span class="pre">in_contact</span></code>를 포함하는 <code class="xref py py-class docutils literal notranslate"><span class="pre">ContactSensorReading</span></code>을 반환합니다.</p>
+<p>현재 프레임에서 판독값을 얻는 사용 예시:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.sensors.experimental.physics</span><span class="w"> </span><span class="kn">import</span> <span class="n">ContactSensor</span>
 
-<span class="n">sensor</span> <span class="o">=</span> <span class="n">ContactSensor</span><span class="p">(</span><span class="s2">&quot;/World/Cube/Contact_Sensor&quot;</span><span class="p">)</span>
+<span class="n">sensor</span> <span class="o">=</span> <span class="n">ContactSensor</span><span class="p">(</span><span class="s2">"/World/Cube/Contact_Sensor"</span><span class="p">)</span>
 <span class="n">sensor</span><span class="o">.</span><span class="n">get_sensor_reading</span><span class="p">()</span>
 </pre></div>
 </div>
 <p><strong>ContactSensor.get_data()</strong></p>
-<p>The <code class="docutils literal notranslate"><span class="pre">get_data()</span></code> member function on the <code class="docutils literal notranslate"><span class="pre">ContactSensor</span></code> runtime class returns a structured dictionary with <code class="docutils literal notranslate"><span class="pre">time</span></code>, <code class="docutils literal notranslate"><span class="pre">physics_step</span></code>, <code class="docutils literal notranslate"><span class="pre">in_contact</span></code>, <code class="docutils literal notranslate"><span class="pre">force</span></code>, and <code class="docutils literal notranslate"><span class="pre">number_of_contacts</span></code>. Internally it calls <code class="xref py py-meth docutils literal notranslate"><span class="pre">get_sensor_reading()</span></code> for the contact state and <code class="xref py py-meth docutils literal notranslate"><span class="pre">get_raw_data()</span></code> to compute <code class="docutils literal notranslate"><span class="pre">number_of_contacts</span></code>. When <code class="docutils literal notranslate"><span class="pre">add_raw_contact_data_to_frame()</span></code> has been called, the dictionary additionally contains a <code class="docutils literal notranslate"><span class="pre">contacts</span></code> list whose entries provide <code class="docutils literal notranslate"><span class="pre">body0</span></code>, <code class="docutils literal notranslate"><span class="pre">body1</span></code>, <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">normal</span></code>, and <code class="docutils literal notranslate"><span class="pre">impulse</span></code> per contact point.</p>
-<p>Sample usage:</p>
+<p><code class="docutils literal notranslate"><span class="pre">ContactSensor</span></code> 런타임 클래스의 <code class="docutils literal notranslate"><span class="pre">get_data()</span></code> 멤버 함수는 <code class="docutils literal notranslate"><span class="pre">time</span></code>, <code class="docutils literal notranslate"><span class="pre">physics_step</span></code>, <code class="docutils literal notranslate"><span class="pre">in_contact</span></code>, <code class="docutils literal notranslate"><span class="pre">force</span></code>, <code class="docutils literal notranslate"><span class="pre">number_of_contacts</span></code>를 포함하는 구조화된 딕셔너리를 반환합니다. <code class="docutils literal notranslate"><span class="pre">add_raw_contact_data_to_frame()</span></code>이 호출된 경우, 딕셔너리에는 각 접촉 점당 <code class="docutils literal notranslate"><span class="pre">body0</span></code>, <code class="docutils literal notranslate"><span class="pre">body1</span></code>, <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">normal</span></code>, <code class="docutils literal notranslate"><span class="pre">impulse</span></code>를 제공하는 <code class="docutils literal notranslate"><span class="pre">contacts</span></code> 목록도 추가됩니다.</p>
+<p>사용 예시:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.sensors.experimental.physics</span><span class="w"> </span><span class="kn">import</span> <span class="n">Contact</span><span class="p">,</span> <span class="n">ContactSensor</span>
 
 <span class="n">sensor</span> <span class="o">=</span> <span class="n">ContactSensor</span><span class="p">(</span>
     <span class="n">Contact</span><span class="p">(</span>
-        <span class="s2">&quot;/World/Cube/Contact_Sensor&quot;</span><span class="p">,</span>
+        <span class="s2">"/World/Cube/Contact_Sensor"</span><span class="p">,</span>
         <span class="n">translations</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]]),</span>
     <span class="p">)</span>
 <span class="p">)</span>
@@ -1461,10 +1084,10 @@ Attach the contact sensor to the latter.</p>
 </pre></div>
 </div>
 <p><strong>ContactSensor.get_raw_data()</strong></p>
-<p>Returns a list of raw contact records (one per contact event in the current physics step). Each record contains <code class="docutils literal notranslate"><span class="pre">time</span></code>, <code class="docutils literal notranslate"><span class="pre">dt</span></code>, <code class="docutils literal notranslate"><span class="pre">body0</span></code>, <code class="docutils literal notranslate"><span class="pre">body1</span></code>, <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">normal</span></code>, and <code class="docutils literal notranslate"><span class="pre">impulse</span></code>. Raw data disregards the sensor’s <code class="docutils literal notranslate"><span class="pre">min_threshold</span></code>/<code class="docutils literal notranslate"><span class="pre">max_threshold</span></code> filtering: contacts that fall below the threshold are still reported here, even though they would be discarded by the filtered <code class="docutils literal notranslate"><span class="pre">ContactSensorReading</span></code>. To pass through to a frame call instead, enable the <code class="docutils literal notranslate"><span class="pre">contacts</span></code> list with <code class="docutils literal notranslate"><span class="pre">ContactSensor.add_raw_contact_data_to_frame()</span></code>.</p>
+<p>현재 물리 스텝의 접촉 이벤트당 하나씩 원시 접촉 레코드 목록을 반환합니다. 각 레코드는 <code class="docutils literal notranslate"><span class="pre">time</span></code>, <code class="docutils literal notranslate"><span class="pre">dt</span></code>, <code class="docutils literal notranslate"><span class="pre">body0</span></code>, <code class="docutils literal notranslate"><span class="pre">body1</span></code>, <code class="docutils literal notranslate"><span class="pre">position</span></code>, <code class="docutils literal notranslate"><span class="pre">normal</span></code>, <code class="docutils literal notranslate"><span class="pre">impulse</span></code>를 포함합니다. 원시 데이터는 센서의 <code class="docutils literal notranslate"><span class="pre">min_threshold</span></code>/<code class="docutils literal notranslate"><span class="pre">max_threshold</span></code> 필터링을 무시합니다: 임계값 미만의 접촉은 필터링된 <code class="docutils literal notranslate"><span class="pre">ContactSensorReading</span></code>에서는 버려지더라도 여기에서는 여전히 보고됩니다. 프레임으로 전달하려면 <code class="docutils literal notranslate"><span class="pre">ContactSensor.add_raw_contact_data_to_frame()</span></code>으로 <code class="docutils literal notranslate"><span class="pre">contacts</span></code> 목록을 활성화하십시오.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.sensors.experimental.physics</span><span class="w"> </span><span class="kn">import</span> <span class="n">ContactSensor</span>
 
-<span class="n">sensor</span> <span class="o">=</span> <span class="n">ContactSensor</span><span class="p">(</span><span class="s2">&quot;/World/Cube/Contact_Sensor&quot;</span><span class="p">)</span>
+<span class="n">sensor</span> <span class="o">=</span> <span class="n">ContactSensor</span><span class="p">(</span><span class="s2">"/World/Cube/Contact_Sensor"</span><span class="p">)</span>
 <span class="n">raw_data</span> <span class="o">=</span> <span class="n">sensor</span><span class="o">.</span><span class="n">get_raw_data</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">raw_data</span><span class="p">))</span>
 </pre></div>
@@ -1473,62 +1096,40 @@ Attach the contact sensor to the latter.</p>
 <section id="api-documentation">
 <h3>API documentation<a class="headerlink" href="isaacsim_sensors_physics_contact.html#api-documentation" title="Link to this heading">#</a></h3>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">Deprecated since version 6.0: </span>The <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.physics</span></code> extension is deprecated. Use <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.physics.ContactSensor</span></code> instead.</p>
+<p><span class="versionmodified deprecated">6.0 이후 더 이상 사용되지 않음: </span><code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.physics</span></code> 확장은 더 이상 사용되지 않습니다. 대신 <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.experimental.physics.ContactSensor</span></code>를 사용하십시오.</p>
 </div>
-<p>See the <a href="../py/source/extensions/isaacsim.sensors.experimental.physics/docs/index.html" target="_blank">isaacsim.sensors.experimental.physics API Documentation</a> for the current API and <a href="https://docs.isaacsim.omniverse.nvidia.com/latest/py/source/extensions/isaacsim.sensors.physics/docs/index.html" target="_blank">isaacsim.sensors.physics API Documentation (deprecated)</a> for the deprecated API.</p>
+<p>현재 API는 <a href="../py/source/extensions/isaacsim.sensors.experimental.physics/docs/index.html" target="_blank">isaacsim.sensors.experimental.physics API Documentation</a>을, 더 이상 사용되지 않는 API는 <a href="https://docs.isaacsim.omniverse.nvidia.com/latest/py/source/extensions/isaacsim.sensors.physics/docs/index.html" target="_blank">isaacsim.sensors.physics API Documentation (deprecated)</a>을 참조하십시오.</p>
 </section>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="isaacsim_sensors_physics_articulation_force.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Articulation joint sensors</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="isaacsim_sensors_physics_effort.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Effort sensor</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="isaacsim_sensors_physics_articulation_force.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Articulation joint sensors</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="isaacsim_sensors_physics_effort.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Effort sensor</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="isaacsim_sensors_physics_contact.html#gui">GUI</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="isaacsim_sensors_physics_contact.html#creating-and-modifying-the-contact-sensor">Creating and modifying the contact sensor</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="isaacsim_sensors_physics_contact.html#contact-sensor-example">Contact sensor example</a></li>
@@ -1550,46 +1151,29 @@ Attach the contact sensor to the latter.</p>
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1620,36 +1204,21 @@ Attach the contact sensor to the latter.</p>
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

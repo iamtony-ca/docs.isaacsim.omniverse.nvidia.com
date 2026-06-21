@@ -1,561 +1,257 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Data Generation with MobilityGen &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Data Generation with MobilityGen — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
-  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
-</script>
-<script type="text/javascript">
-  function OptanonWrapper() {
-    var event = new Event('bannerLoaded');
-    window.dispatchEvent(event);
-  }
-</script>
-<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
-</script>
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'synthetic_data_generation/tutorial_replicator_mobility_gen';</script>
-    <script>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'synthetic_data_generation/tutorial_replicator_mobility_gen';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Teleoperation Synthetic Data Generation" href="tutorial_replicator_teleop_sdg.html" />
-    <link rel="prev" title="Grasping Synthetic Data Generation" href="tutorial_replicator_grasping_sdg.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="tutorial_replicator_teleop_sdg.html" rel="next" title="Teleoperation Synthetic Data Generation"/>
+<link href="tutorial_replicator_grasping_sdg.html" rel="prev" title="Grasping Synthetic Data Generation"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="tutorial_replicator_mobility_gen.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="tutorial_replicator_mobility_gen.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -575,7 +271,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -603,20 +298,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -691,17 +374,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -879,7 +552,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -919,13 +591,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -972,10 +638,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1144,18 +806,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1181,98 +833,71 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Synthetic Data Generation</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Data Generation with MobilityGen</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">Synthetic Data Generation</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Data Generation with MobilityGen</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="data-generation-with-mobilitygen">
+<article class="bd-article">
+<section id="data-generation-with-mobilitygen">
 <span id="isaac-sim-app-tutorial-replicator-mobility-gen"></span><h1>Data Generation with MobilityGen<a class="headerlink" href="tutorial_replicator_mobility_gen.html#data-generation-with-mobilitygen" title="Link to this heading">#</a></h1>
-<p>MobilityGen is a toolset built on NVIDIA Isaac Sim
-that enables you to generate and collect data for mobile robots.</p>
-<a class="reference internal image-reference" href="../_images/isim_5.0_replicator_tut_gui_mobility_gen_robots.png"><img alt="../_images/isim_5.0_replicator_tut_gui_mobility_gen_robots.png" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_mobility_gen_robots.png" style="width: 640px;" />
+<p>MobilityGen은 NVIDIA Isaac Sim을 기반으로 구축된 툴셋으로, 모바일 로봇을 위한 데이터를 생성하고 수집할 수 있게 해줍니다.</p>
+<a class="reference internal image-reference" href="../_images/isim_5.0_replicator_tut_gui_mobility_gen_robots.png"><img alt="../_images/isim_5.0_replicator_tut_gui_mobility_gen_robots.png" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_mobility_gen_robots.png" style="width: 640px;"/>
 </a>
-<a class="reference internal image-reference" href="../_images/isim_5.0_replicator_tut_gui_mobility_gen_screencast.gif"><img alt="../_images/isim_5.0_replicator_tut_gui_mobility_gen_screencast.gif" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_mobility_gen_screencast.gif" style="width: 640px;" />
+<a class="reference internal image-reference" href="../_images/isim_5.0_replicator_tut_gui_mobility_gen_screencast.gif"><img alt="../_images/isim_5.0_replicator_tut_gui_mobility_gen_screencast.gif" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_mobility_gen_screencast.gif" style="width: 640px;"/>
 </a>
-<p>MobilityGen supports:</p>
+<p>MobilityGen은 다음을 지원합니다:</p>
 <ul class="simple">
 <li><dl class="simple">
-<dt>Many robot types</dt><dd><ul>
-<li><p>Differential drive - Jetbot, Carter</p></li>
-<li><p>Quadruped - Spot</p></li>
-<li><p>Humanoid - H1</p></li>
+<dt>다양한 로봇 유형</dt><dd><ul>
+<li><p>차동 구동 - Jetbot, Carter</p></li>
+<li><p>사족 보행 - Spot</p></li>
+<li><p>휴머노이드 - H1</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>Many sensor configurations</dt><dd><ul>
+<dt>다양한 센서 구성</dt><dd><ul>
 <li><dl class="simple">
-<dt>Single front-camera configurations</dt><dd><ul>
+<dt>단일 전방 카메라 구성</dt><dd><ul>
 <li><p>JetbotRobot, CarterRobot, H1Robot, SpotRobot</p></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>USD-based multi-sensor rigs (current version supports multi-camera only)</dt><dd><ul>
+<dt>USD 기반 다중 센서 리그 (현재 버전은 다중 카메라만 지원)</dt><dd><ul>
 <li><p>JetbotMultiSensorRobot, CarterMultiSensorRobot, H1MultiSensorRobot, SpotMultiSensorRobot</p></li>
 </ul>
 </dd>
@@ -1283,9 +908,9 @@ that enables you to generate and collect data for mobile robots.</p>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>Many data collection methods</dt><dd><ul>
-<li><p>Manual - Keyboard Teleoperation, Gamepad Teleoperation</p></li>
-<li><p>Automated - Random Accelerations, Random Path Following</p></li>
+<dt>다양한 데이터 수집 방법</dt><dd><ul>
+<li><p>수동 - 키보드 텔레오퍼레이션, 게임패드 텔레오퍼레이션</p></li>
+<li><p>자동화 - 무작위 가속, 무작위 경로 추종</p></li>
 </ul>
 </dd>
 </dl>
@@ -1295,166 +920,146 @@ that enables you to generate and collect data for mobile robots.</p>
 <h2>Generate Data with MobilityGen<a class="headerlink" href="tutorial_replicator_mobility_gen.html#generate-data-with-mobilitygen" title="Link to this heading">#</a></h2>
 <section id="launch-isaac-sim">
 <h3>Launch Isaac Sim<a class="headerlink" href="tutorial_replicator_mobility_gen.html#launch-isaac-sim" title="Link to this heading">#</a></h3>
-<p>Open Isaac Sim from the terminal with multi-GPU rendering disabled:</p>
+<p>다중 GPU 렌더링을 비활성화한 상태로 터미널에서 Isaac Sim을 실행합니다:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./isaac-sim.sh<span class="w"> </span>--/renderer/multiGpu/enabled<span class="o">=</span><span class="nb">false</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Always launch Isaac Sim with <code class="docutils literal notranslate"><span class="pre">--/renderer/multiGpu/enabled=false</span></code> when using
-MobilityGen. On machines with multiple GPUs, leaving multi-GPU rendering enabled
-can cause CUDA errors or crashes during MobilityGen startup.</p>
+<p>MobilityGen을 사용할 때는 항상 <code class="docutils literal notranslate"><span class="pre">--/renderer/multiGpu/enabled=false</span></code>로 Isaac Sim을 실행하세요. 다중 GPU가 있는 머신에서 다중 GPU 렌더링을 활성화한 상태로 두면 MobilityGen 시작 시 CUDA 오류나 충돌이 발생할 수 있습니다.</p>
 </div>
 </section>
 <section id="build-an-occupancy-map">
 <h3>Build an Occupancy Map<a class="headerlink" href="tutorial_replicator_mobility_gen.html#build-an-occupancy-map" title="Link to this heading">#</a></h3>
-<p>You must create an occupancy map of your environment.</p>
-<p>This tutorial uses an example warehouse scene.</p>
+<p>환경의 점유 맵을 생성해야 합니다.</p>
+<p>이 튜토리얼은 예시 창고 장면을 사용합니다.</p>
 <ol class="arabic">
-<li><p>Load the warehouse stage:</p>
+<li><p>창고 스테이지를 로드합니다:</p>
 <ol class="arabic simple">
-<li><p>Open Content Browser if it’s not already open (<strong>Window &gt; Browsers &gt; Content</strong>).</p></li>
-<li><p>Load the warehouse USD file in <cite>Isaac Sim/Environments/Simple_Warehouse/warehouse_multiple_shelves.usd</cite>.</p></li>
+<li><p>아직 열려 있지 않은 경우 Content Browser를 엽니다 (<strong>Window &gt; Browsers &gt; Content</strong>).</p></li>
+<li><p><cite>Isaac Sim/Environments/Simple_Warehouse/warehouse_multiple_shelves.usd</cite>의 창고 USD 파일을 로드합니다.</p></li>
 </ol>
 </li>
-<li><p>Create the occupancy map:</p>
+<li><p>점유 맵을 생성합니다:</p>
 <ol class="arabic">
-<li><p>Select <strong>Tools &gt; Robotics &gt; Occupancy Map</strong> to open the Occupancy Map extension.</p></li>
-<li><p>In the <strong>Occupancy Map</strong> window set <strong>Origin</strong> to:</p>
+<li><p><strong>Tools &gt; Robotics &gt; Occupancy Map</strong>을 선택하여 Occupancy Map 확장을 엽니다.</p></li>
+<li><p><strong>Occupancy Map</strong> 창에서 <strong>Origin</strong>을 다음으로 설정합니다:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">X</span></code>: <code class="docutils literal notranslate"><span class="pre">2.0</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Y</span></code>: <code class="docutils literal notranslate"><span class="pre">0.0</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Z</span></code>: <code class="docutils literal notranslate"><span class="pre">0.0</span></code></p></li>
 </ul>
-<p>To input a value in the text box, <code class="docutils literal notranslate"><span class="pre">ctrl</span> <span class="pre">+</span> <span class="pre">left</span> <span class="pre">click</span></code> to activate the input mode.</p>
+<p>텍스트 상자에 값을 입력하려면 <code class="docutils literal notranslate"><span class="pre">ctrl</span> <span class="pre">+</span> <span class="pre">left</span> <span class="pre">click</span></code>으로 입력 모드를 활성화하세요.</p>
 </li>
-<li><p>In the <strong>Occupancy Map</strong> window set <strong>Upper Bound</strong> to:</p>
+<li><p><strong>Occupancy Map</strong> 창에서 <strong>Upper Bound</strong>를 다음으로 설정합니다:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">X</span></code>: <code class="docutils literal notranslate"><span class="pre">10.0</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Y</span></code>: <code class="docutils literal notranslate"><span class="pre">20.0</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Z</span></code>: <code class="docutils literal notranslate"><span class="pre">2.0</span></code> (Assumes the robot can move under two meter overpasses)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Z</span></code>: <code class="docutils literal notranslate"><span class="pre">2.0</span></code> (로봇이 2미터 고가 구조물 아래를 통과할 수 있다고 가정)</p></li>
 </ul>
 </li>
-<li><p>In the <strong>Occupancy Map</strong> window set <strong>Lower Bound</strong> to:</p>
+<li><p><strong>Occupancy Map</strong> 창에서 <strong>Lower Bound</strong>를 다음으로 설정합니다:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">X</span></code>: <code class="docutils literal notranslate"><span class="pre">-14.0</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Y</span></code>: <code class="docutils literal notranslate"><span class="pre">-18.0</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Z</span></code>: <code class="docutils literal notranslate"><span class="pre">0.1</span></code> (Assume the robot can move over <code class="docutils literal notranslate"><span class="pre">5cm</span></code> bumps)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Z</span></code>: <code class="docutils literal notranslate"><span class="pre">0.1</span></code> (로봇이 <code class="docutils literal notranslate"><span class="pre">5cm</span></code> 범프를 넘을 수 있다고 가정)</p></li>
 </ul>
-<p>Please note, the coordinates specified for the occupancy upper and lower bound define a bounding box within the warehouse_multiple_shelves.usd scene that we want the robot to be able to navigate. We’ve pre-selected values that cover the main floor area.
-When using a different scene, you may adjust these bounds to cover the area suitable for your USD scene.</p>
+<p>점유 상한 및 하한에 지정된 좌표는 warehouse_multiple_shelves.usd 장면 내에서 로봇이 탐색할 수 있도록 하려는 경계 상자를 정의합니다. 주요 바닥 영역을 커버하는 값을 미리 선택했습니다. 다른 장면을 사용하는 경우 USD 장면에 적합한 영역을 커버하도록 이 경계를 조정할 수 있습니다.</p>
 </li>
-<li><p>Click <strong>Calculate</strong> to generate the occupancy map.</p></li>
-<li><p>Click <strong>Visualize Image</strong> to view the occupancy map.</p></li>
-<li><p>Enter “map” in the <strong>Image File Name</strong> field and click <strong>Update YAML</strong>.</p></li>
-<li><p>Click <strong>Save YAML</strong>.</p></li>
-<li><p>In the tree explorer, open the folder <code class="docutils literal notranslate"><span class="pre">~/MobilityGenData/maps/warehouse_multiple_shelves</span></code>.</p>
-<p>On Windows replace ~ with the directory of your choice.</p>
+<li><p><strong>Calculate</strong>를 클릭하여 점유 맵을 생성합니다.</p></li>
+<li><p><strong>Visualize Image</strong>를 클릭하여 점유 맵을 확인합니다.</p></li>
+<li><p><strong>Image File Name</strong> 필드에 "map"을 입력하고 <strong>Update YAML</strong>을 클릭합니다.</p></li>
+<li><p><strong>Save YAML</strong>을 클릭합니다.</p></li>
+<li><p>트리 탐색기에서 <code class="docutils literal notranslate"><span class="pre">~/MobilityGenData/maps/warehouse_multiple_shelves</span></code> 폴더를 엽니다.</p>
+<p>Windows에서는 ~를 원하는 디렉토리로 교체하세요.</p>
 </li>
-<li><p>Under the file name enter <code class="docutils literal notranslate"><span class="pre">map.yaml</span></code> and click save.</p></li>
-<li><p>Back in the <strong>Visualization</strong> window, click <strong>Save Image</strong>.</p></li>
-<li><p>In the tree explorer, open the folder <code class="docutils literal notranslate"><span class="pre">~/MobilityGenData/maps/warehouse_multiple_shelves</span></code>.</p></li>
-<li><p>Under the file name enter <code class="docutils literal notranslate"><span class="pre">map.png</span></code> and click save.</p></li>
+<li><p>파일 이름 아래에 <code class="docutils literal notranslate"><span class="pre">map.yaml</span></code>을 입력하고 저장을 클릭합니다.</p></li>
+<li><p><strong>Visualization</strong> 창으로 돌아가 <strong>Save Image</strong>를 클릭합니다.</p></li>
+<li><p>트리 탐색기에서 <code class="docutils literal notranslate"><span class="pre">~/MobilityGenData/maps/warehouse_multiple_shelves</span></code> 폴더를 엽니다.</p></li>
+<li><p>파일 이름 아래에 <code class="docutils literal notranslate"><span class="pre">map.png</span></code>를 입력하고 저장을 클릭합니다.</p></li>
 </ol>
 </li>
 </ol>
-<p>Verify that you now have a folder named <code class="docutils literal notranslate"><span class="pre">~/MobilityGenData/maps/warehouse_multiple_shelves/</span></code> with
-a file named <code class="docutils literal notranslate"><span class="pre">map.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">map.png</span></code> inside.</p>
+<p><code class="docutils literal notranslate"><span class="pre">~/MobilityGenData/maps/warehouse_multiple_shelves/</span></code> 폴더에 <code class="docutils literal notranslate"><span class="pre">map.yaml</span></code>과 <code class="docutils literal notranslate"><span class="pre">map.png</span></code> 파일이 있는지 확인합니다.</p>
 </section>
 <section id="record-a-trajectory">
 <h3>Record a Trajectory<a class="headerlink" href="tutorial_replicator_mobility_gen.html#record-a-trajectory" title="Link to this heading">#</a></h3>
-<p>After creating a map of the environment, you can generate data with MobilityGen:</p>
+<p>환경 맵을 생성한 후 MobilityGen으로 데이터를 생성할 수 있습니다:</p>
 <ol class="arabic simple">
-<li><p>Enable the MobilityGen UI extension.</p>
+<li><p>MobilityGen UI 확장을 활성화합니다.</p>
 <ol class="arabic simple">
-<li><p>Navigate to <strong>Window</strong> &gt; <strong>Extensions</strong> and search for <strong>MobilityGen UI</strong>.</p></li>
-<li><p>Click the toggle switch for the <strong>MobilityGen UI</strong> extension.</p></li>
-<li><p>Verify that two windows open.  One window is the MobilityGen UI, the other is to display the Occupancy Map and visualizations.  One window might be hiding behind the other when they first appear, so we recommend dragging them into a window pane to view both at the same time.</p></li>
+<li><p><strong>Window</strong> &gt; <strong>Extensions</strong>로 이동하여 <strong>MobilityGen UI</strong>를 검색합니다.</p></li>
+<li><p><strong>MobilityGen UI</strong> 확장의 토글 스위치를 클릭합니다.</p></li>
+<li><p>두 개의 창이 열리는지 확인합니다. 하나는 MobilityGen UI 창이고, 다른 하나는 Occupancy Map 및 시각화를 표시하는 창입니다. 처음 나타날 때 한 창이 다른 창 뒤에 숨어 있을 수 있으므로 두 창을 동시에 볼 수 있도록 창 패널로 드래그하는 것을 권장합니다.</p></li>
 </ol>
 </li>
 </ol>
-<a class="reference internal image-reference" href="../_images/isim_6.0_replicator_tut_gui_mobility_gen_enable_extension.gif"><img alt="../_images/isim_6.0_replicator_tut_gui_mobility_gen_enable_extension.gif" class="align-center" src="../_images/isim_6.0_replicator_tut_gui_mobility_gen_enable_extension.gif" style="width: 640px;" />
+<a class="reference internal image-reference" href="../_images/isim_6.0_replicator_tut_gui_mobility_gen_enable_extension.gif"><img alt="../_images/isim_6.0_replicator_tut_gui_mobility_gen_enable_extension.gif" class="align-center" src="../_images/isim_6.0_replicator_tut_gui_mobility_gen_enable_extension.gif" style="width: 640px;"/>
 </a>
 <ol class="arabic">
-<li><p>Build the scenario:</p>
+<li><p>시나리오를 구성합니다:</p>
 <ol class="arabic">
-<li><p>In the <strong>MobilityGen</strong> window under <strong>Stage</strong> paste the following USD:</p>
+<li><p><strong>MobilityGen</strong> 창의 <strong>Stage</strong> 아래에 다음 USD를 붙여넣습니다:</p>
 <p><a class="reference external" href="http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Environments/Simple_Warehouse/warehouse_multiple_shelves.usd">http://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Environments/Simple_Warehouse/warehouse_multiple_shelves.usd</a></p>
 </li>
-<li><p>In the <strong>MobilityGen</strong> window under <strong>Occupancy Map</strong> enter the path to the <code class="docutils literal notranslate"><span class="pre">map.yaml</span></code> file created previously.</p>
+<li><p><strong>MobilityGen</strong> 창의 <strong>Occupancy Map</strong> 아래에 이전에 생성한 <code class="docutils literal notranslate"><span class="pre">map.yaml</span></code> 파일 경로를 입력합니다.</p>
 <p>~/MobilityGenData/maps/warehouse_multiple_shelves/map.yaml</p>
 </li>
-<li><p>Under the <strong>Robot</strong> dropdown select <strong>H1Robot</strong>.</p></li>
-<li><p>Under the <strong>Scenario</strong> dropdown select <strong>KeyboardTeleoperationScenario</strong>.</p></li>
-<li><p>Click <strong>Build</strong>.</p>
-<p>After a few seconds, verify that the scene and occupancy map appear.</p>
+<li><p><strong>Robot</strong> 드롭다운에서 <strong>H1Robot</strong>을 선택합니다.</p></li>
+<li><p><strong>Scenario</strong> 드롭다운에서 <strong>KeyboardTeleoperationScenario</strong>를 선택합니다.</p></li>
+<li><p><strong>Build</strong>를 클릭합니다.</p>
+<p>몇 초 후 장면과 점유 맵이 표시되는지 확인합니다.</p>
 </li>
 </ol>
 </li>
 </ol>
-<a class="reference internal image-reference" href="../_images/isim_6.0_replicator_tut_gui_mobility_gen_build_scenario.gif"><img alt="../_images/isim_6.0_replicator_tut_gui_mobility_gen_build_scenario.gif" class="align-center" src="../_images/isim_6.0_replicator_tut_gui_mobility_gen_build_scenario.gif" style="width: 640px;" />
+<a class="reference internal image-reference" href="../_images/isim_6.0_replicator_tut_gui_mobility_gen_build_scenario.gif"><img alt="../_images/isim_6.0_replicator_tut_gui_mobility_gen_build_scenario.gif" class="align-center" src="../_images/isim_6.0_replicator_tut_gui_mobility_gen_build_scenario.gif" style="width: 640px;"/>
 </a>
 <ol class="arabic simple">
-<li><p>Test drive the robot using the following keys:</p>
+<li><p>다음 키를 사용하여 로봇을 테스트 운전합니다:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">W</span></code> - Move forward</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">A</span></code> - Turn left</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">S</span></code> - Move backwards</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">D</span></code> - Turn right</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">W</span></code> - 앞으로 이동</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">A</span></code> - 왼쪽으로 회전</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">S</span></code> - 뒤로 이동</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">D</span></code> - 오른쪽으로 회전</p></li>
 </ul>
 </li>
-<li><p>Start recording:</p>
+<li><p>녹화를 시작합니다:</p>
 <ol class="arabic simple">
-<li><p>Click <strong>Start recording</strong> to start recording a log.</p></li>
-<li><p>Move the robot around.</p></li>
-<li><p>Click <strong>Stop recording</strong> to stop recording.</p></li>
+<li><p><strong>Start recording</strong>을 클릭하여 로그 녹화를 시작합니다.</p></li>
+<li><p>로봇을 이동시킵니다.</p></li>
+<li><p><strong>Stop recording</strong>을 클릭하여 녹화를 중지합니다.</p></li>
 </ol>
 </li>
 </ol>
-<a class="reference internal image-reference" href="../_images/isim_6.0_replicator_tut_gui_mobility_gen_record_scenario.gif"><img alt="../_images/isim_6.0_replicator_tut_gui_mobility_gen_record_scenario.gif" class="align-center" src="../_images/isim_6.0_replicator_tut_gui_mobility_gen_record_scenario.gif" style="width: 640px;" />
+<a class="reference internal image-reference" href="../_images/isim_6.0_replicator_tut_gui_mobility_gen_record_scenario.gif"><img alt="../_images/isim_6.0_replicator_tut_gui_mobility_gen_record_scenario.gif" class="align-center" src="../_images/isim_6.0_replicator_tut_gui_mobility_gen_record_scenario.gif" style="width: 640px;"/>
 </a>
-<p>The data is now recorded to <code class="docutils literal notranslate"><span class="pre">~/MobilityGenData/recordings</span></code> by default.</p>
+<p>데이터는 기본적으로 <code class="docutils literal notranslate"><span class="pre">~/MobilityGenData/recordings</span></code>에 기록됩니다.</p>
 </section>
 <section id="sensor-calibration-overrides">
 <h3>Sensor calibration overrides<a class="headerlink" href="tutorial_replicator_mobility_gen.html#sensor-calibration-overrides" title="Link to this heading">#</a></h3>
-<p>If you change sensors on the robot in Isaac Sim—for example camera intrinsics, distortion
-coefficients, projection type, or sensor transforms—MobilityGen persists those edits as a <strong>small
-USD diff</strong>, not a full copy of the robot asset.</p>
-<p>The comparison below contrasts replay <strong>without</strong> the persisted override file against replay <strong>with</strong>
-<code class="docutils literal notranslate"><span class="pre">sensor_overrides.usda</span></code> applied, so rendered cameras match the calibration from capture time.</p>
-<a class="reference internal image-reference" href="../_images/isim_6.0_replicator_tut_gui_mobility_gen_sensor_overrides_compare.png"><img alt="../_images/isim_6.0_replicator_tut_gui_mobility_gen_sensor_overrides_compare.png" class="align-center" src="../_images/isim_6.0_replicator_tut_gui_mobility_gen_sensor_overrides_compare.png" style="width: 640px;" />
+<p>Isaac Sim에서 로봇의 센서를 변경하는 경우(예: 카메라 내부 파라미터, 왜곡 계수, 투영 유형 또는 센서 변환), MobilityGen은 해당 편집 내용을 로봇 에셋의 전체 복사본이 아닌 <strong>소규모 USD 차이(diff)</strong>로 저장합니다.</p>
+<p>아래 비교는 저장된 오버라이드 파일 <strong>없이</strong> 재생하는 것과 <code class="docutils literal notranslate"><span class="pre">sensor_overrides.usda</span></code>를 <strong>적용하여</strong> 재생하는 것을 대조하며, 렌더링된 카메라가 캡처 시점의 캘리브레이션과 일치하도록 합니다.</p>
+<a class="reference internal image-reference" href="../_images/isim_6.0_replicator_tut_gui_mobility_gen_sensor_overrides_compare.png"><img alt="../_images/isim_6.0_replicator_tut_gui_mobility_gen_sensor_overrides_compare.png" class="align-center" src="../_images/isim_6.0_replicator_tut_gui_mobility_gen_sensor_overrides_compare.png" style="width: 640px;"/>
 </a>
-<p>The following screen capture walks through applying sensor calibration in the UI and how that ties
-into recording and replay with <code class="docutils literal notranslate"><span class="pre">sensor_overrides.usda</span></code>.</p>
-<a class="reference internal image-reference" href="../_images/isim_6.0_replicator_tut_gui_mobility_gen_sensor_overrides.gif"><img alt="../_images/isim_6.0_replicator_tut_gui_mobility_gen_sensor_overrides.gif" class="align-center" src="../_images/isim_6.0_replicator_tut_gui_mobility_gen_sensor_overrides.gif" style="width: 640px;" />
+<p>다음 화면 캡처는 UI에서 센서 캘리브레이션을 적용하는 방법과 <code class="docutils literal notranslate"><span class="pre">sensor_overrides.usda</span></code>를 사용한 녹화 및 재생과의 연관성을 설명합니다.</p>
+<a class="reference internal image-reference" href="../_images/isim_6.0_replicator_tut_gui_mobility_gen_sensor_overrides.gif"><img alt="../_images/isim_6.0_replicator_tut_gui_mobility_gen_sensor_overrides.gif" class="align-center" src="../_images/isim_6.0_replicator_tut_gui_mobility_gen_sensor_overrides.gif" style="width: 640px;"/>
 </a>
-<p>The MobilityGen extension uses the helpers in
-<code class="docutils literal notranslate"><span class="pre">source/extensions/isaacsim.replicator.experimental.mobility_gen/python/impl/sensor_overrides.py</span></code>
-to:</p>
+<p>MobilityGen 확장은 <code class="docutils literal notranslate"><span class="pre">source/extensions/isaacsim.replicator.experimental.mobility_gen/python/impl/sensor_overrides.py</span></code>의 헬퍼를 사용하여:</p>
 <ol class="arabic simple">
-<li><p><strong>Save</strong> calibration overrides from the live stage into a file named <code class="docutils literal notranslate"><span class="pre">sensor_overrides.usda</span></code>
-inside each recording directory.  Only attributes you changed (relative to the referenced robot
-USD) are written; the result is a lightweight override layer.</p></li>
-<li><p><strong>Apply</strong> that same file when you replay or render: the extension loads <code class="docutils literal notranslate"><span class="pre">sensor_overrides.usda</span></code>
-and merges those opinions onto the robot prim <strong>subtree</strong> so nested cameras and rigs match the
-calibration from capture time.</p></li>
+<li><p>라이브 스테이지에서 <code class="docutils literal notranslate"><span class="pre">sensor_overrides.usda</span></code>라는 파일로 캘리브레이션 오버라이드를 <strong>저장</strong>합니다. 각 녹화 디렉토리 내에 저장됩니다. 참조된 로봇 USD에 비해 변경된 속성만 기록되어 경량 오버라이드 레이어가 됩니다.</p></li>
+<li><p>재생 또는 렌더링 시 동일한 파일을 <strong>적용</strong>합니다: 확장이 <code class="docutils literal notranslate"><span class="pre">sensor_overrides.usda</span></code>를 로드하고 해당 내용을 로봇 프림 <strong>서브트리</strong>에 병합하여 중첩된 카메라와 리그가 캡처 시점의 캘리브레이션과 일치하도록 합니다.</p></li>
 </ol>
-<p><code class="docutils literal notranslate"><span class="pre">sensor_overrides.usda</span></code> is optional: if a recording does not contain one (for example,
-recordings predating this feature), no overrides are applied during replay.</p>
+<p><code class="docutils literal notranslate"><span class="pre">sensor_overrides.usda</span></code>는 선택 사항입니다: 녹화에 해당 파일이 없는 경우(예: 이 기능 이전의 녹화), 재생 중에 오버라이드가 적용되지 않습니다.</p>
 </section>
 <section id="replay-and-render">
 <h3>Replay and Render<a class="headerlink" href="tutorial_replicator_mobility_gen.html#replay-and-render" title="Link to this heading">#</a></h3>
-<p>After recording a trajectory (robot poses and joint state), you can <em>replay</em> it headlessly
-to render sensor images (RGB, depth, segmentation, normals) without re-running the physics
-simulation.</p>
+<p>궤적(로봇 자세 및 관절 상태)을 녹화한 후, 물리 시뮬레이션을 다시 실행하지 않고 <em>재생</em>하여 센서 이미지(RGB, 깊이, 세분화, 법선)를 헤드리스로 렌더링할 수 있습니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Recordings made with Isaac Sim 5.x use a different on-disk format than 6.0 and must be
-converted before replay. See <a class="reference internal" href="../migration_guides/isaac_sim_6_0/mobility_gen_recordings_migration.html#mobility-gen-recordings-migration"><span class="std std-ref">MobilityGen Recordings</span></a> for the conversion
-script.</p>
+<p>Isaac Sim 5.x로 만든 녹화는 6.0과 다른 디스크 형식을 사용하므로 재생 전에 변환해야 합니다. 변환 스크립트는 <a class="reference internal" href="../migration_guides/isaac_sim_6_0/mobility_gen_recordings_migration.html#mobility-gen-recordings-migration"><span class="std std-ref">MobilityGen Recordings</span></a>를 참조하세요.</p>
 </div>
-<p>Isaac Sim ships a standalone replay script for this. Run it from the Isaac Sim root directory
-(replace <code class="docutils literal notranslate"><span class="pre">~/omni_isaac_sim</span></code> with your actual Isaac Sim installation path):</p>
+<p>Isaac Sim은 이를 위한 독립 실행형 재생 스크립트를 제공합니다. Isaac Sim 루트 디렉토리에서 실행합니다(<code class="docutils literal notranslate"><span class="pre">~/omni_isaac_sim</span></code>을 실제 Isaac Sim 설치 경로로 교체):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./python.sh<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>standalone_examples/replicator/mobility_gen/replay_directory.py<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--input<span class="w">  </span>~/MobilityGenData/recordings<span class="w"> </span><span class="se">\</span>
@@ -1463,77 +1068,73 @@ script.</p>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--input</span></code> — directory containing one or more recordings (each in its own subdirectory).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--output</span></code> — directory where replays with rendered sensor data will be written.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--render_interval</span></code> — render every Nth physics step. <code class="docutils literal notranslate"><span class="pre">40</span></code> renders roughly once per second and is a good starting point; set to <code class="docutils literal notranslate"><span class="pre">1</span></code> for full-frame-rate output.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--input</span></code> — 하나 이상의 녹화가 포함된 디렉토리 (각각 별도의 서브 디렉토리에).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--output</span></code> — 렌더링된 센서 데이터와 함께 재생 결과가 저장될 디렉토리.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--render_interval</span></code> — N번째 물리 스텝마다 렌더링합니다. <code class="docutils literal notranslate"><span class="pre">40</span></code>은 초당 약 한 번 렌더링하며 좋은 시작점입니다; 전체 프레임 레이트 출력을 위해 <code class="docutils literal notranslate"><span class="pre">1</span></code>로 설정합니다.</p></li>
 </ul>
-<p>Additional optional flags:</p>
+<p>추가 선택적 플래그:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--rgb_enabled</span></code> — enable RGB image rendering (default: <code class="docutils literal notranslate"><span class="pre">True</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--depth_enabled</span></code> — enable depth image rendering (default: <code class="docutils literal notranslate"><span class="pre">True</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--segmentation_enabled</span></code> — enable semantic segmentation rendering (default: <code class="docutils literal notranslate"><span class="pre">True</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--normals_enabled</span></code> — enable surface normal rendering (default: <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--instance_id_segmentation_enabled</span></code> — enable instance segmentation rendering (default: <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--render_rt_subframes</span></code> — number of RT subframes per step; increase for higher rendering quality at the cost of speed (default: <code class="docutils literal notranslate"><span class="pre">1</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--rgb_enabled</span></code> — RGB 이미지 렌더링 활성화 (기본값: <code class="docutils literal notranslate"><span class="pre">True</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--depth_enabled</span></code> — 깊이 이미지 렌더링 활성화 (기본값: <code class="docutils literal notranslate"><span class="pre">True</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--segmentation_enabled</span></code> — 시맨틱 세분화 렌더링 활성화 (기본값: <code class="docutils literal notranslate"><span class="pre">True</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--normals_enabled</span></code> — 표면 법선 렌더링 활성화 (기본값: <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--instance_id_segmentation_enabled</span></code> — 인스턴스 세분화 렌더링 활성화 (기본값: <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--render_rt_subframes</span></code> — 스텝당 RT 서브프레임 수; 속도를 희생하고 더 높은 렌더링 품질을 위해 증가 (기본값: <code class="docutils literal notranslate"><span class="pre">1</span></code>).</p></li>
 </ul>
-<p>After the script finishes, verify that you have a folder <code class="docutils literal notranslate"><span class="pre">~/MobilityGenData/replays</span></code>, which contains
-the rendered sensor data.</p>
-<p>You can open this folder to explore the data.  Some data (like segmentation masks) can be difficult to visualize using the file browser alone.</p>
-<p>Fortunately, there are many examples on how to load and work with the recorded data in the open source <a class="reference external" href="https://github.com/NVlabs/MobilityGen/tree/dev-external-occupancy-map-generation/examples">MobilityGen GitHub Repository</a>.  We recommend visualizing your recorded data by running the <a class="reference external" href="https://github.com/NVlabs/MobilityGen/blob/main/examples/04_visualize_gradio.py">Gradio Visualization Script</a>.</p>
-<a class="reference internal image-reference" href="../_images/isim_5.0_replicator_tut_gui_mobility_gen_gradio_gui.png"><img alt="../_images/isim_5.0_replicator_tut_gui_mobility_gen_gradio_gui.png" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_mobility_gen_gradio_gui.png" style="width: 640px;" />
+<p>스크립트가 완료된 후 렌더링된 센서 데이터가 포함된 <code class="docutils literal notranslate"><span class="pre">~/MobilityGenData/replays</span></code> 폴더가 있는지 확인합니다.</p>
+<p>이 폴더를 열어 데이터를 탐색할 수 있습니다. 파일 브라우저만으로는 일부 데이터(예: 세분화 마스크)를 시각화하기 어려울 수 있습니다.</p>
+<p>다행히 오픈소스 <a class="reference external" href="https://github.com/NVlabs/MobilityGen/tree/dev-external-occupancy-map-generation/examples">MobilityGen GitHub 저장소</a>에 기록된 데이터를 로드하고 작업하는 방법에 대한 다양한 예제가 있습니다. <a class="reference external" href="https://github.com/NVlabs/MobilityGen/blob/main/examples/04_visualize_gradio.py">Gradio 시각화 스크립트</a>를 실행하여 기록된 데이터를 시각화하는 것을 권장합니다.</p>
+<a class="reference internal image-reference" href="../_images/isim_5.0_replicator_tut_gui_mobility_gen_gradio_gui.png"><img alt="../_images/isim_5.0_replicator_tut_gui_mobility_gen_gradio_gui.png" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_mobility_gen_gradio_gui.png" style="width: 640px;"/>
 </a>
-<p>To run this example you would clone the above repository and run the following command from a Python interpreter with Gradio installed</p>
+<p>이 예제를 실행하려면 위의 저장소를 클론하고 Gradio가 설치된 Python 인터프리터에서 다음 명령을 실행합니다.</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">python</span><span class="w"> </span><span class="n">examples</span><span class="o">/</span><span class="mo">04</span><span class="n">_visualize_gradio</span><span class="p">.</span><span class="n">py</span><span class="w"> </span><span class="o">--</span><span class="n">input_dir</span><span class="w"> </span><span class="o">~/</span><span class="n">MobilityGenData</span><span class="o">/</span><span class="n">replays</span>
 </pre></div>
 </div>
-<p>You can also check the <a class="reference external" href="https://github.com/NVlabs/MobilityGen/blob/main/examples/reader.py">reader.py</a> file for a helper class for reading the data in Python.</p>
+<p>Python에서 데이터를 읽기 위한 헬퍼 클래스는 <a class="reference external" href="https://github.com/NVlabs/MobilityGen/blob/main/examples/reader.py">reader.py</a> 파일을 참조하세요.</p>
 </section>
 </section>
 <section id="tips">
 <h2>Tips<a class="headerlink" href="tutorial_replicator_mobility_gen.html#tips" title="Link to this heading">#</a></h2>
 <section id="generate-procedural-data">
 <h3>Generate Procedural Data<a class="headerlink" href="tutorial_replicator_mobility_gen.html#generate-procedural-data" title="Link to this heading">#</a></h3>
-<p>Generating procedural mobility data with MobilityGen is done very similar to the basic teleoperation workflow above.</p>
-<p>To generate procedural data:</p>
+<p>MobilityGen을 사용한 절차적 이동성 데이터 생성은 위의 기본 텔레오퍼레이션 워크플로우와 매우 유사하게 수행됩니다.</p>
+<p>절차적 데이터를 생성하려면:</p>
 <ol class="arabic simple">
-<li><p>Follow <code class="docutils literal notranslate"><span class="pre">Build</span> <span class="pre">an</span> <span class="pre">Occupancy</span> <span class="pre">Map</span></code> above to create an occupancy map of the environment.</p></li>
-<li><p>Follow <code class="docutils literal notranslate"><span class="pre">Record</span> <span class="pre">a</span> <span class="pre">Trajectory</span></code> above, but select <code class="docutils literal notranslate"><span class="pre">RandomPathFollowingScenario</span></code> instead of <code class="docutils literal notranslate"><span class="pre">KeyboardTeleoperationScenario</span></code>.
-- You no longer need to manually teleoperate the robot.  When the scenario is built, it will run and reset automatically.
-- You do need to hit “start recording” to enable recording to disk.  However, when the scenario resets, a new recording will be created automatically.
-- Verify that you have recordings collected in the <code class="docutils literal notranslate"><span class="pre">~/MobilityGenData</span></code> folder the same as above.</p></li>
-<li><p>Follow <code class="docutils literal notranslate"><span class="pre">Replay</span> <span class="pre">and</span> <span class="pre">render</span></code> above to render the sensor data from the recorded trajectories.</p></li>
+<li><p>위의 <code class="docutils literal notranslate"><span class="pre">Build</span> <span class="pre">an</span> <span class="pre">Occupancy</span> <span class="pre">Map</span></code>을 따라 환경의 점유 맵을 생성합니다.</p></li>
+<li><p>위의 <code class="docutils literal notranslate"><span class="pre">Record</span> <span class="pre">a</span> <span class="pre">Trajectory</span></code>를 따르되, <code class="docutils literal notranslate"><span class="pre">KeyboardTeleoperationScenario</span></code> 대신 <code class="docutils literal notranslate"><span class="pre">RandomPathFollowingScenario</span></code>를 선택합니다. - 더 이상 수동으로 로봇을 텔레오퍼레이션할 필요가 없습니다. 시나리오가 구성되면 자동으로 실행되고 초기화됩니다. - "start recording"을 눌러 디스크에 녹화를 활성화해야 합니다. 그러나 시나리오가 초기화되면 새로운 녹화가 자동으로 생성됩니다. - 위와 동일하게 <code class="docutils literal notranslate"><span class="pre">~/MobilityGenData</span></code> 폴더에 녹화가 수집되었는지 확인합니다.</p></li>
+<li><p>위의 <code class="docutils literal notranslate"><span class="pre">Replay</span> <span class="pre">and</span> <span class="pre">render</span></code>를 따라 녹화된 궤적의 센서 데이터를 렌더링합니다.</p></li>
 </ol>
-<p>The process for other procedural scenarios (like <code class="docutils literal notranslate"><span class="pre">RandomAccelerationScenario</span></code>) is similar.</p>
+<p>다른 절차적 시나리오(예: <code class="docutils literal notranslate"><span class="pre">RandomAccelerationScenario</span></code>)의 프로세스도 유사합니다.</p>
 </section>
 <section id="add-a-custom-robot">
 <h3>Add a Custom Robot<a class="headerlink" href="tutorial_replicator_mobility_gen.html#add-a-custom-robot" title="Link to this heading">#</a></h3>
-<p>You can implement a new robot for use with MobilityGen.  This involves editing the <code class="docutils literal notranslate"><span class="pre">robots.py</span></code> file in the MobilityGen Examples extension.</p>
-<p>The general workflow is as follows:</p>
+<p>MobilityGen과 함께 사용할 새로운 로봇을 구현할 수 있습니다. 이는 MobilityGen Examples 확장의 <code class="docutils literal notranslate"><span class="pre">robots.py</span></code> 파일을 편집하는 것을 포함합니다.</p>
+<p>일반적인 워크플로우는 다음과 같습니다:</p>
 <ol class="arabic simple">
-<li><p>Open the <code class="docutils literal notranslate"><span class="pre">robots.py</span></code> file in an editor of choice.  This is located at <code class="docutils literal notranslate"><span class="pre">&lt;isaac</span> <span class="pre">sim</span> <span class="pre">path&gt;/exts/isaacsim.replicator.mobility_gen.examples/isaacsim/replicator/mobility_gen/examples/robots.py</span></code>.</p></li>
-<li><p>Create a new class that subclasses the <code class="docutils literal notranslate"><span class="pre">MobilityGenRobot</span></code> class.  Alternatively, if your robot fits one of the existing implementations (like <code class="docutils literal notranslate"><span class="pre">WheeledMobilityGenRobot</span></code>), you can subclass that.</p>
+<li><p>원하는 에디터에서 <code class="docutils literal notranslate"><span class="pre">robots.py</span></code> 파일을 엽니다. 이 파일은 <code class="docutils literal notranslate"><span class="pre">&lt;isaac</span> <span class="pre">sim</span> <span class="pre">path&gt;/exts/isaacsim.replicator.mobility_gen.examples/isaacsim/replicator/mobility_gen/examples/robots.py</span></code>에 위치합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MobilityGenRobot</span></code> 클래스를 상속하는 새로운 클래스를 생성합니다. 또는 로봇이 기존 구현(예: <code class="docutils literal notranslate"><span class="pre">WheeledMobilityGenRobot</span></code>) 중 하나에 적합하다면 해당 클래스를 상속할 수 있습니다.</p>
 <ul class="simple">
-<li><p>We recommend starting by reviewing an existing robot implementation in <code class="docutils literal notranslate"><span class="pre">robots.py</span></code>, to get started.  A good way to start is by customizing an existing robot.</p></li>
+<li><p>시작하려면 <code class="docutils literal notranslate"><span class="pre">robots.py</span></code>의 기존 로봇 구현을 검토하는 것을 권장합니다. 기존 로봇을 커스터마이징하는 것이 좋은 시작 방법입니다.</p></li>
 </ul>
 </li>
-<li><p>If you are starting from scratch, implement the required abstract methods of <code class="docutils literal notranslate"><span class="pre">MobilityGenRobot</span></code> class:</p>
+<li><p>처음부터 시작하는 경우 <code class="docutils literal notranslate"><span class="pre">MobilityGenRobot</span></code> 클래스의 필수 추상 메서드를 구현합니다:</p>
 <ul class="simple">
-<li><p>Implement the <code class="docutils literal notranslate"><span class="pre">build()</span></code> method.  This method is responsible for adding the robot to the USD stage.</p></li>
-<li><p>Implement the <code class="docutils literal notranslate"><span class="pre">write_action()</span></code> method.  This method takes as input a linear and angular velocity command and performs any control logic.</p></li>
-<li><p>Overwrite common class parameters (like physics_dt).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">build()</span></code> 메서드를 구현합니다. 이 메서드는 USD 스테이지에 로봇을 추가하는 역할을 합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">write_action()</span></code> 메서드를 구현합니다. 이 메서드는 선형 및 각속도 명령을 입력으로 받아 제어 로직을 수행합니다.</p></li>
+<li><p>일반적인 클래스 매개변수(예: physics_dt)를 덮어씁니다.</p></li>
 </ul>
 </li>
-<li><p>Register the robot class by using the <code class="docutils literal notranslate"><span class="pre">ROBOTS.register()</span></code> decorator. This makes the custom robot discoverable by MobilityGen.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ROBOTS.register()</span></code> 데코레이터를 사용하여 로봇 클래스를 등록합니다. 이를 통해 사용자 정의 로봇이 MobilityGen에서 검색될 수 있습니다.</p></li>
 </ol>
-<p>After implementing this in the file above, save the file.</p>
-<p>When you restart Isaac Sim, verify that the new robot is registered, in the MobilityGen UI, and ready for data collection.</p>
-<p>Because the registration of a new robot requires editing the Isaac Sim build file, make a copy of your <code class="docutils literal notranslate"><span class="pre">robot.py</span></code> externally so you do not lose it.</p>
-<p>When defining your robot, you may find the following list of common parameters and their descriptions helpful</p>
+<p>위의 파일에 이를 구현한 후 파일을 저장합니다.</p>
+<p>Isaac Sim을 재시작하면 MobilityGen UI에서 새로운 로봇이 등록되어 데이터 수집에 사용할 수 있는지 확인합니다.</p>
+<p>새로운 로봇을 등록하려면 Isaac Sim 빌드 파일을 편집해야 하므로, 분실되지 않도록 <code class="docutils literal notranslate"><span class="pre">robot.py</span></code>의 복사본을 외부에 저장하세요.</p>
+<p>로봇을 정의할 때 다음 일반적인 매개변수 목록과 설명이 도움이 될 수 있습니다.</p>
 <div class="pst-scrollable-table-container"><table class="table" id="id2">
 <caption><span class="caption-text">Common Robot Parameters</span><a class="headerlink" href="tutorial_replicator_mobility_gen.html#id2" title="Link to this table">#</a></caption>
 <colgroup>
-<col style="width: 30.0%" />
-<col style="width: 70.0%" />
+<col style="width: 30.0%"/>
+<col style="width: 70.0%"/>
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
@@ -1542,82 +1143,82 @@ the rendered sensor data.</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">physics_dt</span></code></p></td>
-<td><p>The physics timestep to use for simulating the robot.</p></td>
+<td><p>로봇 시뮬레이션에 사용할 물리 타임스텝.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">z_offset</span></code></p></td>
-<td><p>The Z-axis offset height to spawn the robot.</p></td>
+<td><p>로봇을 스폰할 Z축 오프셋 높이.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">chase_camera_base_path</span></code></p></td>
-<td><p>The relative USD path which will be used to spawn the third person view camera. This is typically set to the robot base frame.</p></td>
+<td><p>3인칭 시점 카메라를 스폰하는 데 사용할 상대 USD 경로. 일반적으로 로봇 베이스 프레임으로 설정됩니다.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">chase_camera_x_offset</span></code></p></td>
-<td><p>The relative X-axis offset to spawn the third person view camera.</p></td>
+<td><p>3인칭 시점 카메라를 스폰할 상대 X축 오프셋.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">chase_camera_z_offset</span></code></p></td>
-<td><p>The relative Z-axis offset to spawn the third person view camera.</p></td>
+<td><p>3인칭 시점 카메라를 스폰할 상대 Z축 오프셋.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">chase_camera_tilt_angle</span></code></p></td>
-<td><p>The tilt angle to apply to the third person view camera.</p></td>
+<td><p>3인칭 시점 카메라에 적용할 틸트 각도.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">occupancy_map_radius</span></code></p></td>
-<td><p>The robot footprint radius to use for spawning and path planning.</p></td>
+<td><p>스폰 및 경로 계획에 사용할 로봇 풋프린트 반지름.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">occupancy_map_collision_radius</span></code></p></td>
-<td><p>The robot footprint radius to use for collision based episode termination.</p></td>
+<td><p>충돌 기반 에피소드 종료에 사용할 로봇 풋프린트 반지름.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">front_camera_type</span></code></p></td>
-<td><p>The static class representing the front camera.</p></td>
+<td><p>전방 카메라를 나타내는 정적 클래스.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">front_camera_base_path</span></code></p></td>
-<td><p>The relative USD path to spawn the front camera.</p></td>
+<td><p>전방 카메라를 스폰할 상대 USD 경로.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">front_camera_rotation</span></code></p></td>
-<td><p>The relative XYZ rotation used when spawning the front camera.</p></td>
+<td><p>전방 카메라를 스폰할 때 사용할 상대 XYZ 회전.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">front_camera_translation</span></code></p></td>
-<td><p>The relative XYZ translation used when spawning the front camera.</p></td>
+<td><p>전방 카메라를 스폰할 때 사용할 상대 XYZ 이동.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">keyboard_linear_velocity_gain</span></code></p></td>
-<td><p>The gain used to map keyboard button presses to the robot’s linear velocity. A larger gain results in faster movement.</p></td>
+<td><p>키보드 버튼 누름을 로봇의 선속도에 매핑하는 데 사용되는 게인. 게인이 클수록 움직임이 빠릅니다.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">keyboard_angular_velocity_gain</span></code></p></td>
-<td><p>The gain used to map keyboard button presses to the robot’s angular velocity. A larger gain results in faster movement.</p></td>
+<td><p>키보드 버튼 누름을 로봇의 각속도에 매핑하는 데 사용되는 게인. 게인이 클수록 움직임이 빠릅니다.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">gamepad_linear_velocity_gain</span></code></p></td>
-<td><p>The gain used to map gamepad axis movement to the robot’s linear velocity. A larger gain results in faster movement.</p></td>
+<td><p>게임패드 축 움직임을 로봇의 선속도에 매핑하는 데 사용되는 게인. 게인이 클수록 움직임이 빠릅니다.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gamepad_angular_velocity_gain</span></code></p></td>
-<td><p>The gain used to map gamepad axis movement to the robot’s angular velocity. A larger gain results in faster movement.</p></td>
+<td><p>게임패드 축 움직임을 로봇의 각속도에 매핑하는 데 사용되는 게인. 게인이 클수록 움직임이 빠릅니다.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">random_action_linear_velocity_range</span></code></p></td>
-<td><p>The robot linear velocity limits for the random acceleration scenario.</p></td>
+<td><p>무작위 가속 시나리오에서 로봇 선속도 한계.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">random_action_angular_velocity_range</span></code></p></td>
-<td><p>The robot angular velocity limits for the random acceleration scenario.</p></td>
+<td><p>무작위 가속 시나리오에서 로봇 각속도 한계.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">random_action_linear_acceleration_std</span></code></p></td>
-<td><p>The standard deviation used for sampling the robot linear acceleration each timestep during the random acceleration scenario.</p></td>
+<td><p>무작위 가속 시나리오에서 각 타임스텝에 로봇 선가속도를 샘플링하는 데 사용되는 표준 편차.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">random_action_angular_acceleration_std</span></code></p></td>
-<td><p>The standard deviation used for sampling the robot angular acceleration each timestep during the random acceleration scenario.</p></td>
+<td><p>무작위 가속 시나리오에서 각 타임스텝에 로봇 각가속도를 샘플링하는 데 사용되는 표준 편차.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">random_action_grid_pose_sampler_grid_size</span></code></p></td>
-<td><p>The grid size to use for spawning the robot during the random acceleration scenario.</p></td>
+<td><p>무작위 가속 시나리오에서 로봇을 스폰하는 데 사용할 격자 크기.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">path_following_speed</span></code></p></td>
-<td><p>The constant linear speed to use for the path following scenario.</p></td>
+<td><p>경로 추종 시나리오에 사용할 일정한 선속도.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">path_following_angular_gain</span></code></p></td>
-<td><p>The gain used for the proportional steering control in the path following scenario. A larger gain results in quicker turning, but potential overshoot and wobbling.</p></td>
+<td><p>경로 추종 시나리오에서 비례 조향 제어에 사용되는 게인. 게인이 클수록 빠른 회전이 가능하지만, 오버슈트와 흔들림이 발생할 수 있습니다.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">path_following_stop_distance_threshold</span></code></p></td>
-<td><p>The distance threshold at which point the robot will stop. Applies to the path following scenario.</p></td>
+<td><p>로봇이 멈출 거리 임계값. 경로 추종 시나리오에 적용됩니다.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">path_following_forward_angle_threshold</span></code></p></td>
-<td><p>The angle threshold at which point the robot will move forward. Applies to the path following scenario.</p></td>
+<td><p>로봇이 앞으로 이동할 각도 임계값. 경로 추종 시나리오에 적용됩니다.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">path_following_target_point_offset_meters</span></code></p></td>
-<td><p>The offset distance used to generate the ‘target point’ that the robot will follow in the path following scenario. A larger offset results in smoother motion, but too large may cause the robot to cut corners during turns.</p></td>
+<td><p>경로 추종 시나리오에서 로봇이 따라갈 '목표 지점'을 생성하는 데 사용되는 오프셋 거리. 오프셋이 클수록 더 부드러운 움직임이 가능하지만, 너무 크면 로봇이 회전 시 코너를 잘라낼 수 있습니다.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1625,46 +1226,31 @@ the rendered sensor data.</p>
 </section>
 <section id="use-nurec-assets-in-mobilitygen">
 <h3>Use NuRec Assets in MobilityGen<a class="headerlink" href="tutorial_replicator_mobility_gen.html#use-nurec-assets-in-mobilitygen" title="Link to this heading">#</a></h3>
-<p>MobilityGen operates on USD environments, including 3D reconstructed scenes produced with the NVIDIA NuRec pipeline.
-The <a class="reference external" href="https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-NuRec">NVIDIA PhysicalAI-Robotics NuRec dataset</a>
-provides ready-to-use indoor scenes that can be used directly as MobilityGen stages.</p>
+<p>MobilityGen은 NVIDIA NuRec 파이프라인으로 제작된 3D 재구성 장면을 포함한 USD 환경에서 작동합니다. <a class="reference external" href="https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-NuRec">NVIDIA PhysicalAI-Robotics NuRec 데이터셋</a>은 MobilityGen 스테이지로 직접 사용할 수 있는 실내 장면을 제공합니다.</p>
 <section id="overview">
 <h4>Overview<a class="headerlink" href="tutorial_replicator_mobility_gen.html#overview" title="Link to this heading">#</a></h4>
-<p>NuRec scenes are published in two USD formats: <strong>Particle USD</strong>, a particle-based representation, and <strong>Volume USD</strong>,
-a volumetric representation. Either format can be used as the MobilityGen stage, and many scenes also include a
-pre-computed occupancy map that can replace manual map generation.</p>
-<p>This workflow follows the same core MobilityGen pipeline described above: select or generate an occupancy map,
-record a trajectory, and replay that trajectory to render sensor data. Only the source of the stage and occupancy
-map changes when working with NuRec assets.</p>
-<img alt="../_images/isim_6.0_replicator_tut_gui_mobility_gen_nurec_example.gif" src="../_images/isim_6.0_replicator_tut_gui_mobility_gen_nurec_example.gif" />
+<p>NuRec 장면은 두 가지 USD 형식으로 제공됩니다: <strong>Particle USD</strong>(파티클 기반 표현)와 <strong>Volume USD</strong>(부피 표현). 두 형식 모두 MobilityGen 스테이지로 사용할 수 있으며, 많은 장면에는 수동 맵 생성을 대체할 수 있는 사전 계산된 점유 맵이 포함되어 있습니다.</p>
+<p>이 워크플로우는 위에서 설명한 핵심 MobilityGen 파이프라인과 동일합니다: 점유 맵을 선택하거나 생성하고, 궤적을 녹화하고, 해당 궤적을 재생하여 센서 데이터를 렌더링합니다. NuRec 에셋을 사용할 때는 스테이지와 점유 맵의 소스만 달라집니다.</p>
+<img alt="../_images/isim_6.0_replicator_tut_gui_mobility_gen_nurec_example.gif" src="../_images/isim_6.0_replicator_tut_gui_mobility_gen_nurec_example.gif"/>
 </section>
 <section id="use-a-nurec-scene">
 <h4>Use a NuRec Scene<a class="headerlink" href="tutorial_replicator_mobility_gen.html#use-a-nurec-scene" title="Link to this heading">#</a></h4>
 <ol class="arabic">
-<li><p>Download a scene USD file in either particle or volume format from the
-<a class="reference external" href="https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-NuRec">NVIDIA PhysicalAI-Robotics NuRec dataset</a>.</p></li>
-<li><p>If the dataset provides an occupancy map for the selected scene, use that file directly and skip
-occupancy-map generation.</p></li>
-<li><p>If no occupancy map is available, load the reconstructed USD in Isaac Sim and follow the same
-occupancy-map procedure used for other MobilityGen environments.</p></li>
-<li><p>In the MobilityGen window, set <strong>Stage</strong> to the path of the NuRec scene USD, for example:</p>
+<li><p><a class="reference external" href="https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-NuRec">NVIDIA PhysicalAI-Robotics NuRec 데이터셋</a>에서 파티클 또는 볼륨 형식의 장면 USD 파일을 다운로드합니다.</p></li>
+<li><p>데이터셋에서 선택한 장면에 대한 점유 맵이 제공되는 경우, 해당 파일을 직접 사용하고 점유 맵 생성 단계를 건너뜁니다.</p></li>
+<li><p>점유 맵을 사용할 수 없는 경우, Isaac Sim에서 재구성된 USD를 로드하고 다른 MobilityGen 환경에 사용되는 것과 동일한 점유 맵 절차를 따릅니다.</p></li>
+<li><p>MobilityGen 창에서 <strong>Stage</strong>를 NuRec 장면 USD 경로로 설정합니다. 예를 들어:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">nurec_scene</span><span class="p">.</span><span class="n">usd</span>
 </pre></div>
 </div>
 </li>
-<li><p>Set <strong>Occupancy Map</strong> to the corresponding <code class="docutils literal notranslate"><span class="pre">map.yaml</span></code> file, either from the dataset or from
-the generated output.</p></li>
-<li><p>Continue with the standard MobilityGen flow: record a trajectory, then run <code class="docutils literal notranslate"><span class="pre">replay_directory.py</span></code>
-to replay and render sensor data.</p></li>
+<li><p><strong>Occupancy Map</strong>을 데이터셋에서 가져온 또는 생성한 <code class="docutils literal notranslate"><span class="pre">map.yaml</span></code> 파일로 설정합니다.</p></li>
+<li><p>표준 MobilityGen 흐름을 계속합니다: 궤적을 녹화한 후 <code class="docutils literal notranslate"><span class="pre">replay_directory.py</span></code>를 실행하여 센서 데이터를 재생하고 렌더링합니다.</p></li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>RGB rendering is fully supported for trajectories recorded in reconstructed environments.
-Depth rendering can be enabled, but accuracy is not guaranteed because reconstructed geometry
-may be incomplete or noisy. Semantic segmentation is not supported for reconstructed scenes
-in this workflow.</p>
-<p>To skip depth and semantic segmentation during replay (recommended for NuRec-only workflows),
-pass the negated flags supported by <code class="docutils literal notranslate"><span class="pre">replay_directory.py</span></code>:</p>
+<p>RGB 렌더링은 재구성된 환경에서 녹화된 궤적에 완전히 지원됩니다. 깊이 렌더링은 활성화할 수 있지만, 재구성된 지오메트리가 불완전하거나 노이즈가 있을 수 있어 정확도가 보장되지 않습니다. 시맨틱 세분화는 이 워크플로우에서 재구성된 장면을 지원하지 않습니다.</p>
+<p>재생 중 깊이 및 시맨틱 세분화를 건너뛰려면(NuRec 전용 워크플로우에 권장), <code class="docutils literal notranslate"><span class="pre">replay_directory.py</span></code>에서 지원하는 부정 플래그를 사용합니다:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./python.sh<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>standalone_examples/replicator/mobility_gen/replay_directory.py<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--input<span class="w">  </span>~/MobilityGenData/recordings<span class="w"> </span><span class="se">\</span>
@@ -1674,81 +1260,55 @@ pass the negated flags supported by <code class="docutils literal notranslate"><
 <span class="w">    </span>--no-segmentation_enabled
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">--no-depth_enabled</span></code> turns off depth image rendering; <code class="docutils literal notranslate"><span class="pre">--no-segmentation_enabled</span></code> turns off
-semantic segmentation.  RGB remains on by default (use <code class="docutils literal notranslate"><span class="pre">--no-rgb_enabled</span></code> only if you want to
-disable RGB as well).</p>
-<p>Occupancy-map quality depends on the collision geometry available in the USD stage. When
-generating a map for a reconstructed scene, review the occupancy-map visualization and adjust
-bounds as needed before recording trajectories.</p>
+<p><code class="docutils literal notranslate"><span class="pre">--no-depth_enabled</span></code>는 깊이 이미지 렌더링을 끄고, <code class="docutils literal notranslate"><span class="pre">--no-segmentation_enabled</span></code>는 시맨틱 세분화를 끕니다. RGB는 기본적으로 켜져 있습니다(RGB도 비활성화하려면 <code class="docutils literal notranslate"><span class="pre">--no-rgb_enabled</span></code>만 사용).</p>
+<p>점유 맵 품질은 USD 스테이지에서 사용 가능한 충돌 지오메트리에 따라 다릅니다. 재구성된 장면의 맵을 생성할 때, 궤적을 녹화하기 전에 점유 맵 시각화를 검토하고 경계를 필요에 따라 조정하세요.</p>
 </div>
 </section>
 </section>
 </section>
 <section id="next-steps">
 <h2>Next Steps<a class="headerlink" href="tutorial_replicator_mobility_gen.html#next-steps" title="Link to this heading">#</a></h2>
-<p>In this tutorial, you:</p>
+<p>이 튜토리얼에서 수행한 작업:</p>
 <ol class="arabic simple">
-<li><p>Built an occupancy map for use with MobilityGen.</p></li>
-<li><p>Recorded a MobilityGen trajectory using the H1 robot with keyboard Teleoperation.</p></li>
-<li><p>Rendered sensor data based on the recorded trajectory.</p></li>
+<li><p>MobilityGen에 사용할 점유 맵을 구성했습니다.</p></li>
+<li><p>키보드 텔레오퍼레이션을 사용하여 H1 로봇으로 MobilityGen 궤적을 녹화했습니다.</p></li>
+<li><p>녹화된 궤적을 기반으로 센서 데이터를 렌더링했습니다.</p></li>
 </ol>
-<p>As next steps, try recording data:</p>
+<p>다음 단계로 데이터를 녹화해 보세요:</p>
 <ul class="simple">
-<li><p>for a different robot (for example: Spot)</p></li>
-<li><p>using a different scenario (for example: Random Path Following)</p></li>
+<li><p>다른 로봇 사용 (예: Spot)</p></li>
+<li><p>다른 시나리오 사용 (예: Random Path Following)</p></li>
 </ul>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="tutorial_replicator_grasping_sdg.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Grasping Synthetic Data Generation</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="tutorial_replicator_teleop_sdg.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Teleoperation Synthetic Data Generation</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="tutorial_replicator_grasping_sdg.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Grasping Synthetic Data Generation</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="tutorial_replicator_teleop_sdg.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Teleoperation Synthetic Data Generation</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_mobility_gen.html#generate-data-with-mobilitygen">Generate Data with MobilityGen</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_mobility_gen.html#launch-isaac-sim">Launch Isaac Sim</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_mobility_gen.html#build-an-occupancy-map">Build an Occupancy Map</a></li>
@@ -1769,46 +1329,29 @@ bounds as needed before recording trajectories.</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_mobility_gen.html#next-steps">Next Steps</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1839,36 +1382,21 @@ bounds as needed before recording trajectories.</p>
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

@@ -1,561 +1,257 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Grasping Synthetic Data Generation &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Grasping Synthetic Data Generation — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
-  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
-</script>
-<script type="text/javascript">
-  function OptanonWrapper() {
-    var event = new Event('bannerLoaded');
-    window.dispatchEvent(event);
-  }
-</script>
-<script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
-</script>
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'synthetic_data_generation/tutorial_replicator_grasping_sdg';</script>
-    <script>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'synthetic_data_generation/tutorial_replicator_grasping_sdg';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Data Generation with MobilityGen" href="tutorial_replicator_mobility_gen.html" />
-    <link rel="prev" title="Telemetry and Performance Tracking" href="../action_and_event_data_generation/tutorial_telemetry.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="tutorial_replicator_mobility_gen.html" rel="next" title="Data Generation with MobilityGen"/>
+<link href="../action_and_event_data_generation/tutorial_telemetry.html" rel="prev" title="Telemetry and Performance Tracking"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="tutorial_replicator_grasping_sdg.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="tutorial_replicator_grasping_sdg.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -575,7 +271,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -603,20 +298,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -691,17 +374,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -879,7 +552,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -919,13 +591,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -972,10 +638,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1144,18 +806,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1181,227 +833,201 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Synthetic Data Generation</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Grasping Synthetic Data Generation</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">Synthetic Data Generation</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Grasping Synthetic Data Generation</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="grasping-synthetic-data-generation">
+<article class="bd-article">
+<section id="grasping-synthetic-data-generation">
 <span id="isaac-sim-app-tutorial-replicator-grasping-sdg"></span><h1>Grasping Synthetic Data Generation<a class="headerlink" href="tutorial_replicator_grasping_sdg.html#grasping-synthetic-data-generation" title="Link to this heading">#</a></h1>
-<p>This tutorial introduces the <code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.grasping</span></code> extension and its associated UI, <code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.grasping.ui</span></code>. These tools provide a comprehensive workflow for generating synthetic grasping datasets in Isaac Sim.</p>
+<p>이 튜토리얼은 <code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.grasping</span></code> 확장 기능과 그 UI인 <code class="docutils literal notranslate"><span class="pre">isaacsim.replicator.grasping.ui</span></code>를 소개합니다. 이 도구들은 Isaac Sim에서 합성 그래스핑 데이터셋을 생성하기 위한 종합적인 워크플로우를 제공합니다.</p>
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="tutorial_replicator_grasping_sdg.html#learning-objectives" title="Link to this heading">#</a></h2>
-<p>After completing this tutorial, you will be able to:</p>
+<p>이 튜토리얼을 완료하면 다음을 수행할 수 있습니다:</p>
 <ul class="simple">
-<li><p>Understand the core components and data flow of the Grasping SDG extension.</p></li>
-<li><p>Navigate and utilize the Grasping SDG UI to configure and run grasp generation workflows.</p></li>
-<li><p>Define gripper properties, joint states, and multi-step grasp phases.</p></li>
-<li><p>Configure object properties and grasp pose sampling parameters.</p></li>
-<li><p>Execute and interpret the results of physics-based grasp evaluations.</p></li>
-<li><p>Manage grasping configurations using YAML files for saving, loading, and sharing setups.</p></li>
+<li><p>Grasping SDG 확장 기능의 핵심 구성 요소와 데이터 흐름 이해.</p></li>
+<li><p>Grasping SDG UI를 탐색하고 활용하여 그래스프 생성 워크플로우를 구성하고 실행.</p></li>
+<li><p>그리퍼 속성, 조인트 상태, 다단계 그래스프 페이즈 정의.</p></li>
+<li><p>객체 속성과 그래스프 포즈 샘플링 파라미터 구성.</p></li>
+<li><p>물리 기반 그래스프 평가의 결과 실행 및 해석.</p></li>
+<li><p>저장, 로딩, 공유 설정을 위한 YAML 파일을 사용하여 그래스핑 구성 관리.</p></li>
 </ul>
-<p>The extensions are automatically loaded in Isaac Sim, and the UI window can be opened from the main menu using <strong>Tools</strong> &gt; <strong>Replicator</strong> &gt; <strong>Grasping</strong>.</p>
-<img alt="Grasping workflow overview" class="align-center" src="../_images/isim_5.0_replicator_tut_viewport_grasping_workflow.webp" />
+<p>확장 기능은 Isaac Sim에서 자동으로 로드되며, UI 창은 메인 메뉴에서 <strong>Tools</strong> &gt; <strong>Replicator</strong> &gt; <strong>Grasping</strong>을 사용하여 열 수 있습니다.</p>
+<img alt="Grasping workflow overview" class="align-center" src="../_images/isim_5.0_replicator_tut_viewport_grasping_workflow.webp"/>
 </section>
 <section id="getting-started">
 <h2>Getting Started<a class="headerlink" href="tutorial_replicator_grasping_sdg.html#getting-started" title="Link to this heading">#</a></h2>
-<p>Before proceeding, it is recommended that you familiarize yourself with:</p>
+<p>진행하기 전에 다음 사항에 익숙해지는 것이 좋습니다:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../physics/simulation_fundamentals.html#simulation-fundamentals"><span class="std std-ref">Simulation Fundamentals</span></a>: For understanding physics simulation concepts and gripper rigging (for example, drive joints).</p></li>
-<li><p><a class="reference internal" href="../robot_simulation/grasp_editor.html#isaac-sim-app-tutorial-grasp-editor-import"><span class="std std-ref">Grasp Editor</span></a>: This tutorial covers related concepts and provides a foundation for grasp definition.</p></li>
+<li><p><a class="reference internal" href="../physics/simulation_fundamentals.html#simulation-fundamentals"><span class="std std-ref">Simulation Fundamentals</span></a>: 물리 시뮬레이션 개념과 그리퍼 리깅(예: 드라이브 조인트) 이해.</p></li>
+<li><p><a class="reference internal" href="../robot_simulation/grasp_editor.html#isaac-sim-app-tutorial-grasp-editor-import"><span class="std std-ref">Grasp Editor</span></a>: 이 튜토리얼은 관련 개념을 다루며 그래스프 정의의 기초를 제공합니다.</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The grasp sampler requires the <code class="docutils literal notranslate"><span class="pre">libspatialindex</span></code> library. If you see related warnings, install it (for example, on Ubuntu: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">libspatialindex-dev</span></code>).</p>
+<p>그래스프 샘플러는 <code class="docutils literal notranslate"><span class="pre">libspatialindex</span></code> 라이브러리가 필요합니다. 관련 경고가 표시되면 설치하세요 (예: Ubuntu에서: <code class="docutils literal notranslate"><span class="pre">sudo apt-get install libspatialindex-dev</span></code>).</p>
 </div>
-<p>This tutorial utilizes an example stage that includes a pre-configured gripper and objects suitable for grasping exercises. You can find this stage at:</p>
+<p>이 튜토리얼은 그래스핑 연습에 적합한 미리 구성된 그리퍼와 객체가 포함된 예제 스테이지를 활용합니다. 이 스테이지는 다음에서 찾을 수 있습니다:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="nl">https</span><span class="p">:</span><span class="c1">//omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.0</span>
 <span class="o">/</span><span class="n">Isaac</span><span class="o">/</span><span class="n">Samples</span><span class="o">/</span><span class="n">Replicator</span><span class="o">/</span><span class="n">Stage</span><span class="o">/</span><span class="n">sdg_grasping_xarm</span><span class="p">.</span><span class="n">usd</span>
 </pre></div>
 </div>
-<p>The stage asset can be found in the <strong>Content Browser</strong> under <strong>Isaac Sim</strong> &gt; <strong>Samples</strong> &gt; <strong>Replicator</strong> &gt; <strong>Stage</strong> &gt; <strong>sdg_grasping_xarm.usd</strong>, or can be loaded using by inserting the whole URL in the path field.</p>
-<p>The example stage features a gripper with drive joints and three objects equipped with rigid body physics and colliders. Gravity is disabled for these objects to simplify initial interactions. The Grasping UI window typically docks in the <strong>Property</strong> panel upon opening.</p>
-<img alt="Example stage with a gripper and objects for grasping" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_grasping_stage.jpg" />
+<p>스테이지 에셋은 <strong>Content Browser</strong>에서 <strong>Isaac Sim</strong> &gt; <strong>Samples</strong> &gt; <strong>Replicator</strong> &gt; <strong>Stage</strong> &gt; <strong>sdg_grasping_xarm.usd</strong>에서 찾거나, 경로 필드에 전체 URL을 입력하여 로드할 수 있습니다.</p>
+<p>예제 스테이지에는 드라이브 조인트가 있는 그리퍼와 강체 물리 및 충돌체가 있는 세 개의 객체가 있습니다. 초기 상호 작용을 단순화하기 위해 이 객체들에 대한 중력이 비활성화되어 있습니다. Grasping UI 창은 열릴 때 일반적으로 <strong>Property</strong> 패널에 도킹됩니다.</p>
+<img alt="Example stage with a gripper and objects for grasping" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_grasping_stage.jpg"/>
 </section>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="tutorial_replicator_grasping_sdg.html#overview" title="Link to this heading">#</a></h2>
-<p>The extension is designed to automate the process of finding and evaluating potential grasp poses for a given gripper-object pair. At its core, the workflow revolves around several key components and stages:</p>
+<p>확장 기능은 주어진 그리퍼-객체 쌍에 대한 잠재적인 그래스프 포즈를 찾고 평가하는 프로세스를 자동화하도록 설계되었습니다. 핵심적으로 워크플로우는 여러 주요 구성 요소와 단계를 중심으로 이루어집니다:</p>
 <ol class="arabic simple">
-<li><p><strong>Configuration</strong>: Defining the specific gripper, the target object, and the parameters that govern how grasps are found and tested.</p></li>
-<li><p><strong>Grasp Pose Sampling</strong>: Algorithms (for example, antipodal samplers) generate a set of candidate grasp poses around the target object. These poses represent potential ways the gripper might hold the object.</p></li>
-<li><p><strong>Grasp Execution Phases</strong>: For each candidate grasp, a sequence of actions, termed “Grasp Phases” (for example, move to pre-grasp, close fingers, lift), is simulated. This allows for defining complex, multi-step grasping behaviors analogous to real-world robot actions.</p></li>
-<li><p><strong>Physics-Based Evaluation</strong>: Each phase of the grasp is simulated in the physics engine. The success or failure of the grasp attempt, along with other metrics (like contact forces, object displacement), can be recorded. In its current state the extension saves the gripper state as result from which the grasps can be evaluated.</p></li>
-<li><p><strong>Data Logging and Management</strong>: Successful grasps and their associated parameters are logged. The entire setup can be saved to and loaded from configuration files (YAML format), ensuring reproducibility and facilitating batch processing.</p></li>
+<li><p><strong>구성</strong>: 특정 그리퍼, 대상 객체, 그래스프를 찾고 테스트하는 방법을 제어하는 파라미터 정의.</p></li>
+<li><p><strong>그래스프 포즈 샘플링</strong>: 알고리즘(예: antipodal 샘플러)이 대상 객체 주변에 후보 그래스프 포즈 세트를 생성합니다. 이 포즈들은 그리퍼가 객체를 잡을 수 있는 잠재적인 방법을 나타냅니다.</p></li>
+<li><p><strong>그래스프 실행 페이즈</strong>: 각 후보 그래스프에 대해 "그래스프 페이즈"(예: 프리-그래스프로 이동, 손가락 닫기, 들어올리기)라고 불리는 일련의 동작이 시뮬레이션됩니다. 이를 통해 실제 로봇 동작과 유사한 복잡한 다단계 그래스핑 동작을 정의할 수 있습니다.</p></li>
+<li><p><strong>물리 기반 평가</strong>: 그래스프의 각 페이즈가 물리 엔진에서 시뮬레이션됩니다. 그래스프 시도의 성공 또는 실패와 다른 메트릭(접촉력, 객체 변위 등)을 기록할 수 있습니다. 현재 상태에서 확장 기능은 그래스프를 평가할 수 있는 결과로 그리퍼 상태를 저장합니다.</p></li>
+<li><p><strong>데이터 로깅 및 관리</strong>: 성공적인 그래스프와 관련 파라미터가 기록됩니다. 전체 설정을 구성 파일(YAML 형식)에 저장하고 로드할 수 있어 재현성과 배치 처리를 용이하게 합니다.</p></li>
 </ol>
-<p>The <code class="docutils literal notranslate"><span class="pre">GraspingManager</span></code> class is the central Python API orchestrating these steps, while the UI provides an intuitive way to configure and run this pipeline.</p>
+<p><code class="docutils literal notranslate"><span class="pre">GraspingManager</span></code> 클래스가 이 단계들을 조율하는 중앙 Python API이며, UI는 이 파이프라인을 구성하고 실행하는 직관적인 방법을 제공합니다.</p>
 </section>
 <section id="ui-window-overview">
 <h2>UI Window Overview<a class="headerlink" href="tutorial_replicator_grasping_sdg.html#ui-window-overview" title="Link to this heading">#</a></h2>
-<p>The Grasping UI window provides the interface for setting up and running the grasping simulations workflows. It is organized into several sections, each addressing a specific part of the process. The general workflow involves configuring these sections, typically starting with the gripper and object, then defining the evaluation workflow and simulation parameters, and finally managing the overall configuration.</p>
-<img alt="Grasping UI window main interface" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_grasping_ui_window.jpg" />
+<p>Grasping UI 창은 그래스핑 시뮬레이션 워크플로우를 설정하고 실행하기 위한 인터페이스를 제공합니다. 프로세스의 특정 부분을 각각 다루는 여러 섹션으로 구성되어 있습니다. 일반적인 워크플로우는 이 섹션들을 구성하는 것으로, 일반적으로 그리퍼와 객체부터 시작하여 평가 워크플로우와 시뮬레이션 파라미터를 정의하고, 마지막으로 전체 구성을 관리하는 것입니다.</p>
+<img alt="Grasping UI window main interface" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_grasping_ui_window.jpg"/>
 <section id="gripper-section">
 <h3>Gripper Section<a class="headerlink" href="tutorial_replicator_grasping_sdg.html#gripper-section" title="Link to this heading">#</a></h3>
-<p>This section is dedicated to defining the properties and behavior of the gripper, which is fundamental for any grasp attempt.</p>
-<img alt="Grasping UI: Gripper joints configuration" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_grasping_ui_gripper_joints.jpg" />
+<p>이 섹션은 그리퍼의 속성과 동작을 정의하는 데 전용되어 있으며, 이는 모든 그래스프 시도에 기본적인 요소입니다.</p>
+<img alt="Grasping UI: Gripper joints configuration" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_grasping_ui_gripper_joints.jpg"/>
 <ul>
-<li><p><strong>Path</strong>: Specify the USD path to the root prim of your gripper (for example, <code class="docutils literal notranslate"><span class="pre">/World/Robot/gripper_base</span></code>).</p></li>
-<li><p><strong>Joints</strong>: After a gripper is selected, its articulated joints are listed. Here you can:</p>
+<li><p><strong>Path</strong>: 그리퍼의 루트 프림에 대한 USD 경로를 지정합니다 (예: <code class="docutils literal notranslate"><span class="pre">/World/Robot/gripper_base</span></code>).</p></li>
+<li><p><strong>Joints</strong>: 그리퍼가 선택되면 관절화된 조인트가 나열됩니다. 여기서 다음을 수행할 수 있습니다:</p>
 <ul class="simple">
-<li><p><strong>Include/Exclude</strong>: Select the joints that are actively controlled during the grasp phases. These joints have to be drive joints.</p></li>
-<li><p>Set <strong>pre-grasp positions</strong>: Define the initial state for each joint, typically an open configuration, before the grasp sequence begins.</p></li>
-<li><p>Toggle visibility between all joints or of type drive (non-mimic) joints.</p></li>
+<li><p><strong>Include/Exclude</strong>: 그래스프 페이즈 중에 적극적으로 제어되는 조인트를 선택합니다. 이 조인트들은 드라이브 조인트여야 합니다.</p></li>
+<li><p><strong>pre-grasp 위치 설정</strong>: 그래스프 시퀀스가 시작되기 전 각 조인트의 초기 상태(일반적으로 열린 구성)를 정의합니다.</p></li>
+<li><p>모든 조인트 또는 드라이브(non-mimic) 타입 조인트만 표시하도록 전환합니다.</p></li>
 </ul>
 </li>
-<li><p><strong>Grasp Phases</strong>: This powerful feature allows you to define a sequence of discrete actions that constitute a complete grasp attempt. This is analogous to defining a state machine or a sequence of motion primitives for the gripper.</p>
-<img alt="Grasping UI: Gripper grasp phases configuration" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_grasping_ui_gripper_grasp_phases.jpg" />
-<p>For each phase (for example, “Open”, “Close”), you specify:</p>
+<li><p><strong>Grasp Phases</strong>: 이 강력한 기능을 사용하면 완전한 그래스프 시도를 구성하는 일련의 이산 동작을 정의할 수 있습니다. 이는 그리퍼에 대한 상태 머신 또는 모션 프리미티브 시퀀스를 정의하는 것과 유사합니다.</p>
+<img alt="Grasping UI: Gripper grasp phases configuration" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_grasping_ui_gripper_grasp_phases.jpg"/>
+<p>각 페이즈(예: "Open", "Close")에 대해 지정합니다:</p>
 <ul class="simple">
-<li><p>Target joint positions for the active gripper joints.</p></li>
-<li><p>Simulation step delta time (<code class="docutils literal notranslate"><span class="pre">dt</span></code>) for the physics steps within this phase.</p></li>
-<li><p>Number of simulation steps to execute for this phase.</p></li>
+<li><p>활성 그리퍼 조인트의 목표 조인트 위치.</p></li>
+<li><p>이 페이즈 내 물리 스텝을 위한 시뮬레이션 스텝 델타 시간(<code class="docutils literal notranslate"><span class="pre">dt</span></code>).</p></li>
+<li><p>이 페이즈에 실행할 시뮬레이션 스텝 수.</p></li>
 </ul>
-<p>Phases can be reordered, deleted, or simulated individually for debugging. If pre-grasp joint positions adequately prepare the gripper (for example, fully open), an explicit “Open” phase might be unnecessary.</p>
+<p>페이즈는 디버깅을 위해 재정렬, 삭제하거나 개별적으로 시뮬레이션할 수 있습니다. pre-grasp 조인트 위치가 그리퍼를 적절히 준비시키는 경우(예: 완전히 열림), 명시적인 "Open" 페이즈가 필요하지 않을 수 있습니다.</p>
 </li>
 </ul>
 </section>
 <section id="object-section">
 <h3>Object Section<a class="headerlink" href="tutorial_replicator_grasping_sdg.html#object-section" title="Link to this heading">#</a></h3>
-<p>This section focuses on specifying the target object and configuring how potential grasp poses are generated for it.</p>
-<img alt="Grasping UI: Object and grasp pose sampler configuration" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_grasping_ui_object.jpg" />
+<p>이 섹션은 대상 객체를 지정하고 잠재적인 그래스프 포즈가 어떻게 생성되는지 구성하는 데 중점을 둡니다.</p>
+<img alt="Grasping UI: Object and grasp pose sampler configuration" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_grasping_ui_object.jpg"/>
 <ul>
-<li><p><strong>Path</strong>: The USD path to the target object prim (for example, <code class="docutils literal notranslate"><span class="pre">/World/MyObject</span></code>).</p></li>
-<li><p><strong>Grasp Pose Sampler</strong>: This configures the algorithm used to find potential grasp poses. This tutorial primarily uses an <strong>antipodal grasp sampler</strong> (implemented in <code class="docutils literal notranslate"><span class="pre">sampler_utils.py</span></code>). An antipodal grasp is typically stable for parallel-jaw grippers, involving two contact points on opposite sides of the object. Key parameters include:</p>
+<li><p><strong>Path</strong>: 대상 객체 프림에 대한 USD 경로 (예: <code class="docutils literal notranslate"><span class="pre">/World/MyObject</span></code>).</p></li>
+<li><p><strong>Grasp Pose Sampler</strong>: 잠재적인 그래스프 포즈를 찾는 데 사용되는 알고리즘을 구성합니다. 이 튜토리얼은 주로 <strong>antipodal 그래스프 샘플러</strong>(<code class="docutils literal notranslate"><span class="pre">sampler_utils.py</span></code>에서 구현)를 사용합니다. Antipodal 그래스프는 일반적으로 평행 조 그리퍼에 대해 안정적이며, 객체의 반대편에 두 접촉점을 포함합니다. 주요 파라미터는 다음과 같습니다:</p>
 <ul class="simple">
-<li><p><strong>Number of orientations per grasp axis</strong>: How many rotational variations around the primary grasp axis to sample.</p></li>
-<li><p><strong>Gripper standoff distance</strong>: The distance from the gripper’s Tool Center Point (TCP) or fingertips to the object surface during the approach phase, crucial for avoiding premature collision.</p></li>
-<li><p><strong>Maximum gripper aperture</strong>: The widest opening of the gripper jaws, filtering out grasps that are too wide for the object.</p></li>
-<li><p><strong>Alignment axes for the grasp</strong>: Defines local gripper axes to align with object features or the grasp line.</p></li>
-<li><p><strong>Gripper approach direction</strong>: The vector along which the gripper moves towards the object.</p></li>
-<li><p><strong>Lateral perturbation (sigma)</strong>: Adds randomness to the grasp point location along the grasp axis, allowing for exploration around nominal contact points.</p></li>
-<li><p><strong>Random seed</strong>: For ensuring reproducible sampling results.</p></li>
+<li><p><strong>그래스프 축당 방향 수</strong>: 주 그래스프 축 주변에서 샘플링할 회전 변형 수.</p></li>
+<li><p><strong>그리퍼 이격 거리</strong>: 접근 페이즈 중 그리퍼의 도구 중심점(TCP) 또는 손가락 끝에서 객체 표면까지의 거리로, 조기 충돌을 피하는 데 중요합니다.</p></li>
+<li><p><strong>최대 그리퍼 개구부</strong>: 그리퍼 조의 가장 넓은 열림으로, 객체에 너무 넓은 그래스프를 필터링합니다.</p></li>
+<li><p><strong>그래스프 정렬 축</strong>: 객체 특징 또는 그래스프 라인에 맞게 로컬 그리퍼 축을 정의합니다.</p></li>
+<li><p><strong>그리퍼 접근 방향</strong>: 그리퍼가 객체를 향해 이동하는 벡터.</p></li>
+<li><p><strong>측면 섭동(sigma)</strong>: 그래스프 축을 따라 그래스프 포인트 위치에 무작위성을 추가하여 명목 접촉점 주변을 탐색합니다.</p></li>
+<li><p><strong>랜덤 시드</strong>: 재현 가능한 샘플링 결과 보장.</p></li>
 </ul>
 </li>
-<li><p><strong>Grasp Poses</strong>: Manages the set of candidate grasp poses generated by the sampler.</p>
+<li><p><strong>Grasp Poses</strong>: 샘플러가 생성한 후보 그래스프 포즈 세트를 관리합니다.</p>
 <ul class="simple">
-<li><p>Specify the desired number of candidate poses.</p></li>
-<li><p>Clear previously generated poses.</p></li>
-<li><p>Visualize the poses in the viewport (either in world or object-local frames) and cycle through them to inspect their placement.</p></li>
+<li><p>원하는 후보 포즈 수를 지정합니다.</p></li>
+<li><p>이전에 생성된 포즈를 지웁니다.</p></li>
+<li><p>뷰포트에서 포즈를 시각화하고(세계 또는 객체 로컬 프레임에서) 배치를 검사하기 위해 순환합니다.</p></li>
 </ul>
-<p>The following image shows example grasp poses generated by the antipodal sampler on various objects:</p>
-<img alt="Resulting grasp poses from the antipodal grasp sampler" class="align-center" src="../_images/isim_5.0_replicator_tut_viewport_grasping_poses.jpg" />
+<p>다음 이미지는 다양한 객체에서 antipodal 샘플러가 생성한 예제 그래스프 포즈를 보여줍니다:</p>
+<img alt="Resulting grasp poses from the antipodal grasp sampler" class="align-center" src="../_images/isim_5.0_replicator_tut_viewport_grasping_poses.jpg"/>
 </li>
-<li><p><strong>Trimesh</strong>: Provides options for debug visualization of the object’s triangle mesh, which is used internally by the sampler for geometric calculations and collision checks.</p></li>
+<li><p><strong>Trimesh</strong>: 샘플러가 기하학적 계산 및 충돌 확인에 내부적으로 사용하는 객체의 삼각형 메시에 대한 디버그 시각화 옵션을 제공합니다.</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_measure-tool.html">Measure Tool</a> can be useful for determining values like gripper aperture or standoff distance.</p>
-<img alt="Using the Measure Tool for gripper and standoff distances" class="align-center" src="../_images/isim_5.0_replicator_tut_viewport_grasping_measure_tool.jpg" />
+<p><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_measure-tool.html">Measure Tool</a>은 그리퍼 개구부 또는 이격 거리와 같은 값을 결정하는 데 유용할 수 있습니다.</p>
+<img alt="Using the Measure Tool for gripper and standoff distances" class="align-center" src="../_images/isim_5.0_replicator_tut_viewport_grasping_measure_tool.jpg"/>
 </div>
 </section>
 <section id="workflow-section">
 <h3>Workflow Section<a class="headerlink" href="tutorial_replicator_grasping_sdg.html#workflow-section" title="Link to this heading">#</a></h3>
-<p>The Workflow section is where you orchestrate the actual grasp evaluation process using the configurations defined in the Gripper and Object sections.</p>
-<img alt="Grasping UI: Workflow configuration (This image might be missing, using a placeholder name)" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_grasping_ui_workflow.jpg" />
-<p>The system first saves the gripper’s initial pose. Then, for each generated grasp pose selected for evaluation, it sequentially executes the defined grasp phases within the physics simulation. After all phases for a given pose are completed, the outcome (for example, success based on object stability, contact with target) and other relevant metrics are recorded.</p>
+<p>Workflow 섹션은 Gripper와 Object 섹션에서 정의된 구성을 사용하여 실제 그래스프 평가 프로세스를 오케스트레이션하는 곳입니다.</p>
+<img alt="Grasping UI: Workflow configuration (This image might be missing, using a placeholder name)" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_grasping_ui_workflow.jpg"/>
+<p>시스템은 먼저 그리퍼의 초기 포즈를 저장합니다. 그런 다음, 평가를 위해 선택된 생성된 각 그래스프 포즈에 대해 물리 시뮬레이션 내에서 정의된 그래스프 페이즈를 순차적으로 실행합니다. 주어진 포즈의 모든 페이즈가 완료되면 결과(예: 객체 안정성, 목표와의 접촉에 기반한 성공)와 기타 관련 메트릭이 기록됩니다.</p>
 <ul class="simple">
-<li><p><strong>Number of Grasps Samples</strong>: Specify how many of the generated grasp poses should be evaluated. Use -1 to evaluate all available poses.</p></li>
-<li><p><strong>Output Path</strong>: Define the directory and base file name for saving the evaluation results. The results are typically saved in a structured format like YAML, detailing each evaluated grasp and its outcome.</p></li>
-<li><p><strong>Overwrite Results</strong>: If enabled, existing result files at the output path will be overwritten. Otherwise, new files will be created (for example, with incremental numbering) to avoid data loss.</p></li>
-<li><p><strong>Start Workflow</strong>: Initiates the grasp evaluation process. The UI will often provide feedback on the progress.</p></li>
+<li><p><strong>Number of Grasps Samples</strong>: 평가할 생성된 그래스프 포즈 수를 지정합니다. 모든 사용 가능한 포즈를 평가하려면 -1을 사용합니다.</p></li>
+<li><p><strong>Output Path</strong>: 평가 결과 저장을 위한 디렉토리와 기본 파일 이름을 정의합니다. 결과는 일반적으로 각 평가된 그래스프와 그 결과를 자세히 설명하는 YAML과 같은 구조화된 형식으로 저장됩니다.</p></li>
+<li><p><strong>Overwrite Results</strong>: 활성화하면 출력 경로의 기존 결과 파일이 덮어쓰여집니다. 그렇지 않으면 데이터 손실을 방지하기 위해 새 파일이 생성됩니다(예: 증가하는 번호 매기기).</p></li>
+<li><p><strong>Start Workflow</strong>: 그래스프 평가 프로세스를 시작합니다. UI는 종종 진행 상황에 대한 피드백을 제공합니다.</p></li>
 </ul>
 </section>
 <section id="simulation-section">
 <h3>Simulation Section<a class="headerlink" href="tutorial_replicator_grasping_sdg.html#simulation-section" title="Link to this heading">#</a></h3>
-<p>This section allows you to fine-tune global parameters that affect how the physics simulation is run during the grasp evaluation.</p>
-<img alt="Grasping UI: Simulation settings" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_grasping_ui_simulation.jpg" />
+<p>이 섹션에서는 그래스프 평가 중 물리 시뮬레이션이 실행되는 방식에 영향을 미치는 전역 파라미터를 세부적으로 조정할 수 있습니다.</p>
+<img alt="Grasping UI: Simulation settings" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_grasping_ui_simulation.jpg"/>
 <ul class="simple">
-<li><p><strong>Render each simulation step</strong>: Control whether the viewport updates after each individual physics step within a grasp phase. Disabling this can speed up the evaluation process significantly for large datasets, with rendering potentially only occurring after each full grasp attempt or phase.</p></li>
-<li><p><strong>Simulate using timeline</strong>: Choose between advancing the simulation by stepping the main Isaac Sim timeline or by directly stepping the physics scene. Direct physics steps can offer more precise control for rapid evaluations, while timeline-based simulation might be closer to how a full robot application would run.</p></li>
-<li><p><strong>Isolated physics scene</strong>: Optionally specify a path to a <strong>Physics Scene</strong> prim. If provided, the grasping simulation can be run within this dedicated physics scene, preventing interference from other dynamic objects or physics settings in the main stage. This is useful for ensuring consistent and repeatable grasp evaluations.</p></li>
+<li><p><strong>각 시뮬레이션 스텝 렌더링</strong>: 그래스프 페이즈 내의 각 개별 물리 스텝 후 뷰포트 업데이트 여부를 제어합니다. 이를 비활성화하면 대규모 데이터셋의 평가 프로세스가 크게 빨라질 수 있으며, 렌더링은 각 전체 그래스프 시도 또는 페이즈 후에만 발생할 수 있습니다.</p></li>
+<li><p><strong>타임라인을 사용하여 시뮬레이션</strong>: 메인 Isaac Sim 타임라인을 스텝하거나 물리 장면을 직접 스텝하여 시뮬레이션을 진행하는 방법 중에서 선택합니다. 직접 물리 스텝은 신속한 평가에 더 정밀한 제어를 제공할 수 있는 반면, 타임라인 기반 시뮬레이션은 전체 로봇 애플리케이션이 실행되는 방식에 더 가까울 수 있습니다.</p></li>
+<li><p><strong>격리된 물리 장면</strong>: 선택적으로 <strong>Physics Scene</strong> 프림의 경로를 지정합니다. 제공되면 그래스핑 시뮬레이션이 이 전용 물리 장면 내에서 실행되어 메인 스테이지의 다른 동적 객체나 물리 설정의 간섭을 방지합니다. 이는 일관되고 반복 가능한 그래스프 평가를 보장하는 데 유용합니다.</p></li>
 </ul>
 </section>
 <section id="config-section">
 <h3>Config Section<a class="headerlink" href="tutorial_replicator_grasping_sdg.html#config-section" title="Link to this heading">#</a></h3>
-<p>The Config section provides the crucial functionality for saving your entire grasping setup to a YAML file and loading it back later. This is essential for reproducibility, sharing configurations, and running batch experiments.</p>
-<img alt="Grasping UI: Configuration management" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_grasping_ui_config.jpg" />
+<p>Config 섹션은 전체 그래스핑 설정을 YAML 파일에 저장하고 나중에 다시 로드하는 중요한 기능을 제공합니다. 이는 재현성, 구성 공유, 배치 실험 실행에 필수적입니다.</p>
+<img alt="Grasping UI: Configuration management" class="align-center" src="../_images/isim_5.0_replicator_tut_gui_grasping_ui_config.jpg"/>
 <ul class="simple">
-<li><p><strong>File Path</strong>: Specify the path to the YAML configuration file for saving or loading.</p></li>
-<li><p><strong>Config Includes</strong>: Selectively choose which components of the setup are included in the save/load operation. This allows for modular configurations. Options typically include:</p>
+<li><p><strong>File Path</strong>: 저장 또는 로딩을 위한 YAML 구성 파일의 경로를 지정합니다.</p></li>
+<li><p><strong>Config Includes</strong>: 저장/로드 작업에 포함되는 설정의 구성 요소를 선택적으로 선택합니다. 이를 통해 모듈식 구성이 가능합니다. 옵션에는 일반적으로 다음이 포함됩니다:</p>
 <ul>
 <li><p>Gripper Path</p></li>
 <li><p>Joint Pregrasp States</p></li>
 <li><p>Grasp Phases</p></li>
 <li><p>Object Path</p></li>
 <li><p>Sampler Parameters</p></li>
-<li><p>Generated Grasp Poses (if you wish to save a specific set of poses)</p></li>
+<li><p>Generated Grasp Poses (특정 포즈 세트를 저장하려는 경우)</p></li>
 </ul>
 </li>
-<li><p><strong>Overwrite Existing File</strong>: When saving, this option determines if an existing file at the specified path should be overwritten.</p></li>
-<li><p><strong>Load/Save Buttons</strong>: Execute the respective file operations.</p></li>
+<li><p><strong>Overwrite Existing File</strong>: 저장 시, 이 옵션은 지정된 경로에 기존 파일을 덮어쓸지 여부를 결정합니다.</p></li>
+<li><p><strong>Load/Save 버튼</strong>: 각각의 파일 작업을 실행합니다.</p></li>
 </ul>
-<p>This structured UI and configuration system offers detailed control and flexibility for generating diverse grasping datasets.</p>
+<p>이 구조화된 UI와 구성 시스템은 다양한 그래스핑 데이터셋 생성에 대한 상세한 제어와 유연성을 제공합니다.</p>
 </section>
 <section id="configuration-file-example">
 <h3>Configuration File Example<a class="headerlink" href="tutorial_replicator_grasping_sdg.html#configuration-file-example" title="Link to this heading">#</a></h3>
-<p>Below is a snippet illustrating the structure of a YAML configuration file. It can store settings for the gripper, object, sampler, and defined grasp phases. The specific content will depend on which components were selected for inclusion through the ‘Config Includes’ UI options.</p>
-<details open>
+<p>다음은 YAML 구성 파일의 구조를 보여주는 스니펫입니다. 그리퍼, 객체, 샘플러, 정의된 그래스프 페이즈의 설정을 저장할 수 있습니다. 구체적인 내용은 'Config Includes' UI 옵션을 통해 포함하도록 선택된 구성 요소에 따라 달라집니다.</p>
+<details open="">
 <summary>xarm_antipodal.yaml</summary><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">grasp_phases</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">joint_drive_targets</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">/World/Grippers/xarm_gripper/joints/drive_joint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">48.0</span>
@@ -1444,24 +1070,24 @@
 </section>
 <section id="code-example">
 <h2>Code Example<a class="headerlink" href="tutorial_replicator_grasping_sdg.html#code-example" title="Link to this heading">#</a></h2>
-<p>The following scripts demonstrates a complete workflow for generating a grasping dataset using the <code class="docutils literal notranslate"><span class="pre">GraspingManager</span></code> API. This script programmatically performs the steps configurable through the UI:</p>
+<p>다음 스크립트는 <code class="docutils literal notranslate"><span class="pre">GraspingManager</span></code> API를 사용하여 그래스핑 데이터셋을 생성하는 완전한 워크플로우를 보여줍니다. 이 스크립트는 UI를 통해 구성 가능한 단계를 프로그래밍 방식으로 수행합니다:</p>
 <ul class="simple">
-<li><p>opening a stage</p></li>
-<li><p>setting up the <code class="docutils literal notranslate"><span class="pre">GraspingManager</span></code> (potentially by loading a configuration file)</p></li>
-<li><p>generating grasp Poses</p></li>
-<li><p>evaluating these poses using physics simulation</p></li>
-<li><p>saving the results</p></li>
+<li><p>스테이지 열기</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GraspingManager</span></code> 설정 (구성 파일 로드 가능성 포함)</p></li>
+<li><p>그래스프 포즈 생성</p></li>
+<li><p>물리 시뮬레이션을 사용하여 이 포즈들 평가</p></li>
+<li><p>결과 저장</p></li>
 </ul>
-<p>This approach is highly suitable for batch processing or integration into larger robotics workflows. The script can be run directly from the <a class="reference internal" href="../development_tools/omniverse_script_editor.html#script-editor"><span class="std std-ref">Script Editor</span></a> or as a <a class="reference internal" href="../introduction/workflows.html#standalone-application"><span class="std std-ref">Standalone Application</span></a>.</p>
-<p>To run the standalone example from the terminal (on Windows, use <code class="docutils literal notranslate"><span class="pre">python.bat</span></code> instead of <code class="docutils literal notranslate"><span class="pre">python.sh</span></code>):</p>
+<p>이 접근 방식은 배치 처리 또는 더 큰 로보틱스 워크플로우와의 통합에 매우 적합합니다. 스크립트는 <a class="reference internal" href="../development_tools/omniverse_script_editor.html#script-editor"><span class="std std-ref">Script Editor</span></a>에서 직접 실행하거나 <a class="reference internal" href="../introduction/workflows.html#standalone-application"><span class="std std-ref">독립 실행형 애플리케이션</span></a>으로 실행할 수 있습니다.</p>
+<p>터미널에서 독립 실행형 예제를 실행하려면 (Windows에서는 <code class="docutils literal notranslate"><span class="pre">python.sh</span></code> 대신 <code class="docutils literal notranslate"><span class="pre">python.bat</span></code> 사용):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./python.sh<span class="w"> </span>standalone_examples/api/isaacsim.replicator.grasping/grasping_workflow_sdg.py
 </pre></div>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio"/>
 <label class="sd-tab-label" for="sd-tab-item-0">
 Script Editor</label><div class="sd-tab-content docutils">
-<details open>
+<details open="">
 <summary>Grasping Synthetic Data Generation Workflow</summary><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
@@ -1482,9 +1108,9 @@ Script Editor</label><div class="sd-tab-content docutils">
     <span class="n">object_prim_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="n">assets_root_path</span> <span class="o">=</span> <span class="k">await</span> <span class="n">get_assets_root_path_async</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Assets root path: </span><span class="si">{</span><span class="n">assets_root_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Assets root path: </span><span class="si">{</span><span class="n">assets_root_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="n">stage_url</span> <span class="o">=</span> <span class="n">assets_root_path</span> <span class="o">+</span> <span class="n">stage_path</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Opening stage: </span><span class="si">{</span><span class="n">stage_url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Opening stage: </span><span class="si">{</span><span class="n">stage_url</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">await</span> <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">open_stage_async</span><span class="p">(</span><span class="n">stage_url</span><span class="p">)</span>
     <span class="n">stage</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">get_stage</span><span class="p">()</span>
 
@@ -1492,14 +1118,14 @@ Script Editor</label><div class="sd-tab-content docutils">
 
     <span class="k">if</span> <span class="n">config_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">load_status</span> <span class="o">=</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Config load status: </span><span class="si">{</span><span class="n">load_status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Config load status: </span><span class="si">{</span><span class="n">load_status</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="c1"># Make sure the object to grasp is set (either from the config file or from the argument)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">get_object_prim_path</span><span class="p">()</span> <span class="ow">and</span> <span class="n">object_prim_path</span><span class="p">:</span>
         <span class="n">grasping_manager</span><span class="o">.</span><span class="n">object_path</span> <span class="o">=</span> <span class="n">object_prim_path</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">get_object_prim_path</span><span class="p">():</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: Object to grasp is not set (missing in config and argument). Aborting.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Warning: Object to grasp is not set (missing in config and argument). Aborting."</span><span class="p">)</span>
         <span class="k">return</span>
 
     <span class="c1"># Make sure the gripper is set (either from the config file or from the argument)</span>
@@ -1507,46 +1133,46 @@ Script Editor</label><div class="sd-tab-content docutils">
         <span class="n">grasping_manager</span><span class="o">.</span><span class="n">gripper_path</span> <span class="o">=</span> <span class="n">gripper_path</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">gripper_path</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: Gripper path is not set (missing in config and argument). Aborting.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Warning: Gripper path is not set (missing in config and argument). Aborting."</span><span class="p">)</span>
         <span class="k">return</span>
 
-    <span class="c1"># If there are already grasp poses in the configuration, don&#39;t generate new ones</span>
+    <span class="c1"># If there are already grasp poses in the configuration, don't generate new ones</span>
     <span class="k">if</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">grasp_locations</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">grasping_manager</span><span class="o">.</span><span class="n">grasp_locations</span><span class="p">)</span><span class="si">}</span><span class="s2"> grasp poses in the configuration file. No new poses will be generated.&quot;</span>
+            <span class="sa">f</span><span class="s2">"Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">grasping_manager</span><span class="o">.</span><span class="n">grasp_locations</span><span class="p">)</span><span class="si">}</span><span class="s2"> grasp poses in the configuration file. No new poses will be generated."</span>
         <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No grasp poses found in configuration, generating new ones...&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"No grasp poses found in configuration, generating new ones..."</span><span class="p">)</span>
 
         <span class="c1"># Determine Sampler Configuration</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">grasping_manager</span><span class="o">.</span><span class="n">sampler_config</span> <span class="ow">and</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">sampler_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sampler_type&quot;</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">grasping_manager</span><span class="o">.</span><span class="n">sampler_config</span> <span class="ow">and</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">sampler_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sampler_type"</span><span class="p">)):</span>
             <span class="k">if</span> <span class="n">sampler_config</span><span class="p">:</span>
                 <span class="n">grasping_manager</span><span class="o">.</span><span class="n">sampler_config</span> <span class="o">=</span> <span class="n">sampler_config</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span>
-                    <span class="s2">&quot;Warning: Sampler configuration is missing or invalid (not in config file and not provided as argument). Aborting pose generation.&quot;</span>
+                    <span class="s2">"Warning: Sampler configuration is missing or invalid (not in config file and not provided as argument). Aborting pose generation."</span>
                 <span class="p">)</span>
                 <span class="k">return</span>
 
         <span class="c1"># Generate the grasp poses</span>
         <span class="n">success_generation</span> <span class="o">=</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">generate_grasp_poses</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">success_generation</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">grasp_locations</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed to generate grasp poses or no poses were generated.&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Failed to generate grasp poses or no poses were generated."</span><span class="p">)</span>
             <span class="k">return</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">grasping_manager</span><span class="o">.</span><span class="n">grasp_locations</span><span class="p">)</span><span class="si">}</span><span class="s2"> new grasp poses.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Generated </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">grasping_manager</span><span class="o">.</span><span class="n">grasp_locations</span><span class="p">)</span><span class="si">}</span><span class="s2"> new grasp poses."</span><span class="p">)</span>
 
     <span class="c1"># Store the initial gripper pose to be able to restore it after the evaluation</span>
     <span class="n">grasping_manager</span><span class="o">.</span><span class="n">store_initial_gripper_pose</span><span class="p">()</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Evaluating grasp poses...&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Evaluating grasp poses..."</span><span class="p">)</span>
     <span class="n">poses_to_evaluate</span> <span class="o">=</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">get_grasp_poses</span><span class="p">(</span><span class="n">in_world_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">poses_to_evaluate</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No poses available to evaluate..&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"No poses available to evaluate.."</span><span class="p">)</span>
         <span class="k">return</span>
 
     <span class="c1"># Determine Output Path</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">output_dir</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: Output path is not defined data will not be saved.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Warning: Output path is not defined data will not be saved."</span><span class="p">)</span>
 
     <span class="c1"># Set the output path and overwrite flag</span>
     <span class="n">grasping_manager</span><span class="o">.</span><span class="n">set_results_output_dir</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
@@ -1556,7 +1182,7 @@ Script Editor</label><div class="sd-tab-content docutils">
     <span class="n">physics_scene_path_for_eval</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="n">physics_scene_path</span> <span class="ow">and</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="n">physics_scene_path</span><span class="p">):</span>
         <span class="n">physics_scene_path_for_eval</span> <span class="o">=</span> <span class="n">physics_scene_path</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Physics scene path for evaluation: </span><span class="si">{</span><span class="n">physics_scene_path_for_eval</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Physics scene path for evaluation: </span><span class="si">{</span><span class="n">physics_scene_path_for_eval</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="k">await</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">evaluate_grasp_poses</span><span class="p">(</span>
         <span class="n">grasp_poses</span><span class="o">=</span><span class="n">poses_to_evaluate</span><span class="p">,</span>
@@ -1565,28 +1191,28 @@ Script Editor</label><div class="sd-tab-content docutils">
         <span class="n">simulate_using_timeline</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grasping workflow example finished.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Grasping workflow example finished."</span><span class="p">)</span>
     <span class="n">grasping_manager</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 
 
-<span class="n">stage_path</span> <span class="o">=</span> <span class="s2">&quot;/Isaac/Samples/Replicator/Stage/sdg_grasping_xarm.usd&quot;</span>
-<span class="n">ext_path</span> <span class="o">=</span> <span class="n">get_extension_path_from_name</span><span class="p">(</span><span class="s2">&quot;isaacsim.replicator.grasping&quot;</span><span class="p">)</span>
-<span class="n">config_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ext_path</span><span class="p">,</span> <span class="s2">&quot;data/gripper_configs/xarm_antipodal_soup_can.yaml&quot;</span><span class="p">)</span>
-<span class="n">output_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;xarm_antipodal&quot;</span><span class="p">)</span>
+<span class="n">stage_path</span> <span class="o">=</span> <span class="s2">"/Isaac/Samples/Replicator/Stage/sdg_grasping_xarm.usd"</span>
+<span class="n">ext_path</span> <span class="o">=</span> <span class="n">get_extension_path_from_name</span><span class="p">(</span><span class="s2">"isaacsim.replicator.grasping"</span><span class="p">)</span>
+<span class="n">config_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ext_path</span><span class="p">,</span> <span class="s2">"data/gripper_configs/xarm_antipodal_soup_can.yaml"</span><span class="p">)</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">"xarm_antipodal"</span><span class="p">)</span>
 
 <span class="n">asyncio</span><span class="o">.</span><span class="n">ensure_future</span><span class="p">(</span><span class="n">run_example_async</span><span class="p">(</span><span class="n">stage_path</span><span class="o">=</span><span class="n">stage_path</span><span class="p">,</span> <span class="n">config_path</span><span class="o">=</span><span class="n">config_path</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">))</span>
 </pre></div>
 </div>
 </details></div>
-<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio"/>
 <label class="sd-tab-label" for="sd-tab-item-1">
 Standalone Application</label><div class="sd-tab-content docutils">
-<details open>
-<summary>Grasping Synthetic Data Generation Workflow</summary><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Demonstrate grasp pose generation and evaluation using the grasping manager.&quot;&quot;&quot;</span>
+<details open="">
+<summary>Grasping Synthetic Data Generation Workflow</summary><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""Demonstrate grasp pose generation and evaluation using the grasping manager."""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimulationApp</span>
 
-<span class="n">simulation_app</span> <span class="o">=</span> <span class="n">SimulationApp</span><span class="p">(</span><span class="n">launch_config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;headless&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+<span class="n">simulation_app</span> <span class="o">=</span> <span class="n">SimulationApp</span><span class="p">(</span><span class="n">launch_config</span><span class="o">=</span><span class="p">{</span><span class="s2">"headless"</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
@@ -1598,8 +1224,8 @@ Standalone Application</label><div class="sd-tab-content docutils">
 
 <span class="c1"># Make sure the grasping extension is loaded and enabled</span>
 <span class="n">ext_manager</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">kit</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">get_app</span><span class="p">()</span><span class="o">.</span><span class="n">get_extension_manager</span><span class="p">()</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">ext_manager</span><span class="o">.</span><span class="n">is_extension_enabled</span><span class="p">(</span><span class="s2">&quot;isaacsim.replicator.grasping&quot;</span><span class="p">):</span>
-    <span class="n">ext_manager</span><span class="o">.</span><span class="n">set_extension_enabled_immediate</span><span class="p">(</span><span class="s2">&quot;isaacsim.replicator.grasping&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">ext_manager</span><span class="o">.</span><span class="n">is_extension_enabled</span><span class="p">(</span><span class="s2">"isaacsim.replicator.grasping"</span><span class="p">):</span>
+    <span class="n">ext_manager</span><span class="o">.</span><span class="n">set_extension_enabled_immediate</span><span class="p">(</span><span class="s2">"isaacsim.replicator.grasping"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.replicator.grasping.grasping_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">GraspingManager</span>
 
 
@@ -1612,11 +1238,11 @@ Standalone Application</label><div class="sd-tab-content docutils">
     <span class="n">gripper_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">object_prim_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run grasp pose generation and physics-based evaluation workflow.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Run grasp pose generation and physics-based evaluation workflow."""</span>
     <span class="n">assets_root_path</span> <span class="o">=</span> <span class="n">get_assets_root_path</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Assets root path: </span><span class="si">{</span><span class="n">assets_root_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Assets root path: </span><span class="si">{</span><span class="n">assets_root_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="n">stage_url</span> <span class="o">=</span> <span class="n">assets_root_path</span> <span class="o">+</span> <span class="n">stage_path</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Opening stage: </span><span class="si">{</span><span class="n">stage_url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Opening stage: </span><span class="si">{</span><span class="n">stage_url</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">open_stage</span><span class="p">(</span><span class="n">stage_url</span><span class="p">)</span>
     <span class="n">stage</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">get_stage</span><span class="p">()</span>
 
@@ -1624,14 +1250,14 @@ Standalone Application</label><div class="sd-tab-content docutils">
 
     <span class="k">if</span> <span class="n">config_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">load_status</span> <span class="o">=</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Config load status: </span><span class="si">{</span><span class="n">load_status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Config load status: </span><span class="si">{</span><span class="n">load_status</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="c1"># Make sure the object to grasp is set (either from the config file or from the argument)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">get_object_prim_path</span><span class="p">()</span> <span class="ow">and</span> <span class="n">object_prim_path</span><span class="p">:</span>
         <span class="n">grasping_manager</span><span class="o">.</span><span class="n">object_path</span> <span class="o">=</span> <span class="n">object_prim_path</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">get_object_prim_path</span><span class="p">():</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: Object to grasp is not set (missing in config and argument). Aborting.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Warning: Object to grasp is not set (missing in config and argument). Aborting."</span><span class="p">)</span>
         <span class="k">return</span>
 
     <span class="c1"># Make sure the gripper is set (either from the config file or from the argument)</span>
@@ -1639,46 +1265,46 @@ Standalone Application</label><div class="sd-tab-content docutils">
         <span class="n">grasping_manager</span><span class="o">.</span><span class="n">gripper_path</span> <span class="o">=</span> <span class="n">gripper_path</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">gripper_path</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: Gripper path is not set (missing in config and argument). Aborting.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Warning: Gripper path is not set (missing in config and argument). Aborting."</span><span class="p">)</span>
         <span class="k">return</span>
 
-    <span class="c1"># If there are already grasp poses in the configuration, don&#39;t generate new ones</span>
+    <span class="c1"># If there are already grasp poses in the configuration, don't generate new ones</span>
     <span class="k">if</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">grasp_locations</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">grasping_manager</span><span class="o">.</span><span class="n">grasp_locations</span><span class="p">)</span><span class="si">}</span><span class="s2"> grasp poses in the configuration file. No new poses will be generated.&quot;</span>
+            <span class="sa">f</span><span class="s2">"Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">grasping_manager</span><span class="o">.</span><span class="n">grasp_locations</span><span class="p">)</span><span class="si">}</span><span class="s2"> grasp poses in the configuration file. No new poses will be generated."</span>
         <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No grasp poses found in configuration, generating new ones...&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"No grasp poses found in configuration, generating new ones..."</span><span class="p">)</span>
 
         <span class="c1"># Determine Sampler Configuration</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">grasping_manager</span><span class="o">.</span><span class="n">sampler_config</span> <span class="ow">and</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">sampler_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sampler_type&quot;</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">grasping_manager</span><span class="o">.</span><span class="n">sampler_config</span> <span class="ow">and</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">sampler_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sampler_type"</span><span class="p">)):</span>
             <span class="k">if</span> <span class="n">sampler_config</span><span class="p">:</span>
                 <span class="n">grasping_manager</span><span class="o">.</span><span class="n">sampler_config</span> <span class="o">=</span> <span class="n">sampler_config</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span>
-                    <span class="s2">&quot;Warning: Sampler configuration is missing or invalid (not in config file and not provided as argument). Aborting pose generation.&quot;</span>
+                    <span class="s2">"Warning: Sampler configuration is missing or invalid (not in config file and not provided as argument). Aborting pose generation."</span>
                 <span class="p">)</span>
                 <span class="k">return</span>
 
         <span class="c1"># Generate the grasp poses</span>
         <span class="n">success_generation</span> <span class="o">=</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">generate_grasp_poses</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">success_generation</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">grasp_locations</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed to generate grasp poses or no poses were generated.&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Failed to generate grasp poses or no poses were generated."</span><span class="p">)</span>
             <span class="k">return</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">grasping_manager</span><span class="o">.</span><span class="n">grasp_locations</span><span class="p">)</span><span class="si">}</span><span class="s2"> new grasp poses.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Generated </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">grasping_manager</span><span class="o">.</span><span class="n">grasp_locations</span><span class="p">)</span><span class="si">}</span><span class="s2"> new grasp poses."</span><span class="p">)</span>
 
     <span class="c1"># Store the initial gripper pose to be able to restore it after the evaluation</span>
     <span class="n">grasping_manager</span><span class="o">.</span><span class="n">store_initial_gripper_pose</span><span class="p">()</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Evaluating grasp poses...&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Evaluating grasp poses..."</span><span class="p">)</span>
     <span class="n">poses_to_evaluate</span> <span class="o">=</span> <span class="n">grasping_manager</span><span class="o">.</span><span class="n">get_grasp_poses</span><span class="p">(</span><span class="n">in_world_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">poses_to_evaluate</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No poses available to evaluate..&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"No poses available to evaluate.."</span><span class="p">)</span>
         <span class="k">return</span>
 
     <span class="c1"># Determine Output Path</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">output_dir</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: Output path is not defined data will not be saved.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Warning: Output path is not defined data will not be saved."</span><span class="p">)</span>
 
     <span class="c1"># Set the output path and overwrite flag</span>
     <span class="n">grasping_manager</span><span class="o">.</span><span class="n">set_results_output_dir</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
@@ -1688,7 +1314,7 @@ Standalone Application</label><div class="sd-tab-content docutils">
     <span class="n">physics_scene_path_for_eval</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="n">physics_scene_path</span> <span class="ow">and</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="n">physics_scene_path</span><span class="p">):</span>
         <span class="n">physics_scene_path_for_eval</span> <span class="o">=</span> <span class="n">physics_scene_path</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Physics scene path for evaluation: </span><span class="si">{</span><span class="n">physics_scene_path_for_eval</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Physics scene path for evaluation: </span><span class="si">{</span><span class="n">physics_scene_path_for_eval</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="n">grasping_workflow_task</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">ensure_future</span><span class="p">(</span>
         <span class="n">grasping_manager</span><span class="o">.</span><span class="n">evaluate_grasp_poses</span><span class="p">(</span>
@@ -1702,14 +1328,14 @@ Standalone Application</label><div class="sd-tab-content docutils">
     <span class="k">while</span> <span class="ow">not</span> <span class="n">grasping_workflow_task</span><span class="o">.</span><span class="n">done</span><span class="p">():</span>
         <span class="n">simulation_app</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grasping workflow example finished.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Grasping workflow example finished."</span><span class="p">)</span>
     <span class="n">grasping_manager</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 
 
-<span class="n">stage_path</span> <span class="o">=</span> <span class="s2">&quot;/Isaac/Samples/Replicator/Stage/sdg_grasping_xarm.usd&quot;</span>
-<span class="n">ext_path</span> <span class="o">=</span> <span class="n">get_extension_path_from_name</span><span class="p">(</span><span class="s2">&quot;isaacsim.replicator.grasping&quot;</span><span class="p">)</span>
-<span class="n">config_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ext_path</span><span class="p">,</span> <span class="s2">&quot;data/gripper_configs/xarm_antipodal_soup_can.yaml&quot;</span><span class="p">)</span>
-<span class="n">output_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;xarm_antipodal&quot;</span><span class="p">)</span>
+<span class="n">stage_path</span> <span class="o">=</span> <span class="s2">"/Isaac/Samples/Replicator/Stage/sdg_grasping_xarm.usd"</span>
+<span class="n">ext_path</span> <span class="o">=</span> <span class="n">get_extension_path_from_name</span><span class="p">(</span><span class="s2">"isaacsim.replicator.grasping"</span><span class="p">)</span>
+<span class="n">config_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ext_path</span><span class="p">,</span> <span class="s2">"data/gripper_configs/xarm_antipodal_soup_can.yaml"</span><span class="p">)</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">"xarm_antipodal"</span><span class="p">)</span>
 
 <span class="n">run_example</span><span class="p">(</span><span class="n">stage_path</span><span class="o">=</span><span class="n">stage_path</span><span class="p">,</span> <span class="n">config_path</span><span class="o">=</span><span class="n">config_path</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">)</span>
 
@@ -1719,56 +1345,34 @@ Standalone Application</label><div class="sd-tab-content docutils">
 </div>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../action_and_event_data_generation/tutorial_telemetry.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Telemetry and Performance Tracking</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="tutorial_replicator_mobility_gen.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Data Generation with MobilityGen</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="../action_and_event_data_generation/tutorial_telemetry.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Telemetry and Performance Tracking</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="tutorial_replicator_mobility_gen.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Data Generation with MobilityGen</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_grasping_sdg.html#learning-objectives">Learning Objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_grasping_sdg.html#getting-started">Getting Started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_grasping_sdg.html#overview">Overview</a></li>
@@ -1783,46 +1387,29 @@ Standalone Application</label><div class="sd-tab-content docutils">
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_replicator_grasping_sdg.html#code-example">Code Example</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1853,36 +1440,21 @@ Standalone Application</label><div class="sd-tab-content docutils">
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>
