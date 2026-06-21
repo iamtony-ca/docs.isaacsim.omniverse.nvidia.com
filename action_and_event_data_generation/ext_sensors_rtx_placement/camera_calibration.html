@@ -1,551 +1,256 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Camera Calibration &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Camera Calibration — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-
-
-
-    <script rel="preload" src="../../_static/modal-table.js"></script>
-    <script src="../../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../../_static/external-links.js"></script>
-    <script src="../../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../../_static/image_lightbox.js"></script>
-    <script src="../../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'action_and_event_data_generation/ext_sensors_rtx_placement/camera_calibration';</script>
-    <script>
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script rel="preload" src="../../_static/modal-table.js"></script>
+<script src="../../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../../_static/external-links.js"></script>
+<script src="../../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../../_static/image_lightbox.js"></script>
+<script src="../../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'action_and_event_data_generation/ext_sensors_rtx_placement/camera_calibration';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Reacting to Events with Actor Triggers" href="../example_event_reactive_actors.html" />
-    <link rel="prev" title="Camera Placement" href="camera_placement.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../../_static/searchtools.js"></script>
-    <script src="../../_static/language_data.js"></script>
-    <script src="../../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../../_static/favicon.png" rel="icon"/>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<link href="../example_event_reactive_actors.html" rel="next" title="Reacting to Events with Actor Triggers"/>
+<link href="camera_placement.html" rel="prev" title="Camera Placement"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../../_static/searchtools.js"></script>
+<script src="../../_static/language_data.js"></script>
+<script src="../../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="camera_calibration.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="camera_calibration.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +270,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -593,20 +297,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -681,17 +373,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -869,7 +551,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -909,13 +590,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -962,10 +637,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1134,18 +805,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1171,109 +832,79 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="../../synthetic_data_generation/index.html" class="nav-link">Synthetic Data Generation</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Action and Event Data Generation</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="../tutorial_sensors_rtx_placement.html" class="nav-link">RTX Sensors Placement and Calibration</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Camera Calibration</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="../../synthetic_data_generation/index.html">Synthetic Data Generation</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="../index.html">Action and Event Data Generation</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="../tutorial_sensors_rtx_placement.html">RTX Sensors Placement and Calibration</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Camera Calibration</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="camera-calibration">
+<article class="bd-article">
+<section id="camera-calibration">
 <h1>Camera Calibration<a class="headerlink" href="camera_calibration.html#camera-calibration" title="Link to this heading">#</a></h1>
-<p>The Camera Calibration Tool (<code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.rtx.calibration</span></code> extension) generates camera calibration data for deployed cameras in the scene.</p>
+<p>카메라 교정 도구(<code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.rtx.calibration</span></code> 확장)는 씬에 배포된 카메라에 대한 카메라 교정 데이터를 생성합니다.</p>
 <section id="enable-the-extension">
 <span id="enabling-camera-calibration-extension"></span><h2>Enable the Extension<a class="headerlink" href="camera_calibration.html#enable-the-extension" title="Link to this heading">#</a></h2>
-<p>Follow the <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_core/ext_extension-manager.html">Omniverse Extension Manager guide</a> to enable the <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.rtx.calibration</span></code> extension.</p>
+<p><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_core/ext_extension-manager.html">Omniverse Extension Manager 가이드</a>를 따라 <code class="docutils literal notranslate"><span class="pre">isaacsim.sensors.rtx.calibration</span></code> 확장을 활성화하세요.</p>
 </section>
 <section id="open-the-calibration-tool-panel">
 <span id="activate-camera-calibration-tool-panel"></span><h2>Open the Calibration Tool Panel<a class="headerlink" href="camera_calibration.html#open-the-calibration-tool-panel" title="Link to this heading">#</a></h2>
-<p>The <strong>Calibration Tool</strong> UI will automatically be opened on the right side of the screen. It is accessible by <strong>Tools &gt; Sensors &gt; Camera Calibration</strong>.</p>
+<p><strong>교정 도구</strong> UI는 화면 오른쪽에 자동으로 열립니다. <strong>Tools &gt; Sensors &gt; Camera Calibration</strong>으로 접근할 수 있습니다.</p>
 <section id="input-fields">
 <h3>Input Fields<a class="headerlink" href="camera_calibration.html#input-fields" title="Link to this heading">#</a></h3>
-<p id="ira-calibration-attribute"><strong>Place Info</strong>: A string that describes the location of the scene, including city, building, and room. This information is converted and stored in <code class="docutils literal notranslate"><span class="pre">calibration.json</span></code>. Review the output example for more details.</p>
+<p id="ira-calibration-attribute"><strong>Place Info</strong>: 도시, 건물, 방 등 씬의 위치를 설명하는 문자열입니다. 이 정보는 <code class="docutils literal notranslate"><span class="pre">calibration.json</span></code>에 변환되어 저장됩니다. 자세한 내용은 출력 예시를 참조하세요.</p>
 <blockquote>
 <div><ul>
-<li><p>Input Format: <code class="docutils literal notranslate"><span class="pre">city=[city</span> <span class="pre">name]/building=[building</span> <span class="pre">name]/room=[room</span> <span class="pre">name]</span></code></p></li>
-<li><p>Example:</p>
+<li><p>입력 형식: <code class="docutils literal notranslate"><span class="pre">city=[city</span> <span class="pre">name]/building=[building</span> <span class="pre">name]/room=[room</span> <span class="pre">name]</span></code></p></li>
+<li><p>예시:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Input: <code class="docutils literal notranslate"><span class="pre">city=Santa</span> <span class="pre">Clara/building=NVIDIA</span> <span class="pre">Voyager/room=Visitor</span> <span class="pre">Lobby</span></code></p></li>
-<li><p>Output: in <code class="docutils literal notranslate"><span class="pre">calibration.json</span></code>:</p></li>
+<li><p>입력: <code class="docutils literal notranslate"><span class="pre">city=Santa</span> <span class="pre">Clara/building=NVIDIA</span> <span class="pre">Voyager/room=Visitor</span> <span class="pre">Lobby</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">calibration.json</span></code>의 출력:</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="s2">&quot;place&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"place"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;Santa Clara&quot;</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"city"</span><span class="p">,</span>
+        <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"Santa Clara"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;building&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;NVIDIA Voyager&quot;</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"building"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"NVIDIA Voyager"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;room&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;Visitor Lobby&quot;</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"room"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"Visitor Lobby"</span>
         <span class="p">}</span>
     <span class="p">],</span>
 <span class="p">}</span>
@@ -1283,85 +914,85 @@
 </li>
 </ul>
 </div></blockquote>
-<p><strong>Scene Root Prim Path</strong>: The path to the root prim of the scene. This is used to approximate the top view camera’s position. The top view camera will look at the scene root prim’s center.</p>
-<p><strong>Floor &amp; Ceiling Height</strong>: The floor and ceiling height values for the scene.</p>
+<p><strong>Scene Root Prim Path</strong>: 씬의 루트 prim 경로입니다. 상단 뷰 카메라의 위치를 근사하는 데 사용됩니다. 상단 뷰 카메라는 씬 루트 prim의 중심을 바라봅니다.</p>
+<p><strong>Floor &amp; Ceiling Height</strong>: 씬의 바닥 및 천장 높이 값입니다.</p>
 <blockquote>
 <div><div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>The ceiling height adjusts the clipping range of the top view camera, making it easier to create accurate top views.</p></li>
-<li><p>By default, the ceiling height is set to <code class="docutils literal notranslate"><span class="pre">-1</span></code>, which means the top view camera’s clipping range will use its default value.</p></li>
-<li><p>By customizing the ceiling height, you can clip out prims or objects above the specified value when creating a top view camera.</p></li>
+<li><p>천장 높이는 상단 뷰 카메라의 클리핑 범위를 조정하여 정확한 상단 뷰를 더 쉽게 만들 수 있도록 합니다.</p></li>
+<li><p>기본적으로 천장 높이는 <code class="docutils literal notranslate"><span class="pre">-1</span></code>로 설정되어 있으며, 이는 상단 뷰 카메라의 클리핑 범위가 기본값을 사용함을 의미합니다.</p></li>
+<li><p>천장 높이를 사용자 정의하면 상단 뷰 카메라를 만들 때 지정된 값 이상의 prim이나 객체를 잘라낼 수 있습니다.</p></li>
 </ul>
 </div>
 </div></blockquote>
-<p><strong>Top View Camera</strong>: This camera will be used to render the <code class="docutils literal notranslate"><span class="pre">top_view</span></code> images.</p>
+<p><strong>Top View Camera</strong>: 이 카메라는 <code class="docutils literal notranslate"><span class="pre">top_view</span></code> 이미지를 렌더링하는 데 사용됩니다.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><strong>Create</strong>: After <strong>Scene Root Prim Path</strong> is set, clicking this button will automatically generate a top view camera that looks at the scene root’s center. The top view camera will be generated under <code class="docutils literal notranslate"><span class="pre">/World/Top_Camera</span></code>.</p></li>
-<li><p><strong>Path</strong>: After clicking <strong>Create</strong>, the top view camera’s path will be shown here. You can also use this field to select existing top view cameras in the stage.</p></li>
+<li><p><strong>Create</strong>: <strong>Scene Root Prim Path</strong>가 설정된 후 이 버튼을 클릭하면 씬 루트의 중심을 바라보는 상단 뷰 카메라가 자동으로 생성됩니다. 상단 뷰 카메라는 <code class="docutils literal notranslate"><span class="pre">/World/Top_Camera</span></code> 아래에 생성됩니다.</p></li>
+<li><p><strong>Path</strong>: <strong>Create</strong>를 클릭한 후 상단 뷰 카메라의 경로가 여기에 표시됩니다. 이 필드를 사용하여 스테이지에서 기존 상단 뷰 카메라를 선택할 수도 있습니다.</p></li>
 </ul>
 </div></blockquote>
 <blockquote id="valid-topview-camera-path">
 <div><div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>The <strong>Top View Camera</strong> must be vertical to the ground and it must cover the position of all the calibration dots under <code class="docutils literal notranslate"><span class="pre">World/Calibration_Dots</span></code> and cameras under the <code class="docutils literal notranslate"><span class="pre">World/Cameras</span></code>.</p></li>
-<li><p>The <strong>Top View Camera</strong> must have a rotation of <code class="docutils literal notranslate"><span class="pre">[0,0,0]</span></code> with the projection type set to <code class="docutils literal notranslate"><span class="pre">orthographic</span></code>.</p></li>
+<li><p><strong>Top View Camera</strong>는 지면에 수직이어야 하며 <code class="docutils literal notranslate"><span class="pre">World/Calibration_Dots</span></code> 아래의 모든 교정 점과 <code class="docutils literal notranslate"><span class="pre">World/Cameras</span></code> 아래의 카메라 위치를 모두 포함해야 합니다.</p></li>
+<li><p><strong>Top View Camera</strong>는 <code class="docutils literal notranslate"><span class="pre">[0,0,0]</span></code>의 회전을 가져야 하며 투영 유형은 <code class="docutils literal notranslate"><span class="pre">orthographic</span></code>으로 설정해야 합니다.</p></li>
 </ul>
 </div>
 </div></blockquote>
-<p><strong>Raycast Density</strong>: The density of the raycast. The higher this value, the more detailed the FOV contour will be. A density value of <code class="docutils literal notranslate"><span class="pre">N</span></code> indicates that <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">*</span> <span class="pre">N</span></code> rays will be cast and they are uniformly distributed for each camera.</p>
+<p><strong>Raycast Density</strong>: 레이캐스트의 밀도입니다. 값이 높을수록 FOV 윤곽이 더 세밀해집니다. 밀도 값 <code class="docutils literal notranslate"><span class="pre">N</span></code>은 각 카메라에 대해 <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">*</span> <span class="pre">N</span></code>개의 광선이 균일하게 분포되어 발사됨을 나타냅니다.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Default value: 100</p></li>
+<li><p>기본값: 100</p></li>
 </ul>
 </div></blockquote>
-<p><strong>Minimum FOV Polygon Edge Length (meter)</strong>: The minimum length of edges in the polygon’s contour. Edges shorter than this length are ignored and the vertices are connected to the next point that meets this criteria. The unit is meter.</p>
+<p><strong>Minimum FOV Polygon Edge Length (meter)</strong>: 폴리곤 윤곽의 최소 엣지 길이입니다. 이 길이보다 짧은 엣지는 무시되고 꼭짓점은 이 기준을 충족하는 다음 점에 연결됩니다. 단위는 미터입니다.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Default value: 0 (no simplification in drawing the contour)</p></li>
+<li><p>기본값: 0 (윤곽 그리기 단순화 없음)</p></li>
 </ul>
 </div></blockquote>
-<p><strong>Minimum Area of FOV Polygon Hole to Ignore</strong>: When generating data, holes in the FOV polygon that are smaller than this threshold value are ignored. Holes are the areas that are not included in the FOV polygon.</p>
+<p><strong>Minimum Area of FOV Polygon Hole to Ignore</strong>: 데이터 생성 시 이 임계값보다 작은 FOV 폴리곤의 구멍은 무시됩니다. 구멍은 FOV 폴리곤에 포함되지 않는 영역입니다.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Default value: 0 (don’t ignore any holes in FOV polygons)</p></li>
+<li><p>기본값: 0 (FOV 폴리곤의 구멍 무시 없음)</p></li>
 </ul>
 </div></blockquote>
-<p id="ira-calibration-additional-attribute"><strong>Create Camera View Images</strong>: Whether to include camera view images in the output folder.</p>
-<p><strong>Create FOV Polygon Images</strong>: Whether to render top view images with FOV polygons in the debug data folder.</p>
-<p><strong>Show FOV Polygon</strong>: Whether to show FOV polygons from the currently selected camera.</p>
-<p><strong>Output Folder Path</strong>: The path to the output folder. Click on the folder icon to select the output folder path.</p>
+<p id="ira-calibration-additional-attribute"><strong>Create Camera View Images</strong>: 출력 폴더에 카메라 뷰 이미지를 포함할지 여부입니다.</p>
+<p><strong>Create FOV Polygon Images</strong>: 디버그 데이터 폴더에 FOV 폴리곤이 있는 상단 뷰 이미지를 렌더링할지 여부입니다.</p>
+<p><strong>Show FOV Polygon</strong>: 현재 선택된 카메라의 FOV 폴리곤을 표시할지 여부입니다.</p>
+<p><strong>Output Folder Path</strong>: 출력 폴더 경로입니다. 폴더 아이콘을 클릭하여 출력 폴더 경로를 선택하세요.</p>
 <section id="buttons-and-functions">
 <h4>Buttons and Functions<a class="headerlink" href="camera_calibration.html#buttons-and-functions" title="Link to this heading">#</a></h4>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Before starting to generate the calibration file, the following prerequisites must be met:</p>
+<p>교정 파일 생성을 시작하기 전에 다음 전제 조건을 충족해야 합니다:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><strong>Top View Camera Path</strong> field is set up with a valid camera prim path to a <a class="reference internal" href="camera_calibration.html#valid-topview-camera-path"><span class="std std-ref">valid top view camera</span></a>.</p></li>
-<li><p>The output folder path value must be valid.</p></li>
-<li><p>The <strong>Place Info</strong> must have the correct format and input.</p></li>
-<li><p>The cameras must be under <code class="docutils literal notranslate"><span class="pre">/World/Cameras</span></code>.</p></li>
+<li><p><strong>Top View Camera Path</strong> 필드에 <a class="reference internal" href="camera_calibration.html#valid-topview-camera-path"><span class="std std-ref">유효한 상단 뷰 카메라</span></a>의 유효한 카메라 prim 경로가 설정되어 있어야 합니다.</p></li>
+<li><p>출력 폴더 경로 값이 유효해야 합니다.</p></li>
+<li><p><strong>Place Info</strong>의 형식과 입력이 올바르게 입력되어야 합니다.</p></li>
+<li><p>카메라는 <code class="docutils literal notranslate"><span class="pre">/World/Cameras</span></code> 아래에 있어야 합니다.</p></li>
 </ul>
 </div></blockquote>
 </div>
 <ul>
-<li><p><strong>Create Dot Prims</strong>: Generate calibration dot prims for each camera. Calibration dots will be randomly generated and they are used to sample the polygons contour that each camera can view.</p></li>
-<li><p><strong>Generate Calibration File</strong>: Create <code class="docutils literal notranslate"><span class="pre">calibration.json</span></code> that stores all the camera calibration data.</p>
+<li><p><strong>Create Dot Prims</strong>: 각 카메라에 대한 교정 점 prim을 생성합니다. 교정 점은 무작위로 생성되며 각 카메라가 볼 수 있는 폴리곤 윤곽을 샘플링하는 데 사용됩니다.</p></li>
+<li><p><strong>Generate Calibration File</strong>: 모든 카메라 교정 데이터를 저장하는 <code class="docutils literal notranslate"><span class="pre">calibration.json</span></code>을 생성합니다.</p>
 <blockquote>
 <div><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>You must run <strong>Create Dot Prims</strong> before generating the calibration file.</p>
+<p>교정 파일을 생성하기 전에 반드시 <strong>Create Dot Prims</strong>를 실행해야 합니다.</p>
 </div>
 </div></blockquote>
 </li>
-<li><p><strong>Generate Top View Image</strong>: Generates the top view image and stores the image in the output folder. An <code class="docutils literal notranslate"><span class="pre">imageMetadata.json</span></code> file will be generated to store the image metadata.</p>
+<li><p><strong>Generate Top View Image</strong>: 상단 뷰 이미지를 생성하고 출력 폴더에 저장합니다. 이미지 메타데이터를 저장하는 <code class="docutils literal notranslate"><span class="pre">imageMetadata.json</span></code> 파일도 생성됩니다.</p>
 <blockquote>
 <div><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If the <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">FOV</span> <span class="pre">Polygon</span> <span class="pre">Images</span></code> is checked, the FOV polygon is visualized on the top view layout. The FOV images are generated in a debug data folder within the output folder.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">FOV</span> <span class="pre">Polygon</span> <span class="pre">Images</span></code>가 선택된 경우 FOV 폴리곤이 상단 뷰 레이아웃에 시각화됩니다. FOV 이미지는 출력 폴더 내 디버그 데이터 폴더에 생성됩니다.</p>
 </div>
 </div></blockquote>
 </li>
@@ -1371,24 +1002,24 @@
 </section>
 <section id="using-the-camera-calibration-tool-tutorial">
 <h2>Using the Camera Calibration Tool Tutorial<a class="headerlink" href="camera_calibration.html#using-the-camera-calibration-tool-tutorial" title="Link to this heading">#</a></h2>
-<p>To use the <strong>Camera Calibration</strong> tool. This tutorial makes use of the <a class="reference internal" href="../../assets/usd_assets_environments.html#isaac-assets-environments-warehouse"><span class="std std-ref">Isaac Sim Full Warehouse</span></a> for demonstration.</p>
+<p><strong>Camera Calibration</strong> 도구를 사용하려면, 이 튜토리얼은 시연을 위해 <a class="reference internal" href="../../assets/usd_assets_environments.html#isaac-assets-environments-warehouse"><span class="std std-ref">Isaac Sim Full Warehouse</span></a>를 사용합니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>Stage unit must be in meters.</p></li>
-<li><p>A valid <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_navigation-mesh.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">NavMesh</span></a> is required.</p></li>
+<li><p>스테이지 단위는 미터여야 합니다.</p></li>
+<li><p>유효한 <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_navigation-mesh.html" title="(in Omniverse Extensions)"><span class="xref std std-doc">NavMesh</span></a>가 필요합니다.</p></li>
 </ul>
 </div>
 <section id="id1">
 <h3>Enable the Extension<a class="headerlink" href="camera_calibration.html#id1" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p><a class="reference internal" href="camera_calibration.html#enabling-camera-calibration-extension"><span class="std std-ref">Enable the isaacsim.sensors.rtx.calibration extension</span></a>.</p></li>
-<li><p><a class="reference internal" href="camera_calibration.html#activate-camera-calibration-tool-panel"><span class="std std-ref">Open the camera calibration tool panel</span></a>.</p></li>
+<li><p><a class="reference internal" href="camera_calibration.html#enabling-camera-calibration-extension"><span class="std std-ref">isaacsim.sensors.rtx.calibration 확장 활성화</span></a>.</p></li>
+<li><p><a class="reference internal" href="camera_calibration.html#activate-camera-calibration-tool-panel"><span class="std std-ref">카메라 교정 도구 패널 열기</span></a>.</p></li>
 </ol>
 </section>
 <section id="create-cameras">
 <h3>Create Cameras<a class="headerlink" href="camera_calibration.html#create-cameras" title="Link to this heading">#</a></h3>
-<p>Cameras under <code class="docutils literal notranslate"><span class="pre">/World/Cameras</span></code> are used to generate the calibration file. Ideally, the cameras are able to view the walkable area of the scene.</p>
+<p><code class="docutils literal notranslate"><span class="pre">/World/Cameras</span></code> 아래의 카메라들이 교정 파일 생성에 사용됩니다. 이상적으로 카메라들은 씬의 보행 가능 영역을 볼 수 있어야 합니다.</p>
 <blockquote>
 <div><div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -1401,152 +1032,130 @@
 </section>
 <section id="create-top-view-camera">
 <span id="create-top-view-camera-with-section-tool"></span><h3>Create Top View Camera<a class="headerlink" href="camera_calibration.html#create-top-view-camera" title="Link to this heading">#</a></h3>
-<p>The <strong>Top View Camera</strong> supports the following features:</p>
+<p><strong>Top View Camera</strong>는 다음 기능을 지원합니다:</p>
 <ul class="simple">
-<li><p>Capture top view images of the scene.</p></li>
-<li><p>Generate FOV polygons of the scene.</p></li>
-<li><p>Generate 2D camera locations of each camera within the top view image.</p></li>
+<li><p>씬의 상단 뷰 이미지 캡처.</p></li>
+<li><p>씬의 FOV 폴리곤 생성.</p></li>
+<li><p>상단 뷰 이미지 내 각 카메라의 2D 카메라 위치 생성.</p></li>
 </ul>
-<p>The extension provides a UI to help you create the top view camera:</p>
+<p>확장에서는 상단 뷰 카메라를 만드는 데 도움이 되는 UI를 제공합니다:</p>
 <ol class="arabic">
-<li><p>Set the <strong>Scene Root Prim Path</strong>. The top view camera generated by this tool will look at this scene root. In this case, set it to <code class="docutils literal notranslate"><span class="pre">/Root</span></code>.</p></li>
-<li><p>Set the <strong>Floor &amp; Ceiling Height</strong> values to clip the ceiling from the top view camera’s view.</p>
+<li><p><strong>Scene Root Prim Path</strong>를 설정합니다. 이 도구로 생성된 상단 뷰 카메라는 이 씬 루트를 바라봅니다. 이 경우 <code class="docutils literal notranslate"><span class="pre">/Root</span></code>로 설정합니다.</p></li>
+<li><p><strong>Floor &amp; Ceiling Height</strong> 값을 설정하여 상단 뷰 카메라의 뷰에서 천장을 잘라냅니다.</p>
 <blockquote>
 <div><div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>In this tutorial, set <strong>Ceiling Height</strong> to <code class="docutils literal notranslate"><span class="pre">6</span></code> to clip the warehouse ceiling.</p></li>
-<li><p>Because the warehouse floor height is <code class="docutils literal notranslate"><span class="pre">0</span></code>, there’s no need to change the <strong>Floor Height</strong>.</p></li>
+<li><p>이 튜토리얼에서는 <strong>Ceiling Height</strong>를 <code class="docutils literal notranslate"><span class="pre">6</span></code>으로 설정하여 창고 천장을 잘라냅니다.</p></li>
+<li><p>창고 바닥 높이가 <code class="docutils literal notranslate"><span class="pre">0</span></code>이므로 <strong>Floor Height</strong>는 변경할 필요가 없습니다.</p></li>
 </ul>
-<a class="reference internal image-reference" href="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_gui_set_ceiling_height.png"><img alt="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_gui_set_ceiling_height.png" class="align-center" src="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_gui_set_ceiling_height.png" style="width: 600px;" />
+<a class="reference internal image-reference" href="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_gui_set_ceiling_height.png"><img alt="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_gui_set_ceiling_height.png" class="align-center" src="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_gui_set_ceiling_height.png" style="width: 600px;"/>
 </a>
 </div>
 </div></blockquote>
 </li>
-<li><p>Click <strong>Create</strong>. The top view camera will be generated and its path will be shown in the text field.</p>
+<li><p><strong>Create</strong>를 클릭합니다. 상단 뷰 카메라가 생성되고 그 경로가 텍스트 필드에 표시됩니다.</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_gui_create_top_view_camera.png"><img alt="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_gui_create_top_view_camera.png" class="align-center" src="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_gui_create_top_view_camera.png" style="width: 600px;" />
+<div><a class="reference internal image-reference" href="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_gui_create_top_view_camera.png"><img alt="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_gui_create_top_view_camera.png" class="align-center" src="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_gui_create_top_view_camera.png" style="width: 600px;"/>
 </a>
 </div></blockquote>
 </li>
-<li><p>Switch the viewport to the new top view camera to verify that it covers the floorplan.</p>
+<li><p>뷰포트를 새 상단 뷰 카메라로 전환하여 평면도를 전체적으로 포함하는지 확인합니다.</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_top_view_image.png"><img alt="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_top_view_image.png" class="align-center" src="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_top_view_image.png" style="width: 600px;" />
+<div><a class="reference internal image-reference" href="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_top_view_image.png"><img alt="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_top_view_image.png" class="align-center" src="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_top_view_image.png" style="width: 600px;"/>
 </a>
 </div></blockquote>
 </li>
 </ol>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>To switch the viewport to the top-view camera, click the Camera icon, then click <strong>Cameras &gt; Calibration_Top_Camera</strong>.</p>
-<a class="reference internal image-reference" href="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_switch_viewport.png"><img alt="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_switch_viewport.png" class="align-center" src="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_switch_viewport.png" style="width: 600px;" />
+<p>뷰포트를 상단 뷰 카메라로 전환하려면 카메라 아이콘을 클릭한 다음 <strong>Cameras &gt; Calibration_Top_Camera</strong>를 클릭하세요.</p>
+<a class="reference internal image-reference" href="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_switch_viewport.png"><img alt="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_switch_viewport.png" class="align-center" src="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_switch_viewport.png" style="width: 600px;"/>
 </a>
 </div>
 </section>
 <section id="set-up-the-calibration-tool-attributes">
 <h3>Set Up the Calibration Tool Attributes<a class="headerlink" href="camera_calibration.html#set-up-the-calibration-tool-attributes" title="Link to this heading">#</a></h3>
-<p>This step is to enter the information needed for camera calibration.</p>
+<p>이 단계는 카메라 교정에 필요한 정보를 입력하는 단계입니다.</p>
 <ol class="arabic simple">
-<li><p>Enter the place information in <strong>Place Info</strong>. In this case, it’s <code class="docutils literal notranslate"><span class="pre">city=Santa</span> <span class="pre">Clara/building=Isaac</span> <span class="pre">Sim</span> <span class="pre">Warehouse/room=Warehouse</span></code>.</p></li>
-<li><p>Set <strong>Raycast Density</strong>, <strong>Minimum FOV Polygon Edge Length</strong>, and <strong>Minimum Area of FOV Polygon Hole to Ignore</strong>. See the <a class="reference internal" href="camera_calibration.html#ira-calibration-attribute"><span class="std std-ref">Input Field</span></a> for more details. In this case, use the default values.</p></li>
-<li><p>Check the <strong>Create Camera View Images</strong>, <strong>Create FOV Polygon Images</strong>, and <strong>Show FOV Polygon</strong> boxes if these <a class="reference internal" href="camera_calibration.html#ira-calibration-additional-attribute"><span class="std std-ref">additional data</span></a> are needed.</p></li>
-<li><p>Set <strong>Output Folder Path</strong> by either entering the path or clicking the folder picker icon.</p></li>
+<li><p><strong>Place Info</strong>에 장소 정보를 입력합니다. 이 경우 <code class="docutils literal notranslate"><span class="pre">city=Santa</span> <span class="pre">Clara/building=Isaac</span> <span class="pre">Sim</span> <span class="pre">Warehouse/room=Warehouse</span></code>입니다.</p></li>
+<li><p><strong>Raycast Density</strong>, <strong>Minimum FOV Polygon Edge Length</strong>, <strong>Minimum Area of FOV Polygon Hole to Ignore</strong>를 설정합니다. 자세한 내용은 <a class="reference internal" href="camera_calibration.html#ira-calibration-attribute"><span class="std std-ref">입력 필드</span></a>를 참조하세요. 이 경우 기본값을 사용합니다.</p></li>
+<li><p>이러한 <a class="reference internal" href="camera_calibration.html#ira-calibration-additional-attribute"><span class="std std-ref">추가 데이터</span></a>가 필요한 경우 <strong>Create Camera View Images</strong>, <strong>Create FOV Polygon Images</strong>, <strong>Show FOV Polygon</strong> 상자를 선택합니다.</p></li>
+<li><p>경로를 입력하거나 폴더 선택 아이콘을 클릭하여 <strong>Output Folder Path</strong>를 설정합니다.</p></li>
 </ol>
 </section>
 <section id="generate-calibration-dots">
 <h3>Generate Calibration Dots<a class="headerlink" href="camera_calibration.html#generate-calibration-dots" title="Link to this heading">#</a></h3>
-<p>Generate calibration dots for each camera by clicking the <strong>Create Dot Prims</strong> button.</p>
+<p><strong>Create Dot Prims</strong> 버튼을 클릭하여 각 카메라의 교정 점을 생성합니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>Calibration dot prims are generated under <code class="docutils literal notranslate"><span class="pre">/World/Calibration_Dots/[Camera</span> <span class="pre">Name]/</span></code>, where <code class="docutils literal notranslate"><span class="pre">[Camera</span> <span class="pre">Name]</span></code> is the name of the camera.</p></li>
-<li><p>For each camera prim under <code class="docutils literal notranslate"><span class="pre">/World/Cameras</span></code>, six calibration dots are generated. The dot prims are used to calculate the projection matrix for each camera.</p></li>
-<li><p>You can switch your viewport to any camera’s view to check whether all calibration dots are visible.</p></li>
+<li><p>교정 점 prim은 <code class="docutils literal notranslate"><span class="pre">/World/Calibration_Dots/[Camera</span> <span class="pre">Name]/</span></code> 아래에 생성됩니다. 여기서 <code class="docutils literal notranslate"><span class="pre">[Camera</span> <span class="pre">Name]</span></code>은 카메라의 이름입니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/World/Cameras</span></code> 아래의 각 카메라 prim에 대해 여섯 개의 교정 점이 생성됩니다. 이 점 prim들은 각 카메라의 투영 행렬을 계산하는 데 사용됩니다.</p></li>
+<li><p>뷰포트를 카메라 뷰로 전환하여 모든 교정 점이 보이는지 확인할 수 있습니다.</p></li>
 </ul>
 </div>
 </section>
 <section id="generate-the-calibration-file">
 <h3>Generate the Calibration File<a class="headerlink" href="camera_calibration.html#generate-the-calibration-file" title="Link to this heading">#</a></h3>
 <ol class="arabic">
-<li><p>Generate the calibration file by clicking on the <strong>Generate Calibration File</strong> button. This generates a <code class="docutils literal notranslate"><span class="pre">calibration.json</span></code> file to <strong>Output Folder Path</strong>.</p></li>
-<li><p>After the <code class="docutils literal notranslate"><span class="pre">calibration.json</span></code> file is generated. You can visualize the FOV in the stage by selecting the target camera.</p>
+<li><p><strong>Generate Calibration File</strong> 버튼을 클릭하여 교정 파일을 생성합니다. <strong>Output Folder Path</strong>에 <code class="docutils literal notranslate"><span class="pre">calibration.json</span></code> 파일이 생성됩니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">calibration.json</span></code> 파일이 생성된 후 대상 카메라를 선택하여 스테이지에서 FOV를 시각화할 수 있습니다.</p>
 <blockquote>
-<div><img alt="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_visualize_fov.png" class="align-center" src="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_visualize_fov.png" />
+<div><img alt="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_visualize_fov.png" class="align-center" src="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_visualize_fov.png"/>
 </div></blockquote>
 </li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Your result might look different because it depends on the camera parameters. In this tutorial, the translate of the camera is <code class="docutils literal notranslate"><span class="pre">(-13.02311,</span> <span class="pre">7.20828,</span> <span class="pre">5.0)</span></code>, the orient is <code class="docutils literal notranslate"><span class="pre">(-55.253,</span> <span class="pre">-56.035,</span> <span class="pre">-150.088)</span></code>, and the camera focal length is <code class="docutils literal notranslate"><span class="pre">20.94</span></code>.</p>
+<p>결과는 카메라 매개변수에 따라 달라질 수 있습니다. 이 튜토리얼에서 카메라의 이동은 <code class="docutils literal notranslate"><span class="pre">(-13.02311,</span> <span class="pre">7.20828,</span> <span class="pre">5.0)</span></code>, 방향은 <code class="docutils literal notranslate"><span class="pre">(-55.253,</span> <span class="pre">-56.035,</span> <span class="pre">-150.088)</span></code>, 카메라 초점 거리는 <code class="docutils literal notranslate"><span class="pre">20.94</span></code>입니다.</p>
 </div>
 </section>
 <section id="generate-top-view-image">
 <h3>Generate Top View Image<a class="headerlink" href="camera_calibration.html#generate-top-view-image" title="Link to this heading">#</a></h3>
-<p>To visualize the generated FOV polygon top view image, generate the image by clicking on <strong>Generate Top View Image</strong> button.</p>
+<p>생성된 FOV 폴리곤 상단 뷰 이미지를 시각화하려면 <strong>Generate Top View Image</strong> 버튼을 클릭하여 이미지를 생성합니다.</p>
 <blockquote>
-<div><p>The Top View Camera’s view will be rendered and output to the <code class="docutils literal notranslate"><span class="pre">[Output</span> <span class="pre">Folder</span> <span class="pre">Path]</span></code>.
-An <code class="docutils literal notranslate"><span class="pre">imageMetadata.json</span></code> file is also generated to store image metadata.</p>
+<div><p>상단 뷰 카메라의 뷰가 렌더링되어 <code class="docutils literal notranslate"><span class="pre">[Output</span> <span class="pre">Folder</span> <span class="pre">Path]</span></code>에 출력됩니다.
+이미지 메타데이터를 저장하는 <code class="docutils literal notranslate"><span class="pre">imageMetadata.json</span></code> 파일도 생성됩니다.</p>
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If <strong>Create FOV Polygon Images</strong> is checked, for each camera there will be an image with a white-shaded FOV polygon from the top view.
-The FOV polygon images will be generated under <code class="docutils literal notranslate"><span class="pre">[Output</span> <span class="pre">Folder</span> <span class="pre">Path]/Debug/fieldOfViewPolygon</span></code>.</p>
-<a class="reference internal image-reference" href="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_fov_polygon.png"><img alt="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_fov_polygon.png" class="align-center" src="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_fov_polygon.png" style="width: 600px;" />
+<p><strong>Create FOV Polygon Images</strong>가 선택된 경우 각 카메라에 대해 상단 뷰에서 흰색 음영 처리된 FOV 폴리곤이 있는 이미지가 생성됩니다.
+FOV 폴리곤 이미지는 <code class="docutils literal notranslate"><span class="pre">[Output</span> <span class="pre">Folder</span> <span class="pre">Path]/Debug/fieldOfViewPolygon</span></code> 아래에 생성됩니다.</p>
+<a class="reference internal image-reference" href="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_fov_polygon.png"><img alt="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_fov_polygon.png" class="align-center" src="../../_images/isim_6.0_full_ext-isaacsim.sensors.rtx.calibration-0.3.1_viewport_fov_polygon.png" style="width: 600px;"/>
 </a>
 </div>
 </section>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="camera_placement.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Camera Placement</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../example_event_reactive_actors.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Reacting to Events with Actor Triggers</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="camera_placement.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Camera Placement</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="../example_event_reactive_actors.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Reacting to Events with Actor Triggers</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="camera_calibration.html#enable-the-extension">Enable the Extension</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="camera_calibration.html#open-the-calibration-tool-panel">Open the Calibration Tool Panel</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="camera_calibration.html#input-fields">Input Fields</a><ul class="nav section-nav flex-column">
@@ -1566,46 +1175,29 @@ The FOV polygon images will be generated under <code class="docutils literal not
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1636,36 +1228,21 @@ The FOV polygon images will be generated under <code class="docutils literal not
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>
