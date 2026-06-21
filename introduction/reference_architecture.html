@@ -1,551 +1,256 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Reference Architecture and Task Groupings &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Reference Architecture and Task Groupings — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'introduction/reference_architecture';</script>
-    <script>
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'introduction/reference_architecture';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Workflows" href="workflows.html" />
-    <link rel="prev" title="Standalone Examples Reference List" href="standalone_examples_list.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="workflows.html" rel="next" title="Workflows"/>
+<link href="standalone_examples_list.html" rel="prev" title="Standalone Examples Reference List"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="reference_architecture.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="reference_architecture.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +270,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -593,20 +297,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -681,17 +373,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -869,7 +551,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -909,13 +590,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -962,10 +637,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1134,18 +805,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1171,72 +832,48 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Reference Architecture and Task Groupings</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Reference Architecture and Task Groupings</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="reference-architecture-and-task-groupings">
+<article class="bd-article">
+<section id="reference-architecture-and-task-groupings">
 <span id="isaac-sim-main-reference-architecture"></span><h1>Reference Architecture and Task Groupings<a class="headerlink" href="reference_architecture.html#reference-architecture-and-task-groupings" title="Link to this heading">#</a></h1>
-<p>Isaac Sim is typically installed and used as one part of a larger solution. Depending on your use case and  requirements, this document provides a reference architecture. Almost all use-cases involve some commonalities, which are highlighted as task groupings in the diagrams below. Within each task grouping your product architecture could include one or more of the products or components that are listed.</p>
-<p>Regardless of your product components, most Isaac Sim use cases involve the following high level task groupings that occur in roughly the same order:</p>
+<p>Isaac Sim은 일반적으로 더 큰 솔루션의 일부로 설치 및 사용됩니다. 사용 사례와 요구 사항에 따라 이 문서는 참조 아키텍처를 제공합니다. 거의 모든 사용 사례에는 공통점이 있으며, 아래 다이어그램에서 태스크 그룹화로 강조 표시됩니다. 각 태스크 그룹화 내에서 제품 아키텍처는 나열된 제품 또는 컴포넌트 중 하나 이상을 포함할 수 있습니다.</p>
+<p>제품 컴포넌트에 관계없이, 대부분의 Isaac Sim 사용 사례는 대략 동일한 순서로 발생하는 다음과 같은 고수준 태스크 그룹화를 포함합니다:</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3 sd-fade-in">
 <summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">1. Geometry Authoring</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<span class="sd-summary-text">1. Geometry Authoring</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-right" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <ul class="simple">
 <li><p class="sd-card-text"><a class="reference external" href="https://developer.nvidia.com/omniverse/simready-assets">SimReady Assets</a></p></li>
 <li><p class="sd-card-text"><a class="reference internal" href="../assets/usd_assets_overview.html#isaac-assets-overview"><span class="std std-ref">Isaac Sim Assets</span></a></p></li>
@@ -1244,7 +881,7 @@
 </div>
 </details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3 sd-fade-in">
 <summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">2. Importing Assets</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<span class="sd-summary-text">2. Importing Assets</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-right" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <ul class="simple">
 <li><p class="sd-card-text"><a class="reference internal" href="../importer_exporter/importers_exporters.html#isaac-sim-importers-and-exporters"><span class="std std-ref">Importers and Exporters</span></a></p></li>
 <li><p class="sd-card-text"><a class="reference internal" href="../omniverse_usd/index.html#isaac-sim-app-omniverse-usd-tools"><span class="std std-ref">USD Tools</span></a></p></li>
@@ -1252,7 +889,7 @@
 </div>
 </details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3 sd-fade-in">
 <summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">3. Scene Setup</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<span class="sd-summary-text">3. Scene Setup</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-right" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <ul class="simple">
 <li><p class="sd-card-text"><a class="reference internal" href="../robot_setup/index.html#isaac-sim-robot-setup"><span class="std std-ref">Robot Setup Tools and Standards</span></a></p></li>
 <li><p class="sd-card-text"><a class="reference internal" href="../robot_setup_tutorials/index.html#isaac-sim-robot-setup-tutorials"><span class="std std-ref">Robot Setup Tutorials</span></a></p></li>
@@ -1261,7 +898,7 @@
 </div>
 </details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3 sd-fade-in">
 <summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">4. Interaction with the Digital Twin</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<span class="sd-summary-text">4. Interaction with the Digital Twin</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-right" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <ul class="simple">
 <li><p class="sd-card-text"><a class="reference internal" href="../robot_simulation/index.html#isaac-sim-robot-simulation"><span class="std std-ref">Robot Simulation and Controllers</span></a></p></li>
 <li><p class="sd-card-text"><a class="reference internal" href="../physics/index.html#isaac-sim-physics"><span class="std std-ref">Robot Articulation and Physics Tools</span></a></p></li>
@@ -1271,7 +908,7 @@
 </div>
 </details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3 sd-fade-in">
 <summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">5. Use Cases</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<span class="sd-summary-text">5. Use Cases</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg aria-hidden="true" class="sd-octicon sd-octicon-chevron-right" height="1.5em" version="1.1" viewbox="0 0 24 24" width="1.5em"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <ul class="simple">
 <li><p class="sd-card-text"><a class="reference internal" href="../isaac_lab_tutorials/index.html#isaac-lab-tutorials-page"><span class="std std-ref">Isaac Lab</span></a></p></li>
 <li><p class="sd-card-text"><a class="reference internal" href="../synthetic_data_generation/index.html#isaac-synthetic-data-generation-page"><span class="std std-ref">Synthetic Data Generation</span></a></p></li>
@@ -1279,361 +916,198 @@
 <li><p class="sd-card-text"><a class="reference internal" href="../nvidia_isaac_ros/isaac_ros_tutorials.html#isaac-sim-app-isaac-ros-tutorials"><span class="std std-ref">Isaac ROS</span></a></p></li>
 </ul>
 </div>
-</details><p>Typical use-cases are summarized in <a class="reference internal" href="reference_architecture.html#isaac-sim-ra-consumption"><span class="std std-ref">Use Cases</span></a>.</p>
-<a class="reference internal image-reference" href="../_images/isim_4.5_base_ref_external_arch_res_full.png"><img alt="Isaac Sim Reference Architecture" class="align-center" src="../_images/isim_4.5_base_ref_external_arch_res_full.png" style="width: 100%;" />
+</details><p>일반적인 사용 사례는 <a class="reference internal" href="reference_architecture.html#isaac-sim-ra-consumption"><span class="std std-ref">Use Cases</span></a>에 요약되어 있습니다.</p>
+<a class="reference internal image-reference" href="../_images/isim_4.5_base_ref_external_arch_res_full.png"><img alt="Isaac Sim Reference Architecture" class="align-center" src="../_images/isim_4.5_base_ref_external_arch_res_full.png" style="width: 100%;"/>
 </a>
 <section id="geometry-authoring">
 <span id="isaac-sim-ra-geometry-authoring"></span><h2>Geometry Authoring<a class="headerlink" href="reference_architecture.html#geometry-authoring" title="Link to this heading">#</a></h2>
-<p>The simulation environment (scene) is composed of various components including robots,
-static, and dynamic objects. The mechanical and geometrical design for these components
-is usually done with CAD software like Solidworks, Pro-E, Catia, AutoCad, or Creo. Parts and
-components of varying complexity can be designed and assembled.</p>
-<p>Developers can also leverage existing 3D asset libraries, which provide a vast collection of
-existing 3D assets. Omniverse and Isaac Sim leverage a file format called <a class="reference external" href="https://www.nvidia.com/en-us/omniverse/usd/">Universal Scene
-Description (OpenUSD)</a>.</p>
-<p>All assets need to be converted to OpenUSD before they can be used with Isaac Sim, and the default unit for Isaac Sim is meters.</p>
-<a class="reference internal image-reference" href="../_images/isim_4.5_base_ref_external_arch_geom_authoring.png"><img alt="Geometry Authoring" class="align-center" src="../_images/isim_4.5_base_ref_external_arch_geom_authoring.png" style="width: 50%;" />
+<p>시뮬레이션 환경(씬)은 로봇, 정적 및 동적 객체를 포함한 다양한 컴포넌트로 구성됩니다. 이러한 컴포넌트의 기계적 및 기하학적 설계는 일반적으로 Solidworks, Pro-E, Catia, AutoCad 또는 Creo와 같은 CAD 소프트웨어로 수행됩니다. 다양한 복잡도의 부품 및 컴포넌트를 설계하고 조립할 수 있습니다.</p>
+<p>개발자는 방대한 3D 에셋 컬렉션을 제공하는 기존 3D 에셋 라이브러리를 활용할 수도 있습니다. Omniverse와 Isaac Sim은 <a class="reference external" href="https://www.nvidia.com/en-us/omniverse/usd/">Universal Scene Description (OpenUSD)</a>라는 파일 형식을 사용합니다.</p>
+<p>모든 에셋은 Isaac Sim에서 사용되기 전에 OpenUSD로 변환되어야 하며, Isaac Sim의 기본 단위는 미터입니다.</p>
+<a class="reference internal image-reference" href="../_images/isim_4.5_base_ref_external_arch_geom_authoring.png"><img alt="Geometry Authoring" class="align-center" src="../_images/isim_4.5_base_ref_external_arch_geom_authoring.png" style="width: 50%;"/>
 </a>
-<p>NVIDIA provides a vast collection of OpenUSD ‘SimReady’ assets. <a class="reference external" href="https://developer.nvidia.com/omniverse/simready-assets">SimReady</a>, or
-simulation-ready, assets are physically accurate 3D objects that have accurate
-physical properties, behavior, and connected data streams that are used to represent the real world in
-simulated digital worlds. Developers can use these building blocks to construct scenes and
-generate data per their requirements. The Warehouse asset collection includes over
-800 3D assets of commonly available tools, equipment, and items in a warehouse including
-forklifts, pallets, racks, and shelves.</p>
-<a class="reference internal image-reference" href="../_images/isim_4.5_base_ref_external_arch_simready_warehouse.png"><img alt="SimReady Warehouse Assets" class="align-center" src="../_images/isim_4.5_base_ref_external_arch_simready_warehouse.png" style="width: 75%;" />
+<p>NVIDIA는 방대한 OpenUSD 'SimReady' 에셋 컬렉션을 제공합니다. <a class="reference external" href="https://developer.nvidia.com/omniverse/simready-assets">SimReady</a>는 시뮬레이션 준비된 에셋으로, 정확한 물리적 속성, 동작, 연결된 데이터 스트림을 갖는 물리적으로 정확한 3D 객체로 시뮬레이션 디지털 세계에서 실제 세계를 표현합니다. 개발자는 이러한 빌딩 블록을 사용하여 씬을 구성하고 요구 사항에 따라 데이터를 생성할 수 있습니다. 웨어하우스 에셋 컬렉션에는 지게차, 팔레트, 랙, 선반을 포함하여 웨어하우스에서 일반적으로 사용되는 도구, 장비, 아이템의 3D 에셋 800여 개가 포함되어 있습니다.</p>
+<a class="reference internal image-reference" href="../_images/isim_4.5_base_ref_external_arch_simready_warehouse.png"><img alt="SimReady Warehouse Assets" class="align-center" src="../_images/isim_4.5_base_ref_external_arch_simready_warehouse.png" style="width: 75%;"/>
 </a>
-<a class="reference internal image-reference" href="../_images/isim_4.5_base_ref_external_arch_simready_pallets.png"><img alt="Pallet Collection" class="align-center" src="../_images/isim_4.5_base_ref_external_arch_simready_pallets.png" style="width: 75%;" />
+<a class="reference internal image-reference" href="../_images/isim_4.5_base_ref_external_arch_simready_pallets.png"><img alt="Pallet Collection" class="align-center" src="../_images/isim_4.5_base_ref_external_arch_simready_pallets.png" style="width: 75%;"/>
 </a>
-<a class="reference internal image-reference" href="../_images/isim_4.5_base_ref_external_arch_simready_palletjacks.png"><img alt="PalletJack Collection" class="align-center" src="../_images/isim_4.5_base_ref_external_arch_simready_palletjacks.png" style="width: 75%;" />
+<a class="reference internal image-reference" href="../_images/isim_4.5_base_ref_external_arch_simready_palletjacks.png"><img alt="PalletJack Collection" class="align-center" src="../_images/isim_4.5_base_ref_external_arch_simready_palletjacks.png" style="width: 75%;"/>
 </a>
 </section>
 <section id="importing-assets">
 <span id="isaac-sim-ra-importing-assets"></span><h2>Importing Assets<a class="headerlink" href="reference_architecture.html#importing-assets" title="Link to this heading">#</a></h2>
-<p>There are extensions that enable importing CAD (Computer Aided Design) files into Isaac Sim
-that handle conversion to OpenUSD. Extensions are core building blocks that
-interact with and add or extend the functionality of Isaac Sim.</p>
+<p>Isaac Sim으로 CAD(컴퓨터 보조 설계) 파일을 가져와 OpenUSD로 변환을 처리하는 확장 기능이 있습니다. 확장 기능은 Isaac Sim의 기능과 상호 작용하고 추가하거나 확장하는 핵심 빌딩 블록입니다.</p>
 <section id="importing-and-creating-environments">
 <h3>Importing and Creating Environments<a class="headerlink" href="reference_architecture.html#importing-and-creating-environments" title="Link to this heading">#</a></h3>
-<p>The <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_asset-importer.html#asset-importer">asset importer</a>
-can be leveraged for importing OBJ, FBX, and glTF formats. The <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_cad-converter.html#cad-converter">CAD converter</a>
-extension supports a variety of popular CAD files from applications including
-Catia, Solidworks, AutoCad, and Creo. This enables you to quickly convert and
-import your environment into Isaac Sim.</p>
-<p>OpenUSD Connections and Data Exchange, formerly Omniverse Connect, is a collection of
-<a class="reference external" href="https://docs.omniverse.nvidia.com/connect/latest/catalog.html#importers-exporters">importers</a>,
-<a class="reference external" href="https://docs.omniverse.nvidia.com/connect/latest/catalog.html#exporters">exporters</a>,
-<a class="reference external" href="https://docs.omniverse.nvidia.com/connect/latest/catalog.html#converters">converters</a>, and
-<a class="reference external" href="https://docs.omniverse.nvidia.com/connect/latest/catalog.html#file-format-plugins">USD file format</a> plug-ins. They enable various 3D applications, products, and file formats to exchange data using OpenUSD.</p>
-<p>Some CAD applications have connectors with Omniverse, which allows them to bring over more relevant
-and contextual information when converting to USD. For example, PTC Creo, Autodesk Revit, or Autodesk Alias have corresponding connectors. The files generated
-from their CAD converters will have all the visual meshes represented in OpenUSD.</p>
+<p><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_asset-importer.html#asset-importer">asset importer</a>는 OBJ, FBX, glTF 형식을 가져오는 데 사용할 수 있습니다. <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_cad-converter.html#cad-converter">CAD converter</a> 확장 기능은 Catia, Solidworks, AutoCad, Creo를 포함한 애플리케이션의 다양한 인기 CAD 파일을 지원합니다. 이를 통해 환경을 Isaac Sim으로 빠르게 변환하고 가져올 수 있습니다.</p>
+<p>OpenUSD Connections and Data Exchange(이전 Omniverse Connect)는 다양한 3D 애플리케이션, 제품, 파일 형식이 OpenUSD를 사용하여 데이터를 교환할 수 있게 하는 <a class="reference external" href="https://docs.omniverse.nvidia.com/connect/latest/catalog.html#importers-exporters">importers</a>, <a class="reference external" href="https://docs.omniverse.nvidia.com/connect/latest/catalog.html#exporters">exporters</a>, <a class="reference external" href="https://docs.omniverse.nvidia.com/connect/latest/catalog.html#converters">converters</a>, <a class="reference external" href="https://docs.omniverse.nvidia.com/connect/latest/catalog.html#file-format-plugins">USD file format</a> 플러그인 모음입니다.</p>
+<p>일부 CAD 애플리케이션은 Omniverse와의 커넥터가 있어 USD로 변환할 때 더 관련성 있고 맥락적인 정보를 가져올 수 있습니다. 예를 들어 PTC Creo, Autodesk Revit 또는 Autodesk Alias에는 해당 커넥터가 있습니다. 이러한 CAD 컨버터로 생성된 파일은 OpenUSD에 표현된 모든 시각적 메시를 갖습니다.</p>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/isaac_assets_simple_warehouse_multiple_shelves.png"><img alt="Small warehouse multiple shelves" src="../_images/isaac_assets_simple_warehouse_multiple_shelves.png" style="width: 75%;" />
+<a class="reference internal image-reference" href="../_images/isaac_assets_simple_warehouse_multiple_shelves.png"><img alt="Small warehouse multiple shelves" src="../_images/isaac_assets_simple_warehouse_multiple_shelves.png" style="width: 75%;"/>
 </a>
 </figure>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/isaac_assets_hospital.png"><img alt="Hospital" src="../_images/isaac_assets_hospital.png" style="width: 75%;" />
+<a class="reference internal image-reference" href="../_images/isaac_assets_hospital.png"><img alt="Hospital" src="../_images/isaac_assets_hospital.png" style="width: 75%;"/>
 </a>
 </figure>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/isaac_assets_office.png"><img alt="Office" src="../_images/isaac_assets_office.png" style="width: 75%;" />
+<a class="reference internal image-reference" href="../_images/isaac_assets_office.png"><img alt="Office" src="../_images/isaac_assets_office.png" style="width: 75%;"/>
 </a>
 </figure>
 </section>
 <section id="importing-robots">
 <h3>Importing Robots<a class="headerlink" href="reference_architecture.html#importing-robots" title="Link to this heading">#</a></h3>
-<p>Isaac Sim comes with a variety of robots already imported. The pre-imported robots can be found on the <a class="reference internal" href="../assets/usd_assets_robots.html#isaac-assets-robots"><span class="std std-ref">Robot Assets</span></a> page. Isaac Sim also provides advanced options for importing other robots.</p>
-<p>If your robot is in <a class="reference external" href="https://wiki.ros.org/urdf">URDF</a>, you can use the <a class="reference internal" href="../importer_exporter/ext_isaacsim_asset_importer_urdf.html#isaac-sim-urdf-importer"><span class="std std-ref">URDF Importer Extension</span></a> extension from the GUI or from Python. This extension will import the visual meshes and the prim hierarchies (child-parent relationships), along with extra information about how the collision meshes, joints, and sensors are encoded.</p>
-<p>You could also use the <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_onshape.html">Onshape Importer</a> and <a class="reference internal" href="../importer_exporter/ext_isaacsim_asset_importer_mjcf.html#isaac-sim-mjcf-importer"><span class="std std-ref">MJCF Importer Extension</span></a>. With these importers, you will have to add the joint drives in
-and may have to tune them. The <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html#isaac-gain-tuner"><span class="std std-ref">Gain Tuner Extension</span></a> allows you to visualize and tune the joints.</p>
+<p>Isaac Sim에는 이미 가져온 다양한 로봇이 포함되어 있습니다. 사전 가져온 로봇은 <a class="reference internal" href="../assets/usd_assets_robots.html#isaac-assets-robots"><span class="std std-ref">Robot Assets</span></a> 페이지에서 찾을 수 있습니다. Isaac Sim은 다른 로봇을 가져오기 위한 고급 옵션도 제공합니다.</p>
+<p>로봇이 <a class="reference external" href="https://wiki.ros.org/urdf">URDF</a> 형식인 경우, GUI나 Python에서 <a class="reference internal" href="../importer_exporter/ext_isaacsim_asset_importer_urdf.html#isaac-sim-urdf-importer"><span class="std std-ref">URDF Importer Extension</span></a>을 사용할 수 있습니다. 이 확장 기능은 시각적 메시와 prim 계층(자식-부모 관계)을 가져오며, 충돌 메시, 관절, 센서가 인코딩되는 방법에 대한 추가 정보도 가져옵니다.</p>
+<p><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_onshape.html">Onshape Importer</a>와 <a class="reference internal" href="../importer_exporter/ext_isaacsim_asset_importer_mjcf.html#isaac-sim-mjcf-importer"><span class="std std-ref">MJCF Importer Extension</span></a>도 사용할 수 있습니다. 이 임포터를 사용하면 관절 드라이브를 추가하고 튜닝해야 할 수 있습니다. <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html#isaac-gain-tuner"><span class="std std-ref">Gain Tuner Extension</span></a>을 사용하면 관절을 시각화하고 튜닝할 수 있습니다.</p>
 </section>
 </section>
 <section id="scene-setup">
 <span id="isaac-sim-ra-scene-setup"></span><h2>Scene Setup<a class="headerlink" href="reference_architecture.html#scene-setup" title="Link to this heading">#</a></h2>
-<p>You can set up the scene after all the necessary assets are converted to OpenUSD and
-imported into Isaac Sim.</p>
-<p>To properly simulate real world situations, you must have physics characteristics defined. For example, physics characteristics define if an object is subject to gravity or how solid it is.</p>
-<a class="reference internal image-reference" href="../_images/isim_4.5_base_ref_external_arch_scene_setup.png"><img alt="Scene Setup" class="align-center" src="../_images/isim_4.5_base_ref_external_arch_scene_setup.png" style="width: 50%;" />
+<p>필요한 모든 에셋이 OpenUSD로 변환되고 Isaac Sim에 가져온 후 씬을 설정할 수 있습니다.</p>
+<p>실제 세계 상황을 올바르게 시뮬레이션하려면 물리 특성이 정의되어 있어야 합니다. 예를 들어, 물리 특성은 객체가 중력의 영향을 받는지 또는 얼마나 단단한지를 정의합니다.</p>
+<a class="reference internal image-reference" href="../_images/isim_4.5_base_ref_external_arch_scene_setup.png"><img alt="Scene Setup" class="align-center" src="../_images/isim_4.5_base_ref_external_arch_scene_setup.png" style="width: 50%;"/>
 </a>
 <section id="adding-physics">
 <h3>Adding Physics<a class="headerlink" href="reference_architecture.html#adding-physics" title="Link to this heading">#</a></h3>
-<p>After importing the required assets into Isaac Sim, make sure they have appropriate
-Physics for accurate simulations. Some asset importers like the URDF and Onshape Importer carry over
-most Physics parameters and configurations, for the rest of the imported assets adding
-physics before proceeding would be necessary. The <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_physics.html#physics-core">NVIDIA Omniverse™ Physics simulation
-extension</a>
-is powered by the NVIDIA PhysX SDK. It supports Rigid Body Simulation,
-Character Control, Deformable Body Simulation, Particle Simulation, and Articulations. The
-important steps for adding Physics to your scene are:</p>
+<p>필요한 에셋을 Isaac Sim에 가져온 후 정확한 시뮬레이션을 위해 적절한 물리가 있는지 확인합니다. URDF 및 Onshape Importer와 같은 일부 에셋 임포터는 대부분의 물리 매개변수와 구성을 가져오지만, 나머지 가져온 에셋의 경우 진행하기 전에 물리를 추가하는 것이 필요합니다. <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_physics.html#physics-core">NVIDIA Omniverse™ Physics simulation extension</a>은 NVIDIA PhysX SDK로 구동됩니다. 강체 시뮬레이션, 캐릭터 제어, 변형 가능 바디 시뮬레이션, 입자 시뮬레이션, 관절형 구조를 지원합니다. 씬에 물리를 추가하는 중요한 단계는 다음과 같습니다:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>Creating the physics scene</p></li>
-<li><p>Assigning collision settings</p></li>
-<li><p>Adding joints and drives.</p></li>
+<li><p>물리 씬 생성</p></li>
+<li><p>충돌 설정 할당</p></li>
+<li><p>관절 및 드라이브 추가.</p></li>
 </ol>
 </div></blockquote>
 <section id="creating-the-physics-scene">
 <h4>Creating the Physics Scene<a class="headerlink" href="reference_architecture.html#creating-the-physics-scene" title="Link to this heading">#</a></h4>
-<p>The first step is to create a Physics Scene and ensure that the default parameters
-for it are acceptable. For example, verify the direction and magnitude of gravity in
-the scene. If the imported scene does not contain a ground plane, make sure to add
-one before proceeding. It will prevent any physics-enabled objects from falling
-below it. Unless you are simulating hundreds of rigid bodies and robots, it is more
-efficient to use the CPU solver instead of the GPU solver.
-Refer to the <a class="reference internal" href="../robot_setup_tutorials/tutorial_intro_environment_setup.html#isaac-sim-app-tutorial-intro-environment-setup"><span class="std std-ref">Tutorial 1: Stage Setup</span></a> tutorial</p>
+<p>첫 번째 단계는 물리 씬을 생성하고 기본 매개변수가 적절한지 확인하는 것입니다. 예를 들어 씬에서 중력의 방향과 크기를 확인합니다. 가져온 씬에 지면 평면이 없다면 진행하기 전에 추가해야 합니다. 이는 물리가 활성화된 객체가 그 아래로 떨어지는 것을 방지합니다. 수백 개의 강체와 로봇을 시뮬레이션하지 않는 한 GPU 솔버 대신 CPU 솔버를 사용하는 것이 더 효율적입니다.
+<a class="reference internal" href="../robot_setup_tutorials/tutorial_intro_environment_setup.html#isaac-sim-app-tutorial-intro-environment-setup"><span class="std std-ref">Tutorial 1: Stage Setup</span></a> 튜토리얼 참조</p>
 </section>
 <section id="assigning-collision-settings">
 <h4>Assigning Collision Settings<a class="headerlink" href="reference_architecture.html#assigning-collision-settings" title="Link to this heading">#</a></h4>
-<p><a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/rigid_bodies_articulations/rigid_bodies.html#create-a-rigid-body-with-a-collider">Collision</a>
-enables rigid bodies to interact with each other in an environment. The
-geometry of the object can be approximated by convex hull, convex decomposition,
-bounding sphere, bounding box, and SDF collision meshes. Each of them
-approximates the geometry using different methods and may be better suited for
-specific use cases. PhysX supports exact representations for Cube, Capsule, and
-Sphere shapes. Cones and Cylinders are supported through the custom geometry
-flag and are particularly useful when setting collision approximations for wheels of
-robots. <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/rigid_bodies_articulations/rigid_bodies.html#configure-rigid-body-s-material-properties">Rigid-body physics materials</a>
-provide friction, restitution (a.k.a. ‘bounciness’), and material density properties</p>
+<p><a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/rigid_bodies_articulations/rigid_bodies.html#create-a-rigid-body-with-a-collider">Collision</a>은 강체가 환경에서 서로 상호 작용할 수 있게 합니다. 객체의 기하는 볼록 껍질, 볼록 분해, 경계 구, 경계 박스, SDF 충돌 메시로 근사할 수 있습니다. 각 방법은 다른 기하 근사 방법을 사용하며 특정 사용 사례에 더 적합할 수 있습니다. PhysX는 Cube, Capsule, Sphere 형상에 대한 정확한 표현을 지원합니다. Cone 및 Cylinder는 커스텀 기하 플래그를 통해 지원되며 로봇 바퀴의 충돌 근사 설정에 특히 유용합니다. <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/rigid_bodies_articulations/rigid_bodies.html#configure-rigid-body-s-material-properties">Rigid-body physics materials</a>는 마찰, 반발(a.k.a. '탄성'), 재료 밀도 속성을 제공합니다</p>
 </section>
 <section id="adding-joints-and-drives">
 <h4>Adding Joints and Drives<a class="headerlink" href="reference_architecture.html#adding-joints-and-drives" title="Link to this heading">#</a></h4>
-<p>After adding the appropriate collision meshes to prims in the scene, we need to
-ensure that they interact correctly with one another. We can do this by defining
-appropriate joints between prims connected to each other. Joints give you the
-ability to connect physics objects by defining how the objects may move relative to
-each other. There are various <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/rigid_bodies_articulations/joints.html">joints types</a>
-to select from including revolute, prismatic, spherical, fixed, etc.</p>
+<p>씬의 prim에 적절한 충돌 메시를 추가한 후, 서로 올바르게 상호 작용하는지 확인해야 합니다. 이는 서로 연결된 prim 간에 적절한 관절을 정의하여 수행할 수 있습니다. 관절은 객체가 서로 상대적으로 어떻게 이동할 수 있는지를 정의하여 물리 객체를 연결하는 능력을 제공합니다. 회전, 프리즘, 구형, 고정 등을 포함한 다양한 <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/rigid_bodies_articulations/joints.html">관절 유형</a>을 선택할 수 있습니다.</p>
 </section>
 </section>
 <section id="adding-sensors">
 <h3>Adding Sensors<a class="headerlink" href="reference_architecture.html#adding-sensors" title="Link to this heading">#</a></h3>
-<p>Isaac Sim sensor simulation extensions can simulate ground truth perception and
-physics-based sensors, and has a library of realistic sensor models. You can simulate
-camera, lidar, radar, and physics-based sensors. It is possible to use camera calibration
-parameters obtained from OpenCV or ROS by converting them to Isaac Sim units, refer to the <a class="reference internal" href="../sensors/isaacsim_sensors_camera.html#isaacsim-sensors-camera"><span class="std std-ref">Camera Sensors</span></a> page.
-RTX Lidar and Radar sensors are simulated at render time on the GPU with RTX hardware. A variety of physics-based sensors
-like contact sensors, IMUs sensor, force sensor, effort sensor, and proximity sensor are also included. These sensors can be added
-at the appropriate locations in the stage hierarchy (for example, a camera or lidar might be
-added near the front/top of the robot). The <a class="reference internal" href="../assets/usd_assets_camera_depth_sensors.html#isaac-assets-camera-depth-sensors"><span class="std std-ref">Camera and Depth Sensors</span></a> and <a class="reference internal" href="../assets/usd_assets_nonvisual_sensors.html#isaac-assets-nonvisual-sensors"><span class="std std-ref">Non-Visual Sensors</span></a> pages
-highlight all the available physical sensor assets available with Isaac Sim</p>
+<p>Isaac Sim 센서 시뮬레이션 확장 기능은 그라운드 트루스 인식 및 물리 기반 센서를 시뮬레이션할 수 있으며 실제적인 센서 모델 라이브러리를 갖추고 있습니다. 카메라, 라이다, 레이더, 물리 기반 센서를 시뮬레이션할 수 있습니다. OpenCV 또는 ROS에서 얻은 카메라 캘리브레이션 매개변수를 Isaac Sim 단위로 변환하여 사용할 수 있습니다. <a class="reference internal" href="../sensors/isaacsim_sensors_camera.html#isaacsim-sensors-camera"><span class="std std-ref">Camera Sensors</span></a> 페이지를 참조하세요.
+RTX Lidar 및 Radar 센서는 RTX 하드웨어로 GPU에서 렌더 시간에 시뮬레이션됩니다. 접촉 센서, IMU 센서, 힘 센서, 토크 센서, 근접 센서와 같은 다양한 물리 기반 센서도 포함됩니다. 이 센서들은 스테이지 계층의 적절한 위치에 추가할 수 있습니다(예: 카메라나 라이다는 로봇의 앞/상단 근처에 추가). <a class="reference internal" href="../assets/usd_assets_camera_depth_sensors.html#isaac-assets-camera-depth-sensors"><span class="std std-ref">Camera and Depth Sensors</span></a>와 <a class="reference internal" href="../assets/usd_assets_nonvisual_sensors.html#isaac-assets-nonvisual-sensors"><span class="std std-ref">Non-Visual Sensors</span></a> 페이지는 Isaac Sim에서 사용 가능한 모든 물리적 센서 에셋을 강조합니다</p>
 </section>
 <section id="import-and-create-materials">
 <h3>Import and Create Materials<a class="headerlink" href="reference_architecture.html#import-and-create-materials" title="Link to this heading">#</a></h3>
-<p><a class="reference external" href="https://docs.omniverse.nvidia.com/materials-and-rendering/latest/materials.html#omniverse-materials">Materials</a> in Isaac Sim
-are supported using <a class="reference external" href="https://www.nvidia.com/en-us/design-visualization/technologies/material-definition-language/">NVIDIA Material Definition Language (MDL)</a> ,
-a shading language designed for defining and describing the appearance
-of materials in computer graphics. It allows artists and developers to create highly realistic
-materials by specifying their physical properties, surface characteristics, and how they
-interact with light. Omniverse comes with several template materials, including a physically
-based glass; several general purpose multi-lobed materials useful for dielectric and
-non-dielectric materials, skin, hair, liquids and other materials requiring subsurface
-scattering or transmissive effects; and USD’s UsdPreviewSurface.</p>
+<p>Isaac Sim의 <a class="reference external" href="https://docs.omniverse.nvidia.com/materials-and-rendering/latest/materials.html#omniverse-materials">Materials</a>는 컴퓨터 그래픽스에서 재료의 외관을 정의하고 설명하기 위해 설계된 쉐이딩 언어인 <a class="reference external" href="https://www.nvidia.com/en-us/design-visualization/technologies/material-definition-language/">NVIDIA Material Definition Language (MDL)</a>을 사용하여 지원됩니다. 아티스트와 개발자는 물리적 속성, 표면 특성, 빛과의 상호 작용 방식을 지정하여 매우 사실적인 재료를 만들 수 있습니다. Omniverse에는 물리 기반 유리, 유전체 및 비유전체 재료, 피부, 머리카락, 액체 및 산란 또는 투과 효과가 필요한 기타 재료에 유용한 범용 다중 로브 재료, USD의 UsdPreviewSurface를 포함한 여러 템플릿 재료가 제공됩니다.</p>
 </section>
 </section>
 <section id="interaction-with-digital-twin">
 <span id="isaac-sim-ra-interaction"></span><h2>Interaction with Digital Twin<a class="headerlink" href="reference_architecture.html#interaction-with-digital-twin" title="Link to this heading">#</a></h2>
-<p>Once the assets have been imported and the scene has been set up, there are various ways
-to interact with the simulated environment, which are summarized below.</p>
-<a class="reference internal image-reference" href="../_images/isim_4.5_base_ref_external_arch_interact.png"><img alt="Interact with Scene" class="align-center" src="../_images/isim_4.5_base_ref_external_arch_interact.png" style="width: 50%;" />
+<p>에셋을 가져오고 씬을 설정한 후, 시뮬레이션 환경과 상호 작용하는 다양한 방법이 있으며, 아래에 요약되어 있습니다.</p>
+<a class="reference internal image-reference" href="../_images/isim_4.5_base_ref_external_arch_interact.png"><img alt="Interact with Scene" class="align-center" src="../_images/isim_4.5_base_ref_external_arch_interact.png" style="width: 50%;"/>
 </a>
 <section id="gui">
 <h3>GUI<a class="headerlink" href="reference_architecture.html#gui" title="Link to this heading">#</a></h3>
-<p>The GUI provides intuitive controls for scene management, object manipulation, and
-real-time monitoring, providing a streamlined interface for developing and testing robotic
-systems. Pre-packaged examples, robots and environments can easily be accessed and
-added to the scene via the GUI. Create tools make it easy to assemble, illuminate, simulate,
-and render scenes large and small, therefore making it the ideal place to build your virtual
-worlds, assemble robots, and examine physics. Refer to the <a class="reference internal" href="../gui/index.html#isaac-sim-gui-tutorials-page"><span class="std std-ref">GUI Reference</span></a> for
-getting started with the GUI tutorials.</p>
+<p>GUI는 씬 관리, 객체 조작, 실시간 모니터링을 위한 직관적인 컨트롤을 제공하며, 로봇 시스템 개발 및 테스트를 위한 간소화된 인터페이스를 제공합니다. GUI를 통해 사전 패키지된 예제, 로봇 및 환경에 쉽게 접근하고 씬에 추가할 수 있습니다. Create 도구를 사용하면 크고 작은 씬을 쉽게 조립, 조명, 시뮬레이션, 렌더링할 수 있으므로 가상 세계를 구축하고 로봇을 조립하며 물리를 검사하기에 이상적인 장소입니다. GUI 튜토리얼을 시작하려면 <a class="reference internal" href="../gui/index.html#isaac-sim-gui-tutorials-page"><span class="std std-ref">GUI Reference</span></a>를 참조하세요.</p>
 </section>
 <section id="standalone-python">
 <h3>Standalone Python<a class="headerlink" href="reference_architecture.html#standalone-python" title="Link to this heading">#</a></h3>
-<p>Isaac Sim provides a built-in <a class="reference internal" href="../python_scripting/manual_standalone_python.html#isaac-sim-python-environment"><span class="std std-ref">Python Environment</span></a> that packages can use, like a
-system-level Python install. This is the recommended environment for running Python
-Scripts with Isaac Sim. All Isaac Sim libraries and dependencies can be imported and
-accessed through this Python environment. It also allows users to script and run their
-entire worflkow headlessly. For using libraries and tools which are not a part of Isaac Sim,
-ensure that they work with Python 3.11 first. A collection of standalone python examples is
-provided with Isaac Sim and serves as a good starting point to understand the overall
-steps involved. Jupyter notebook and Visual Studio Code support is also available. Workflows from the GUI
-can be completely scripted in Python and can be run in headless mode too.</p>
+<p>Isaac Sim은 패키지가 시스템 수준 Python 설치처럼 사용할 수 있는 내장 <a class="reference internal" href="../python_scripting/manual_standalone_python.html#isaac-sim-python-environment"><span class="std std-ref">Python Environment</span></a>를 제공합니다. 이는 Isaac Sim에서 Python 스크립트를 실행하기 위한 권장 환경입니다. 이 Python 환경을 통해 모든 Isaac Sim 라이브러리와 의존성을 가져오고 접근할 수 있습니다. 또한 전체 워크플로우를 헤드리스로 스크립팅하고 실행할 수 있습니다. Isaac Sim의 일부가 아닌 라이브러리와 도구를 사용하려면 먼저 Python 3.11과 호환되는지 확인합니다. Isaac Sim과 함께 제공되는 독립 실행형 Python 예제 컬렉션은 전반적인 단계를 이해하기 위한 좋은 출발점입니다. Jupyter 노트북 및 Visual Studio Code 지원도 제공됩니다. GUI의 워크플로우는 Python으로 완전히 스크립팅할 수 있으며 헤드리스 모드에서도 실행할 수 있습니다.</p>
 </section>
 <section id="extensions">
 <h3>Extensions<a class="headerlink" href="reference_architecture.html#extensions" title="Link to this heading">#</a></h3>
-<p>Extensions enable developers to add functionality and integrate other tools for Isaac Sim.
-They are individually built application modules. All the tools used in Isaac Sim are built as
-extensions. Various extensions enable easier interaction with sensors, robots and prims in
-the scene. The ROS 2 Bridge extension can be used to connect your ROS packages and
-code to Isaac Sim. Developers can write their own extensions in C++, Python or a
-combination of both.</p>
+<p>확장 기능은 개발자가 Isaac Sim에 기능을 추가하고 다른 도구를 통합할 수 있게 합니다. 개별적으로 빌드된 애플리케이션 모듈입니다. Isaac Sim에서 사용되는 모든 도구는 확장 기능으로 구축됩니다. 다양한 확장 기능은 씬의 센서, 로봇 및 prim과의 상호 작용을 쉽게 합니다. ROS 2 Bridge 확장 기능을 사용하여 ROS 패키지와 코드를 Isaac Sim에 연결할 수 있습니다. 개발자는 C++, Python 또는 둘 다 조합하여 자신만의 확장 기능을 작성할 수 있습니다.</p>
 </section>
 <section id="omnigraph">
 <h3>OmniGraph<a class="headerlink" href="reference_architecture.html#omnigraph" title="Link to this heading">#</a></h3>
-<p><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_omnigraph.html">OmniGraph</a> is the visual scripting language
-for Omniverse. It is not a single type of graph, but a composition of many different graph systems
-under a single framework. Many Isaac Sim extensions provide nodes for building graphs for common
-use cases. Core, sensor, and ROS extensions are a few examples that contain such OmniGraph Nodes.</p>
+<p><a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_omnigraph.html">OmniGraph</a>는 Omniverse를 위한 비주얼 스크립팅 언어입니다. 단일 유형의 그래프가 아니라 단일 프레임워크 아래 여러 다른 그래프 시스템의 조합입니다. 많은 Isaac Sim 확장 기능은 일반적인 사용 사례를 위한 그래프를 구축하기 위한 노드를 제공합니다. Core, 센서, ROS 확장 기능은 이러한 OmniGraph 노드를 포함하는 몇 가지 예시입니다.</p>
 </section>
 </section>
 <section id="use-cases">
 <span id="isaac-sim-ra-consumption"></span><h2>Use Cases<a class="headerlink" href="reference_architecture.html#use-cases" title="Link to this heading">#</a></h2>
 <section id="synthetic-data-generation-sdg">
 <h3>Synthetic Data Generation (SDG)<a class="headerlink" href="reference_architecture.html#synthetic-data-generation-sdg" title="Link to this heading">#</a></h3>
-<p>Developers can generate physically accurate synthetic data that can enhance the training
-and performance of AI perception networks used for robotics using
-<a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_replicator.html">Omniverse Replicator</a>.
-Replicator is a collection of extensions, Python APIs, workflows, and tools that enable
-synthetic data generation tasks.</p>
-<p>Once the scene has been set up, Replicator can be used to modify and randomize various
-features like position, rotation, lighting, size, and textures of assets in the scene. A wide
-range of annotations are supported including 2D bounding boxes, 3D bounding boxes,
-semantic and instance segmentation masks, normals, depth, pointclouds, and more, with
-data being written in common formats like COCO and KITTI formats. Custom annotators
-and writers can also be implemented for advanced use cases like pose estimation. This
-enables developers to seamlessly integrate the generated data with their training pipelines</p>
-<a class="reference internal image-reference" href="../_images/isim_4.5_base_ref_external_arch_sdg.png"><img alt="Replicator annotations" class="align-center" src="../_images/isim_4.5_base_ref_external_arch_sdg.png" style="width: 75%;" />
+<p>개발자는 <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_replicator.html">Omniverse Replicator</a>를 사용하여 로봇에 사용되는 AI 인식 네트워크의 훈련과 성능을 향상시킬 수 있는 물리적으로 정확한 합성 데이터를 생성할 수 있습니다. Replicator는 합성 데이터 생성 태스크를 가능하게 하는 확장 기능, Python API, 워크플로우, 도구의 모음입니다.</p>
+<p>씬이 설정된 후, Replicator를 사용하여 씬에서 에셋의 위치, 회전, 조명, 크기, 텍스처와 같은 다양한 기능을 수정하고 무작위화할 수 있습니다. 2D 경계 박스, 3D 경계 박스, 의미론적 및 인스턴스 분할 마스크, 법선, 깊이, 포인트 클라우드 등 다양한 주석이 지원되며, 데이터는 COCO 및 KITTI 형식과 같은 일반적인 형식으로 작성됩니다. 포즈 추정과 같은 고급 사용 사례를 위한 커스텀 주석기 및 라이터도 구현할 수 있습니다. 이를 통해 개발자는 생성된 데이터를 훈련 파이프라인과 원활하게 통합할 수 있습니다</p>
+<a class="reference internal image-reference" href="../_images/isim_4.5_base_ref_external_arch_sdg.png"><img alt="Replicator annotations" class="align-center" src="../_images/isim_4.5_base_ref_external_arch_sdg.png" style="width: 75%;"/>
 </a>
-<p>To get started, developers can leverage the Python API provided by Omniverse Replicator
-for generating synthetic data. The same scripts can be used to generate data headlessly in
-the cloud through the Isaac Sim docker container (instructions <a class="reference internal" href="../installation/install_container.html#isaac-sim-app-install-container"><span class="std std-ref">Container Installation</span></a>)
-on a developer’s preferred CSP (AWS, Alibaba, Azure, GCP) with the <a class="reference internal" href="../installation/install_cloud.html#isaac-sim-app-install-cloud"><span class="std std-ref">Cloud Deployment</span></a> guide.
-<a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_replicator/yaml_workflow.html#replicator-yaml">Replicator YAML</a>
-can be used for low-code situations where scripts can easily be edited by non-technical experts.
-They offer a high level of portability and care suitable for cloud use cases.</p>
+<p>시작하려면 개발자는 합성 데이터 생성을 위해 Omniverse Replicator가 제공하는 Python API를 활용할 수 있습니다. 동일한 스크립트를 <a class="reference internal" href="../installation/install_container.html#isaac-sim-app-install-container"><span class="std std-ref">Container Installation</span></a>을 통해 Isaac Sim 도커 컨테이너에서 클라우드에서 헤드리스로 데이터를 생성하거나, <a class="reference internal" href="../installation/install_cloud.html#isaac-sim-app-install-cloud"><span class="std std-ref">Cloud Deployment</span></a> 가이드를 통해 개발자가 선호하는 CSP(AWS, Alibaba, Azure, GCP)에서 사용할 수 있습니다. <a class="reference external" href="https://docs.omniverse.nvidia.com/extensions/latest/ext_replicator/yaml_workflow.html#replicator-yaml">Replicator YAML</a>은 비기술 전문가가 스크립트를 쉽게 편집할 수 있는 로우코드 상황에서 사용할 수 있습니다. 높은 이식성을 제공하며 클라우드 사용 사례에 적합합니다.</p>
 </section>
 <section id="software-in-the-loop-sil">
 <h3>Software in the Loop (SIL)<a class="headerlink" href="reference_architecture.html#software-in-the-loop-sil" title="Link to this heading">#</a></h3>
-<p>Once the simulation scenario has been set up, developers can tune and test various
-aspects of their robotics software stack. The insights gained after varying parameters and
-configurations of the software stack and the simulated robot enable an easier and
-accurate transition to the physical real-world robot. A few common use cases are
-highlighted below:</p>
+<p>시뮬레이션 시나리오가 설정된 후, 개발자는 로봇 소프트웨어 스택의 다양한 측면을 조정하고 테스트할 수 있습니다. 소프트웨어 스택과 시뮬레이션된 로봇의 매개변수 및 구성을 변경하여 얻은 통찰은 물리적 실제 로봇으로의 더 쉽고 정확한 전환을 가능하게 합니다. 일반적인 사용 사례 몇 가지가 아래에 강조 표시됩니다:</p>
 <section id="single-and-multi-robot-navigation">
 <h4>Single and Multi-Robot Navigation<a class="headerlink" href="reference_architecture.html#single-and-multi-robot-navigation" title="Link to this heading">#</a></h4>
-<p>The navigation stack for a robot can be easily tested in various scenarios. The assets in the
-environment can be randomized to come up with these scenarios. For running navigation
-with multiple robots, a multi-GPU setup can be leveraged. Isaac Sim supports the ROS 2
-Nav2 stack via the ROS 2 Bridge.</p>
+<p>로봇의 내비게이션 스택은 다양한 시나리오에서 쉽게 테스트할 수 있습니다. 환경의 에셋을 무작위화하여 이러한 시나리오를 구성할 수 있습니다. 여러 로봇으로 내비게이션을 실행하려면 멀티 GPU 설정을 활용할 수 있습니다. Isaac Sim은 ROS 2 Bridge를 통해 ROS 2 Nav2 스택을 지원합니다.</p>
 </section>
 <section id="ai-model-evaluation">
 <h4>AI Model Evaluation<a class="headerlink" href="reference_architecture.html#ai-model-evaluation" title="Link to this heading">#</a></h4>
-<p>Evaluating models is easy in simulation because of direct access to ground truth which
-could be through Physics, the state of a robot, or reading of a sensor. These can then be
-compared with the model predictions to obtain the evaluation metrics.</p>
-<p>For example, in computer vision tasks, the rendered image from the simulated camera can
-be passed through the model for obtaining predictions. This can then be compared with
-the ground truth (available directly from simulation or via Replicator) to obtain evaluation
-metrics. This can also be done for other sensors like Lidars and can be easily extended to
-multimodal applications</p>
+<p>시뮬레이션에서는 물리, 로봇 상태 또는 센서 읽기를 통해 그라운드 트루스에 직접 접근할 수 있어 모델 평가가 쉽습니다. 이를 모델 예측과 비교하여 평가 지표를 얻을 수 있습니다.</p>
+<p>예를 들어, 컴퓨터 비전 태스크에서 시뮬레이션된 카메라의 렌더링된 이미지를 모델에 전달하여 예측을 얻을 수 있습니다. 이를 그라운드 트루스(시뮬레이션에서 직접 또는 Replicator를 통해 제공)와 비교하여 평가 지표를 얻을 수 있습니다. 이는 라이다와 같은 다른 센서에도 가능하며 멀티모달 애플리케이션으로 쉽게 확장할 수 있습니다</p>
 </section>
 <section id="perception">
 <h4>Perception<a class="headerlink" href="reference_architecture.html#perception" title="Link to this heading">#</a></h4>
-<p><a class="reference external" href="https://developer.nvidia.com/isaac/perceptor">Isaac Perceptor</a> is a reference workflow of
-NVIDIA-accelerated libraries and AI models that helps you quickly build robust autonomous
-mobile robots (AMRs) to perceive, localize, and operate in unstructured environments like
-warehouses or factories. It works with inputs from simulated environments in Isaac Sim</p>
+<p><a class="reference external" href="https://developer.nvidia.com/isaac/perceptor">Isaac Perceptor</a>는 창고나 공장과 같은 비구조화된 환경에서 인식, 로컬라이제이션, 운영할 수 있는 강건한 자율 이동 로봇(AMR)을 빠르게 구축하는 데 도움이 되는 NVIDIA 가속 라이브러리와 AI 모델의 참조 워크플로우입니다. Isaac Sim의 시뮬레이션 환경에서의 입력으로 작동합니다</p>
 </section>
 <section id="manipulation">
 <h4>Manipulation<a class="headerlink" href="reference_architecture.html#manipulation" title="Link to this heading">#</a></h4>
-<p><a class="reference external" href="https://nvidia-isaac-ros.github.io/reference_workflows/isaac_manipulator/index.html">Isaac Manipulator</a>
-can be leveraged for manipulation tasks and verified in simulation. It is a
-collection of GPU-accelerated packages for perception driven manipulation, providing
-capabilities such as object detection and pose estimation. Time optimal collision-free
-motion can be generated with cuMotion. Nvblox can be used for local 3D reconstruction
-and obstacle detection. MoveIt is also supported via the ROS Bridge in Isaac Sim.</p>
+<p><a class="reference external" href="https://nvidia-isaac-ros.github.io/reference_workflows/isaac_manipulator/index.html">Isaac Manipulator</a>는 조작 태스크에 활용하고 시뮬레이션에서 검증할 수 있습니다. 인식 기반 조작을 위한 GPU 가속 패키지 모음으로, 객체 감지 및 포즈 추정과 같은 기능을 제공합니다. cuMotion으로 시간 최적 무충돌 모션을 생성할 수 있습니다. Nvblox는 로컬 3D 재구성 및 장애물 감지에 사용할 수 있습니다. MoveIt도 Isaac Sim의 ROS Bridge를 통해 지원됩니다.</p>
 </section>
 <section id="reinforcement-learning">
 <h4>Reinforcement Learning<a class="headerlink" href="reference_architecture.html#reinforcement-learning" title="Link to this heading">#</a></h4>
-<p><a class="reference internal" href="../isaac_lab_tutorials/index.html#isaac-lab-tutorials-page"><span class="std std-ref">Isaac Lab</span></a> is a united and modular framework for robot learning that aims to simplify
-common workflows in robotics research (such as RL, learning from demonstrations, and
-motion planning). It is built upon NVIDIA Isaac Sim.</p>
+<p><a class="reference internal" href="../isaac_lab_tutorials/index.html#isaac-lab-tutorials-page"><span class="std std-ref">Isaac Lab</span></a>은 로봇 연구의 일반적인 워크플로우(RL, 시연을 통한 학습, 모션 계획 등)를 단순화하는 것을 목표로 하는 통합되고 모듈화된 로봇 학습 프레임워크입니다. NVIDIA Isaac Sim 위에 구축되어 있습니다.</p>
 </section>
 </section>
 <section id="hardware-in-the-loop-hil">
 <h3>Hardware in the Loop (HIL)<a class="headerlink" href="reference_architecture.html#hardware-in-the-loop-hil" title="Link to this heading">#</a></h3>
-<p>Hardware in the loop testing and evaluation can be done with Isaac Sim. The target
-deployment device will receive all the data from the simulated robot and sensors which can
-be fed to the needed software stacks/algorithms. ROS 2 can be leveraged as the
-middleware which handles sending and receiving all the data from the simulation computer
-to the target device. For example, a simulated camera from Isaac Sim will stream over all
-the image data via the ROS 2 bridge from Isaac Sim to an
-<a class="reference external" href="https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/">NVIDIA Jetson Orin</a>, the
-embedded device on the robot which will run the computer vision application. This is
-particularly useful when selecting the target deployment device to verify it can run the
-software stack needed before physically setting up the robot.</p>
+<p>Isaac Sim으로 하드웨어-인-더-루프 테스트 및 평가를 수행할 수 있습니다. 목표 배포 장치는 시뮬레이션된 로봇과 센서에서 모든 데이터를 수신하여 필요한 소프트웨어 스택/알고리즘에 공급할 수 있습니다. ROS 2는 시뮬레이션 컴퓨터에서 목표 장치로 모든 데이터를 주고받는 미들웨어로 활용할 수 있습니다. 예를 들어, Isaac Sim의 시뮬레이션된 카메라는 Isaac Sim의 ROS 2 브리지를 통해 <a class="reference external" href="https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/">NVIDIA Jetson Orin</a>으로 모든 이미지 데이터를 스트리밍합니다. Jetson Orin은 컴퓨터 비전 애플리케이션을 실행할 로봇의 임베디드 장치입니다. 이는 물리적으로 로봇을 설정하기 전에 목표 배포 장치가 필요한 소프트웨어 스택을 실행할 수 있는지 검증하는 데 특히 유용합니다.</p>
 </section>
 <section id="ci-cd">
 <h3>CI/CD<a class="headerlink" href="reference_architecture.html#ci-cd" title="Link to this heading">#</a></h3>
 <section id="osmo">
 <h4>OSMO<a class="headerlink" href="reference_architecture.html#osmo" title="Link to this heading">#</a></h4>
-<p><a class="reference external" href="https://developer.nvidia.com/osmo">OSMO</a>
-is a cloud-native workow orchestration platform that lets you easily scale your
-workloads across distributed environments — from on-premises to private and public
-cloud. You can now apply for early access.</p>
+<p><a class="reference external" href="https://developer.nvidia.com/osmo">OSMO</a>는 온프레미스에서 프라이빗 및 퍼블릭 클라우드까지 분산 환경 전반에 걸쳐 워크로드를 쉽게 확장할 수 있는 클라우드 네이티브 워크플로우 오케스트레이션 플랫폼입니다. 현재 얼리 액세스를 신청할 수 있습니다.</p>
 </section>
 <section id="sizing-calculator">
 <h4>Sizing Calculator<a class="headerlink" href="reference_architecture.html#sizing-calculator" title="Link to this heading">#</a></h4>
-<p>Please refer to the <a class="reference internal" href="../reference_material/benchmarks.html#isaac-sim-benchmarks"><span class="std std-ref">Isaac Sim Benchmarks</span></a> page for Isaac Sim performance benchmarks
-across multiple consumer and enterprise hardware configurations.</p>
+<p>여러 소비자 및 엔터프라이즈 하드웨어 구성에서의 Isaac Sim 성능 벤치마크는 <a class="reference internal" href="../reference_material/benchmarks.html#isaac-sim-benchmarks"><span class="std std-ref">Isaac Sim Benchmarks</span></a> 페이지를 참조하세요.</p>
 </section>
 </section>
 </section>
 <section id="further-reading">
 <h2>Further Reading<a class="headerlink" href="reference_architecture.html#further-reading" title="Link to this heading">#</a></h2>
-<p>Follow the relevant tutorials for a deeper dive into a corresponding section.</p>
+<p>해당 섹션에 대한 자세한 내용은 관련 튜토리얼을 따르세요.</p>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="standalone_examples_list.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Standalone Examples Reference List</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="workflows.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Workflows</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="standalone_examples_list.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Standalone Examples Reference List</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="workflows.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Workflows</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="reference_architecture.html#geometry-authoring">Geometry Authoring</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="reference_architecture.html#importing-assets">Importing Assets</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="reference_architecture.html#importing-and-creating-environments">Importing and Creating Environments</a></li>
@@ -1678,46 +1152,29 @@ across multiple consumer and enterprise hardware configurations.</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="reference_architecture.html#further-reading">Further Reading</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1748,36 +1205,21 @@ across multiple consumer and enterprise hardware configurations.</p>
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

@@ -1,551 +1,256 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Isaac Sim Basic Usage Tutorial &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Isaac Sim Basic Usage Tutorial — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'introduction/quickstart_isaacsim';</script>
-    <script>
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'introduction/quickstart_isaacsim';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Basic Robot Tutorial" href="quickstart_isaacsim_robot.html" />
-    <link rel="prev" title="Quick Tutorials" href="quickstart_index.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="quickstart_isaacsim_robot.html" rel="next" title="Basic Robot Tutorial"/>
+<link href="quickstart_index.html" rel="prev" title="Quick Tutorials"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="quickstart_isaacsim.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="quickstart_isaacsim.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +270,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -593,20 +297,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -681,17 +373,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -869,7 +551,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -909,13 +590,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -962,10 +637,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1134,18 +805,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1171,96 +832,70 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="quickstart_index.html" class="nav-link">Quick Tutorials</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Isaac Sim Basic Usage Tutorial</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="quickstart_index.html">Quick Tutorials</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Isaac Sim Basic Usage Tutorial</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="isaac-sim-short-basic-usage-tutorial">
+<article class="bd-article">
+<section id="isaac-sim-short-basic-usage-tutorial">
 <span id="isaac-sim-app-intro-quickstart"></span><h1>Isaac Sim Basic Usage Tutorial<a class="headerlink" href="quickstart_isaacsim.html#isaac-sim-short-basic-usage-tutorial" title="Link to this heading">#</a></h1>
-<p>This tutorial covers the basics of Isaac Sim, including navigating the GUI, adding objects to the stage, looking up basic properties of objects, and running simulations.</p>
-<p>In this tutorial, you will go from a blank stage to a moving robot using your choice of three different workflows. The purpose of including the three different workflows is to illustrate that Isaac Sim can be used in different ways depending on your needs.</p>
-<p>You can review the scripts in both workflows to see how they differ. Comparing and contrasting can help you understand how to perform the exact same tasks:</p>
+<p>이 튜토리얼은 GUI 탐색, 스테이지에 객체 추가, 객체의 기본 속성 조회, 시뮬레이션 실행 등 Isaac Sim의 기본 사항을 다룹니다.</p>
+<p>이 튜토리얼에서는 세 가지 다른 워크플로우 중 선택하여 빈 스테이지에서 움직이는 로봇까지 진행합니다. 세 가지 워크플로우를 포함한 이유는 Isaac Sim을 필요에 따라 다양한 방식으로 사용할 수 있음을 보여주기 위해서입니다.</p>
+<p>두 워크플로우의 스크립트를 검토하여 차이점을 확인할 수 있습니다. 비교하면 동일한 작업을 수행하는 방법을 이해하는 데 도움이 됩니다:</p>
 <ul class="simple">
-<li><p>The <strong>extension script</strong> can be found in <strong>Window &gt; Examples &gt; Robotics Examples</strong>, then click on <strong>Open Script</strong> on the right upper corner of the browser.</p></li>
-<li><p>The <strong>standalone script</strong> can be found in the <code class="docutils literal notranslate"><span class="pre">&lt;isaac-sim-root-dir&gt;/standalone_examples/tutorials/</span></code> folder.</p></li>
+<li><p><strong>extension script</strong>는 <strong>Window &gt; Examples &gt; Robotics Examples</strong>에서 찾을 수 있으며, 브라우저 오른쪽 상단의 <strong>Open Script</strong>를 클릭합니다.</p></li>
+<li><p><strong>standalone script</strong>는 <code class="docutils literal notranslate"><span class="pre"><isaac-sim-root-dir>/standalone_examples/tutorials/</isaac-sim-root-dir></span></code> 폴더에 있습니다.</p></li>
 </ul>
-<p>You can try the “hot-reloading” feature out by editing any of the scripts in the Extension examples. Save the file and see the changes reflected immediately without shutting down the simulator.</p>
-<p>For a description of workflow concepts, see <a class="reference internal" href="workflows.html#isaac-sim-app-tutorial-intro-workflows"><span class="std std-ref">Workflows</span></a>.</p>
+<p>확장 예제의 스크립트를 편집하여 "hot-reloading" 기능을 시험해 볼 수 있습니다. 파일을 저장하면 시뮬레이터를 종료하지 않고도 즉시 변경 사항이 반영됩니다.</p>
+<p>워크플로우 개념에 대한 설명은 <a class="reference internal" href="workflows.html#isaac-sim-app-tutorial-intro-workflows"><span class="std std-ref">Workflows</span></a>를 참조하세요.</p>
 <section id="tutorial">
 <h2>Tutorial<a class="headerlink" href="quickstart_isaacsim.html#tutorial" title="Link to this heading">#</a></h2>
-<p>There are three tabs for this tutorial, all three perform the same actions and reach the same outcome. Go through the full page under the same tab to learn about each workflow. Toggle between tabs to compare the different workflows or to perform the tutorial steps for your environment.</p>
+<p>이 튜토리얼에는 세 개의 탭이 있으며, 모두 동일한 작업을 수행하고 동일한 결과에 도달합니다. 각 워크플로우를 배우려면 동일한 탭 아래의 전체 페이지를 진행하세요. 탭 간에 전환하여 다양한 워크플로우를 비교하거나 환경에 맞는 튜토리얼 단계를 수행하세요.</p>
 <ul class="simple">
 <li><p>GUI</p></li>
 <li><p>Extensions</p></li>
 <li><p>Standalone Python</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio"/>
 <label class="sd-tab-label" for="sd-tab-item-0">
 GUI</label><div class="sd-tab-content docutils">
 <p class="rubric">Launch</p>
 <ol class="arabic">
-<li><p>Launch Isaac Sim from installation root folder.</p>
+<li><p>설치 루트 폴더에서 Isaac Sim을 실행합니다.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<input checked="checked" id="sd-tab-item-3" name="sd-tab-set-1" type="radio"/>
 <label class="sd-tab-label" for="sd-tab-item-3">
 Linux</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/isaacsim
@@ -1268,7 +903,7 @@ Linux</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-4" name="sd-tab-set-1" type="radio">
+<input id="sd-tab-item-4" name="sd-tab-set-1" type="radio"/>
 <label class="sd-tab-label" for="sd-tab-item-4">
 Windows</label><div class="sd-tab-content docutils">
 <div class="highlight-bat notranslate"><div class="highlight"><pre><span></span><span class="k">cd</span> C:\isaacsim
@@ -1277,213 +912,213 @@ isaac-sim.bat
 </div>
 </div>
 </div>
-<p>After the simulator is fully loaded, create a new scene:</p>
+<p>시뮬레이터가 완전히 로드된 후 새 씬을 생성합니다:</p>
 </li>
-<li><p>From the top Menu Bar, click <strong>File &gt; New</strong>. The first time you launch Isaac Sim, it may take a five - ten minutes to complete.</p></li>
+<li><p>상단 메뉴 바에서 <strong>File &gt; New</strong>를 클릭합니다. 처음 Isaac Sim을 실행하면 완료하는 데 5~10분이 걸릴 수 있습니다.</p></li>
 </ol>
 <p class="rubric">Add a Ground Plane</p>
-<p>Add a ground plane to the scene:</p>
+<p>씬에 지면 평면을 추가합니다:</p>
 <ol class="arabic simple">
-<li><p>From the top Menu Bar, click <strong>Create &gt; Physics &gt; Ground Plane</strong>.</p></li>
+<li><p>상단 메뉴 바에서 <strong>Create &gt; Physics &gt; Ground Plane</strong>을 클릭합니다.</p></li>
 </ol>
 <p class="rubric">Add a Light Source</p>
-<p>You can add a light source to the scene to illuminate the objects in the scene. If you have a light source in the scene, but no object to reflect the light, the scene will still be dark.</p>
-<p>Add a Distant Light source to the scene:</p>
+<p>씬의 객체를 비추기 위해 씬에 광원을 추가할 수 있습니다. 광원이 있지만 빛을 반사할 객체가 없는 경우 씬은 여전히 어둡습니다.</p>
+<p>씬에 Distant Light 광원을 추가합니다:</p>
 <ol class="arabic simple">
-<li><p>From the top Menu Bar, click <strong>Create &gt; Lights &gt; Distant Light</strong>.</p></li>
+<li><p>상단 메뉴 바에서 <strong>Create &gt; Lights &gt; Distant Light</strong>를 클릭합니다.</p></li>
 </ol>
 <p class="rubric">Add a Visual Cube</p>
-<p>A “visual” cube is a cube with no physics properties attached, for example, no mass, no collision. This cube will not fall under gravity or collide with other objects.</p>
-<p>Add a cube to the scene:</p>
+<p>"visual" 큐브는 물리 속성(예: 질량, 충돌 없음)이 없는 큐브입니다. 이 큐브는 중력에 의해 떨어지거나 다른 객체와 충돌하지 않습니다.</p>
+<p>씬에 큐브를 추가합니다:</p>
 <ol class="arabic simple">
-<li><p>From the top Menu Bar, click <strong>Create &gt; Shape &gt; Cube</strong>.</p></li>
-<li><p>From the far left side of the UI locate the arrow icon and press <strong>Play</strong>.  The cube does not do anything when simulation is running.</p></li>
+<li><p>상단 메뉴 바에서 <strong>Create &gt; Shape &gt; Cube</strong>를 클릭합니다.</p></li>
+<li><p>UI 왼쪽 끝에서 화살표 아이콘을 찾아 <strong>Play</strong>를 누릅니다. 시뮬레이션이 실행 중일 때 큐브는 아무것도 하지 않습니다.</p></li>
 </ol>
-<img alt="../_images/isim_4.5_base_tut_gui_add_cube.webp" class="align-center" src="../_images/isim_4.5_base_tut_gui_add_cube.webp" />
+<img alt="../_images/isim_4.5_base_tut_gui_add_cube.webp" class="align-center" src="../_images/isim_4.5_base_tut_gui_add_cube.webp"/>
 <p class="rubric">Move, Rotate, and Scale the Cube</p>
-<p>Use the various gizmos on the left hand side toolbar to manipulate the cube.</p>
+<p>왼쪽 도구 모음의 다양한 기즈모를 사용하여 큐브를 조작합니다.</p>
 <ol class="arabic simple">
-<li><p>Press “W” or click on the Move Gizmo to drag and move the cube. You can move it in only one axis by clicking on the arrows and drag, in two axes by clicking on the colored squares and drag, or in all three axes by clicking on the dot in the center of the gizmo and drag.</p></li>
-<li><p>Press “E” or click on the Rotate Gizmo to rotate the cube.</p></li>
-<li><p>Press “R” or click on the Scale Gizmo to scale the cube. You can scale it in one dimension by clicking on the the arrows and drag, two dimensions by clicking on the colored squares and drag, or in all three dimensions by clicking on the circle in the center of the gizmo and drag.</p></li>
-<li><p>Press “esc” to deselect the cube.</p></li>
+<li><p>"W"를 누르거나 이동 기즈모를 클릭하여 큐브를 드래그하여 이동합니다. 화살표를 클릭하고 드래그하여 한 축으로만 이동하거나, 색상 사각형을 클릭하고 드래그하여 두 축으로 이동하거나, 기즈모 중심의 점을 클릭하고 드래그하여 세 축 모두로 이동할 수 있습니다.</p></li>
+<li><p>"E"를 누르거나 회전 기즈모를 클릭하여 큐브를 회전합니다.</p></li>
+<li><p>"R"을 누르거나 크기 조정 기즈모를 클릭하여 큐브의 크기를 조정합니다. 화살표를 클릭하고 드래그하여 한 차원으로, 색상 사각형을 클릭하고 드래그하여 두 차원으로, 기즈모 중심의 원을 클릭하고 드래그하여 세 차원 모두로 크기를 조정할 수 있습니다.</p></li>
+<li><p>"esc"를 눌러 큐브 선택을 해제합니다.</p></li>
 </ol>
-<p>For “Move” and “Rotate”, you can  indicate if you are maneuvering in local or world coordinates. Click and hold on the gizmos to see the options.</p>
-<p>You can make more precise modifications to the cube through its  <strong>Property</strong> panel by typing in the exact numbers in the corresponding boxes. Click on the blue square next to the boxes to reset the values to default.</p>
-<img alt="../_images/isim_4.5_base_tut_gui_move_cube.webp" class="align-center" src="../_images/isim_4.5_base_tut_gui_move_cube.webp" />
+<p>"이동" 및 "회전"의 경우, 로컬 또는 월드 좌표에서 조작하고 있는지 지정할 수 있습니다. 기즈모를 클릭하고 유지하여 옵션을 확인합니다.</p>
+<p>해당 상자에 정확한 숫자를 입력하여 <strong>Property</strong> 패널을 통해 큐브를 더 정밀하게 수정할 수 있습니다. 상자 옆의 파란색 사각형을 클릭하여 값을 기본값으로 재설정합니다.</p>
+<img alt="../_images/isim_4.5_base_tut_gui_move_cube.webp" class="align-center" src="../_images/isim_4.5_base_tut_gui_move_cube.webp"/>
 <p class="rubric">Add Physics and Collision Properties</p>
-<p>Common physics properties are mass and inertia matrix, which are the properties that allow the object to fall under gravity. Collision Properties are the properties that allow the object to collide with other objects.</p>
-<p>Physics and collision properties can be added separately, so you can have an object that collides with other objects but does not fall under gravity, or falls under gravity but does not collide with other objects. But in many cases, they are added together.</p>
-<p>To add physics and collision properties to the cube:</p>
+<p>일반적인 물리 속성은 질량과 관성 행렬이며, 이는 객체가 중력에 의해 떨어질 수 있게 하는 속성입니다. 충돌 속성은 객체가 다른 객체와 충돌할 수 있게 하는 속성입니다.</p>
+<p>물리 및 충돌 속성은 별도로 추가할 수 있으므로, 다른 객체와 충돌하지만 중력에 의해 떨어지지 않는 객체나, 중력에 의해 떨어지지만 다른 객체와 충돌하지 않는 객체를 만들 수 있습니다. 그러나 많은 경우 함께 추가됩니다.</p>
+<p>큐브에 물리 및 충돌 속성을 추가하려면:</p>
 <ol class="arabic simple">
-<li><p>Find the object (“/World/Cube”) on the stage tree and highlight it.</p></li>
-<li><p>From the <strong>Property</strong> panel on the bottom right of the Workspace, click on the <strong>Add</strong> button and select <strong>Physics</strong> on the dropdown menu. This will show a list of properties that can be added to the object.</p></li>
-<li><p>Select <strong>Rigid Body with Colliders Preset</strong> to add both physics and collision meshes to the object.</p></li>
-<li><p>Press the <strong>Play</strong> button to see the cube fall under gravity and collide with the ground plane.</p></li>
+<li><p>스테이지 트리에서 객체("/World/Cube")를 찾아 선택합니다.</p></li>
+<li><p>워크스페이스 오른쪽 하단의 <strong>Property</strong> 패널에서 <strong>Add</strong> 버튼을 클릭하고 드롭다운 메뉴에서 <strong>Physics</strong>를 선택합니다. 객체에 추가할 수 있는 속성 목록이 표시됩니다.</p></li>
+<li><p>객체에 물리 및 충돌 메시를 모두 추가하려면 <strong>Rigid Body with Colliders Preset</strong>을 선택합니다.</p></li>
+<li><p><strong>Play</strong> 버튼을 눌러 큐브가 중력에 의해 떨어지고 지면 평면과 충돌하는 것을 확인합니다.</p></li>
 </ol>
-<img alt="../_images/isim_4.5_base_tut_gui_physics_property.webp" class="align-center" src="../_images/isim_4.5_base_tut_gui_physics_property.webp" />
+<img alt="../_images/isim_4.5_base_tut_gui_physics_property.webp" class="align-center" src="../_images/isim_4.5_base_tut_gui_physics_property.webp"/>
 </div>
-<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio"/>
 <label class="sd-tab-label" for="sd-tab-item-1">
 Extension</label><div class="sd-tab-content docutils">
 <p class="rubric">Launch</p>
-<p>We will demonstrate the property of an Extension workflow using an existing Extension module called the “Script Editor”. The Script Editor allows the users to interact with the stage using Python. You will see that we will be mostly using the same Python APIs as in the Standalone Python workflow. The difference between the two workflows will become clear when we start to interact with the simulation timeline, especially in the <a class="reference internal" href="quickstart_isaacsim_robot.html#isaac-sim-app-intro-quickstart-robot"><span class="std std-ref">next tutorial</span></a>.</p>
-<p>Launch a fresh instance of Isaac Sim, go the top Menu Bar and click <strong>Window &gt; Script Editor</strong>.
-The code snippets in this tab are sections from one runnable script and should be executed in order.</p>
+<p>"Script Editor"라는 기존 확장 모듈을 사용하여 Extension 워크플로우의 속성을 보여줍니다. Script Editor를 사용하면 Python으로 스테이지와 상호 작용할 수 있습니다. 대부분 Standalone Python 워크플로우와 동일한 Python API를 사용한다는 것을 알 수 있습니다. 두 워크플로우의 차이점은 특히 <a class="reference internal" href="quickstart_isaacsim_robot.html#isaac-sim-app-intro-quickstart-robot"><span class="std std-ref">다음 튜토리얼</span></a>에서 시뮬레이션 타임라인과 상호 작용할 때 명확해집니다.</p>
+<p>새로운 Isaac Sim 인스턴스를 실행하고, 상단 메뉴 바에서 <strong>Window &gt; Script Editor</strong>를 클릭합니다.
+이 탭의 코드 스니펫은 실행 가능한 하나의 스크립트의 섹션으로, 순서대로 실행해야 합니다.</p>
 <p class="rubric">Add a Ground Plane</p>
-<p>To add a ground plane using the interactive Python, copy paste the following snippet in the Script Editor and run it by clicking the <strong>Run</strong> button on the bottom.</p>
+<p>대화식 Python을 사용하여 지면 평면을 추가하려면, 다음 스니펫을 Script Editor에 복사하여 붙여넣고 하단의 <strong>Run</strong> 버튼을 클릭하여 실행합니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.utils.stage</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stage_utils</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.objects</span><span class="w"> </span><span class="kn">import</span> <span class="n">GroundPlane</span>
 
 <span class="n">stage_utils</span><span class="o">.</span><span class="n">create_new_stage</span><span class="p">()</span>
-<span class="n">GroundPlane</span><span class="p">(</span><span class="s2">&quot;/World/GroundPlane&quot;</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">GroundPlane</span><span class="p">(</span><span class="s2">"/World/GroundPlane"</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 <p class="rubric">Add a Light Source</p>
-<p>You can add a light source to the scene to illuminate the objects in the scene. If you have a light source in the scene, but no object to reflect the light, the scene will still be dark.</p>
+<p>씬의 객체를 비추기 위해 씬에 광원을 추가할 수 있습니다. 광원이 있지만 빛을 반사할 객체가 없는 경우 씬은 여전히 어둡습니다.</p>
 <ol class="arabic simple">
-<li><p>Open a new tab in the Script Editor (<strong>Tab &gt; Add Tab</strong>).</p></li>
-<li><p>Add a light source by copy-pasting the following snippet in the Script Editor and running it.</p></li>
+<li><p>Script Editor에서 새 탭을 엽니다(<strong>Tab &gt; Add Tab</strong>).</p></li>
+<li><p>다음 스니펫을 Script Editor에 복사하여 붙여넣고 실행하여 광원을 추가합니다.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.objects</span><span class="w"> </span><span class="kn">import</span> <span class="n">DistantLight</span>
 
-<span class="n">distant_light</span> <span class="o">=</span> <span class="n">DistantLight</span><span class="p">(</span><span class="s2">&quot;/DistantLight&quot;</span><span class="p">)</span>
+<span class="n">distant_light</span> <span class="o">=</span> <span class="n">DistantLight</span><span class="p">(</span><span class="s2">"/DistantLight"</span><span class="p">)</span>
 <span class="n">distant_light</span><span class="o">.</span><span class="n">set_intensities</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="rubric">Add a Visual Cube</p>
-<p>A “visual” cube is a cube with no physics properties attached. No mass, no collision. This cube will not fall under gravity or collide with other objects. You can press <strong>Play</strong> to see that the cube does not do anything when the simulation is running.</p>
+<p>"visual" 큐브는 물리 속성이 없는 큐브입니다. 질량 없음, 충돌 없음. 이 큐브는 중력에 의해 떨어지거나 다른 객체와 충돌하지 않습니다. <strong>Play</strong>를 눌러 시뮬레이션이 실행 중일 때 큐브가 아무것도 하지 않는 것을 확인할 수 있습니다.</p>
 <ol class="arabic simple">
-<li><p>Open a new tab in the Script Editor (<strong>Tab &gt; Add Tab</strong>).</p></li>
-<li><p>Add two cubes by copy-pasting the following snippet in the Script Editor and run it. We’ll keep one as visual-only, and add physics and collision properties to the other for comparison.</p></li>
+<li><p>Script Editor에서 새 탭을 엽니다(<strong>Tab &gt; Add Tab</strong>).</p></li>
+<li><p>다음 스니펫을 Script Editor에 복사하여 붙여넣고 실행하여 두 큐브를 추가합니다. 하나는 visual 전용으로 유지하고, 비교를 위해 다른 하나에 물리 및 충돌 속성을 추가합니다.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.materials</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreviewSurfaceMaterial</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.objects</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cube</span>
 
-<span class="n">yellow_material</span> <span class="o">=</span> <span class="n">PreviewSurfaceMaterial</span><span class="p">(</span><span class="s2">&quot;/Materials/yellow&quot;</span><span class="p">)</span>
-<span class="n">yellow_material</span><span class="o">.</span><span class="n">set_input_values</span><span class="p">(</span><span class="s2">&quot;diffuseColor&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="n">yellow_material</span> <span class="o">=</span> <span class="n">PreviewSurfaceMaterial</span><span class="p">(</span><span class="s2">"/Materials/yellow"</span><span class="p">)</span>
+<span class="n">yellow_material</span><span class="o">.</span><span class="n">set_input_values</span><span class="p">(</span><span class="s2">"diffuseColor"</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
 
-<span class="n">cyan_material</span> <span class="o">=</span> <span class="n">PreviewSurfaceMaterial</span><span class="p">(</span><span class="s2">&quot;/Materials/cyan&quot;</span><span class="p">)</span>
-<span class="n">cyan_material</span><span class="o">.</span><span class="n">set_input_values</span><span class="p">(</span><span class="s2">&quot;diffuseColor&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">cyan_material</span> <span class="o">=</span> <span class="n">PreviewSurfaceMaterial</span><span class="p">(</span><span class="s2">"/Materials/cyan"</span><span class="p">)</span>
+<span class="n">cyan_material</span><span class="o">.</span><span class="n">set_input_values</span><span class="p">(</span><span class="s2">"diffuseColor"</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
 
 <span class="n">visual_cube</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span>
-    <span class="n">paths</span><span class="o">=</span><span class="s2">&quot;/visual_cube&quot;</span><span class="p">,</span>
+    <span class="n">paths</span><span class="o">=</span><span class="s2">"/visual_cube"</span><span class="p">,</span>
     <span class="n">positions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
     <span class="n">sizes</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">visual_cube</span><span class="o">.</span><span class="n">apply_visual_materials</span><span class="p">(</span><span class="n">yellow_material</span><span class="p">)</span>
 
 <span class="n">test_cube</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span>
-    <span class="n">paths</span><span class="o">=</span><span class="s2">&quot;/test_cube&quot;</span><span class="p">,</span>
+    <span class="n">paths</span><span class="o">=</span><span class="s2">"/test_cube"</span><span class="p">,</span>
     <span class="n">positions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
     <span class="n">sizes</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">test_cube</span><span class="o">.</span><span class="n">apply_visual_materials</span><span class="p">(</span><span class="n">cyan_material</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Isaac Sim Core API are wrappers for raw USD and physics engine APIs. You can add a visual cube (without physics and color properties) using raw USD API. Notice that the raw USD API is more verbose, but gives you more control over each property.</p>
+<p>Isaac Sim Core API는 원시 USD 및 물리 엔진 API의 래퍼입니다. 원시 USD API를 사용하여 visual 큐브(물리 및 색상 속성 없음)를 추가할 수 있습니다. 원시 USD API는 더 장황하지만 각 속성에 대해 더 많은 제어권을 제공합니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni.usd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">Gf</span><span class="p">,</span> <span class="n">UsdGeom</span>
 
 <span class="n">stage</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">get_stage</span><span class="p">()</span>
 
-<span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;/visual_cube_usd&quot;</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s2">"/visual_cube_usd"</span>
 <span class="n">cube_geom</span> <span class="o">=</span> <span class="n">UsdGeom</span><span class="o">.</span><span class="n">Cube</span><span class="o">.</span><span class="n">Define</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
 <span class="n">cube_prim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 <span class="n">size</span> <span class="o">=</span> <span class="mf">0.5</span>
 <span class="n">offset</span> <span class="o">=</span> <span class="n">Gf</span><span class="o">.</span><span class="n">Vec3f</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
 <span class="n">cube_geom</span><span class="o">.</span><span class="n">CreateSizeAttr</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">cube_prim</span><span class="o">.</span><span class="n">HasAttribute</span><span class="p">(</span><span class="s2">&quot;xformOp:translate&quot;</span><span class="p">):</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">cube_prim</span><span class="o">.</span><span class="n">HasAttribute</span><span class="p">(</span><span class="s2">"xformOp:translate"</span><span class="p">):</span>
     <span class="n">UsdGeom</span><span class="o">.</span><span class="n">Xformable</span><span class="p">(</span><span class="n">cube_prim</span><span class="p">)</span><span class="o">.</span><span class="n">AddTranslateOp</span><span class="p">()</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">cube_prim</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="s2">&quot;xformOp:translate&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
+    <span class="n">cube_prim</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="s2">"xformOp:translate"</span><span class="p">)</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="rubric">Add Physics and Collision Properties</p>
-<p>Common physics properties are mass and inertia matrix, which are the properties that allow the object to fall under gravity. Collision Properties are the properties that allow the object to collide with other objects.</p>
-<p>Physics and collision properties can be added separately, so that you can have an object that collides with other objects but does not fall under gravity, or falls under gravity but does not collide with other objects. But in many cases, they are added together.</p>
-<p>With the core APIs, you can add a new cube with physics and collision by creating a cube and then applying rigid body and collision APIs.</p>
+<p>일반적인 물리 속성은 질량과 관성 행렬이며, 이는 객체가 중력에 의해 떨어질 수 있게 하는 속성입니다. 충돌 속성은 객체가 다른 객체와 충돌할 수 있게 하는 속성입니다.</p>
+<p>물리 및 충돌 속성은 별도로 추가할 수 있으므로, 다른 객체와 충돌하지만 중력에 의해 떨어지지 않는 객체나, 중력에 의해 떨어지지만 다른 객체와 충돌하지 않는 객체를 만들 수 있습니다. 그러나 많은 경우 함께 추가됩니다.</p>
+<p>Core API를 사용하면 큐브를 생성한 다음 강체 바디와 충돌 API를 적용하여 물리 및 충돌이 있는 새 큐브를 추가할 수 있습니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.materials</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreviewSurfaceMaterial</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.objects</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cube</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.prims</span><span class="w"> </span><span class="kn">import</span> <span class="n">GeomPrim</span><span class="p">,</span> <span class="n">RigidPrim</span>
 
-<span class="n">red_material</span> <span class="o">=</span> <span class="n">PreviewSurfaceMaterial</span><span class="p">(</span><span class="s2">&quot;/Materials/red&quot;</span><span class="p">)</span>
-<span class="n">red_material</span><span class="o">.</span><span class="n">set_input_values</span><span class="p">(</span><span class="s2">&quot;diffuseColor&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="n">red_material</span> <span class="o">=</span> <span class="n">PreviewSurfaceMaterial</span><span class="p">(</span><span class="s2">"/Materials/red"</span><span class="p">)</span>
+<span class="n">red_material</span><span class="o">.</span><span class="n">set_input_values</span><span class="p">(</span><span class="s2">"diffuseColor"</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
 
 <span class="n">dynamic_cube</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span>
-    <span class="n">paths</span><span class="o">=</span><span class="s2">&quot;/dynamic_cube&quot;</span><span class="p">,</span>
+    <span class="n">paths</span><span class="o">=</span><span class="s2">"/dynamic_cube"</span><span class="p">,</span>
     <span class="n">positions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
     <span class="n">sizes</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
     <span class="n">scales</span><span class="o">=</span><span class="p">[</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span>
 <span class="p">)</span>
 <span class="n">dynamic_cube</span><span class="o">.</span><span class="n">apply_visual_materials</span><span class="p">(</span><span class="n">red_material</span><span class="p">)</span>
-<span class="n">RigidPrim</span><span class="p">(</span><span class="n">paths</span><span class="o">=</span><span class="s2">&quot;/dynamic_cube&quot;</span><span class="p">)</span>
-<span class="n">GeomPrim</span><span class="p">(</span><span class="n">paths</span><span class="o">=</span><span class="s2">&quot;/dynamic_cube&quot;</span><span class="p">,</span> <span class="n">apply_collision_apis</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">RigidPrim</span><span class="p">(</span><span class="n">paths</span><span class="o">=</span><span class="s2">"/dynamic_cube"</span><span class="p">)</span>
+<span class="n">GeomPrim</span><span class="p">(</span><span class="n">paths</span><span class="o">=</span><span class="s2">"/dynamic_cube"</span><span class="p">,</span> <span class="n">apply_collision_apis</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Alternatively, if you want to modify an existing object to have physics and collision properties, you can use the following snippet.</p>
+<p>또는 기존 객체에 물리 및 충돌 속성을 추가하려면 다음 스니펫을 사용할 수 있습니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.prims</span><span class="w"> </span><span class="kn">import</span> <span class="n">GeomPrim</span><span class="p">,</span> <span class="n">RigidPrim</span>
 
-<span class="n">RigidPrim</span><span class="p">(</span><span class="n">paths</span><span class="o">=</span><span class="s2">&quot;/test_cube&quot;</span><span class="p">)</span>
-<span class="n">GeomPrim</span><span class="p">(</span><span class="n">paths</span><span class="o">=</span><span class="s2">&quot;/test_cube&quot;</span><span class="p">,</span> <span class="n">apply_collision_apis</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">RigidPrim</span><span class="p">(</span><span class="n">paths</span><span class="o">=</span><span class="s2">"/test_cube"</span><span class="p">)</span>
+<span class="n">GeomPrim</span><span class="p">(</span><span class="n">paths</span><span class="o">=</span><span class="s2">"/test_cube"</span><span class="p">,</span> <span class="n">apply_collision_apis</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Click the <strong>Play</strong> button to see the cubes fall under gravity and collide with the ground plane.</p>
+<p><strong>Play</strong> 버튼을 클릭하여 큐브가 중력에 의해 떨어지고 지면 평면과 충돌하는 것을 확인합니다.</p>
 <p class="rubric">Move, Rotate, and Scale the Cube</p>
-<p>Moving an object using core API:</p>
+<p>Core API를 사용하여 객체 이동:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.prims</span><span class="w"> </span><span class="kn">import</span> <span class="n">XformPrim</span>
 
 <span class="n">translate_offset</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
 <span class="n">orientation_offset</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="n">scale</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>
 
-<span class="n">cube_prim</span> <span class="o">=</span> <span class="n">XformPrim</span><span class="p">(</span><span class="n">paths</span><span class="o">=</span><span class="s2">&quot;/test_cube&quot;</span><span class="p">)</span>
+<span class="n">cube_prim</span> <span class="o">=</span> <span class="n">XformPrim</span><span class="p">(</span><span class="n">paths</span><span class="o">=</span><span class="s2">"/test_cube"</span><span class="p">)</span>
 <span class="n">cube_prim</span><span class="o">.</span><span class="n">set_world_poses</span><span class="p">(</span><span class="n">translate_offset</span><span class="p">,</span> <span class="n">orientation_offset</span><span class="p">)</span>
 <span class="n">cube_prim</span><span class="o">.</span><span class="n">set_local_scales</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Moving an object using raw USD API:</p>
+<p>원시 USD API를 사용하여 객체 이동:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni.usd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">Gf</span><span class="p">,</span> <span class="n">UsdGeom</span>
 
 <span class="n">stage</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">get_stage</span><span class="p">()</span>
-<span class="n">cube_prim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="s2">&quot;/visual_cube_usd&quot;</span><span class="p">)</span>
+<span class="n">cube_prim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="s2">"/visual_cube_usd"</span><span class="p">)</span>
 <span class="n">translate_offset</span> <span class="o">=</span> <span class="n">Gf</span><span class="o">.</span><span class="n">Vec3f</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
 <span class="n">rotate_offset</span> <span class="o">=</span> <span class="n">Gf</span><span class="o">.</span><span class="n">Vec3f</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>  <span class="c1"># Note this is in degrees.</span>
 <span class="n">scale</span> <span class="o">=</span> <span class="n">Gf</span><span class="o">.</span><span class="n">Vec3f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="ow">not</span> <span class="n">cube_prim</span><span class="o">.</span><span class="n">HasAttribute</span><span class="p">(</span><span class="s2">&quot;xformOp:translate&quot;</span><span class="p">):</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">cube_prim</span><span class="o">.</span><span class="n">HasAttribute</span><span class="p">(</span><span class="s2">"xformOp:translate"</span><span class="p">):</span>
     <span class="n">UsdGeom</span><span class="o">.</span><span class="n">Xformable</span><span class="p">(</span><span class="n">cube_prim</span><span class="p">)</span><span class="o">.</span><span class="n">AddTranslateOp</span><span class="p">()</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">translate_offset</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">cube_prim</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="s2">&quot;xformOp:translate&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">translate_offset</span><span class="p">)</span>
+    <span class="n">cube_prim</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="s2">"xformOp:translate"</span><span class="p">)</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">translate_offset</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="ow">not</span> <span class="n">cube_prim</span><span class="o">.</span><span class="n">HasAttribute</span><span class="p">(</span><span class="s2">&quot;xformOp:rotateXYZ&quot;</span><span class="p">):</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">cube_prim</span><span class="o">.</span><span class="n">HasAttribute</span><span class="p">(</span><span class="s2">"xformOp:rotateXYZ"</span><span class="p">):</span>
     <span class="n">UsdGeom</span><span class="o">.</span><span class="n">Xformable</span><span class="p">(</span><span class="n">cube_prim</span><span class="p">)</span><span class="o">.</span><span class="n">AddRotateXYZOp</span><span class="p">()</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">rotate_offset</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">cube_prim</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="s2">&quot;xformOp:rotateXYZ&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">rotate_offset</span><span class="p">)</span>
+    <span class="n">cube_prim</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="s2">"xformOp:rotateXYZ"</span><span class="p">)</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">rotate_offset</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="ow">not</span> <span class="n">cube_prim</span><span class="o">.</span><span class="n">HasAttribute</span><span class="p">(</span><span class="s2">&quot;xformOp:scale&quot;</span><span class="p">):</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">cube_prim</span><span class="o">.</span><span class="n">HasAttribute</span><span class="p">(</span><span class="s2">"xformOp:scale"</span><span class="p">):</span>
     <span class="n">UsdGeom</span><span class="o">.</span><span class="n">Xformable</span><span class="p">(</span><span class="n">cube_prim</span><span class="p">)</span><span class="o">.</span><span class="n">AddScaleOp</span><span class="p">()</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">cube_prim</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="s2">&quot;xformOp:scale&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
+    <span class="n">cube_prim</span><span class="o">.</span><span class="n">GetAttribute</span><span class="p">(</span><span class="s2">"xformOp:scale"</span><span class="p">)</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio"/>
 <label class="sd-tab-label" for="sd-tab-item-2">
 Standalone Python</label><div class="sd-tab-content docutils">
 <p class="rubric">Launch</p>
-<p>The script that runs Part I, <a class="reference internal" href="quickstart_isaacsim.html#isaac-sim-app-intro-quickstart"><span class="std std-ref">Isaac Sim Basic Usage Tutorial</span></a>, is located in  <code class="docutils literal notranslate"><span class="pre">standalone_examples/tutorials/getting_started/getting_started.py</span></code>.</p>
-<p>To run the script, open a terminal, navigate to the root of the Isaac Sim installation, and run the following command:</p>
+<p>파트 I <a class="reference internal" href="quickstart_isaacsim.html#isaac-sim-app-intro-quickstart"><span class="std std-ref">Isaac Sim Basic Usage Tutorial</span></a>을 실행하는 스크립트는 <code class="docutils literal notranslate"><span class="pre">standalone_examples/tutorials/getting_started/getting_started.py</span></code>에 있습니다.</p>
+<p>스크립트를 실행하려면 터미널을 열고, Isaac Sim 설치 루트로 이동하여 다음 명령을 실행합니다:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="sd-tab-item-5" name="sd-tab-set-2" type="radio">
+<input checked="checked" id="sd-tab-item-5" name="sd-tab-set-2" type="radio"/>
 <label class="sd-tab-label" for="sd-tab-item-5">
 Linux</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./python.sh<span class="w"> </span>standalone_examples/tutorials/getting_started/getting_started.py
 </pre></div>
 </div>
 </div>
-<input id="sd-tab-item-6" name="sd-tab-set-2" type="radio">
+<input id="sd-tab-item-6" name="sd-tab-set-2" type="radio"/>
 <label class="sd-tab-label" for="sd-tab-item-6">
 Windows</label><div class="sd-tab-content docutils">
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python.bat<span class="w"> </span>standalone_examples<span class="se">\t</span>utorials<span class="se">\g</span>etting_started<span class="se">\g</span>etting_started.py
@@ -1493,32 +1128,32 @@ Windows</label><div class="sd-tab-content docutils">
 </div>
 <p class="rubric">Code Explained</p>
 <p><strong>Add a Ground Plane</strong></p>
-<p>The lines inside <code class="docutils literal notranslate"><span class="pre">getting_started.py</span></code> that are relevant to adding a ground plane to the scene are below.</p>
+<p><code class="docutils literal notranslate"><span class="pre">getting_started.py</span></code> 내부에서 씬에 지면 평면을 추가하는 것과 관련된 줄은 아래에 있습니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.objects</span><span class="w"> </span><span class="kn">import</span> <span class="n">GroundPlane</span>
 
-<span class="n">GroundPlane</span><span class="p">(</span><span class="s2">&quot;/World/GroundPlane&quot;</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">GroundPlane</span><span class="p">(</span><span class="s2">"/World/GroundPlane"</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 <p><strong>Add a Light Source</strong></p>
-<p>You can add a light source to the scene to illuminate the objects in the scene. If you have a light source in the scene, but no object to reflect the light, the scene will still be dark.</p>
-<p>The lines inside <code class="docutils literal notranslate"><span class="pre">getting_started.py</span></code> that add a Distant Light are:</p>
+<p>씬의 객체를 비추기 위해 씬에 광원을 추가할 수 있습니다. 광원이 있지만 빛을 반사할 객체가 없는 경우 씬은 여전히 어둡습니다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">getting_started.py</span></code> 내부에서 Distant Light를 추가하는 줄은:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.objects</span><span class="w"> </span><span class="kn">import</span> <span class="n">DistantLight</span>
 
-<span class="n">distantLight</span> <span class="o">=</span> <span class="n">DistantLight</span><span class="p">(</span><span class="s2">&quot;/DistantLight&quot;</span><span class="p">)</span>
+<span class="n">distantLight</span> <span class="o">=</span> <span class="n">DistantLight</span><span class="p">(</span><span class="s2">"/DistantLight"</span><span class="p">)</span>
 <span class="n">distantLight</span><span class="o">.</span><span class="n">set_intensities</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>Add a Visual Cube</strong></p>
-<p>A “visual” cube is a cube with no physics properties attached. No mass, no collision. This cube will not fall under gravity or collide with other objects. You can press <strong>Play</strong> to see that the cube does not do anything when the simulation is running.</p>
-<p>The lines inside <code class="docutils literal notranslate"><span class="pre">getting_started.py</span></code> that add a visual cube to the scene are:</p>
+<p>"visual" 큐브는 물리 속성이 없는 큐브입니다. 질량 없음, 충돌 없음. 이 큐브는 중력에 의해 떨어지거나 다른 객체와 충돌하지 않습니다. <strong>Play</strong>를 눌러 시뮬레이션이 실행 중일 때 큐브가 아무것도 하지 않는 것을 확인할 수 있습니다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">getting_started.py</span></code> 내부에서 씬에 visual 큐브를 추가하는 줄은:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.materials</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreviewSurfaceMaterial</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.objects</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cube</span>
 
-<span class="n">yellow_material</span> <span class="o">=</span> <span class="n">PreviewSurfaceMaterial</span><span class="p">(</span><span class="s2">&quot;/Materials/yellow&quot;</span><span class="p">)</span>
-<span class="n">yellow_material</span><span class="o">.</span><span class="n">set_input_values</span><span class="p">(</span><span class="s2">&quot;diffuseColor&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="n">yellow_material</span> <span class="o">=</span> <span class="n">PreviewSurfaceMaterial</span><span class="p">(</span><span class="s2">"/Materials/yellow"</span><span class="p">)</span>
+<span class="n">yellow_material</span><span class="o">.</span><span class="n">set_input_values</span><span class="p">(</span><span class="s2">"diffuseColor"</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
 
 <span class="n">visual_cube</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span>
-    <span class="n">paths</span><span class="o">=</span><span class="s2">&quot;/visual_cube&quot;</span><span class="p">,</span>
+    <span class="n">paths</span><span class="o">=</span><span class="s2">"/visual_cube"</span><span class="p">,</span>
     <span class="n">positions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
     <span class="n">sizes</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
 <span class="p">)</span>
@@ -1526,136 +1161,97 @@ Windows</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 <p><strong>Add Physics and Collision Properties</strong></p>
-<p>Common physics properties are mass and inertia matrix, which are the properties that allow the object to fall under gravity. Collision properties are the properties that allow the object to collide with other objects.</p>
-<p>Physics and collision properties can be added separately, so you can have an object that collides with other objects but does not fall under gravity, or falls under gravity but does not collide with other objects. But in many cases, they are added together.</p>
-<p>With the experimental APIs, you spawn a cube with <code class="docutils literal notranslate"><span class="pre">Cube</span></code>, then apply rigid body and collision by wrapping the prim with <code class="docutils literal notranslate"><span class="pre">RigidPrim</span></code> and <code class="docutils literal notranslate"><span class="pre">GeomPrim</span></code>. The script creates a cube at <code class="docutils literal notranslate"><span class="pre">/dynamic_cube</span></code> and then applies physics and collision to it:</p>
+<p>일반적인 물리 속성은 질량과 관성 행렬이며, 이는 객체가 중력에 의해 떨어질 수 있게 하는 속성입니다. 충돌 속성은 객체가 다른 객체와 충돌할 수 있게 하는 속성입니다.</p>
+<p>물리 및 충돌 속성은 별도로 추가할 수 있으므로, 다른 객체와 충돌하지만 중력에 의해 떨어지지 않는 객체나, 중력에 의해 떨어지지만 다른 객체와 충돌하지 않는 객체를 만들 수 있습니다. 그러나 많은 경우 함께 추가됩니다.</p>
+<p>실험적 API를 사용하면 <code class="docutils literal notranslate"><span class="pre">Cube</span></code>로 큐브를 생성한 다음 prim을 <code class="docutils literal notranslate"><span class="pre">RigidPrim</span></code>과 <code class="docutils literal notranslate"><span class="pre">GeomPrim</span></code>으로 감싸 강체 바디와 충돌을 적용합니다. 스크립트는 <code class="docutils literal notranslate"><span class="pre">/dynamic_cube</span></code>에 큐브를 생성한 다음 물리 및 충돌을 적용합니다:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.materials</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreviewSurfaceMaterial</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.objects</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cube</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.prims</span><span class="w"> </span><span class="kn">import</span> <span class="n">GeomPrim</span><span class="p">,</span> <span class="n">RigidPrim</span>
 
-<span class="n">cyan_material</span> <span class="o">=</span> <span class="n">PreviewSurfaceMaterial</span><span class="p">(</span><span class="s2">&quot;/Materials/cyan&quot;</span><span class="p">)</span>
-<span class="n">cyan_material</span><span class="o">.</span><span class="n">set_input_values</span><span class="p">(</span><span class="s2">&quot;diffuseColor&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">cyan_material</span> <span class="o">=</span> <span class="n">PreviewSurfaceMaterial</span><span class="p">(</span><span class="s2">"/Materials/cyan"</span><span class="p">)</span>
+<span class="n">cyan_material</span><span class="o">.</span><span class="n">set_input_values</span><span class="p">(</span><span class="s2">"diffuseColor"</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
 
 <span class="n">cube</span> <span class="o">=</span> <span class="n">Cube</span><span class="p">(</span>
-    <span class="n">paths</span><span class="o">=</span><span class="s2">&quot;/dynamic_cube&quot;</span><span class="p">,</span>
+    <span class="n">paths</span><span class="o">=</span><span class="s2">"/dynamic_cube"</span><span class="p">,</span>
     <span class="n">positions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span>
     <span class="n">sizes</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">cube</span><span class="o">.</span><span class="n">apply_visual_materials</span><span class="p">(</span><span class="n">cyan_material</span><span class="p">)</span>
-<span class="n">RigidPrim</span><span class="p">(</span><span class="n">paths</span><span class="o">=</span><span class="s2">&quot;/dynamic_cube&quot;</span><span class="p">)</span>
-<span class="n">GeomPrim</span><span class="p">(</span><span class="n">paths</span><span class="o">=</span><span class="s2">&quot;/dynamic_cube&quot;</span><span class="p">,</span> <span class="n">apply_collision_apis</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">RigidPrim</span><span class="p">(</span><span class="n">paths</span><span class="o">=</span><span class="s2">"/dynamic_cube"</span><span class="p">)</span>
+<span class="n">GeomPrim</span><span class="p">(</span><span class="n">paths</span><span class="o">=</span><span class="s2">"/dynamic_cube"</span><span class="p">,</span> <span class="n">apply_collision_apis</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p class="rubric">Move, Rotate, and Scale the Cube</p>
-<p>The snippet below shows the lines that moved the objects in the scene using the core API.</p>
+<p>Core API를 사용하여 씬에서 객체를 이동한 줄을 보여주는 스니펫입니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="n">translate_offset</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
 <span class="n">orientation_offset</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># quaternion wxyz</span>
 <span class="n">scale</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>
 
-<span class="n">cube_prim</span> <span class="o">=</span> <span class="n">XformPrim</span><span class="p">(</span><span class="n">paths</span><span class="o">=</span><span class="s2">&quot;/visual_cube&quot;</span><span class="p">)</span>
+<span class="n">cube_prim</span> <span class="o">=</span> <span class="n">XformPrim</span><span class="p">(</span><span class="n">paths</span><span class="o">=</span><span class="s2">"/visual_cube"</span><span class="p">)</span>
 <span class="n">cube_prim</span><span class="o">.</span><span class="n">set_world_poses</span><span class="p">(</span><span class="n">translate_offset</span><span class="p">,</span> <span class="n">orientation_offset</span><span class="p">)</span>
 <span class="n">cube_prim</span><span class="o">.</span><span class="n">set_local_scales</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Save your work.</p>
-<p>You can now proceed to <a class="reference internal" href="quickstart_isaacsim_robot.html#isaac-sim-app-intro-quickstart-robot"><span class="std std-ref">the next tutorial</span></a>.</p>
+<p>작업을 저장합니다.</p>
+<p><a class="reference internal" href="quickstart_isaacsim_robot.html#isaac-sim-app-intro-quickstart-robot"><span class="std std-ref">다음 튜토리얼</span></a>로 진행할 수 있습니다.</p>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="quickstart_index.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Quick Tutorials</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="quickstart_isaacsim_robot.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Basic Robot Tutorial</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="quickstart_index.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Quick Tutorials</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="quickstart_isaacsim_robot.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Basic Robot Tutorial</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="quickstart_isaacsim.html#tutorial">Tutorial</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1686,36 +1282,21 @@ Windows</label><div class="sd-tab-content docutils">
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>
