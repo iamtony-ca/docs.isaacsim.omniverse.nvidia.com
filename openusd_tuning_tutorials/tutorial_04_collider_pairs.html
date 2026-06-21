@@ -1,551 +1,256 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Tutorial 4: Collider Pairs &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Tutorial 4: Collider Pairs — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'openusd_tuning_tutorials/tutorial_04_collider_pairs';</script>
-    <script>
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'openusd_tuning_tutorials/tutorial_04_collider_pairs';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tutorial 5: Joint Drive Tuning" href="tutorial_05_joint_drive_tuning.html" />
-    <link rel="prev" title="Tutorial 3: Inspect Asset" href="tutorial_03_inspect_asset.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="tutorial_05_joint_drive_tuning.html" rel="next" title="Tutorial 5: Joint Drive Tuning"/>
+<link href="tutorial_03_inspect_asset.html" rel="prev" title="Tutorial 3: Inspect Asset"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="tutorial_04_collider_pairs.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="tutorial_04_collider_pairs.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +270,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -593,20 +297,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -681,17 +373,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -869,7 +551,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -909,13 +590,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -962,10 +637,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1134,18 +805,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1171,402 +832,352 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="../robot_setup/index.html" class="nav-link">Robot Setup</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">OpenUSD and Tuning Best Practices Tutorial Series</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Tutorial 4: Collider Pairs</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="../robot_setup/index.html">Robot Setup</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">OpenUSD and Tuning Best Practices Tutorial Series</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Tutorial 4: Collider Pairs</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="tutorial-4-collider-pairs">
+<article class="bd-article">
+<section id="tutorial-4-collider-pairs">
 <span id="isaac-sim-tutorial-tuning-openusd-module-3"></span><h1>Tutorial 4: Collider Pairs<a class="headerlink" href="tutorial_04_collider_pairs.html#tutorial-4-collider-pairs" title="Link to this heading">#</a></h1>
-<p>We inspected the asset structure and collision meshes. Now we tackle a question that makes or breaks this dexterous hand simulation: <strong>which parts of the hand are allowed to collide with each other?</strong> In the real world, a finger can’t pass through the palm, but in simulation, overlapping collision geometry between links can create phantom contacts, jitter, and forces that blow the hand apart. <strong>Filtered Pairs</strong> in Isaac Sim let you turn off collision between specific rigid bodies so you keep the contacts that matter (finger on object, intentional finger-to-finger) and remove the ones that cause instability.</p>
+<p>에셋 구조와 충돌 메시를 검사했습니다. 이제 이 다관절 손 시뮬레이션의 성패를 좌우하는 질문에 답해야 합니다: <strong>핸드의 어느 부분이 서로 충돌할 수 있나요?</strong> 현실 세계에서 손가락은 손바닥을 통과할 수 없지만, 시뮬레이션에서 링크 간의 충돌 지오메트리가 겹치면 가짜 접촉, 떨림, 핸드를 산산조각 낼 수 있는 힘이 발생할 수 있습니다. Isaac Sim의 <strong>Filtered Pairs</strong>는 특정 강체 간의 충돌을 비활성화하여, 중요한 접촉(손가락-물체, 의도된 손가락-손가락 접촉)은 유지하고 불안정성을 유발하는 접촉은 제거할 수 있습니다.</p>
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="tutorial_04_collider_pairs.html#learning-objectives" title="Link to this heading">#</a></h2>
-<p>In this tutorial, you will:</p>
+<p>이 튜토리얼에서 수행할 작업:</p>
 <ul class="simple">
-<li><p><strong>Explain</strong> how <strong>Filtered Pairs</strong> work and when to use them.</p></li>
-<li><p><strong>Identify</strong> overlapping self-collision pairs with the <strong>Robot Self-Collision Detector</strong> and inspect collision geometry with the <strong>Physics Debugger</strong> as needed.</p></li>
-<li><p><strong>Add</strong> filtered pairs for the palm and pinky using <strong>Filtered Pair</strong> in the detector or <strong>Filtered Pairs</strong> on the <em>Property</em> panel, on the <strong>physics.usda</strong> layer.</p></li>
+<li><p><strong>설명</strong>하기: <strong>Filtered Pairs</strong>의 작동 방식과 사용 시기.</p></li>
+<li><p><strong>식별</strong>하기: <strong>Robot Self-Collision Detector</strong>로 겹치는 자기 충돌 쌍을 식별하고 필요 시 <strong>Physics Debugger</strong>로 충돌 지오메트리 검사하기.</p></li>
+<li><p><strong>추가</strong>하기: 감지기의 <strong>Filtered Pair</strong> 또는 <em>Property</em> 패널의 <strong>Filtered Pairs</strong>를 사용하여 손바닥과 새끼손가락에 대한 필터된 쌍을 <strong>physics.usda</strong> 레이어에 추가하기.</p></li>
 </ul>
 </section>
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="tutorial_04_collider_pairs.html#prerequisites" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Complete <a class="reference internal" href="tutorial_03_inspect_asset.html#isaac-sim-tutorial-tuning-openusd-module-2"><span class="std std-ref">Tutorial 3: Inspect Asset</span></a>.</p></li>
-<li><p>Have the Inspire Hand scene open in Isaac Sim with joint and collider visualization familiar from the previous tutorial.</p></li>
+<li><p><a class="reference internal" href="tutorial_03_inspect_asset.html#isaac-sim-tutorial-tuning-openusd-module-2"><span class="std std-ref">Tutorial 3: Inspect Asset</span></a>을 완료합니다.</p></li>
+<li><p>이전 튜토리얼에서 익힌 관절 및 콜라이더 시각화와 함께 Isaac Sim에서 Inspire Hand 씬이 열려 있어야 합니다.</p></li>
 </ul>
 </section>
 <section id="module-3-1-understanding-filtered-pairs">
 <h2>Module 3.1: Understanding Filtered Pairs<a class="headerlink" href="tutorial_04_collider_pairs.html#module-3-1-understanding-filtered-pairs" title="Link to this heading">#</a></h2>
-<p><strong>Filtered Pairs</strong> explicitly tell the physics engine: “Do not detect collision between these two rigid bodies.” In Isaac Sim, adjacent links (two links connected by a joint) in an articulation don’t self-collide by default, but <strong>non-adjacent</strong> links do. As you will see, many of those non-adjacent links can have overlapping or very close collision geometry. In these scenarios, you can get:</p>
+<p><strong>Filtered Pairs</strong>는 물리 엔진에게 명시적으로 "이 두 강체 사이의 충돌을 감지하지 마세요"라고 알립니다. Isaac Sim에서 관절 구조의 인접한 링크(관절로 연결된 두 링크)는 기본적으로 자기 충돌이 없지만, <strong>비인접</strong> 링크는 충돌합니다. 보시다시피, 이러한 비인접 링크 중 많은 것이 겹치거나 매우 가까운 충돌 지오메트리를 가질 수 있습니다. 이러한 시나리오에서는 다음이 발생할 수 있습니다:</p>
 <ul class="simple">
-<li><p><strong>Unrealistic forces</strong> — The solver tries to resolve interpenetration between links that would never actually touch in the real mechanism.</p></li>
-<li><p><strong>Instability</strong> — The hand can jitter, jump, or blow apart as conflicting contacts fight each other.</p></li>
-<li><p><strong>Wasted compute</strong> — Simulating every anatomically possible self-contact is rarely necessary for grasping or manipulation.</p></li>
+<li><p><strong>비현실적인 힘</strong> — 솔버가 실제 메커니즘에서 절대 접촉하지 않을 링크 간의 관통을 해결하려고 시도합니다.</p></li>
+<li><p><strong>불안정성</strong> — 충돌하는 접촉이 서로 싸우면서 핸드가 떨리거나, 튀거나, 산산조각 날 수 있습니다.</p></li>
+<li><p><strong>불필요한 계산</strong> — 해부학적으로 가능한 모든 자기 접촉을 시뮬레이션하는 것은 파지나 조작에 거의 필요하지 않습니다.</p></li>
 </ul>
-<p>So the goal is to <strong>filter the problematic pairs</strong> while keeping contacts that you care about (e.g. finger–object, or specific finger–finger contacts). Use filtered pairs judiciously: over-filtering can allow unrealistic interpenetration; under-filtering can cause instability. We’ll turn on self-collisions, run the <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_collision_detector.html#isaac-collision-detector"><span class="std std-ref">Robot Self-Collision Detector</span></a> to see which links overlap at rest, then author filters on <strong>physics.usda</strong>. The Physics Debugger is also available to view solid collision meshes in the viewport while you reason about a pair.</p>
+<p>따라서 목표는 중요한 접촉(예: 손가락-물체, 특정 손가락-손가락 접촉)을 유지하면서 <strong>문제가 되는 쌍을 필터링</strong>하는 것입니다. 필터된 쌍을 신중하게 사용하세요: 과도한 필터링은 비현실적인 관통을 허용할 수 있고, 부족한 필터링은 불안정성을 유발할 수 있습니다. 자기 충돌을 켜고, <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_collision_detector.html#isaac-collision-detector"><span class="std std-ref">Robot Self-Collision Detector</span></a>를 실행하여 현재 구성에서 어느 링크가 겹치는지 확인한 다음, <strong>physics.usda</strong>에 필터를 저작합니다. Physics Debugger는 쌍에 대해 추론하는 동안 뷰포트에서 솔리드 충돌 메시를 보는 데도 사용할 수 있습니다.</p>
 </section>
 <section id="module-3-2-enable-self-collision-and-inspect-pairs">
 <h2>Module 3.2: Enable self-collision and inspect pairs<a class="headerlink" href="tutorial_04_collider_pairs.html#module-3-2-enable-self-collision-and-inspect-pairs" title="Link to this heading">#</a></h2>
-<p><strong>Which pairs should you filter?</strong> At the current configuration, the self-collision detector queries the physics engine for overlapping colliders, maps them to rigid-body links, and shows them in a sortable, searchable table.</p>
+<p><strong>어떤 쌍을 필터링해야 하나요?</strong> 현재 구성에서 자기 충돌 감지기는 물리 엔진에서 겹치는 콜라이더를 쿼리하고, 강체 링크에 매핑하여 정렬 및 검색 가능한 테이블에 표시합니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>For this tutorial we focus on the <strong>pinky</strong> (little finger) as a clear example; the same workflow applies to other fingers or links.</p>
+<p>이 튜토리얼에서는 명확한 예시로 <strong>새끼손가락</strong>에 초점을 맞춥니다; 동일한 워크플로우가 다른 손가락이나 링크에도 적용됩니다.</p>
 </div>
 <section id="step-1-reproduce-the-problem">
 <h3>Step 1: Reproduce the problem<a class="headerlink" href="tutorial_04_collider_pairs.html#step-1-reproduce-the-problem" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Press <strong>Play</strong>. With self-collisions disabled, the simulation is stable. Press <strong>Stop</strong>.</p></li>
+<li><p><strong>Play</strong>를 누릅니다. 자기 충돌이 비활성화된 상태에서 시뮬레이션이 안정적입니다. <strong>Stop</strong>을 누릅니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="GIF showing simulation with self-collisions disabled (stable)." src="../_images/isim_6.0_full_tut_gui_simulation_self_collisions_disabled_stable.gif" />
+<img alt="GIF showing simulation with self-collisions disabled (stable)." src="../_images/isim_6.0_full_tut_gui_simulation_self_collisions_disabled_stable.gif"/>
 </figure>
 <ol class="arabic simple">
-<li><p>Because enabling <strong>Articulation Root</strong> is a PhysX-specific API, we want to make sure we are authoring on the <strong>physx.usda</strong> layer. In the <strong>Layer</strong> tab, click the <strong>Insert Sublayer</strong> icon to add a new sublayer beneath the current layer stack.</p></li>
+<li><p><strong>Articulation Root</strong> 활성화는 PhysX 전용 API이므로, <strong>physx.usda</strong> 레이어에 저작하고 있는지 확인해야 합니다. <strong>Layer</strong> 탭에서 <strong>Insert Sublayer</strong> 아이콘을 클릭하여 현재 레이어 스택 아래에 새 서브레이어를 추가합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="The Layer panel with the Insert Sublayer icon highlighted." src="../_images/isim_6.0_full_tut_gui_layer_panel_insert_sublayer_icon.png" />
+<img alt="The Layer panel with the Insert Sublayer icon highlighted." src="../_images/isim_6.0_full_tut_gui_layer_panel_insert_sublayer_icon.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p>In the file dialog, navigate to <code class="docutils literal notranslate"><span class="pre">/path/to/Inspire/module_1_start/payloads/Physics/</span></code>, select <code class="docutils literal notranslate"><span class="pre">physx.usda</span></code>, and click <strong>Open</strong> to insert it as a sublayer.</p></li>
+<li><p>파일 대화 상자에서 <code class="docutils literal notranslate"><span class="pre">/path/to/Inspire/module_1_start/payloads/Physics/</span></code>로 이동하여 <code class="docutils literal notranslate"><span class="pre">physx.usda</span></code>를 선택하고 <strong>Open</strong>을 클릭하여 서브레이어로 삽입합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="File dialog with physx.usda selected as the sublayer to insert." src="../_images/isim_6.0_full_tut_gui_file_dialog_physx_usda_sublayer.png" />
+<img alt="File dialog with physx.usda selected as the sublayer to insert." src="../_images/isim_6.0_full_tut_gui_file_dialog_physx_usda_sublayer.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p>Once <strong>physx.usda</strong> appears in the layer stack, <strong>Right-click on physx.usda</strong> and select <strong>Set Authoring Layer</strong>.</p></li>
+<li><p><strong>physx.usda</strong>가 레이어 스택에 나타나면, <strong>physx.usda를 마우스 오른쪽 버튼으로 클릭</strong>하고 <strong>Set Authoring Layer</strong>를 선택합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Context menu with Set Authoring Layer highlighted for physx.usda." src="../_images/isim_6.0_full_tut_gui_context_menu_set_authoring_layer_physx.png" />
+<img alt="Context menu with Set Authoring Layer highlighted for physx.usda." src="../_images/isim_6.0_full_tut_gui_context_menu_set_authoring_layer_physx.png"/>
 </figure>
-<p>You should now see the <strong>physx.usda</strong> layer highlighted green, indicating it is the active authoring layer.</p>
+<p>이제 <strong>physx.usda</strong> 레이어가 녹색으로 강조 표시되어 활성 저작 레이어임을 나타냅니다.</p>
 <figure class="align-center">
-<img alt="Layer panel with physx.usda highlighted green as the current authoring layer." src="../_images/isim_6.0_full_tut_gui_layer_panel_physx_usda_highlighted_green.png" />
-</figure>
-<ol class="arabic simple">
-<li><p>In the <em>Stage</em> panel, select <code class="docutils literal notranslate"><span class="pre">r_base_link</span></code>. In the <em>Property</em> panel, scroll to <strong>Articulation Root</strong> and check <strong>Self Collisions Enabled</strong>.</p></li>
-</ol>
-<figure class="align-center">
-<img alt="Articulation Root with Self Collisions Enabled option." src="../_images/isim_6.0_full_tut_gui_articulation_root_self_collisions_enabled.png" />
+<img alt="Layer panel with physx.usda highlighted green as the current authoring layer." src="../_images/isim_6.0_full_tut_gui_layer_panel_physx_usda_highlighted_green.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p>Press <strong>Play</strong> again. Links move erratically as overlapping collision geometry between non-adjacent links is now colliding, and the solver can’t resolve it cleanly.</p></li>
+<li><p><em>Stage</em> 패널에서 <code class="docutils literal notranslate"><span class="pre">r_base_link</span></code>를 선택합니다. <em>Property</em> 패널에서 <strong>Articulation Root</strong>로 스크롤하고 <strong>Self Collisions Enabled</strong>를 체크합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="GIF showing simulation instability with self-collisions enabled." src="../_images/isim_6.0_full_tut_gui_simulation_instability_self_collisions_enabled.gif" />
+<img alt="Articulation Root with Self Collisions Enabled option." src="../_images/isim_6.0_full_tut_gui_articulation_root_self_collisions_enabled.png"/>
+</figure>
+<ol class="arabic simple">
+<li><p><strong>Play</strong>를 다시 누릅니다. 비인접 링크 간의 겹치는 충돌 지오메트리가 이제 충돌하고 솔버가 이를 깔끔하게 해결할 수 없어 링크가 불규칙하게 움직입니다.</p></li>
+</ol>
+<figure class="align-center">
+<img alt="GIF showing simulation instability with self-collisions enabled." src="../_images/isim_6.0_full_tut_gui_simulation_instability_self_collisions_enabled.gif"/>
 </figure>
 </section>
 <section id="step-2-run-the-robot-self-collision-detector">
 <h3>Step 2: Run the Robot Self-Collision Detector<a class="headerlink" href="tutorial_04_collider_pairs.html#step-2-run-the-robot-self-collision-detector" title="Link to this heading">#</a></h3>
-<p>With <strong>Self Collisions Enabled</strong> on the articulation root, the physics engine can evaluate which collider pairs overlap in the hand’s current configuration. The detector surfaces those pairs in a docked panel so you can inspect them and conveniently toggle <strong>Filtered Pair</strong>.</p>
+<p>관절 루트에 <strong>Self Collisions Enabled</strong>가 설정되면, 물리 엔진이 핸드의 현재 구성에서 겹치는 콜라이더 쌍을 평가할 수 있습니다. 감지기는 도킹된 패널에 이러한 쌍을 표시하여 검사하고 편리하게 <strong>Filtered Pair</strong>를 전환할 수 있도록 합니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If <strong>Self Collisions</strong> on the articulation root are <strong>disabled</strong>, the tool reports no overlapping pairs from the collision engine—see <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_collision_detector.html#isaac-collision-detector-ui"><span class="std std-ref">User Interface</span></a>. Keep self-collisions <strong>on</strong> for this tutorial.</p>
+<p>관절 루트에서 <strong>Self Collisions</strong>가 <strong>비활성화</strong>된 경우, 도구는 충돌 엔진에서 겹치는 쌍을 보고하지 않습니다—<a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_collision_detector.html#isaac-collision-detector-ui"><span class="std std-ref">User Interface</span></a>를 참조하세요. 이 튜토리얼에서는 자기 충돌을 <strong>켜둡니다</strong>.</p>
 </div>
 <ol class="arabic simple">
-<li><p>Press <strong>Stop</strong> if the simulation is still running so the hand returns to a stable pose for analysis.</p></li>
-<li><p>Open <strong>Tools &gt; Robotics &gt; Asset Editors &gt; Robot Self-Collision Detector</strong>.</p></li>
-<li><p>In the <strong>Robot</strong> dropdown, select the <strong>Inspire Hand</strong>.</p></li>
-<li><p>Leave <strong>Include environment collisions</strong> off unless you have added props; we only need self-pairs for this exercise.</p></li>
-<li><p>Click <strong>Check Collisions</strong>. The table fills with <strong>Rigid Body A</strong> and <strong>Rigid Body B</strong> for each overlapping pair.</p></li>
+<li><p>핸드가 분석을 위한 안정적인 포즈로 돌아오도록 시뮬레이션이 아직 실행 중이면 <strong>Stop</strong>을 누릅니다.</p></li>
+<li><p><strong>Tools &gt; Robotics &gt; Asset Editors &gt; Robot Self-Collision Detector</strong>를 엽니다.</p></li>
+<li><p><strong>Robot</strong> 드롭다운에서 <strong>Inspire Hand</strong>를 선택합니다.</p></li>
+<li><p>소품을 추가하지 않은 경우 <strong>Include environment collisions</strong>는 꺼둡니다; 이 연습에서는 자기 쌍만 필요합니다.</p></li>
+<li><p><strong>Check Collisions</strong>를 클릭합니다. 테이블에 겹치는 각 쌍에 대한 <strong>Rigid Body A</strong>와 <strong>Rigid Body B</strong>가 채워집니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Robot Self-Collision Detector on Inspire Hand." src="../_images/isim_6.0_full_tut_gui_self_collision_detector_panel_inspire.png" />
+<img alt="Robot Self-Collision Detector on Inspire Hand." src="../_images/isim_6.0_full_tut_gui_self_collision_detector_panel_inspire.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p>Use the <strong>search</strong> field or column sort to find rows that involve the pinky and palm—for example pairs that include <code class="docutils literal notranslate"><span class="pre">r_base_link</span></code> with <code class="docutils literal notranslate"><span class="pre">right_little_rubber_1</span></code>, and <code class="docutils literal notranslate"><span class="pre">right_little_1</span></code> with <code class="docutils literal notranslate"><span class="pre">right_little_rubber_2</span></code>. You will enable <strong>Filtered Pair</strong> on those rows in the next module.</p></li>
-<li><p>Click a row to <strong>highlight both bodies</strong> in the viewport with distinct outline colors so you can confirm which links the table refers to.</p></li>
+<li><p><strong>검색</strong> 필드 또는 열 정렬을 사용하여 새끼손가락과 손바닥을 포함하는 행을 찾습니다—예를 들어 <code class="docutils literal notranslate"><span class="pre">r_base_link</span></code>와 <code class="docutils literal notranslate"><span class="pre">right_little_rubber_1</span></code>, <code class="docutils literal notranslate"><span class="pre">right_little_1</span></code>과 <code class="docutils literal notranslate"><span class="pre">right_little_rubber_2</span></code>를 포함하는 쌍. 다음 모듈에서 해당 행에 대해 <strong>Filtered Pair</strong>를 활성화합니다.</p></li>
+<li><p>행을 클릭하여 뷰포트에서 두 바디를 별도의 윤곽 색상으로 <strong>강조 표시</strong>하여 테이블이 참조하는 링크를 확인합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Viewport highlighting for a selected collision pair." src="../_images/isim_6.0_full_tut_gui_self_collision_detector_viewport_pair.png" />
+<img alt="Viewport highlighting for a selected collision pair." src="../_images/isim_6.0_full_tut_gui_self_collision_detector_viewport_pair.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p>Use the <strong>focal</strong> (crosshair) icons next to a body name to select that body’s collision prims in the <em>Stage</em> when you need a closer look.</p></li>
+<li><p>바디 이름 옆의 <strong>포커스</strong>(십자선) 아이콘을 사용하여 더 자세히 살펴볼 때 해당 바디의 충돌 프림을 <em>Stage</em>에서 선택합니다.</p></li>
 </ol>
-<p>Sorting, batch checkbox toggles, multi-row selection, and keyboard navigation are described in <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_collision_detector.html#isaac-collision-detector"><span class="std std-ref">Robot Self-Collision Detector</span></a>.</p>
+<p>정렬, 일괄 체크박스 전환, 다중 행 선택, 키보드 탐색은 <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_collision_detector.html#isaac-collision-detector"><span class="std std-ref">Robot Self-Collision Detector</span></a>에 설명되어 있습니다.</p>
 </section>
 <section id="solid-collision-meshes-physics-debugger">
 <h3>Solid collision meshes (Physics Debugger)<a class="headerlink" href="tutorial_04_collider_pairs.html#solid-collision-meshes-physics-debugger" title="Link to this heading">#</a></h3>
-<p>The steps below walk through <strong>Solid Collision Mesh Visualization</strong> for the Inspire Hand so you can relate detector rows to concrete shapes in the viewport. Follow them when that extra view helps; otherwise continue to the next module.</p>
-<p>We use the pinky as the example: visualize its collision meshes and relate them to the overlaps you saw in the detector.</p>
+<p>아래 단계는 Inspire Hand에 대한 <strong>솔리드 충돌 메시 시각화</strong>를 안내하여 감지기 행과 뷰포트의 구체적인 형상을 연결할 수 있습니다. 이 추가 뷰가 도움이 될 때 따르고, 그렇지 않으면 다음 모듈로 계속 진행합니다.</p>
+<p>새끼손가락을 예시로 사용합니다: 충돌 메시를 시각화하고 감지기에서 본 겹침과 연결합니다.</p>
 <ol class="arabic simple">
-<li><p>Open <strong>Utilities &gt; Physics Debugger</strong> to show the <em>Physics Debug</em> panel.</p></li>
+<li><p><strong>Utilities &gt; Physics Debugger</strong>를 열어 <em>Physics Debug</em> 패널을 표시합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Open the Physics Debug panel." src="../_images/isim_6.0_full_tut_gui_utilities_physics_debugger_panel.png" />
+<img alt="Open the Physics Debug panel." src="../_images/isim_6.0_full_tut_gui_utilities_physics_debugger_panel.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p>Have the root prim <code class="docutils literal notranslate"><span class="pre">inspire_hand</span></code> selected. In <strong>Collision Mesh Debug Visualization</strong>, enable <strong>Solid Collision Mesh Visualization</strong>.</p></li>
+<li><p>루트 프림 <code class="docutils literal notranslate"><span class="pre">inspire_hand</span></code>를 선택합니다. <strong>Collision Mesh Debug Visualization</strong>에서 <strong>Solid Collision Mesh Visualization</strong>을 활성화합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Enable Solid Collision Mesh Visualization." src="../_images/isim_6.0_full_tut_gui_solid_collision_mesh_visualization_enable.png" />
+<img alt="Enable Solid Collision Mesh Visualization." src="../_images/isim_6.0_full_tut_gui_solid_collision_mesh_visualization_enable.png"/>
 </figure>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p><strong>Solid Collision Mesh Visualization</strong> shows only the collision meshes for the currently selected prim. Ensure the <code class="docutils literal notranslate"><span class="pre">inspire_hand</span></code> prim is selected in the <em>Stage</em> panel so all collision meshes are visible.</p>
+<p><strong>Solid Collision Mesh Visualization</strong>은 현재 선택된 프림의 충돌 메시만 표시합니다. <em>Stage</em> 패널에서 <code class="docutils literal notranslate"><span class="pre">inspire_hand</span></code> 프림이 선택되어 모든 충돌 메시가 보이도록 합니다.</p>
 </div>
 <ol class="arabic simple">
-<li><p>Open <strong>Eye &gt; Show by Type &gt; Meshes</strong> and turn <strong>Meshes</strong> off so the solid collision meshes are easier to see.</p></li>
+<li><p><strong>Eye &gt; Show by Type &gt; Meshes</strong>를 열고 <strong>Meshes</strong>를 꺼서 솔리드 충돌 메시를 더 쉽게 볼 수 있도록 합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Solid collision mesh visualization viewport with meshes hidden." src="../_images/isim_6.0_full_tut_gui_solid_collision_mesh_viewport.png" />
+<img alt="Solid collision mesh visualization viewport with meshes hidden." src="../_images/isim_6.0_full_tut_gui_solid_collision_mesh_viewport.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p>In the <em>Stage</em> panel, deactivate the <code class="docutils literal notranslate"><span class="pre">right_little_1</span></code> link (lower pinky) to expose the overlapping collision shapes underneath—the rubber pad and surrounding links.</p></li>
+<li><p><em>Stage</em> 패널에서 <code class="docutils literal notranslate"><span class="pre">right_little_1</span></code> 링크(하부 새끼손가락)를 비활성화하여 아래의 겹치는 충돌 형상—고무 패드와 주변 링크—을 노출합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Deactivate link to see rubber pad collision shapes overlap." src="../_images/isim_6.0_full_tut_gui_deactivate_link_rubber_pad_overlap.png" />
+<img alt="Deactivate link to see rubber pad collision shapes overlap." src="../_images/isim_6.0_full_tut_gui_deactivate_link_rubber_pad_overlap.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p>Identify where <code class="docutils literal notranslate"><span class="pre">right_little_rubber_1</span></code> (lower pinky rubber pad) overlaps with <code class="docutils literal notranslate"><span class="pre">r_base_link</span></code> (palm)—that is where a problematic self-collision is likely to occur.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">right_little_rubber_1</span></code>(하부 새끼손가락 고무 패드)이 <code class="docutils literal notranslate"><span class="pre">r_base_link</span></code>(손바닥)와 겹치는 위치를 식별합니다—여기서 문제가 되는 자기 충돌이 발생할 가능성이 높습니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Viewport showing solid collision meshes; pinky rubber pad and second link overlapping." src="../_images/isim_6.0_full_tut_gui_viewport_pinky_rubber_palm_overlap.png" />
+<img alt="Viewport showing solid collision meshes; pinky rubber pad and second link overlapping." src="../_images/isim_6.0_full_tut_gui_viewport_pinky_rubber_palm_overlap.png"/>
 </figure>
-<p>In the image above, with the lower pinky link hidden, the lower pinky rubber pad (tan/sand color) overlaps and collides with the palm (yellow). This is an example of a pair we will filter out to ensure stable simulation.</p>
-<p>The schematic below shows which rigid body pairs of the pinky we will filter in this tutorial:</p>
+<p>위의 이미지에서 하부 새끼손가락 링크가 숨겨진 상태에서, 하부 새끼손가락 고무 패드(황갈색/모래색)가 손바닥(노란색)과 겹치고 충돌합니다. 이는 안정적인 시뮬레이션을 위해 필터링할 쌍의 예시입니다.</p>
+<p>아래 스키마틱은 이 튜토리얼에서 필터링할 새끼손가락의 강체 쌍을 보여줍니다:</p>
 <figure class="align-center">
-<img alt="Schematic of rigid bodies and which collision pairs to filter." src="../_images/isim_6.0_full_tut_gui_schematic_rigid_bodies_filtered_pairs.png" />
+<img alt="Schematic of rigid bodies and which collision pairs to filter." src="../_images/isim_6.0_full_tut_gui_schematic_rigid_bodies_filtered_pairs.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p>Open <strong>Eye &gt; Show by Type &gt; Meshes</strong> and toggle <strong>Meshes</strong> on to re-enable mesh visualization.</p></li>
+<li><p><strong>Eye &gt; Show by Type &gt; Meshes</strong>를 열고 <strong>Meshes</strong>를 켜서 메시 시각화를 다시 활성화합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Solid collision mesh visualization viewport with meshes visible." src="../_images/isim_6.0_full_tut_gui_solid_collision_mesh_viewport.png" />
+<img alt="Solid collision mesh visualization viewport with meshes visible." src="../_images/isim_6.0_full_tut_gui_solid_collision_mesh_viewport.png"/>
 </figure>
 </section>
 </section>
 <section id="module-3-3-adding-filtered-pairs">
 <h2>Module 3.3: Adding Filtered Pairs<a class="headerlink" href="tutorial_04_collider_pairs.html#module-3-3-adding-filtered-pairs" title="Link to this heading">#</a></h2>
-<p>Next, we filter two specific self-collision pairs that drive pinky instability: (1) the palm <code class="docutils literal notranslate"><span class="pre">r_base_link</span></code> and the pinky’s lower rubber pad <code class="docutils literal notranslate"><span class="pre">right_little_rubber_1</span></code>, and (2) the lower pinky link <code class="docutils literal notranslate"><span class="pre">right_little_1</span></code> and the upper rubber pad <code class="docutils literal notranslate"><span class="pre">right_little_rubber_2</span></code>.</p>
+<p>다음으로, 새끼손가락 불안정성을 유발하는 두 가지 특정 자기 충돌 쌍을 필터링합니다: (1) 손바닥 <code class="docutils literal notranslate"><span class="pre">r_base_link</span></code>와 새끼손가락의 하부 고무 패드 <code class="docutils literal notranslate"><span class="pre">right_little_rubber_1</span></code>, (2) 하부 새끼손가락 링크 <code class="docutils literal notranslate"><span class="pre">right_little_1</span></code>과 상부 고무 패드 <code class="docutils literal notranslate"><span class="pre">right_little_rubber_2</span></code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>It doesn’t matter whether the filtered pair is a parent or child link; USD’s Physics Filtered Pairs block collisions between the specified pairs in both directions.</p>
+<p>필터된 쌍이 부모 링크인지 자식 링크인지는 중요하지 않습니다; USD의 Physics Filtered Pairs는 양방향으로 지정된 쌍 간의 충돌을 차단합니다.</p>
 </div>
-<p>To follow Asset Structure 3.0, filtered pairs use the neutral Physics API—author on <strong>physics.usda</strong>.</p>
+<p>Asset Structure 3.0을 따르기 위해, 필터된 쌍은 중립 Physics API를 사용합니다—<strong>physics.usda</strong>에 저작합니다.</p>
 <section id="set-physics-usda-as-the-authoring-layer">
 <h3>Set <strong>physics.usda</strong> as the authoring layer<a class="headerlink" href="tutorial_04_collider_pairs.html#set-physics-usda-as-the-authoring-layer" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>In the <strong>Layer</strong> tab, expand <strong>physx.usda</strong>. You should see <strong>physics.usda</strong> listed in the hierarchy.</p></li>
+<li><p><strong>Layer</strong> 탭에서 <strong>physx.usda</strong>를 확장합니다. <strong>physics.usda</strong>가 계층 구조에 나열됩니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Layer tab expanded to show physics.usda under physx.usda." src="../_images/isim_6.0_full_tut_gui_layer_tab_physics_usda_under_physx.png" />
+<img alt="Layer tab expanded to show physics.usda under physx.usda." src="../_images/isim_6.0_full_tut_gui_layer_tab_physics_usda_under_physx.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p><strong>Right-click on physics.usda</strong> and select <strong>Set Authoring Layer</strong>.</p></li>
+<li><p><strong>physics.usda를 마우스 오른쪽 버튼으로 클릭</strong>하고 <strong>Set Authoring Layer</strong>를 선택합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Right-click context menu to set authoring layer on physics.usda." src="../_images/isim_6.0_full_tut_gui_rightclick_set_authoring_layer_physics_usda.png" />
+<img alt="Right-click context menu to set authoring layer on physics.usda." src="../_images/isim_6.0_full_tut_gui_rightclick_set_authoring_layer_physics_usda.png"/>
 </figure>
-<p>You should now see the <strong>physics.usda</strong> layer highlighted green, indicating it is the active authoring layer.</p>
+<p>이제 <strong>physics.usda</strong> 레이어가 녹색으로 강조 표시되어 활성 저작 레이어임을 나타냅니다.</p>
 <figure class="align-center">
-<img alt="physics.usda highlighted green, showing it is the active authoring layer." src="../_images/isim_6.0_full_tut_gui_physics_usda_highlighted_green_authoring_layer.png" />
+<img alt="physics.usda highlighted green, showing it is the active authoring layer." src="../_images/isim_6.0_full_tut_gui_physics_usda_highlighted_green_authoring_layer.png"/>
 </figure>
 </section>
 <section id="robot-self-collision-detector-filtered-pair">
 <h3>Robot Self-Collision Detector: <strong>Filtered Pair</strong><a class="headerlink" href="tutorial_04_collider_pairs.html#robot-self-collision-detector-filtered-pair" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Open <strong>Tools &gt; Robotics &gt; Asset Editors &gt; Robot Self-Collision Detector</strong> (or bring the panel forward if it is already open).</p></li>
-<li><p>Click <strong>Check Collisions</strong> so the table matches the current stage.</p></li>
-<li><p>Find the row whose two bodies are <code class="docutils literal notranslate"><span class="pre">r_base_link</span></code> and <code class="docutils literal notranslate"><span class="pre">right_little_rubber_1</span></code> (column order may vary). Enable <strong>Filtered Pair</strong> for that row.</p></li>
-<li><p>Find the row for <code class="docutils literal notranslate"><span class="pre">right_little_1</span></code> and <code class="docutils literal notranslate"><span class="pre">right_little_rubber_2</span></code>. Enable <strong>Filtered Pair</strong> for that row.</p></li>
+<li><p><strong>Tools &gt; Robotics &gt; Asset Editors &gt; Robot Self-Collision Detector</strong>를 엽니다(또는 이미 열려 있으면 패널을 앞으로 가져옵니다).</p></li>
+<li><p><strong>Check Collisions</strong>를 클릭하여 테이블이 현재 스테이지와 일치하도록 합니다.</p></li>
+<li><p>두 바디가 <code class="docutils literal notranslate"><span class="pre">r_base_link</span></code>와 <code class="docutils literal notranslate"><span class="pre">right_little_rubber_1</span></code>인 행을 찾습니다(열 순서가 다를 수 있음). 해당 행에 대해 <strong>Filtered Pair</strong>를 활성화합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">right_little_1</span></code>과 <code class="docutils literal notranslate"><span class="pre">right_little_rubber_2</span></code>에 대한 행을 찾습니다. 해당 행에 대해 <strong>Filtered Pair</strong>를 활성화합니다.</p></li>
 </ol>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Multi-select rows and toggle one <strong>Filtered Pair</strong> checkbox to apply the same state to every selected row; see <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_collision_detector.html#isaac-collision-detector-ui"><span class="std std-ref">User Interface</span></a>.</p>
+<p>행을 다중 선택한 후 하나의 <strong>Filtered Pair</strong> 체크박스를 전환하여 선택된 모든 행에 동일한 상태를 적용합니다; <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_collision_detector.html#isaac-collision-detector-ui"><span class="std std-ref">User Interface</span></a>를 참조하세요.</p>
 </div>
-<p>Toggling <strong>Filtered Pair</strong> authors <code class="docutils literal notranslate"><span class="pre">UsdPhysics.FilteredPairsAPI</span></code> on the active layer—the <strong>physics.usda</strong> authoring layer you set above.</p>
+<p><strong>Filtered Pair</strong>를 전환하면 활성 레이어—위에서 설정한 <strong>physics.usda</strong> 저작 레이어—에 <code class="docutils literal notranslate"><span class="pre">UsdPhysics.FilteredPairsAPI</span></code>를 저작합니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you use the detector checkboxes in this section, skip the <em>Property</em> panel subsection that follows.</p>
+<p>이 섹션에서 감지기 체크박스를 사용한 경우, 다음의 <em>Property</em> 패널 하위 섹션을 건너뜁니다.</p>
 </div>
 </section>
 <section id="verify-and-save">
 <h3>Verify and save<a class="headerlink" href="tutorial_04_collider_pairs.html#verify-and-save" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Click on the blue files icon next to <strong>physics.usda (Authoring Layer)</strong> to save the changes to <strong>physics.usda</strong>.</p></li>
+<li><p><strong>physics.usda (Authoring Layer)</strong> 옆의 파란 파일 아이콘을 클릭하여 <strong>physics.usda</strong>에 변경 사항을 저장합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Layer panel for saving to physics.usda." src="../_images/isim_6.0_full_tut_gui_layer_panel_save_physics_usda.png" />
+<img alt="Layer panel for saving to physics.usda." src="../_images/isim_6.0_full_tut_gui_layer_panel_save_physics_usda.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p>Press <strong>Play</strong>. The pinky (little finger) should move more stably; the other fingers will still be unstable until their collision pairs are filtered the same way.</p></li>
+<li><p><strong>Play</strong>를 누릅니다. 새끼손가락(소지)이 더 안정적으로 움직여야 합니다; 다른 손가락들은 같은 방식으로 충돌 쌍이 필터링될 때까지 여전히 불안정합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="GIF showing pinky moving stably after filtering its collision pairs." src="../_images/isim_6.0_full_tut_gui_pinky_stable_after_filtered_pairs.gif" />
+<img alt="GIF showing pinky moving stably after filtering its collision pairs." src="../_images/isim_6.0_full_tut_gui_pinky_stable_after_filtered_pairs.gif"/>
 </figure>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Before starting Tutorial 5, open <code class="docutils literal notranslate"><span class="pre">/path/to/Inspire/module_3_end-checkpoint_1/inspire_hand.usda</span></code>. It includes all collision filters for stability, plus additional filtered pairs (e.g. finger tips and pads) for computational performance.</p>
+<p>Tutorial 5를 시작하기 전에 <code class="docutils literal notranslate"><span class="pre">/path/to/Inspire/module_3_end-checkpoint_1/inspire_hand.usda</span></code>를 엽니다. 안정성을 위한 모든 충돌 필터와 계산 성능을 위한 추가 필터된 쌍(예: 손끝과 패드)이 포함되어 있습니다.</p>
 </div>
 </section>
 <section id="property-panel-filtered-pairs-on-each-prim">
 <h3><em>Property</em> panel: <strong>Filtered Pairs</strong> on each prim<a class="headerlink" href="tutorial_04_collider_pairs.html#property-panel-filtered-pairs-on-each-prim" title="Link to this heading">#</a></h3>
-<p>The following steps add the same two relationships by editing <strong>Filtered Pairs</strong> on <code class="docutils literal notranslate"><span class="pre">r_base_link</span></code> and <code class="docutils literal notranslate"><span class="pre">right_little_1</span></code>. Use them if you prefer prim-by-prim authoring or want to see where the targets appear in the <em>Property</em> panel. If you already enabled both pairs in the Robot Self-Collision Detector, skip this subsection.</p>
+<p>다음 단계는 <code class="docutils literal notranslate"><span class="pre">r_base_link</span></code>와 <code class="docutils literal notranslate"><span class="pre">right_little_1</span></code>의 <strong>Filtered Pairs</strong>를 편집하여 동일한 두 관계를 추가합니다. 프림별 저작을 선호하거나 <em>Property</em> 패널에서 타깃이 어디에 나타나는지 확인하고 싶다면 이 단계를 사용하세요. Robot Self-Collision Detector에서 두 쌍을 이미 활성화한 경우 이 하위 섹션을 건너뜁니다.</p>
 <section id="palm-and-lower-pinky-rubber-pad">
 <h4>Palm and lower pinky rubber pad<a class="headerlink" href="tutorial_04_collider_pairs.html#palm-and-lower-pinky-rubber-pad" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
-<li><p>In the <em>Stage</em> tab, select the <code class="docutils literal notranslate"><span class="pre">r_base_link</span></code> prim. In the <em>Property</em> panel, click <strong>Add &gt; Physics &gt; Filtered Pairs</strong>.</p></li>
+<li><p><em>Stage</em> 탭에서 <code class="docutils literal notranslate"><span class="pre">r_base_link</span></code> 프림을 선택합니다. <em>Property</em> 패널에서 <strong>Add &gt; Physics &gt; Filtered Pairs</strong>를 클릭합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Right-click on r_base_link to add a Physics Filtered Pair." src="../_images/isim_6.0_full_tut_gui_add_physics_filtered_pair_r_base_link.png" />
+<img alt="Right-click on r_base_link to add a Physics Filtered Pair." src="../_images/isim_6.0_full_tut_gui_add_physics_filtered_pair_r_base_link.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p>With <code class="docutils literal notranslate"><span class="pre">r_base_link</span></code> still selected, go to the <em>Property</em> panel. Find the <strong>Filtered Pairs</strong> section and click <strong>Add Target</strong> to add a new filtered collision pair.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">r_base_link</span></code>가 여전히 선택된 상태에서 <em>Property</em> 패널로 이동합니다. <strong>Filtered Pairs</strong> 섹션을 찾고 <strong>Add Target</strong>을 클릭하여 새 필터된 충돌 쌍을 추가합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Property panel showing Filtered Pairs, with Add Target button highlighted." src="../_images/isim_6.0_full_tut_gui_filtered_pairs_add_target_button.png" />
+<img alt="Property panel showing Filtered Pairs, with Add Target button highlighted." src="../_images/isim_6.0_full_tut_gui_filtered_pairs_add_target_button.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p>In the pop-up that appears, browse or type to select <code class="docutils literal notranslate"><span class="pre">right_little_rubber_1</span></code>.</p></li>
+<li><p>나타나는 팝업에서 <code class="docutils literal notranslate"><span class="pre">right_little_rubber_1</span></code>을 탐색하거나 입력하여 선택합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Popup window to select right_little_rubber_1 as the filtered pair target." src="../_images/isim_6.0_full_tut_gui_popup_select_right_little_rubber_1.png" />
+<img alt="Popup window to select right_little_rubber_1 as the filtered pair target." src="../_images/isim_6.0_full_tut_gui_popup_select_right_little_rubber_1.png"/>
 </figure>
-<p>After these steps, collisions between the palm (<code class="docutils literal notranslate"><span class="pre">r_base_link</span></code>) and the pinky’s lower rubber pad (<code class="docutils literal notranslate"><span class="pre">right_little_rubber_1</span></code>) are filtered out.</p>
+<p>이 단계 후, 손바닥(<code class="docutils literal notranslate"><span class="pre">r_base_link</span></code>)과 새끼손가락의 하부 고무 패드(<code class="docutils literal notranslate"><span class="pre">right_little_rubber_1</span></code>) 간의 충돌이 필터링됩니다.</p>
 </section>
 <section id="lower-pinky-link-and-upper-rubber-pad">
 <h4>Lower pinky link and upper rubber pad<a class="headerlink" href="tutorial_04_collider_pairs.html#lower-pinky-link-and-upper-rubber-pad" title="Link to this heading">#</a></h4>
 <ol class="arabic simple">
-<li><p>In the <em>Stage</em> panel, select the <code class="docutils literal notranslate"><span class="pre">right_little_1</span></code> prim (lower link of the pinky). In the <em>Property</em> panel, click <strong>Add &gt; Physics &gt; Filtered Pairs</strong>.</p></li>
+<li><p><em>Stage</em> 패널에서 <code class="docutils literal notranslate"><span class="pre">right_little_1</span></code> 프림(새끼손가락의 하부 링크)을 선택합니다. <em>Property</em> 패널에서 <strong>Add &gt; Physics &gt; Filtered Pairs</strong>를 클릭합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Right-click on right_little_1 to add a Physics Filtered Pair." src="../_images/isim_6.0_full_tut_gui_add_physics_filtered_pair_right_little_1.png" />
+<img alt="Right-click on right_little_1 to add a Physics Filtered Pair." src="../_images/isim_6.0_full_tut_gui_add_physics_filtered_pair_right_little_1.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p>With <code class="docutils literal notranslate"><span class="pre">right_little_1</span></code> still selected, go to the <em>Property</em> panel. Find the <strong>Filtered Pairs</strong> section and click <strong>Add Target</strong> to add a new filtered collision pair.</p></li>
-<li><p>In the pop-up window, browse or type to select <code class="docutils literal notranslate"><span class="pre">right_little_rubber_2</span></code> (the upper pinky rubber pad), and confirm the selection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">right_little_1</span></code>이 여전히 선택된 상태에서 <em>Property</em> 패널로 이동합니다. <strong>Filtered Pairs</strong> 섹션을 찾고 <strong>Add Target</strong>을 클릭하여 새 필터된 충돌 쌍을 추가합니다.</p></li>
+<li><p>팝업 창에서 <code class="docutils literal notranslate"><span class="pre">right_little_rubber_2</span></code>(상부 새끼손가락 고무 패드)를 탐색하거나 입력하여 선택하고 확인합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Property panel on right_little_1 prim, Filtered Pairs section with Add Target button." src="../_images/isim_6.0_full_tut_gui_right_little_1_filtered_pairs_add_target.png" />
+<img alt="Property panel on right_little_1 prim, Filtered Pairs section with Add Target button." src="../_images/isim_6.0_full_tut_gui_right_little_1_filtered_pairs_add_target.png"/>
 </figure>
-<p>Save the layers as in <strong>Verify and save</strong> above and then press <strong>Play</strong> again to confirm the pinky moves more stably.</p>
+<p>위의 <strong>검증 및 저장</strong>에서와 같이 레이어를 저장한 후 <strong>Play</strong>를 다시 눌러 새끼손가락이 더 안정적으로 움직이는지 확인합니다.</p>
 </section>
 </section>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="tutorial_04_collider_pairs.html#summary" title="Link to this heading">#</a></h2>
-<p>This tutorial covered:</p>
+<p>이 튜토리얼에서 다룬 내용:</p>
 <ul class="simple">
-<li><p>How <strong>Filtered Pairs</strong> work and when to use them to prevent invalid self-collisions.</p></li>
-<li><p>Enabling self-collisions, running the <strong>Robot Self-Collision Detector</strong> to list overlapping pairs and mark <strong>Filtered Pair</strong>, and using the <strong>Physics Debugger</strong> for solid collision mesh visualization when helpful.</p></li>
-<li><p>Authoring the pinky’s two filters on <strong>physics.usda</strong> via the detector or the <em>Property</em> panel on <code class="docutils literal notranslate"><span class="pre">r_base_link</span></code> and <code class="docutils literal notranslate"><span class="pre">right_little_1</span></code>.</p></li>
+<li><p><strong>Filtered Pairs</strong>의 작동 방식과 유효하지 않은 자기 충돌을 방지하기 위한 사용 시기.</p></li>
+<li><p>자기 충돌 활성화, <strong>Robot Self-Collision Detector</strong>를 실행하여 겹치는 쌍을 나열하고 <strong>Filtered Pair</strong>를 표시하며, 필요 시 <strong>Physics Debugger</strong>로 솔리드 충돌 메시 시각화하기.</p></li>
+<li><p>감지기 또는 <code class="docutils literal notranslate"><span class="pre">r_base_link</span></code>와 <code class="docutils literal notranslate"><span class="pre">right_little_1</span></code>의 <em>Property</em> 패널을 통해 새끼손가락의 두 필터를 <strong>physics.usda</strong>에 저작하기.</p></li>
 </ul>
 </section>
 <section id="next-steps">
 <h2>Next Steps<a class="headerlink" href="tutorial_04_collider_pairs.html#next-steps" title="Link to this heading">#</a></h2>
-<p>Continue to <a class="reference internal" href="tutorial_05_joint_drive_tuning.html#isaac-sim-tutorial-tuning-openusd-module-4"><span class="std std-ref">Tutorial 5: Joint Drive Tuning</span></a> to set drive limits (max force, max velocity) from the Inspire Hand specs, then to <a class="reference internal" href="tutorial_06_joint_gains_tuning.html#isaac-sim-tutorial-tuning-openusd-module-5"><span class="std std-ref">Tutorial 6: Joint Gains Tuning</span></a> for stiffness and damping with the Gain Tuner.</p>
+<p>드라이브 한계(최대 힘, 최대 속도)를 Inspire Hand 사양에서 설정하려면 <a class="reference internal" href="tutorial_05_joint_drive_tuning.html#isaac-sim-tutorial-tuning-openusd-module-4"><span class="std std-ref">Tutorial 5: Joint Drive Tuning</span></a>으로 계속 진행하고, 게인 튜너로 강성 및 감쇠를 설정하려면 <a class="reference internal" href="tutorial_06_joint_gains_tuning.html#isaac-sim-tutorial-tuning-openusd-module-5"><span class="std std-ref">Tutorial 6: Joint Gains Tuning</span></a>으로 계속 진행하세요.</p>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="tutorial_03_inspect_asset.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Tutorial 3: Inspect Asset</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="tutorial_05_joint_drive_tuning.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Tutorial 5: Joint Drive Tuning</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="tutorial_03_inspect_asset.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Tutorial 3: Inspect Asset</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="tutorial_05_joint_drive_tuning.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Tutorial 5: Joint Drive Tuning</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_04_collider_pairs.html#learning-objectives">Learning Objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_04_collider_pairs.html#prerequisites">Prerequisites</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_04_collider_pairs.html#module-3-1-understanding-filtered-pairs">Module 3.1: Understanding Filtered Pairs</a></li>
@@ -1590,46 +1201,29 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_04_collider_pairs.html#summary">Summary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_04_collider_pairs.html#next-steps">Next Steps</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1660,36 +1254,21 @@
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

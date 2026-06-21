@@ -1,551 +1,256 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Tutorial 5: Joint Drive Tuning &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Tutorial 5: Joint Drive Tuning — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'openusd_tuning_tutorials/tutorial_05_joint_drive_tuning';</script>
-    <script>
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'openusd_tuning_tutorials/tutorial_05_joint_drive_tuning';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tutorial 6: Joint Gains Tuning" href="tutorial_06_joint_gains_tuning.html" />
-    <link rel="prev" title="Tutorial 4: Collider Pairs" href="tutorial_04_collider_pairs.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="tutorial_06_joint_gains_tuning.html" rel="next" title="Tutorial 6: Joint Gains Tuning"/>
+<link href="tutorial_04_collider_pairs.html" rel="prev" title="Tutorial 4: Collider Pairs"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="tutorial_05_joint_drive_tuning.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="tutorial_05_joint_drive_tuning.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -565,7 +270,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -593,20 +297,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -681,17 +373,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -869,7 +551,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -909,13 +590,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -962,10 +637,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1134,18 +805,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1171,121 +832,93 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="../robot_setup/index.html" class="nav-link">Robot Setup</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">OpenUSD and Tuning Best Practices Tutorial Series</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Tutorial 5: Joint Drive Tuning</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="../robot_setup/index.html">Robot Setup</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">OpenUSD and Tuning Best Practices Tutorial Series</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Tutorial 5: Joint Drive Tuning</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="tutorial-5-joint-drive-tuning">
+<article class="bd-article">
+<section id="tutorial-5-joint-drive-tuning">
 <span id="isaac-sim-tutorial-tuning-openusd-module-4"></span><h1>Tutorial 5: Joint Drive Tuning<a class="headerlink" href="tutorial_05_joint_drive_tuning.html#tutorial-5-joint-drive-tuning" title="Link to this heading">#</a></h1>
-<p>Collision pairs are filtered (Tutorial 4). The next question: <strong>with how much torque and velocity can each joint move?</strong> If the simulated hand can apply more torque than the real hardware, or spin faster than the real motors, your grasps and controllers will behave differently in sim than on the robot. Conversely, limits that are too low make the hand feel weak or sluggish. In this tutorial we set the <strong>drive limits</strong>—max torque and max velocity—from the Inspire Hand specs. Stiffness and damping (how the joint <em>responds</em> to position commands) are tuned in Tutorial 6.</p>
+<p>충돌 쌍이 필터링되었습니다(Tutorial 4). 다음 질문: <strong>각 관절은 얼마나 많은 토크와 속도로 움직일 수 있나요?</strong> 시뮬레이션된 핸드가 실제 하드웨어보다 더 많은 토크를 가하거나 실제 모터보다 빠르게 회전할 수 있다면, 시뮬레이션에서의 파지와 제어기가 로봇에서와 다르게 동작합니다. 반대로, 너무 낮은 한계는 핸드를 약하거나 느리게 느껴지게 합니다. 이 튜토리얼에서는 Inspire Hand 사양에서 <strong>드라이브 한계</strong>—최대 토크와 최대 속도—를 설정합니다. 강성 및 감쇠(관절이 위치 명령에 <em>반응</em>하는 방법)는 Tutorial 6에서 튜닝합니다.</p>
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="tutorial_05_joint_drive_tuning.html#learning-objectives" title="Link to this heading">#</a></h2>
-<p>In this tutorial, you will:</p>
+<p>이 튜토리얼에서 수행할 작업:</p>
 <ul class="simple">
-<li><p><strong>Configure</strong> mimic joints to be non-compliant for initial gains tuning.</p></li>
-<li><p><strong>Compute and set</strong> max joint torque derived from Inspire specifications.</p></li>
-<li><p><strong>Set</strong> max joint velocity directly from Inspire specifications.</p></li>
+<li><p><strong>구성</strong>하기: 초기 게인 튜닝을 위해 미믹 관절을 비순응형으로 구성하기.</p></li>
+<li><p><strong>계산 및 설정</strong>하기: Inspire 사양에서 파생된 최대 관절 토크 계산 및 설정하기.</p></li>
+<li><p><strong>설정</strong>하기: Inspire 사양에서 직접 최대 관절 속도 설정하기.</p></li>
 </ul>
-<p>Inspire Hand specs used in this tutorial (palm fingers): Max palm finger grip force 10 N; max palm finger bend speed 260 deg/s.</p>
+<p>이 튜토리얼에서 사용된 Inspire Hand 사양(손바닥 손가락): 최대 손바닥 손가락 파지력 10 N; 최대 손바닥 손가락 굽힘 속도 260 deg/s.</p>
 </section>
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="tutorial_05_joint_drive_tuning.html#prerequisites" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Complete <a class="reference internal" href="tutorial_04_collider_pairs.html#isaac-sim-tutorial-tuning-openusd-module-3"><span class="std std-ref">Tutorial 4: Collider Pairs</span></a>.</p></li>
-<li><p>Open <code class="docutils literal notranslate"><span class="pre">/path/to/Inspire/module_3_end-checkpoint_1/inspire_hand.usda</span></code> in Isaac Sim (or have your own filtered-pairs version open).</p></li>
+<li><p><a class="reference internal" href="tutorial_04_collider_pairs.html#isaac-sim-tutorial-tuning-openusd-module-3"><span class="std std-ref">Tutorial 4: Collider Pairs</span></a>를 완료합니다.</p></li>
+<li><p>Isaac Sim에서 <code class="docutils literal notranslate"><span class="pre">/path/to/Inspire/module_3_end-checkpoint_1/inspire_hand.usda</span></code>를 열거나(또는 자신의 필터된 쌍 버전을 열어) 시작합니다.</p></li>
 </ul>
 </section>
 <section id="module-4-1-mimic-joints">
 <h2>Module 4.1: Mimic Joints<a class="headerlink" href="tutorial_05_joint_drive_tuning.html#module-4-1-mimic-joints" title="Link to this heading">#</a></h2>
-<p>In the Inspire Hand model, the fingers use PhysX <strong>mimic joints</strong> to replicate the underactuated mechanism found in the real robotic hand. In this approach, a single motor drives multiple joints using a fixed gear ratio, allowing for coordinated finger movement and more realistic simulation of the physical hand.</p>
-<p>A mimic joint links two degrees of freedom, establishing a relationship (via gear ratio and offset) so that when one joint moves, the other follows accordingly. These mimic joints can be either <strong>compliant</strong> (allowing some “softness” or flexibility, like a spring) or <strong>non-compliant</strong> (rigidly enforcing the kinematic constraint). For this tutorial, we’ll configure <strong>non-compliant</strong> mimic joints to initially tune the driven joints. (You can add compliance for “softer” mimic behavior later, if needed.)</p>
-<p>Follow these steps to configure the mimic joints:</p>
+<p>Inspire Hand 모델에서 손가락들은 PhysX <strong>미믹 관절</strong>을 사용하여 실제 로봇 핸드에서 발견되는 언더액추에이티드 메커니즘을 복제합니다. 이 접근 방식에서는 단일 모터가 고정된 기어 비율을 사용하여 여러 관절을 구동하여 조율된 손가락 움직임과 물리적 핸드의 더 현실적인 시뮬레이션을 가능하게 합니다.</p>
+<p>미믹 관절은 두 자유도를 연결하여 (기어 비율과 오프셋을 통해) 하나의 관절이 움직이면 다른 관절도 따라오도록 하는 관계를 설정합니다. 이러한 미믹 관절은 <strong>순응형</strong>(스프링처럼 "유연함" 또는 탄력성 허용)이거나 <strong>비순응형</strong>(운동학적 제약을 엄격히 시행)일 수 있습니다. 이 튜토리얼에서는 구동 관절을 초기 튜닝하기 위해 <strong>비순응형</strong> 미믹 관절로 구성합니다. (필요한 경우 나중에 "부드러운" 미믹 동작을 위한 순응성을 추가할 수 있습니다.)</p>
+<p>미믹 관절을 구성하는 단계:</p>
 <ol class="arabic simple">
-<li><p>Open <code class="docutils literal notranslate"><span class="pre">/path/to/Inspire/module_3_end-checkpoint_1/inspire_hand.usda</span></code> in Isaac Sim if you haven’t already.</p></li>
-<li><p>Mimic joints are a PhysX-specific feature, so set your authoring layer to <strong>physx.usda</strong>. In the <strong>Layer</strong> tab, click the <strong>Insert Sublayer</strong> icon if the sublayer is not already there.</p></li>
+<li><p>아직 열지 않은 경우 Isaac Sim에서 <code class="docutils literal notranslate"><span class="pre">/path/to/Inspire/module_3_end-checkpoint_1/inspire_hand.usda</span></code>를 엽니다.</p></li>
+<li><p>미믹 관절은 PhysX 전용 기능이므로 저작 레이어를 <strong>physx.usda</strong>로 설정합니다. <strong>Layer</strong> 탭에서 서브레이어가 없는 경우 <strong>Insert Sublayer</strong> 아이콘을 클릭합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="The Layer panel with the Insert Sublayer icon highlighted." src="../_images/isim_6.0_full_tut_gui_layer_panel_insert_sublayer_icon.png" />
+<img alt="The Layer panel with the Insert Sublayer icon highlighted." src="../_images/isim_6.0_full_tut_gui_layer_panel_insert_sublayer_icon.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p>In the file dialog, navigate to <code class="docutils literal notranslate"><span class="pre">/path/to/Inspire/module_3_end-checkpoint_1/payloads/Physics/</span></code>, select <code class="docutils literal notranslate"><span class="pre">physx.usda</span></code>, and click <strong>Open</strong>.</p></li>
+<li><p>파일 대화 상자에서 <code class="docutils literal notranslate"><span class="pre">/path/to/Inspire/module_3_end-checkpoint_1/payloads/Physics/</span></code>로 이동하여 <code class="docutils literal notranslate"><span class="pre">physx.usda</span></code>를 선택하고 <strong>Open</strong>을 클릭합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="File dialog with physx.usda selected as the sublayer to insert." src="../_images/isim_6.0_full_tut_gui_file_dialog_physx_usda_sublayer.png" />
+<img alt="File dialog with physx.usda selected as the sublayer to insert." src="../_images/isim_6.0_full_tut_gui_file_dialog_physx_usda_sublayer.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p>Once <strong>physx.usda</strong> appears in the layer stack, <strong>Right-click on physx.usda</strong> and select <strong>Set Authoring Layer</strong>.</p></li>
+<li><p><strong>physx.usda</strong>가 레이어 스택에 나타나면, <strong>physx.usda를 마우스 오른쪽 버튼으로 클릭</strong>하고 <strong>Set Authoring Layer</strong>를 선택합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Context menu with Set Authoring Layer highlighted for physx.usda." src="../_images/isim_6.0_full_tut_gui_context_menu_set_authoring_layer_physx.png" />
+<img alt="Context menu with Set Authoring Layer highlighted for physx.usda." src="../_images/isim_6.0_full_tut_gui_context_menu_set_authoring_layer_physx.png"/>
 </figure>
-<p>You should now see the <strong>physx.usda</strong> layer highlighted green, indicating it is the active authoring layer.</p>
+<p>이제 <strong>physx.usda</strong> 레이어가 녹색으로 강조 표시되어 활성 저작 레이어임을 나타냅니다.</p>
 <figure class="align-center">
-<img alt="Layer tab with physx.usda highlighted green." src="../_images/isim_6.0_full_tut_gui_layer_panel_physx_usda_highlighted_green.png" />
+<img alt="Layer tab with physx.usda highlighted green." src="../_images/isim_6.0_full_tut_gui_layer_panel_physx_usda_highlighted_green.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p>In the <em>Stage</em> panel, multi-select the mimic joints for the Inspire Hand palm fingers (hold <strong>CTRL</strong> and left-click each):</p>
+<li><p><em>Stage</em> 패널에서 Inspire Hand 손바닥 손가락의 미믹 관절을 다중 선택합니다(<strong>CTRL</strong>을 누른 채 각각 왼쪽 클릭):</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">right_thumb_3_joint</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">right_thumb_4_joint</span></code></p></li>
@@ -1297,163 +930,141 @@
 </li>
 </ol>
 <figure class="align-center">
-<img alt="Stage panel with all mimic joints multi-selected." src="../_images/isim_6.0_full_tut_gui_stage_panel_mimic_joints_multiselected.png" />
+<img alt="Stage panel with all mimic joints multi-selected." src="../_images/isim_6.0_full_tut_gui_stage_panel_mimic_joints_multiselected.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p>With the joints selected, go to the <em>Property</em> panel. Find the <strong>Mimic Joint</strong> section and set <strong>Damping Ratio</strong> to <strong>0.0</strong> and <strong>Natural Frequency</strong> to <strong>0.0</strong> to make the constraint non-compliant.</p></li>
+<li><p>관절이 선택된 상태에서 <em>Property</em> 패널로 이동합니다. <strong>Mimic Joint</strong> 섹션을 찾아 <strong>Damping Ratio</strong>를 <strong>0.0</strong>으로, <strong>Natural Frequency</strong>를 <strong>0.0</strong>으로 설정하여 제약을 비순응형으로 만듭니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Setting Damping Ratio and Natural Frequency for non-compliant mimic joints." src="../_images/isim_6.0_full_tut_gui_mimic_joint_damping_ratio_natural_frequency_non_compliant.png" />
+<img alt="Setting Damping Ratio and Natural Frequency for non-compliant mimic joints." src="../_images/isim_6.0_full_tut_gui_mimic_joint_damping_ratio_natural_frequency_non_compliant.png"/>
 </figure>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Setting natural frequency or damping ratio to <strong>0.0</strong> tells PhysX to make this a non-compliant mimic joint. Setting both of them to <strong>0.0</strong> makes the intent clear.</p>
+<p>고유 주파수 또는 감쇠 비율을 <strong>0.0</strong>으로 설정하면 PhysX에게 이 미믹 관절을 비순응형으로 만들라고 알립니다. 둘 다 <strong>0.0</strong>으로 설정하면 의도가 명확해집니다.</p>
 </div>
 <ol class="arabic simple">
-<li><p>Click on the blue files icon next to <strong>physx.usda (Authoring Layer)</strong> to save the changes to <strong>physx.usda</strong>.</p></li>
+<li><p><strong>physx.usda (Authoring Layer)</strong> 옆의 파란 파일 아이콘을 클릭하여 <strong>physx.usda</strong>에 변경 사항을 저장합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Layer panel for saving to physx.usda." src="../_images/isim_6.0_full_tut_gui_layer_panel_save_physx_usda.png" />
+<img alt="Layer panel for saving to physx.usda." src="../_images/isim_6.0_full_tut_gui_layer_panel_save_physx_usda.png"/>
 </figure>
-<p>After these steps, the mimic joints in your Inspire Hand model will behave as a stiff, non-compliant mechanism, giving you precise control for gains tuning in the next module.</p>
+<p>이 단계 후, Inspire Hand 모델의 미믹 관절은 강성의 비순응형 메커니즘으로 동작하여 다음 모듈의 게인 튜닝을 위한 정밀한 제어를 제공합니다.</p>
 </section>
 <section id="module-4-2-configure-max-joint-torque">
 <h2>Module 4.2: Configure Max Joint Torque<a class="headerlink" href="tutorial_05_joint_drive_tuning.html#module-4-2-configure-max-joint-torque" title="Link to this heading">#</a></h2>
-<p>The maximum drive force (torque for revolute joints) caps how much force the finger can apply at the contact. Too low and the hand cannot hold the specified load; too high and you risk unrealistic forces or instability. We derive the value from the manufacturer’s grip force and the distance from joint to fingertip so the sim matches the real hand’s capability.</p>
-<p><strong>Torque = Force × Distance</strong></p>
-<p>For the palm finger, max force is 10 N. The distance between <code class="docutils literal notranslate"><span class="pre">right_little_1_joint</span></code> and the tip of the little finger is 0.045 m + 0.039 m.</p>
-<p><strong>Little finger:</strong> Torque = 10 × (0.045 + 0.039) = 0.84 Nm</p>
-<p>There are two joints in the mimic chain, so multiply by 2:</p>
-<p><strong>Little finger max drive force:</strong> 0.84 × 2 = 1.68 Nm</p>
+<p>최대 드라이브 힘(회전 관절의 토크)은 손가락이 접촉 시 가할 수 있는 최대 힘을 제한합니다. 너무 낮으면 핸드가 지정된 부하를 유지할 수 없고, 너무 높으면 비현실적인 힘이나 불안정성이 위험합니다. 시뮬레이션이 실제 핸드의 능력과 일치하도록 제조업체의 파지력과 관절에서 손끝까지의 거리로부터 값을 도출합니다.</p>
+<p><strong>토크 = 힘 × 거리</strong></p>
+<p>손바닥 손가락의 최대 힘은 10 N입니다. <code class="docutils literal notranslate"><span class="pre">right_little_1_joint</span></code>에서 새끼손가락 끝까지의 거리는 0.045 m + 0.039 m입니다.</p>
+<p><strong>새끼손가락:</strong> 토크 = 10 × (0.045 + 0.039) = 0.84 Nm</p>
+<p>미믹 체인에 두 개의 관절이 있으므로 2를 곱합니다:</p>
+<p><strong>새끼손가락 최대 드라이브 힘:</strong> 0.84 × 2 = 1.68 Nm</p>
 <ol class="arabic simple">
-<li><p>Max Force drive parameters are a neutral physics attribute, so author on the <strong>physics.usda</strong> layer. In the <strong>Layer</strong> tab, expand the <strong>physx.usda</strong> layer.</p></li>
+<li><p>Max Force 드라이브 파라미터는 중립 물리 속성이므로 <strong>physics.usda</strong> 레이어에 저작합니다. <strong>Layer</strong> 탭에서 <strong>physx.usda</strong> 레이어를 확장합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Expand physx.usda." src="../_images/isim_6.0_full_tut_gui_layer_tab_physics_usda_under_physx.png" />
+<img alt="Expand physx.usda." src="../_images/isim_6.0_full_tut_gui_layer_tab_physics_usda_under_physx.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p><strong>Right-click on physics.usda</strong> and select <strong>Set Authoring Layer</strong>.</p></li>
+<li><p><strong>physics.usda를 마우스 오른쪽 버튼으로 클릭</strong>하고 <strong>Set Authoring Layer</strong>를 선택합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Set physics.usda as the authoring layer." src="../_images/isim_6.0_full_tut_gui_rightclick_set_authoring_layer_physics_usda.png" />
+<img alt="Set physics.usda as the authoring layer." src="../_images/isim_6.0_full_tut_gui_rightclick_set_authoring_layer_physics_usda.png"/>
 </figure>
-<p>You should now see the <strong>physics.usda</strong> layer highlighted green, indicating it is the active authoring layer.</p>
+<p>이제 <strong>physics.usda</strong> 레이어가 녹색으로 강조 표시되어 활성 저작 레이어임을 나타냅니다.</p>
 <figure class="align-center">
-<img alt="physics.usda highlighted green, showing it is the active authoring layer." src="../_images/isim_6.0_full_tut_gui_physics_usda_highlighted_green_authoring_layer.png" />
-</figure>
-<ol class="arabic simple">
-<li><p>In the <em>Stage</em> panel, find and select <code class="docutils literal notranslate"><span class="pre">inspire_hand/Physics/right_little_1_joint</span></code>.</p></li>
-<li><p>In the <em>Property</em> panel, scroll to <strong>Drive</strong> and set <strong>Max Force</strong> to <strong>1.68</strong> based on our calculations.</p></li>
-</ol>
-<figure class="align-center">
-<img alt="Drive section with Max Force set to 1.68 for right_little_1_joint." src="../_images/isim_6.0_full_tut_gui_drive_max_force_1_68_right_little_1_joint.png" />
+<img alt="physics.usda highlighted green, showing it is the active authoring layer." src="../_images/isim_6.0_full_tut_gui_physics_usda_highlighted_green_authoring_layer.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p>Click on the blue files icon next to <strong>physics.usda (Authoring Layer)</strong> to save the changes to <strong>physics.usda</strong>.</p></li>
+<li><p><em>Stage</em> 패널에서 <code class="docutils literal notranslate"><span class="pre">inspire_hand/Physics/right_little_1_joint</span></code>를 찾아 선택합니다.</p></li>
+<li><p><em>Property</em> 패널에서 <strong>Drive</strong>로 스크롤하고 <strong>Max Force</strong>를 계산한 값에 따라 <strong>1.68</strong>로 설정합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Layer panel for saving to physics.usda." src="../_images/isim_6.0_full_tut_gui_layer_panel_save_physics_usda.png" />
+<img alt="Drive section with Max Force set to 1.68 for right_little_1_joint." src="../_images/isim_6.0_full_tut_gui_drive_max_force_1_68_right_little_1_joint.png"/>
+</figure>
+<ol class="arabic simple">
+<li><p><strong>physics.usda (Authoring Layer)</strong> 옆의 파란 파일 아이콘을 클릭하여 <strong>physics.usda</strong>에 변경 사항을 저장합니다.</p></li>
+</ol>
+<figure class="align-center">
+<img alt="Layer panel for saving to physics.usda." src="../_images/isim_6.0_full_tut_gui_layer_panel_save_physics_usda.png"/>
 </figure>
 </section>
 <section id="module-4-3-apply-max-velocity">
 <h2>Module 4.3: Apply Max Velocity<a class="headerlink" href="tutorial_05_joint_drive_tuning.html#module-4-3-apply-max-velocity" title="Link to this heading">#</a></h2>
-<p>Maximum joint velocity limits how fast the joint can move. Without a cap, the solver can command velocities that no real motor could achieve, leading to unrealistic motion or numerical instability. We set the limit from the Inspire Hand’s palm finger bend speed (260 deg/s) so the simulated hand moves within the same envelope as the hardware.</p>
+<p>최대 관절 속도는 관절이 얼마나 빠르게 움직일 수 있는지를 제한합니다. 상한이 없으면 솔버가 실제 모터가 달성할 수 없는 속도를 명령하여 비현실적인 동작이나 수치적 불안정성을 초래합니다. 시뮬레이션된 핸드가 하드웨어와 동일한 범위 내에서 움직이도록 Inspire Hand의 손바닥 손가락 굽힘 속도(260 deg/s)에서 한계를 설정합니다.</p>
 <ul class="simple">
-<li><p><strong>Realism</strong> — Simulated motion matches real hardware.</p></li>
-<li><p><strong>Stability</strong> — Avoids velocity spikes that cause instability.</p></li>
+<li><p><strong>현실성</strong> — 시뮬레이션 동작이 실제 하드웨어와 일치합니다.</p></li>
+<li><p><strong>안정성</strong> — 불안정성을 유발하는 속도 스파이크를 방지합니다.</p></li>
 </ul>
 <ol class="arabic simple">
-<li><p>Maximum joint velocity is a PhysX-specific attribute, so author on the <strong>physx.usda</strong> layer. In the <strong>Layer</strong> tab, <strong>Right-click on physx.usda</strong> and select <strong>Set Authoring Layer</strong>.</p></li>
+<li><p>최대 관절 속도는 PhysX 전용 속성이므로 <strong>physx.usda</strong> 레이어에 저작합니다. <strong>Layer</strong> 탭에서 <strong>physx.usda를 마우스 오른쪽 버튼으로 클릭</strong>하고 <strong>Set Authoring Layer</strong>를 선택합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="physx.usda set as authoring layer." src="../_images/isim_6.0_full_tut_gui_context_menu_set_authoring_layer_physx.png" />
+<img alt="physx.usda set as authoring layer." src="../_images/isim_6.0_full_tut_gui_context_menu_set_authoring_layer_physx.png"/>
 </figure>
-<p>You should now see the <strong>physx.usda</strong> layer highlighted green, indicating it is the active authoring layer.</p>
+<p>이제 <strong>physx.usda</strong> 레이어가 녹색으로 강조 표시되어 활성 저작 레이어임을 나타냅니다.</p>
 <figure class="align-center">
-<img alt="Layer tab with physx.usda highlighted green." src="../_images/isim_6.0_full_tut_gui_layer_panel_physx_usda_highlighted_green.png" />
-</figure>
-<ol class="arabic simple">
-<li><p>In the <em>Stage</em> panel, find and select <code class="docutils literal notranslate"><span class="pre">inspire_hand/Physics/right_little_1_joint</span></code>.</p></li>
-<li><p>In the <em>Property</em> panel, scroll to <strong>Raw USD Properties</strong>, expand <strong>Advanced</strong>, and set <strong>Maximum Joint Velocity</strong> to <strong>260</strong> (deg/s).</p></li>
-</ol>
-<figure class="align-center">
-<img alt="Drive Advanced section with Maximum Joint Velocity set to 260." src="../_images/isim_6.0_full_tut_gui_drive_advanced_max_joint_velocity_260.png" />
+<img alt="Layer tab with physx.usda highlighted green." src="../_images/isim_6.0_full_tut_gui_layer_panel_physx_usda_highlighted_green.png"/>
 </figure>
 <ol class="arabic simple">
-<li><p>Click on the blue files icon next to <strong>physx.usda (Authoring Layer)</strong> to save the changes to <strong>physx.usda</strong>.</p></li>
+<li><p><em>Stage</em> 패널에서 <code class="docutils literal notranslate"><span class="pre">inspire_hand/Physics/right_little_1_joint</span></code>를 찾아 선택합니다.</p></li>
+<li><p><em>Property</em> 패널에서 <strong>Raw USD Properties</strong>로 스크롤하고 <strong>Advanced</strong>를 확장한 후 <strong>Maximum Joint Velocity</strong>를 <strong>260</strong>(deg/s)으로 설정합니다.</p></li>
 </ol>
 <figure class="align-center">
-<img alt="Layer panel for saving to physx.usda." src="../_images/isim_6.0_full_tut_gui_layer_panel_save_physx_usda.png" />
+<img alt="Drive Advanced section with Maximum Joint Velocity set to 260." src="../_images/isim_6.0_full_tut_gui_drive_advanced_max_joint_velocity_260.png"/>
+</figure>
+<ol class="arabic simple">
+<li><p><strong>physx.usda (Authoring Layer)</strong> 옆의 파란 파일 아이콘을 클릭하여 <strong>physx.usda</strong>에 변경 사항을 저장합니다.</p></li>
+</ol>
+<figure class="align-center">
+<img alt="Layer panel for saving to physx.usda." src="../_images/isim_6.0_full_tut_gui_layer_panel_save_physx_usda.png"/>
 </figure>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>A checkpoint file with drive limits for all 6 joints derived using the same process is provided at <code class="docutils literal notranslate"><span class="pre">/path/to/Inspire/module_4_end-checkpoint_2/inspire_hand.usda</span></code>. Open this file before starting Tutorial 6.</p>
+<p>동일한 프로세스를 사용하여 파생된 6개 관절의 드라이브 한계가 있는 체크포인트 파일이 <code class="docutils literal notranslate"><span class="pre">/path/to/Inspire/module_4_end-checkpoint_2/inspire_hand.usda</span></code>에 제공됩니다. Tutorial 6을 시작하기 전에 이 파일을 여세요.</p>
 </div>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="tutorial_05_joint_drive_tuning.html#summary" title="Link to this heading">#</a></h2>
-<p>This tutorial covered:</p>
+<p>이 튜토리얼에서 다룬 내용:</p>
 <ul class="simple">
-<li><p>Configuring <strong>mimic joints</strong> as non-compliant so the solver enforces the finger kinematics without adding compliance—setting you up for clean gain tuning in Tutorial 6.</p></li>
-<li><p><strong>Computing and setting max joint torque</strong> from Inspire Hand specs (force × distance, then × 2 for the mimic chain) so the hand’s grip capability matches the real robot.</p></li>
-<li><p>Setting <strong>max joint velocity</strong> from specs (260 deg/s) so motion is realistic and the simulation stays stable.</p></li>
+<li><p>솔버가 순응성 추가 없이 손가락 운동학을 시행하도록 <strong>미믹 관절</strong>을 비순응형으로 구성하기—Tutorial 6에서 깔끔한 게인 튜닝을 위한 준비.</p></li>
+<li><p>Inspire Hand 사양(힘 × 거리, 미믹 체인에 × 2)으로부터 <strong>최대 관절 토크를 계산하고 설정</strong>하여 핸드의 파지 능력이 실제 로봇과 일치하도록 하기.</p></li>
+<li><p>사양에서 <strong>최대 관절 속도</strong>(260 deg/s)를 설정하여 동작이 현실적이고 시뮬레이션이 안정적으로 유지되도록 하기.</p></li>
 </ul>
 <section id="next-steps">
 <h3>Next Steps<a class="headerlink" href="tutorial_05_joint_drive_tuning.html#next-steps" title="Link to this heading">#</a></h3>
-<p>Continue to <a class="reference internal" href="tutorial_06_joint_gains_tuning.html#isaac-sim-tutorial-tuning-openusd-module-5"><span class="std std-ref">Tutorial 6: Joint Gains Tuning</span></a> to tune drive stiffness and damping with the Gain Tuner and analyze the results.</p>
+<p>게인 튜너로 드라이브 강성과 감쇠를 튜닝하고 결과를 분석하려면 <a class="reference internal" href="tutorial_06_joint_gains_tuning.html#isaac-sim-tutorial-tuning-openusd-module-5"><span class="std std-ref">Tutorial 6: Joint Gains Tuning</span></a>으로 계속 진행하세요.</p>
 </section>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="tutorial_04_collider_pairs.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Tutorial 4: Collider Pairs</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="tutorial_06_joint_gains_tuning.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Tutorial 6: Joint Gains Tuning</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="tutorial_04_collider_pairs.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Tutorial 4: Collider Pairs</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="tutorial_06_joint_gains_tuning.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Tutorial 6: Joint Gains Tuning</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_05_joint_drive_tuning.html#learning-objectives">Learning Objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_05_joint_drive_tuning.html#prerequisites">Prerequisites</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_05_joint_drive_tuning.html#module-4-1-mimic-joints">Module 4.1: Mimic Joints</a></li>
@@ -1464,46 +1075,29 @@
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1534,36 +1128,21 @@
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>
