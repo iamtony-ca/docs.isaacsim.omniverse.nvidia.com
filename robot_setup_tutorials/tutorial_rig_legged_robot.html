@@ -1,53 +1,40 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Tutorial 13: Rigging a Legged Robot for a Locomotion Policy &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Tutorial 13: Rigging a Legged Robot for a Locomotion Policy — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
-  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script charset="UTF-8" data-document-language="true" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript">
 </script>
 <script type="text/javascript">
   function OptanonWrapper() {
@@ -57,506 +44,224 @@
 </script>
 <script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
 </script>
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'robot_setup_tutorials/tutorial_rig_legged_robot';</script>
-    <script>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'robot_setup_tutorials/tutorial_rig_legged_robot';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="OpenUSD and Tuning Best Practices Tutorial Series" href="../openusd_tuning_tutorials/index.html" />
-    <link rel="prev" title="Tutorial 12: Asset Optimization" href="optimizing_asset.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="../openusd_tuning_tutorials/index.html" rel="next" title="OpenUSD and Tuning Best Practices Tutorial Series"/>
+<link href="optimizing_asset.html" rel="prev" title="Tutorial 12: Asset Optimization"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="tutorial_rig_legged_robot.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="tutorial_rig_legged_robot.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -576,7 +281,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -604,20 +308,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -692,17 +384,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -880,7 +562,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -920,13 +601,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -973,10 +648,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1145,18 +816,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1182,92 +843,64 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="../robot_setup/index.html" class="nav-link">Robot Setup</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Robot Setup Tutorials Series</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Tutorial 13: Rigging a Legged Robot for a Locomotion Policy</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="../robot_setup/index.html">Robot Setup</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">Robot Setup Tutorials Series</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Tutorial 13: Rigging a Legged Robot for a Locomotion Policy</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="tutorial-13-rigging-a-legged-robot-for-a-locomotion-policy">
+<article class="bd-article">
+<section id="tutorial-13-rigging-a-legged-robot-for-a-locomotion-policy">
 <span id="isaac-sim-app-tutorial-rig-legged-robot"></span><h1>Tutorial 13: Rigging a Legged Robot for a Locomotion Policy<a class="headerlink" href="tutorial_rig_legged_robot.html#tutorial-13-rigging-a-legged-robot-for-a-locomotion-policy" title="Link to this heading">#</a></h1>
-<p>This tutorial explains how to rig a legged robot to match the configuration specified by a locomotion policy.
-The Isaac Sim <a class="reference internal" href="../isaac_lab_tutorials/tutorial_policy_deployment.html#isaac-sim-policy-controller-class"><span class="std std-ref">Policy Controller Class</span></a> already handles robot rigging at runtime for inference in Isaac Sim,
-so this tutorial is only relevant when you want to run the robot policy from an external process, such as ROS.</p>
+<p>이 튜토리얼에서는 이동 정책이 지정한 구성에 맞게 다족 로봇을 리깅하는 방법을 설명합니다.
+Isaac Sim의 <a class="reference internal" href="../isaac_lab_tutorials/tutorial_policy_deployment.html#isaac-sim-policy-controller-class"><span class="std std-ref">Policy Controller Class</span></a>는 Isaac Sim에서 추론을 위한 런타임 로봇 리깅을 이미 처리하므로,
+이 튜토리얼은 ROS 같은 외부 프로세스에서 로봇 정책을 실행하려는 경우에만 관련이 있습니다.</p>
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="tutorial_rig_legged_robot.html#learning-objectives" title="Link to this heading">#</a></h2>
-<p>In this tutorial, you will walk through the process of rigging an H1 humanoid robot to match the configuration specified by the H1 flat terrain locomotion policy.</p>
+<p>이 튜토리얼에서는 H1 인간형 로봇을 H1 평지 이동 정책이 지정한 구성에 맞게 리깅하는 과정을 진행합니다.</p>
 <ol class="arabic simple">
-<li><p>Setting the initial robot position</p></li>
-<li><p>Setting the joint configuration</p></li>
-<li><p>Verifying the joint configuration</p></li>
+<li><p>초기 로봇 위치 설정</p></li>
+<li><p>조인트 구성 설정</p></li>
+<li><p>조인트 구성 확인</p></li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The H1 flat terrain policy environment definition file is available <a class="reference external" href="https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.0/Isaac/Samples/Policies/H1_Policies/h1_env.yaml">here</a>.</p>
+<p>H1 평지 정책 환경 정의 파일은 <a class="reference external" href="https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/6.0/Isaac/Samples/Policies/H1_Policies/h1_env.yaml">여기</a>에서 사용 가능합니다.</p>
 </div>
 </section>
 <section id="setting-the-initial-robot-position">
 <span id="isaac-sim-tutorial-rig-legged-robot-initial-position"></span><h2>Setting the Initial Robot Position<a class="headerlink" href="tutorial_rig_legged_robot.html#setting-the-initial-robot-position" title="Link to this heading">#</a></h2>
-<p>The initial joint position of the robot is specified under the <code class="docutils literal notranslate"><span class="pre">robot:init_state:joint_pos</span></code> section of the environment definition file. The joint names are specified using the <code class="docutils literal notranslate"><span class="pre">.*</span></code> wildcard.</p>
+<p>로봇의 초기 조인트 위치는 환경 정의 파일의 <code class="docutils literal notranslate"><span class="pre">robot:init_state:joint_pos</span></code> 섹션에 지정됩니다. 조인트 이름은 <code class="docutils literal notranslate"><span class="pre">.*</span></code> 와일드카드를 사용하여 지정됩니다.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nt">robot</span><span class="p">:</span>
 <span class="linenos"> 2</span><span class="w">  </span><span class="nt">init_state</span><span class="p">:</span>
 <span class="linenos"> 3</span><span class="w">    </span><span class="nt">joint_pos</span><span class="p">:</span>
@@ -1287,61 +920,61 @@ so this tutorial is only relevant when you want to run the robot policy from an 
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The joint positions are specified in radians, whereas USD joint positions are specified in degrees.</p>
+<p>조인트 위치는 라디안으로 지정되지만 USD 조인트 위치는 도(degree)로 지정됩니다.</p>
 </div>
-<p>To store the initial state of the robot:</p>
+<p>로봇의 초기 상태를 저장하려면:</p>
 <ol class="arabic">
-<li><p>Open the <code class="docutils literal notranslate"><span class="pre">h1.usd</span></code> file from the Content Browser at <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Sim/Robots/Unitree/H1</span></code>.</p></li>
-<li><p>In the upper-right corner of the stage, select the <code class="docutils literal notranslate"><span class="pre">funnel</span></code> icon and click <code class="docutils literal notranslate"><span class="pre">Physics</span> <span class="pre">Joints</span></code> to filter the joint list.</p>
-<a class="reference internal image-reference" href="../_images/isim_5.0_full_tut_gui_rigging_humanoid_1.png"><img alt="../_images/isim_5.0_full_tut_gui_rigging_humanoid_1.png" class="align-center" src="../_images/isim_5.0_full_tut_gui_rigging_humanoid_1.png" style="width: 80%;" />
+<li><p>콘텐츠 브라우저의 <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">Sim/Robots/Unitree/H1</span></code>에서 <code class="docutils literal notranslate"><span class="pre">h1.usd</span></code> 파일을 엽니다.</p></li>
+<li><p>스테이지 우측 상단 모서리에서 <code class="docutils literal notranslate"><span class="pre">funnel</span></code> 아이콘을 선택하고 <code class="docutils literal notranslate"><span class="pre">Physics</span> <span class="pre">Joints</span></code>를 클릭하여 조인트 목록을 필터링합니다.</p>
+<a class="reference internal image-reference" href="../_images/isim_5.0_full_tut_gui_rigging_humanoid_1.png"><img alt="../_images/isim_5.0_full_tut_gui_rigging_humanoid_1.png" class="align-center" src="../_images/isim_5.0_full_tut_gui_rigging_humanoid_1.png" style="width: 80%;"/>
 </a>
 </li>
-<li><p>Left-click the first joint (<code class="docutils literal notranslate"><span class="pre">left_hip_yaw</span></code>), then Shift-left-click the last joint (<code class="docutils literal notranslate"><span class="pre">right_elbow</span></code>) to select all joints.</p></li>
-<li><p>Right-click any selected joint and click <strong>Add</strong> &gt; <strong>Physics</strong> &gt; <strong>Joint State Angular</strong> to create a Joint State API attribute on the joints.</p></li>
-<li><p>Right-click any selected joint and click <strong>Add</strong> &gt; <strong>Physics</strong> &gt; <strong>Angular drive</strong> to create a joint drive API attribute on the joints.</p></li>
+<li><p>첫 번째 조인트(<code class="docutils literal notranslate"><span class="pre">left_hip_yaw</span></code>)를 좌클릭한 다음 마지막 조인트(<code class="docutils literal notranslate"><span class="pre">right_elbow</span></code>)를 Shift+좌클릭하여 모든 조인트를 선택합니다.</p></li>
+<li><p>선택된 조인트를 우클릭하고 <strong>Add</strong> &gt; <strong>Physics</strong> &gt; <strong>Joint State Angular</strong>를 클릭하여 조인트에 Joint State API 속성을 만듭니다.</p></li>
+<li><p>선택된 조인트를 우클릭하고 <strong>Add</strong> &gt; <strong>Physics</strong> &gt; <strong>Angular drive</strong>를 클릭하여 조인트에 조인트 드라이브 API 속성을 만듭니다.</p></li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">Joint</span> <span class="pre">State</span> <span class="pre">Angular</span></code> API reports the joint position and velocity, and the <code class="docutils literal notranslate"><span class="pre">Angular</span> <span class="pre">drive</span></code> API drives the joint. If the joint already has a <code class="docutils literal notranslate"><span class="pre">Joint</span> <span class="pre">State</span> <span class="pre">Angular</span></code> API or <code class="docutils literal notranslate"><span class="pre">Angular</span> <span class="pre">drive</span></code> API, you can skip the previous two steps.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Joint</span> <span class="pre">State</span> <span class="pre">Angular</span></code> API는 조인트 위치와 속도를 보고하고, <code class="docutils literal notranslate"><span class="pre">Angular</span> <span class="pre">drive</span></code> API는 조인트를 구동합니다. 조인트에 이미 <code class="docutils literal notranslate"><span class="pre">Joint</span> <span class="pre">State</span> <span class="pre">Angular</span></code> API 또는 <code class="docutils literal notranslate"><span class="pre">Angular</span> <span class="pre">drive</span></code> API가 있으면 이전 두 단계를 건너뛸 수 있습니다.</p>
 </div>
 <ol class="arabic simple" start="6">
-<li><p>For each active joint, convert the <code class="docutils literal notranslate"><span class="pre">joint_pos</span></code> and <code class="docutils literal notranslate"><span class="pre">joint_vel</span></code> values from radians to degrees.</p></li>
-<li><p>Left-click the joint you are changing.</p></li>
-<li><p>In the Property panel, scroll down to the <code class="docutils literal notranslate"><span class="pre">Target</span> <span class="pre">Position</span></code> attribute.</p></li>
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">Target</span> <span class="pre">Position</span></code> attribute to the converted value from the <code class="docutils literal notranslate"><span class="pre">joint_pos</span></code> attribute in the environment definition file.</p></li>
-<li><p>Set the <code class="docutils literal notranslate"><span class="pre">Target</span> <span class="pre">Velocity</span></code> attribute to the converted value from the <code class="docutils literal notranslate"><span class="pre">joint_vel</span></code> attribute in the environment definition file.</p></li>
-<li><p>Repeat the previous steps for each active joint.</p></li>
-<li><p>Press play.</p></li>
+<li><p>각 활성 조인트에 대해 <code class="docutils literal notranslate"><span class="pre">joint_pos</span></code>와 <code class="docutils literal notranslate"><span class="pre">joint_vel</span></code> 값을 라디안에서 도(degree)로 변환합니다.</p></li>
+<li><p>변경하려는 조인트를 좌클릭합니다.</p></li>
+<li><p>Property 패널에서 <code class="docutils literal notranslate"><span class="pre">Target</span> <span class="pre">Position</span></code> 속성으로 스크롤합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Target</span> <span class="pre">Position</span></code> 속성을 환경 정의 파일의 <code class="docutils literal notranslate"><span class="pre">joint_pos</span></code> 속성에서 변환된 값으로 설정합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Target</span> <span class="pre">Velocity</span></code> 속성을 환경 정의 파일의 <code class="docutils literal notranslate"><span class="pre">joint_vel</span></code> 속성에서 변환된 값으로 설정합니다.</p></li>
+<li><p>각 활성 조인트에 대해 이전 단계를 반복합니다.</p></li>
+<li><p>Play를 누릅니다.</p></li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>When using Newton, physics initialization might fail because reversed joints are not supported for <code class="docutils literal notranslate"><span class="pre">/h1/Joints/torso</span></code>. If this happens, select the <code class="docutils literal notranslate"><span class="pre">torso</span></code> joint. In the Property panel, go to <strong>Physics</strong> &gt; <strong>Joint</strong> and swap the joint bodies so <code class="docutils literal notranslate"><span class="pre">Body</span> <span class="pre">0</span></code> is <code class="docutils literal notranslate"><span class="pre">/h1/torso_link</span></code> and <code class="docutils literal notranslate"><span class="pre">Body</span> <span class="pre">1</span></code> is <code class="docutils literal notranslate"><span class="pre">/h1/pelvis</span></code>.</p>
+<p>Newton을 사용할 때 <code class="docutils literal notranslate"><span class="pre">/h1/Joints/torso</span></code>에 역방향 조인트가 지원되지 않아 물리 초기화가 실패할 수 있습니다. 이런 경우 <code class="docutils literal notranslate"><span class="pre">torso</span></code> 조인트를 선택합니다. Property 패널에서 <strong>Physics</strong> &gt; <strong>Joint</strong>로 이동하여 <code class="docutils literal notranslate"><span class="pre">Body</span> <span class="pre">0</span></code>이 <code class="docutils literal notranslate"><span class="pre">/h1/torso_link</span></code>이고 <code class="docutils literal notranslate"><span class="pre">Body</span> <span class="pre">1</span></code>이 <code class="docutils literal notranslate"><span class="pre">/h1/pelvis</span></code>가 되도록 조인트 바디를 교체합니다.</p>
 </div>
 <ol class="arabic simple" start="13">
-<li><p>Verify that the robot moves to the initial position specified in the environment definition file. To make the robot start in the initial position when the simulation starts, store the data in the Joint State API.</p></li>
-<li><p>To prevent the robot from falling indefinitely, add a fixed joint between the robot and the world by right-clicking <code class="docutils literal notranslate"><span class="pre">/h1/torso_link</span></code> and selecting <strong>Create</strong> &gt; <strong>Physics</strong> &gt; <strong>Joint</strong> &gt; <strong>Fixed Joint</strong>.</p></li>
+<li><p>로봇이 환경 정의 파일에 지정된 초기 위치로 이동하는지 확인합니다. 시뮬레이션 시작 시 로봇이 초기 위치에서 시작하도록 하려면 Joint State API에 데이터를 저장합니다.</p></li>
+<li><p>로봇이 무한정 떨어지는 것을 방지하려면 <code class="docutils literal notranslate"><span class="pre">/h1/torso_link</span></code>를 우클릭하고 <strong>Create</strong> &gt; <strong>Physics</strong> &gt; <strong>Joint</strong> &gt; <strong>Fixed Joint</strong>를 선택하여 로봇과 월드 사이에 고정 조인트를 추가합니다.</p></li>
 </ol>
-<a class="reference internal image-reference" href="../_images/isim_5.0_full_tut_gui_rigging_humanoid_2.webp"><img alt="../_images/isim_5.0_full_tut_gui_rigging_humanoid_2.webp" class="align-center" src="../_images/isim_5.0_full_tut_gui_rigging_humanoid_2.webp" style="width: 80%;" />
+<a class="reference internal image-reference" href="../_images/isim_5.0_full_tut_gui_rigging_humanoid_2.webp"><img alt="../_images/isim_5.0_full_tut_gui_rigging_humanoid_2.webp" class="align-center" src="../_images/isim_5.0_full_tut_gui_rigging_humanoid_2.webp" style="width: 80%;"/>
 </a>
-<p>To save the robot pose:</p>
+<p>로봇 포즈를 저장하려면:</p>
 <ol class="arabic">
-<li><p>In the upper-left corner of the stage, click <strong>Edit</strong> &gt; <strong>Preferences</strong>.</p></li>
-<li><p>In the <strong>Preferences</strong> window, click the <strong>Physics</strong> tab in the left sidebar.</p></li>
-<li><p>Uncheck <strong>Reset Simulation on Stop</strong>.</p>
-<a class="reference internal image-reference" href="../_images/isim_5.0_full_tut_gui_rigging_humanoid_3.png"><img alt="../_images/isim_5.0_full_tut_gui_rigging_humanoid_3.png" class="align-center" src="../_images/isim_5.0_full_tut_gui_rigging_humanoid_3.png" style="width: 80%;" />
+<li><p>스테이지 왼쪽 상단 모서리에서 <strong>Edit</strong> &gt; <strong>Preferences</strong>를 클릭합니다.</p></li>
+<li><p><strong>Preferences</strong> 창에서 왼쪽 사이드바의 <strong>Physics</strong> 탭을 클릭합니다.</p></li>
+<li><p><strong>Reset Simulation on Stop</strong>을 해제합니다.</p>
+<a class="reference internal image-reference" href="../_images/isim_5.0_full_tut_gui_rigging_humanoid_3.png"><img alt="../_images/isim_5.0_full_tut_gui_rigging_humanoid_3.png" class="align-center" src="../_images/isim_5.0_full_tut_gui_rigging_humanoid_3.png" style="width: 80%;"/>
 </a>
 </li>
-<li><p>Play the simulation and stop it when the robot reaches the desired initial pose. Repeat this step once more to ensure the pose is saved even after reset.</p></li>
-<li><p>Delete the fixed joint between the robot and the world.</p></li>
-<li><p>Press <strong>Ctrl+S</strong> to save the USD file.</p></li>
-<li><p>Check <strong>Reset Simulation on Stop</strong> again.</p></li>
+<li><p>시뮬레이션을 실행하고 로봇이 원하는 초기 포즈에 도달하면 멈춥니다. 리셋 후에도 포즈가 저장되도록 이 단계를 한 번 더 반복합니다.</p></li>
+<li><p>로봇과 월드 사이의 고정 조인트를 삭제합니다.</p></li>
+<li><p><strong>Ctrl+S</strong>를 눌러 USD 파일을 저장합니다.</p></li>
+<li><p><strong>Reset Simulation on Stop</strong>을 다시 선택합니다.</p></li>
 </ol>
 </section>
 <section id="setting-the-joint-configuration">
 <span id="isaac-sim-tutorial-rig-legged-robot-joint-configuration"></span><h2>Setting the Joint Configuration<a class="headerlink" href="tutorial_rig_legged_robot.html#setting-the-joint-configuration" title="Link to this heading">#</a></h2>
-<p>Set the joint configuration to match the policy’s robot configuration. This may be different from the values stored in the USD file.
-The joint drive configuration is specified under the <code class="docutils literal notranslate"><span class="pre">scene:robot:actuators</span></code> section of the environment definition file.</p>
-<p>The following snippet shows the actuator configuration for the H1 robot legs.</p>
+<p>정책의 로봇 구성과 일치하도록 조인트 구성을 설정합니다. 이것은 USD 파일에 저장된 값과 다를 수 있습니다.
+조인트 드라이브 구성은 환경 정의 파일의 <code class="docutils literal notranslate"><span class="pre">scene:robot:actuators</span></code> 섹션에 지정됩니다.</p>
+<p>다음 스니펫은 H1 로봇 다리에 대한 액추에이터 구성을 보여줍니다.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="l l-Scalar l-Scalar-Plain">actuators:k</span>
 <span class="linenos"> 2</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">legs</span><span class="p p-Indicator">:</span>
 <span class="linenos"> 3</span><span class="w">    </span><span class="nt">class_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">omni.isaac.lab.actuators.actuator_pd:ImplicitActuator</span>
@@ -1369,47 +1002,47 @@ The joint drive configuration is specified under the <code class="docutils liter
 <span class="linenos">25</span><span class="w">    </span><span class="nt">friction</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">joint_names_expr</span></code> is a list of joint names to be controlled by the actuator. The <code class="docutils literal notranslate"><span class="pre">class_type</span></code> is the actuator type.
-The <code class="docutils literal notranslate"><span class="pre">effort_limit</span></code> is the maximum effort that can be applied to the joint. The <code class="docutils literal notranslate"><span class="pre">velocity_limit</span></code> is the maximum velocity that can be applied to the joint.
-The <code class="docutils literal notranslate"><span class="pre">stiffness</span></code> defines the joint stiffness. The <code class="docutils literal notranslate"><span class="pre">damping</span></code> defines the joint damping. The <code class="docutils literal notranslate"><span class="pre">armature</span></code> defines the joint armature, and the <code class="docutils literal notranslate"><span class="pre">friction</span></code> defines the joint friction.</p>
-<p>To set the joint configurations:</p>
+<p><code class="docutils literal notranslate"><span class="pre">joint_names_expr</span></code>는 액추에이터에 의해 제어될 조인트 이름 목록입니다. <code class="docutils literal notranslate"><span class="pre">class_type</span></code>은 액추에이터 유형입니다.
+<code class="docutils literal notranslate"><span class="pre">effort_limit</span></code>는 조인트에 가할 수 있는 최대 힘입니다. <code class="docutils literal notranslate"><span class="pre">velocity_limit</span></code>는 조인트에 가할 수 있는 최대 속도입니다.
+<code class="docutils literal notranslate"><span class="pre">stiffness</span></code>는 조인트 강성을 정의합니다. <code class="docutils literal notranslate"><span class="pre">damping</span></code>은 조인트 감쇠를 정의합니다. <code class="docutils literal notranslate"><span class="pre">armature</span></code>는 조인트 아마추어를 정의하고 <code class="docutils literal notranslate"><span class="pre">friction</span></code>은 조인트 마찰을 정의합니다.</p>
+<p>조인트 구성을 설정하려면:</p>
 <ol class="arabic simple">
-<li><p>Left-click a joint, such as <code class="docutils literal notranslate"><span class="pre">left_hip_yaw</span></code>.</p></li>
-<li><p>In the Property panel, scroll down to the <code class="docutils literal notranslate"><span class="pre">Joint</span> <span class="pre">Drive</span></code> attribute and set <code class="docutils literal notranslate"><span class="pre">stiffness</span></code> and <code class="docutils literal notranslate"><span class="pre">damping</span></code> to the values specified in the environment definition file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">left_hip_yaw</span></code>와 같은 조인트를 좌클릭합니다.</p></li>
+<li><p>Property 패널에서 <code class="docutils literal notranslate"><span class="pre">Joint</span> <span class="pre">Drive</span></code> 속성으로 스크롤하고 환경 정의 파일에 지정된 값으로 <code class="docutils literal notranslate"><span class="pre">stiffness</span></code>와 <code class="docutils literal notranslate"><span class="pre">damping</span></code>을 설정합니다.</p></li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Remember to convert stiffness and damping to degree-based units.</p>
+<p>stiffness와 damping을 도(degree) 기반 단위로 변환하는 것을 잊지 마세요.</p>
 </div>
-<p>The USD file stiffness is in <span class="math notranslate nohighlight">\(\frac{kg \cdot m^2}{deg \cdot s^2}\)</span> and the damping is in <span class="math notranslate nohighlight">\(\frac{kg \cdot m^2}{deg \cdot s}\)</span>.
-To convert radians to degrees, you can use the following formulas:</p>
+<p>USD 파일의 stiffness는 <span class="math notranslate nohighlight">\(\frac{kg \cdot m^2}{deg \cdot s^2}\)</span> 단위이고 damping은 <span class="math notranslate nohighlight">\(\frac{kg \cdot m^2}{deg \cdot s}\)</span> 단위입니다.
+라디안을 도(degree)로 변환하려면 다음 수식을 사용할 수 있습니다:</p>
 <div class="math notranslate nohighlight">
 \[S_{deg} = S_{rad} \times \frac{\pi}{180}\]</div>
 <div class="math notranslate nohighlight">
 \[D_{deg} = D_{rad} \times \frac{\pi}{180}\]</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">effort_limit</span></code> is the maximum effort that can be applied to the joint. Set that value to the <code class="docutils literal notranslate"><span class="pre">Max</span> <span class="pre">Force</span></code> attribute of the joint drive API.</p>
-<p>Scroll down to <strong>Raw USD Properties</strong> under the <strong>Advanced</strong> tab, and set the <strong>Armature</strong> and <strong>Joint Friction</strong> attributes to the values specified in the environment definition file.</p>
-<p>For the <strong>Maximum Joint Velocity</strong> attribute, set it to the <strong>velocity_limit</strong> value specified in the environment definition file. Remember to convert it to degrees.</p>
+<p><code class="docutils literal notranslate"><span class="pre">effort_limit</span></code>는 조인트에 가할 수 있는 최대 힘입니다. 해당 값을 조인트 드라이브 API의 <code class="docutils literal notranslate"><span class="pre">Max</span> <span class="pre">Force</span></code> 속성에 설정합니다.</p>
+<p><strong>Advanced</strong> 탭의 <strong>Raw USD Properties</strong>로 스크롤하고 환경 정의 파일에 지정된 값으로 <strong>Armature</strong>와 <strong>Joint Friction</strong> 속성을 설정합니다.</p>
+<p><strong>Maximum Joint Velocity</strong> 속성에는 환경 정의 파일에 지정된 <strong>velocity_limit</strong> 값으로 설정합니다. 도(degree)로 변환하는 것을 잊지 마세요.</p>
 <div class="math notranslate nohighlight">
 \[\omega_{deg} = \omega_{rad} \times \frac{180}{\pi}\]</div>
-<a class="reference internal image-reference" href="../_images/isim_5.0_full_tut_gui_rigging_humanoid_4.png"><img alt="../_images/isim_5.0_full_tut_gui_rigging_humanoid_4.png" class="align-center" src="../_images/isim_5.0_full_tut_gui_rigging_humanoid_4.png" style="width: 80%;" />
+<a class="reference internal image-reference" href="../_images/isim_5.0_full_tut_gui_rigging_humanoid_4.png"><img alt="../_images/isim_5.0_full_tut_gui_rigging_humanoid_4.png" class="align-center" src="../_images/isim_5.0_full_tut_gui_rigging_humanoid_4.png" style="width: 80%;"/>
 </a>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Remember to set the joint configurations for all active joints in the robot, such as the arms and legs.</p>
+<p>팔과 다리 같은 로봇의 모든 활성 조인트에 대해 조인트 구성을 설정하는 것을 잊지 마세요.</p>
 </div>
 </section>
 <section id="verifying-the-joint-configuration">
 <h2>Verifying the Joint Configuration<a class="headerlink" href="tutorial_rig_legged_robot.html#verifying-the-joint-configuration" title="Link to this heading">#</a></h2>
-<p>To verify the joint configuration, you can play the simulation and run the following snippet in Script Editor to print the joint configuration.</p>
+<p>조인트 구성을 확인하려면 시뮬레이션을 실행하고 Script Editor에서 다음 스니펫을 실행하여 조인트 구성을 출력할 수 있습니다.</p>
 <ol class="arabic">
-<li><p>Play the simulation.</p></li>
-<li><p>Open Script Editor by clicking <strong>Window</strong> &gt; <strong>Script Editor</strong>.</p></li>
-<li><p>Copy and paste the following snippet into Script Editor.</p></li>
-<li><p>Run the snippet by clicking the <strong>Run</strong> button.</p>
+<li><p>시뮬레이션을 실행합니다.</p></li>
+<li><p><strong>Window</strong> &gt; <strong>Script Editor</strong>를 클릭하여 Script Editor를 엽니다.</p></li>
+<li><p>다음 스니펫을 Script Editor에 복사하여 붙여넣습니다.</p></li>
+<li><p><strong>Run</strong> 버튼을 클릭하여 스니펫을 실행합니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">isaacsim.core.experimental.prims</span><span class="w"> </span><span class="kn">import</span> <span class="n">Articulation</span>
 
-<span class="n">prim</span> <span class="o">=</span> <span class="n">Articulation</span><span class="p">(</span><span class="s2">&quot;/h1&quot;</span><span class="p">)</span>
+<span class="n">prim</span> <span class="o">=</span> <span class="n">Articulation</span><span class="p">(</span><span class="s2">"/h1"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">prim</span><span class="o">.</span><span class="n">dof_names</span><span class="p">)</span>
 <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">get_dof_limits</span><span class="p">()</span>
 <span class="n">stiffnesses</span><span class="p">,</span> <span class="n">dampings</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">get_dof_gains</span><span class="p">()</span>
@@ -1417,16 +1050,16 @@ To convert radians to degrees, you can use the following formulas:</p>
 <span class="n">max_efforts</span> <span class="o">=</span> <span class="n">prim</span><span class="o">.</span><span class="n">get_dof_max_efforts</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">prim</span><span class="o">.</span><span class="n">dof_names</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: lower=</span><span class="si">{</span><span class="n">lower</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, upper=</span><span class="si">{</span><span class="n">upper</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, &quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;maxVelocity=</span><span class="si">{</span><span class="n">max_velocities</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, maxEffort=</span><span class="si">{</span><span class="n">max_efforts</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">, &quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;stiffness=</span><span class="si">{</span><span class="n">stiffnesses</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, damping=</span><span class="si">{</span><span class="n">dampings</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: lower=</span><span class="si">{</span><span class="n">lower</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, upper=</span><span class="si">{</span><span class="n">upper</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, "</span>
+        <span class="sa">f</span><span class="s2">"maxVelocity=</span><span class="si">{</span><span class="n">max_velocities</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, maxEffort=</span><span class="si">{</span><span class="n">max_efforts</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">, "</span>
+        <span class="sa">f</span><span class="s2">"stiffness=</span><span class="si">{</span><span class="n">stiffnesses</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, damping=</span><span class="si">{</span><span class="n">dampings</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span>
     <span class="p">)</span>
 </pre></div>
 </div>
 </li>
-<li><p>Verify that you see console output similar to the following:</p></li>
+<li><p>다음과 유사한 콘솔 출력이 표시되는지 확인합니다:</p></li>
 </ol>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[&#39;left_hip_yaw&#39;, &#39;right_hip_yaw&#39;, &#39;torso&#39;, &#39;left_hip_roll&#39;, &#39;right_hip_roll&#39;, &#39;left_shoulder_pitch&#39;, &#39;right_shoulder_pitch&#39;, &#39;left_hip_pitch&#39;, &#39;right_hip_pitch&#39;, &#39;left_shoulder_roll&#39;, &#39;right_shoulder_roll&#39;, &#39;left_knee&#39;, &#39;right_knee&#39;, &#39;left_shoulder_yaw&#39;, &#39;right_shoulder_yaw&#39;, &#39;left_ankle&#39;, &#39;right_ankle&#39;, &#39;left_elbow&#39;, &#39;right_elbow&#39;]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">['left_hip_yaw', 'right_hip_yaw', 'torso', 'left_hip_roll', 'right_hip_roll', 'left_shoulder_pitch', 'right_shoulder_pitch', 'left_hip_pitch', 'right_hip_pitch', 'left_shoulder_roll', 'right_shoulder_roll', 'left_knee', 'right_knee', 'left_shoulder_yaw', 'right_shoulder_yaw', 'left_ankle', 'right_ankle', 'left_elbow', 'right_elbow']</span>
 <span class="go">  left_hip_yaw: lower=-0.4300, upper=0.4300, maxVelocity=100.00, maxEffort=300, stiffness=149.54, damping=5.00</span>
 <span class="go">  right_hip_yaw: lower=-0.4300, upper=0.4300, maxVelocity=100.00, maxEffort=300, stiffness=149.54, damping=5.00</span>
 <span class="go">  torso: lower=-2.3500, upper=2.3500, maxVelocity=100.00, maxEffort=300, stiffness=200.00, damping=4.98</span>
@@ -1448,120 +1081,81 @@ To convert radians to degrees, you can use the following formulas:</p>
 <span class="go">  right_elbow: lower=-1.2500, upper=2.6100, maxVelocity=100.00, maxEffort=300, stiffness=40.00, damping=10.00</span>
 </pre></div>
 </div>
-<p>The limit values in the console output are in radians. Each line shows the properties for a single DOF.
-Verify that the <code class="docutils literal notranslate"><span class="pre">maxVelocity</span></code>, <code class="docutils literal notranslate"><span class="pre">maxEffort</span></code>, <code class="docutils literal notranslate"><span class="pre">stiffness</span></code>, and <code class="docutils literal notranslate"><span class="pre">damping</span></code> values match the values specified in the environment definition file.</p>
-<p>For example, for <code class="docutils literal notranslate"><span class="pre">left_hip_yaw</span></code>, the max velocity is <code class="docutils literal notranslate"><span class="pre">100.0</span></code>, the max effort is <code class="docutils literal notranslate"><span class="pre">300.0</span></code>, the stiffness is <code class="docutils literal notranslate"><span class="pre">150.0</span></code>, and the damping is <code class="docutils literal notranslate"><span class="pre">5.0</span></code>.</p>
+<p>콘솔 출력의 한도 값은 라디안 단위입니다. 각 줄에는 단일 DOF에 대한 속성이 표시됩니다.
+<code class="docutils literal notranslate"><span class="pre">maxVelocity</span></code>, <code class="docutils literal notranslate"><span class="pre">maxEffort</span></code>, <code class="docutils literal notranslate"><span class="pre">stiffness</span></code>, <code class="docutils literal notranslate"><span class="pre">damping</span></code> 값이 환경 정의 파일에 지정된 값과 일치하는지 확인합니다.</p>
+<p>예를 들어 <code class="docutils literal notranslate"><span class="pre">left_hip_yaw</span></code>의 경우 최대 속도는 <code class="docutils literal notranslate"><span class="pre">100.0</span></code>, 최대 힘은 <code class="docutils literal notranslate"><span class="pre">300.0</span></code>, stiffness는 <code class="docutils literal notranslate"><span class="pre">150.0</span></code>, damping은 <code class="docutils literal notranslate"><span class="pre">5.0</span></code>입니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The rigged H1 robot is available in the Content Browser at <code class="docutils literal notranslate"><span class="pre">Isaac/Samples/Rigging/H1/h1_rigged.usd</span></code>.</p>
+<p>리깅된 H1 로봇은 콘텐츠 브라우저의 <code class="docutils literal notranslate"><span class="pre">Isaac/Samples/Rigging/H1/h1_rigged.usd</span></code>에서 사용 가능합니다.</p>
 </div>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="tutorial_rig_legged_robot.html#summary" title="Link to this heading">#</a></h2>
-<p>This tutorial covers the following topics:</p>
+<p>이 튜토리얼에서는 다음 주제를 다뤘습니다:</p>
 <ul class="simple">
-<li><p>Setting the initial robot position</p></li>
-<li><p>Setting the joint configuration</p></li>
-<li><p>Verifying the joint configuration</p></li>
+<li><p>초기 로봇 위치 설정</p></li>
+<li><p>조인트 구성 설정</p></li>
+<li><p>조인트 구성 확인</p></li>
 </ul>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="optimizing_asset.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Tutorial 12: Asset Optimization</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../openusd_tuning_tutorials/index.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">OpenUSD and Tuning Best Practices Tutorial Series</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="optimizing_asset.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Tutorial 12: Asset Optimization</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="../openusd_tuning_tutorials/index.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">OpenUSD and Tuning Best Practices Tutorial Series</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_rig_legged_robot.html#learning-objectives">Learning Objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_rig_legged_robot.html#setting-the-initial-robot-position">Setting the Initial Robot Position</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_rig_legged_robot.html#setting-the-joint-configuration">Setting the Joint Configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_rig_legged_robot.html#verifying-the-joint-configuration">Verifying the Joint Configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="tutorial_rig_legged_robot.html#summary">Summary</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1592,36 +1186,21 @@ Verify that the <code class="docutils literal notranslate"><span class="pre">max
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

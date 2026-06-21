@@ -1,53 +1,40 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Tutorial 11: Tuning Joint Drive Gains &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Tutorial 11: Tuning Joint Drive Gains — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript"
-  data-document-language="true" charset="UTF-8" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5">
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script charset="UTF-8" data-document-language="true" data-domain-script="3e2b62ff-7ae7-4ac5-87c8-d5949ecafff5" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript">
 </script>
 <script type="text/javascript">
   function OptanonWrapper() {
@@ -57,505 +44,223 @@
 </script>
 <script src="https://images.nvidia.com/aem-dam/Solutions/ot-js/ot-custom.js" type="text/javascript">
 </script>
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'robot_setup_tutorials/joint_tuning';</script>
-    <script>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'robot_setup_tutorials/joint_tuning';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tutorial 12: Asset Optimization" href="optimizing_asset.html" />
-    <link rel="prev" title="Tutorial 10: Rig Closed-Loop Structures" href="rig_closed_loop_structures.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="optimizing_asset.html" rel="next" title="Tutorial 12: Asset Optimization"/>
+<link href="rig_closed_loop_structures.html" rel="prev" title="Tutorial 10: Rig Closed-Loop Structures"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="joint_tuning.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="joint_tuning.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -575,7 +280,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -603,20 +307,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -691,17 +383,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -879,7 +561,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -919,13 +600,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -972,10 +647,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1144,18 +815,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1181,134 +842,106 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="../robot_setup/index.html" class="nav-link">Robot Setup</a></li>
-    
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Robot Setup Tutorials Series</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Tutorial 11: Tuning Joint Drive Gains</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="../robot_setup/index.html">Robot Setup</a></li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">Robot Setup Tutorials Series</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Tutorial 11: Tuning Joint Drive Gains</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="tutorial-11-tuning-joint-drive-gains">
+<article class="bd-article">
+<section id="tutorial-11-tuning-joint-drive-gains">
 <span id="isaac-sim-app-tutorial-advanced-joint-tuning"></span><h1>Tutorial 11: Tuning Joint Drive Gains<a class="headerlink" href="joint_tuning.html#tutorial-11-tuning-joint-drive-gains" title="Link to this heading">#</a></h1>
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="joint_tuning.html#learning-objectives" title="Link to this heading">#</a></h2>
-<p>In this tutorial, you use the Gain Tuner to bring an un-tuned UR10 manipulator from zero gains to a working set of stiffness and damping values. Along the way you learn how to:</p>
+<p>이 튜토리얼에서는 Gain Tuner를 사용하여 게인이 설정되지 않은 UR10 매니퓰레이터를 0 게인에서 작동하는 강성 및 감쇠 값 세트로 설정합니다. 이 과정에서 다음을 배웁니다:</p>
 <ul class="simple">
-<li><p>Diagnose missing or insufficient gains with the <strong>Snap-to-Limits</strong> test.</p></li>
-<li><p>Distinguish <strong>Fail</strong> from <strong>Blocked</strong> results using the <strong>Disable Self-Collisions</strong> toggle.</p></li>
-<li><p>Validate tuned gains with the <strong>Stress Test</strong> and observe how velocity limits contribute to solver stability.</p></li>
+<li><p><strong>Snap-to-Limits</strong> 테스트로 누락되거나 부족한 게인을 진단합니다.</p></li>
+<li><p><strong>Disable Self-Collisions</strong> 토글을 사용하여 <strong>Fail</strong>과 <strong>Blocked</strong> 결과를 구분합니다.</p></li>
+<li><p><strong>Stress Test</strong>로 튜닝된 게인을 검증하고 속도 제한이 솔버 안정성에 어떻게 기여하는지 관찰합니다.</p></li>
 </ul>
-<p>For a full explanation of how the Gain Tuner works, the physics behind joint drives, and the complete parameter reference for each test, see <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html#isaac-gain-tuner"><span class="std std-ref">Gain Tuner Extension</span></a>.</p>
-<p><em>10-15 Minute Tutorial</em></p>
+<p>Gain Tuner 작동 방식, 조인트 드라이브의 물리학, 각 테스트의 전체 매개변수 참조에 대한 자세한 설명은 <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html#isaac-gain-tuner"><span class="std std-ref">Gain Tuner 익스텐션</span></a>을 참고하세요.</p>
+<p><em>10-15분 튜토리얼</em></p>
 </section>
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="joint_tuning.html#prerequisites" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Complete the <a class="reference internal" href="../importer_exporter/import_urdf.html#isaac-sim-app-tutorial-advanced-import-urdf"><span class="std std-ref">Tutorial: Import URDF</span></a> tutorial to import the UR10 onto the stage. The URDF importer sets all joint stiffness and damping to zero by default, so the robot has no active drives.</p></li>
-<li><p>Read the <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html#isaac-gain-tuner"><span class="std std-ref">Gain Tuner Extension</span></a> reference for background on the parameters, physics, and detailed result interpretation guide.</p></li>
+<li><p><a class="reference internal" href="../importer_exporter/import_urdf.html#isaac-sim-app-tutorial-advanced-import-urdf"><span class="std std-ref">튜토리얼: URDF 가져오기</span></a> 튜토리얼을 완료하여 UR10을 스테이지에 가져옵니다. URDF 임포터는 기본적으로 모든 조인트 강성과 감쇠를 0으로 설정하므로 로봇에 활성 드라이브가 없습니다.</p></li>
+<li><p>매개변수, 물리학, 상세한 결과 해석 가이드에 대한 배경 지식을 위해 <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html#isaac-gain-tuner"><span class="std std-ref">Gain Tuner 익스텐션</span></a> 참조를 읽으세요.</p></li>
 </ul>
 </section>
 <section id="step-1-open-the-gain-tuner-and-observe-zero-gains">
 <h2>Step 1: Open the Gain Tuner and observe zero gains<a class="headerlink" href="joint_tuning.html#step-1-open-the-gain-tuner-and-observe-zero-gains" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Go to <strong>Tools</strong> &gt; <strong>Robotics</strong> &gt; <strong>Asset Editors</strong> &gt; <strong>Gain Tuner</strong>.</p></li>
-<li><p>Select the UR10 from the <strong>Select Robot</strong> dropdown.</p></li>
-<li><p>Ensure that <strong>Mode</strong> is set to <strong>Position</strong> for each joint.</p></li>
-<li><p>Observe that all six joints — <code class="docutils literal notranslate"><span class="pre">shoulder_pan_joint</span></code>, <code class="docutils literal notranslate"><span class="pre">shoulder_lift_joint</span></code>, <code class="docutils literal notranslate"><span class="pre">elbow_joint</span></code>, <code class="docutils literal notranslate"><span class="pre">wrist_1_joint</span></code>, <code class="docutils literal notranslate"><span class="pre">wrist_2_joint</span></code>, <code class="docutils literal notranslate"><span class="pre">wrist_3_joint</span></code> — have <strong>Stiffness</strong> and <strong>Damping</strong> set to <code class="docutils literal notranslate"><span class="pre">0</span></code>. With zero gains the robot has no active drives and will collapse under gravity when the simulation is played.</p></li>
+<li><p><strong>Tools</strong> &gt; <strong>Robotics</strong> &gt; <strong>Asset Editors</strong> &gt; <strong>Gain Tuner</strong>로 이동합니다.</p></li>
+<li><p><strong>Select Robot</strong> 드롭다운에서 UR10을 선택합니다.</p></li>
+<li><p>각 조인트에 대해 <strong>Mode</strong>가 <strong>Position</strong>으로 설정되어 있는지 확인합니다.</p></li>
+<li><p>6개의 조인트 — <code class="docutils literal notranslate"><span class="pre">shoulder_pan_joint</span></code>, <code class="docutils literal notranslate"><span class="pre">shoulder_lift_joint</span></code>, <code class="docutils literal notranslate"><span class="pre">elbow_joint</span></code>, <code class="docutils literal notranslate"><span class="pre">wrist_1_joint</span></code>, <code class="docutils literal notranslate"><span class="pre">wrist_2_joint</span></code>, <code class="docutils literal notranslate"><span class="pre">wrist_3_joint</span></code> — 모두 <strong>Stiffness</strong>와 <strong>Damping</strong>이 <code class="docutils literal notranslate"><span class="pre">0</span></code>으로 설정되어 있는지 확인합니다. 게인이 0이면 로봇에 활성 드라이브가 없어 시뮬레이션 재생 시 중력으로 인해 쓰러집니다.</p></li>
 </ol>
-<img alt="Gain Tuner with the UR10 selected and all gains at zero" class="align-center" src="../_images/isim_6.0_full_tut_gui_gain_tuner_ur10_zero_gains.png" />
+<img alt="Gain Tuner with the UR10 selected and all gains at zero" class="align-center" src="../_images/isim_6.0_full_tut_gui_gain_tuner_ur10_zero_gains.png"/>
 </section>
 <section id="step-2-snap-to-limits-with-weak-gains">
 <h2>Step 2: Snap-to-Limits with weak gains<a class="headerlink" href="joint_tuning.html#step-2-snap-to-limits-with-weak-gains" title="Link to this heading">#</a></h2>
-<p>Set initial gains to see how the robot responds with deliberately low stiffness and no damping:</p>
+<p>의도적으로 낮은 강성과 감쇠 없이 로봇이 어떻게 반응하는지 확인하기 위해 초기 게인을 설정합니다:</p>
 <ol class="arabic simple">
-<li><p>In the <strong>Stiffness</strong> column, set all six joints to <code class="docutils literal notranslate"><span class="pre">10</span></code>. Leave <strong>Damping</strong> at <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
-<li><p>Select the <strong>Snap-to-Limits</strong> test mode (the default).</p></li>
-<li><p>Enable the <strong>Test</strong> checkbox for all joints.</p></li>
-<li><p>Press <strong>Play</strong>, then press <strong>Run Test</strong>.</p></li>
+<li><p><strong>Stiffness</strong> 열에서 6개 조인트 모두 <code class="docutils literal notranslate"><span class="pre">10</span></code>으로 설정합니다. <strong>Damping</strong>은 <code class="docutils literal notranslate"><span class="pre">0</span></code>으로 유지합니다.</p></li>
+<li><p><strong>Snap-to-Limits</strong> 테스트 모드(기본값)를 선택합니다.</p></li>
+<li><p>모든 조인트에 대해 <strong>Test</strong> 체크박스를 활성화합니다.</p></li>
+<li><p><strong>Play</strong>를 누른 다음 <strong>Run Test</strong>를 누릅니다.</p></li>
 </ol>
-<p>With stiffness at only 10 Nm/rad and no damping, expect:</p>
+<p>강성이 10 Nm/rad이고 감쇠가 없는 경우 예상 결과:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">shoulder_lift_joint</span></code> and <code class="docutils literal notranslate"><span class="pre">elbow_joint</span></code> are likely to <strong>Fail</strong>. These joints bear the full weight of the arm and 10 Nm/rad of stiffness is far too low to drive them to their limits.</p></li>
-<li><p>Wrist joints may also <strong>Fail</strong> or show long settling times with oscillation, since there is no damping to absorb overshoot.</p></li>
-<li><p>Some joints may report <strong>Blocked</strong> if the collision geometry prevents them from reaching a limit.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shoulder_lift_joint</span></code>와 <code class="docutils literal notranslate"><span class="pre">elbow_joint</span></code>는 <strong>Fail</strong>할 가능성이 높습니다. 이 조인트들은 팔 전체 무게를 지탱하는데 10 Nm/rad 강성은 한계까지 구동하기에 너무 낮습니다.</p></li>
+<li><p>오버슈트를 흡수할 감쇠가 없어 손목 조인트도 <strong>Fail</strong>하거나 진동과 함께 긴 정착 시간을 보일 수 있습니다.</p></li>
+<li><p>충돌 지오메트리가 한계에 도달하는 것을 방해하는 경우 일부 조인트가 <strong>Blocked</strong>를 보고할 수 있습니다.</p></li>
 </ul>
-<img alt="Gain Tuner with the UR10 selected and stiffness set to 10 Nm/rad" class="align-center" src="../_images/isim_6.0_full_tut_gui_gain_tuner_ur10_snap_to_limits_weak_gains.png" />
+<img alt="Gain Tuner with the UR10 selected and stiffness set to 10 Nm/rad" class="align-center" src="../_images/isim_6.0_full_tut_gui_gain_tuner_ur10_snap_to_limits_weak_gains.png"/>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If a joint reports <strong>Blocked</strong>, re-run with <strong>Disable Self-Collisions</strong> enabled. If the joint then passes, the joint limit extends beyond what the collision geometry allows — tighten the joint limit in USD rather than adjusting gains.</p>
+<p>조인트가 <strong>Blocked</strong>를 보고하면 <strong>Disable Self-Collisions</strong>를 활성화하여 다시 실행합니다. 그 후 조인트가 통과하면 조인트 한계가 충돌 지오메트리가 허용하는 것보다 더 멀리 뻗어 있다는 뜻입니다. 게인을 조정하는 대신 USD에서 조인트 한계를 좁히세요.</p>
 </div>
 </section>
 <section id="step-3-tuned-parameters">
 <span id="tuned-ur10-gains-table"></span><h2>Step 3: Tuned parameters<a class="headerlink" href="joint_tuning.html#step-3-tuned-parameters" title="Link to this heading">#</a></h2>
-<p>Before adjusting gains, check the joint force limits. The UR10’s URDF defines max effort values (330 Nm for the shoulder joints, 150 Nm for the elbow, 56 Nm for the wrist joints) that are imported as the joint <strong>Max Force</strong> in USD. With high stiffness, the PD controller may need to apply forces that exceed these limits to drive the heavy shoulder and elbow links to their targets. If a joint still fails Snap-to-Limits after increasing stiffness, select the joint in the <strong>Properties</strong> panel and set <strong>Max Force</strong> to a higher value or to <code class="docutils literal notranslate"><span class="pre">inf</span></code> (infinite) under <strong>Joint</strong> &gt; <strong>Advanced</strong> &gt; <strong>Maximum Force</strong>. For the UR10, <code class="docutils literal notranslate"><span class="pre">shoulder_pan_joint</span></code> and <code class="docutils literal notranslate"><span class="pre">shoulder_lift_joint</span></code> require infinite max force to pass.</p>
-<p>The following gains produce a UR10 that passes Snap-to-Limits. They were found using the position-drive tuning heuristic described in the <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html#isaac-gain-tuner-tuning-workflow"><span class="std std-ref">Tuning Workflow</span></a> section of the Gain Tuner reference:</p>
+<p>게인을 조정하기 전에 조인트 힘 한계를 확인하세요. UR10의 URDF는 최대 effort 값(어깨 조인트 330 Nm, 팔꿈치 150 Nm, 손목 조인트 56 Nm)을 정의하며 이는 USD에서 조인트 <strong>Max Force</strong>로 가져옵니다. 높은 강성에서 PD 컨트롤러는 무거운 어깨와 팔꿈치 링크를 목표로 구동하기 위해 이 한계를 초과하는 힘을 적용해야 할 수 있습니다. 강성을 높인 후에도 조인트가 Snap-to-Limits에 실패하면 <strong>Properties</strong> 패널에서 해당 조인트를 선택하고 <strong>Joint</strong> &gt; <strong>Advanced</strong> &gt; <strong>Maximum Force</strong>에서 <strong>Max Force</strong>를 더 높은 값이나 <code class="docutils literal notranslate"><span class="pre">inf</span></code>(무한대)로 설정하세요. UR10의 경우 <code class="docutils literal notranslate"><span class="pre">shoulder_pan_joint</span></code>와 <code class="docutils literal notranslate"><span class="pre">shoulder_lift_joint</span></code>는 통과하려면 무한 최대 힘이 필요합니다.</p>
+<p>다음 게인은 Snap-to-Limits를 통과하는 UR10을 만듭니다. Gain Tuner 참조의 <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html#isaac-gain-tuner-tuning-workflow"><span class="std std-ref">튜닝 워크플로우</span></a> 섹션에 설명된 위치 드라이브 튜닝 휴리스틱을 사용하여 찾았습니다:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <colgroup>
-<col style="width: 42.9%" />
-<col style="width: 28.6%" />
-<col style="width: 28.6%" />
+<col style="width: 42.9%"/>
+<col style="width: 28.6%"/>
+<col style="width: 28.6%"/>
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Joint</p></th>
+<tr class="row-odd"><th class="head"><p>조인트</p></th>
 <th class="head"><p>Stiffness</p></th>
 <th class="head"><p>Damping</p></th>
 </tr>
@@ -1343,104 +976,82 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>These values are starting-point examples. Fine-tune them for your specific application by iterating with the Gain Tuner tests. The shoulder and elbow joints require higher gains because they bear the weight of the full arm, while the lighter wrist joints respond well at lower values.</p>
+<p>이 값들은 시작점 예시입니다. Gain Tuner 테스트를 반복하여 특정 응용 프로그램에 맞게 세밀하게 조정하세요. 어깨와 팔꿈치 조인트는 전체 팔의 무게를 지탱하므로 더 높은 게인이 필요하며, 가벼운 손목 조인트는 낮은 값에서도 잘 반응합니다.</p>
 </div>
-<p>Enter these values, re-run the Snap-to-Limits test, and confirm that all joints now <strong>Pass</strong>.</p>
-<img alt="Gain Tuner with the UR10 selected and gains set to the values in the table" class="align-center" src="../_images/isim_6.0_full_tut_gui_gain_tuner_ur10_snap_to_limits_tuned_gains.png" />
-<p>You can further validate tracking quality with the <strong>Sinusoidal</strong> and <strong>Step Function</strong> test modes. For configuration details and result interpretation, see <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html#isaac-gain-tuner-sinusoidal"><span class="std std-ref">Sinusoidal</span></a> and <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html#isaac-gain-tuner-step-function"><span class="std std-ref">Step Function</span></a>.</p>
+<p>이 값을 입력하고, Snap-to-Limits 테스트를 다시 실행하여 모든 조인트가 이제 <strong>Pass</strong>하는지 확인합니다.</p>
+<img alt="Gain Tuner with the UR10 selected and gains set to the values in the table" class="align-center" src="../_images/isim_6.0_full_tut_gui_gain_tuner_ur10_snap_to_limits_tuned_gains.png"/>
+<p><strong>Sinusoidal</strong> 및 <strong>Step Function</strong> 테스트 모드를 통해 추적 품질을 추가로 검증할 수 있습니다. 구성 세부 사항과 결과 해석은 <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html#isaac-gain-tuner-sinusoidal"><span class="std std-ref">Sinusoidal</span></a> 및 <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html#isaac-gain-tuner-step-function"><span class="std std-ref">Step Function</span></a>을 참고하세요.</p>
 </section>
 <section id="step-4-stress-test-with-tuned-gains">
 <h2>Step 4: Stress Test with tuned gains<a class="headerlink" href="joint_tuning.html#step-4-stress-test-with-tuned-gains" title="Link to this heading">#</a></h2>
-<p>With the tuned gains from <a class="reference internal" href="joint_tuning.html#tuned-ur10-gains-table"><span class="std std-ref">Step 3: Tuned parameters</span></a> applied, run the Stress Test to verify the robot is stable under the extreme commands typical of reinforcement learning training:</p>
+<p><a class="reference internal" href="joint_tuning.html#tuned-ur10-gains-table"><span class="std std-ref">3단계: 튜닝된 매개변수</span></a>에서 튜닝된 게인을 적용한 후, 강화 학습 훈련에서 일반적인 극단적인 명령 하에서 로봇이 안정적인지 확인하기 위해 Stress Test를 실행합니다:</p>
 <ol class="arabic simple">
-<li><p>Select the <strong>Stress Test</strong> mode and choose the <strong>Random Walk</strong> sub-mode.</p></li>
-<li><p>Set <strong>Sequence</strong> for all joints to <code class="docutils literal notranslate"><span class="pre">1</span></code> so that the joints are tested in parallel.</p></li>
-<li><p>Leave <strong>Disable Velocity Limits</strong> off (the default).</p></li>
-<li><p>Press <strong>Play</strong>, then press <strong>Run Test</strong>.</p></li>
-<li><p>All joints should report <strong>Stable</strong>.</p></li>
+<li><p><strong>Stress Test</strong> 모드를 선택하고 <strong>Random Walk</strong> 하위 모드를 선택합니다.</p></li>
+<li><p>조인트를 병렬로 테스트하도록 모든 조인트의 <strong>Sequence</strong>를 <code class="docutils literal notranslate"><span class="pre">1</span></code>로 설정합니다.</p></li>
+<li><p><strong>Disable Velocity Limits</strong>를 해제 상태로 유지합니다(기본값).</p></li>
+<li><p><strong>Play</strong>를 누른 다음 <strong>Run Test</strong>를 누릅니다.</p></li>
+<li><p>모든 조인트가 <strong>Stable</strong>을 보고해야 합니다.</p></li>
 </ol>
-<img alt="Stress Test results showing Stable joints" class="align-center" src="../_images/isim_6.0_full_tut_gui_gain_tuner_ur10_stress_test_stable.png" />
-<p>Now observe what happens without velocity limits:</p>
+<img alt="Stress Test results showing Stable joints" class="align-center" src="../_images/isim_6.0_full_tut_gui_gain_tuner_ur10_stress_test_stable.png"/>
+<p>이제 속도 제한 없이 어떤 일이 발생하는지 관찰합니다:</p>
 <ol class="arabic simple">
-<li><p>Enable <strong>Disable Velocity Limits</strong>.</p></li>
-<li><p>Press <strong>Run Test</strong> again.</p></li>
-<li><p>Some joints now report <strong>Unstable</strong>.</p></li>
+<li><p><strong>Disable Velocity Limits</strong>를 활성화합니다.</p></li>
+<li><p><strong>Run Test</strong>를 다시 누릅니다.</p></li>
+<li><p>일부 조인트가 이제 <strong>Unstable</strong>을 보고합니다.</p></li>
 </ol>
-<img alt="Stress Test results showing Unstable joints" class="align-center" src="../_images/isim_6.0_full_tut_gui_gain_tuner_ur10_stress_test_unstable.png" />
-<p>Without velocity limits, the PD controller responds to the stress test’s large position errors by generating forces that accelerate joints to extreme speeds within a single simulation timestep. At these speeds the discrete-time solver can fail to converge, leading to energy blowup or NaN values.</p>
-<p>Velocity limits serve two purposes:</p>
+<img alt="Stress Test results showing Unstable joints" class="align-center" src="../_images/isim_6.0_full_tut_gui_gain_tuner_ur10_stress_test_unstable.png"/>
+<p>속도 제한 없이 PD 컨트롤러는 스트레스 테스트의 큰 위치 오류에 반응하여 단일 시뮬레이션 타임스텝 내에 조인트를 극단적인 속도로 가속시키는 힘을 생성합니다. 이러한 속도에서 이산 시간 솔버는 수렴에 실패하여 에너지 폭발이나 NaN 값이 발생할 수 있습니다.</p>
+<p>속도 제한은 두 가지 목적을 제공합니다:</p>
 <ul class="simple">
-<li><p><strong>Physical fidelity</strong> — real actuators have maximum speeds defined by the manufacturer. The UR10’s URDF specifies velocity limits of approximately 2–3 rad/s per joint. Setting these in simulation reproduces the real robot’s motion envelope.</p></li>
-<li><p><strong>Solver stability</strong> — by capping joint speed, velocity limits keep per-step displacements within the range where the PhysX implicit integrator remains numerically stable.</p></li>
+<li><p><strong>물리적 정확성</strong> — 실제 액추에이터는 제조사가 정의한 최대 속도가 있습니다. UR10의 URDF는 조인트당 약 2-3 rad/s의 속도 제한을 지정합니다. 이를 시뮬레이션에 설정하면 실제 로봇의 동작 범위가 재현됩니다.</p></li>
+<li><p><strong>솔버 안정성</strong> — 조인트 속도를 제한함으로써 속도 제한은 PhysX 암시적 적분기가 수치적으로 안정적인 범위 내에서 단계당 변위를 유지합니다.</p></li>
 </ul>
-<p>If your application requires higher velocity limits than the manufacturer specification, increase them incrementally and re-run the Stress Test after each change to confirm the solver remains stable at the new limits.</p>
-<p>Repeat the comparison in <strong>Adversarial</strong> sub-mode to confirm the same behavior under worst-case correlated configurations.</p>
+<p>응용 프로그램이 제조사 사양보다 더 높은 속도 제한을 요구하는 경우 점진적으로 증가시키고 각 변경 후 Stress Test를 다시 실행하여 솔버가 새 한계에서 안정적으로 유지되는지 확인합니다.</p>
+<p><strong>Adversarial</strong> 하위 모드에서 비교를 반복하여 최악의 상관 구성 하에서 동일한 동작을 확인합니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>A <strong>Stable</strong> result is meaningful only at the sigma and snap interval values used. When assessing readiness for Isaac Lab training, record these parameters alongside results. See <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html#isaac-gain-tuner-stress-test"><span class="std std-ref">Stress Test</span></a> for a full explanation of how to interpret each result combination.</p>
+<p><strong>Stable</strong> 결과는 사용된 sigma 및 snap interval 값에서만 의미가 있습니다. Isaac Lab 훈련 준비 상태를 평가할 때 이러한 매개변수를 결과와 함께 기록하세요. 각 결과 조합을 해석하는 방법에 대한 전체 설명은 <a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html#isaac-gain-tuner-stress-test"><span class="std std-ref">Stress Test</span></a>를 참고하세요.</p>
 </div>
 <section id="summary">
 <h3>Summary<a class="headerlink" href="joint_tuning.html#summary" title="Link to this heading">#</a></h3>
-<p>This tutorial covered:</p>
+<p>이 튜토리얼에서 다룬 내용:</p>
 <ol class="arabic simple">
-<li><p>Starting from an un-tuned UR10 imported from URDF with zero gains.</p></li>
-<li><p>Using Snap-to-Limits to identify joints with insufficient stiffness and distinguishing Fail from Blocked results.</p></li>
-<li><p>Applying tuned gains and confirming all joints pass Snap-to-Limits.</p></li>
-<li><p>Using the Stress Test to demonstrate why velocity limits are important for solver stability.</p></li>
+<li><p>게인이 0인 상태로 URDF에서 가져온 튜닝되지 않은 UR10에서 시작.</p></li>
+<li><p>Snap-to-Limits를 사용하여 강성이 부족한 조인트를 식별하고 Fail과 Blocked 결과를 구분.</p></li>
+<li><p>튜닝된 게인을 적용하고 모든 조인트가 Snap-to-Limits를 통과하는지 확인.</p></li>
+<li><p>Stress Test를 사용하여 솔버 안정성에 속도 제한이 중요한 이유를 설명.</p></li>
 </ol>
 </section>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="rig_closed_loop_structures.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Tutorial 10: Rig Closed-Loop Structures</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="optimizing_asset.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Tutorial 12: Asset Optimization</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="rig_closed_loop_structures.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Tutorial 10: Rig Closed-Loop Structures</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="optimizing_asset.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Tutorial 12: Asset Optimization</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="joint_tuning.html#learning-objectives">Learning Objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="joint_tuning.html#prerequisites">Prerequisites</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="joint_tuning.html#step-1-open-the-gain-tuner-and-observe-zero-gains">Step 1: Open the Gain Tuner and observe zero gains</a></li>
@@ -1451,46 +1062,29 @@
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1521,36 +1115,21 @@
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>
