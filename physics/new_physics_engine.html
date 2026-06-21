@@ -1,553 +1,258 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta content="Physics Data Flow and Engine Integration" name="title" />
-<meta content="lang=en physics data flow USD Fabric tensors engine integration Isaac Sim" name="keywords" />
-
-    <title>Physics Data Flow and Engine Integration &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Physics Data Flow and Engine Integration" name="title"/>
+<meta content="lang=en physics data flow USD Fabric tensors engine integration Isaac Sim" name="keywords"/>
+<title>Physics Data Flow and Engine Integration — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'physics/new_physics_engine';</script>
-    <script>
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'physics/new_physics_engine';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Newton Physics Backend" href="newton_physics.html" />
-    <link rel="prev" title="Physics Simulation Fundamentals" href="simulation_fundamentals.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="newton_physics.html" rel="next" title="Newton Physics Backend"/>
+<link href="simulation_fundamentals.html" rel="prev" title="Physics Simulation Fundamentals"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="new_physics_engine.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="new_physics_engine.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -567,7 +272,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -595,20 +299,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -683,17 +375,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -871,7 +553,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -911,13 +592,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -964,10 +639,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1136,18 +807,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1173,211 +834,163 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Physics</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Physics Data Flow and Engine Integration</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">Physics</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Physics Data Flow and Engine Integration</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="physics-data-flow-and-engine-integration">
+<article class="bd-article">
+<section id="physics-data-flow-and-engine-integration">
 <span id="physics-data-flow"></span><h1>Physics Data Flow and Engine Integration<a class="headerlink" href="new_physics_engine.html#physics-data-flow-and-engine-integration" title="Link to this heading">#</a></h1>
-<p>This page describes how physics data moves through Isaac Sim and how to integrate a new physics engine. The first section summarizes the three data pathways (USD, Fabric, and Physics Tensors) and the unified API layer. The second section explains the steps to implement a new backend that plugs into these same pathways.</p>
+<p>이 페이지는 Isaac Sim에서 물리 데이터가 이동하는 방식과 새 물리 엔진을 통합하는 방법을 설명합니다. 첫 번째 섹션에서는 세 가지 데이터 경로(USD, Fabric, Physics Tensors)와 통합 API 레이어를 요약합니다. 두 번째 섹션에서는 이러한 경로에 연결되는 새 백엔드를 구현하는 단계를 설명합니다.</p>
 <section id="id1">
 <h2>Physics Data Flow<a class="headerlink" href="new_physics_engine.html#id1" title="Link to this heading">#</a></h2>
-<p>Isaac Sim uses three data pathways to move physics data between user code, the active physics engine, and the rendering pipeline: USD, Fabric, and Physics Tensors. On top of these, <code class="docutils literal notranslate"><span class="pre">isaacsim.core.experimental</span></code> provides a unified API that abstracts backend differences and is the recommended way to interact with simulation data.</p>
+<p>Isaac Sim은 사용자 코드, 활성 물리 엔진, 렌더링 파이프라인 간에 물리 데이터를 이동하기 위해 USD, Fabric, Physics Tensors라는 세 가지 데이터 경로를 사용합니다. 이 위에 <code class="docutils literal notranslate"><span class="pre">isaacsim.core.experimental</span></code>이 백엔드 차이를 추상화하는 통합 API를 제공하며, 시뮬레이션 데이터와 상호작용하는 데 권장되는 방식입니다.</p>
 <figure class="align-center" id="id2">
-<a class="reference internal image-reference" href="../_images/isim_6.0_full_ref_external_data_flow.png"><img alt="../_images/isim_6.0_full_ref_external_data_flow.png" src="../_images/isim_6.0_full_ref_external_data_flow.png" style="width: 800px;" />
+<a class="reference internal image-reference" href="../_images/isim_6.0_full_ref_external_data_flow.png"><img alt="../_images/isim_6.0_full_ref_external_data_flow.png" src="../_images/isim_6.0_full_ref_external_data_flow.png" style="width: 800px;"/>
 </a>
 <figcaption>
-<p><span class="caption-text">Physics data flow architecture in Isaac Sim.</span><a class="headerlink" href="new_physics_engine.html#id2" title="Link to this image">#</a></p>
+<p><span class="caption-text">Isaac Sim의 물리 데이터 흐름 아키텍처.</span><a class="headerlink" href="new_physics_engine.html#id2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="data-pathways-explained">
 <span id="data-flow-pathways"></span><h3>Data Pathways Explained<a class="headerlink" href="new_physics_engine.html#data-pathways-explained" title="Link to this heading">#</a></h3>
-<p><strong>USD</strong> is the authoring and persistence format. It stores scene structure, transforms, physics properties, and visual properties. Physics properties use USD Physics and engine-specific schemas. Use USD before and after play for scene authoring, initial configuration, and persisting state. It is not designed for per-frame bulk reads. For runtime performance use Fabric or Tensors.</p>
-<p><strong>Fabric</strong> is a GPU-accelerated runtime data store, populated from USD at load and updated by the active engine for each frame. It holds world transforms (for example, <code class="docutils literal notranslate"><span class="pre">omni:fabric:worldMatrix</span></code>) and is the bridge between simulation and rendering. Use Fabric when you need high-performance read access to transforms during simulation.</p>
-<p><strong>Physics Tensors</strong> provide batch read/write access to engine state (articulations, rigid bodies, contacts) and are available only after play. Create a <code class="docutils literal notranslate"><span class="pre">SimulationView</span></code> and view objects (for example, <code class="docutils literal notranslate"><span class="pre">ArticulationView</span></code>, <code class="docutils literal notranslate"><span class="pre">RigidBodyView</span></code>) to exchange data in NumPy, PyTorch, or Warp. Use Tensors for control loops, RL policies, and high-throughput state exchange. Both PhysX SDK and Newton expose a tensor API that conforms to the same view interface.</p>
-<p><strong>Unified API (``isaacsim.core.experimental``):</strong> The recommended approach is to use the prim wrappers (<code class="docutils literal notranslate"><span class="pre">XformPrim</span></code>, <code class="docutils literal notranslate"><span class="pre">RigidPrim</span></code>, <code class="docutils literal notranslate"><span class="pre">ArticulationPrim</span></code>), which abstract over USD, Fabric, and Tensors and auto-select the appropriate backend. When the simulation is running, operations route to the active engine’s tensor API. Refer to the <a class="reference internal" href="../python_scripting/core_api_overview.html"><span class="doc">Core API Overview</span></a> for details on the Core Experimental API.</p>
+<p><strong>USD</strong>는 저작 및 영속 형식입니다. 씬 구조, 트랜스폼, 물리 속성, 시각적 속성을 저장합니다. 물리 속성은 USD Physics 및 엔진별 스키마를 사용합니다. 씬 저작, 초기 구성, 상태 저장을 위해 Play 전후에 USD를 사용합니다. 프레임별 대량 읽기에는 적합하지 않습니다. 런타임 성능을 위해서는 Fabric 또는 Tensors를 사용하세요.</p>
+<p><strong>Fabric</strong>은 GPU 가속 런타임 데이터 저장소로, 로드 시 USD에서 채워지고 매 프레임 활성 엔진에 의해 업데이트됩니다. 월드 트랜스폼(예: <code class="docutils literal notranslate"><span class="pre">omni:fabric:worldMatrix</span></code>)을 보유하며 시뮬레이션과 렌더링 사이의 브리지 역할을 합니다. 시뮬레이션 중 트랜스폼에 대한 고성능 읽기 접근이 필요할 때 Fabric을 사용하세요.</p>
+<p><strong>Physics Tensors</strong>는 엔진 상태(아티큘레이션, 리지드 바디, 접촉)에 대한 배치 읽기/쓰기 접근을 제공하며 Play 후에만 사용할 수 있습니다. <code class="docutils literal notranslate"><span class="pre">SimulationView</span></code>와 뷰 오브젝트(예: <code class="docutils literal notranslate"><span class="pre">ArticulationView</span></code>, <code class="docutils literal notranslate"><span class="pre">RigidBodyView</span></code>)를 생성하여 NumPy, PyTorch, Warp로 데이터를 교환합니다. 제어 루프, RL 정책, 고처리량 상태 교환에는 Tensors를 사용하세요. PhysX SDK와 Newton 모두 동일한 뷰 인터페이스를 따르는 텐서 API를 노출합니다.</p>
+<p><strong>Unified API (<code>isaacsim.core.experimental</code>):</strong> 권장 방식은 USD, Fabric, Tensors를 추상화하고 적절한 백엔드를 자동으로 선택하는 prim 래퍼(<code class="docutils literal notranslate"><span class="pre">XformPrim</span></code>, <code class="docutils literal notranslate"><span class="pre">RigidPrim</span></code>, <code class="docutils literal notranslate"><span class="pre">ArticulationPrim</span></code>)를 사용하는 것입니다. 시뮬레이션이 실행 중일 때 연산은 활성 엔진의 텐서 API로 라우팅됩니다. Core Experimental API에 대한 자세한 내용은 <a class="reference internal" href="../python_scripting/core_api_overview.html"><span class="doc">Core API Overview</span></a>를 참조하세요.</p>
 </section>
 <section id="per-engine-data-pathways">
 <h3>Per-Engine Data Pathways<a class="headerlink" href="new_physics_engine.html#per-engine-data-pathways" title="Link to this heading">#</a></h3>
-<p>Both PhysX SDK and Newton import USD at initialization, write transforms to Fabric each frame, and provide a Tensor API with the same view types. PhysX SDK also supports a Fabric/USD change listener for runtime USD edits and extends the tensor API to deformable bodies. Newton’s tensor API covers rigid bodies, articulations, and rigid contacts.</p>
+<p>PhysX SDK와 Newton 모두 초기화 시 USD를 임포트하고, 매 프레임 Fabric에 트랜스폼을 쓰고, 동일한 뷰 타입의 텐서 API를 제공합니다. PhysX SDK는 또한 런타임 USD 편집을 위한 Fabric/USD 변경 리스너를 지원하고 텐서 API를 변형 가능 바디로 확장합니다. Newton의 텐서 API는 리지드 바디, 아티큘레이션, 리지드 접촉을 포함합니다.</p>
 </section>
 <section id="choosing-a-pathway">
 <h3>Choosing a Pathway<a class="headerlink" href="new_physics_engine.html#choosing-a-pathway" title="Link to this heading">#</a></h3>
-<p>Choose:</p>
+<p>선택 기준:</p>
 <ul class="simple">
-<li><p><strong>USD</strong> for authoring and persistence</p></li>
-<li><p><strong>Fabric</strong> for runtime transforms (for example, for rendering)</p></li>
-<li><p><strong>Tensors</strong> for batch state read/write (RL, control, contact forces)</p></li>
+<li><p><strong>USD</strong>: 저작 및 영속</p></li>
+<li><p><strong>Fabric</strong>: 런타임 트랜스폼 (예: 렌더링용)</p></li>
+<li><p><strong>Tensors</strong>: 배치 상태 읽기/쓰기 (RL, 제어, 접촉력)</p></li>
 </ul>
-<p>For engine-agnostic code the preference is to use <strong>isaacsim.core.experimental</strong>.</p>
+<p>엔진에 독립적인 코드에는 <strong>isaacsim.core.experimental</strong> 사용을 권장합니다.</p>
 </section>
 </section>
 <section id="implementing-a-physics-engine">
 <span id="implementing-physics-engine"></span><h2>Implementing a Physics Engine<a class="headerlink" href="new_physics_engine.html#implementing-a-physics-engine" title="Link to this heading">#</a></h2>
-<p>To integrate a new physics engine with Isaac Sim, you must:</p>
+<p>Isaac Sim에 새 물리 엔진을 통합하려면:</p>
 <ul class="simple">
-<li><p>plug into the same data flow</p></li>
-<li><p>parse USD at initialization</p></li>
-<li><p>write body transforms to Fabric each frame</p></li>
-<li><p>expose a Tensor API that matches the expected view interface</p></li>
+<li><p>동일한 데이터 흐름에 연결</p></li>
+<li><p>초기화 시 USD 파싱</p></li>
+<li><p>매 프레임 Fabric에 바디 트랜스폼 쓰기</p></li>
+<li><p>예상되는 뷰 인터페이스와 일치하는 텐서 API 노출</p></li>
 </ul>
-<p>The runtime then drives your engine using the unified physics interface (<code class="docutils literal notranslate"><span class="pre">omni.physics.core</span></code>), making it available to <code class="docutils literal notranslate"><span class="pre">SimulationManager</span></code>, <code class="docutils literal notranslate"><span class="pre">isaacsim.core.experimental</span></code>, and the tensor API.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">isaacsim.physics.newton</span></code> extension is the reference implementation.</p>
+<p>그러면 런타임이 통합 물리 인터페이스(<code class="docutils literal notranslate"><span class="pre">omni.physics.core</span></code>)를 사용하여 엔진을 구동하고, <code class="docutils literal notranslate"><span class="pre">SimulationManager</span></code>, <code class="docutils literal notranslate"><span class="pre">isaacsim.core.experimental</span></code>, 텐서 API에서 사용할 수 있게 됩니다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">isaacsim.physics.newton</span></code> 익스텐션이 참조 구현입니다.</p>
 <section id="architecture-overview">
 <h3>Architecture Overview<a class="headerlink" href="new_physics_engine.html#architecture-overview" title="Link to this heading">#</a></h3>
-<p>The integration connects your engine to the three data pathways described above. Five components are involved:</p>
+<p>통합은 엔진을 위에 설명된 세 가지 데이터 경로에 연결합니다. 다섯 가지 구성 요소가 관여합니다:</p>
 <ul class="simple">
-<li><p><strong>Simulation Function adapters</strong> — How the runtime drives simulation steps that include, attach/detach a USD stage, run a step (<code class="docutils literal notranslate"><span class="pre">simulate</span></code>), fetch results, and expose step/contact callbacks and capability queries.</p></li>
-<li><p><strong>Stage Update Function adapters</strong> — How the runtime handles stage and timeline events including, play, pause, reset, load physics from USD, and release resources.</p></li>
-<li><p><strong>Registration</strong> — A <code class="docutils literal notranslate"><span class="pre">Simulation</span></code> object holds your Simulation Function and Stage Update Function adapters. You can register it with the physics interface under a name (for example <code class="docutils literal notranslate"><span class="pre">&quot;newton&quot;</span></code>) so the <code class="docutils literal notranslate"><span class="pre">SimulationManager</span></code> can activate it.</p></li>
-<li><p><strong>Fabric synchronization</strong> — For each frame, write your engine’s body transforms into Fabric so that the renderer can display the scene.</p></li>
-<li><p><strong>Tensor API</strong> — A <code class="docutils literal notranslate"><span class="pre">SimulationView</span></code> and view classes (for example, <code class="docutils literal notranslate"><span class="pre">ArticulationView</span></code>, <code class="docutils literal notranslate"><span class="pre">RigidBodyView</span></code>) that wrap your engine state and use the existing NumPy/PyTorch/Warp frontends so that your user code can read/write the state in bulk.</p></li>
+<li><p><strong>Simulation Function 어댑터</strong> — 런타임이 시뮬레이션 스텝을 구동하는 방법으로, USD 스테이지 연결/분리, 스텝 실행(<code class="docutils literal notranslate"><span class="pre">simulate</span></code>), 결과 가져오기, 스텝/접촉 콜백 및 기능 쿼리 노출을 포함합니다.</p></li>
+<li><p><strong>Stage Update Function 어댑터</strong> — 런타임이 Play, Pause, Reset, USD에서 물리 로드, 리소스 해제 등 스테이지 및 타임라인 이벤트를 처리하는 방법입니다.</p></li>
+<li><p><strong>Registration</strong> — <code class="docutils literal notranslate"><span class="pre">Simulation</span></code> 오브젝트가 Simulation Function 및 Stage Update Function 어댑터를 보유합니다. 이름(예: <code class="docutils literal notranslate"><span class="pre">"newton"</span></code>) 아래 물리 인터페이스에 등록하면 <code class="docutils literal notranslate"><span class="pre">SimulationManager</span></code>가 활성화할 수 있습니다.</p></li>
+<li><p><strong>Fabric 동기화</strong> — 매 프레임 엔진의 바디 트랜스폼을 Fabric에 써서 렌더러가 씬을 표시할 수 있게 합니다.</p></li>
+<li><p><strong>텐서 API</strong> — 엔진 상태를 래핑하고 기존 NumPy/PyTorch/Warp 프론트엔드를 사용하는 <code class="docutils literal notranslate"><span class="pre">SimulationView</span></code>와 뷰 클래스(예: <code class="docutils literal notranslate"><span class="pre">ArticulationView</span></code>, <code class="docutils literal notranslate"><span class="pre">RigidBodyView</span></code>)로, 사용자 코드가 상태를 대량으로 읽고 쓸 수 있게 합니다.</p></li>
 </ul>
 <figure class="align-center" id="id3">
-<a class="reference internal image-reference" href="../_images/isim_6.0_full_ref_external_engine_architecture.png"><img alt="../_images/isim_6.0_full_ref_external_engine_architecture.png" src="../_images/isim_6.0_full_ref_external_engine_architecture.png" style="width: 800px;" />
+<a class="reference internal image-reference" href="../_images/isim_6.0_full_ref_external_engine_architecture.png"><img alt="../_images/isim_6.0_full_ref_external_engine_architecture.png" src="../_images/isim_6.0_full_ref_external_engine_architecture.png" style="width: 800px;"/>
 </a>
 <figcaption>
-<p><span class="caption-text">Engine integration architecture.</span><a class="headerlink" href="new_physics_engine.html#id3" title="Link to this image">#</a></p>
+<p><span class="caption-text">엔진 통합 아키텍처.</span><a class="headerlink" href="new_physics_engine.html#id3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="integration-flow">
 <h3>Integration Flow<a class="headerlink" href="new_physics_engine.html#integration-flow" title="Link to this heading">#</a></h3>
-<p><strong>Startup:</strong> The extension creates the engine stage and the Simulation Function and Stage Update Function adapters, builds a <code class="docutils literal notranslate"><span class="pre">Simulation</span></code> object from them, and registers it with <code class="docutils literal notranslate"><span class="pre">get_physics_interface().register_simulation(simulation,</span> <span class="pre">&quot;your_engine_name&quot;)</span></code>. Optionally it switches the active engine to the new one using <code class="docutils literal notranslate"><span class="pre">SimulationManager</span></code>.</p>
-<p><strong>When the user hits Play:</strong> The runtime calls your Stage Update Function adapters (for example, <code class="docutils literal notranslate"><span class="pre">on_attach</span></code>, <code class="docutils literal notranslate"><span class="pre">force_load_physics_from_usd()</span></code>) to parse the USD stage and build simulation objects.</p>
+<p><strong>시작:</strong> 익스텐션이 엔진 스테이지와 Simulation Function 및 Stage Update Function 어댑터를 생성하고, 이로부터 <code class="docutils literal notranslate"><span class="pre">Simulation</span></code> 오브젝트를 빌드하여 <code class="docutils literal notranslate"><span class="pre">get_physics_interface().register_simulation(simulation,</span> <span class="pre">"your_engine_name")</span></code>으로 등록합니다. 선택적으로 <code class="docutils literal notranslate"><span class="pre">SimulationManager</span></code>를 사용하여 활성 엔진을 새 엔진으로 전환합니다.</p>
+<p><strong>사용자가 Play를 누를 때:</strong> 런타임이 Stage Update Function 어댑터(예: <code class="docutils literal notranslate"><span class="pre">on_attach</span></code>, <code class="docutils literal notranslate"><span class="pre">force_load_physics_from_usd()</span></code>)를 호출하여 USD 스테이지를 파싱하고 시뮬레이션 오브젝트를 빌드합니다.</p>
 <blockquote>
-<div><p>Each frame it calls <code class="docutils literal notranslate"><span class="pre">simulate(elapsed_time,</span> <span class="pre">current_time)</span></code> to advance the engine and then write updated transforms to Fabric so that rendering stays in sync. Any code that you have that uses <code class="docutils literal notranslate"><span class="pre">SimulationView</span></code> or <code class="docutils literal notranslate"><span class="pre">ArticulationView</span></code> talks to your tensor backend, which reads and writes your engine’s buffers.</p>
+<div><p>매 프레임 <code class="docutils literal notranslate"><span class="pre">simulate(elapsed_time,</span> <span class="pre">current_time)</span></code>를 호출하여 엔진을 진행시키고, 렌더링이 동기화되도록 업데이트된 트랜스폼을 Fabric에 씁니다. <code class="docutils literal notranslate"><span class="pre">SimulationView</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">ArticulationView</span></code>를 사용하는 코드는 텐서 백엔드와 통신하여 엔진 버퍼를 읽고 씁니다.</p>
 </div></blockquote>
-<p><strong>Shutdown:</strong> The extension unregisters the simulation and releases resources; if it had auto-switched, it switches back to the default engine.</p>
-<p>For a complete example, refer to the <code class="docutils literal notranslate"><span class="pre">isaacsim.physics.newton</span></code> extension:</p>
+<p><strong>종료:</strong> 익스텐션이 시뮬레이션을 등록 해제하고 리소스를 해제합니다. 자동 전환했다면 기본 엔진으로 다시 전환합니다.</p>
+<p>완전한 예제는 <code class="docutils literal notranslate"><span class="pre">isaacsim.physics.newton</span></code> 익스텐션을 참조하세요:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">impl.simulation_functions</span></code> and <code class="docutils literal notranslate"><span class="pre">impl.stage_update_functions</span></code> implement the two adapter interfaces</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">impl.fabric</span></code> handles Fabric writes</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">impl.tensors</span></code> implements the view classes</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">impl.register_simulation</span></code> and <code class="docutils literal notranslate"><span class="pre">impl.extension</span></code> tie registration and lifecycle together</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">impl.simulation_functions</span></code>와 <code class="docutils literal notranslate"><span class="pre">impl.stage_update_functions</span></code>가 두 어댑터 인터페이스를 구현합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">impl.fabric</span></code>이 Fabric 쓰기를 처리합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">impl.tensors</span></code>가 뷰 클래스를 구현합니다.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">impl.register_simulation</span></code>과 <code class="docutils literal notranslate"><span class="pre">impl.extension</span></code>이 등록과 라이프사이클을 연결합니다.</p></li>
 </ul>
 </section>
 <section id="engine-switching-at-runtime">
 <h3>Engine Switching at Runtime<a class="headerlink" href="new_physics_engine.html#engine-switching-at-runtime" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">SimulationManager.switch_physics_engine(name)</span></code> activates the engine registered under that name:</p>
+<p><code class="docutils literal notranslate"><span class="pre">SimulationManager.switch_physics_engine(name)</span></code>이 해당 이름으로 등록된 엔진을 활성화합니다:</p>
 <ul class="simple">
-<li><p>it deactivates the current engine (Stage Update Function adapters <code class="docutils literal notranslate"><span class="pre">on_detach</span></code>)</p></li>
-<li><p>activates the new one (<code class="docutils literal notranslate"><span class="pre">on_attach</span></code>)</p></li>
-<li><p>invalidates existing simulation views</p></li>
-<li><p>triggers a fresh load from USD on the new engine.</p></li>
+<li><p>현재 엔진을 비활성화합니다(Stage Update Function 어댑터 <code class="docutils literal notranslate"><span class="pre">on_detach</span></code>).</p></li>
+<li><p>새 엔진을 활성화합니다(<code class="docutils literal notranslate"><span class="pre">on_attach</span></code>).</p></li>
+<li><p>기존 시뮬레이션 뷰를 무효화합니다.</p></li>
+<li><p>새 엔진에서 USD로부터 새로운 로드를 트리거합니다.</p></li>
 </ul>
-<p>Only one engine is active at a time. To switch it you must change it before starting the simulation.</p>
+<p>한 번에 하나의 엔진만 활성화됩니다. 전환하려면 시뮬레이션을 시작하기 전에 변경해야 합니다.</p>
 </section>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="simulation_fundamentals.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Physics Simulation Fundamentals</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="newton_physics.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Newton Physics Backend</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="simulation_fundamentals.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Physics Simulation Fundamentals</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="newton_physics.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Newton Physics Backend</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="new_physics_engine.html#id1">Physics Data Flow</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="new_physics_engine.html#data-pathways-explained">Data Pathways Explained</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="new_physics_engine.html#per-engine-data-pathways">Per-Engine Data Pathways</a></li>
@@ -1391,46 +1004,29 @@
 </ul>
 </li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1461,36 +1057,21 @@
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>

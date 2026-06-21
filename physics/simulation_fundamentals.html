@@ -1,553 +1,258 @@
 
-
 <!DOCTYPE html>
 
-
-<html lang="en" data-content_root="../" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta content="Physics Simulation Fundamentals" name="title" />
-<meta content="lang=en A quick introduction to how Simulation works on Isaac Sim" name="keywords" />
-
-    <title>Physics Simulation Fundamentals &#8212; Isaac Sim Documentation</title>
-  
-  
-  
-  <script data-cfasync="false">
+<html data-content_root="../" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Physics Simulation Fundamentals" name="title"/>
+<meta content="lang=en A quick introduction to how Simulation works on Isaac Sim" name="keywords"/>
+<title>Physics Simulation Fundamentals — Isaac Sim Documentation</title>
+<script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
+<!--
     this give us a css class that will be invisible only if js is disabled
   -->
-  <noscript>
-    <style>
+<noscript>
+<style>
       .pst-js-only { display: none !important; }
 
     </style>
-  </noscript>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css%3Fv=8f2a1f02.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css%3Fv=767de534.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css%3Fv=76b2166b.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/image_lightbox.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/isaacsim-design.css%3Fv=54bad574.css" />
-  
-  <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" />
-
-
-
-
-
-    <script rel="preload" src="../_static/modal-table.js"></script>
-    <script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
-    <script src="../_static/doctools.js%3Fv=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
-    <script src="../_static/external-links.js"></script>
-    <script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
-    <script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
-    <script src="../_static/image_lightbox.js"></script>
-    <script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'physics/simulation_fundamentals';</script>
-    <script>
+</noscript>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css%3Fdigest=7f76b32a3354e82990f2.css" rel="stylesheet"/>
+<link href="../_static/pygments.css%3Fv=8f2a1f02.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/styles/nvidia-sphinx-theme.css%3Fv=933278ad.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/custom.css%3Fv=767de534.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/copybutton.css%3Fv=76b2166b.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/image_lightbox.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/sphinx-design.min.css%3Fv=95c83b7e.css" rel="stylesheet" type="text/css"/>
+<link href="../_static/isaacsim-design.css%3Fv=54bad574.css" rel="stylesheet" type="text/css"/>
+<!-- So that users can add custom icons -->
+<script defer="" src="../_static/scripts/fontawesome.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2" rel="preload"/>
+<script rel="preload" src="../_static/modal-table.js"></script>
+<script src="../_static/documentation_options.js%3Fv=cb01d673"></script>
+<script src="../_static/doctools.js%3Fv=9bcbadda"></script>
+<script src="../_static/sphinx_highlight.js%3Fv=dc90522c"></script>
+<script src="../_static/external-links.js"></script>
+<script src="../_static/clipboard.min.js%3Fv=a7894cd8"></script>
+<script src="../_static/copybutton.js%3Fv=65e89d2a"></script>
+<script src="../_static/image_lightbox.js"></script>
+<script src="../_static/design-tabs.js%3Fv=f930bc37"></script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'physics/simulation_fundamentals';</script>
+<script>
         DOCUMENTATION_OPTIONS.theme_version = '0.17.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = '../versions1.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = '6.0.0';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
-
-<script type="text/javascript" src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js"></script>
-
-    <link rel="icon" href="../_static/favicon.png"/>
-
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Physics Data Flow and Engine Integration" href="new_physics_engine.html" />
-    <link rel="prev" title="Physics" href="index.html" />
-
-<link rel="preload" as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png">
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
-    <meta name="docbuild:last-update" content="Jun 05, 2026"/>
-  
-    
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script src="../searchindex.js"></script>
-  
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
-    <script>
+<script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+<script src="../_static/version-patch.js%3Fv=3e13fdd2"></script>
+<script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" type="text/javascript"></script>
+<link href="../_static/favicon.png" rel="icon"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="new_physics_engine.html" rel="next" title="Physics Data Flow and Engine Integration"/>
+<link href="index.html" rel="prev" title="Physics"/>
+<link as="image" href="https://www.nvidia.com/content/dam/1x1-00000000.png" rel="preload"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<meta content="" name="docsearch:version"/>
+<meta content="Jun 05, 2026" name="docbuild:last-update"/>
+<script src="../_static/searchtools.js"></script>
+<script src="../_static/language_data.js"></script>
+<script src="../searchindex.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-896K85H299"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-896K85H299');
     </script>
-    
-
-
-  </head>
-
-  <body data-default-mode="">
-
-<img src="https://www.nvidia.com/content/dam/1x1-00000000.png" width="1" height="1" style="display:none;" alt="country_code">
-
-
-  
-  
-  <div id="pst-skip-link" class="skip-link d-print-none"><a href="simulation_fundamentals.html#main-content">Skip to main content</a></div>
-
-  
-  <div id="pst-scroll-pixel-helper"></div>
-  
-  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
-  
-  <dialog id="pst-search-dialog">
-    
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="Search the docs ..."
-         aria-label="Search the docs ..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</head>
+<body data-default-mode="">
+<img alt="country_code" height="1" src="https://www.nvidia.com/content/dam/1x1-00000000.png" style="display:none;" width="1"/>
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="simulation_fundamentals.html#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<dialog id="pst-search-dialog">
+<form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="Search the docs ..." autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" name="q" placeholder="Search the docs ..." spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>
-  </dialog>
-
-  <div class="pst-async-banner-revealer d-none">
-  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</dialog>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
 </div>
-
-  
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none" id="pst-header">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-3 navbar-header-items__start">
-    
-      <div class="navbar-item">
-
-  
-
+<button aria-label="Site navigation" class="pst-navbar-icon sidebar-toggle primary-toggle">
+<span class="fa-solid fa-bars"></span>
+</button>
+<div class="col-lg-3 navbar-header-items__start">
+<div class="navbar-item">
 <a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
 </a></div>
-    
-  </div>
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    <div class="me-auto navbar-header-items__center">
-      
-        <div class="navbar-item">
-
-
-<div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-2"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-2"
-    aria-label="Version switcher list"
-  >
-    Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-2"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-2">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
-</div></div>
-      
-    </div>
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-        <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button></div>
-      
-        <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
-</ul></div>
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
 </div>
-
-    </header>
-  
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
-        
-
-
-
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    
-    
-      
-    
-    
-    <img src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg" class="logo__image only-light" alt="Isaac Sim Documentation - Home"/>
-    <img src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg" class="logo__image only-dark pst-js-only" alt="Isaac Sim Documentation - Home"/>
-  
-  
-    <p class="title logo__title">Isaac Sim Documentation</p>
-  
-</a>
-
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-      <div class="sidebar-header-items__center">
-        
-          
-          
-            <div class="navbar-item">
-
-
+<div class="col-lg-9 navbar-header-items">
+<div class="me-auto navbar-header-items__center">
+<div class="navbar-item">
 <div class="version-switcher__container dropdown pst-js-only">
-  <button id="pst-version-switcher-button-3"
-    type="button"
-    class="version-switcher__button btn btn-sm dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-haspopup="listbox"
-    aria-controls="pst-version-switcher-list-3"
-    aria-label="Version switcher list"
-  >
+<button aria-controls="pst-version-switcher-list-2" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-2" type="button">
     Choose version  <!-- this text may get changed later by javascript -->
-    <span class="caret"></span>
-  </button>
-  <div id="pst-version-switcher-list-3"
-    class="version-switcher__menu dropdown-menu list-group-flush py-0"
-    role="listbox" aria-labelledby="pst-version-switcher-button-3">
-    <!-- dropdown will be populated by javascript on page load -->
-  </div>
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-2" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
 </div></div>
-          
-        
-      </div>
-    
-    
-    
-      <div class="sidebar-header-items__end">
-        
-          <div class="navbar-item">
-
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</div>
+<div class="navbar-header-items__end">
+<div class="navbar-item navbar-persistent--container">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
 </button></div>
-        
-          <div class="navbar-item"><ul class="navbar-icon-links"
-    aria-label="Icon Links">
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="http://discord.gg/nvidiaomniverse" title="discord" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-discord fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">discord</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://github.com/isaac-sim" title="github" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">github</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://twitter.com/nvidiaomniverse" title="twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitter</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" title="youtube" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-youtube fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">youtube</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.instagram.com/nvidiarobotics" title="instagram" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">instagram</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://developer.nvidia.com/isaac/sim" title="www" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-solid fa-globe fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">www</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.linkedin.com/showcase/nvidiarobotics" title="linkedin" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">linkedin</span></a>
-        </li>
-        <li class="nav-item">
-          
-          
-          
-          
-          
-          
-          
-          
-          <a href="https://www.twitch.tv/nvidiaomniverse" title="twitch" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-twitch fa-lg" aria-hidden="true"></i>
-            <span class="sr-only">twitch</span></a>
-        </li>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
 </ul></div>
-        
-      </div>
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-
-
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Table of Contents">
-  <p class="bd-links__title" role="heading" aria-level="1">Table of Contents</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
+</div>
+</div>
+<div class="navbar-persistent--mobile">
+<button aria-label="Search" class="btn search-button-field search-button__button pst-js-only" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<span class="search-button__default-text">Search</span>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+</div>
+<button aria-label="On this page" class="pst-navbar-icon sidebar-toggle secondary-toggle">
+<span class="fa-solid fa-outdent"></span>
+</button>
+</div>
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<dialog id="pst-primary-sidebar-modal"></dialog>
+<div class="bd-sidebar-primary bd-sidebar" id="pst-primary-sidebar">
+<a class="navbar-brand logo" href="../index.html">
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-blk-for-screen.svg"/>
+<img alt="Isaac Sim Documentation - Home" class="logo__image only-dark pst-js-only" src="../_static/nvidia-logo-horiz-rgb-wht-for-screen.svg"/>
+<p class="title logo__title">Isaac Sim Documentation</p>
+</a>
+<div class="sidebar-header-items sidebar-primary__section">
+<div class="sidebar-header-items__center">
+<div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+<button aria-controls="pst-version-switcher-list-3" aria-haspopup="listbox" aria-label="Version switcher list" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" id="pst-version-switcher-button-3" type="button">
+    Choose version  <!-- this text may get changed later by javascript -->
+<span class="caret"></span>
+</button>
+<div aria-labelledby="pst-version-switcher-button-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" id="pst-version-switcher-list-3" role="listbox">
+<!-- dropdown will be populated by javascript on page load -->
+</div>
+</div></div>
+</div>
+<div class="sidebar-header-items__end">
+<div class="navbar-item">
+<button aria-label="Color mode" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" data-bs-placement="bottom" data-bs-title="Color mode" data-bs-toggle="tooltip">
+<i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light" title="Light"></i>
+<i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark" title="Dark"></i>
+<i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i>
+</button></div>
+<div class="navbar-item"><ul aria-label="Icon Links" class="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="http://discord.gg/nvidiaomniverse" rel="noopener" target="_blank" title="discord"><i aria-hidden="true" class="fa-brands fa-discord fa-lg"></i>
+<span class="sr-only">discord</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://github.com/isaac-sim" rel="noopener" target="_blank" title="github"><i aria-hidden="true" class="fa-brands fa-github fa-lg"></i>
+<span class="sr-only">github</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://twitter.com/nvidiaomniverse" rel="noopener" target="_blank" title="twitter"><i aria-hidden="true" class="fa-brands fa-twitter fa-lg"></i>
+<span class="sr-only">twitter</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.youtube.com/channel/UCSKUoczbGAcMld7HjpCR8OA" rel="noopener" target="_blank" title="youtube"><i aria-hidden="true" class="fa-brands fa-youtube fa-lg"></i>
+<span class="sr-only">youtube</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.instagram.com/nvidiarobotics" rel="noopener" target="_blank" title="instagram"><i aria-hidden="true" class="fa-brands fa-instagram fa-lg"></i>
+<span class="sr-only">instagram</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://developer.nvidia.com/isaac/sim" rel="noopener" target="_blank" title="www"><i aria-hidden="true" class="fa-solid fa-globe fa-lg"></i>
+<span class="sr-only">www</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.linkedin.com/showcase/nvidiarobotics" rel="noopener" target="_blank" title="linkedin"><i aria-hidden="true" class="fa-brands fa-linkedin fa-lg"></i>
+<span class="sr-only">linkedin</span></a>
+</li>
+<li class="nav-item">
+<a class="nav-link pst-navbar-icon" data-bs-placement="bottom" data-bs-toggle="tooltip" href="https://www.twitch.tv/nvidiaomniverse" rel="noopener" target="_blank" title="twitch"><i aria-hidden="true" class="fa-brands fa-twitch fa-lg"></i>
+<span class="sr-only">twitch</span></a>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<nav aria-label="Table of Contents" class="bd-docs-nav bd-links">
+<p aria-level="1" class="bd-links__title" role="heading">Table of Contents</p>
+<div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Isaac Sim</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">What Is Isaac Sim?</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overview/release_notes.html">Release Notes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -567,7 +272,6 @@
 </details></li>
 <li class="toctree-l3 has-children"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/index.html">Isaac Sim 4.5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l4"><a class="reference internal" href="../migration_guides/isaac_sim_4_5/extensions_renaming.html">Renaming Extensions in Isaac Sim 4.5</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -595,20 +299,8 @@
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/manual_livestream_clients.html">Livestream Clients</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_python.html">Python Environment Installation</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_faq.html">Setup Tips</a></li>
 </ul>
 </details></li>
@@ -683,17 +375,7 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ros2_tutorials/ros2_landing_page.html">ROS 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros.html">ROS 2 Installation (Default)</a></li>
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../installation/install_ros_other_platforms.html">ROS 2 Installation (Other Platforms)</a></li>
-
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ros2_tutorials/index.html">ROS 2 Tutorials (Linux and Windows)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_turtlebot.html">URDF Import: Turtlebot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ros2_tutorials/tutorial_ros2_drive_turtlebot.html">Driving TurtleBot using ROS 2 Messages</a></li>
@@ -871,7 +553,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../gui/menu_replicator.html">Replicator Menu</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/preferences.html">Preferences</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gui/selection-modes.html">Selection Modes</a></li>
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../omnigraph/index.html">OmniGraph</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -911,13 +592,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard.html">Robot Wizard [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_wizard_tutorials.html">Robot Wizard Tutorial [Deprecated]</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_inspector.html">Robot Inspector Window</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/robot_poser.html">Robot Poser</a></li>
-
-
-
-
 <li class="toctree-l2 has-children"><a class="reference internal" href="../robot_setup/editing_tools.html">Editor Tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_util_merge_mesh.html">Mesh merge tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../robot_setup/ext_isaacsim_robot_setup_gain_tuner.html">Gain Tuner Extension</a></li>
@@ -964,10 +639,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_transformer_tutorials.html">Asset Transformer Tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/troubleshooting.html">Robot Setup Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_setup/asset_validation.html">Asset Validation</a></li>
-
-
-
-
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../robot_simulation/index.html">Robot Simulation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -1136,18 +807,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/usd_tools.html">USD Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/building_cpp_usd_plugins.html">Building C++ USD Plugins Against the Standalone Installer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/robot_schema.html">Robot Schema</a></li>
-
-
-
-
-
-
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/sensor_schema.html">Sensor Schema</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../omniverse_usd/omniverse_tools.html">Commands</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -1173,78 +834,52 @@
 </ul>
 </div>
 </nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main" role="main">
-        
-        
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article d-print-none">
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item">
-
+<div class="header-article-items__start">
+<div class="header-article-item">
 <nav aria-label="Breadcrumb" class="d-print-none">
-  <ul class="bd-breadcrumbs">
-    
-    <li class="breadcrumb-item breadcrumb-home">
-      <a href="../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
-      </a>
-    </li>
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Physics</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Physics Simulation Fundamentals</span></li>
-  </ul>
+<ul class="bd-breadcrumbs">
+<li class="breadcrumb-item breadcrumb-home">
+<a aria-label="Home" class="nav-link" href="../index.html">
+<i class="fa-solid fa-home"></i>
+</a>
+</li>
+<li class="breadcrumb-item"><a class="nav-link" href="index.html">Physics</a></li>
+<li aria-current="page" class="breadcrumb-item active"><span class="ellipsis">Physics Simulation Fundamentals</span></li>
+</ul>
 </nav>
 </div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
+</div>
+<div class="header-article-items__end">
 <div class="header-article-item">
-  <div class="d-flex justify-content-end w-100">
-    <a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
-  </div>
+<div class="header-article-item">
+<div class="d-flex justify-content-end w-100">
+<a href="https://surveys.hotjar.com/4904bf71-6484-47a7-83ff-4715cceabdb5" id="openPopupButton">Is this page helpful?</a>
+</div>
 </div></div>
-      
-    </div>
-  
 </div>
 </div>
-              
-              
-              
-                
+</div>
 <div id="searchbox"></div>
-                <article class="bd-article">
-                  
-  <section id="physics-simulation-fundamentals">
+<article class="bd-article">
+<section id="physics-simulation-fundamentals">
 <span id="simulation-fundamentals"></span><h1>Physics Simulation Fundamentals<a class="headerlink" href="simulation_fundamentals.html#physics-simulation-fundamentals" title="Link to this heading">#</a></h1>
 <section id="physics-in-usd-schemas">
 <span id="physics-schemas"></span><h2>Physics in USD Schemas<a class="headerlink" href="simulation_fundamentals.html#physics-in-usd-schemas" title="Link to this heading">#</a></h2>
-<p>The physics properties of assets are all well-defined using <a class="reference external" href="https://openusd.org/release/api/usd_physics_page_front.html">USD Physics Schemas</a> and <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_usd_schema_physics/latest/annotated.html">Physx Schemas</a> . The documentation of Physics properties and how to access them in code is defined in C++, but you can follow <a class="reference external" href="https://developer.nvidia.com/usd/apinotes">these guidelines</a> to find the equivalent calls in Python. For example, where generic names are used to represent an arbitrary API, the general usage is:</p>
+<p>에셋의 물리 속성은 <a class="reference external" href="https://openusd.org/release/api/usd_physics_page_front.html">USD Physics Schemas</a>와 <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_usd_schema_physics/latest/annotated.html">Physx Schemas</a>를 사용하여 잘 정의되어 있습니다. 물리 속성의 문서와 코드에서 접근하는 방법은 C++로 정의되어 있지만, <a class="reference external" href="https://developer.nvidia.com/usd/apinotes">이 가이드라인</a>을 따라 Python에서 동등한 호출을 찾을 수 있습니다.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">omni.usd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pxr</span><span class="w"> </span><span class="kn">import</span> <span class="n">PhysxSchema</span><span class="p">,</span> <span class="n">Usd</span><span class="p">,</span> <span class="n">UsdGeom</span><span class="p">,</span> <span class="n">UsdPhysics</span>
 
 <span class="n">stage</span> <span class="o">=</span> <span class="n">omni</span><span class="o">.</span><span class="n">usd</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">get_stage</span><span class="p">()</span>
-<span class="n">prim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="s2">&quot;/Path/To/Prim&quot;</span><span class="p">)</span>
+<span class="n">prim</span> <span class="o">=</span> <span class="n">stage</span><span class="o">.</span><span class="n">GetPrimAtPath</span><span class="p">(</span><span class="s2">"/Path/To/Prim"</span><span class="p">)</span>
 <span class="n">physics_api_prim</span> <span class="o">=</span> <span class="n">UsdPhysics</span><span class="o">.</span><span class="n">SomePhysicsAPI</span><span class="p">(</span><span class="n">prim</span><span class="p">)</span>
 <span class="n">physx_api_prim</span> <span class="o">=</span> <span class="n">PhysxSchema</span><span class="o">.</span><span class="n">AnotherPhysxAPI</span><span class="p">(</span><span class="n">prim</span><span class="p">)</span>
 
@@ -1262,64 +897,64 @@
 <span class="n">physics_attr</span><span class="o">.</span><span class="n">Set</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>In some cases, you may need to have additional parameters when casting the Prim to a given API, for example, <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_usd_schema_physics/latest/class_physx_schema_joint_state_a_p_i.html#afff2009176797852a1389d7244caa875">Joint State</a> does require the joint type (“Prismatic”, or “Angular”, for instance). In these cases the C++ signature will contain a “TfToken” type. Replace it with a basic string and it should work in Python.</p>
-<p>If you need to know the attribute name of some physics attribute you see on the UI, Hover over the attribute in the properties panel, and it will show its name in the tooltip. The attribute name standard is <code class="docutils literal notranslate"><span class="pre">schema_name:attribute_name</span></code>, so for example something like <code class="docutils literal notranslate"><span class="pre">physics:velocity</span></code> on a rigid body means it’s using the Physics Rigid Body API and the attribute name is <code class="docutils literal notranslate"><span class="pre">velocity</span></code>, so the corresponding attribute getter would be <code class="docutils literal notranslate"><span class="pre">UsdPhysics.RigidBodyAPI(prim).GetVelocityAttr()</span></code>.</p>
+<p>일부 경우에는 Prim을 특정 API로 캐스팅할 때 추가 파라미터가 필요합니다. 예를 들어 <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_usd_schema_physics/latest/class_physx_schema_joint_state_a_p_i.html#afff2009176797852a1389d7244caa875">Joint State</a>는 조인트 유형("Prismatic" 또는 "Angular" 등)을 요구합니다. 이 경우 C++ 시그니처에 "TfToken" 유형이 포함됩니다. 기본 문자열로 대체하면 Python에서 작동합니다.</p>
+<p>UI에서 보이는 물리 속성의 속성 이름을 알아야 하는 경우, 속성 패널에서 속성 위에 마우스를 올리면 툴팁에 이름이 표시됩니다. 속성 이름 표준은 <code class="docutils literal notranslate"><span class="pre">schema_name:attribute_name</span></code>입니다. 예를 들어 리지드 바디의 <code class="docutils literal notranslate"><span class="pre">physics:velocity</span></code>는 Physics Rigid Body API를 사용하고 속성 이름이 <code class="docutils literal notranslate"><span class="pre">velocity</span></code>임을 의미하므로, 해당 속성 게터는 <code class="docutils literal notranslate"><span class="pre">UsdPhysics.RigidBodyAPI(prim).GetVelocityAttr()</span></code>입니다.</p>
 </section>
 <section id="simulation-timeline">
 <h2>Simulation Timeline<a class="headerlink" href="simulation_fundamentals.html#simulation-timeline" title="Link to this heading">#</a></h2>
-<p>Simulation time <strong>differs</strong> from real-time. Depending on system configuration and the size of the simulated environment, each time step may be computed faster or slower than the time it’s simulating, resulting in a warped speed if results are presented sequentially (often, physics simulation in Isaac Sim is faster than real-time). To mitigate this, Isaac Sim is configured by default with a limiter to match real-time speed.</p>
-<p>Moreover, the simulation may run at a faster pace than rendering, meaning there may be more than one simulation time-step occurring in the background for every rendered frame. In the simplified example below, the simulation is set to run at 120 time steps per second, while rendering is set to 60 frames per second, resulting in two physics steps per rendered frame:</p>
-<a class="reference internal image-reference" href="../_images/isaac_sim_timeline.png"><img alt="../_images/isaac_sim_timeline.png" src="../_images/isaac_sim_timeline.png" style="width: 1200px;" />
+<p>시뮬레이션 시간은 실제 시간과 <strong>다릅니다</strong>. 시스템 구성과 시뮬레이션 환경의 크기에 따라 각 시간 스텝이 시뮬레이션하는 시간보다 빠르거나 느리게 계산되어, 결과를 순차적으로 표시하면 왜곡된 속도가 발생할 수 있습니다(Isaac Sim의 물리 시뮬레이션은 종종 실시간보다 빠릅니다). 이를 완화하기 위해 Isaac Sim은 기본적으로 실시간 속도와 일치하는 제한기가 구성되어 있습니다.</p>
+<p>또한 시뮬레이션은 렌더링보다 빠른 속도로 실행될 수 있어, 렌더링되는 각 프레임에 대해 백그라운드에서 두 개 이상의 시뮬레이션 타임 스텝이 발생할 수 있습니다. 아래 간단한 예에서 시뮬레이션은 초당 120 타임 스텝으로 실행되고 렌더링은 초당 60 프레임으로 설정되어 렌더링된 프레임당 두 번의 물리 스텝이 발생합니다:</p>
+<a class="reference internal image-reference" href="../_images/isaac_sim_timeline.png"><img alt="../_images/isaac_sim_timeline.png" src="../_images/isaac_sim_timeline.png" style="width: 1200px;"/>
 </a>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The physics step time doesn’t necessarily coincide with system time (from the simulation start). In cases where the simulation can run faster than real-time, it’s possible to run an accelerated version of the simulation in a timeline without rendering or frame-rate blocking.</p>
+<p>물리 스텝 시간이 반드시 시스템 시간(시뮬레이션 시작부터)과 일치하는 것은 아닙니다. 시뮬레이션이 실시간보다 빠르게 실행될 수 있는 경우, 렌더링이나 프레임 레이트 차단 없이 타임라인에서 가속된 버전의 시뮬레이션을 실행할 수 있습니다.</p>
 </div>
-<p>Ideally, simulation and rendering would match or be multiples of each other, but when this isn’t the case, each rendered frame may contain an uneven number of simulation timesteps. For example, simulation set to 100 steps per second, rendering set to 30 frames per second, resulting in most render updates having 3 simulation steps but occasionally 4 in a frame.</p>
-<p>There are three event streams on the timeline (among a few others, but these are notably the most relevant for Isaac Sim). You can subscribe directly to Simulation Events or to Frame update events, either pre or post-rendering. OmniGraph nodes are typically updated on a pre-render event, but there are ways to set them to update on different events, such as every physics step.</p>
+<p>이상적으로 시뮬레이션과 렌더링은 서로 일치하거나 배수 관계여야 하지만, 그렇지 않은 경우 각 렌더링 프레임에 불균등한 수의 시뮬레이션 타임스텝이 포함될 수 있습니다. 예를 들어 초당 100 스텝의 시뮬레이션, 초당 30 프레임의 렌더링에서 대부분의 렌더링 업데이트에는 3번의 시뮬레이션 스텝이 있지만 가끔 프레임에 4번이 포함됩니다.</p>
+<p>타임라인에는 세 가지 이벤트 스트림이 있습니다(다른 것도 있지만 Isaac Sim에서 특히 관련성 높은 것들입니다). 시뮬레이션 이벤트 또는 프레임 업데이트 이벤트(렌더링 전 또는 후)에 직접 구독할 수 있습니다. OmniGraph 노드는 일반적으로 사전 렌더링 이벤트에서 업데이트되지만 매 물리 스텝 등 다른 이벤트에서 업데이트되도록 설정하는 방법도 있습니다.</p>
 <section id="configuring-frame-rate">
 <span id="simulation-fundamentals-configuring-frame-rate"></span><h3>Configuring Frame Rate<a class="headerlink" href="simulation_fundamentals.html#configuring-frame-rate" title="Link to this heading">#</a></h3>
-<p>The stage’s <strong>Timecodes per second</strong> can be configured by adjusting the current stage metadata. In the <strong>Layer</strong> tab, select the <strong>Root Layer</strong>, and in the properties panel modify the <strong>Timecodes per second</strong> property. Under the GUI default <code class="docutils literal notranslate"><span class="pre">/app/player/useFixedTimeStepping=true</span></code>, the timeline uses <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">TimeCodesPerSecond</span></code> as its per-tick <code class="docutils literal notranslate"><span class="pre">dt</span></code>, so this value sets the simulation’s wall-clock playback rate as well as the recorded animation rate. The physics step rate is configured separately on the Physics Scene (see <strong>Configuring Simulation Timesteps</strong> below); for the relationship between the three rates, see <a class="reference internal" href="../sensors/isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-clock-relationships"><span class="std std-ref">Architecture: Timeline, Physics, and the Renderer</span></a>.</p>
-<a class="reference internal image-reference" href="../_images/isaac_sim_frame_rate.png"><img alt="../_images/isaac_sim_frame_rate.png" src="../_images/isaac_sim_frame_rate.png" style="width: 400px;" />
+<p>스테이지의 <strong>Timecodes per second</strong>는 현재 스테이지 메타데이터를 조정하여 구성할 수 있습니다. <strong>Layer</strong> 탭에서 <strong>Root Layer</strong>를 선택하고 속성 패널에서 <strong>Timecodes per second</strong> 속성을 수정하세요. GUI 기본값 <code class="docutils literal notranslate"><span class="pre">/app/player/useFixedTimeStepping=true</span></code>에서 타임라인은 <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">TimeCodesPerSecond</span></code>를 틱당 <code class="docutils literal notranslate"><span class="pre">dt</span></code>로 사용하므로, 이 값은 시뮬레이션의 벽시계 재생 속도와 기록된 애니메이션 속도를 모두 설정합니다. 물리 스텝 속도는 Physics Scene에서 별도로 구성됩니다. 세 가지 속도 간의 관계는 <a class="reference internal" href="../sensors/isaacsim_sensors_multitick_rendering.html#isaac-sim-sensors-multitick-clock-relationships"><span class="std std-ref">Architecture: Timeline, Physics, and the Renderer</span></a>를 참조하세요.</p>
+<a class="reference internal image-reference" href="../_images/isaac_sim_frame_rate.png"><img alt="../_images/isaac_sim_frame_rate.png" src="../_images/isaac_sim_frame_rate.png" style="width: 400px;"/>
 </a>
 </section>
 <section id="configuring-simulation-timesteps">
 <h3>Configuring Simulation Timesteps<a class="headerlink" href="simulation_fundamentals.html#configuring-simulation-timesteps" title="Link to this heading">#</a></h3>
-<p>Simulation steps per second are determined in the Physics Scene. If there’s no Physics scene in your stage, it uses the default value, which is 60 steps per second.</p>
-<p>To add a Simulation Scene element:</p>
+<p>시뮬레이션 초당 스텝 수는 Physics Scene에서 결정됩니다. 스테이지에 Physics Scene이 없으면 기본값인 초당 60 스텝을 사용합니다.</p>
+<p>Simulation Scene 요소를 추가하려면:</p>
 <ol class="arabic simple">
-<li><p>Click on <strong>Create</strong> &gt; <strong>Physics</strong> &gt; <strong>Simulation Scene</strong>.</p></li>
-<li><p>Select the Simulation scene.</p></li>
-<li><p>In the Properties panel check the element <strong>Simulation Steps per Second</strong>.</p></li>
+<li><p><strong>Create</strong> &gt; <strong>Physics</strong> &gt; <strong>Simulation Scene</strong>을 클릭합니다.</p></li>
+<li><p>Simulation scene을 선택합니다.</p></li>
+<li><p>속성 패널에서 <strong>Simulation Steps per Second</strong> 요소를 확인합니다.</p></li>
 </ol>
-<a class="reference internal image-reference" href="../_images/isaac_sim_steps_per_second.png"><img alt="../_images/isaac_sim_steps_per_second.png" src="../_images/isaac_sim_steps_per_second.png" style="width: 400px;" />
+<a class="reference internal image-reference" href="../_images/isaac_sim_steps_per_second.png"><img alt="../_images/isaac_sim_steps_per_second.png" src="../_images/isaac_sim_steps_per_second.png" style="width: 400px;"/>
 </a>
-<p>For more details on other parameters in the Physics Scene, refer to <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/index.html" title="(in Omni Physics)"><span>Omniverse Physics Developer Guide</span></a>.</p>
+<p>Physics Scene의 다른 파라미터에 대한 자세한 내용은 <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/index.html" title="(in Omni Physics)"><span>Omniverse Physics Developer Guide</span></a>를 참조하세요.</p>
 </section>
 </section>
 <section id="simulation-components">
 <h2>Simulation Components<a class="headerlink" href="simulation_fundamentals.html#simulation-components" title="Link to this heading">#</a></h2>
-<p>Prims in a USD stage do not have physics enabled by default, but you may add simulation properties through the UI or using Python scripts. The following creates an example scene to which elements are added as we progress through the basic physics object types.</p>
-<p>To begin, create a new scene and add a ground plane to it: <strong>File</strong> &gt; <strong>New</strong>, then <strong>Create</strong> &gt; <strong>Physics</strong> &gt; <strong>Ground Plane</strong>.</p>
+<p>USD 스테이지의 Prim은 기본적으로 물리가 활성화되어 있지 않지만 UI 또는 Python 스크립트를 통해 시뮬레이션 속성을 추가할 수 있습니다. 다음은 기본 물리 오브젝트 유형을 진행하면서 요소를 추가하는 예제 씬을 생성합니다.</p>
+<p>시작하려면 새 씬을 만들고 지면 평면을 추가하세요: <strong>File</strong> &gt; <strong>New</strong>, 그런 다음 <strong>Create</strong> &gt; <strong>Physics</strong> &gt; <strong>Ground Plane</strong>.</p>
 <section id="rigid-body">
 <h3>Rigid Body<a class="headerlink" href="simulation_fundamentals.html#rigid-body" title="Link to this heading">#</a></h3>
-<p>This is the most basic element. Adding rigid body dynamics enables an element to be subject to gravitational acceleration and other external forces.</p>
-<p>1, Add a container to use as our Rigid Body: <strong>Create</strong> &gt; <strong>Xform</strong>.
-2. Move it up to <code class="code docutils literal notranslate"><span class="pre">Z=10</span></code> in the properties panel.
-3. To make it a rigid body, right-click on it in the stage, then <strong>Add</strong> &gt; <strong>Physics</strong> &gt; <strong>Rigid Body</strong>.</p>
-<a class="reference internal image-reference" href="../_images/isaac_sim_rigid_body.png"><img alt="../_images/isaac_sim_rigid_body.png" src="../_images/isaac_sim_rigid_body.png" style="width: 400px;" />
+<p>이것은 가장 기본적인 요소입니다. 리지드 바디 역학을 추가하면 요소가 중력 가속도와 다른 외력의 영향을 받을 수 있게 됩니다.</p>
+<p>1. 리지드 바디로 사용할 컨테이너 추가: <strong>Create</strong> &gt; <strong>Xform</strong>.
+2. 속성 패널에서 <code class="code docutils literal notranslate"><span class="pre">Z=10</span></code>으로 이동합니다.
+3. 리지드 바디로 만들려면 스테이지에서 우클릭한 다음 <strong>Add</strong> &gt; <strong>Physics</strong> &gt; <strong>Rigid Body</strong>.</p>
+<a class="reference internal image-reference" href="../_images/isaac_sim_rigid_body.png"><img alt="../_images/isaac_sim_rigid_body.png" src="../_images/isaac_sim_rigid_body.png" style="width: 400px;"/>
 </a>
-<p>Verify that the Xform is now be a rigid body, although you may not see much because it has no visual meshes.</p>
-<p>You can fix that by nesting a Cube in it:</p>
+<p>Xform이 이제 리지드 바디임을 확인합니다. 시각적 메시가 없어 보이지 않을 수 있습니다.</p>
+<p>Cube를 안에 중첩하여 해결할 수 있습니다:</p>
 <ol class="arabic simple">
-<li><p><strong>Create</strong> &gt; <strong>Mesh</strong> &gt; <strong>Cube</strong>, and drag it into the Xform.</p></li>
-<li><p>Ensure the cube’s Translate is set to [0,0,0.5].</p></li>
+<li><p><strong>Create</strong> &gt; <strong>Mesh</strong> &gt; <strong>Cube</strong>를 선택하고 Xform에 드래그합니다.</p></li>
+<li><p>큐브의 Translate가 [0,0,0.5]로 설정되어 있는지 확인합니다.</p></li>
 </ol>
-<a class="reference internal image-reference" href="../_images/isaac_sim_cube.png"><img alt="../_images/isaac_sim_cube.png" src="../_images/isaac_sim_cube.png" style="width: 600px;" />
+<a class="reference internal image-reference" href="../_images/isaac_sim_cube.png"><img alt="../_images/isaac_sim_cube.png" src="../_images/isaac_sim_cube.png" style="width: 600px;"/>
 </a>
-<p>After you’ve completed the same setup as the screenshot above, hit play and see what happens:</p>
+<p>위 스크린샷과 동일한 설정을 완료한 후 Play를 눌러 결과를 확인합니다:</p>
 <div id="kaltura_player_288773707" style="width: 560px;height: 395px"></div>
-<script type="text/javascript" src="https://cdnapisec.kaltura.com/p/2935771/embedPlaykitJs/uiconf_id/53712482"></script>
+<script src="https://cdnapisec.kaltura.com/p/2935771/embedPlaykitJs/uiconf_id/53712482" type="text/javascript"></script>
 <script type="text/javascript">
 try {
   var kalturaPlayer = KalturaPlayer.setup({
@@ -1333,34 +968,33 @@ try {
 } catch (e) {
   console.error(e.message)
 }
-</script><p>Review the following:</p>
+</script><p>다음을 검토합니다:</p>
 <ul class="simple">
-<li><p>Notice how the Z position gets updated as the object falls - this is because we are highlighting the rigid body directly. Try again selecting the cube, and you’ll notice that it doesn’t change.</p></li>
-<li><p>The cube falls straight through the ground. We need to let the simulation know it needs to collide with other objects.</p></li>
+<li><p>오브젝트가 떨어지면서 Z 위치가 업데이트되는 것을 확인합니다. 리지드 바디를 직접 강조 표시하고 있기 때문입니다. 큐브를 다시 선택하면 변경되지 않는 것을 확인할 수 있습니다.</p></li>
+<li><p>큐브가 지면을 바로 통과합니다. 다른 오브젝트와 충돌해야 한다는 것을 시뮬레이션에 알려야 합니다.</p></li>
 </ul>
 </section>
 <section id="colliders">
 <h3>Colliders<a class="headerlink" href="simulation_fundamentals.html#colliders" title="Link to this heading">#</a></h3>
-<p>To make our rigid body collide, you must indicate to the simulation that you want it to. For that, there’s the Collider API.</p>
+<p>리지드 바디가 충돌하도록 하려면 시뮬레이션에 이를 원한다는 것을 표시해야 합니다. 이를 위해 Collider API가 있습니다.</p>
 <ol class="arabic simple">
-<li><p>Select the Cube prim, and click on the <strong>Add Button</strong> &gt; <strong>Physics</strong> &gt; <strong>Collider</strong>.</p></li>
-<li><p>Run the simulation again and verify that the rigid body stops at the ground.</p></li>
+<li><p>Cube prim을 선택하고 <strong>Add Button</strong> &gt; <strong>Physics</strong> &gt; <strong>Collider</strong>를 클릭합니다.</p></li>
+<li><p>시뮬레이션을 다시 실행하여 리지드 바디가 지면에서 멈추는지 확인합니다.</p></li>
 </ol>
-<p>Colliders can also be added to non-movable objects. Let’s experiment:</p>
+<p>콜라이더는 움직이지 않는 오브젝트에도 추가할 수 있습니다. 실험해 봅시다:</p>
 <ol class="arabic simple">
-<li><p>Create a new cube and place it at Z=3.0.</p></li>
-<li><p>Then change its scale to [2,2,0.01] to create a 2x2 meter platform.</p></li>
-<li><p>Add the collider to it just like before, without adding the Rigid body.</p></li>
+<li><p>새 큐브를 만들어 Z=3.0에 배치합니다.</p></li>
+<li><p>스케일을 [2,2,0.01]로 변경하여 2x2미터 플랫폼을 만듭니다.</p></li>
+<li><p>리지드 바디 추가 없이 이전처럼 콜라이더를 추가합니다.</p></li>
 </ol>
-<a class="reference internal image-reference" href="../_images/isim_4.0_base_ref_gui_platform.png"><img alt="../_images/isim_4.0_base_ref_gui_platform.png" src="../_images/isim_4.0_base_ref_gui_platform.png" style="width: 600px;" />
+<a class="reference internal image-reference" href="../_images/isim_4.0_base_ref_gui_platform.png"><img alt="../_images/isim_4.0_base_ref_gui_platform.png" src="../_images/isim_4.0_base_ref_gui_platform.png" style="width: 600px;"/>
 </a>
-<p>Play the simulation again, and verify that this is the result:</p>
-<a class="reference internal image-reference" href="../_images/isim_4.0_base_ref_gui_platform_stop.png"><img alt="../_images/isim_4.0_base_ref_gui_platform_stop.png" src="../_images/isim_4.0_base_ref_gui_platform_stop.png" style="width: 600px;" />
+<p>시뮬레이션을 다시 실행하여 결과를 확인합니다:</p>
+<a class="reference internal image-reference" href="../_images/isim_4.0_base_ref_gui_platform_stop.png"><img alt="../_images/isim_4.0_base_ref_gui_platform_stop.png" src="../_images/isim_4.0_base_ref_gui_platform_stop.png" style="width: 600px;"/>
 </a>
-<p>Raise the Xform position to <code class="code docutils literal notranslate"><span class="pre">Z=80</span></code>.
-Play the simulation again.</p>
+<p>Xform 위치를 <code class="code docutils literal notranslate"><span class="pre">Z=80</span></code>으로 올립니다. 시뮬레이션을 다시 실행합니다.</p>
 <div id="kaltura_player_115311347" style="width: 560px;height: 395px"></div>
-<script type="text/javascript" src="https://cdnapisec.kaltura.com/p/2935771/embedPlaykitJs/uiconf_id/53712482"></script>
+<script src="https://cdnapisec.kaltura.com/p/2935771/embedPlaykitJs/uiconf_id/53712482" type="text/javascript"></script>
 <script type="text/javascript">
 try {
   var kalturaPlayer = KalturaPlayer.setup({
@@ -1374,43 +1008,42 @@ try {
 } catch (e) {
   console.error(e.message)
 }
-</script><p>With this example, you are solving some of the common issues of physics simulation. Because time is discretized, if objects move too fast,  during one time-step the object is above the platform, and in the next it has completely passed through it, with no collision captured.
-This doesn’t occur with the ground plane because it implements a “force field” that pushes penetrated objects towards the ground surface.</p>
-<p>To remedy this, enable an option in the physics scene called <strong>Enable CCD</strong> (Continuous Collision Detection). CCD sweeps the object from one pose to the next. This option must also be enabled in the rigid body itself:</p>
+</script><p>이 예제로 물리 시뮬레이션의 일반적인 문제를 해결하고 있습니다. 시간이 이산화되어 있기 때문에 오브젝트가 너무 빠르게 움직이면 한 타임스텝에서는 플랫폼 위에 있고 다음에는 완전히 통과하여 충돌이 감지되지 않습니다. 지면 평면에서는 이런 문제가 발생하지 않는데, 관통된 오브젝트를 지면 표면 방향으로 밀어내는 "포스 필드"를 구현하기 때문입니다.</p>
+<p>이를 해결하기 위해 물리 씬에서 <strong>Enable CCD</strong>(Continuous Collision Detection)라는 옵션을 활성화하세요. CCD는 한 포즈에서 다음 포즈로 오브젝트를 스윕합니다. 이 옵션은 리지드 바디 자체에서도 활성화해야 합니다:</p>
 <ol class="arabic simple">
-<li><p>Select the Xform.</p></li>
-<li><p>In the properties panel, enable CCD under the rigid body properties.</p></li>
+<li><p>Xform을 선택합니다.</p></li>
+<li><p>속성 패널에서 리지드 바디 속성 아래 CCD를 활성화합니다.</p></li>
 </ol>
-<p>There are other ways to solve this issue, but for this scenario, this is the most effective.</p>
-<p>Remember that collision has nothing to do with what you see on screen. For instance, you could hide the cube and the collider would behave the same, or you could add another cube or a sphere under Xform and it would have no effect unless you apply the Collision API to it.</p>
-<p>Many object colliders are made using a composition of multiple mesh elements, giving it its shape and behavior. They work as a single rigid body even if they are physically separated on the stage, as long as they are all children of a rigid body.</p>
-<p>Try adding and removing colliders to this rigid body or adding more rigid bodies to this scene and see how they behave.</p>
+<p>이 문제를 해결하는 다른 방법도 있지만 이 시나리오에서는 이것이 가장 효과적입니다.</p>
+<p>충돌은 화면에서 보이는 것과 관계없다는 것을 기억하세요. 예를 들어, 큐브를 숨겨도 콜라이더는 동일하게 동작하고, Xform 아래에 다른 큐브나 구를 추가해도 Collision API를 적용하지 않으면 효과가 없습니다.</p>
+<p>많은 오브젝트 콜라이더는 여러 메시 요소의 구성으로 만들어져 형태와 동작을 결정합니다. 스테이지에서 물리적으로 분리되어 있어도 모두 리지드 바디의 자식이면 단일 리지드 바디로 작동합니다.</p>
+<p>이 리지드 바디에 콜라이더를 추가하거나 제거하거나 씬에 더 많은 리지드 바디를 추가하여 동작을 확인해 보세요.</p>
 <section id="convex-hull">
 <h4>Convex Hull<a class="headerlink" href="simulation_fundamentals.html#convex-hull" title="Link to this heading">#</a></h4>
-<p>This next experiment with colliders removes the platform you added before and returns our Xform to <code class="code docutils literal notranslate"><span class="pre">Z=10</span></code>.</p>
+<p>다음 콜라이더 실험에서는 이전에 추가한 플랫폼을 제거하고 Xform을 <code class="code docutils literal notranslate"><span class="pre">Z=10</span></code>으로 되돌립니다.</p>
 <ol class="arabic simple">
-<li><p>Add a Torus mesh in the place of the platform at <code class="code docutils literal notranslate"><span class="pre">Z=3.0</span></code> and scale it to [5.0, 5.0, 5.0].</p></li>
+<li><p>플랫폼 자리에 <code class="code docutils literal notranslate"><span class="pre">Z=3.0</span></code>에 Torus 메시를 추가하고 [5.0, 5.0, 5.0]으로 스케일합니다.</p></li>
 <li><p><strong>Add</strong> &gt; <strong>Physics</strong> &gt; <strong>Rigid Body With Colliders Preset</strong>.</p></li>
-<li><p>Run the simulation.</p></li>
+<li><p>시뮬레이션을 실행합니다.</p></li>
 </ol>
-<p>The Cube sits on top of the torus hole because the default approximation for mesh geometry is a convex hull. This is an approximation that the simulation engine can process efficiently, i.e. they are a good choice for performant simulations. We will review more complex, and therefore more computationally expensive approximations below.</p>
-<p>To see the collision shape in use:</p>
+<p>큐브가 토러스 구멍 위에 앉는 것은 메시 지오메트리의 기본 근사가 볼록 껍질(convex hull)이기 때문입니다. 이는 시뮬레이션 엔진이 효율적으로 처리할 수 있는 근사로, 성능 좋은 시뮬레이션에 좋은 선택입니다. 아래에서 더 복잡하고 계산 비용이 높은 근사를 검토할 것입니다.</p>
+<p>사용 중인 충돌 형태를 보려면:</p>
 <ol class="arabic simple">
-<li><p>Click on the eye icon on the top-left side of the Viewport.</p></li>
+<li><p>뷰포트 왼쪽 상단의 눈 아이콘을 클릭합니다.</p></li>
 <li><p><strong>Show by type</strong> &gt; <strong>Physics</strong> &gt; <strong>Colliders</strong> &gt; <strong>Selected</strong>.</p></li>
-<li><p>Verify that green lines appear on the Torus.</p></li>
+<li><p>토러스에 녹색 선이 나타나는지 확인합니다.</p></li>
 </ol>
-<p>This is a debug view of the collision shape.</p>
-<p>You can also view a solid display of the colliders by opening the Physics debug menu:
+<p>이것은 충돌 형태의 디버그 뷰입니다.</p>
+<p>Physics 디버그 메뉴를 열어 콜라이더의 솔리드 표시를 볼 수도 있습니다:
 1. <strong>Window</strong> &gt; <strong>Simulation</strong> &gt; <strong>Debug</strong>.
-2. In the debug window, scroll to “Collision Mesh Debug Visualization”.
-3. Check “Solid Mesh Collision Visualization”.
-4 Verify that when you select the torus, its shape displays solidly.</p>
+2. 디버그 창에서 "Collision Mesh Debug Visualization"으로 스크롤합니다.
+3. "Solid Mesh Collision Visualization"을 체크합니다.
+4. 토러스를 선택하면 형태가 솔리드로 표시되는지 확인합니다.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <tbody>
-<tr class="row-odd"><td><img alt="../_images/isaac_sim_torus.png" src="../_images/isaac_sim_torus.png" />
+<tr class="row-odd"><td><img alt="../_images/isaac_sim_torus.png" src="../_images/isaac_sim_torus.png"/>
 </td>
-<td><img alt="../_images/isaac_sim_torus_collision.png" src="../_images/isaac_sim_torus_collision.png" />
+<td><img alt="../_images/isaac_sim_torus_collision.png" src="../_images/isaac_sim_torus_collision.png"/>
 </td>
 </tr>
 </tbody>
@@ -1419,85 +1052,85 @@ This doesn’t occur with the ground plane because it implements a “force fiel
 </section>
 <section id="convex-decomposition">
 <h4>Convex Decomposition<a class="headerlink" href="simulation_fundamentals.html#convex-decomposition" title="Link to this heading">#</a></h4>
-<p>At a small expense, the torus collider can have the hole by a composition of convex shapes. This composition can be:</p>
+<p>약간의 비용으로 토러스 콜라이더에 볼록 형태의 구성을 통해 구멍을 만들 수 있습니다. 이 구성은 다음 방법으로 만들 수 있습니다:</p>
 <ul class="simple">
-<li><p>manually created by adding multiple shapes</p></li>
-<li><p>computed with Physics Convex Decomposition</p></li>
+<li><p>여러 형상을 수동으로 추가하여 생성</p></li>
+<li><p>Physics Convex Decomposition으로 계산</p></li>
 </ul>
 <ol class="arabic simple">
-<li><p>Select the Torus.</p></li>
-<li><p>In the properties panel, scroll down to the Collision section, and select <strong>Convex Decomposition</strong> from the drop-down.</p></li>
-<li><p>By opening the Advanced tab, you can adjust the parameters until you find a decomposition to your satisfaction.</p></li>
+<li><p>토러스를 선택합니다.</p></li>
+<li><p>속성 패널에서 Collision 섹션으로 스크롤하고 드롭다운에서 <strong>Convex Decomposition</strong>을 선택합니다.</p></li>
+<li><p>Advanced 탭을 열어 만족스러운 분해를 찾을 때까지 파라미터를 조정합니다.</p></li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Fewer convex hulls typically results in higher performance.</p>
+<p>convex hull이 적을수록 일반적으로 성능이 향상됩니다.</p>
 </div>
-<p>In the Simulation Debug tab, you can also increase the Explode View distance to split the collider shapes and better understand how the composition is made.</p>
-<a class="reference internal image-reference" href="../_images/isaac_sim_torus_exploded.png"><img alt="../_images/isaac_sim_torus_exploded.png" src="../_images/isaac_sim_torus_exploded.png" style="width: 800px;" />
+<p>Simulation Debug 탭에서 Explode View 거리를 늘려 콜라이더 형상을 분리하고 구성 방식을 더 잘 이해할 수 있습니다.</p>
+<a class="reference internal image-reference" href="../_images/isaac_sim_torus_exploded.png"><img alt="../_images/isaac_sim_torus_exploded.png" src="../_images/isaac_sim_torus_exploded.png" style="width: 800px;"/>
 </a>
-<p>The Collider drop-down contains more options to explore, like Bounding Cube and Sphere - the cheapest collisions possible, and a mode “Sphere Approximation”, which is similar to Convex decomposition but directly uses a group of spheres instead of conforming meshes.</p>
+<p>Collider 드롭다운에는 가장 저렴한 충돌인 Bounding Cube와 Sphere, 그리고 적합 메시 대신 구 그룹을 직접 사용하는 Convex Decomposition과 유사한 "Sphere Approximation" 모드 등 더 많은 옵션이 있습니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>While triangle mesh and mesh simplification are not supported by rigid bodies and fall back to convex hull, it is possible to use a triangle mesh geometry directly on a rigid body by adding a signed-distance field to it; select <strong>SDF Mesh</strong> in the approximation drop-down to do so.</p>
+<p>삼각형 메시와 메시 단순화는 리지드 바디에서 지원되지 않고 convex hull로 폴백되지만, 서명 거리 필드(SDF)를 추가하여 리지드 바디에서 직접 삼각형 메시 지오메트리를 사용할 수 있습니다. 이를 위해 근사 드롭다운에서 <strong>SDF Mesh</strong>를 선택하세요.</p>
 </div>
-<p>For more details on Rigid Bodies and Colliders, check <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/rigid_bodies_articulations/rigid_bodies.html" title="(in Omni Physics)"><span class="xref std std-doc">Rigid Body Simulation</span></a> and <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/rigid_bodies_articulations/collision.html" title="(in Omni Physics)"><span class="xref std std-doc">Colliders</span></a>.</p>
+<p>리지드 바디와 콜라이더에 대한 자세한 내용은 <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/rigid_bodies_articulations/rigid_bodies.html" title="(in Omni Physics)"><span class="xref std std-doc">Rigid Body Simulation</span></a>과 <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/rigid_bodies_articulations/collision.html" title="(in Omni Physics)"><span class="xref std std-doc">Colliders</span></a>를 확인하세요.</p>
 </section>
 <section id="contact-and-rest-offset">
 <h4>Contact and Rest Offset<a class="headerlink" href="simulation_fundamentals.html#contact-and-rest-offset" title="Link to this heading">#</a></h4>
-<p>In the Collider Advanced tab, there are two more parameters that can be important tuning parameters when there are collision issues, in particular with small and thin objects.</p>
-<p>The Rest Offset can be tuned to inflate or shrink the collision geometry set; it can be useful to adjust in cases where the visual mesh is larger or smaller than the collision geometry so that the collision locations are consistent with the visual representation.</p>
-<p>The Contact Offset dictates how far from the collision geometry, irrespective of Rest Offset, the simulation engine starts generating contact constraints. The tradeoff for tuning the contact offset is performance vs. collision fidelity: A larger Contact Offset results in many contact constraints being generated which is more computationally expensive; a smaller offset can result in issues with contacts being detected too late, and symptoms include jittering or missed contacts or even tunneling (see notes on CCD above).</p>
+<p>Collider Advanced 탭에는 특히 작고 얇은 오브젝트에서 충돌 문제가 있을 때 중요한 튜닝 파라미터 두 가지가 있습니다.</p>
+<p>Rest Offset는 충돌 지오메트리 세트를 팽창시키거나 축소시키도록 조정할 수 있습니다. 시각적 메시가 충돌 지오메트리보다 크거나 작은 경우 충돌 위치가 시각적 표현과 일치하도록 조정하는 데 유용합니다.</p>
+<p>Contact Offset는 Rest Offset과 무관하게 충돌 지오메트리에서 얼마나 떨어진 곳에서 시뮬레이션 엔진이 접촉 제약을 생성하기 시작하는지를 결정합니다. Contact Offset 조정의 트레이드오프는 성능 대 충돌 품질입니다. Contact Offset이 크면 많은 접촉 제약이 생성되어 계산 비용이 높아지고, 작은 Offset은 접촉이 너무 늦게 감지되어 떨림, 접촉 누락, 터널링 등의 문제가 발생할 수 있습니다(위의 CCD 참고 사항 참조).</p>
 </section>
 </section>
 <section id="contacts-and-friction">
 <h3>Contacts and Friction<a class="headerlink" href="simulation_fundamentals.html#contacts-and-friction" title="Link to this heading">#</a></h3>
-<p>Besides making sure that object do not interpenetrate, collisions can transfer or dissipate energy as modeled by restitution and friction.</p>
-<p>The parameters for the contact model are  available in Physics materials. To create a Physics material:</p>
+<p>충돌은 오브젝트가 서로 관통하지 않도록 하는 것 외에도 반발력(restitution)과 마찰력(friction)으로 모델링된 에너지를 전달하거나 소산시킬 수 있습니다.</p>
+<p>접촉 모델의 파라미터는 물리 머티리얼에서 사용할 수 있습니다. Physics material을 생성하려면:</p>
 <ol class="arabic simple">
-<li><p>Go to <strong>Create</strong> &gt; <strong>Physics</strong> &gt; <strong>Physics Material</strong>.</p></li>
-<li><p>Select Rigid Body Material.</p></li>
+<li><p><strong>Create</strong> &gt; <strong>Physics</strong> &gt; <strong>Physics Material</strong>로 이동합니다.</p></li>
+<li><p>Rigid Body Material을 선택합니다.</p></li>
 </ol>
-<p>Physics materials are typically assigned to <strong>Collider Geometry</strong> but behave analogous to USD render materials otherwise; see <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/index.html" title="(in Omni Physics)"><span class="xref std std-doc">Physics Materials</span></a> for a full explanation of USD material resolution logic. For example, you may assign different materials to different collision geometry of a rigid body, or you may assign a material to the rigid body prim and configure it to override any materials set on the collider children.</p>
-<p>To assign a physics material:</p>
+<p>물리 머티리얼은 일반적으로 <strong>Collider Geometry</strong>에 할당되지만 그 외에는 USD 렌더 머티리얼과 유사하게 작동합니다. USD 머티리얼 해석 로직에 대한 전체 설명은 <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/index.html" title="(in Omni Physics)"><span class="xref std std-doc">Physics Materials</span></a>를 참조하세요. 예를 들어, 리지드 바디의 충돌 지오메트리마다 다른 머티리얼을 할당하거나 리지드 바디 prim에 머티리얼을 할당하여 콜라이더 자식에 설정된 모든 머티리얼을 재정의할 수 있습니다.</p>
+<p>물리 머티리얼을 할당하려면:</p>
 <ol class="arabic simple">
-<li><p>Select the collider prim.</p></li>
-<li><p>Scroll to the Collider settings.</p></li>
-<li><p>In Physics Materials on Selected Models, select the desired material. The list only allows picking materials that have physics properties.</p></li>
+<li><p>콜라이더 prim을 선택합니다.</p></li>
+<li><p>Collider 설정으로 스크롤합니다.</p></li>
+<li><p>Physics Materials on Selected Models에서 원하는 머티리얼을 선택합니다. 목록은 물리 속성이 있는 머티리얼만 선택할 수 있습니다.</p></li>
 </ol>
-<p>Note that you may also add a physics material to a render material with <strong>“Add”</strong> &gt; <strong>Physics</strong> &gt; <strong>Rigid Body Material</strong> and assign the material in the render material section; the physics properties will be picked up.</p>
+<p>렌더 머티리얼에 <strong>"Add"</strong> &gt; <strong>Physics</strong> &gt; <strong>Rigid Body Material</strong>로 물리 머티리얼을 추가하고 렌더 머티리얼 섹션에서 머티리얼을 할당할 수도 있습니다. 물리 속성이 적용됩니다.</p>
 <section id="compliant-contacts">
 <h4>Compliant Contacts<a class="headerlink" href="simulation_fundamentals.html#compliant-contacts" title="Link to this heading">#</a></h4>
-<p>You may configure the rigid material to produce compliant (i.e. spring-damper) contact dynamics in the Advanced tab. This may be useful for approximating deformable bodies with rigid bodies.</p>
+<p>Advanced 탭에서 리지드 머티리얼이 순응(compliant, 즉 스프링-댐퍼) 접촉 역학을 생성하도록 구성할 수 있습니다. 이는 리지드 바디로 변형 가능 바디를 근사하는 데 유용할 수 있습니다.</p>
 </section>
 <section id="combine-modes">
 <h4>Combine Modes<a class="headerlink" href="simulation_fundamentals.html#combine-modes" title="Link to this heading">#</a></h4>
-<p>Because contacts are an interaction between two bodies, each contact parameter is not enough to describe how this interaction plays out. Just like in the real world, one surface material property may dominate the interaction or they may seamlessly combine into an average value. To replicate that, friction, restitution, and compliant-contact damping have a configurable combine mode field. Because both sides of the contact have this combine mode, the precedence of the combine mode matters:</p>
-<p>The lower in the drop-down, the lower the priority of a mode in a combine mismatch resolution; so <code class="code docutils literal notranslate"><span class="pre">average</span> <span class="pre">&lt;</span> <span class="pre">min</span> <span class="pre">&lt;</span> <span class="pre">multiply</span> <span class="pre">&lt;</span> <span class="pre">max</span></code>.</p>
-<p>For example, if Collider A has a friction combine mode <cite>average</cite> while Collider B has <cite>min</cite>, their interaction resolves as the minimum friction between the two. If a body C with combine mode <cite>max</cite> contacts A and B, the friction between A and C are resolved with <cite>max</cite>, as well as B and C.</p>
+<p>접촉은 두 바디 간의 상호작용이므로 각 접촉 파라미터만으로는 이 상호작용이 어떻게 전개되는지 설명하기에 충분하지 않습니다. 실제 세계와 마찬가지로 한 표면의 재질 속성이 상호작용을 지배하거나 평균값으로 원활하게 결합될 수 있습니다. 이를 재현하기 위해 마찰, 반발력, 순응 접촉 댐핑은 구성 가능한 결합 모드 필드를 가지고 있습니다. 접촉의 양쪽 모두 이 결합 모드를 가지므로 결합 모드의 우선순위가 중요합니다:</p>
+<p>드롭다운에서 낮을수록 불일치 해결에서 모드의 우선순위가 낮습니다. 따라서 <code class="code docutils literal notranslate"><span class="pre">average</span> <span class="pre">&lt;</span> <span class="pre">min</span> <span class="pre">&lt;</span> <span class="pre">multiply</span> <span class="pre">&lt;</span> <span class="pre">max</span></code>.</p>
+<p>예를 들어 콜라이더 A의 마찰 결합 모드가 <cite>average</cite>이고 콜라이더 B가 <cite>min</cite>이면, 둘의 상호작용은 두 마찰 중 최솟값으로 해결됩니다. 결합 모드 <cite>max</cite>인 바디 C가 A와 B에 접촉하면 A와 C의 마찰은 <cite>max</cite>로, B와 C도 <cite>max</cite>로 해결됩니다.</p>
 </section>
 </section>
 <section id="joints">
 <h3>Joints<a class="headerlink" href="simulation_fundamentals.html#joints" title="Link to this heading">#</a></h3>
-<p>Robots are typically composed of multiple jointed rigid bodies. Joints create constraints between two bodies. In the following, you use a <strong>Revolute Joint</strong>, but the steps are similar for other joint types, see a list in <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/rigid_bodies_articulations/joints.html#joints" title="(in Omni Physics)"><span>Joints</span></a>.</p>
-<p>You must configure the relative pose of the joint frames for each body to be jointed. Find more details, in particular the local scaling aspect of joint frames in the <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/rigid_bodies_articulations/joints.html#jointframes" title="(in Omni Physics)"><span class="xref std std-ref">Joint Frames Section</span></a>.</p>
-<img alt="../_images/isaac_sim_joint_pose.png" src="../_images/isaac_sim_joint_pose.png" />
-<p>Note that when creating a joint through the UI, the joint’s frames are set to match the pose of the second rigid body selected for the creation.</p>
-<p>Now create a joint as follows:</p>
+<p>로봇은 일반적으로 여러 조인트 리지드 바디로 구성됩니다. 조인트는 두 바디 간에 제약을 만듭니다. 다음에서 <strong>Revolute Joint</strong>를 사용하지만 다른 조인트 유형에도 단계가 유사합니다. <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/rigid_bodies_articulations/joints.html#joints" title="(in Omni Physics)"><span>Joints</span></a>에서 목록을 확인하세요.</p>
+<p>조인트로 연결할 각 바디의 조인트 프레임 상대 포즈를 구성해야 합니다. 특히 조인트 프레임의 로컬 스케일링 측면에 대한 자세한 내용은 <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/rigid_bodies_articulations/joints.html#jointframes" title="(in Omni Physics)"><span class="xref std std-ref">Joint Frames Section</span></a>을 참조하세요.</p>
+<img alt="../_images/isaac_sim_joint_pose.png" src="../_images/isaac_sim_joint_pose.png"/>
+<p>UI를 통해 조인트를 생성할 때 조인트의 프레임은 생성을 위해 선택한 두 번째 리지드 바디의 포즈와 일치하도록 설정됩니다.</p>
+<p>이제 다음과 같이 조인트를 만드세요:</p>
 <ol class="arabic simple">
-<li><p>Select first the Xform rigid body, and then the Torus rigid body.</p></li>
-<li><p>Go to <strong>Create</strong> &gt; <strong>Physics</strong> &gt; <strong>Joints</strong> &gt; <strong>(Joint Type)</strong>.</p></li>
+<li><p>먼저 Xform 리지드 바디를 선택하고, 그런 다음 Torus 리지드 바디를 선택합니다.</p></li>
+<li><p><strong>Create</strong> &gt; <strong>Physics</strong> &gt; <strong>Joints</strong> &gt; <strong>(Joint Type)</strong>으로 이동합니다.</p></li>
 </ol>
-<p>For this tutorial, use the <strong>Revolute Joint</strong> type. Because the Torus was selected second, the joint is at its center.</p>
-<p>You will notice a circle on-screen, representing the origin and range of motion for the joint. If you start the simulation now, the Torus and Cube fall together. When the torus hits the ground, the cube stops moving. It’s in a stable position, but if you nudge it, it moves down in a circular pattern. Interact with the cube by pressing shift and left-clicking the cube.</p>
-<p>Check the properties panel and review the following attributes:</p>
-<a class="reference internal image-reference" href="../_images/isaac_sim_torus_joint.png"><img alt="../_images/isaac_sim_torus_joint.png" src="../_images/isaac_sim_torus_joint.png" style="width: 600px;" />
+<p>이 튜토리얼에서는 <strong>Revolute Joint</strong> 유형을 사용합니다. Torus가 두 번째로 선택되었으므로 조인트가 Torus 중심에 위치합니다.</p>
+<p>화면에 조인트의 원점과 운동 범위를 나타내는 원이 표시됩니다. 지금 시뮬레이션을 시작하면 Torus와 Cube가 함께 떨어집니다. Torus가 지면에 닿으면 큐브가 멈춥니다. 안정적인 위치에 있지만 살짝 건드리면 원형 패턴으로 내려갑니다. Shift를 누른 채 큐브를 클릭하여 상호작용해 보세요.</p>
+<p>속성 패널을 확인하고 다음 속성을 검토합니다:</p>
+<a class="reference internal image-reference" href="../_images/isaac_sim_torus_joint.png"><img alt="../_images/isaac_sim_torus_joint.png" src="../_images/isaac_sim_torus_joint.png" style="width: 600px;"/>
 </a>
 <ol class="arabic simple">
 <li><p>Body 0: /World/XForm</p></li>
 <li><p>Body 1: /World/Torus</p></li>
 </ol>
-<p>These are the Poses relative to the bodies. You will notice that Position 0 is <code class="code docutils literal notranslate"><span class="pre">Z=-7.0</span></code>.</p>
+<p>이들은 바디에 상대적인 포즈입니다. Position 0이 <code class="code docutils literal notranslate"><span class="pre">Z=-7.0</span></code>임을 알 수 있습니다.</p>
 <ol class="arabic simple">
 <li><p>Position 0: <code class="code docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0,</span> <span class="pre">-7.0]</span></code></p></li>
 <li><p>Rotation 0: <code class="code docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0,</span> <span class="pre">0.0]</span></code></p></li>
@@ -1506,92 +1139,70 @@ This doesn’t occur with the ground plane because it implements a “force fiel
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>When setting up joints that are part of an articulation, make sure that Body 0 will be the parent of Body 1 in the articulation-tree hierarchy. This way, joint-related quantities like link incoming joint forces or joint drive targets have a one-to-one correspondence in the PhysX SDK and USD.</p>
+<p>아티큘레이션의 일부인 조인트를 설정할 때, Body 0가 아티큘레이션 트리 계층에서 Body 1의 부모가 되는지 확인하세요. 이렇게 하면 링크 수신 조인트 힘이나 조인트 드라이브 목표 같은 조인트 관련 양이 PhysX SDK와 USD에서 일대일 대응을 갖게 됩니다.</p>
 </div>
 <section id="joint-axis">
 <h4>Joint Axis<a class="headerlink" href="simulation_fundamentals.html#joint-axis" title="Link to this heading">#</a></h4>
-<p>A revolute joint provides one degree of freedom and you may choose what axis of the joint frames is free. By default, the X axis is selected. You can change that in Properties, under the Revolute Joint section.</p>
+<p>Revolute Joint는 하나의 자유도를 제공하며 어느 조인트 프레임 축이 자유로운지 선택할 수 있습니다. 기본적으로 X 축이 선택됩니다. Properties의 Revolute Joint 섹션에서 변경할 수 있습니다.</p>
 </section>
 <section id="joint-limits">
 <h4>Joint Limits<a class="headerlink" href="simulation_fundamentals.html#joint-limits" title="Link to this heading">#</a></h4>
-<p>The joint limits determine how far the joint can move from its original position. By default, when a joint is created, it comes without limits. With the joint selected, scroll down in the Properties panel and modify the Lower Limit and Upper Limit under the Revolute Joint section. Remember that USD uses degrees, not radians to represent angles.</p>
+<p>조인트 제한은 조인트가 원래 위치에서 얼마나 멀리 이동할 수 있는지를 결정합니다. 기본적으로 조인트 생성 시 제한이 없습니다. 조인트를 선택한 상태에서 속성 패널을 스크롤하여 Revolute Joint 섹션의 Lower Limit와 Upper Limit를 수정합니다. USD는 라디안이 아닌 도(degrees)를 사용한다는 것을 기억하세요.</p>
 </section>
 <section id="adding-a-joint-drive">
 <h4>Adding a Joint Drive<a class="headerlink" href="simulation_fundamentals.html#adding-a-joint-drive" title="Link to this heading">#</a></h4>
-<p>You may control the position and velocity of the degree of freedom that the joint added using a Joint Drive. You can do that by clicking the <strong>Add Button</strong> &gt; <strong>Physics</strong> &gt; <strong>Angular Drive</strong>. For details on configuring a joint drive, refer to <a class="reference internal" href="../robot_setup_tutorials/joint_tuning.html#isaac-sim-app-tutorial-advanced-joint-tuning"><span class="std std-ref">Tutorial 11: Tuning Joint Drive Gains</span></a>.</p>
+<p>Joint Drive를 사용하여 조인트가 추가한 자유도의 위치와 속도를 제어할 수 있습니다. <strong>Add Button</strong> &gt; <strong>Physics</strong> &gt; <strong>Angular Drive</strong>를 클릭하여 할 수 있습니다. 조인트 드라이브 구성에 대한 자세한 내용은 <a class="reference internal" href="../robot_setup_tutorials/joint_tuning.html#isaac-sim-app-tutorial-advanced-joint-tuning"><span class="std std-ref">Tutorial 11: Tuning Joint Drive Gains</span></a>을 참조하세요.</p>
 </section>
 </section>
 </section>
 <section id="articulation">
 <h2>Articulation<a class="headerlink" href="simulation_fundamentals.html#articulation" title="Link to this heading">#</a></h2>
-<p>An articulation is an optimized simulation structure for jointed bodies that provides superior performance, fidelity, and features for robotics. There are some limitations regarding topology (loop-closing) and joint support, which you can learn about in <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/rigid_bodies_articulations/articulations.html#articulations" title="(in Omni Physics)"><span>Articulations</span></a>. For a complete guide in tuning articulations, refer to <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/guides/articulation_stability_guide.html">Articulation Stability Guide</a>.</p>
-<p>For overall Simulation Hints and FAQ, refer to <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/107.3/dev_guide/guides.html">Physx Simulation Hints and FAQ</a>.</p>
+<p>아티큘레이션은 조인트 바디를 위한 최적화된 시뮬레이션 구조로 로보틱스에 뛰어난 성능, 정확도, 기능을 제공합니다. 토폴로지(루프 클로징)와 조인트 지원에 관한 일부 제한이 있으며 <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/rigid_bodies_articulations/articulations.html#articulations" title="(in Omni Physics)"><span>Articulations</span></a>에서 학습할 수 있습니다. 아티큘레이션 튜닝에 대한 전체 가이드는 <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/latest/dev_guide/guides/articulation_stability_guide.html">Articulation Stability Guide</a>를 참조하세요.</p>
+<p>전반적인 시뮬레이션 힌트와 FAQ는 <a class="reference external" href="https://docs.omniverse.nvidia.com/kit/docs/omni_physics/107.3/dev_guide/guides.html">Physx Simulation Hints and FAQ</a>를 참조하세요.</p>
 </section>
 <section id="stepping-an-omnigraph-short-with-physics">
 <h2>Stepping an OmniGraph with Physics<a class="headerlink" href="simulation_fundamentals.html#stepping-an-omnigraph-short-with-physics" title="Link to this heading">#</a></h2>
-<p>To guarantee one graph step per physics step at the moment it happens, you must use a modified version of an OmniGraph.</p>
+<p>물리 스텝이 발생하는 순간 그래프 스텝당 하나를 보장하려면 수정된 OmniGraph 버전을 사용해야 합니다.</p>
 <ol class="arabic simple">
-<li><p>Create a new Action Graph through <strong>Create</strong> &gt; <strong>Visual Scripting</strong> &gt; <strong>Action Graph</strong>.</p></li>
-<li><p>Select the created graph on the stage and in the <strong>Raw USD Properties</strong> section, in the pipeline stage, select <em>PipelineStageOnDemand</em>.</p></li>
-<li><p>On the Action Graph window, search for <strong>On Physics Step</strong>. Drag and Drop it on your OmniGraph.</p></li>
-<li><p>Continue your OmniGraph as usual.</p></li>
+<li><p><strong>Create</strong> &gt; <strong>Visual Scripting</strong> &gt; <strong>Action Graph</strong>를 통해 새 Action Graph를 만듭니다.</p></li>
+<li><p>스테이지에서 생성된 그래프를 선택하고 <strong>Raw USD Properties</strong> 섹션의 파이프라인 스테이지에서 <em>PipelineStageOnDemand</em>를 선택합니다.</p></li>
+<li><p>Action Graph 창에서 <strong>On Physics Step</strong>을 검색합니다. OmniGraph에 드래그 앤 드롭합니다.</p></li>
+<li><p>평소처럼 OmniGraph를 계속 진행합니다.</p></li>
 </ol>
 <figure class="align-default">
-<a class="reference internal image-reference" href="../_images/isaac_og_physics_step.png"><img alt="../_images/isaac_og_physics_step.png" src="../_images/isaac_og_physics_step.png" style="width: 1000px;" />
+<a class="reference internal image-reference" href="../_images/isaac_og_physics_step.png"><img alt="../_images/isaac_og_physics_step.png" src="../_images/isaac_og_physics_step.png" style="width: 1000px;"/>
 </a>
 </figure>
 </section>
 </section>
-
-
-                </article>
-              
-              
-              
-              
-              
-                <footer class="prev-next-footer d-print-none">
-                  
+</article>
+<footer class="prev-next-footer d-print-none">
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="index.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Physics</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="new_physics_engine.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Physics Data Flow and Engine Integration</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
+<a class="left-prev" href="index.html" title="previous page">
+<i class="fa-solid fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Physics</p>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-
-
-              
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
+</a>
+<a class="right-next" href="new_physics_engine.html" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Physics Data Flow and Engine Integration</p>
+</div>
+<i class="fa-solid fa-angle-right"></i>
+</a>
+</div>
+</footer>
+</div>
+<dialog id="pst-secondary-sidebar-modal"></dialog>
+<div class="bd-sidebar-secondary bd-toc" id="pst-secondary-sidebar"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage" id="pst-page-navigation-heading-2">
+<i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+<nav aria-labelledby="pst-page-navigation-heading-2" class="page-toc" id="pst-page-toc-nav">
+<ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="simulation_fundamentals.html#physics-in-usd-schemas">Physics in USD Schemas</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="simulation_fundamentals.html#simulation-timeline">Simulation Timeline</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="simulation_fundamentals.html#configuring-frame-rate">Configuring Frame Rate</a></li>
@@ -1622,46 +1233,29 @@ This doesn’t occur with the ground plane because it implements a “force fiel
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="simulation_fundamentals.html#articulation">Articulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="simulation_fundamentals.html#stepping-an-omnigraph-short-with-physics">Stepping an OmniGraph with Physics</a></li>
 </ul>
-  </nav></div>
-
+</nav></div>
 </div></div>
-              
-            
-
-          </div>
-          <footer class="bd-footer-content">
-            
-          </footer>
-        
-      </main>
-    </div>
-  </div>
-  
-
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
-
-
+</div>
+<footer class="bd-footer-content">
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script defer="" src="../_static/scripts/bootstrap.js%3Fdigest=7f76b32a3354e82990f2"></script>
+<script defer="" src="../_static/scripts/pydata-sphinx-theme.js%3Fdigest=7f76b32a3354e82990f2"></script>
 <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
-
-  <footer class="bd-footer">
+<footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
-  
-    <div class="footer-items__start">
-      
-        <div class="footer-item">
+<div class="footer-items__start">
+<div class="footer-item">
 <a class="footer-brand logo" href="https://www.nvidia.com">
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg" class="logo__image only-light" alt="NVIDIA"/>
-  <img src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg" class="logo__image only-dark" alt="NVIDIA"/>
+<img alt="NVIDIA" class="logo__image only-light" src="../_static/nvidia-logo-horiz-rgb-1c-blk-for-screen.svg"/>
+<img alt="NVIDIA" class="logo__image only-dark" src="../_static/nvidia-logo-horiz-rgb-1c-wht-for-screen.svg"/>
 </a></div>
-      
-        <div class="footer-item">
-
+<div class="footer-item">
 <div class="footer-links">
-  
-  
-  <a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
+<a class="external" href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/">Privacy Policy</a>
    | 
   
   
@@ -1692,36 +1286,21 @@ This doesn’t occur with the ground plane because it implements a “force fiel
   
   
   <a class="external" href="https://www.nvidia.com/en-us/contact/">Contact</a>
-  
-  
-  
 </div>
 </div>
-      
-        <div class="footer-item">
-
-
-
-
-  <p class="copyright">
+<div class="footer-item">
+<p class="copyright">
     
       Copyright © 2023-2026, NVIDIA Corporation.
       <br/>
-    
-  </p>
+</p>
 </div>
-      
-        <div class="footer-item"><p class="last-updated">
+<div class="footer-item"><p class="last-updated">
   Last updated on Jun 05, 2026.
   <br/>
 </p></div>
-      
-    </div>
-  
-  
-  
 </div>
-
-  </footer>
-  </body>
+</div>
+</footer>
+</body>
 </html>
